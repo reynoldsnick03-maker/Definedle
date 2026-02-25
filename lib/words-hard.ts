@@ -387,7 +387,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "pursuit of a cause", matchTerms: ["pursuit", "cause", "objective", "goal", "mission", "purpose", "crusade", "dedicat", "commit", "devot", "driven", "determined"], label: "In pursuit of a cause or objective", hint: "The definition says 'in pursuit of a cause or an objective' -- zealousness is directed at something specific." },
     ],
     synonyms: ["passionate", "fervent", "enthusiastic", "fanatical"],
-    etymology: "Greek zelos (zeal, ardor). Related to 'jealousy' -- same root.",
+    etymology: "Greek zelos (zeal, ardor).",
   },
   // ── 31. poignant ──
   {
@@ -2252,7 +2252,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "unable to be affected", matchTerms: ["unable to be affected", "unaffected", "immune", "invulnerabl", "resistant", "insensitive", "indifferent", "untouched", "unmoved"], label: "Unable to be affected", hint: "The definition says 'unable to be affected by something' -- nothing gets through the armor." },
     ],
     synonyms: ["impenetrable", "resistant", "immune"],
-    etymology: "Latin impervius 'that cannot be passed through,' from im (not) + pervius (passable), from per (through) + via (way, road).",
+    etymology: "Latin impervius, from im (not) + pervius, from per (through) + via (way, road).",
   },
   // ── 178. supplicate ──
   {
@@ -2264,7 +2264,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "earnestly or humbly", matchTerms: ["earnest", "humble", "desperate", "sincere", "heartfelt", "fervent", "devout", "submissive", "prostrate", "on one's knees"], label: "Earnestly or humbly", hint: "The definition says 'earnestly or humbly' -- supplication involves deep sincerity and humility." },
     ],
     synonyms: ["beg", "plead", "implore"],
-    etymology: "Latin supplicare 'to plead humbly,' from sub (under, from below) + plicare (to fold) -- literally 'to fold under,' as in kneeling.",
+    etymology: "Latin supplicare, from sub (under, from below) + plicare (to fold).",
   },
   // ── 179. truculent ──
   {
@@ -2276,7 +2276,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "relentlessly hostile", matchTerms: ["relentless", "hostile", "implacabl", "uncompromis", "inexorabl", "ruthless", "remorseless", "unsparing", "vindictive"], label: "Relentlessly hostile", hint: "The definition says 'relentlessly hostile' -- the hostility never lets up." },
     ],
     synonyms: ["unforgiving", "relentless", "merciless"],
-    etymology: "Latin implacabilis 'that cannot be appeased,' from im (not) + placare (to calm, soothe, please) -- literally 'not soothable.'",
+    etymology: "Latin implacabilis, from im (not) + placare (to calm, soothe, please).",
   },
   // ── 180. mendacious ──
   {
@@ -2288,7 +2288,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "granted to particular group", matchTerms: ["grant", "particular", "person", "group", "exclusive", "select", "certain", "position", "status", "rank"], label: "Granted to a particular person or group", hint: "The definition says 'granted to a particular person or group' -- perquisites belong to those in certain positions." },
     ],
     synonyms: ["perk", "privilege", "benefit"],
-    etymology: "Latin perquisitum 'thing gained,' from perquirere 'to search diligently for' -- per (thoroughly) + quaerere (to seek). 'Perk' is actually short for perquisite.",
+    etymology: "Latin perquisitum, from perquirere -- per (thoroughly) + quaerere (to seek).",
   },
   // ── 181. obdurate ──
   {
@@ -2299,7 +2299,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "stubbornly refusing", matchTerms: ["stubborn", "refus", "obstinate", "headstrong", "unyielding", "immovable", "intransigen", "inflexibl", "rigid", "adamant", "resolute"], label: "Stubbornly refusing to change", hint: "The definition says 'stubbornly refusing to change' -- obdurate people will not budge no matter what." },
     ],
     synonyms: ["stubborn", "unyielding", "intransigent"],
-    etymology: "Latin obdurare 'to harden the heart against,' from ob (against) + durare (to harden), from durus (hard) -- literally 'hardened against.'",
+    etymology: "Latin obdurare, from ob (against) + durare (to harden), from durus (hard).",
   },
   // ── 182. salacious ──
   {
@@ -2311,7 +2311,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "sexual matters", matchTerms: ["sexual", "erotic", "titillating", "suggestive", "risqué", "bawdy", "raunchy", "obscene", "pornographic", "licentious"], label: "In sexual matters", hint: "The definition says 'in sexual matters' -- salacious content is specifically about sex." },
     ],
     synonyms: ["lewd", "indecent", "prurient"],
-    etymology: "Latin salax 'fond of leaping, lustful,' from salire (to leap) -- the image of an animal leaping upon another.",
+    etymology: "Latin salax, from salire (to leap).",
   },
   // ── 183-200: FINAL BATCH ──
   {
@@ -2323,7 +2323,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "sudden and unconsidered", matchTerms: ["sudden", "without careful", "hasty", "rash", "reckless", "impulsiv", "impetuous", "premature", "ill-considered", "abrupt"], label: "Sudden and without consideration", hint: "The definition says 'done suddenly and without careful consideration' -- precipitous decisions are dangerously hasty." },
     ],
     synonyms: ["steep", "hasty", "rash"],
-    etymology: "Latin praecipitium 'a steep place, a fall,' from praeceps 'headlong' -- prae (before, ahead) + caput (head). Literally 'head first.'",
+    etymology: "Latin praecipitium, from praeceps -- prae (before, ahead) + caput (head).",
   },
   {
     word: "dissolute",
@@ -2334,7 +2334,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "improper conduct", matchTerms: ["improper", "conduct", "behavior", "indulgen", "excess", "hedonist", "profligat", "dissipat", "reckless", "wild", "wanton"], label: "Given to improper conduct", hint: "The definition says 'given to immoral or improper conduct' -- a lifestyle of excess and indulgence." },
     ],
     synonyms: ["debauched", "decadent", "profligate"],
-    etymology: "Latin dissolutus 'loose, disconnected,' past participle of dissolvere -- dis (apart) + solvere (to loosen). Literally 'loosened apart' from moral restraint.",
+    etymology: "Latin dissolutus, past participle of dissolvere -- dis (apart) + solvere (to loosen).",
   },
   {
     word: "edify",
@@ -2345,7 +2345,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "morally or spiritually", matchTerms: ["moral", "spiritual", "intellectual", "character", "soul", "mind", "wisdom", "virtue", "growth", "development"], label: "Morally or spiritually", hint: "The definition says 'especially morally or spiritually' -- edification targets the inner person." },
     ],
     synonyms: ["enlighten", "instruct", "uplift"],
-    etymology: "Latin aedificare 'to build, construct,' from aedes (dwelling, temple) + facere (to make). Originally 'to build a temple' -- later 'to build up' a person's character.",
+    etymology: "Latin aedificare, from aedes (dwelling, temple) + facere (to make).",
   },
   {
     word: "pejorative",
@@ -2356,7 +2356,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "negative connotation", matchTerms: ["negative", "connotation", "offensive", "insulting", "degrading", "uncomplimentary", "unflattering", "critical", "hostile"], label: "Having a negative connotation", hint: "The definition says 'having a negative connotation' -- the word itself carries a built-in judgment." },
     ],
     synonyms: ["derogatory", "disparaging", "demeaning"],
-    etymology: "Latin peiorare 'to make worse,' from peior (worse). A pejorative word literally 'makes worse' -- it degrades what it describes.",
+    etymology: "Latin peiorare, from peior (worse).",
   },
   {
     word: "quiescent",
@@ -2366,7 +2366,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "inactive", matchTerms: ["inactive", "dormant", "still", "quiet", "calm", "resting", "idle", "latent", "passive", "motionless", "inert", "stagnant"], label: "In a state of inactivity", hint: "The definition says 'in a state or period of inactivity or dormancy' -- quiet and still, but not necessarily permanently." },
     ],
     synonyms: ["dormant", "inactive", "latent"],
-    etymology: "Latin quiescere 'to rest, be quiet,' from quies (rest, quiet). Related to 'quiet' -- a state of peaceful stillness.",
+    etymology: "Latin quiescere, from quies (rest, quiet).",
   },
   {
     word: "stolid",
@@ -2377,7 +2377,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "little emotion", matchTerms: ["little emotion", "unemotional", "impassive", "expressionless", "phlegmatic", "apathetic", "indifferent", "unresponsive", "wooden", "dull"], label: "Showing little emotion", hint: "The definition says 'showing little emotion or animation' -- outwardly flat and unreactive." },
     ],
     synonyms: ["impassive", "unemotional", "phlegmatic"],
-    etymology: "Latin stolidus 'dull, stupid, insensible,' possibly related to stultus (foolish). Originally implied dullness; now means calmly undemonstrative.",
+    etymology: "Latin stolidus, possibly related to stultus (foolish).",
   },
   {
     word: "internalize",
@@ -2388,7 +2388,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "by learning or unconscious", matchTerms: ["learning", "unconscious", "assimilation", "gradually", "over time", "without realizing", "automatic", "deep", "ingrained", "habitual"], label: "Through learning or unconscious assimilation", hint: "The definition says 'by learning or unconscious assimilation' -- it can happen without you knowing." },
     ],
     synonyms: ["absorb", "assimilate", "incorporate"],
-    etymology: "Latin internus 'inward, internal,' from inter (between, within) + -ize (to make). Literally 'to make internal' -- taking something outside and making it part of your inner self.",
+    etymology: "Latin internus, from inter (between, within) + -ize (to make).",
   },
   {
     word: "rancorous",
@@ -2399,7 +2399,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "ill will", matchTerms: ["ill will", "hatred", "malevolence", "vindictiv", "vengeful", "venomous", "toxic", "poisonous", "corrosive", "destructive"], label: "Showing ill will", hint: "The definition says 'ill will' -- rancorous people actively wish harm on others." },
     ],
     synonyms: ["bitter", "resentful", "spiteful"],
-    etymology: "Old French rancor, from Latin rancorem 'bitterness, rancidity,' from rancere 'to stink' -- resentment so deep it reeks.",
+    etymology: "Old French rancor, from Latin rancorem, from rancere (to stink).",
   },
   {
     word: "ossify",
@@ -2410,7 +2410,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "cease developing", matchTerms: ["cease developing", "stop growing", "stagnate", "conventional", "traditional", "conservative", "backward", "stuck", "unchanging", "fossilized"], label: "Cease developing; become conventional", hint: "The definition says 'cease developing and become set in a rigidly conventional pattern' -- no more growth or adaptation." },
     ],
     synonyms: ["harden", "rigidify", "petrify"],
-    etymology: "Latin os (bone) + -ify (to make). Literally 'to make into bone' -- figuratively, to become rigid and set.",
+    etymology: "Latin os (bone) + -ify (to make).",
   },
   {
     word: "byzantine",
@@ -2421,7 +2421,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "involving intrigue", matchTerms: ["intrigue", "scheming", "political", "bureaucrat", "administration", "red tape", "machination", "conspiracy", "devious", "underhanded"], label: "Involving intrigue and bureaucracy", hint: "The definition says 'involving a great deal of administrative detail; characterized by intrigue' -- byzantine also suggests scheming and politics." },
     ],
     synonyms: ["complex", "labyrinthine", "convoluted"],
-    etymology: "From Byzantium (Constantinople), capital of the Eastern Roman Empire, notorious for its complex court intrigues and bureaucracy.",
+    etymology: "From Byzantium (Constantinople), capital of the Eastern Roman Empire.",
   },
   {
     word: "demur",
@@ -2432,7 +2432,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "show reluctance", matchTerms: ["reluctance", "reluctant", "hesitat", "balk", "waver", "pause", "hold back", "shy away", "recoil", "unwilling"], label: "Show reluctance", hint: "The definition says 'show reluctance' -- demurring is a polite way of pushing back." },
     ],
     synonyms: ["object", "protest", "hesitate"],
-    etymology: "Old French demorer 'to linger, hesitate,' from Latin demorari 'to delay' -- de (completely) + morari (to delay).",
+    etymology: "Old French demorer, from Latin demorari -- de (completely) + morari (to delay).",
   },
   {
     word: "perfidy",
@@ -2443,7 +2443,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "betrayal of trust", matchTerms: ["betrayal", "trust", "disloyalty", "faithless", "traitor", "backstab", "double-cross", "infidel", "treason", "sellout"], label: "Deliberate betrayal of trust", hint: "The definition says 'deliberate betrayal of trust' -- perfidy is calculated treachery." },
     ],
     synonyms: ["treachery", "betrayal", "duplicity"],
-    etymology: "Latin perfidia 'faithlessness, falsehood,' from perfidus 'treacherous' -- per (to destruction) + fides (faith). Literally 'through faith-breaking.'",
+    etymology: "Latin perfidia, from perfidus -- per (to destruction) + fides (faith).",
   },
   {
     word: "incipient",
@@ -2454,7 +2454,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "beginning to develop", matchTerms: ["beginning", "develop", "forming", "growing", "arising", "appearing", "surfacing", "germinating", "taking shape"], label: "Beginning to happen or develop", hint: "The definition says 'beginning to happen or develop' -- incipient things are in their earliest phase." },
     ],
     synonyms: ["nascent", "emerging", "budding"],
-    etymology: "Latin incipiens, present participle of incipere 'to begin' -- in (into) + capere (to take). Literally 'taking in hand.'",
+    etymology: "Latin incipiens, present participle of incipere -- in (into) + capere (to take).",
   },
   // ── 219. abnegate ──
   {
@@ -2465,7 +2465,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "renounce", matchTerms: ["renounc", "reject", "give up", "abandon", "surrender", "relinquish", "forgo", "forsak", "sacrifice", "abstain", "deny oneself"], label: "Renounce or reject", hint: "The definition says 'renounce or reject something desired or valuable' -- deliberately giving up what you want." },
     ],
     synonyms: ["renounce", "relinquish", "forgo"],
-    etymology: "Latin abnegare 'to refuse, deny' -- ab (away) + negare (to deny). To deny oneself completely.",
+    etymology: "Latin abnegare -- ab (away) + negare (to deny).",
   },
   // ── 220. apotheosis ──
   {
@@ -2477,7 +2477,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "divine status", matchTerms: ["divine", "god", "deif", "glorif", "exalt", "worship", "idoliz", "ideal", "perfect", "sublime", "transcend"], label: "Elevation to divine status", hint: "The definition says 'elevation of someone to divine status' -- being treated as godlike." },
     ],
     synonyms: ["pinnacle", "culmination", "zenith"],
-    etymology: "Greek apotheosis 'making divine,' from apo (change) + theos (god). Literally 'becoming a god.'",
+    etymology: "Greek apotheosis, from apo (change) + theos (god).",
   },
   // ── 221. bellicose ──
   {
@@ -2489,7 +2489,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "willingness to fight", matchTerms: ["willing", "fight", "battle", "war", "conflict", "combat", "contentious", "truculent", "fierce", "violent"], label: "Willingness to fight", hint: "The definition says 'willingness to fight' -- eager for confrontation." },
     ],
     synonyms: ["aggressive", "combative", "pugnacious"],
-    etymology: "Latin bellicosus 'warlike,' from bellicus 'of war,' from bellum (war). Related to 'belligerent' and 'rebel.'",
+    etymology: "Latin bellicosus, from bellicus, from bellum (war).",
   },
   // ── 222. calumny ──
   {
@@ -2501,7 +2501,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "damage reputation", matchTerms: ["damage", "reputation", "slander", "libel", "defam", "smear", "vilif", "malign", "tarnish", "discredit", "destroy"], label: "To damage reputation", hint: "The definition says 'in order to damage their reputation' -- the purpose is reputational harm." },
     ],
     synonyms: ["slander", "defamation", "libel"],
-    etymology: "Latin calumnia 'false accusation, trickery,' possibly related to calvi 'to deceive.' A deliberate lie meant to damage.",
+    etymology: "Latin calumnia, possibly related to calvi (to deceive).",
   },
   // ── 223. chimerical ──
   {
@@ -2513,7 +2513,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "improbable", matchTerms: ["improbabl", "unrealistic", "impossib", "far-fetched", "utopian", "quixotic", "wild", "absurd", "delusional", "preposterous"], label: "Fantastically improbable", hint: "The definition says 'fantastically visionary or improbable' -- too outlandish to actually happen." },
     ],
     synonyms: ["fanciful", "illusory", "unrealistic"],
-    etymology: "Greek khimaira, the Chimera -- a fire-breathing monster with a lion's head, goat's body, and serpent's tail. Something as wildly impossible as that beast.",
+    etymology: "Greek khimaira, the Chimera -- a mythological creature combining parts of different animals.",
   },
   // ── 224. conflate ──
   {
@@ -2525,7 +2525,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "mistakenly identical", matchTerms: ["mistaken", "identical", "confus", "equat", "interchange", "muddle", "blur", "indistinguish", "mix up", "error"], label: "Mistakenly treating as identical", hint: "The definition says 'often mistakenly treating distinct things as identical' -- the combining creates false equivalence." },
     ],
     synonyms: ["merge", "confuse", "equate"],
-    etymology: "Latin conflare 'to blow together, fuse' -- con (together) + flare (to blow). Originally about melting metals together.",
+    etymology: "Latin conflare -- con (together) + flare (to blow).",
   },
   // ── 225. concomitant ──
   {
@@ -2536,7 +2536,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "naturally accompanying", matchTerms: ["naturally", "accompan", "associated", "concurrent", "coexist", "coincid", "alongside", "attendant", "parallel", "simultaneous", "corresponding", "related", "linked"], label: "Naturally accompanying", hint: "The definition says 'naturally accompanying or associated with something' -- it comes along as a natural part." },
     ],
     synonyms: ["accompanying", "concurrent", "attendant"],
-    etymology: "Latin concomitari 'to accompany' -- con (together) + comitari (to accompany), from comes (companion).",
+    etymology: "Latin concomitari -- con (together) + comitari, from comes (companion).",
   },
   // ── 226. deleterious ──
   {
@@ -2547,7 +2547,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "causing harm", matchTerms: ["caus", "harm", "damage", "injur", "detriment", "destructive", "noxious", "pernicious", "adverse", "toxic", "harmful", "hurtful", "negative", "damaging", "ruinous"], label: "Causing harm or damage", hint: "The definition says 'causing harm or damage' -- deleterious effects are harmful ones." },
     ],
     synonyms: ["harmful", "damaging", "detrimental"],
-    etymology: "Greek deleterios 'noxious, destructive,' from deleisthai 'to hurt, injure.' Harmful at its root.",
+    etymology: "Greek deleterios, from deleisthai (to hurt, injure).",
   },
   // ── 227. demagogue ──
   {
@@ -2559,7 +2559,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "appeals to prejudice", matchTerms: ["appeal", "prejudic", "desire", "emotion", "fear", "passion", "manipulat", "exploit", "pander", "inflam", "incite", "stir up", "populis", "sentiment"], label: "Appeals to desires and prejudices", hint: "The definition says 'appealing to the desires and prejudices of ordinary people rather than by using rational argument' -- manipulation over reason." },
     ],
     synonyms: ["agitator", "rabble-rouser", "populist"],
-    etymology: "Greek demagogos 'popular leader' -- demos (people) + agogos (leading), from agein (to lead). Originally neutral; now pejorative.",
+    etymology: "Greek demagogos -- demos (people) + agogos (leading), from agein (to lead).",
   },
   // ── 228. desultory ──
   {
@@ -2571,7 +2571,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "occurring randomly", matchTerms: ["random", "intermittent", "sporadic", "fitful", "irregular", "erratic", "scattered", "disconnected", "rambling", "meandering"], label: "Occurring randomly", hint: "The definition says 'occurring randomly or intermittently' -- not sustained or focused." },
     ],
     synonyms: ["aimless", "haphazard", "halfhearted"],
-    etymology: "Latin desultorius 'superficial, skipping,' from desultor 'a circus rider who leaps from horse to horse' -- jumping without direction.",
+    etymology: "Latin desultorius, from desultor -- a circus rider who leaps from horse to horse.",
   },
   // ── 229. disabuse ──
   {
@@ -2583,7 +2583,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "belief is mistaken", matchTerms: ["idea", "belief", "mistaken", "wrong", "false", "incorrect", "error", "misconception", "illusion", "delusion", "misunderstand"], label: "That a belief is mistaken", hint: "The definition says 'that an idea or belief is mistaken' -- freeing someone from a false idea." },
     ],
     synonyms: ["correct", "enlighten", "undeceive"],
-    etymology: "French desabuser -- des (away, from) + abuser (to deceive, abuse). Literally 'to un-deceive.'",
+    etymology: "French desabuser -- des (away, from) + abuser (to deceive, abuse).",
   },
   // ── 230. ebullience ──
   {
@@ -2594,7 +2594,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "cheerful and energetic", matchTerms: ["cheerful", "energy", "enthusias", "exuberan", "lively", "vivacious", "spirited", "effervescen", "buoyant", "animated", "joyful", "vibrant", "bubbly"], label: "Cheerful and full of energy", hint: "The definition says 'the quality of being cheerful and full of energy' -- overflowing with positive vitality." },
     ],
     synonyms: ["exuberance", "enthusiasm", "vivacity"],
-    etymology: "Latin ebullire 'to bubble up' -- e (out) + bullire (to boil, bubble). Enthusiasm that boils over.",
+    etymology: "Latin ebullire -- e (out) + bullire (to boil, bubble).",
   },
   // ── 231. effete ──
   {
@@ -2606,7 +2606,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "weak or decadent", matchTerms: ["weak", "decaden", "overrefin", "pamper", "soft", "delicate", "spoiled", "dainty", "precious", "affected", "mannered"], label: "Weak or decadent from overrefinement", hint: "The definition says 'weak or decadent, especially as a result of overrefinement' -- softened by excess." },
     ],
     synonyms: ["decadent", "enervated", "overrefined"],
-    etymology: "Latin effetus 'that has brought forth young, exhausted by bearing' -- ex (out) + fetus (breeding). Originally 'worn out from producing.'",
+    etymology: "Latin effetus -- ex (out) + fetus (breeding).",
   },
   // ── 232. enervate ──
   {
@@ -2617,7 +2617,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "drained of energy", matchTerms: ["drain", "energy", "vitality", "exhaust", "deplet", "sap", "tire", "weaken", "fatigue", "debilitat", "enfeebl", "devitaliz", "wear out", "wear down"], label: "Drained of energy or vitality", hint: "The definition says 'to feel drained of energy or vitality' -- the life force is being sucked out." },
     ],
     synonyms: ["weaken", "exhaust", "debilitate"],
-    etymology: "Latin enervare 'to cut the sinews of, weaken' -- e (out of) + nervus (sinew, nerve). Often mistaken for 'energize' but means the opposite.",
+    etymology: "Latin enervare -- e (out of) + nervus (sinew, nerve).",
   },
   // ── 233. ephemeral ──
   {
@@ -2628,7 +2628,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "very short time", matchTerms: ["short time", "brief", "fleeting", "transient", "momentary", "passing", "temporary", "impermanent", "short-lived", "evanescent", "fugitive", "transitory"], label: "Lasting a very short time", hint: "The definition says 'lasting for a very short time' -- here one moment, gone the next." },
     ],
     synonyms: ["fleeting", "transient", "short-lived"],
-    etymology: "Greek ephemeros 'lasting only a day' -- epi (on) + hemera (day). Originally described insects that live only one day.",
+    etymology: "Greek ephemeros -- epi (on) + hemera (day).",
   },
   // ── 234. epistolary ──
   {
@@ -2639,7 +2639,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "relating to letters", matchTerms: ["letter", "letters", "correspond", "epistl", "mail", "written", "writing", "missive", "dispatch", "communic"], label: "Relating to letters", hint: "The definition says 'relating to the writing of letters' -- epistolary works use letter-writing as their form." },
     ],
     synonyms: ["letter-writing", "correspondence"],
-    etymology: "Latin epistola 'a letter,' from Greek epistole 'a message, letter' -- epi (upon) + stellein (to send). Literally 'something sent upon.'",
+    etymology: "Latin epistola, from Greek epistole -- epi (upon) + stellein (to send).",
   },
   // ── 235. excoriate ──
   {
@@ -2650,7 +2650,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "criticize severely", matchTerms: ["censur", "criticiz", "condemn", "denounc", "lambast", "berat", "castigat", "rebuk", "upbraid", "vilif", "attack", "assail", "savage"], label: "Censure or criticize severely", hint: "The definition says 'to censure or criticize severely' -- harsh, blistering criticism." },
     ],
     synonyms: ["condemn", "lambaste", "castigate"],
-    etymology: "Latin excoriare 'to strip off the skin' -- ex (off) + corium (skin, hide). Criticism so harsh it flays you.",
+    etymology: "Latin excoriare -- ex (off) + corium (skin, hide).",
   },
   // ── 236. exigent ──
   {
@@ -2661,7 +2661,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "pressing and demanding", matchTerms: ["press", "demand", "urgent", "critical", "crucial", "imperative", "compel", "insistent", "acute", "dire", "immediate", "emergent"], label: "Pressing; demanding immediate action", hint: "The definition says 'pressing; demanding immediate action or attention' -- cannot be delayed." },
     ],
     synonyms: ["urgent", "pressing", "imperative"],
-    etymology: "Latin exigere 'to drive out, demand, measure' -- ex (out) + agere (to drive). Something that drives you to act now.",
+    etymology: "Latin exigere -- ex (out) + agere (to drive).",
   },
   // ── 237. expatiate ──
   {
@@ -2672,7 +2672,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "speak at length", matchTerms: ["speak", "write", "length", "detail", "elaborat", "expound", "discourse", "hold forth", "dilat", "go on", "rambl", "extensive", "thorough", "exhaustive"], label: "Speak or write at length", hint: "The definition says 'speak or write at length or in detail' -- going into extensive, possibly excessive detail." },
     ],
     synonyms: ["elaborate", "expound", "discourse"],
-    etymology: "Latin expatiare 'to wander, digress' -- ex (out) + spatiari (to walk), from spatium (space). To wander widely in speech.",
+    etymology: "Latin expatiare -- ex (out) + spatiari (to walk), from spatium (space).",
   },
   // ── 238. extirpate ──
   {
@@ -2683,7 +2683,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "root out and destroy", matchTerms: ["root out", "destroy", "eradicat", "eliminat", "exterminat", "annihilat", "abolish", "wipe out", "stamp out", "remove", "uproot", "obliterat", "expung"], label: "Root out and destroy completely", hint: "The definition says 'root out and destroy completely' -- total elimination from the root." },
     ],
     synonyms: ["eradicate", "eliminate", "annihilate"],
-    etymology: "Latin extirpare 'to root out' -- ex (out) + stirps (root, stem). To pull up by the roots so nothing remains.",
+    etymology: "Latin extirpare -- ex (out) + stirps (root, stem).",
   },
   // ── 239. febrile ──
   {
@@ -2695,7 +2695,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "nervous excitement", matchTerms: ["nervous", "excitement", "energy", "frenetic", "frantic", "hectic", "agitat", "restless", "manic", "frenzied", "overwrought", "hyperactiv"], label: "Nervous excitement or energy", hint: "The definition says 'characterized by a great deal of nervous excitement or energy' -- intensely agitated." },
     ],
     synonyms: ["feverish", "frenetic", "frantic"],
-    etymology: "Latin febrilis 'feverish,' from febris (fever). Related to 'February,' the Roman month of purification (fever-cleansing).",
+    etymology: "Latin febrilis, from febris (fever).",
   },
   // ── 240. grandiloquent ──
   {
@@ -2707,7 +2707,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "intended to impress", matchTerms: ["intend", "impress", "show off", "ostentatious", "affected", "theatrical", "dramatic", "showy"], label: "Intended to impress", hint: "The definition says 'intended to impress' -- the grandiose language is meant to dazzle the audience." },
     ],
     synonyms: ["bombastic", "pompous", "pretentious"],
-    etymology: "Latin grandiloquus 'using lofty speech' -- grandis (grand, great) + loqui (to speak). Speaking with exaggerated grandeur.",
+    etymology: "Latin grandiloquus -- grandis (grand, great) + loqui (to speak).",
   },
   // ── 241. hegemony ──
   {
@@ -2719,7 +2719,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "over others", matchTerms: ["over others", "country", "social group", "nation", "state", "class", "society", "subordinat", "inferior", "subject", "lesser"], label: "Over other groups or countries", hint: "The definition says 'especially by one country or social group over others' -- hegemony is always relative." },
     ],
     synonyms: ["dominance", "supremacy", "authority"],
-    etymology: "Greek hegemonia 'leadership, rule,' from hegemon 'leader,' from hegeisthai 'to lead.'",
+    etymology: "Greek hegemonia, from hegemon, from hegeisthai (to lead).",
   },
   // ���─ 242. iconoclast ──
   {
@@ -2731,7 +2731,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "cherished beliefs", matchTerms: ["cherish", "belief", "institution", "tradition", "convention", "established", "sacred", "revered", "orthodox", "dogma", "custom", "norm", "status quo", "mainstream"], label: "Cherished beliefs or institutions", hint: "The definition says 'cherished beliefs or institutions' -- they target things society holds dear." },
     ],
     synonyms: ["rebel", "nonconformist", "dissident"],
-    etymology: "Greek eikonoklastes 'image-breaker' -- eikon (image, likeness) + klastes (breaker). Originally meant one who destroyed religious icons.",
+    etymology: "Greek eikonoklastes -- eikon (image, likeness) + klastes (breaker).",
   },
   // ── 243. ignoble ──
   {
@@ -2742,7 +2742,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "not honorable", matchTerms: ["not honorabl", "dishonor", "dishonour", "base", "shameful", "disgrace", "contempt", "vile", "despicabl", "ignomin", "low", "mean", "sordid", "wretched", "unworthy"], label: "Not honorable; base and shameful", hint: "The definition says 'not honorable in character or purpose; base and shameful' -- morally low." },
     ],
     synonyms: ["dishonorable", "base", "shameful"],
-    etymology: "Latin ignobilis 'not noble, unknown' -- in (not) + gnobilis, older form of nobilis (noble, well-known). Literally 'not known' for any good.",
+    etymology: "Latin ignobilis -- in (not) + gnobilis, older form of nobilis (noble).",
   },
   // ── 244. impecunious ──
   {
@@ -2753,7 +2753,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "no money", matchTerms: ["no money", "little money", "poor", "impoverish", "pennil", "destitut", "indigent", "needy", "bankrupt", "broke", "insolvent", "poverty", "moneyless", "without funds"], label: "Having little or no money", hint: "The definition says 'having little or no money; poor' -- financially destitute." },
     ],
     synonyms: ["poor", "penniless", "destitute"],
-    etymology: "Latin impecuniosus 'having no money' -- in (not) + pecuniosus (wealthy), from pecunia (money), from pecu (cattle). No cattle = no wealth.",
+    etymology: "Latin impecuniosus -- in (not) + pecuniosus, from pecunia (money), from pecu (cattle).",
   },
   // ── 245. inchoate ──
   {
@@ -2765,7 +2765,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "not fully formed", matchTerms: ["not fully formed", "undeveloped", "rudimentary", "immature", "incomplete", "unfinished", "partial", "rough", "crude", "formless", "amorphous", "unshap"], label: "Not fully formed or developed", hint: "The definition says 'not fully formed or developed; rudimentary' -- still taking shape." },
     ],
     synonyms: ["rudimentary", "nascent", "undeveloped"],
-    etymology: "Latin inchoatus, past participle of inchoare 'to begin, start work on' -- possibly from in + cohum (the strap yoking oxen to a plow). The first yoking.",
+    etymology: "Latin inchoatus, past participle of inchoare -- possibly from in + cohum (the strap yoking oxen to a plow).",
   },
   // ── 246. indefatigable ──
   {
@@ -2776,7 +2776,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "persisting tirelessly", matchTerms: ["persist", "tireless", "untiring", "unflagging", "inexhaustibl", "unrelenting", "relentless", "unwavering", "dogged", "tenacious", "unceasing", "energetic", "determined", "assiduous", "diligent", "industrious"], label: "Persisting tirelessly", hint: "The definition says 'persisting tirelessly; never showing signs of fatigue' -- they never run out of energy." },
     ],
     synonyms: ["tireless", "unflagging", "relentless"],
-    etymology: "Latin indefatigabilis -- in (not) + defatigare (to tire out), from de (completely) + fatigare (to weary). Literally 'un-tire-outable.'",
+    etymology: "Latin indefatigabilis -- in (not) + defatigare (to tire out), from de (completely) + fatigare (to weary).",
   },
   // ── 247. inimical ──
   {
@@ -2788,7 +2788,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "unfriendly or hostile", matchTerms: ["unfriendly", "hostile", "antagonistic", "adverse", "opposed", "malevolent", "ill-disposed", "unwelcoming", "threatening"], label: "Unfriendly or hostile", hint: "The definition says 'unfriendly or hostile' -- the attitude is actively against." },
     ],
     synonyms: ["hostile", "harmful", "antagonistic"],
-    etymology: "Latin inimicalis 'hostile,' from inimicus 'enemy' -- in (not) + amicus (friend). Literally 'not a friend.'",
+    etymology: "Latin inimicalis, from inimicus -- in (not) + amicus (friend).",
   },
   // ── 248. inscrutable ──
   {
@@ -2799,7 +2799,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "impossible to understand", matchTerms: ["impossibl", "understand", "interpret", "decipher", "read", "fathom", "comprehend", "impenetrab", "unfathom", "enigmatic", "mysterious", "opaque", "cryptic", "baffling", "puzzling", "inexplicable"], label: "Impossible to understand", hint: "The definition says 'impossible to understand or interpret' -- completely unreadable." },
     ],
     synonyms: ["enigmatic", "mysterious", "unfathomable"],
-    etymology: "Latin inscrutabilis 'not to be searched into' -- in (not) + scrutari (to search, examine), from scruta (rags, trash). Originally 'not worth rummaging through.'",
+    etymology: "Latin inscrutabilis -- in (not) + scrutari (to search, examine), from scruta (rags, trash).",
   },
   // ── 249. invidious ──
   {
@@ -2811,7 +2811,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "unfairly discriminating", matchTerms: ["unfair", "discriminat", "unjust", "partial", "biased", "prejudic", "inequitable"], label: "Unfairly discriminating", hint: "The definition says 'unfairly discriminating' -- invidious comparisons treat things unequally." },
     ],
     synonyms: ["resentful", "offensive", "unfair"],
-    etymology: "Latin invidiosus 'envious, hateful,' from invidia (envy, ill will) -- in (upon) + videre (to see). The evil eye of jealousy.",
+    etymology: "Latin invidiosus, from invidia -- in (upon) + videre (to see).",
   },
   // ── 250. irascible ──
   {
@@ -2822,7 +2822,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "easily angered", matchTerms: ["easily angered", "quick-tempered", "irritabl", "short-tempered", "hot-tempered", "testy", "touchy", "cantankerous", "choleric", "grumpy", "cranky", "petulant", "snappy", "peevish", "fractious"], label: "Tendency to be easily angered", hint: "The definition says 'tendency to be easily angered' -- they have a very short fuse." },
     ],
     synonyms: ["irritable", "testy", "cantankerous"],
-    etymology: "Latin irascibilis 'prone to anger,' from irasci 'to grow angry,' from ira (anger). Related to 'ire' and 'irate.'",
+    etymology: "Latin irascibilis, from irasci, from ira (anger).",
   },
   // ── 251. jejune ──
   {
@@ -2834,7 +2834,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "lacking substance", matchTerms: ["lacking", "substance", "interest", "dull", "bland", "dry", "vapid", "insipid", "uninteresting", "tedious", "banal", "trite"], label: "Lacking substance or interest", hint: "The definition says 'lacking substance or interest' -- there's nothing meaty to engage with." },
     ],
     synonyms: ["naive", "superficial", "vapid"],
-    etymology: "Latin jejunus 'fasting, barren, meagre' -- originally 'empty-stomached.' The jejunum (part of the small intestine) is always found empty at autopsy.",
+    etymology: "Latin jejunus -- the jejunum (part of the small intestine) is named from the same root.",
   },
   // ── 252. lachrymose ──
   {
@@ -2845,7 +2845,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "tearful", matchTerms: ["tearful", "weeping", "crying", "tears", "sob", "wail", "mournful", "sorrowful", "melancholy", "sad", "doleful", "lugubrious", "plaintive", "grief"], label: "Tearful or inducing tears", hint: "The definition says 'tearful or given to weeping; inducing tears' -- connected to crying and sadness." },
     ],
     synonyms: ["tearful", "mournful", "sorrowful"],
-    etymology: "Latin lacrimosus 'tearful,' from lacrima (a tear). The 'h' was added by false association with Greek dakryma (tear).",
+    etymology: "Latin lacrimosus, from lacrima (a tear).",
   },
   // ── 253. lassitude ──
   {
@@ -2857,7 +2857,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "lack of energy", matchTerms: ["lack of energy", "no energy", "apathy", "inertia", "malaise", "debility", "prostration", "weakness"], label: "Lack of energy", hint: "The definition says 'lack of energy' -- no drive to do anything." },
     ],
     synonyms: ["weariness", "lethargy", "fatigue"],
-    etymology: "Latin lassitudo 'faintness, weariness,' from lassus (faint, weary). Related to 'alas.'",
+    etymology: "Latin lassitudo, from lassus (faint, weary).",
   },
   // ── 254. lugubrious ──
   {
@@ -2868,7 +2868,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "sad and dismal", matchTerms: ["sad", "dismal", "gloomy", "mournful", "melancholy", "sorrowful", "doleful", "dreary", "funereal", "somber", "bleak", "depress", "woeful", "morose", "plaintive"], label: "Looking or sounding sad and dismal", hint: "The definition says 'looking or sounding sad and dismal' -- exaggeratedly mournful." },
     ],
     synonyms: ["mournful", "gloomy", "doleful"],
-    etymology: "Latin lugubris 'mournful,' from lugere (to mourn). Exaggeratedly gloomy -- almost comically sad.",
+    etymology: "Latin lugubris, from lugere (to mourn).",
   },
   // ── 255. malfeasance ──
   {
@@ -2880,7 +2880,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "public official", matchTerms: ["public", "official", "government", "authority", "office", "position", "power", "trust", "duty", "elected"], label: "Especially by a public official", hint: "The definition says 'especially by a public official' -- malfeasance often involves abuse of power." },
     ],
     synonyms: ["misconduct", "corruption", "wrongdoing"],
-    etymology: "Anglo-French malfaisance 'wrongdoing' -- mal (evil, bad) + faisance (doing), from faire (to do). Literally 'evil-doing.'",
+    etymology: "Anglo-French malfaisance -- mal (evil, bad) + faisance (doing), from faire (to do).",
   },
   // ── 256. meretricious ──
   {
@@ -2892,7 +2892,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "no real value", matchTerms: ["no value", "no integrity", "cheap", "worthless", "hollow", "superficial", "fake", "false", "misleading", "deceptive", "insincere", "tawdry", "tasteless", "vulgar"], label: "No real value or integrity", hint: "The definition says 'having in reality no value or integrity' -- the appeal is a facade." },
     ],
     synonyms: ["gaudy", "tawdry", "flashy"],
-    etymology: "Latin meretricius 'of or relating to prostitutes,' from meretrix (prostitute), from merere (to earn money). Attractive but cheaply so.",
+    etymology: "Latin meretricius, from meretrix, from merere (to earn money).",
   },
   // ── 257. mordant ──
   {
@@ -2904,7 +2904,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "biting wit", matchTerms: ["wit", "humor", "humour", "sarcas", "irony", "clever", "dry", "dark", "pointed", "barbed"], label: "Biting in wit or expression", hint: "The definition says 'biting in wit or expression' -- humor that stings." },
     ],
     synonyms: ["caustic", "acerbic", "sardonic"],
-    etymology: "French mordant 'biting,' from mordre 'to bite,' from Latin mordere (to bite). Wit that bites.",
+    etymology: "French mordant, from mordre, from Latin mordere (to bite).",
   },
   // ── 258. nadir ──
   {
@@ -2916,7 +2916,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "greatest adversity", matchTerms: ["greatest adversity", "worst", "bleakest", "darkest", "crisis", "despair", "downfall", "ruin", "misfortune", "hardship", "decline"], label: "Of greatest adversity", hint: "The definition says 'the point of greatest adversity' -- things can't get any worse from here." },
     ],
     synonyms: ["low point", "bottom", "depths"],
-    etymology: "Arabic nazir 'opposite to' (as in nazir as-samt, 'opposite the zenith'). The lowest point, directly underfoot.",
+    etymology: "Arabic nazir (opposite to), as in nazir as-samt (opposite the zenith).",
   },
   // ── 259. obsequious ──
   {
@@ -2928,7 +2928,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "fawning", matchTerms: ["fawning", "flattering", "ingratiat", "toadying", "bootlicking", "kowtowing", "cringing", "unctuous", "oily", "smarmy"], label: "Fawning", hint: "The definition says 'fawning' -- desperate to please those in power." },
     ],
     synonyms: ["sycophantic", "servile", "fawning"],
-    etymology: "Latin obsequiosus 'compliant,' from obsequi 'to comply' -- ob (toward) + sequi (to follow). Following too eagerly.",
+    etymology: "Latin obsequiosus, from obsequi -- ob (toward) + sequi (to follow).",
   },
   // ── 260. officious ──
   {
@@ -2940,7 +2940,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "trivial matters", matchTerms: ["trivial", "petty", "minor", "unimportant", "small", "insignificant", "unnecessary", "excessive", "overzealo"], label: "Especially in trivial matters", hint: "The definition says 'especially in trivial matters' -- making a big deal out of nothing." },
     ],
     synonyms: ["meddlesome", "intrusive", "domineering"],
-    etymology: "Latin officiosus 'dutiful, obliging,' from officium (duty, service). Originally positive; now means annoyingly eager to serve.",
+    etymology: "Latin officiosus, from officium (duty, service).",
   },
   // ── 261. opprobrium ──
   {
@@ -2952,7 +2952,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "public disgrace", matchTerms: ["public", "disgrace", "shame", "dishonor", "dishonour", "infamy", "humiliation", "ignominy", "stigma", "notoriety"], label: "Public disgrace from shameful conduct", hint: "The definition says 'public disgrace arising from shameful conduct' -- the shame that follows wrongdoing." },
     ],
     synonyms: ["disgrace", "infamy", "censure"],
-    etymology: "Latin opprobrium 'disgrace, reproach' -- ob (against) + probrum (shameful act, infamy). Shame cast against someone.",
+    etymology: "Latin opprobrium -- ob (against) + probrum (shameful act, infamy).",
   },
   // ── 262. palimpsest ──
   {
@@ -2964,7 +2964,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "traces remain", matchTerms: ["traces", "remain", "visible", "beneath", "under", "layers", "ghost", "faint", "residual", "vestige", "remnant", "echo"], label: "But traces of the original remain", hint: "The definition says 'but traces of the original remain' -- the past shows through." },
     ],
     synonyms: ["overwritten text", "layered manuscript"],
-    etymology: "Greek palimpsestos 'scraped again' -- palin (again) + psestos (scraped), from psen (to rub smooth). A manuscript scraped clean and reused.",
+    etymology: "Greek palimpsestos -- palin (again) + psestos (scraped), from psen (to rub smooth).",
   },
   // ── 263. parsimonious ──
   {
@@ -2975,7 +2975,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "unwilling to spend", matchTerms: ["unwilling", "spend", "money", "cheap", "stingy", "miserly", "tight-fisted", "penny-pinching", "frugal", "thrifty", "niggardly", "mean", "closefisted", "skinflint"], label: "Excessively unwilling to spend", hint: "The definition says 'excessively unwilling to spend money or use resources' -- extreme cheapness." },
     ],
     synonyms: ["miserly", "stingy", "tight-fisted"],
-    etymology: "Latin parsimonia 'thrift, frugality,' from parcere (to spare, refrain). Sparing taken to an extreme.",
+    etymology: "Latin parsimonia, from parcere (to spare, refrain).",
   },
   // ── 264. penchant ──
   {
@@ -2986,7 +2986,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "strong liking", matchTerms: ["strong", "liking", "fondness", "taste", "preference", "affinity", "inclination", "predilection", "proclivity", "weakness", "love", "passion", "appetite"], label: "A strong liking or tendency", hint: "The definition says 'a strong or habitual liking for something or tendency to do something' -- a natural pull toward something." },
     ],
     synonyms: ["fondness", "predilection", "inclination"],
-    etymology: "French penchant 'inclination, liking,' present participle of pencher 'to lean, tilt,' from Latin pendere (to hang, weigh). A leaning toward something.",
+    etymology: "French penchant, present participle of pencher, from Latin pendere (to hang, weigh).",
   },
   // ── 265. penurious ──
   {
@@ -2998,7 +2998,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "unwilling to spend", matchTerms: ["unwilling to spend", "stingy", "miserly", "cheap", "tight", "parsimonious", "frugal", "mean", "closefist"], label: "Unwilling to spend money", hint: "The definition also says 'excessively unwilling to spend money' -- penurious can also mean miserly." },
     ],
     synonyms: ["destitute", "impoverished", "miserly"],
-    etymology: "Latin penuria 'want, need, scarcity.' Related to Greek penia (poverty) and peina (hunger).",
+    etymology: "Latin penuria. Related to Greek penia and peina.",
   },
   // ── 266. perspicacious ──
   {
@@ -3021,7 +3021,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "suggesting sadness", matchTerms: ["sadness", "sad", "mournful", "melancholy", "sorrowful", "plaintive", "doleful", "wistful", "poignant", "haunting"], label: "Expressing or suggesting sadness", hint: "The definition says 'expressing or suggesting sadness' -- the sound carries emotional weight." },
     ],
     synonyms: ["resonant", "mournful", "reverberating"],
-    etymology: "Latin plangens, from plangere 'to beat, strike, lament' -- originally the sound of beating one's breast in grief.",
+    etymology: "Latin plangens, from plangere (to beat, strike, lament).",
   },
   // ── 268. polemic ──
   {
@@ -3033,7 +3033,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "controversial argument", matchTerms: ["controversial", "argument", "debate", "dispute", "contentious", "divisive", "provocative", "combative", "adversarial", "aggressive"], label: "Controversial argument", hint: "The definition says 'a controversial argument' -- polemics take a forceful side." },
     ],
     synonyms: ["diatribe", "invective", "attack"],
-    etymology: "Greek polemikos 'warlike,' from polemos (war). An argument that goes to war.",
+    etymology: "Greek polemikos, from polemos (war).",
   },
   // ── 269. probity ──
   {
@@ -3044,7 +3044,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "strong moral principles", matchTerms: ["moral", "principle", "ethics", "integrity", "virtue", "righteousness", "upright", "rectitude", "honor", "honour", "honest", "decency", "character", "conscience", "incorrupt"], label: "Strong moral principles; honesty", hint: "The definition says 'the quality of having strong moral principles; honesty and decency' -- deep ethical integrity." },
     ],
     synonyms: ["integrity", "honesty", "rectitude"],
-    etymology: "Latin probitas 'uprightness, honesty,' from probus (good, honest). Goodness tested and proven.",
+    etymology: "Latin probitas, from probus (good, honest).",
   },
   // ── 270. profligate ──
   {
@@ -3056,7 +3056,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "shamelessly immoral", matchTerms: ["shameless", "immoral", "dissolute", "debauch", "degenerat", "decaden", "licentious", "wanton", "corrupt"], label: "Shamelessly immoral", hint: "The definition says 'shamelessly immoral' -- profligacy often extends to behavior as well." },
     ],
     synonyms: ["wasteful", "extravagant", "dissolute"],
-    etymology: "Latin profligatus 'ruined, dissolute,' from profligare 'to ruin, overthrow' -- pro (forward) + fligere (to strike). Struck down morally.",
+    etymology: "Latin profligatus, from profligare -- pro (forward) + fligere (to strike).",
   },
   // ── 271. propitiate ──
   {
@@ -3068,7 +3068,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "by pleasing them", matchTerms: ["pleas", "offering", "sacrifice", "gift", "gesture", "atonement", "reconciliat", "peace", "olive branch"], label: "By doing something that pleases them", hint: "The definition says 'by doing something that pleases them' -- propitiation requires an offering of some kind." },
     ],
     synonyms: ["appease", "placate", "mollify"],
-    etymology: "Latin propitiare 'to make favorable,' from propitius (favorable, gracious). To win favor through offerings.",
+    etymology: "Latin propitiare, from propitius (favorable, gracious).",
   },
   // ── 272. proscribe ──
   {
@@ -3080,7 +3080,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "condemn or denounce", matchTerms: ["condemn", "denounc", "censur", "reject", "exile", "banish", "ostraciz", "blacklist"], label: "Condemn or denounce", hint: "The definition says 'to condemn or denounce' -- proscribing involves both banning and condemning." },
     ],
     synonyms: ["forbid", "ban", "prohibit"],
-    etymology: "Latin proscribere 'to publish in writing, outlaw' -- pro (before) + scribere (to write). Roman outlaws' names were literally written on public notices.",
+    etymology: "Latin proscribere -- pro (before) + scribere (to write).",
   },
   // ── 273. pusillanimous ──
   {
@@ -3091,7 +3091,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "lack of courage", matchTerms: ["lack of courage", "cowardly", "timid", "fearful", "spineless", "faint-hearted", "craven", "weak", "lily-livered", "gutless", "meek", "submissive", "shrinking", "cower"], label: "Showing lack of courage; timid", hint: "The definition says 'showing a lack of courage or determination; timid' -- too scared to act." },
     ],
     synonyms: ["cowardly", "timid", "spineless"],
-    etymology: "Latin pusillanimis 'fainthearted' -- pusillus (very small) + animus (spirit, courage). Literally 'small-spirited.'",
+    etymology: "Latin pusillanimis -- pusillus (very small) + animus (spirit, courage).",
   },
   // ── 274. querulous ──
   {
@@ -3103,7 +3103,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "petulant or whining", matchTerms: ["petulant", "whining", "peevish", "irritable", "cranky", "sulky", "testy", "fretful", "snappish", "waspish", "captious", "cantankerous"], label: "In a petulant or whining manner", hint: "The definition says 'in a petulant or whining manner' -- the complaints have a childish, annoying quality." },
     ],
     synonyms: ["whining", "petulant", "peevish"],
-    etymology: "Latin querulus 'complaining,' from queri (to complain). Related to 'quarrel.'",
+    etymology: "Latin querulus, from queri (to complain).",
   },
   // ── 275. recalcitrant ──
   {
@@ -3115,7 +3115,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "toward authority", matchTerms: ["authority", "discipline", "control", "rule", "order", "management", "instruction", "command", "law", "regulation"], label: "Toward authority or discipline", hint: "The definition says 'toward authority or discipline' -- recalcitrance is specifically about resisting those in charge." },
     ],
     synonyms: ["defiant", "unruly", "stubborn"],
-    etymology: "Latin recalcitrare 'to kick back' -- re (back) + calcitrare (to kick), from calx (heel). Like a stubborn mule kicking backward.",
+    etymology: "Latin recalcitrare -- re (back) + calcitrare (to kick), from calx (heel).",
   },
   // ── 276. recondite ──
   {
@@ -3127,7 +3127,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "difficult subject matter", matchTerms: ["difficult", "subject", "profound", "complex", "deep", "scholarly", "academic", "erudite", "intellectual", "specialized", "technical"], label: "Dealing with difficult subject matter", hint: "The definition says 'dealing with very profound or difficult subject matter' -- not easy to grasp." },
     ],
     synonyms: ["obscure", "esoteric", "abstruse"],
-    etymology: "Latin reconditus 'hidden, put away,' from recondere 'to put back, conceal' -- re (back) + condere (to store, hide). Knowledge hidden away from common view.",
+    etymology: "Latin reconditus, from recondere -- re (back) + condere (to store, hide).",
   },
   // ── 277. redoubtable ──
   {
@@ -3139,7 +3139,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "commanding respect", matchTerms: ["command", "respect", "fear", "aw", "rever", "admiration", "esteem", "veneration", "deference"], label: "Commanding respect or fear", hint: "The definition says 'commanding respect or fear' -- their strength earns deference." },
     ],
     synonyms: ["formidable", "fearsome", "impressive"],
-    etymology: "French redoutable, from redouter 'to dread' -- re (intensive) + douter (to doubt, fear). Someone who makes you doubt yourself.",
+    etymology: "French redoutable, from redouter -- re (intensive) + douter (to doubt, fear).",
   },
   // ── 278. remonstrate ──
   {
@@ -3151,7 +3151,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "plead in opposition", matchTerms: ["plead", "opposition", "oppos", "resist", "dissent", "disagree", "contend", "reason", "urge", "appeal", "expostulat"], label: "Argue or plead in opposition", hint: "The definition says 'argue or plead in opposition' -- trying to change someone's mind through vigorous debate." },
     ],
     synonyms: ["protest", "object", "argue"],
-    etymology: "Latin remonstrare 'to show again, point out' -- re (again) + monstrare (to show). Showing someone again why they're wrong.",
+    etymology: "Latin remonstrare -- re (again) + monstrare (to show).",
   },
   // ── 279. reprobate ──
   {
@@ -3162,7 +3162,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "unprincipled", matchTerms: ["unprincipled", "depraved", "immoral", "corrupt", "wicked", "sinful", "villainous", "degenerat", "dissolute", "debauched", "shameless", "scoundrel", "rogue"], label: "Unprincipled or depraved person", hint: "The definition says 'an unprincipled or depraved person' -- lacking any moral compass." },
     ],
     synonyms: ["scoundrel", "villain", "rogue"],
-    etymology: "Latin reprobatus 'disapproved,' from reprobare 'to reject' -- re (back) + probare (to approve, test). Someone tested and found wanting.",
+    etymology: "Latin reprobatus, from reprobare -- re (back) + probare (to approve, test).",
   },
   // ── 280. sanguine ──
   {
@@ -3174,7 +3174,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "in difficult situation", matchTerms: ["difficult", "situation", "adversity", "challenge", "hardship", "despite", "nevertheless", "regardless", "even when", "bad times", "trouble"], label: "In a difficult situation", hint: "The definition says 'especially in an apparently difficult situation' -- maintaining hope when things look bad." },
     ],
     synonyms: ["optimistic", "hopeful", "confident"],
-    etymology: "Latin sanguineus, from sanguis (blood). From the medieval four humors.",
+    etymology: "Latin sanguineus, from sanguis (blood).",
   },
   // ── 281. sardonic ──
   {
@@ -3185,7 +3185,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "grimly mocking", matchTerms: ["grim", "mocking", "scornful", "sneering", "derisive", "contemptuous", "disdainful", "bitter", "caustic", "acerbic", "mordant", "wry", "ironic"], label: "Grimly mocking or cynical", hint: "The definition says 'grimly mocking or cynical' -- dark humor laced with contempt." },
     ],
     synonyms: ["cynical", "mocking", "derisive"],
-    etymology: "Greek sardonios, possibly from a Sardinian plant (herba sardonia) said to cause facial contortions.",
+    etymology: "Greek sardonios, possibly from a Sardinian plant (herba sardonia).",
   },
   // ── 282. sartorial ──
   {
@@ -3196,7 +3196,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "relating to clothes", matchTerms: ["cloth", "clothing", "dress", "tailor", "fashion", "garment", "apparel", "attire", "wardrobe", "outfit", "style", "wear", "sewing", "fabric"], label: "Relating to clothes or style of dress", hint: "The definition says 'relating to tailoring, clothes, or style of dress' -- sartorial is about how people dress." },
     ],
     synonyms: ["clothing-related", "fashion", "dress"],
-    etymology: "Latin sartor 'tailor, patcher,' from sarcire (to patch, mend). Literally 'of the tailor.'",
+    etymology: "Latin sartor, from sarcire (to patch, mend).",
   },
   // ── 283. scurrilous ──
   {
@@ -3208,7 +3208,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "damaging reputation", matchTerms: ["damag", "reputation", "smear", "discredit", "vilify", "malign", "tarnish", "attack", "destroy"], label: "With intention of damaging reputation", hint: "The definition says 'with the intention of damaging their reputation' -- the goal is to destroy someone's standing." },
     ],
     synonyms: ["defamatory", "slanderous", "abusive"],
-    etymology: "Latin scurrilis 'buffoon-like,' from scurra (buffoon, jester). Originally coarse humor; now malicious slander.",
+    etymology: "Latin scurrilis, from scurra (buffoon, jester).",
   },
   // ── 284. sedulous ──
   {
@@ -3219,7 +3219,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "dedication and diligence", matchTerms: ["dedication", "diligence", "diligent", "industrious", "hardworking", "assiduous", "painstaking", "meticulous", "thorough", "conscientious", "attentive", "careful", "persistent", "tireless", "devoted"], label: "Showing dedication and diligence", hint: "The definition says 'showing dedication and diligence' -- persistently putting in the work." },
     ],
     synonyms: ["diligent", "industrious", "assiduous"],
-    etymology: "Latin sedulus 'zealous, painstaking,' from sedulo 'sincerely, diligently,' from se (without) + dolus (trickery). Honest, undeceiving effort.",
+    etymology: "Latin sedulus, from sedulo, from se (without) + dolus (trickery).",
   },
   // ── 285. sibilant ──
   {
@@ -3230,7 +3230,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "hissing sound", matchTerms: ["hissing", "sound", "hiss", "whisper", "sizzle", "fizz", "lisp", "rustle", "shh", "snake", "sssss", "sharp", "soft"], label: "Characterized by a hissing sound", hint: "The definition says 'making or characterized by a hissing sound' -- like the sound of an S or SH." },
     ],
     synonyms: ["hissing", "whispering", "fizzing"],
-    etymology: "Latin sibilans 'hissing,' from sibilare (to hiss, whistle). The word itself sounds like what it describes.",
+    etymology: "Latin sibilans, from sibilare (to hiss, whistle).",
   },
   // ── 286. solecism ──
   {
@@ -3242,7 +3242,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "breach of etiquette", matchTerms: ["breach", "manners", "etiquette", "faux pas", "gaffe", "indiscretion", "impropriety", "social error", "tactless", "blunder"], label: "Breach of good manners", hint: "The definition says 'a breach of good manners or etiquette' -- solecisms can also be social mistakes." },
     ],
     synonyms: ["blunder", "gaffe", "impropriety"],
-    etymology: "Greek soloikismos, from Soloi, an Athenian colony in Cilicia where residents spoke a corrupt form of Greek. Their bad grammar became the word for mistakes.",
+    etymology: "Greek soloikismos, from Soloi, an Athenian colony in Cilicia.",
   },
   // ── 287. specious ──
   {
@@ -3254,7 +3254,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "actually wrong", matchTerms: ["actually wrong", "false", "incorrect", "misleading", "deceptive", "fallacious", "spurious", "fraudulent", "bogus", "unsound", "flawed", "erroneous"], label: "But actually wrong; misleading", hint: "The definition says 'but actually wrong; misleading in appearance' -- the plausibility is a lie." },
     ],
     synonyms: ["misleading", "fallacious", "deceptive"],
-    etymology: "Latin speciosus 'good-looking, beautiful,' from species (appearance). Originally a compliment -- it meant 'beautiful' before shifting to 'deceptively beautiful.'",
+    etymology: "Latin speciosus, from species (appearance).",
   },
   // ── 288. superannuated ──
   {
@@ -3266,7 +3266,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "too old to be useful", matchTerms: ["too old", "ineffective", "useless", "worn out", "past it", "decrepit", "enfeebled", "retired", "pensioned", "past its prime", "over the hill"], label: "Too old to be effective", hint: "The definition says 'too old to be effective or useful' -- age has made it obsolete." },
     ],
     synonyms: ["outdated", "obsolete", "antiquated"],
-    etymology: "Medieval Latin superannuatus 'past the useful age' -- super (beyond) + annus (year). Literally 'beyond the years.'",
+    etymology: "Medieval Latin superannuatus -- super (beyond) + annus (year).",
   },
   // ── 289. supine ──
   {
@@ -3278,7 +3278,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "failing to act", matchTerms: ["fail", "act", "protest", "passive", "inactive", "submissive", "lazy", "indolent", "apathetic", "lethargic", "spineless", "compliant", "acquiescent"], label: "Failing to act from weakness", hint: "The definition says 'failing to act or protest as a result of moral weakness or indolence' -- too passive to do anything about it." },
     ],
     synonyms: ["passive", "indolent", "submissive"],
-    etymology: "Latin supinus 'thrown backward, lying face up,' from sub (under) + a root meaning 'up.' Flat on your back, doing nothing.",
+    etymology: "Latin supinus, from sub (under) + a root meaning 'up.'",
   },
   // ── 290. sybaritic ──
   {
@@ -3290,7 +3290,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "self-indulgent", matchTerms: ["self-indulgen", "indulgen", "pamper", "spoiled", "decadent", "excessive", "gratif", "pleasure-seeking"], label: "Self-indulgent", hint: "The definition says 'self-indulgent' -- sybarites deny themselves nothing." },
     ],
     synonyms: ["hedonistic", "luxurious", "self-indulgent"],
-    etymology: "From Sybaris, a Greek colony in southern Italy famous for its extreme wealth and pleasure-seeking. A Sybarite was a resident of this decadent city.",
+    etymology: "From Sybaris, a Greek colony in southern Italy.",
   },
   // ── 291. sycophant ──
   {
@@ -3302,7 +3302,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "to gain advantage", matchTerms: ["gain", "advantage", "benefit", "favor", "favour", "profit", "reward", "advancement", "self-interest", "ulterior", "opportunist", "flatter"], label: "To gain advantage; a flatterer", hint: "The definition says 'in order to gain advantage; a flatterer' -- the fawning is calculated." },
     ],
     synonyms: ["flatterer", "toady", "bootlicker"],
-    etymology: "Greek sykophantes 'false accuser, slanderer' -- sykon (fig) + phainein (to show). Perhaps originally someone who informed on illegal fig exporters; the true origin is debated.",
+    etymology: "Greek sykophantes -- sykon (fig) + phainein (to show). The true origin is debated.",
   },
   // ── 292. tendentious ──
   {
@@ -3314,7 +3314,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "controversial", matchTerms: ["controversial", "contentious", "divisive", "polarizing", "provocative", "dispute", "debate", "arguabl"], label: "Especially a controversial one", hint: "The definition says 'especially a controversial one' -- tendentious arguments are inherently divisive." },
     ],
     synonyms: ["biased", "partisan", "one-sided"],
-    etymology: "German tendenzioes 'with a tendency,' from Latin tendere (to stretch, aim toward). Writing that stretches toward a predetermined conclusion.",
+    etymology: "German tendenzioes, from Latin tendere (to stretch, aim toward).",
   },
   // ── 293. threnody ──
   {
@@ -3326,7 +3326,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "mourning the dead", matchTerms: ["mourn", "dead", "death", "memorial", "funeral", "grief", "loss", "tribute", "remembrance", "commemorate", "honor", "honour", "farewell"], label: "Of mourning for the dead", hint: "The definition says 'of mourning composed as a memorial to a dead person' -- a tribute to someone who has passed." },
     ],
     synonyms: ["elegy", "dirge", "lament"],
-    etymology: "Greek threnodia 'a song of lamentation' -- threnos (wailing, dirge) + oide (song, ode). A song made of grief.",
+    etymology: "Greek threnodia -- threnos (wailing, dirge) + oide (song, ode).",
   },
   // ── 294. timorous ──
   {
@@ -3337,7 +3337,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "nervousness or fear", matchTerms: ["nervous", "fear", "afraid", "frightened", "scared", "anxious", "apprehensive", "timid", "shy", "meek", "diffident", "trembling", "quaking", "cowering", "skittish"], label: "Showing nervousness or fear", hint: "The definition says 'showing nervousness, fear, or a lack of confidence' -- easily scared and unsure." },
     ],
     synonyms: ["timid", "fearful", "nervous"],
-    etymology: "Latin timorosus 'fearful,' from timor (fear), from timere (to fear). Related to 'timid' but stronger -- not just shy, but trembling.",
+    etymology: "Latin timorosus, from timor (fear), from timere (to fear).",
   },
   // ── 295. trenchant ──
   {
@@ -3348,7 +3348,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "vigorous and incisive", matchTerms: ["vigorous", "incisive", "sharp", "cutting", "penetrating", "keen", "pointed", "forceful", "powerful", "effective", "clear", "decisive", "direct", "emphatic"], label: "Vigorous or incisive in expression", hint: "The definition says 'vigorous or incisive in expression or style' -- cutting right to the heart of the matter." },
     ],
     synonyms: ["incisive", "sharp", "penetrating"],
-    etymology: "Old French trenchant 'cutting,' from trenchier 'to cut,' from Latin truncare (to cut off). Related to 'trench' -- words that cut like a blade.",
+    etymology: "Old French trenchant, from trenchier, from Latin truncare (to cut off).",
   },
   // ── 296. turgid ──
   {
@@ -3360,7 +3360,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "pompous language", matchTerms: ["pompous", "bombastic", "grandiloquent", "overblown", "verbose", "inflated", "pretentious", "extravagant", "overwrought", "florid", "flowery", "ornate"], label: "Pompous or bombastic language", hint: "The definition says 'using language that is pompous or bombastic' -- needlessly overblown prose." },
     ],
     synonyms: ["bombastic", "pompous", "bloated"],
-    etymology: "Latin turgidus 'swollen, inflated,' from turgere (to swell). Prose so bloated it's ready to burst.",
+    etymology: "Latin turgidus, from turgere (to swell).",
   },
   // ── 297. unctuous ──
   {
@@ -3371,7 +3371,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "excessively flattering", matchTerms: ["excessive", "flattering", "ingratiat", "smarmy", "oily", "slick", "glib", "smooth", "suave", "insincere", "sycophantic", "fawning", "obsequious", "honeyed"], label: "Excessively flattering; oily", hint: "The definition says 'excessively or ingratiatingly flattering; oily in manner' -- their charm feels slippery and fake." },
     ],
     synonyms: ["smarmy", "oily", "ingratiating"],
-    etymology: "Latin unctuosus 'oily, greasy,' from unctum (ointment), from ungere (to anoint). Originally about literal grease; now about greasy personalities.",
+    etymology: "Latin unctuosus, from unctum (ointment), from ungere (to anoint).",
   },
   // ── 298. venal ──
   {
@@ -3383,7 +3383,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "morally corrupt", matchTerms: ["moral", "corrupt", "dishonest", "unethical", "degraded", "depraved", "shameless", "base"], label: "Morally corrupt", hint: "The definition says 'morally corrupt' -- venal people have sold their integrity." },
     ],
     synonyms: ["corrupt", "bribable", "mercenary"],
-    etymology: "Latin venalis 'for sale,' from venum (sale). Not to be confused with 'venial' (forgivable) -- venal people sell their principles.",
+    etymology: "Latin venalis, from venum (sale).",
   },
   // ── 299. vertiginous ──
   {
@@ -3395,7 +3395,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "extremely high or steep", matchTerms: ["extreme", "high", "steep", "towering", "precipitous", "sheer", "lofty", "elevated", "dizzying heights", "plunging", "abyssal"], label: "Extremely high or steep", hint: "The definition says 'especially by being extremely high or steep' -- the height triggers the dizziness." },
     ],
     synonyms: ["dizzying", "giddy", "precipitous"],
-    etymology: "Latin vertiginosus 'suffering from dizziness,' from vertigo (whirling), from vertere (to turn). The world spinning around you.",
+    etymology: "Latin vertiginosus, from vertigo (whirling), from vertere (to turn).",
   },
   // ── 300. vitiate ──
   {
@@ -3407,7 +3407,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "make legally invalid", matchTerms: ["legal", "invalid", "void", "nullif", "annul", "negate", "revoke", "abolish", "quash", "overturn"], label: "Make legally invalid", hint: "The definition says 'to make legally invalid' -- vitiate can render contracts unenforceable." },
     ],
     synonyms: ["impair", "corrupt", "invalidate"],
-    etymology: "Latin vitiare 'to make faulty,' from vitium (fault, defect, vice). Related to 'vice' and 'vicious' -- to infect something with a flaw.",
+    etymology: "Latin vitiare, from vitium (fault, defect, vice).",
   },
   // ── 301. voluble ──
   {
@@ -3418,7 +3418,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "speaking incessantly", matchTerms: ["speak", "incessant", "continuous", "nonstop", "ceaseless", "unending", "constant", "endless", "persistent", "chatter", "loquacious", "garrulous", "talkative", "verbose"], label: "Speaking incessantly and fluently", hint: "The definition says 'speaking incessantly and fluently' -- the words just keep flowing." },
     ],
     synonyms: ["talkative", "loquacious", "garrulous"],
-    etymology: "Latin volubilis 'that turns easily, fluent,' from volvere (to turn, roll). Words that roll out effortlessly and endlessly.",
+    etymology: "Latin volubilis, from volvere (to turn, roll).",
   },
   // ── 302. winnow ──
   {
@@ -3429,7 +3429,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "remove unwanted", matchTerms: ["remove", "unwanted", "separate", "sift", "sort", "filter", "cull", "weed out", "eliminate", "pare down", "reduce", "narrow", "thin out", "select"], label: "Remove unwanted elements", hint: "The definition says 'remove unwanted elements from a group or collection' -- separating what you want from what you don't." },
     ],
     synonyms: ["sift", "separate", "cull"],
-    etymology: "Old English windwian 'to blow, fan,' from wind. Literally tossing grain in the air so the wind carries away the chaff.",
+    etymology: "Old English windwian, from wind.",
   },
   // ── 303. zeitgeist ──
   {
@@ -3441,7 +3441,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "of a period of history", matchTerms: ["period", "history", "time", "era", "age", "epoch", "generation", "moment", "culture", "society", "ideas", "beliefs"], label: "Of a particular historical period", hint: "The definition says 'of a particular period of history as shown by the ideas and beliefs of the time' -- zeitgeist is time-bound." },
     ],
     synonyms: ["spirit of the age", "ethos", "mood"],
-    etymology: "German Zeitgeist -- Zeit (time) + Geist (spirit, ghost). Literally 'time-ghost,' the invisible spirit that defines an era.",
+    etymology: "German Zeitgeist -- Zeit (time) + Geist (spirit, ghost).",
   },
   // ── 304. acerbic ──
   {
@@ -3452,7 +3452,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "sharp expression", matchTerms: ["sharp", "forthright", "cutting", "biting", "caustic", "mordant", "acid", "acrid", "trenchant", "incisive", "harsh", "severe", "stinging", "scathing"], label: "Sharp and forthright in expression", hint: "The definition says 'sharp and forthright in expression' -- acerbic language cuts deep." },
     ],
     synonyms: ["caustic", "biting", "sharp"],
-    etymology: "Latin acerbus 'harsh, bitter, sour,' from acer (sharp, keen). Related to 'acrid' and 'acrimony' -- sharpness that stings.",
+    etymology: "Latin acerbus, from acer (sharp, keen).",
   },
   // ── 305. anodyne ──
   {
@@ -3463,7 +3463,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "not likely to offend", matchTerms: ["not likely", "provoke", "offense", "inoffensive", "harmless", "bland", "mild", "gentle", "tame", "neutral", "safe", "unobjectionabl", "uncontroversial", "innocuous", "anodyne"], label: "Not likely to offend; bland", hint: "The definition says 'not likely to provoke dissent or offense' -- deliberately avoiding anything provocative." },
     ],
     synonyms: ["bland", "inoffensive", "innocuous"],
-    etymology: "Greek anodynos 'free from pain' -- an (without) + odyne (pain). Originally a painkiller; now anything so gentle it numbs the mind.",
+    etymology: "Greek anodynos -- an (without) + odyne (pain).",
   },
   // ── 306. baleful ──
   {
@@ -3474,7 +3474,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "threatening harm", matchTerms: ["threaten", "harm", "menac", "sinister", "ominous", "malevolent", "malign", "evil", "wicked", "hostile", "dire", "foreboding", "dark", "destructive", "pernicious", "deadly"], label: "Threatening harm; menacing", hint: "The definition says 'threatening harm; menacing' -- radiating danger and ill intent." },
     ],
     synonyms: ["menacing", "sinister", "malevolent"],
-    etymology: "Old English bealu (evil, harm, calamity) + -ful. An ancient Germanic word for evil -- pure, concentrated malice.",
+    etymology: "Old English bealu (evil, harm, calamity) + -ful.",
   },
   // ── 307. bucolic ──
   {
@@ -3485,7 +3485,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "pleasant countryside", matchTerms: ["pleasant", "countryside", "country", "rural", "pastoral", "rustic", "idyllic", "agrarian", "farm", "field", "meadow", "nature", "tranquil", "peaceful", "serene"], label: "Pleasant aspects of countryside", hint: "The definition says 'relating to the pleasant aspects of the countryside and country life' -- an idealized vision of rural living." },
     ],
     synonyms: ["pastoral", "rural", "rustic"],
-    etymology: "Greek boukolikos 'of herdsmen,' from boukolos (cowherd) -- bous (ox) + kolos (tending). Poetry of the cowherds.",
+    etymology: "Greek boukolikos, from boukolos (cowherd) -- bous (ox) + kolos (tending).",
   },
   // ── 308. cachinnate ──
   {
@@ -3496,7 +3496,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "laugh loudly", matchTerms: ["laugh", "loud", "uncontroll", "roar", "howl", "guffaw", "cackle", "shriek", "hysterical", "boisterous", "raucous", "convulsive", "belly laugh"], label: "Laugh loudly and uncontrollably", hint: "The definition says 'to laugh loudly and uncontrollably' -- not a polite giggle but a full-body eruption." },
     ],
     synonyms: ["guffaw", "cackle", "roar with laughter"],
-    etymology: "Latin cachinnare 'to laugh loudly,' probably imitative of the sound of uncontrollable laughter. The word itself sounds like a cackle.",
+    etymology: "Latin cachinnare, probably imitative of the sound of laughter.",
   },
   // ── 309. captious ──
   {
@@ -3507,7 +3507,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "find fault", matchTerms: ["find fault", "fault-finding", "critical", "nitpick", "cavil", "carp", "quibbl", "pedantic", "petty", "hairsplitting", "hypercritical", "censorious", "overcritical"], label: "Tending to find fault", hint: "The definition says 'tending to find fault or raise petty objections' -- always looking for something wrong." },
     ],
     synonyms: ["nitpicking", "fault-finding", "carping"],
-    etymology: "Latin captiosus 'fallacious, deceptive,' from captio (a taking, deception), from capere (to take, seize). Originally 'trying to catch people out.'",
+    etymology: "Latin captiosus, from captio (a taking, deception), from capere (to take, seize).",
   },
   // ── 310. circumlocution ──
   {
@@ -3519,7 +3519,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "vague or evasive", matchTerms: ["vague", "evasive", "deliberat", "avoid", "hedge", "obfuscate", "obscure", "equivocat", "prevaricating", "beating around the bush"], label: "Deliberately vague or evasive", hint: "The definition says 'in a deliberate attempt to be vague or evasive' -- using wordiness as a smokescreen." },
     ],
     synonyms: ["verbosity", "wordiness", "periphrasis"],
-    etymology: "Latin circumlocutio 'a speaking around' -- circum (around) + loqui (to speak). Talking in circles instead of getting to the point.",
+    etymology: "Latin circumlocutio -- circum (around) + loqui (to speak).",
   },
   // ── 311. contumacious ──
   {
@@ -3530,7 +3530,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "stubbornly disobedient", matchTerms: ["stubborn", "willful", "disobedient", "defiant", "rebellious", "insubordinat", "recalcitrant", "refractory", "intractable", "obstinate", "resistant", "unruly", "uncooperativ", "contrary"], label: "Stubbornly disobedient to authority", hint: "The definition says 'stubbornly or willfully disobedient to authority' -- openly refusing to comply." },
     ],
     synonyms: ["defiant", "rebellious", "insubordinate"],
-    etymology: "Latin contumax 'stubborn, insolent,' perhaps from con (intensive) + tumere (to swell). Swollen with defiance.",
+    etymology: "Latin contumax, perhaps from con (intensive) + tumere (to swell).",
   },
   // ── 312. crepuscular ──
   {
@@ -3541,7 +3541,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "relating to twilight", matchTerms: ["twilight", "dusk", "dawn", "dim", "half-light", "fading light", "gloaming", "evening", "morning", "dusky", "shadowy", "murky", "hazy", "softly lit"], label: "Relating to twilight", hint: "The definition says 'relating to twilight' -- the in-between light of dusk or dawn." },
     ],
     synonyms: ["twilit", "dim", "dusky"],
-    etymology: "Latin crepusculum 'twilight, dusk,' possibly related to creper (dark, obscure). The in-between light when day becomes night.",
+    etymology: "Latin crepusculum, possibly related to creper (dark, obscure).",
   },
   // ── 313. diaphanous ──
   {
@@ -3552,7 +3552,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "light and translucent", matchTerms: ["light", "delicate", "translucent", "transparent", "sheer", "thin", "fine", "gossamer", "filmy", "gauzy", "wispy", "ethereal", "airy", "see-through", "flimsy"], label: "Light, delicate, and translucent", hint: "The definition says 'light, delicate, and translucent' -- almost see-through." },
     ],
     synonyms: ["sheer", "translucent", "gossamer"],
-    etymology: "Greek diaphanes 'transparent' -- dia (through) + phainein (to show). Literally 'showing through' -- so fine you can see through it.",
+    etymology: "Greek diaphanes -- dia (through) + phainein (to show).",
   },
   // ── 314. dolorous ──
   {
@@ -3563,7 +3563,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "great sorrow", matchTerms: ["sorrow", "distress", "grief", "sadness", "mourning", "anguish", "heartbreak", "woe", "misery", "pain", "suffering", "lamentation", "mournful", "sorrowful", "woeful", "plaintive", "melancholy"], label: "Feeling great sorrow or distress", hint: "The definition says 'feeling or expressing great sorrow or distress' -- deep, visible grief." },
     ],
     synonyms: ["mournful", "sorrowful", "grieving"],
-    etymology: "Latin dolorosus 'painful, sorrowful,' from dolor (pain, grief). Related to 'doleful' and 'condolence' -- the language of grief.",
+    etymology: "Latin dolorosus, from dolor (pain, grief).",
   },
   // ── 315. effulgent ──
   {
@@ -3574,7 +3574,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "shining brightly", matchTerms: ["shining", "bright", "radiant", "brilliant", "luminous", "gleaming", "glowing", "blazing", "dazzling", "resplendent", "incandescent", "lustrous", "splendid"], label: "Shining brightly; radiant", hint: "The definition says 'shining brightly; radiant' -- emitting powerful light." },
     ],
     synonyms: ["radiant", "brilliant", "luminous"],
-    etymology: "Latin effulgere 'to shine out' -- ex (out) + fulgere (to shine). Light that bursts forth. Related to 'refulgent' and 'fulgent.'",
+    etymology: "Latin effulgere -- ex (out) + fulgere (to shine).",
   },
   // ── 316. emollient ──
   {
@@ -3586,7 +3586,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "avoiding confrontation", matchTerms: ["avoid", "confrontation", "anger", "conciliat", "pacif", "placating", "diplomatic", "tactful", "appeasing", "mollif", "peacemaking"], label: "Avoiding confrontation; calming", hint: "The definition says 'attempting to avoid confrontation or anger' -- emollient words smooth things over." },
     ],
     synonyms: ["soothing", "calming", "conciliatory"],
-    etymology: "Latin emollire 'to soften' -- e (out) + mollire (to soften), from mollis (soft). To draw the hardness out of something.",
+    etymology: "Latin emollire -- e (out) + mollire (to soften), from mollis (soft).",
   },
   // ── 317. equanimity ──
   {
@@ -3598,7 +3598,7 @@ export const hardWords: DailyWord[] = [
       { keyword: "in difficult situation", matchTerms: ["difficult", "situation", "stress", "pressure", "adversity", "crisis", "challenge", "under fire", "hardship", "turmoil", "chaos", "tension", "strain", "duress", "trial", "ordeal", "trouble"], label: "Especially in difficult situations", hint: "The definition says 'especially in a difficult situation' -- equanimity is calm under pressure." },
     ],
     synonyms: ["composure", "poise", "serenity"],
-    etymology: "Latin aequanimitas 'evenness of mind' -- aequus (equal, even) + animus (mind, spirit). A mind that stays level no matter what.",
+    etymology: "Latin aequanimitas -- aequus (equal, even) + animus (mind, spirit).",
   },
   // ── 318. ersatz ──
   {
@@ -3610,6 +3610,6 @@ export const hardWords: DailyWord[] = [
       { keyword: "inferior and not genuine", matchTerms: ["inferior", "not genuine", "fake", "artificial", "synthetic", "counterfeit", "sham", "bogus", "phony", "mock", "pseudo", "knock-off", "cheap"], label: "Inferior; not genuine", hint: "The definition says 'typically an inferior one; not genuine' -- it's a poor copy." },
     ],
     synonyms: ["imitation", "artificial", "substitute"],
-    etymology: "German Ersatz 'replacement, substitute,' from ersetzen (to replace). Widely adopted during wartime when real goods were scarce and substitutes were everywhere.",
+    etymology: "German Ersatz, from ersetzen (to replace).",
   },
 ]
