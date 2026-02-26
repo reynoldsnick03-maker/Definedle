@@ -1304,6 +1304,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["admit", "recognize", "accept", "concede", "confess"],
     partOfSpeech: "verb",
+    etymology: "Old English oncnawan, from on + cnawan (to know). Related to 'know.'",
   },
   {
     word: "accurate",
@@ -1314,6 +1315,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["precise", "exact", "correct", "true", "faithful"],
     partOfSpeech: "adjective",
+    etymology: "Latin accuratus (prepared with care), from ad (to) + cura (care).",
   },
   {
     word: "ambiguous",
@@ -1324,6 +1326,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["unclear", "vague", "equivocal", "obscure", "cryptic"],
     partOfSpeech: "adjective",
+    etymology: "Latin ambiguus (shifting, doubtful), from ambigere -- ambi (both ways) + agere (to drive).",
   },
   {
     word: "anecdotal",
@@ -1334,6 +1337,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["informal", "unreliable", "unscientific", "hearsay", "unverified"],
     partOfSpeech: "adjective",
+    etymology: "Greek anekdota (things unpublished), from an (not) + ekdotos (published).",
   },
   {
     word: "anticipate",
@@ -1344,6 +1348,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["expect", "foresee", "predict", "await", "prepare for"],
     partOfSpeech: "verb",
+    etymology: "Latin anticipare -- ante (before) + capere (to take).",
   },
   {
     word: "assertive",
@@ -1354,6 +1359,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["confident", "self-assured", "bold", "forceful", "decisive"],
     partOfSpeech: "adjective",
+    etymology: "Latin asserere (to claim), from ad (to) + serere (to join).",
   },
   {
     word: "attentive",
@@ -1364,6 +1370,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["alert", "observant", "watchful", "mindful", "vigilant"],
     partOfSpeech: "adjective",
+    etymology: "Latin attendere -- ad (to) + tendere (to stretch).",
   },
   {
     word: "auspicious",
@@ -1374,6 +1381,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["favorable", "promising", "propitious", "fortunate", "opportune"],
     partOfSpeech: "adjective",
+    etymology: "Latin auspicium (divination by birds), from avis (bird) + specere (to look).",
   },
   {
     word: "awkward",
@@ -1384,6 +1392,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["clumsy", "uncomfortable", "embarrassing", "ungainly", "difficult"],
     partOfSpeech: "adjective",
+    etymology: "Middle English awke (turned the wrong way) + -ward. From Old Norse ofugr (turned backward).",
   },
   {
     word: "benevolent",
@@ -1394,6 +1403,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["kind", "generous", "charitable", "compassionate", "altruistic"],
     partOfSpeech: "adjective",
+    etymology: "Latin benevolens -- bene (well) + volens (wishing), from velle (to wish).",
   },
   {
     word: "biased",
@@ -1404,6 +1414,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["prejudiced", "partial", "one-sided", "partisan", "slanted"],
     partOfSpeech: "adjective",
+    etymology: "French biais (oblique, slant), of uncertain origin.",
   },
   {
     word: "brief",
@@ -1414,6 +1425,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["short", "concise", "succinct", "quick", "fleeting"],
     partOfSpeech: "adjective",
+    etymology: "Latin brevis (short). Related to 'abbreviate.'",
   },
   {
     word: "busy",
@@ -1424,6 +1436,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["occupied", "engaged", "active", "hectic", "industrious"],
     partOfSpeech: "adjective",
+    etymology: "Old English bisig (anxious, careful). Of Germanic origin.",
   },
   {
     word: "cabal",
@@ -1434,6 +1447,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["conspiracy", "faction", "clique", "junta", "coterie"],
     partOfSpeech: "noun",
+    etymology: "Hebrew qabbalah (received tradition), from qabal (to receive).",
   },
   {
     word: "calm",
@@ -1444,6 +1458,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["peaceful", "tranquil", "serene", "composed", "placid"],
     partOfSpeech: "adjective",
+    etymology: "Greek kauma (heat of the day) -- the time when activity stops.",
   },
   {
     word: "charisma",
@@ -1454,6 +1469,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["charm", "appeal", "magnetism", "allure", "presence"],
     partOfSpeech: "noun",
+    etymology: "Greek kharisma (divine gift), from kharis (grace, favor).",
   },
   {
     word: "coherent",
@@ -1464,6 +1480,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["logical", "consistent", "clear", "lucid", "intelligible"],
     partOfSpeech: "adjective",
+    etymology: "Latin cohaerere -- co (together) + haerere (to stick).",
   },
   {
     word: "concise",
@@ -1474,6 +1491,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["brief", "succinct", "terse", "pithy", "compact"],
     partOfSpeech: "adjective",
+    etymology: "Latin concisus (cut short), from concidere -- con + caedere (to cut).",
   },
   {
     word: "condescending",
@@ -1484,6 +1502,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["patronizing", "supercilious", "disdainful", "superior", "snobbish"],
     partOfSpeech: "adjective",
+    etymology: "Latin condescendere -- con (together) + descendere (to descend).",
   },
   {
     word: "consequence",
@@ -1494,6 +1513,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["result", "effect", "outcome", "repercussion", "aftermath"],
     partOfSpeech: "noun",
+    etymology: "Latin consequentia, from consequi -- con (together) + sequi (to follow).",
   },
   {
     word: "constraint",
@@ -1504,6 +1524,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["restriction", "limitation", "restraint", "curb", "check"],
     partOfSpeech: "noun",
+    etymology: "Latin constringere -- con (together) + stringere (to draw tight).",
   },
   {
     word: "context",
@@ -1514,6 +1535,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["circumstances", "background", "setting", "situation", "framework"],
     partOfSpeech: "noun",
+    etymology: "Latin contextus (a joining together), from contexere -- con + texere (to weave).",
   },
   {
     word: "corrosive",
@@ -1524,6 +1546,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["destructive", "erosive", "damaging", "harmful", "caustic"],
     partOfSpeech: "adjective",
+    etymology: "Latin corrodere -- cor (intensive) + rodere (to gnaw).",
   },
   {
     word: "credible",
@@ -1534,6 +1557,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["believable", "plausible", "convincing", "trustworthy", "reliable"],
     partOfSpeech: "adjective",
+    etymology: "Latin credibilis, from credere (to believe).",
   },
   {
     word: "deliberate",
@@ -1544,6 +1568,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["intentional", "planned", "calculated", "conscious", "purposeful"],
     partOfSpeech: "adjective",
+    etymology: "Latin deliberatus, from deliberare -- de + librare (to weigh), from libra (scales).",
   },
   {
     word: "delusional",
@@ -1554,6 +1579,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["deluded", "mistaken", "irrational", "unrealistic", "self-deceiving"],
     partOfSpeech: "adjective",
+    etymology: "Latin deludere (to mock, deceive) -- de + ludere (to play).",
   },
   {
     word: "dependent",
@@ -1564,6 +1590,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["reliant", "contingent", "subordinate", "conditional", "subject to"],
     partOfSpeech: "adjective",
+    etymology: "Latin dependere -- de (down) + pendere (to hang).",
   },
   {
     word: "derivative",
@@ -1574,6 +1601,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["unoriginal", "imitative", "copied", "secondary", "borrowed"],
     partOfSpeech: "adjective",
+    etymology: "Latin derivare -- de (away) + rivus (stream).",
   },
   {
     word: "detrimental",
@@ -1584,6 +1612,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["harmful", "damaging", "injurious", "adverse", "deleterious"],
     partOfSpeech: "adjective",
+    etymology: "Latin detrimentum (a rubbing away, loss), from deterere -- de + terere (to rub).",
   },
   {
     word: "direct",
@@ -1594,6 +1623,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["straightforward", "frank", "candid", "plain", "explicit"],
     partOfSpeech: "adjective",
+    etymology: "Latin directus, from dirigere -- di (apart) + regere (to guide).",
   },
   {
     word: "discrete",
@@ -1604,6 +1634,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["separate", "distinct", "individual", "detached", "unconnected"],
     partOfSpeech: "adjective",
+    etymology: "Latin discretus (separated), from discernere -- dis (apart) + cernere (to separate).",
   },
   {
     word: "disillusioned",
@@ -1614,6 +1645,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["disenchanted", "disappointed", "disillusioned", "cynical", "let down"],
     partOfSpeech: "adjective",
+    etymology: "Dis- (removal) + illusion, from Latin illudere (to mock).",
   },
   {
     word: "dissolve",
@@ -1624,6 +1656,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["melt", "disintegrate", "disperse", "end", "terminate"],
     partOfSpeech: "verb",
+    etymology: "Latin dissolvere -- dis (apart) + solvere (to loosen).",
   },
   {
     word: "earnest",
@@ -1634,6 +1667,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["sincere", "serious", "solemn", "heartfelt", "fervent"],
     partOfSpeech: "adjective",
+    etymology: "Old English eornost (seriousness, battle). Of Germanic origin.",
   },
   {
     word: "empathetic",
@@ -1644,6 +1678,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["understanding", "compassionate", "sympathetic", "sensitive", "perceptive"],
     partOfSpeech: "adjective",
+    etymology: "Greek empatheia -- en (in) + pathos (feeling).",
   },
   {
     word: "erroneous",
@@ -1654,6 +1689,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["incorrect", "wrong", "false", "inaccurate", "mistaken"],
     partOfSpeech: "adjective",
+    etymology: "Latin errare (to wander, stray).",
   },
   {
     word: "evaluate",
@@ -1664,6 +1700,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["assess", "appraise", "judge", "analyze", "review"],
     partOfSpeech: "verb",
+    etymology: "French evaluer, from e- (out) + value, from Latin valere (to be strong).",
   },
   {
     word: "exaggerate",
@@ -1674,6 +1711,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["overstate", "embellish", "amplify", "magnify", "inflate"],
     partOfSpeech: "verb",
+    etymology: "Latin exaggerare -- ex (thoroughly) + aggerare (to heap up).",
   },
   {
     word: "existential",
@@ -1684,6 +1722,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["philosophical", "fundamental", "metaphysical", "ontological"],
     partOfSpeech: "adjective",
+    etymology: "Latin existere -- ex (out) + sistere (to cause to stand).",
   },
   {
     word: "explicit",
@@ -1694,6 +1733,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["clear", "unambiguous", "definite", "precise", "express"],
     partOfSpeech: "adjective",
+    etymology: "Latin explicitus (unfolded), from explicare -- ex + plicare (to fold).",
   },
   {
     word: "flexible",
@@ -1704,6 +1744,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["adaptable", "versatile", "pliable", "adjustable", "accommodating"],
     partOfSpeech: "adjective",
+    etymology: "Latin flexibilis, from flectere (to bend).",
   },
   {
     word: "gaslighting",
@@ -1714,6 +1755,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["manipulating", "deceiving", "psychologically abusing", "brainwashing"],
     partOfSpeech: "noun",
+    etymology: "From the 1944 film 'Gaslight,' where a husband manipulates his wife into doubting her sanity.",
   },
   {
     word: "gregarious",
@@ -1724,6 +1766,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["sociable", "outgoing", "friendly", "convivial", "extroverted"],
     partOfSpeech: "adjective",
+    etymology: "Latin gregarius (of a flock), from grex (flock, herd).",
   },
   {
     word: "harmless",
@@ -1734,6 +1777,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["innocuous", "safe", "benign", "inoffensive", "gentle"],
     partOfSpeech: "adjective",
+    etymology: "Old English hearm (harm) + -less. Of Germanic origin.",
   },
   {
     word: "hesitant",
@@ -1744,6 +1788,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["uncertain", "reluctant", "tentative", "indecisive", "wavering"],
     partOfSpeech: "adjective",
+    etymology: "Latin haesitare (to stick fast, stammer), from haerere (to stick).",
   },
   {
     word: "impartial",
@@ -1754,6 +1799,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["unbiased", "neutral", "fair", "objective", "disinterested"],
     partOfSpeech: "adjective",
+    etymology: "Im- (not) + partial, from Latin pars (part) -- not taking a part/side.",
   },
   {
     word: "implicit",
@@ -1764,6 +1810,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["implied", "tacit", "understood", "unspoken", "inferred"],
     partOfSpeech: "adjective",
+    etymology: "Latin implicitus (entangled), from implicare -- in + plicare (to fold).",
   },
   {
     word: "incognito",
@@ -1774,6 +1821,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["anonymous", "disguised", "unrecognized", "undercover", "in disguise"],
     partOfSpeech: "adverb",
+    etymology: "Latin incognitus -- in (not) + cognitus (known), from cognoscere (to know).",
   },
   {
     word: "indifferent",
@@ -1784,6 +1832,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["apathetic", "unconcerned", "uninterested", "detached", "aloof"],
     partOfSpeech: "adjective",
+    etymology: "Latin indifferens -- in (not) + differens (differing).",
   },
   {
     word: "influence",
@@ -1794,6 +1843,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["power", "sway", "impact", "effect", "authority"],
     partOfSpeech: "noun",
+    etymology: "Latin influere (to flow in) -- in + fluere (to flow). Originally an astrological term.",
   },
   {
     word: "integrity",
@@ -1804,6 +1854,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["honesty", "uprightness", "probity", "rectitude", "honor"],
     partOfSpeech: "noun",
+    etymology: "Latin integritas (wholeness), from integer (whole, complete).",
   },
   {
     word: "intention",
@@ -1814,6 +1865,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["aim", "purpose", "plan", "goal", "objective"],
     partOfSpeech: "noun",
+    etymology: "Latin intentio (a stretching out), from intendere -- in + tendere (to stretch).",
   },
   {
     word: "interpret",
@@ -1824,6 +1876,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["explain", "construe", "understand", "read", "decipher"],
     partOfSpeech: "verb",
+    etymology: "Latin interpretari (to explain), from interpres (agent, translator).",
   },
   {
     word: "intuition",
@@ -1834,6 +1887,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["instinct", "insight", "hunch", "gut feeling", "sixth sense"],
     partOfSpeech: "noun",
+    etymology: "Latin intueri (to look at, consider) -- in + tueri (to watch, guard).",
   },
   {
     word: "irony",
@@ -1844,6 +1898,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["sarcasm", "satire", "mockery", "paradox", "incongruity"],
     partOfSpeech: "noun",
+    etymology: "Greek eironeia (dissimulation, feigned ignorance), from eiron (dissembler).",
   },
   {
     word: "justify",
@@ -1854,6 +1909,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["defend", "vindicate", "warrant", "validate", "rationalize"],
     partOfSpeech: "verb",
+    etymology: "Latin justificare -- justus (just) + facere (to make).",
   },
   {
     word: "logical",
@@ -1864,6 +1920,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["rational", "reasonable", "sensible", "coherent", "valid"],
     partOfSpeech: "adjective",
+    etymology: "Greek logikos, from logos (word, reason, discourse).",
   },
   {
     word: "manipulative",
@@ -1874,6 +1931,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["scheming", "calculating", "devious", "cunning", "crafty"],
     partOfSpeech: "adjective",
+    etymology: "Latin manipulus (handful), from manus (hand) + plere (to fill).",
   },
   {
     word: "methodical",
@@ -1884,6 +1942,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["systematic", "orderly", "organized", "disciplined", "meticulous"],
     partOfSpeech: "adjective",
+    etymology: "Greek methodikos, from methodos -- meta (after) + hodos (way, journey).",
   },
   {
     word: "minimal",
@@ -1894,6 +1953,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["minimum", "least", "smallest", "nominal", "negligible"],
     partOfSpeech: "adjective",
+    etymology: "Latin minimus (smallest), superlative of minor (smaller).",
   },
   {
     word: "moderate",
@@ -1904,6 +1964,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["reasonable", "temperate", "measured", "modest", "middle-of-the-road"],
     partOfSpeech: "adjective",
+    etymology: "Latin moderatus, from moderari (to regulate), from modus (measure).",
   },
   {
     word: "motivation",
@@ -1914,6 +1975,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["incentive", "drive", "impetus", "stimulus", "reason"],
     partOfSpeech: "noun",
+    etymology: "Latin motivus (moving), from movere (to move).",
   },
   {
     word: "neutral",
@@ -1924,6 +1986,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["impartial", "unbiased", "objective", "uncommitted", "nonpartisan"],
     partOfSpeech: "adjective",
+    etymology: "Latin neutralis, from neuter -- ne (not) + uter (either).",
   },
   {
     word: "objective",
@@ -1934,6 +1997,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["impartial", "unbiased", "factual", "neutral", "dispassionate"],
     partOfSpeech: "adjective",
+    etymology: "Latin objectivus, from objectum (thing presented to the mind), from obicere (to throw before).",
   },
   {
     word: "optimistic",
@@ -1944,6 +2008,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["hopeful", "positive", "confident", "upbeat", "sanguine"],
     partOfSpeech: "adjective",
+    etymology: "Latin optimus (best). Related to Leibniz's philosophy that this is the 'best of all possible worlds.'",
   },
   {
     word: "outcome",
@@ -1954,6 +2019,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["result", "consequence", "effect", "conclusion", "end"],
     partOfSpeech: "noun",
+    etymology: "Out- + come. A straightforward English compound.",
   },
   {
     word: "overlook",
@@ -1964,6 +2030,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["miss", "ignore", "neglect", "disregard", "pass over"],
     partOfSpeech: "verb",
+    etymology: "Over- + look. Originally 'to look over from above,' later 'to fail to notice.'",
   },
   {
     word: "patronizing",
@@ -1974,6 +2041,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["condescending", "superior", "disdainful", "supercilious", "snobbish"],
     partOfSpeech: "adjective",
+    etymology: "Latin patronus (protector), from pater (father). A patron 'looks down' as a father might.",
   },
   {
     word: "persistent",
@@ -1984,6 +2052,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["persevering", "tenacious", "determined", "resolute", "dogged"],
     partOfSpeech: "adjective",
+    etymology: "Latin persistere -- per (through) + sistere (to stand).",
   },
   {
     word: "perspective",
@@ -1994,6 +2063,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["viewpoint", "standpoint", "outlook", "angle", "approach"],
     partOfSpeech: "noun",
+    etymology: "Latin perspicere (to look through) -- per + specere (to look).",
   },
   {
     word: "pragmatic",
@@ -2004,6 +2074,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["practical", "realistic", "sensible", "matter-of-fact", "down-to-earth"],
     partOfSpeech: "adjective",
+    etymology: "Greek pragmatikos (relating to fact), from pragma (deed, act).",
   },
   {
     word: "pretentious",
@@ -2014,6 +2085,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["affected", "ostentatious", "pompous", "showy", "grandiose"],
     partOfSpeech: "adjective",
+    etymology: "Latin praetendere (to stretch forth, claim) -- prae (before) + tendere (to stretch).",
   },
   {
     word: "proportionate",
@@ -2024,6 +2096,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["commensurate", "corresponding", "relative", "balanced", "appropriate"],
     partOfSpeech: "adjective",
+    etymology: "Latin proportio -- pro (for) + portio (part, share).",
   },
   {
     word: "provocative",
@@ -2034,6 +2107,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["inflammatory", "incendiary", "controversial", "stimulating", "challenging"],
     partOfSpeech: "adjective",
+    etymology: "Latin provocare (to call forth, challenge) -- pro + vocare (to call).",
   },
   {
     word: "rational",
@@ -2044,6 +2118,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["logical", "reasonable", "sensible", "sound", "coherent"],
     partOfSpeech: "adjective",
+    etymology: "Latin rationalis, from ratio (reckoning, reason).",
   },
   {
     word: "reconcile",
@@ -2054,6 +2129,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["reunite", "harmonize", "resolve", "settle", "accommodate"],
     partOfSpeech: "verb",
+    etymology: "Latin reconciliare -- re (again) + conciliare (to bring together), from concilium (council).",
   },
   {
     word: "reductive",
@@ -2064,6 +2140,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["simplistic", "oversimplified", "narrow", "limiting", "diminishing"],
     partOfSpeech: "adjective",
+    etymology: "Latin reducere (to lead back) -- re (back) + ducere (to lead).",
   },
   {
     word: "relevant",
@@ -2074,6 +2151,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["pertinent", "applicable", "germane", "appropriate", "material"],
     partOfSpeech: "adjective",
+    etymology: "Latin relevare (to raise up, lighten) -- re + levare (to lift).",
   },
   {
     word: "resentment",
@@ -2084,6 +2162,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["bitterness", "indignation", "animosity", "grudge", "displeasure"],
     partOfSpeech: "noun",
+    etymology: "French ressentir (to feel strongly) -- re (intensive) + sentir (to feel).",
   },
   {
     word: "resilient",
@@ -2094,6 +2173,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["tough", "hardy", "adaptable", "flexible", "strong"],
     partOfSpeech: "adjective",
+    etymology: "Latin resilire (to spring back) -- re (back) + salire (to jump).",
   },
   {
     word: "restrained",
@@ -2104,6 +2184,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["controlled", "moderate", "subdued", "muted", "understated"],
     partOfSpeech: "adjective",
+    etymology: "Latin restringere -- re (back) + stringere (to draw tight).",
   },
   {
     word: "risk",
@@ -2114,6 +2195,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["danger", "hazard", "peril", "threat", "gamble"],
     partOfSpeech: "noun",
+    etymology: "Italian risco or rischio, possibly from Arabic rizq (fortune, luck).",
   },
   {
     word: "sarcasm",
@@ -2124,6 +2206,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["irony", "mockery", "ridicule", "derision", "scorn"],
     partOfSpeech: "noun",
+    etymology: "Greek sarkasmos (a sneer), from sarkazein (to tear flesh) -- sarx (flesh).",
   },
   {
     word: "scapegoat",
@@ -2134,6 +2217,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["whipping boy", "fall guy", "victim", "target", "patsy"],
     partOfSpeech: "noun",
+    etymology: "Hebrew azazel (the goat sent into the wilderness in Leviticus, bearing the sins of the people).",
   },
   {
     word: "scrutinize",
@@ -2144,6 +2228,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["examine", "inspect", "analyze", "study", "investigate"],
     partOfSpeech: "verb",
+    etymology: "Latin scrutinium (a search), from scrutari (to examine, search), from scruta (rubbish, trash).",
   },
   {
     word: "skeptical",
@@ -2154,6 +2239,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["doubtful", "questioning", "dubious", "unconvinced", "cynical"],
     partOfSpeech: "adjective",
+    etymology: "Greek skeptikos (inquiring), from skeptesthai (to look, consider).",
   },
   {
     word: "speculate",
@@ -2164,6 +2250,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["conjecture", "theorize", "hypothesize", "guess", "surmise"],
     partOfSpeech: "verb",
+    etymology: "Latin speculari (to observe), from specula (watchtower), from specere (to look).",
   },
   {
     word: "steady",
@@ -2174,6 +2261,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["stable", "firm", "constant", "consistent", "unwavering"],
     partOfSpeech: "adjective",
+    etymology: "Old English stede (place, position). Related to 'stead' and 'instead.'",
   },
   {
     word: "subtle",
@@ -2184,6 +2272,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["delicate", "understated", "nuanced", "fine", "elusive"],
     partOfSpeech: "adjective",
+    etymology: "Latin subtilis (fine, thin), from sub (under) + tela (web, woven material).",
   },
   {
     word: "sufficient",
@@ -2194,6 +2283,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["enough", "adequate", "ample", "satisfactory", "sufficient"],
     partOfSpeech: "adjective",
+    etymology: "Latin sufficere (to supply, be adequate) -- sub (under) + facere (to make).",
   },
   {
     word: "superficial",
@@ -2204,6 +2294,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["shallow", "cursory", "surface-level", "skin-deep", "trivial"],
     partOfSpeech: "adjective",
+    etymology: "Latin superficialis, from superficies (surface) -- super (above) + facies (face).",
   },
   {
     word: "tentative",
@@ -2214,6 +2305,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["uncertain", "provisional", "hesitant", "preliminary", "unsure"],
     partOfSpeech: "adjective",
+    etymology: "Latin tentare (to try, test), from tendere (to stretch).",
   },
   {
     word: "tolerant",
@@ -2224,6 +2316,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["accepting", "open-minded", "liberal", "forbearing", "permissive"],
     partOfSpeech: "adjective",
+    etymology: "Latin tolerare (to bear, endure).",
   },
   {
     word: "transparent",
@@ -2234,6 +2327,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["clear", "obvious", "open", "honest", "candid"],
     partOfSpeech: "adjective",
+    etymology: "Latin transparere -- trans (through) + parere (to appear).",
   },
   {
     word: "trustworthy",
@@ -2244,6 +2338,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["reliable", "dependable", "honest", "faithful", "responsible"],
     partOfSpeech: "adjective",
+    etymology: "Old English treowe (faithful) + worthy. Of Germanic origin.",
   },
   {
     word: "undermine",
@@ -2254,6 +2349,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["weaken", "sabotage", "subvert", "erode", "damage"],
     partOfSpeech: "verb",
+    etymology: "Under- + mine (to dig). Originally to dig tunnels beneath fortifications.",
   },
   {
     word: "utility",
@@ -2264,6 +2360,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["usefulness", "practicality", "functionality", "benefit", "value"],
     partOfSpeech: "noun",
+    etymology: "Latin utilitas, from utilis (useful), from uti (to use).",
   },
   {
     word: "validate",
@@ -2274,6 +2371,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["confirm", "verify", "substantiate", "authenticate", "ratify"],
     partOfSpeech: "verb",
+    etymology: "Latin validus (strong), from valere (to be strong).",
   },
   {
     word: "versatile",
@@ -2284,6 +2382,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["adaptable", "flexible", "multifaceted", "all-around", "multipurpose"],
     partOfSpeech: "adjective",
+    etymology: "Latin versatilis (turning), from versare (to turn often), from vertere (to turn).",
   },
   {
     word: "voluntary",
@@ -2294,6 +2393,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["willing", "optional", "unforced", "spontaneous", "discretionary"],
     partOfSpeech: "adjective",
+    etymology: "Latin voluntarius, from voluntas (will), from velle (to wish).",
   },
   {
     word: "wary",
@@ -2304,6 +2404,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["cautious", "careful", "vigilant", "guarded", "circumspect"],
     partOfSpeech: "adjective",
+    etymology: "Old English waer (aware, cautious). Of Germanic origin.",
   },
   {
     word: "willingness",
@@ -2314,5 +2415,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["readiness", "eagerness", "inclination", "disposition", "openness"],
     partOfSpeech: "noun",
+    etymology: "Old English willan (to wish, will) + -ness. Of Germanic origin.",
   },
 ]
