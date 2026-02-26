@@ -148,7 +148,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
           {/* Practice game */}
           {tab === "practice" && practiceWord && (
             <Game
-              key={`practice-${practiceKey}`}
+              key={`practice-${difficulty}-${practiceKey}-${practiceWord.word}`}
               dailyWord={practiceWord}
               difficulty={difficulty}
               isPractice={true}

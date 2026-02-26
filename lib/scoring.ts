@@ -475,13 +475,62 @@ const STOP_WORDS = new Set([
   "one", "two", "especially", "rather", "being", "something", "someone",
 ])
 
+// Negation words that flip the meaning of the following word(s)
+const NEGATION_WORDS = new Set([
+  "not", "never", "no", "none", "neither", "nor", "nobody", "nothing",
+  "nowhere", "without", "lack", "lacking", "lacks", "unable", "cannot",
+  "can't", "won't", "wouldn't", "shouldn't", "couldn't", "doesn't",
+  "don't", "didn't", "isn't", "aren't", "wasn't", "weren't", "hasn't",
+  "haven't", "hadn't", "opposite", "contrary", "antithesis", "un", "in",
+])
+
 // Extract meaningful words from a string (lowercase, no stop words, no short words)
+// Also returns which words are negated (preceded by a negation word)
+function meaningfulWordsWithNegation(text: string): { words: string[]; negatedWords: Set<string> } {
+  const lower = text.toLowerCase().replace(/[^a-z\s'-]/g, " ")
+  const allWords = lower.split(/\s+/)
+  const meaningful: string[] = []
+  const negatedWords = new Set<string>()
+  
+  let negationActive = false
+  let negationDistance = 0
+  
+  for (const word of allWords) {
+    // Check if this word is a negation marker
+    if (NEGATION_WORDS.has(word) || (word.startsWith("un") && word.length > 3) || (word.startsWith("in") && word.length > 4)) {
+      negationActive = true
+      negationDistance = 0
+      continue
+    }
+    
+    // Skip stop words and short words for meaningful extraction
+    if (word.length <= 3 || STOP_WORDS.has(word)) {
+      // But increment negation distance even for skipped words
+      if (negationActive) negationDistance++
+      continue
+    }
+    
+    meaningful.push(word)
+    
+    // Mark as negated if within 3 words of a negation marker
+    if (negationActive && negationDistance <= 3) {
+      negatedWords.add(word)
+    }
+    
+    negationDistance++
+    
+    // Reset negation after 4 words distance
+    if (negationDistance > 4) {
+      negationActive = false
+    }
+  }
+  
+  return { words: meaningful, negatedWords }
+}
+
+// Legacy function for backward compatibility
 function meaningfulWords(text: string): string[] {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z\s]/g, " ")
-    .split(/\s+/)
-    .filter((w) => w.length > 3 && !STOP_WORDS.has(w))
+  return meaningfulWordsWithNegation(text).words
 }
 
 // Check if two words share a common root by comparing prefixes and substrings.
@@ -501,7 +550,8 @@ function stemMatch(a: string, b: string): boolean {
 // Check if a user's input fuzzy-matches a concept by overlapping meaningful
 // words with the concept's definition, label, and hint text.
 // Returns true when enough of the concept's key vocabulary appears in the input.
-function fuzzyConceptMatch(inputWords: string[], concept: { label: string; hint: string; keyword: string }): boolean {
+// Negated words are excluded from matching since they indicate the opposite meaning.
+function fuzzyConceptMatch(inputWords: string[], negatedWords: Set<string>, concept: { label: string; hint: string; keyword: string }): boolean {
   const conceptText = `${concept.label} ${concept.hint} ${concept.keyword}`
   const conceptWords = meaningfulWords(conceptText)
 
@@ -509,10 +559,13 @@ function fuzzyConceptMatch(inputWords: string[], concept: { label: string; hint:
   const unique = [...new Set(conceptWords)]
   if (unique.length === 0) return false
 
-  // Count how many concept words appear via stem matching with any input word
+  // Filter out negated input words - they indicate the opposite meaning
+  const nonNegatedInputWords = inputWords.filter(w => !negatedWords.has(w))
+
+  // Count how many concept words appear via stem matching with any non-negated input word
   let hits = 0
   for (const cw of unique) {
-    for (const iw of inputWords) {
+    for (const iw of nonNegatedInputWords) {
       if (stemMatch(cw, iw)) {
         hits++
         break
@@ -530,6 +583,7 @@ function fuzzyConceptMatch(inputWords: string[], concept: { label: string; hint:
 function scoreAgainstDefinition(
   input: string,
   inputMeaningful: string[],
+  negatedWords: Set<string>,
   words: string[],
   keyConcepts: DailyWord["keyConcepts"],
   synonyms: string[],
@@ -540,7 +594,7 @@ function scoreAgainstDefinition(
 
   const concepts: ConceptResult[] = keyConcepts.map((concept) => {
     const explicitMatch = concept.matchTerms.some((t) => termMatches(input, t))
-    const fuzzyMatch = !explicitMatch && fuzzyConceptMatch(inputMeaningful, concept)
+    const fuzzyMatch = !explicitMatch && fuzzyConceptMatch(inputMeaningful, negatedWords, concept)
     return {
       keyword: concept.keyword,
       label: concept.label,
@@ -571,6 +625,13 @@ function scoreAgainstDefinition(
   let relevantWords = 0
   const irrelevantWords: string[] = []
   for (const iw of inputMeaningful) {
+    // If the word is negated (e.g., "not clear"), treat it as irrelevant
+    // because it means the opposite of what the concept requires
+    if (negatedWords.has(iw)) {
+      irrelevantWords.push(iw)
+      continue
+    }
+    
     const isRelevant =
       allValidVocab.some((v) => iw === v || stemMatch(iw, v)) ||
       allValidVocab.some((v) => areSynonyms(iw, v))
@@ -627,10 +688,10 @@ export function scoreDefinition(
     })
     .join(" ")
 
-  const inputMeaningful = meaningfulWords(input)
+  const { words: inputMeaningful, negatedWords } = meaningfulWordsWithNegation(input)
 
   // Score against the primary definition
-  const primary = scoreAgainstDefinition(input, inputMeaningful, words, dailyWord.keyConcepts, dailyWord.synonyms, dailyWord.definition)
+  const primary = scoreAgainstDefinition(input, inputMeaningful, negatedWords, words, dailyWord.keyConcepts, dailyWord.synonyms, dailyWord.definition)
 
   // Score against alternate definitions and pick the best
   let best = primary
@@ -639,7 +700,7 @@ export function scoreDefinition(
 
   if (dailyWord.altDefinitions) {
     for (const alt of dailyWord.altDefinitions) {
-      const altResult = scoreAgainstDefinition(input, inputMeaningful, words, alt.keyConcepts, dailyWord.synonyms, alt.definition)
+      const altResult = scoreAgainstDefinition(input, inputMeaningful, negatedWords, words, alt.keyConcepts, dailyWord.synonyms, alt.definition)
       const altTotal = altResult.conceptScore + altResult.precisionScore + altResult.lengthScore
       // Prefer higher concept matches first, then total score
       if (altResult.matchedCount > best.matchedCount || (altResult.matchedCount === best.matchedCount && altTotal > bestTotal)) {
