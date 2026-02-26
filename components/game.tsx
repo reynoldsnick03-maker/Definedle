@@ -58,6 +58,12 @@ export function Game({
   const [usedHint, setUsedHint] = useState(false)
   const [showHint, setShowHint] = useState(false)
 
+  // Reset hint state when word changes (for practice mode)
+  useEffect(() => {
+    setShowHint(false)
+    setUsedHint(false)
+  }, [dailyWord.word])
+
   // Check cookie for previous daily submission (daily mode only)
   useEffect(() => {
     if (isPractice) return
