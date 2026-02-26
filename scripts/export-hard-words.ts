@@ -1,9 +1,9 @@
-import { hardWords } from "../lib/words-hard"
+import { hardWords } from "../lib/words-hard.js"
 import * as fs from "fs"
 
-const lines: string[] = [
+const lines = [
   "DEFINEDLE - HARD MODE WORD LIST",
-  "=" .repeat(50),
+  "=".repeat(50),
   `Total words: ${hardWords.length}`,
   "",
 ]
