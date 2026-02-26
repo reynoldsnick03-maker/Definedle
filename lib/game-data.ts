@@ -44,9 +44,19 @@ export function getTodaysWord(): DailyWord {
   return dailyWords[index]
 }
 
+// Hard mode start date: February 26, 2026 (word list refresh)
+const HARD_MODE_START = Date.UTC(2026, 1, 26) // Month is 0-indexed
+
+function getDaysSinceHardModeStart(): number {
+  const now = new Date()
+  const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
+  return Math.floor((today - HARD_MODE_START) / (1000 * 60 * 60 * 24))
+}
+
 export function getTodaysHardWord(): DailyWord {
-  // Offset by 137 so hard and easy words don't cycle in lockstep
-  const index = (getDayOfYear() + 137) % hardWords.length
+  // Cycles through the hard word list starting from Feb 26, 2026
+  const daysSinceStart = getDaysSinceHardModeStart()
+  const index = ((daysSinceStart % hardWords.length) + hardWords.length) % hardWords.length
   return hardWords[index]
 }
 
@@ -57,10 +67,11 @@ export function getTodaysHardWord(): DailyWord {
  */
 function getUpcomingDailyWords(days: number): Set<string> {
   const dayOfYear = getDayOfYear()
+  const daysSinceHardStart = getDaysSinceHardModeStart()
   const upcoming = new Set<string>()
   for (let d = 0; d < days; d++) {
     const easyIdx = (dayOfYear + d) % dailyWords.length
-    const hardIdx = (dayOfYear + d + 137) % hardWords.length
+    const hardIdx = ((daysSinceHardStart + d) % hardWords.length + hardWords.length) % hardWords.length
     upcoming.add(dailyWords[easyIdx].word)
     upcoming.add(hardWords[hardIdx].word)
   }
