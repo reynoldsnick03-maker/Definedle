@@ -609,6 +609,9 @@ function scoreAgainstDefinition(
   const conceptCount = keyConcepts.length
   const pointsPerConcept = Math.round(75 / conceptCount)
 
+  // Extract meaningful words from the official definition for overlap checking
+  const officialDefWords = meaningfulWords(definitionText.toLowerCase())
+  
   const concepts: ConceptResult[] = keyConcepts.map((concept) => {
     // Find explicit match and track which term matched
     let explicitMatchTerm: string | undefined
@@ -622,16 +625,46 @@ function scoreAgainstDefinition(
     // If no explicit match, try fuzzy matching
     const fuzzyResult = !explicitMatchTerm ? fuzzyConceptMatch(inputMeaningful, negatedWords, concept) : { matched: false, nearMiss: false, matchedWords: [] }
     
-    const matched = !!explicitMatchTerm || fuzzyResult.matched
+    let matched = !!explicitMatchTerm || fuzzyResult.matched
+    let nearMiss = !matched && fuzzyResult.nearMiss
+    let matchedWords = explicitMatchTerm ? undefined : ((fuzzyResult.matched || fuzzyResult.nearMiss) ? fuzzyResult.matchedWords : undefined)
+    
+    // FALLBACK: Definition overlap check
+    // If still no match, check if player used words that appear directly in the official definition
+    // This catches cases like "expected" in both player and official definition
+    if (!matched && !nearMiss) {
+      const nonNegatedInput = inputMeaningful.filter(w => !negatedWords.has(w))
+      const overlapWords: string[] = []
+      
+      for (const iw of nonNegatedInput) {
+        // Check if input word appears in official definition (stem match)
+        for (const ow of officialDefWords) {
+          if (stemMatch(iw, ow)) {
+            overlapWords.push(iw)
+            break
+          }
+        }
+      }
+      
+      // If 2+ words overlap with official definition, it's a match
+      // If 1 word overlaps, it's a near-miss
+      if (overlapWords.length >= 2) {
+        matched = true
+        matchedWords = overlapWords
+      } else if (overlapWords.length === 1) {
+        nearMiss = true
+        matchedWords = overlapWords
+      }
+    }
     
     return {
       keyword: concept.keyword,
       label: concept.label,
       hint: concept.hint,
       matched,
-      nearMiss: !matched && fuzzyResult.nearMiss,
+      nearMiss,
       matchedTerm: explicitMatchTerm,
-      matchedWords: explicitMatchTerm ? undefined : ((fuzzyResult.matched || fuzzyResult.nearMiss) ? fuzzyResult.matchedWords : undefined),
+      matchedWords,
     }
   })
 
