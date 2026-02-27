@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { compressToEncodedURIComponent } from "lz-string"
 import { ScoreDisplay } from "./score-display"
 import { ConceptBreakdown } from "./concept-breakdown"
 import { ScoreCelebration } from "./score-celebration"
@@ -69,9 +70,12 @@ export function ResultsPanel({
     const precisionPct = breakdown ? Math.round((breakdown.precision.earned / breakdown.precision.max) * 100) : 0
     const detailPct = breakdown ? Math.round((breakdown.detail.earned / breakdown.detail.max) * 100) : 0
 
-    // Ultra-compact URL: word-score-concepts-k-p-t-mode (no definition, no encoding)
+    // Compact URL with LZ compression - includes definition
+    // Format: word|score|concepts|k|p|t|mode|definition
     const mode = difficulty === "hard" ? "h" : "e"
-    const shareUrl = `${siteUrl}?r=${word}-${score}-${conceptLine}-${conceptPct}-${precisionPct}-${detailPct}-${mode}`
+    const data = `${word}|${score}|${conceptLine}|${conceptPct}|${precisionPct}|${detailPct}|${mode}|${playerDefinition.slice(0, 150)}`
+    const compressed = compressToEncodedURIComponent(data)
+    const shareUrl = `${siteUrl}?r=${compressed}`
 
     // Generate emoji bars for each category (5 squares each)
     const toBar = (pct: number) => {

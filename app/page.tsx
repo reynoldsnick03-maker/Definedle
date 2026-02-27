@@ -1,3 +1,4 @@
+import { decompressFromEncodedURIComponent } from "lz-string"
 import { getTodaysWord, getTodaysHardWord, dailyWords, practiceWords, hardWords } from "@/lib/game-data"
 import { PageClient } from "@/components/page-client"
 
@@ -16,29 +17,21 @@ export default async function Page({ searchParams }: PageProps) {
 
   if (typeof params.r === "string") {
     try {
-      // New ultra-compact format: word-score-concepts-k-p-t-mode
-      // e.g., "precedent-96-pp-101-100-67-e"
-      const parts = params.r.split("-")
-      if (parts.length >= 7) {
-        // Last part is mode (e or h), second-to-last three are percentages
-        const mode = parts[parts.length - 1]
-        const detailPct = parseInt(parts[parts.length - 2], 10)
-        const precisionPct = parseInt(parts[parts.length - 3], 10)
-        const conceptPct = parseInt(parts[parts.length - 4], 10)
-        const concepts = parts[parts.length - 5]
-        const score = parseInt(parts[parts.length - 6], 10)
-        // Word might contain hyphens, so join all remaining parts
-        const word = parts.slice(0, parts.length - 6).join("-")
-        
-        shareData = {
-          w: word,
-          s: score,
-          d: "", // No definition in compact format
-          c: concepts,
-          k: conceptPct,
-          p: precisionPct,
-          t: detailPct,
-          m: mode,
+      // LZ-compressed format: word|score|concepts|k|p|t|mode|definition
+      const decompressed = decompressFromEncodedURIComponent(params.r)
+      if (decompressed) {
+        const parts = decompressed.split("|")
+        if (parts.length >= 7) {
+          shareData = {
+            w: parts[0],
+            s: parseInt(parts[1], 10),
+            c: parts[2],
+            k: parseInt(parts[3], 10),
+            p: parseInt(parts[4], 10),
+            t: parseInt(parts[5], 10),
+            m: parts[6],
+            d: parts[7] || "",
+          }
         }
       }
       
