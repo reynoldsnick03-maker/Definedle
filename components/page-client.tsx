@@ -21,23 +21,46 @@ interface PageClientProps {
   } | null
 }
 
+// Parse URL params once at module level for initial state
+function getInitialSummonedWord(): { word: DailyWord; difficulty: GameMode } | null {
+  if (typeof window === "undefined") return null
+  const params = new URLSearchParams(window.location.search)
+  const wordParam = params.get("word") || Array.from(params.keys()).find(k => k !== "reset" && k !== "r")
+  if (wordParam) {
+    const found = getWordByName(wordParam)
+    if (found) {
+      // Clean URL without reloading
+      window.history.replaceState({}, "", window.location.pathname)
+      return found
+    }
+  }
+  return null
+}
+
 export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: PageClientProps) {
+  // Check for summoned word from URL on initial render
+  const [summonedWord] = useState(() => getInitialSummonedWord())
+  
   const [statsOpen, setStatsOpen] = useState(false)
   const [helpOpen, setHelpOpen] = useState(false)
   const [showingShare, setShowingShare] = useState(!!shareData && !!shareWordData)
-  const [tab, setTab] = useState<TabMode>("daily")
-  const [difficulty, setDifficulty] = useState<GameMode>("easy")
+  const [tab, setTab] = useState<TabMode>(() => summonedWord ? "practice" : "daily")
+  const [difficulty, setDifficulty] = useState<GameMode>(() => summonedWord?.difficulty ?? "easy")
 
   // Practice state -- separate per difficulty so switching doesn't reset
-  const [practiceEasy, setPracticeEasy] = useState<DailyWord | null>(null)
-  const [practiceHard, setPracticeHard] = useState<DailyWord | null>(null)
+  // Initialize with summoned word if present
+  const [practiceEasy, setPracticeEasy] = useState<DailyWord | null>(() => 
+    summonedWord?.difficulty === "easy" ? summonedWord.word : null
+  )
+  const [practiceHard, setPracticeHard] = useState<DailyWord | null>(() => 
+    summonedWord?.difficulty === "hard" ? summonedWord.word : null
+  )
   const [playedEasy, setPlayedEasy] = useState<string[]>([])
   const [playedHard, setPlayedHard] = useState<string[]>([])
   const [practiceKeyEasy, setPracticeKeyEasy] = useState(0)
   const [practiceKeyHard, setPracticeKeyHard] = useState(0)
 
   // ?reset in URL clears all saved state and reloads clean
-  // ?word=xyz summons a specific word in practice mode
   useEffect(() => {
     if (typeof window === "undefined") return
     const params = new URLSearchParams(window.location.search)
@@ -51,28 +74,6 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
       Object.keys(localStorage).filter(k => k.startsWith("definedle-improve-")).forEach(k => localStorage.removeItem(k))
       // Redirect without ?reset
       window.location.replace(window.location.pathname)
-      return
-    }
-    
-    // Check for summoned word (first non-standard param key is treated as word name)
-    // e.g., ?obsolete or ?word=obsolete
-    const wordParam = params.get("word") || Array.from(params.keys()).find(k => k !== "reset" && k !== "r")
-    if (wordParam) {
-      const found = getWordByName(wordParam)
-      if (found) {
-        setTab("practice")
-        setDifficulty(found.difficulty)
-        // Set as the practice word for that difficulty
-        if (found.difficulty === "easy") {
-          setPracticeEasy(found.word)
-          setPracticeKeyEasy((k) => k + 1)
-        } else {
-          setPracticeHard(found.word)
-          setPracticeKeyHard((k) => k + 1)
-        }
-        // Clean URL without reloading
-        window.history.replaceState({}, "", window.location.pathname)
-      }
     }
   }, [])
 
