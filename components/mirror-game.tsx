@@ -70,23 +70,23 @@ function levenshtein(a: string, b: string): number {
   return matrix[b.length][a.length]
 }
 
-// Get color based on similarity score
+// Get color based on similarity score - softer, muted tones
 function getSimilarityColor(similarity: number): string {
-  if (similarity >= 100) return "bg-score-high text-white"
-  if (similarity >= 80) return "bg-emerald-400 text-white"
-  if (similarity >= 60) return "bg-yellow-400 text-foreground"
-  if (similarity >= 40) return "bg-orange-400 text-white"
-  if (similarity >= 20) return "bg-red-400 text-white"
-  return "bg-red-600 text-white"
+  if (similarity >= 100) return "bg-score-high/80 text-white"
+  if (similarity >= 80) return "bg-emerald-400/60 text-emerald-900"
+  if (similarity >= 60) return "bg-amber-300/50 text-amber-900"
+  if (similarity >= 40) return "bg-orange-300/50 text-orange-900"
+  if (similarity >= 20) return "bg-red-300/50 text-red-900"
+  return "bg-red-200/60 text-red-800"
 }
 
 function getSimilarityBorderColor(similarity: number): string {
-  if (similarity >= 100) return "border-score-high"
-  if (similarity >= 80) return "border-emerald-400"
-  if (similarity >= 60) return "border-yellow-400"
-  if (similarity >= 40) return "border-orange-400"
-  if (similarity >= 20) return "border-red-400"
-  return "border-red-600"
+  if (similarity >= 100) return "border-score-high/60"
+  if (similarity >= 80) return "border-emerald-300"
+  if (similarity >= 60) return "border-amber-300"
+  if (similarity >= 40) return "border-orange-300"
+  if (similarity >= 20) return "border-red-300"
+  return "border-red-200"
 }
 
 export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorGameProps) {
@@ -95,6 +95,8 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
   const [isShaking, setIsShaking] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
+  const [hintsRevealed, setHintsRevealed] = useState(0) // 0=none, 1=first letter, 2=last letter
+  const [hintUsedThisTurn, setHintUsedThisTurn] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   
   const maxGuesses = 3
@@ -106,6 +108,8 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
     setCurrentGuess("")
     setIsComplete(false)
     setIsCorrect(false)
+    setHintsRevealed(0)
+    setHintUsedThisTurn(false)
   }, [word.word])
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
@@ -124,6 +128,7 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
     const newGuesses = [...guesses, newGuess]
     setGuesses(newGuesses)
     setCurrentGuess("")
+    setHintUsedThisTurn(false) // Re-enable hint button after each guess
     
     if (isExactMatch) {
       // Correct!
@@ -176,20 +181,34 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
             &ldquo;{word.definition}&rdquo;
           </p>
           
-          {/* Hints - always show word length, reveal first letter after first wrong guess */}
-          <div className="mt-4 flex items-center justify-center gap-3 text-sm text-muted-foreground">
+          {/* Hints - word length shown, others on request */}
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
             <span className="px-2 py-1 rounded bg-muted/50">
               {word.word.length} letters
             </span>
-            {guesses.length >= 1 && !isCorrect && (
+            {hintsRevealed >= 1 && (
               <span className="px-2 py-1 rounded bg-muted/50">
                 Starts with &ldquo;{word.word[0].toUpperCase()}&rdquo;
               </span>
             )}
-            {guesses.length >= 2 && !isCorrect && (
+            {hintsRevealed >= 2 && (
               <span className="px-2 py-1 rounded bg-muted/50">
                 Ends with &ldquo;{word.word[word.word.length - 1]}&rdquo;
               </span>
+            )}
+            {/* Hint request button */}
+            {!isComplete && hintsRevealed < 2 && (
+              <button
+                type="button"
+                disabled={hintUsedThisTurn}
+                onClick={() => {
+                  setHintsRevealed(h => h + 1)
+                  setHintUsedThisTurn(true)
+                }}
+                className="px-2 py-1 rounded bg-muted/30 hover:bg-muted/50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {hintsRevealed === 0 ? "Hint?" : "More?"}
+              </button>
             )}
           </div>
         </div>
@@ -261,9 +280,18 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
               />
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-xs text-muted-foreground">
-                {remainingGuesses} {remainingGuesses === 1 ? "guess" : "guesses"} remaining
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-muted-foreground">
+                  {remainingGuesses} {remainingGuesses === 1 ? "guess" : "guesses"} left
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setIsComplete(true)}
+                  className="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+                >
+                  give up
+                </button>
+              </div>
               <button
                 type="submit"
                 disabled={!currentGuess.trim()}
