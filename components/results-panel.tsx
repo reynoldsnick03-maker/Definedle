@@ -78,6 +78,8 @@ export function ResultsPanel({
     // Clean text-only share format
     const text = `Definedle${modeLabel} - ${score}/100
 
+${word.toUpperCase()}
+
 Concepts:  ${conceptBar} ${matchedCount}/${safeConcepts.length}
 Precision: ${precisionBar}
 Detail:    ${detailBar}
