@@ -96,7 +96,6 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
   const [isComplete, setIsComplete] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
   const [hintsRevealed, setHintsRevealed] = useState(0) // 0=none, 1=length, 2=first letter, 3=last letter
-  const [hintsUsedTotal, setHintsUsedTotal] = useState(0) // Track total hints used across all turns
   const inputRef = useRef<HTMLInputElement>(null)
   
   const maxGuesses = 3
@@ -109,7 +108,6 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
     setIsComplete(false)
     setIsCorrect(false)
     setHintsRevealed(0)
-    setHintsUsedTotal(0)
   }, [word.word])
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
@@ -128,8 +126,6 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
     const newGuesses = [...guesses, newGuess]
     setGuesses(newGuesses)
     setCurrentGuess("")
-    // Hints available = guesses made + 1 (for the initial turn)
-    // So after this guess, player can use hints up to (newGuesses.length + 1), capped at 3
     
     if (isExactMatch) {
       // Correct!
@@ -199,24 +195,16 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
                 Ends with &ldquo;{word.word[word.word.length - 1]}&rdquo;
               </span>
             )}
-            {/* Hint request button - can use up to (guesses + 1) hints total, max 3 */}
-            {!isComplete && hintsRevealed < 3 && (() => {
-              const maxHintsAllowed = Math.min(guesses.length + 1, 3)
-              const canUseHint = hintsUsedTotal < maxHintsAllowed
-              return (
-                <button
-                  type="button"
-                  disabled={!canUseHint}
-                  onClick={() => {
-                    setHintsRevealed(h => h + 1)
-                    setHintsUsedTotal(h => h + 1)
-                  }}
-                  className="px-2 py-1 rounded bg-muted/30 hover:bg-muted/50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                  Hint?
-                </button>
-              )
-            })()}
+            {/* Hint request button - use all 3 hints anytime */}
+            {!isComplete && hintsRevealed < 3 && (
+              <button
+                type="button"
+                onClick={() => setHintsRevealed(h => h + 1)}
+                className="px-2 py-1 rounded bg-muted/30 hover:bg-muted/50 transition-colors"
+              >
+                Hint?
+              </button>
+            )}
           </div>
         </div>
 
