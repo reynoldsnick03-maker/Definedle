@@ -16,22 +16,44 @@ export default async function Page({ searchParams }: PageProps) {
 
   if (typeof params.r === "string") {
     try {
-      const decoded = JSON.parse(decodeURIComponent(atob(params.r)))
-      if (decoded.w && typeof decoded.s === "number" && decoded.d && decoded.c) {
-        // Include all fields including optional ones (k, p, t, m)
+      // Restore URL-safe base64 to standard base64
+      const base64 = params.r.replace(/-/g, "+").replace(/_/g, "/")
+      const decoded = atob(base64)
+      
+      // Try new compact pipe-delimited format first: word|score|definition|concepts|k|p|t|mode
+      const parts = decoded.split("|")
+      if (parts.length >= 4) {
         shareData = {
-          w: decoded.w,
-          s: decoded.s,
-          d: decoded.d,
-          c: decoded.c,
-          k: decoded.k,
-          p: decoded.p,
-          t: decoded.t,
-          m: decoded.m,
+          w: parts[0],
+          s: parseInt(parts[1], 10),
+          d: parts[2],
+          c: parts[3],
+          k: parts[4] ? parseInt(parts[4], 10) : undefined,
+          p: parts[5] ? parseInt(parts[5], 10) : undefined,
+          t: parts[6] ? parseInt(parts[6], 10) : undefined,
+          m: parts[7] || undefined,
         }
-        // Find the word in our data to get official definition and concept labels
+      } else {
+        // Fallback: try legacy JSON format for old links
+        const jsonDecoded = JSON.parse(decodeURIComponent(decoded))
+        if (jsonDecoded.w && typeof jsonDecoded.s === "number" && jsonDecoded.d && jsonDecoded.c) {
+          shareData = {
+            w: jsonDecoded.w,
+            s: jsonDecoded.s,
+            d: jsonDecoded.d,
+            c: jsonDecoded.c,
+            k: jsonDecoded.k,
+            p: jsonDecoded.p,
+            t: jsonDecoded.t,
+            m: jsonDecoded.m,
+          }
+        }
+      }
+      
+      // Find the word in our data to get official definition and concept labels
+      if (shareData) {
         const allWords = [...dailyWords, ...practiceWords, ...hardWords]
-        const wordEntry = allWords.find((w) => w.word.toLowerCase() === decoded.w.toLowerCase())
+        const wordEntry = allWords.find((w) => w.word.toLowerCase() === shareData!.w.toLowerCase())
         if (wordEntry) {
           shareWordData = {
             definition: wordEntry.definition,

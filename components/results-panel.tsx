@@ -69,18 +69,12 @@ export function ResultsPanel({
     const precisionPct = breakdown ? Math.round((breakdown.precision.earned / breakdown.precision.max) * 100) : 0
     const detailPct = breakdown ? Math.round((breakdown.detail.earned / breakdown.detail.max) * 100) : 0
 
-    // Encode result data into a compact URL parameter
-    const shareData = {
-      w: word,
-      s: score,
-      d: playerDefinition.slice(0, 200),
-      c: conceptLine,
-      k: conceptPct,  // key concepts percentage
-      p: precisionPct, // precision percentage
-      t: detailPct,    // detail percentage
-      m: difficulty === "hard" ? "h" : "e", // mode
-    }
-    const encoded = btoa(encodeURIComponent(JSON.stringify(shareData)))
+    // Encode result data into a compact URL parameter using pipe-delimited format
+    // Format: word|score|definition|concepts|conceptPct|precisionPct|detailPct|mode
+    const defText = playerDefinition.slice(0, 200).replace(/\|/g, "/") // escape pipes
+    const compactData = `${word}|${score}|${defText}|${conceptLine}|${conceptPct}|${precisionPct}|${detailPct}|${difficulty === "hard" ? "h" : "e"}`
+    // Use URL-safe base64 (replace + with - and / with _)
+    const encoded = btoa(compactData).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "")
     const shareUrl = `${siteUrl}?r=${encoded}`
 
     // Generate emoji bars for each category (5 squares each)
