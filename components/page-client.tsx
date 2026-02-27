@@ -7,6 +7,7 @@ import { StatsPanel } from "@/components/stats-panel"
 import { HowToPlay } from "@/components/how-to-play"
 import { SharedResult, type ShareData } from "@/components/shared-result"
 import { ModeToggle, type TabMode } from "@/components/mode-toggle"
+import { StreakBadge } from "@/components/streak-badge"
 import type { DailyWord, GameMode } from "@/lib/game-data"
 import { getRandomPracticeWord, getWordByName } from "@/lib/game-data"
 
@@ -46,6 +47,23 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   const [showingShare, setShowingShare] = useState(!!shareData && !!shareWordData)
   const [tab, setTab] = useState<TabMode>(() => summonedWord ? "practice" : "daily")
   const [difficulty, setDifficulty] = useState<GameMode>(() => summonedWord?.difficulty ?? "easy")
+  const [streak, setStreak] = useState(0)
+
+  // Fetch streak on mount
+  useEffect(() => {
+    const fetchStreak = async () => {
+      try {
+        const res = await fetch("/api/history")
+        if (res.ok) {
+          const data = await res.json()
+          setStreak(data.streak || 0)
+        }
+      } catch {
+        // Ignore
+      }
+    }
+    fetchStreak()
+  }, [])
 
   // Practice state -- separate per difficulty so switching doesn't reset
   // Initialize with summoned word if present
@@ -132,9 +150,24 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
     setShowingShare(false)
   }
 
+  // Callback to refresh streak after game completion
+  const refreshStreak = useCallback(async () => {
+    try {
+      const res = await fetch("/api/history")
+      if (res.ok) {
+        const data = await res.json()
+        setStreak(data.streak || 0)
+      }
+    } catch {
+      // Ignore
+    }
+  }, [])
+
   return (
     <main className="flex min-h-svh flex-col items-center bg-background pb-16">
       <GameHeader onStatsOpen={() => setStatsOpen(true)} onHelpOpen={() => setHelpOpen(true)} />
+      {/* Streak badge - only show on daily mode when streak > 0 */}
+      {tab === "daily" && streak > 0 && <StreakBadge streak={streak} />}
       {showingShare && shareData && shareWordData ? (
         <SharedResult
           data={shareData}
@@ -159,6 +192,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               difficulty="easy"
               isPractice={false}
               onStartPractice={() => handleTabChange("practice")}
+              onComplete={refreshStreak}
             />
           </div>
           <div className={tab === "daily" && difficulty === "hard" ? "" : "hidden"}>
@@ -168,6 +202,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               difficulty="hard"
               isPractice={false}
               onStartPractice={() => handleTabChange("practice")}
+              onComplete={refreshStreak}
             />
           </div>
           {/* Practice game */}

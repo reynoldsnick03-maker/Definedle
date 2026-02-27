@@ -42,6 +42,7 @@ interface GameProps {
   isPractice?: boolean
   onNextWord?: () => void
   onStartPractice?: () => void
+  onComplete?: () => void
 }
 
 export function Game({
@@ -50,6 +51,7 @@ export function Game({
   isPractice = false,
   onNextWord,
   onStartPractice,
+  onComplete,
 }: GameProps) {
   const DAILY_RESULT_COOKIE = difficulty === "hard" ? "definedle-today-hard" : "definedle-today"
   const [result, setResult] = useState<ScoreResult | null>(null)
@@ -171,9 +173,11 @@ export function Game({
           // Ignore
         }
         saveToHistory(scoreResult, dailyWord)
+        // Notify parent that game is complete (for streak refresh)
+        onComplete?.()
       }
     },
-    [dailyWord, isPractice, saveToHistory, DAILY_RESULT_COOKIE, usedHint]
+    [dailyWord, isPractice, saveToHistory, DAILY_RESULT_COOKIE, usedHint, onComplete]
   )
 
   return (

@@ -1,13 +1,25 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Check, X, ChevronDown, ChevronUp, AlertTriangle } from "lucide-react"
+import { Check, X, ChevronDown, ChevronUp, AlertTriangle, Minus } from "lucide-react"
 import type { ConceptResult } from "@/lib/scoring"
 
 interface ConceptBreakdownProps {
   concepts: ConceptResult[]
   synonymWarning: boolean
   missedSummary: string | null
+}
+
+// Helper to describe why a concept matched or was close
+function getMatchReason(concept: ConceptResult): string | null {
+  if (concept.matchedTerm) {
+    return `Matched: "${concept.matchedTerm}"`
+  }
+  if (concept.matchedWords && concept.matchedWords.length > 0) {
+    const prefix = concept.nearMiss ? "Close: " : "Your words: "
+    return `${prefix}${concept.matchedWords.map(w => `"${w}"`).join(", ")}`
+  }
+  return null
 }
 
 export function ConceptBreakdown({
@@ -68,8 +80,12 @@ export function ConceptBreakdown({
       <ul className="flex flex-col gap-0.5" role="list" aria-label="Concept breakdown">
         {concepts.map((concept, i) => {
           const isExpanded = expandedIndex === i
-          const isMissed = !concept.matched
           const isVisible = i < visibleCount
+          const matchReason = getMatchReason(concept)
+          
+          // Determine status: matched (green), nearMiss (yellow), missed (red)
+          const status = concept.matched ? "matched" : concept.nearMiss ? "nearMiss" : "missed"
+          const statusLabel = concept.matched ? "captured" : concept.nearMiss ? "almost" : "missed"
 
           return (
             <li
@@ -82,30 +98,29 @@ export function ConceptBreakdown({
             >
               <button
                 type="button"
-                onClick={() => {
-                  if (isMissed) {
-                    setExpandedIndex(isExpanded ? null : i)
-                  }
-                }}
+                onClick={() => setExpandedIndex(isExpanded ? null : i)}
                 className={`
                   flex w-full items-center gap-3 rounded-lg px-3.5 py-2.5 text-left
-                  transition-colors
-                  ${isMissed ? "cursor-pointer hover:bg-muted/70" : "cursor-default"}
+                  transition-colors cursor-pointer hover:bg-muted/70
                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
                 `}
-                aria-expanded={isMissed ? isExpanded : undefined}
-                aria-label={`${concept.label}: ${concept.matched ? "captured" : "missed"}`}
+                aria-expanded={isExpanded}
+                aria-label={`${concept.label}: ${statusLabel}`}
               >
                 {/* Status icon */}
                 <span
                   className={`
                     flex h-5 w-5 shrink-0 items-center justify-center rounded-full
-                    ${concept.matched ? "bg-score-high/15 text-score-high" : "bg-score-low/10 text-score-low"}
+                    ${status === "matched" ? "bg-score-high/15 text-score-high" : 
+                      status === "nearMiss" ? "bg-score-mid/15 text-score-mid" : 
+                      "bg-score-low/10 text-score-low"}
                   `}
                   aria-hidden="true"
                 >
-                  {concept.matched ? (
+                  {status === "matched" ? (
                     <Check className="h-3 w-3" strokeWidth={2.5} />
+                  ) : status === "nearMiss" ? (
+                    <Minus className="h-3 w-3" strokeWidth={2.5} />
                   ) : (
                     <X className="h-3 w-3" strokeWidth={2.5} />
                   )}
@@ -113,29 +128,57 @@ export function ConceptBreakdown({
 
                 {/* Label */}
                 <span
-                  className={`flex-1 text-sm leading-snug ${concept.matched ? "text-foreground" : "text-foreground/70"}`}
+                  className={`flex-1 text-sm leading-snug ${
+                    status === "matched" ? "text-foreground" : 
+                    status === "nearMiss" ? "text-foreground/85" : 
+                    "text-foreground/70"
+                  }`}
                 >
                   {concept.label}
+                  {status === "nearMiss" && (
+                    <span className="ml-2 text-[10px] uppercase tracking-wider text-score-mid font-medium">
+                      Almost
+                    </span>
+                  )}
                 </span>
 
-                {/* Expand chevron for missed concepts */}
-                {isMissed && (
-                  <span className="text-muted-foreground/60" aria-hidden="true">
-                    {isExpanded ? (
-                      <ChevronUp className="h-3.5 w-3.5" />
-                    ) : (
-                      <ChevronDown className="h-3.5 w-3.5" />
-                    )}
-                  </span>
-                )}
+                {/* Expand chevron - always show for transparency */}
+                <span className="text-muted-foreground/60" aria-hidden="true">
+                  {isExpanded ? (
+                    <ChevronUp className="h-3.5 w-3.5" />
+                  ) : (
+                    <ChevronDown className="h-3.5 w-3.5" />
+                  )}
+                </span>
               </button>
 
-              {/* Expanded hint for missed concepts */}
-              {isExpanded && isMissed && (
+              {/* Expanded details - match reason for captured/near-miss, hint for missed */}
+              {isExpanded && (
                 <div className="ml-12 mr-4 mb-2 animate-in fade-in slide-in-from-top-1 duration-200">
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {concept.hint}
-                  </p>
+                  {status === "matched" && matchReason ? (
+                    <p className="text-[11px] leading-relaxed text-score-high/80">
+                      {matchReason}
+                    </p>
+                  ) : status === "nearMiss" ? (
+                    <div className="flex flex-col gap-1">
+                      {matchReason && (
+                        <p className="text-[11px] leading-relaxed text-score-mid/80">
+                          {matchReason}
+                        </p>
+                      )}
+                      <p className="text-sm leading-relaxed text-muted-foreground">
+                        {concept.hint}
+                      </p>
+                    </div>
+                  ) : status === "missed" ? (
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {concept.hint}
+                    </p>
+                  ) : (
+                    <p className="text-[11px] leading-relaxed text-muted-foreground">
+                      Concept detected in your definition.
+                    </p>
+                  )}
                 </div>
               )}
             </li>
