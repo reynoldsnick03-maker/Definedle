@@ -3730,4 +3730,103 @@ export const dailyWords: DailyWord[] = [
     ],
     synonyms: ["plant-related", "herbal", "floral", "vegetable"],
   },
+  // ── 380. immunization ──
+  {
+    word: "immunization",
+    partOfSpeech: "noun",
+    definition: "The process of making a person or animal immune to infection, typically by vaccination.",
+    keyConcepts: [
+      { keyword: "making immune", matchTerms: ["immune", "immunity", "protect", "defense", "resist", "prevention", "safeguard"], label: "Making immune", hint: "The definition says 'making a person or animal immune to infection' -- building protection." },
+      { keyword: "vaccination", matchTerms: ["vaccin", "shot", "inject", "inoculat", "jab", "dose", "needle", "medical"], label: "Typically by vaccination", hint: "The definition says 'typically by vaccination' -- the method of achieving immunity." },
+    ],
+    synonyms: ["vaccination", "inoculation", "protection"],
+  },
+  // ── 381. reluctant ──
+  {
+    word: "reluctant",
+    partOfSpeech: "adjective",
+    definition: "Unwilling and hesitant; disinclined to do something.",
+    keyConcepts: [
+      { keyword: "unwilling", matchTerms: ["unwilling", "not willing", "resist", "opposed", "against", "averse", "loath", "disinclined"], label: "Unwilling", hint: "The definition says 'unwilling' -- not wanting to do it." },
+      { keyword: "hesitant", matchTerms: ["hesitan", "uncertain", "unsure", "doubtful", "wary", "cautious", "slow", "reticent", "hold back"], label: "Hesitant", hint: "The definition says 'hesitant' -- showing doubt or uncertainty about proceeding." },
+    ],
+    synonyms: ["unwilling", "hesitant", "disinclined", "loath", "averse"],
+  },
+  // ── 382. poised ──
+  {
+    word: "poised",
+    partOfSpeech: "adjective",
+    definition: "Having a composed and self-assured manner; ready and prepared for action.",
+    keyConcepts: [
+      { keyword: "composed", matchTerms: ["compos", "calm", "self-assured", "confident", "dignified", "graceful", "elegant", "collected", "balanced", "serene"], label: "Composed and self-assured", hint: "The definition says 'composed and self-assured manner' -- showing calm confidence." },
+      { keyword: "ready", matchTerms: ["ready", "prepar", "set", "position", "about to", "on the verge", "brink", "waiting"], label: "Ready for action", hint: "The definition says 'ready and prepared for action' -- positioned to act." },
+    ],
+    synonyms: ["composed", "self-assured", "ready", "prepared", "graceful"],
+  },
+  // ── 383. capable ──
+  {
+    word: "capable",
+    partOfSpeech: "adjective",
+    definition: "Having the ability, fitness, or quality necessary to do or achieve something.",
+    keyConcepts: [
+      { keyword: "having ability", matchTerms: ["abil", "able", "can", "competent", "skilled", "proficient", "qualified", "talented"], label: "Having ability", hint: "The definition says 'having the ability' -- possessing the necessary skills." },
+      { keyword: "achieve something", matchTerms: ["achieve", "accomplish", "do", "perform", "complete", "succeed", "attain", "manage"], label: "To achieve something", hint: "The definition says 'to do or achieve something' -- able to get results." },
+    ],
+    synonyms: ["able", "competent", "skilled", "proficient", "qualified"],
+  },
+  // ── 384. heritage ──
+  {
+    word: "heritage",
+    partOfSpeech: "noun",
+    definition: "Property, traditions, or features that are passed down from previous generations.",
+    keyConcepts: [
+      { keyword: "passed down", matchTerms: ["pass", "inherit", "hand down", "transmit", "bequeath", "legacy", "ancestral", "generational"], label: "Passed down", hint: "The definition says 'passed down from previous generations' -- inherited from the past." },
+      { keyword: "traditions or features", matchTerms: ["tradition", "custom", "culture", "history", "property", "estate", "feature", "characteristic", "value", "belief"], label: "Traditions or features", hint: "The definition includes 'property, traditions, or features' -- tangible or intangible inheritance." },
+    ],
+    synonyms: ["inheritance", "legacy", "tradition", "birthright"],
+  },
+  // ── 385. jovial ──
+  {
+    word: "jovial",
+    partOfSpeech: "adjective",
+    definition: "Cheerful and friendly; characterized by good humor and hearty enjoyment.",
+    keyConcepts: [
+      { keyword: "cheerful", matchTerms: ["cheerful", "happy", "merry", "jolly", "joyful", "upbeat", "bright", "sunny", "buoyant"], label: "Cheerful and friendly", hint: "The definition says 'cheerful and friendly' -- a warm, positive demeanor." },
+      { keyword: "good humor", matchTerms: ["humor", "humour", "laugh", "fun", "hearty", "enjoy", "convivial", "genial", "good-natured", "amiable"], label: "Good humor", hint: "The definition says 'characterized by good humor' -- enjoying life with others." },
+    ],
+    synonyms: ["cheerful", "jolly", "merry", "convivial", "genial"],
+  },
+  // ── 386. deplorable ──
+  {
+    word: "deplorable",
+    partOfSpeech: "adjective",
+    definition: "Deserving strong condemnation; shockingly bad in quality.",
+    keyConcepts: [
+      { keyword: "deserving condemnation", matchTerms: ["condemn", "disgrace", "shameful", "reprehen", "inexcusable", "unacceptable", "outrageous", "scandal"], label: "Deserving condemnation", hint: "The definition says 'deserving strong condemnation' -- morally wrong or unacceptable." },
+      { keyword: "shockingly bad", matchTerms: ["shock", "terrible", "awful", "dreadful", "appalling", "wretched", "miserable", "lamentable", "abysmal", "dire"], label: "Shockingly bad", hint: "The definition says 'shockingly bad in quality' -- extremely poor." },
+    ],
+    synonyms: ["disgraceful", "shameful", "appalling", "lamentable", "wretched"],
+  },
+  // ── 387. intersect ──
+  {
+    word: "intersect",
+    partOfSpeech: "verb",
+    definition: "To divide something by passing or lying across it; to meet and cross at a point.",
+    keyConcepts: [
+      { keyword: "divide by crossing", matchTerms: ["divid", "cross", "cut", "pass through", "traverse", "bisect", "split"], label: "Divide by crossing", hint: "The definition says 'divide something by passing or lying across it' -- cutting through." },
+      { keyword: "meet at a point", matchTerms: ["meet", "converge", "join", "connect", "overlap", "point", "junction", "crossing"], label: "Meet and cross", hint: "The definition says 'meet and cross at a point' -- coming together at an intersection." },
+    ],
+    synonyms: ["cross", "bisect", "meet", "converge", "overlap"],
+  },
+  // ── 388. drawl ──
+  {
+    word: "drawl",
+    partOfSpeech: "verb/noun",
+    definition: "To speak in a slow, lazy way with prolonged vowel sounds.",
+    keyConcepts: [
+      { keyword: "speak slowly", matchTerms: ["slow", "lazy", "leisur", "unhurried", "relaxed", "languid", "sluggish"], label: "Speak slowly", hint: "The definition says 'speak in a slow, lazy way' -- unhurried speech." },
+      { keyword: "prolonged sounds", matchTerms: ["prolong", "stretch", "extend", "drag", "lengthen", "vowel", "drawn-out", "elongat"], label: "Prolonged vowel sounds", hint: "The definition says 'with prolonged vowel sounds' -- stretching out the words." },
+    ],
+    synonyms: ["drone", "speak slowly"],
+  },
 ]
