@@ -59,29 +59,10 @@ export function ResultsPanel({
   const matchedCount = safeConcepts.filter((c) => c.matched).length
 
   const handleShare = () => {
-    const conceptLine = safeConcepts
-      .map((c) => (c.matched ? "+" : "-"))
-      .join("")
-    const siteUrl = typeof window !== "undefined" ? window.location.origin : ""
-
     // Calculate breakdown percentages for emoji display
     const conceptPct = breakdown ? Math.round((breakdown.concepts.earned / breakdown.concepts.max) * 100) : 0
     const precisionPct = breakdown ? Math.round((breakdown.precision.earned / breakdown.precision.max) * 100) : 0
     const detailPct = breakdown ? Math.round((breakdown.detail.earned / breakdown.detail.max) * 100) : 0
-
-    // Encode result data into a compact URL parameter
-    const shareData = {
-      w: word,
-      s: score,
-      d: playerDefinition.slice(0, 200),
-      c: conceptLine,
-      k: conceptPct,  // key concepts percentage
-      p: precisionPct, // precision percentage
-      t: detailPct,    // detail percentage
-      m: difficulty === "hard" ? "h" : "e", // mode
-    }
-    const encoded = btoa(encodeURIComponent(JSON.stringify(shareData)))
-    const shareUrl = `${siteUrl}?r=${encoded}`
 
     // Generate emoji bars for each category (5 squares each)
     const toBar = (pct: number) => {
@@ -94,13 +75,16 @@ export function ResultsPanel({
     const precisionBar = toBar(precisionPct)
     const detailBar = toBar(detailPct)
 
+    // Clean text-only share format
     const text = `Definedle${modeLabel} - ${score}/100
 
 Concepts:  ${conceptBar} ${matchedCount}/${safeConcepts.length}
 Precision: ${precisionBar}
 Detail:    ${detailBar}
 
-${shareUrl}`
+"${playerDefinition}"
+
+definedle.com`
 
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true)

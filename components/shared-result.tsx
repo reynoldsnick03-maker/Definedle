@@ -136,8 +136,8 @@ export function SharedResult({
         <div className="h-px bg-border" aria-hidden="true" />
 
         {/* Their definition */}
-        <div className="flex flex-col gap-6 my-6">
-          <div className="flex flex-col gap-2">
+        {data.d && (
+          <div className="flex flex-col gap-2 my-6">
             <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">
               Their definition
             </span>
@@ -145,14 +145,18 @@ export function SharedResult({
               {data.d}
             </p>
           </div>
-          <div className="flex flex-col gap-2">
-            <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">
-              Official definition
-            </span>
-            <p className="font-serif text-base leading-relaxed text-foreground italic">
-              {officialDefinition}
-            </p>
-          </div>
+        )}
+
+        {data.d && <div className="h-px bg-border" aria-hidden="true" />}
+
+        {/* Official definition */}
+        <div className="flex flex-col gap-2 my-6">
+          <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">
+            Official definition
+          </span>
+          <p className="font-serif text-base leading-relaxed text-foreground italic">
+            {officialDefinition}
+          </p>
         </div>
 
         {/* CTA */}

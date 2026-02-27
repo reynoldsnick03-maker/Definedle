@@ -1,3 +1,4 @@
+import { decompressFromEncodedURIComponent } from "lz-string"
 import { getTodaysWord, getTodaysHardWord, dailyWords, practiceWords, hardWords } from "@/lib/game-data"
 import { PageClient } from "@/components/page-client"
 
@@ -16,22 +17,28 @@ export default async function Page({ searchParams }: PageProps) {
 
   if (typeof params.r === "string") {
     try {
-      const decoded = JSON.parse(decodeURIComponent(atob(params.r)))
-      if (decoded.w && typeof decoded.s === "number" && decoded.d && decoded.c) {
-        // Include all fields including optional ones (k, p, t, m)
-        shareData = {
-          w: decoded.w,
-          s: decoded.s,
-          d: decoded.d,
-          c: decoded.c,
-          k: decoded.k,
-          p: decoded.p,
-          t: decoded.t,
-          m: decoded.m,
+      // LZ-compressed format: word|score|concepts|k|p|t|mode|definition
+      const decompressed = decompressFromEncodedURIComponent(params.r)
+      if (decompressed) {
+        const parts = decompressed.split("|")
+        if (parts.length >= 7) {
+          shareData = {
+            w: parts[0],
+            s: parseInt(parts[1], 10),
+            c: parts[2],
+            k: parseInt(parts[3], 10),
+            p: parseInt(parts[4], 10),
+            t: parseInt(parts[5], 10),
+            m: parts[6],
+            d: parts[7] || "",
+          }
         }
-        // Find the word in our data to get official definition and concept labels
+      }
+      
+      // Find the word in our data to get official definition and concept labels
+      if (shareData) {
         const allWords = [...dailyWords, ...practiceWords, ...hardWords]
-        const wordEntry = allWords.find((w) => w.word.toLowerCase() === decoded.w.toLowerCase())
+        const wordEntry = allWords.find((w) => w.word.toLowerCase() === shareData!.w.toLowerCase())
         if (wordEntry) {
           shareWordData = {
             definition: wordEntry.definition,
