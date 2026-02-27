@@ -335,7 +335,7 @@ function matchesClusterKey(word: string, key: string): boolean {
   return false
 }
 
-function areSynonyms(a: string, b: string): boolean {
+export function areSynonyms(a: string, b: string): boolean {
   if (a.length < 4 || b.length < 4) return false
   // Find cluster(s) for word a
   const aClusters = new Set<number>()
@@ -589,7 +589,7 @@ function meaningfulWords(text: string): string[] {
 // Check if two words share a common root by comparing prefixes and substrings.
 // Handles pairs like "crime"/"criminal", "relieve"/"relief", "free"/"freedom", etc.
 // STRICT: Avoids false positives like "reality" matching "unrealist" or "idealism" matching "idealist"
-function stemMatch(a: string, b: string): boolean {
+export function stemMatch(a: string, b: string): boolean {
   if (a === b) return true
   
   // One contains the other as a substring (but must be substantial overlap)
