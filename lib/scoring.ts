@@ -27,6 +27,56 @@ export interface ScoreResult {
   altDefinitionUsed?: string // the alt definition text if the alt scored better
 }
 
+// ── Antonym pairs ──
+// Maps a word to its opposite(s). Used to recognize that "not moving" = "stationary"
+const ANTONYM_MAP: Record<string, string[]> = {
+  // Movement
+  "moving": ["stationary", "still", "motionless", "static", "fixed", "immobile", "unmoving"],
+  "changing": ["constant", "unchanging", "stable", "fixed", "static", "permanent", "steady"],
+  "active": ["passive", "inactive", "idle", "dormant", "inert"],
+  "dynamic": ["static", "stationary", "fixed", "stable"],
+  // Temperature
+  "hot": ["cold", "cool", "chilly", "frigid"],
+  "cold": ["hot", "warm", "heated"],
+  // Size
+  "big": ["small", "tiny", "little", "minute"],
+  "large": ["small", "tiny", "little", "minute"],
+  "small": ["big", "large", "huge", "enormous"],
+  // Light
+  "bright": ["dark", "dim", "dull", "murky"],
+  "dark": ["bright", "light", "luminous", "radiant"],
+  // Speed
+  "fast": ["slow", "sluggish", "leisurely"],
+  "quick": ["slow", "sluggish", "leisurely"],
+  "slow": ["fast", "quick", "rapid", "swift"],
+  // Strength
+  "strong": ["weak", "feeble", "frail"],
+  "weak": ["strong", "powerful", "robust"],
+  // Emotion
+  "happy": ["sad", "unhappy", "miserable", "sorrowful"],
+  "sad": ["happy", "joyful", "cheerful", "glad"],
+  // State
+  "alive": ["dead", "deceased", "lifeless"],
+  "dead": ["alive", "living", "animate"],
+  "open": ["closed", "shut", "sealed"],
+  "closed": ["open", "unsealed"],
+  "full": ["empty", "vacant", "hollow"],
+  "empty": ["full", "filled", "occupied"],
+  // Quality
+  "good": ["bad", "poor", "terrible"],
+  "bad": ["good", "excellent", "fine"],
+  "true": ["false", "untrue", "incorrect"],
+  "false": ["true", "correct", "accurate"],
+  "clear": ["unclear", "vague", "obscure", "ambiguous", "confusing"],
+  "certain": ["uncertain", "unsure", "doubtful"],
+  "known": ["unknown", "unfamiliar", "mysterious"],
+  // Social
+  "public": ["private", "secret", "confidential"],
+  "private": ["public", "open", "shared"],
+  "willing": ["unwilling", "reluctant", "hesitant"],
+  "voluntary": ["involuntary", "forced", "compulsory"],
+}
+
 // ── Synonym clusters ──
 // Each array is a group of semantically equivalent words. When checking if a
 // user's word matches a matchTerm, we also check if they share a synonym cluster.
@@ -689,13 +739,27 @@ function scoreAgainstDefinition(
 
   let relevantWords = 0
   const irrelevantWords: string[] = []
+  
+  // Helper: check if a word's antonyms are in the valid vocabulary
+  function negatedWordIsRelevant(word: string): boolean {
+    const antonyms = ANTONYM_MAP[word] || []
+    for (const antonym of antonyms) {
+      if (allValidVocab.some((v) => antonym === v || stemMatch(antonym, v))) {
+        return true
+      }
+    }
+    return false
+  }
+  
   for (const iw of inputMeaningful) {
-    // If the word is negated (e.g., "not moving"), don't count it as irrelevant
-    // The negation is intentional and the concept matching already handles this
-    // We just skip negated words from the precision count entirely
+    // If the word is negated (e.g., "not moving"), check if its antonym is relevant
+    // "not moving" should be treated as "stationary" which may be in the vocab
     if (negatedWords.has(iw)) {
-      // Negated words are neutral - neither relevant nor irrelevant
-      // They express meaning through negation which is valid
+      if (negatedWordIsRelevant(iw)) {
+        // The negation expresses a concept that's in our vocabulary (e.g., "not moving" = "stationary")
+        relevantWords++
+      }
+      // Either way, don't add to irrelevantWords - negation is intentional
       continue
     }
     
@@ -709,8 +773,16 @@ function scoreAgainstDefinition(
     }
   }
   
-  // Adjust the total for precision calculation - exclude negated words
-  const nonNegatedCount = inputMeaningful.length - negatedWords.size
+  // Count negated words that are relevant for the total meaningful count
+  let relevantNegatedCount = 0
+  for (const nw of negatedWords) {
+    if (negatedWordIsRelevant(nw)) {
+      relevantNegatedCount++
+    }
+  }
+  
+  // Adjust the total for precision calculation - include relevant negated words
+  const nonNegatedCount = inputMeaningful.length - negatedWords.size + relevantNegatedCount
   const rawPrecisionRatio = nonNegatedCount > 0
     ? relevantWords / nonNegatedCount
     : 0
