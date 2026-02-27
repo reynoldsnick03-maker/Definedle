@@ -110,21 +110,30 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
-    if (!currentGuess.trim() || isComplete) return
+    const trimmedGuess = currentGuess.trim()
+    if (!trimmedGuess || isComplete) return
     
-    const similarity = calculateSimilarity(currentGuess, word.word, word.synonyms)
-    const newGuess: Guess = { word: currentGuess.trim(), similarity }
+    const gLower = trimmedGuess.toLowerCase()
+    const tLower = word.word.toLowerCase()
+    
+    // Check for exact or stem match (correct answer)
+    const isExactMatch = gLower === tLower || stemMatch(gLower, tLower)
+    const similarity = isExactMatch ? 100 : calculateSimilarity(trimmedGuess, word.word, word.synonyms)
+    
+    const newGuess: Guess = { word: trimmedGuess, similarity }
     const newGuesses = [...guesses, newGuess]
     setGuesses(newGuesses)
     setCurrentGuess("")
     
-    if (similarity >= 100 || stemMatch(currentGuess.toLowerCase().trim(), word.word.toLowerCase())) {
+    if (isExactMatch) {
       // Correct!
       setIsCorrect(true)
       setIsComplete(true)
     } else if (newGuesses.length >= maxGuesses) {
       // Out of guesses
       setIsComplete(true)
+      setIsShaking(true)
+      setTimeout(() => setIsShaking(false), 500)
     } else {
       // Wrong - shake
       setIsShaking(true)
@@ -166,6 +175,23 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
           <p className="text-lg leading-relaxed text-foreground font-serif italic">
             &ldquo;{word.definition}&rdquo;
           </p>
+          
+          {/* Hints - always show word length, reveal first letter after first wrong guess */}
+          <div className="mt-4 flex items-center justify-center gap-3 text-sm text-muted-foreground">
+            <span className="px-2 py-1 rounded bg-muted/50">
+              {word.word.length} letters
+            </span>
+            {guesses.length >= 1 && !isCorrect && (
+              <span className="px-2 py-1 rounded bg-muted/50">
+                Starts with &ldquo;{word.word[0].toUpperCase()}&rdquo;
+              </span>
+            )}
+            {guesses.length >= 2 && !isCorrect && (
+              <span className="px-2 py-1 rounded bg-muted/50">
+                Ends with &ldquo;{word.word[word.word.length - 1]}&rdquo;
+              </span>
+            )}
+          </div>
         </div>
 
         <div className="my-6 h-px bg-border" aria-hidden="true" />

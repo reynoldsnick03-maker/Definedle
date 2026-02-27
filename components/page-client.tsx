@@ -197,7 +197,11 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
           {tab === "practice" && !mirrorMode && (
             <button
               type="button"
-              onClick={() => setMirrorMode(true)}
+              onClick={() => {
+                // Get a new word when entering mirror mode so they can't see the answer
+                handleNextPracticeWord()
+                setMirrorMode(true)
+              }}
               className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
               title="Flip to Mirror Mode - guess the word from its definition"
             >
