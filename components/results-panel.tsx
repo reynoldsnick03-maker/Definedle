@@ -250,6 +250,16 @@ definedle.com`
 
                   const sample = irrelevantWords.slice(0, 3)
                   const sampleText = sample.length > 0 ? ` Words like "${sample.join('", "')}" were off-target.` : ""
+                  
+                  // Handle zero case with better grammar
+                  if (relevantCount === 0) {
+                    return pick([
+                      `None of your ${totalMeaningful} words matched the expected meaning.${sampleText} Focus on the specific ideas in the definition.`,
+                      `Your vocabulary didn't align with the definition.${sampleText} Try to capture the exact meaning rather than general associations.`,
+                      `The wording was too far from the definition.${sampleText} Compare your answer to the official definition below for guidance.`,
+                    ])
+                  }
+                  
                   return pick([
                     `Only ${relevantCount} of ${totalMeaningful} words matched the expected meaning.${sampleText} Focus on the specific ideas in the definition.`,
                     `Most of your vocabulary didn't align with the definition.${sampleText} Try to capture the exact meaning rather than general associations.`,
