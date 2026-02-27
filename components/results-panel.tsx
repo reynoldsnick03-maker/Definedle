@@ -5,7 +5,7 @@ import { ScoreDisplay } from "./score-display"
 import { ConceptBreakdown } from "./concept-breakdown"
 import { ScoreCelebration } from "./score-celebration"
 import { CountdownTimer } from "./countdown-timer"
-import { Check, Copy, ChevronDown, Users } from "lucide-react"
+import { Check, Copy, ChevronDown, Users, MessageSquare } from "lucide-react"
 import type { ConceptResult, ScoreBreakdown } from "@/lib/scoring"
 
 interface ResultsPanelProps {
@@ -44,6 +44,9 @@ export function ResultsPanel({
   const [copied, setCopied] = useState(false)
   const [averageData, setAverageData] = useState<{ average: number; count: number } | null>(null)
   const [submittedScore, setSubmittedScore] = useState(false)
+  const [showFeedback, setShowFeedback] = useState(false)
+  const [feedbackSent, setFeedbackSent] = useState(false)
+  const [feedbackError, setFeedbackError] = useState<string | null>(null)
   
   const improveKey = `definedle-improve-${word}-${difficulty}`
   const submittedKey = `definedle-submitted-${word}-${difficulty}`
@@ -100,6 +103,31 @@ export function ResultsPanel({
     
     submitAndFetch()
   }, [word, score, difficulty, isPractice, submittedKey])
+
+  const handleFeedbackSubmit = async (type: "unfair" | "bug" | "other", message?: string) => {
+    try {
+      const res = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          word,
+          playerDefinition,
+          score,
+          feedbackType: type,
+          message,
+        }),
+      })
+      if (res.ok) {
+        setFeedbackSent(true)
+        setShowFeedback(false)
+      } else {
+        const data = await res.json()
+        setFeedbackError(data.error || "Failed to submit feedback")
+      }
+    } catch {
+      setFeedbackError("Failed to submit feedback")
+    }
+  }
 
   const handleShare = () => {
     // Generate a single progress bar (10 blocks total)
@@ -311,24 +339,73 @@ definedle.com`
 
       {/* Share (daily only) */}
       {!isPractice && (
-        <button
-          type="button"
-          onClick={handleShare}
-          className="flex items-center justify-center gap-2 self-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          aria-label="Copy score to clipboard"
-        >
-          {copied ? (
-            <>
-              <Check className="h-4 w-4" aria-hidden="true" />
-              Copied
-            </>
+        <div className="flex flex-col items-center gap-3">
+          <button
+            type="button"
+            onClick={handleShare}
+            className="flex items-center justify-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            aria-label="Copy score to clipboard"
+          >
+            {copied ? (
+              <>
+                <Check className="h-4 w-4" aria-hidden="true" />
+                Copied
+              </>
+            ) : (
+              <>
+                <Copy className="h-4 w-4" aria-hidden="true" />
+                Share result
+              </>
+            )}
+          </button>
+          
+          {/* Feedback button */}
+          {!feedbackSent ? (
+            <button
+              type="button"
+              onClick={() => setShowFeedback(!showFeedback)}
+              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <MessageSquare className="h-3 w-3" />
+              Report scoring issue
+            </button>
           ) : (
-            <>
-              <Copy className="h-4 w-4" aria-hidden="true" />
-              Share result
-            </>
+            <p className="text-xs text-score-high">Thanks for your feedback!</p>
           )}
-        </button>
+          
+          {/* Feedback form */}
+          {showFeedback && !feedbackSent && (
+            <div className="w-full max-w-sm rounded-lg border border-border bg-muted/30 p-4 animate-in fade-in slide-in-from-top-2 duration-200">
+              <p className="text-sm font-medium mb-3">What went wrong?</p>
+              <div className="flex flex-col gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleFeedbackSubmit("unfair")}
+                  className="text-left text-sm px-3 py-2 rounded-md border border-border hover:bg-accent transition-colors"
+                >
+                  My answer should have scored higher
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleFeedbackSubmit("bug")}
+                  className="text-left text-sm px-3 py-2 rounded-md border border-border hover:bg-accent transition-colors"
+                >
+                  Something didn&apos;t work correctly
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowFeedback(false)}
+                  className="text-xs text-muted-foreground hover:text-foreground mt-1"
+                >
+                  Cancel
+                </button>
+              </div>
+              {feedbackError && (
+                <p className="text-xs text-destructive mt-2">{feedbackError}</p>
+              )}
+            </div>
+          )}
+        </div>
       )}
 
       {/* Practice mode CTA or next word */}
