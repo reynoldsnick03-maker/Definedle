@@ -22,8 +22,19 @@ interface PageClientProps {
 }
 
 export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: PageClientProps) {
-  // Track if we loaded a summoned word from URL
-  const [summonedWord, setSummonedWord] = useState<{ word: DailyWord; difficulty: GameMode } | null>(null)
+  const [statsOpen, setStatsOpen] = useState(false)
+  const [helpOpen, setHelpOpen] = useState(false)
+  const [showingShare, setShowingShare] = useState(!!shareData && !!shareWordData)
+  const [tab, setTab] = useState<TabMode>("daily")
+  const [difficulty, setDifficulty] = useState<GameMode>("easy")
+
+  // Practice state -- separate per difficulty so switching doesn't reset
+  const [practiceEasy, setPracticeEasy] = useState<DailyWord | null>(null)
+  const [practiceHard, setPracticeHard] = useState<DailyWord | null>(null)
+  const [playedEasy, setPlayedEasy] = useState<string[]>([])
+  const [playedHard, setPlayedHard] = useState<string[]>([])
+  const [practiceKeyEasy, setPracticeKeyEasy] = useState(0)
+  const [practiceKeyHard, setPracticeKeyHard] = useState(0)
 
   // ?reset in URL clears all saved state and reloads clean
   // ?word=xyz summons a specific word in practice mode
@@ -49,7 +60,6 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
     if (wordParam) {
       const found = getWordByName(wordParam)
       if (found) {
-        setSummonedWord(found)
         setTab("practice")
         setDifficulty(found.difficulty)
         // Set as the practice word for that difficulty
@@ -65,20 +75,6 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
       }
     }
   }, [])
-
-  const [statsOpen, setStatsOpen] = useState(false)
-  const [helpOpen, setHelpOpen] = useState(false)
-  const [showingShare, setShowingShare] = useState(!!shareData && !!shareWordData)
-  const [tab, setTab] = useState<TabMode>("daily")
-  const [difficulty, setDifficulty] = useState<GameMode>("easy")
-
-  // Practice state -- separate per difficulty so switching doesn't reset
-  const [practiceEasy, setPracticeEasy] = useState<DailyWord | null>(null)
-  const [practiceHard, setPracticeHard] = useState<DailyWord | null>(null)
-  const [playedEasy, setPlayedEasy] = useState<string[]>([])
-  const [playedHard, setPlayedHard] = useState<string[]>([])
-  const [practiceKeyEasy, setPracticeKeyEasy] = useState(0)
-  const [practiceKeyHard, setPracticeKeyHard] = useState(0)
 
   const practiceWord = difficulty === "easy" ? practiceEasy : practiceHard
   const practiceKey = difficulty === "easy" ? practiceKeyEasy : practiceKeyHard
