@@ -250,7 +250,10 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               key={`mirror-${difficulty}-${practiceKey}-${practiceWord.word}`}
               word={practiceWord}
               isPractice={true}
-              onFlipBack={() => setMirrorMode(false)}
+              onFlipBack={() => {
+                handleNextPracticeWord() // Get a new word when flipping back
+                setMirrorMode(false)
+              }}
               onNextWord={() => {
                 handleNextPracticeWord()
               }}
