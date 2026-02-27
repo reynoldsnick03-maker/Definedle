@@ -3576,4 +3576,158 @@ export const dailyWords: DailyWord[] = [
     ],
     synonyms: ["kindle", "inflame", "spark"],
   },
+  // ── 366. populate ──
+  {
+    word: "populate",
+    partOfSpeech: "verb",
+    definition: "To inhabit or fill a place with people or inhabitants; to add data to a database or form.",
+    keyConcepts: [
+      { keyword: "inhabit", matchTerms: ["inhabit", "live", "dwell", "reside", "settle", "occupy", "coloniz", "fill"], label: "Inhabit or fill with people", hint: "The definition says 'inhabit or fill a place with people' -- establishing a presence." },
+      { keyword: "add data", matchTerms: ["data", "fill in", "enter", "input", "add", "insert", "load", "database", "form", "field"], label: "Add data to something", hint: "The definition also means 'add data to a database or form' -- filling in information." },
+    ],
+    synonyms: ["inhabit", "settle", "fill", "occupy"],
+  },
+  // ── 367. terrestrial ──
+  {
+    word: "terrestrial",
+    partOfSpeech: "adjective",
+    definition: "Of or relating to the earth or land, as opposed to water, air, or space.",
+    keyConcepts: [
+      { keyword: "earth or land", matchTerms: ["earth", "land", "ground", "soil", "terra", "worldly", "planet", "globe"], label: "Relating to earth or land", hint: "The definition says 'of or relating to the earth or land' -- grounded, not aquatic or aerial." },
+      { keyword: "not water or space", matchTerms: ["not water", "not air", "not space", "opposed to", "versus", "land-based", "ground-based", "earthbound", "earthly"], label: "As opposed to water, air, or space", hint: "The definition contrasts with water, air, or space -- specifically land-dwelling or earth-bound." },
+    ],
+    synonyms: ["earthly", "land-based", "worldly", "ground"],
+  },
+  // ── 368. turbulent ──
+  {
+    word: "turbulent",
+    partOfSpeech: "adjective",
+    definition: "Characterized by conflict, disorder, or confusion; moving violently or unsteadily.",
+    keyConcepts: [
+      { keyword: "conflict or disorder", matchTerms: ["conflict", "disorder", "chaos", "turmoil", "upheaval", "unrest", "confusion", "tumultuous", "stormy", "volatile", "unstable"], label: "Conflict, disorder, or confusion", hint: "The definition says 'characterized by conflict, disorder, or confusion' -- not calm or peaceful." },
+      { keyword: "moving violently", matchTerms: ["violent", "unsteady", "rough", "choppy", "agitat", "wild", "fierce", "tempestuous", "bumpy", "rocky", "hectic"], label: "Moving violently or unsteadily", hint: "The definition says 'moving violently or unsteadily' -- physically rough movement." },
+    ],
+    synonyms: ["chaotic", "stormy", "volatile", "tumultuous", "rough"],
+  },
+  // ── 369. aromatic ──
+  {
+    word: "aromatic",
+    partOfSpeech: "adjective",
+    definition: "Having a pleasant and distinctive smell; fragrant.",
+    keyConcepts: [
+      { keyword: "pleasant smell", matchTerms: ["pleasant", "nice", "good", "sweet", "lovely", "delightful", "pleasing"], label: "Pleasant smell", hint: "The definition says 'pleasant and distinctive smell' -- it smells good." },
+      { keyword: "fragrant", matchTerms: ["fragran", "smell", "scent", "aroma", "odor", "perfum", "redolen"], label: "Fragrant or distinctive scent", hint: "The definition says 'fragrant' -- having a noticeable, appealing odor." },
+    ],
+    synonyms: ["fragrant", "scented", "perfumed", "sweet-smelling"],
+  },
+  // ── 370. deceptive ──
+  {
+    word: "deceptive",
+    partOfSpeech: "adjective",
+    definition: "Giving an appearance or impression different from the true one; misleading.",
+    keyConcepts: [
+      { keyword: "different from true", matchTerms: ["different", "false", "untrue", "not true", "contrary", "opposite", "wrong impression"], label: "Different from the truth", hint: "The definition says 'different from the true one' -- not what it seems." },
+      { keyword: "misleading", matchTerms: ["mislead", "deceiv", "trick", "fool", "illusion", "delud", "confus", "dishonest", "fraudulent"], label: "Misleading", hint: "The definition says 'misleading' -- causing someone to believe something false." },
+    ],
+    synonyms: ["misleading", "deceiving", "false", "illusory", "dishonest"],
+  },
+  // ── 371. deceitful ──
+  {
+    word: "deceitful",
+    partOfSpeech: "adjective",
+    definition: "Guilty of or involving deceit; deliberately misleading or dishonest.",
+    keyConcepts: [
+      { keyword: "involving deceit", matchTerms: ["deceit", "deceiv", "lie", "lying", "dishonest", "fraud", "cheat", "trick"], label: "Involving deceit", hint: "The definition says 'guilty of or involving deceit' -- actively practicing deception." },
+      { keyword: "deliberately misleading", matchTerms: ["deliberat", "intentional", "purposeful", "mislead", "dishonest", "untruthful", "false", "duplicitous", "two-faced"], label: "Deliberately misleading", hint: "The definition says 'deliberately misleading or dishonest' -- it's intentional, not accidental." },
+    ],
+    synonyms: ["dishonest", "lying", "fraudulent", "duplicitous", "untruthful"],
+  },
+  // ── 372. abolish ──
+  {
+    word: "abolish",
+    partOfSpeech: "verb",
+    definition: "To formally put an end to a system, practice, or institution.",
+    keyConcepts: [
+      { keyword: "formally end", matchTerms: ["formal", "official", "legal", "end", "terminat", "stop", "cease", "eliminat", "eradicat", "do away with", "get rid of"], label: "Formally put an end to", hint: "The definition says 'formally put an end to' -- an official, deliberate termination." },
+      { keyword: "system or institution", matchTerms: ["system", "practice", "institution", "law", "rule", "custom", "tradition", "policy", "slavery", "regulation"], label: "A system, practice, or institution", hint: "The definition applies to 'a system, practice, or institution' -- something established." },
+    ],
+    synonyms: ["eliminate", "end", "eradicate", "annul", "repeal"],
+  },
+  // ── 373. courting ──
+  {
+    word: "courting",
+    partOfSpeech: "verb",
+    definition: "Pursuing a romantic relationship with someone; seeking to win favor or support.",
+    keyConcepts: [
+      { keyword: "romantic pursuit", matchTerms: ["romantic", "romance", "love", "woo", "date", "dating", "relationship", "attract", "pursue", "seduc", "flirt"], label: "Pursuing romantically", hint: "The definition says 'pursuing a romantic relationship' -- trying to win someone's affection." },
+      { keyword: "seeking favor", matchTerms: ["favor", "support", "approv", "win over", "seek", "curry", "cultivat", "pursue", "attract"], label: "Seeking favor or support", hint: "The definition also says 'seeking to win favor or support' -- trying to gain approval." },
+    ],
+    synonyms: ["wooing", "pursuing", "dating", "romancing"],
+  },
+  // ── 374. despondent ──
+  {
+    word: "despondent",
+    partOfSpeech: "adjective",
+    definition: "In low spirits from loss of hope or courage; dejected and disheartened.",
+    keyConcepts: [
+      { keyword: "low spirits", matchTerms: ["low spirits", "sad", "unhappy", "depress", "down", "gloomy", "melanchol", "sorrow", "miserable", "glum"], label: "In low spirits", hint: "The definition says 'in low spirits' -- feeling emotionally down." },
+      { keyword: "loss of hope", matchTerms: ["hope", "hopeless", "discourag", "despair", "deject", "dishearten", "defeatist", "pessimist", "courage", "give up"], label: "Loss of hope or courage", hint: "The definition says 'from loss of hope or courage' -- feeling defeated." },
+    ],
+    synonyms: ["dejected", "disheartened", "hopeless", "depressed", "downcast"],
+  },
+  // ── 375. barrage ──
+  {
+    word: "barrage",
+    partOfSpeech: "noun",
+    definition: "A concentrated outpouring or overwhelming quantity of something; heavy artillery fire.",
+    keyConcepts: [
+      { keyword: "concentrated outpouring", matchTerms: ["concentrat", "outpour", "flood", "torrent", "stream", "deluge", "shower", "volley", "burst", "wave", "bombardment"], label: "Concentrated outpouring", hint: "The definition says 'concentrated outpouring' -- a lot coming at once." },
+      { keyword: "overwhelming quantity", matchTerms: ["overwhelm", "quantity", "mass", "multitude", "abundance", "excess", "barrage", "onslaught", "assault", "attack"], label: "Overwhelming quantity", hint: "The definition says 'overwhelming quantity of something' -- too much to handle." },
+    ],
+    synonyms: ["bombardment", "volley", "torrent", "deluge", "onslaught"],
+  },
+  // ── 376. perpetual ──
+  {
+    word: "perpetual",
+    partOfSpeech: "adjective",
+    definition: "Never ending or changing; occurring repeatedly without interruption.",
+    keyConcepts: [
+      { keyword: "never ending", matchTerms: ["never end", "endless", "eternal", "everlast", "permanent", "forever", "infinite", "constant", "continuous"], label: "Never ending", hint: "The definition says 'never ending or changing' -- it goes on indefinitely." },
+      { keyword: "without interruption", matchTerms: ["without interrupt", "continuous", "unceasing", "uninterrupt", "constant", "persistent", "relentless", "incessant", "recurring", "repeated"], label: "Without interruption", hint: "The definition says 'occurring repeatedly without interruption' -- it keeps happening." },
+    ],
+    synonyms: ["eternal", "endless", "everlasting", "constant", "continuous"],
+  },
+  // ── 377. amnesia ──
+  {
+    word: "amnesia",
+    partOfSpeech: "noun",
+    definition: "A partial or total loss of memory, especially due to brain injury, shock, or illness.",
+    keyConcepts: [
+      { keyword: "loss of memory", matchTerms: ["loss", "lose", "lost", "memory", "memories", "forget", "forgotten", "recall", "remember"], label: "Loss of memory", hint: "The definition says 'partial or total loss of memory' -- unable to remember." },
+      { keyword: "brain injury or shock", matchTerms: ["brain", "injury", "shock", "trauma", "illness", "accident", "damage", "medical", "condition"], label: "Due to injury, shock, or illness", hint: "The definition says 'due to brain injury, shock, or illness' -- there's a medical cause." },
+    ],
+    synonyms: ["memory loss", "forgetfulness", "blackout"],
+  },
+  // ── 378. panoramic ──
+  {
+    word: "panoramic",
+    partOfSpeech: "adjective",
+    definition: "Showing a wide, unobstructed view of an extensive area; comprehensive in scope.",
+    keyConcepts: [
+      { keyword: "wide view", matchTerms: ["wide", "broad", "expansive", "extensive", "sweeping", "vast", "open", "unobstruct", "clear", "view", "vista", "landscape"], label: "Wide, unobstructed view", hint: "The definition says 'wide, unobstructed view' -- you can see a lot." },
+      { keyword: "comprehensive", matchTerms: ["comprehensiv", "complete", "thorough", "all-encompass", "full", "overall", "broad", "inclusive"], label: "Comprehensive in scope", hint: "The definition says 'comprehensive in scope' -- covering everything broadly." },
+    ],
+    synonyms: ["sweeping", "extensive", "wide", "comprehensive", "broad"],
+  },
+  // ── 379. botanical ──
+  {
+    word: "botanical",
+    partOfSpeech: "adjective",
+    definition: "Of or relating to plants or the scientific study of plants.",
+    keyConcepts: [
+      { keyword: "relating to plants", matchTerms: ["plant", "plants", "flora", "vegetation", "herb", "flower", "tree", "leaf", "garden", "green", "nature", "organic"], label: "Relating to plants", hint: "The definition says 'of or relating to plants' -- concerning plant life." },
+      { keyword: "scientific study", matchTerms: ["scien", "study", "botany", "biology", "research", "academic", "classification", "species"], label: "Scientific study of plants", hint: "The definition says 'scientific study of plants' -- botany as a discipline." },
+    ],
+    synonyms: ["plant-related", "herbal", "floral", "vegetable"],
+  },
 ]
