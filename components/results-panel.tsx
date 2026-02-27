@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ScoreDisplay } from "./score-display"
 import { ConceptBreakdown } from "./concept-breakdown"
 import { ScoreCelebration } from "./score-celebration"
 import { CountdownTimer } from "./countdown-timer"
-import { Check, Copy, ChevronDown } from "lucide-react"
+import { Check, Copy, ChevronDown, Users } from "lucide-react"
 import type { ConceptResult, ScoreBreakdown } from "@/lib/scoring"
 
 interface ResultsPanelProps {
@@ -42,7 +42,11 @@ export function ResultsPanel({
   difficulty = "easy",
 }: ResultsPanelProps) {
   const [copied, setCopied] = useState(false)
+  const [averageData, setAverageData] = useState<{ average: number; count: number } | null>(null)
+  const [submittedScore, setSubmittedScore] = useState(false)
+  
   const improveKey = `definedle-improve-${word}-${difficulty}`
+  const submittedKey = `definedle-submitted-${word}-${difficulty}`
   const [showImprove, setShowImprove] = useState(() => {
     if (typeof window === "undefined") return false
     try { return localStorage.getItem(improveKey) === "1" } catch { return false }
@@ -57,6 +61,45 @@ export function ResultsPanel({
 
   const safeConcepts = concepts ?? []
   const matchedCount = safeConcepts.filter((c) => c.matched).length
+
+  // Submit score and fetch average (only for daily words, not practice)
+  useEffect(() => {
+    if (isPractice) return
+    
+    // Check if already submitted for this word
+    const alreadySubmitted = localStorage.getItem(submittedKey) === "1"
+    
+    const submitAndFetch = async () => {
+      try {
+        if (!alreadySubmitted) {
+          // Submit score and get average
+          const res = await fetch("/api/scores", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ word, score, difficulty }),
+          })
+          if (res.ok) {
+            const data = await res.json()
+            setAverageData(data)
+            setSubmittedScore(true)
+            localStorage.setItem(submittedKey, "1")
+          }
+        } else {
+          // Already submitted, just fetch the average
+          const res = await fetch(`/api/scores?word=${encodeURIComponent(word)}&difficulty=${difficulty}`)
+          if (res.ok) {
+            const data = await res.json()
+            setAverageData(data)
+            setSubmittedScore(true)
+          }
+        }
+      } catch (error) {
+        console.error("Failed to submit/fetch score:", error)
+      }
+    }
+    
+    submitAndFetch()
+  }, [word, score, difficulty, isPractice, submittedKey])
 
   const handleShare = () => {
     // Calculate breakdown percentages for emoji display
@@ -98,6 +141,17 @@ definedle.com`
     <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <ScoreCelebration score={score} />
       <ScoreDisplay score={score} />
+
+      {/* Average score display */}
+      {!isPractice && averageData && averageData.count > 1 && (
+        <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+          <Users className="h-4 w-4" aria-hidden="true" />
+          <span>
+            Average: <span className="font-medium text-foreground">{averageData.average}/100</span>
+            <span className="text-xs ml-1">({averageData.count} players)</span>
+          </span>
+        </div>
+      )}
 
       {/* Summary feedback */}
       <p className="text-sm leading-relaxed text-foreground/80 text-center">
