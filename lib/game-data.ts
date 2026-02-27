@@ -98,6 +98,28 @@ function getUpcomingDailyWords(days: number): Set<string> {
   return upcoming
 }
 
+/**
+ * Look up a specific word by name across all word lists.
+ * Returns the word and which difficulty pool it belongs to, or null if not found.
+ */
+export function getWordByName(wordName: string): { word: DailyWord; difficulty: GameMode } | null {
+  const normalized = wordName.toLowerCase().trim()
+  
+  // Check hard words first (more specific pool)
+  const hardMatch = hardWords.find((w) => w.word.toLowerCase() === normalized)
+  if (hardMatch) return { word: hardMatch, difficulty: "hard" }
+  
+  // Check daily words
+  const dailyMatch = dailyWords.find((w) => w.word.toLowerCase() === normalized)
+  if (dailyMatch) return { word: dailyMatch, difficulty: "easy" }
+  
+  // Check practice words
+  const practiceMatch = practiceWords.find((w) => w.word.toLowerCase() === normalized)
+  if (practiceMatch) return { word: practiceMatch, difficulty: "easy" }
+  
+  return null
+}
+
 export function getRandomPracticeWord(excludeWords: string[] = [], difficulty: GameMode = "easy"): DailyWord {
   const pool = difficulty === "hard" ? hardWords : [...dailyWords, ...practiceWords]
   const upcoming = getUpcomingDailyWords(7)

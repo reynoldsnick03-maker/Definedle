@@ -8,7 +8,7 @@ import { HowToPlay } from "@/components/how-to-play"
 import { SharedResult, type ShareData } from "@/components/shared-result"
 import { ModeToggle, type TabMode } from "@/components/mode-toggle"
 import type { DailyWord, GameMode } from "@/lib/game-data"
-import { getRandomPracticeWord } from "@/lib/game-data"
+import { getRandomPracticeWord, getWordByName } from "@/lib/game-data"
 
 interface PageClientProps {
   dailyWord: DailyWord
@@ -21,11 +21,50 @@ interface PageClientProps {
   } | null
 }
 
+// Parse URL params once at module level for initial state
+function getInitialSummonedWord(): { word: DailyWord; difficulty: GameMode } | null {
+  if (typeof window === "undefined") return null
+  const params = new URLSearchParams(window.location.search)
+  const wordParam = params.get("word") || Array.from(params.keys()).find(k => k !== "reset" && k !== "r")
+  if (wordParam) {
+    const found = getWordByName(wordParam)
+    if (found) {
+      // Clean URL without reloading
+      window.history.replaceState({}, "", window.location.pathname)
+      return found
+    }
+  }
+  return null
+}
+
 export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: PageClientProps) {
+  // Check for summoned word from URL on initial render
+  const [summonedWord] = useState(() => getInitialSummonedWord())
+  
+  const [statsOpen, setStatsOpen] = useState(false)
+  const [helpOpen, setHelpOpen] = useState(false)
+  const [showingShare, setShowingShare] = useState(!!shareData && !!shareWordData)
+  const [tab, setTab] = useState<TabMode>(() => summonedWord ? "practice" : "daily")
+  const [difficulty, setDifficulty] = useState<GameMode>(() => summonedWord?.difficulty ?? "easy")
+
+  // Practice state -- separate per difficulty so switching doesn't reset
+  // Initialize with summoned word if present
+  const [practiceEasy, setPracticeEasy] = useState<DailyWord | null>(() => 
+    summonedWord?.difficulty === "easy" ? summonedWord.word : null
+  )
+  const [practiceHard, setPracticeHard] = useState<DailyWord | null>(() => 
+    summonedWord?.difficulty === "hard" ? summonedWord.word : null
+  )
+  const [playedEasy, setPlayedEasy] = useState<string[]>([])
+  const [playedHard, setPlayedHard] = useState<string[]>([])
+  const [practiceKeyEasy, setPracticeKeyEasy] = useState(0)
+  const [practiceKeyHard, setPracticeKeyHard] = useState(0)
+
   // ?reset in URL clears all saved state and reloads clean
   useEffect(() => {
     if (typeof window === "undefined") return
     const params = new URLSearchParams(window.location.search)
+    
     if (params.has("reset")) {
       // Clear daily result cookies
       document.cookie = "definedle-today=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
@@ -37,20 +76,6 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
       window.location.replace(window.location.pathname)
     }
   }, [])
-
-  const [statsOpen, setStatsOpen] = useState(false)
-  const [helpOpen, setHelpOpen] = useState(false)
-  const [showingShare, setShowingShare] = useState(!!shareData && !!shareWordData)
-  const [tab, setTab] = useState<TabMode>("daily")
-  const [difficulty, setDifficulty] = useState<GameMode>("easy")
-
-  // Practice state -- separate per difficulty so switching doesn't reset
-  const [practiceEasy, setPracticeEasy] = useState<DailyWord | null>(null)
-  const [practiceHard, setPracticeHard] = useState<DailyWord | null>(null)
-  const [playedEasy, setPlayedEasy] = useState<string[]>([])
-  const [playedHard, setPlayedHard] = useState<string[]>([])
-  const [practiceKeyEasy, setPracticeKeyEasy] = useState(0)
-  const [practiceKeyHard, setPracticeKeyHard] = useState(0)
 
   const practiceWord = difficulty === "easy" ? practiceEasy : practiceHard
   const practiceKey = difficulty === "easy" ? practiceKeyEasy : practiceKeyHard
