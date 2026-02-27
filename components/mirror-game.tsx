@@ -89,6 +89,17 @@ function getSimilarityBorderColor(similarity: number): string {
   return "border-red-200"
 }
 
+// Check if a word is valid using the Dictionary API
+async function isValidWord(word: string): Promise<boolean> {
+  try {
+    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word.toLowerCase())}`)
+    return response.ok
+  } catch {
+    // On network error, allow the word to avoid blocking gameplay
+    return true
+  }
+}
+
 export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorGameProps) {
   const [guesses, setGuesses] = useState<Guess[]>([])
   const [currentGuess, setCurrentGuess] = useState("")
@@ -96,6 +107,8 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
   const [isComplete, setIsComplete] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
   const [hintsRevealed, setHintsRevealed] = useState(0) // 0=none, 1=length, 2=first letter, 3=last letter
+  const [isValidating, setIsValidating] = useState(false)
+  const [validationError, setValidationError] = useState<string | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   
   const maxGuesses = 3
@@ -108,12 +121,27 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
     setIsComplete(false)
     setIsCorrect(false)
     setHintsRevealed(0)
+    setValidationError(null)
   }, [word.word])
 
-  const handleSubmit = useCallback((e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
     const trimmedGuess = currentGuess.trim()
-    if (!trimmedGuess || isComplete) return
+    if (!trimmedGuess || isComplete || isValidating) return
+    
+    setValidationError(null)
+    setIsValidating(true)
+    
+    // Validate the word first
+    const valid = await isValidWord(trimmedGuess)
+    setIsValidating(false)
+    
+    if (!valid) {
+      setValidationError("Not a valid word")
+      setIsShaking(true)
+      setTimeout(() => setIsShaking(false), 300)
+      return
+    }
     
     const gLower = trimmedGuess.toLowerCase()
     const tLower = word.word.toLowerCase()
@@ -141,7 +169,7 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
     }
-  }, [currentGuess, guesses, isComplete, word.word, word.synonyms])
+  }, [currentGuess, guesses, isComplete, isValidating, word.word, word.synonyms])
 
   return (
     <div className="mx-auto w-full max-w-md px-5">
@@ -266,13 +294,22 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
                 ref={inputRef}
                 type="text"
                 value={currentGuess}
-                onChange={(e) => setCurrentGuess(e.target.value)}
+                onChange={(e) => {
+                  setCurrentGuess(e.target.value)
+                  setValidationError(null)
+                }}
                 placeholder="Type your guess..."
-                className="w-full rounded-lg border border-border bg-background px-4 py-3 text-base placeholder:text-muted-foreground/60 focus:border-foreground/30 focus:outline-none focus:ring-2 focus:ring-ring"
+                className={`w-full rounded-lg border bg-background px-4 py-3 text-base placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-ring ${
+                  validationError ? "border-red-400 focus:border-red-400" : "border-border focus:border-foreground/30"
+                }`}
                 autoFocus
                 autoComplete="off"
                 autoCapitalize="off"
+                disabled={isValidating}
               />
+              {validationError && (
+                <p className="mt-1.5 text-xs text-red-500">{validationError}</p>
+              )}
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -289,10 +326,10 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
               </div>
               <button
                 type="submit"
-                disabled={!currentGuess.trim()}
+                disabled={!currentGuess.trim() || isValidating}
                 className="rounded-lg bg-foreground px-5 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90 disabled:opacity-50"
               >
-                Guess
+                {isValidating ? "Checking..." : "Guess"}
               </button>
             </div>
           </form>

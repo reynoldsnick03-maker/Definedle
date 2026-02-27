@@ -109,7 +109,9 @@ export function HowToPlay({ open, onClose }: HowToPlayProps) {
               <br />
               <span className="text-foreground font-medium">Practice</span> &mdash; unlimited words to sharpen your skills.
               <br />
-              Both have <span className="text-foreground font-medium">Easy</span> and <span className="text-foreground font-medium">Hard</span> difficulty.
+              <span className="text-foreground font-medium">Mirror</span> &mdash; flip the challenge. See the definition, guess the word in 3 tries. Available in Practice mode.
+              <br />
+              Both Daily and Practice have <span className="text-foreground font-medium">Easy</span> and <span className="text-foreground font-medium">Hard</span> difficulty.
             </p>
           </div>
         </div>
