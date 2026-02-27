@@ -1134,7 +1134,7 @@ export const dailyWords: DailyWord[] = [
     partOfSpeech: "noun",
     definition: "Something that deviates from what is standard, normal, or expected.",
     keyConcepts: [
-      { keyword: "deviates", matchTerms: ["deviat", "differ", "depart", "diverge", "irregular", "unusual", "abnormal", "atypical", "exception", "outlier", "oddity", "peculiar", "strange", "unexpected", "surprising", "rare", "uncommon", "anomal"], label: "Deviates from standard or normal", hint: "The definition says 'deviates from what is standard, normal, or expected' -- it doesn't fit the pattern." },
+      { keyword: "deviates", matchTerms: ["deviat", "differ", "depart", "diverge", "irregular", "unusual", "abnormal", "atypical", "exception", "outlier", "oddity", "peculiar", "strange", "unexpected", "surprising", "rare", "uncommon", "anomal", "outside", "beyond", "not normal", "not standard", "not typical", "out of", "expected", "norm", "standard"], label: "Deviates from standard or normal", hint: "The definition says 'deviates from what is standard, normal, or expected' -- it doesn't fit the pattern." },
     ],
     synonyms: ["irregularity", "exception", "oddity"],
   },
