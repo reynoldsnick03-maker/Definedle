@@ -3818,7 +3818,7 @@ export const dailyWords: DailyWord[] = [
     ],
     synonyms: ["cross", "bisect", "meet", "converge", "overlap"],
   },
-  // ── 388. drawl ──
+  // ─��� 388. drawl ──
   {
     word: "drawl",
     partOfSpeech: "verb/noun",
@@ -3828,5 +3828,269 @@ export const dailyWords: DailyWord[] = [
       { keyword: "prolonged sounds", matchTerms: ["prolong", "stretch", "extend", "drag", "lengthen", "vowel", "drawn-out", "elongat"], label: "Prolonged vowel sounds", hint: "The definition says 'with prolonged vowel sounds' -- stretching out the words." },
     ],
     synonyms: ["drone", "speak slowly"],
+  },
+  // ── 389. redemption ──
+  {
+    word: "redemption",
+    partOfSpeech: "noun",
+    definition: "The action of saving or being saved from sin, error, or evil; the act of regaining possession of something in exchange for payment.",
+    keyConcepts: [
+      { keyword: "saving from sin", matchTerms: ["sav", "rescu", "deliver", "sin", "error", "evil", "wrong", "fault", "salv", "atonement", "forgiv"], label: "Saving from sin or evil", hint: "The definition says 'saving or being saved from sin, error, or evil' -- deliverance from wrongdoing." },
+      { keyword: "regaining possession", matchTerms: ["regain", "recover", "reclaim", "get back", "exchange", "payment", "buy back", "repurchase"], label: "Regaining possession", hint: "The definition says 'regaining possession of something in exchange for payment' -- buying back." },
+    ],
+    synonyms: ["salvation", "deliverance", "atonement", "recovery"],
+  },
+  // ── 390. conditional ──
+  {
+    word: "conditional",
+    partOfSpeech: "adjective",
+    definition: "Subject to one or more conditions being met; not absolute.",
+    keyConcepts: [
+      { keyword: "subject to conditions", matchTerms: ["subject", "condition", "depend", "contingent", "provision", "stipulat", "requirement", "if", "provided"], label: "Subject to conditions", hint: "The definition says 'subject to one or more conditions being met' -- requires something else first." },
+      { keyword: "not absolute", matchTerms: ["not absolute", "qualified", "limited", "restrict", "partial", "uncertain", "tentative"], label: "Not absolute", hint: "The definition says 'not absolute' -- there are strings attached." },
+    ],
+    synonyms: ["contingent", "dependent", "provisional", "qualified"],
+  },
+  // ── 391. substantial ──
+  {
+    word: "substantial",
+    partOfSpeech: "adjective",
+    definition: "Of considerable importance, size, or worth; strongly built or made.",
+    keyConcepts: [
+      { keyword: "considerable importance", matchTerms: ["consider", "important", "signific", "large", "big", "sizable", "sizeable", "great", "major", "noteworthy", "worth"], label: "Considerable importance or size", hint: "The definition says 'of considerable importance, size, or worth' -- not trivial." },
+      { keyword: "strongly built", matchTerms: ["strong", "sturdy", "solid", "robust", "durable", "well-built", "firm", "stable"], label: "Strongly built", hint: "The definition says 'strongly built or made' -- solid construction." },
+    ],
+    synonyms: ["significant", "considerable", "sizeable", "solid", "sturdy"],
+  },
+  // ── 392. converse ──
+  {
+    word: "converse",
+    partOfSpeech: "verb",
+    definition: "To engage in conversation; to talk with someone.",
+    keyConcepts: [
+      { keyword: "engage in conversation", matchTerms: ["convers", "talk", "speak", "chat", "discuss", "communicat", "dialogue", "exchange"], label: "Engage in conversation", hint: "The definition says 'engage in conversation' -- verbal interaction." },
+      { keyword: "with someone", matchTerms: ["someone", "person", "people", "other", "together", "mutual", "interactive", "social"], label: "With someone", hint: "The definition says 'talk with someone' -- it's a two-way exchange." },
+    ],
+    synonyms: ["talk", "chat", "speak", "discuss", "communicate"],
+  },
+  // ── 393. deprive ──
+  {
+    word: "deprive",
+    partOfSpeech: "verb",
+    definition: "To prevent someone from having or using something; to take away from.",
+    keyConcepts: [
+      { keyword: "prevent from having", matchTerms: ["prevent", "deny", "refuse", "withhold", "keep from", "stop", "block"], label: "Prevent from having", hint: "The definition says 'prevent someone from having or using something' -- blocking access." },
+      { keyword: "take away", matchTerms: ["take away", "remove", "strip", "dispossess", "rob", "bereave", "divest"], label: "Take away", hint: "The definition says 'take away from' -- removing something possessed." },
+    ],
+    synonyms: ["deny", "strip", "dispossess", "rob", "withhold"],
+  },
+  // ── 394. quaint ──
+  {
+    word: "quaint",
+    partOfSpeech: "adjective",
+    definition: "Attractively unusual or old-fashioned; charmingly strange.",
+    keyConcepts: [
+      { keyword: "attractively unusual", matchTerms: ["attract", "unusual", "peculiar", "curious", "odd", "unique", "distinctive", "charm", "appeal"], label: "Attractively unusual", hint: "The definition says 'attractively unusual' -- strange but in a good way." },
+      { keyword: "old-fashioned", matchTerms: ["old-fashion", "old fashion", "vintage", "antique", "traditional", "classic", "retro", "nostalgic", "bygone"], label: "Old-fashioned", hint: "The definition says 'old-fashioned' -- from an earlier time." },
+    ],
+    synonyms: ["charming", "picturesque", "old-fashioned", "whimsical"],
+  },
+  // ── 395. dismantle ──
+  {
+    word: "dismantle",
+    partOfSpeech: "verb",
+    definition: "To take apart piece by piece; to destroy the structure of something.",
+    keyConcepts: [
+      { keyword: "take apart", matchTerms: ["take apart", "disassembl", "break down", "separate", "deconstruct", "strip", "undo"], label: "Take apart", hint: "The definition says 'take apart piece by piece' -- methodical deconstruction." },
+      { keyword: "destroy structure", matchTerms: ["destroy", "structure", "demolish", "tear down", "remove", "eliminate", "abolish", "disband"], label: "Destroy structure", hint: "The definition says 'destroy the structure of something' -- ending its organized form." },
+    ],
+    synonyms: ["disassemble", "demolish", "take apart", "deconstruct"],
+  },
+  // ── 396. linger ──
+  {
+    word: "linger",
+    partOfSpeech: "verb",
+    definition: "To stay in a place longer than necessary; to be slow to disappear or die.",
+    keyConcepts: [
+      { keyword: "stay longer", matchTerms: ["stay", "remain", "wait", "loiter", "hang around", "tarry", "dawdle", "delay"], label: "Stay longer than necessary", hint: "The definition says 'stay in a place longer than necessary' -- not leaving when expected." },
+      { keyword: "slow to disappear", matchTerms: ["slow", "disappear", "fade", "persist", "endure", "last", "continue", "die"], label: "Slow to disappear", hint: "The definition says 'slow to disappear or die' -- persisting beyond expectation." },
+    ],
+    synonyms: ["loiter", "remain", "tarry", "persist", "dawdle"],
+  },
+  // ── 397. gravitate ──
+  {
+    word: "gravitate",
+    partOfSpeech: "verb",
+    definition: "To move toward or be attracted to something or someone.",
+    keyConcepts: [
+      { keyword: "move toward", matchTerms: ["move", "toward", "draw", "pull", "drift", "tend", "incline", "lean"], label: "Move toward", hint: "The definition says 'move toward' -- physical or metaphorical movement." },
+      { keyword: "attracted to", matchTerms: ["attract", "drawn", "pull", "magnetism", "affinity", "appeal", "interest"], label: "Attracted to", hint: "The definition says 'be attracted to' -- feeling a pull toward something." },
+    ],
+    synonyms: ["drift", "tend", "incline", "lean", "be drawn to"],
+  },
+  // ── 398. usher ──
+  {
+    word: "usher",
+    partOfSpeech: "verb",
+    definition: "To show or guide someone somewhere; to cause or mark the start of something new.",
+    keyConcepts: [
+      { keyword: "guide someone", matchTerms: ["guide", "show", "lead", "escort", "accompany", "direct", "conduct"], label: "Guide someone", hint: "The definition says 'show or guide someone somewhere' -- leading the way." },
+      { keyword: "mark the start", matchTerms: ["start", "begin", "introduc", "herald", "initiat", "launch", "bring in", "new"], label: "Mark the start", hint: "The definition says 'cause or mark the start of something new' -- introducing a new era." },
+    ],
+    synonyms: ["guide", "escort", "lead", "herald", "introduce"],
+  },
+  // ── 399. capture ──
+  {
+    word: "capture",
+    partOfSpeech: "verb",
+    definition: "To take into one's possession or control by force; to record accurately in words or pictures.",
+    keyConcepts: [
+      { keyword: "take by force", matchTerms: ["take", "seize", "catch", "grab", "trap", "apprehend", "arrest", "possess", "control", "force"], label: "Take by force", hint: "The definition says 'take into one's possession or control by force' -- seizing something." },
+      { keyword: "record accurately", matchTerms: ["record", "document", "preserv", "picture", "photograph", "portray", "depict", "convey", "express"], label: "Record accurately", hint: "The definition says 'record accurately in words or pictures' -- preserving a moment." },
+    ],
+    synonyms: ["seize", "catch", "trap", "record", "preserve"],
+  },
+  // ── 400. dangle ──
+  {
+    word: "dangle",
+    partOfSpeech: "verb",
+    definition: "To hang or swing loosely; to offer something enticing to someone.",
+    keyConcepts: [
+      { keyword: "hang loosely", matchTerms: ["hang", "swing", "sway", "droop", "suspend", "loose", "drap"], label: "Hang loosely", hint: "The definition says 'hang or swing loosely' -- not firmly attached." },
+      { keyword: "offer enticingly", matchTerms: ["offer", "entice", "tempt", "lure", "tease", "bait", "tantalize", "wave"], label: "Offer enticingly", hint: "The definition says 'offer something enticing to someone' -- tempting with a reward." },
+    ],
+    synonyms: ["hang", "swing", "suspend", "dip", "tempt"],
+  },
+  // ── 401. deposit ──
+  {
+    word: "deposit",
+    partOfSpeech: "verb",
+    definition: "To put or set down in a specific place; to put money into a bank account.",
+    keyConcepts: [
+      { keyword: "put down", matchTerms: ["put", "set", "place", "lay", "leave", "drop", "position", "store"], label: "Put down", hint: "The definition says 'put or set down in a specific place' -- placing something somewhere." },
+      { keyword: "bank account", matchTerms: ["bank", "account", "money", "fund", "save", "pay in", "credit"], label: "Into bank account", hint: "The definition says 'put money into a bank account' -- financial transaction." },
+    ],
+    synonyms: ["place", "put", "set down", "store", "bank"],
+  },
+  // ── 402. envelop ──
+  {
+    word: "envelop",
+    partOfSpeech: "verb",
+    definition: "To wrap up, cover, or surround completely.",
+    keyConcepts: [
+      { keyword: "wrap or cover", matchTerms: ["wrap", "cover", "cloak", "shroud", "blanket", "veil", "drape", "sheath"], label: "Wrap or cover", hint: "The definition says 'wrap up, cover' -- enclosing something." },
+      { keyword: "surround completely", matchTerms: ["surround", "encircl", "engulf", "enclose", "embrace", "swallow", "enfold", "immerse", "complet"], label: "Surround completely", hint: "The definition says 'surround completely' -- on all sides." },
+    ],
+    synonyms: ["wrap", "surround", "engulf", "shroud", "cloak"],
+  },
+  // ── 403. expose ──
+  {
+    word: "expose",
+    partOfSpeech: "verb",
+    definition: "To make something visible by uncovering it; to reveal the true nature of something.",
+    keyConcepts: [
+      { keyword: "make visible", matchTerms: ["visible", "uncover", "reveal", "show", "display", "bare", "open", "unveil"], label: "Make visible", hint: "The definition says 'make something visible by uncovering it' -- removing what hides it." },
+      { keyword: "reveal true nature", matchTerms: ["reveal", "true", "nature", "unmask", "disclose", "bring to light", "lay bare", "betray"], label: "Reveal true nature", hint: "The definition says 'reveal the true nature of something' -- showing what's really there." },
+    ],
+    synonyms: ["reveal", "uncover", "disclose", "unmask", "bare"],
+  },
+  // ── 404. juggle ──
+  {
+    word: "juggle",
+    partOfSpeech: "verb",
+    definition: "To continuously toss and catch objects; to cope with by adroitly managing multiple activities.",
+    keyConcepts: [
+      { keyword: "toss and catch", matchTerms: ["toss", "throw", "catch", "keep in air", "ball", "object", "perform"], label: "Toss and catch", hint: "The definition says 'continuously toss and catch objects' -- the classic circus skill." },
+      { keyword: "manage multiple", matchTerms: ["manage", "multiple", "balanc", "handle", "cope", "deal with", "coordinate", "multitask"], label: "Manage multiple activities", hint: "The definition says 'cope with by adroitly managing multiple activities' -- keeping many things going at once." },
+    ],
+    synonyms: ["balance", "manage", "handle", "coordinate", "multitask"],
+  },
+  // ── 405. prune ──
+  {
+    word: "prune",
+    partOfSpeech: "verb",
+    definition: "To trim a tree or plant by cutting away dead or excess branches; to reduce or remove what is unnecessary.",
+    keyConcepts: [
+      { keyword: "trim by cutting", matchTerms: ["trim", "cut", "clip", "snip", "shear", "branch", "tree", "plant", "dead", "excess"], label: "Trim by cutting", hint: "The definition says 'trim a tree or plant by cutting away dead or excess branches' -- garden maintenance." },
+      { keyword: "reduce unnecessary", matchTerms: ["reduce", "remove", "unnecessary", "eliminate", "pare", "cut back", "streamline", "slim down"], label: "Remove unnecessary", hint: "The definition says 'reduce or remove what is unnecessary' -- making leaner." },
+    ],
+    synonyms: ["trim", "cut", "clip", "pare", "reduce"],
+  },
+  // ── 406. wring ──
+  {
+    word: "wring",
+    partOfSpeech: "verb",
+    definition: "To squeeze and twist something to force liquid from it; to obtain something with difficulty.",
+    keyConcepts: [
+      { keyword: "squeeze and twist", matchTerms: ["squeeze", "twist", "compress", "press", "squash", "liquid", "water", "wet"], label: "Squeeze and twist", hint: "The definition says 'squeeze and twist something to force liquid from it' -- removing moisture." },
+      { keyword: "obtain with difficulty", matchTerms: ["obtain", "get", "extract", "force", "difficulty", "hard", "effort", "struggle"], label: "Obtain with difficulty", hint: "The definition says 'obtain something with difficulty' -- not easily given." },
+    ],
+    synonyms: ["squeeze", "twist", "extract", "press", "force"],
+  },
+  // ── 407. advise ──
+  {
+    word: "advise",
+    partOfSpeech: "verb",
+    definition: "To offer suggestions about the best course of action; to give counsel or recommendations.",
+    keyConcepts: [
+      { keyword: "offer suggestions", matchTerms: ["suggest", "recommend", "offer", "propos", "counsel", "guidance", "direction"], label: "Offer suggestions", hint: "The definition says 'offer suggestions about the best course of action' -- helping someone decide." },
+      { keyword: "give counsel", matchTerms: ["counsel", "guidance", "advice", "consult", "inform", "guide", "direct", "instruct"], label: "Give counsel", hint: "The definition says 'give counsel or recommendations' -- sharing wisdom." },
+    ],
+    synonyms: ["recommend", "counsel", "suggest", "guide", "urge"],
+  },
+  // ── 408. rectify ──
+  {
+    word: "rectify",
+    partOfSpeech: "verb",
+    definition: "To put right; to correct an error or remove a problem.",
+    keyConcepts: [
+      { keyword: "put right", matchTerms: ["right", "correct", "fix", "repair", "remedy", "amend", "adjust"], label: "Put right", hint: "The definition says 'put right' -- making something correct again." },
+      { keyword: "remove a problem", matchTerms: ["remove", "problem", "error", "mistake", "fault", "resolve", "solve", "address"], label: "Remove a problem", hint: "The definition says 'correct an error or remove a problem' -- eliminating what's wrong." },
+    ],
+    synonyms: ["correct", "fix", "remedy", "amend", "repair"],
+  },
+  // ── 409. perceive ──
+  {
+    word: "perceive",
+    partOfSpeech: "verb",
+    definition: "To become aware of through the senses; to understand or interpret in a particular way.",
+    keyConcepts: [
+      { keyword: "aware through senses", matchTerms: ["aware", "sens", "see", "hear", "feel", "notice", "detect", "observ", "recogniz"], label: "Aware through senses", hint: "The definition says 'become aware of through the senses' -- sensory detection." },
+      { keyword: "interpret", matchTerms: ["interpret", "understand", "view", "regard", "consider", "think", "comprehend", "grasp"], label: "Interpret", hint: "The definition says 'understand or interpret in a particular way' -- how you make sense of it." },
+    ],
+    synonyms: ["sense", "detect", "notice", "observe", "understand"],
+  },
+  // ── 410. regard ──
+  {
+    word: "regard",
+    partOfSpeech: "verb",
+    definition: "To consider or think of in a particular way; to look at steadily.",
+    keyConcepts: [
+      { keyword: "consider", matchTerms: ["consider", "think", "view", "see", "deem", "judge", "rate", "reckon", "perceive"], label: "Consider", hint: "The definition says 'consider or think of in a particular way' -- forming an opinion." },
+      { keyword: "look at steadily", matchTerms: ["look", "gaze", "stare", "watch", "observ", "eye", "view", "steadily"], label: "Look at steadily", hint: "The definition says 'look at steadily' -- attentive observation." },
+    ],
+    synonyms: ["consider", "view", "see", "deem", "observe"],
+  },
+  // ── 411. modify ──
+  {
+    word: "modify",
+    partOfSpeech: "verb",
+    definition: "To make partial changes to something; to alter without transforming completely.",
+    keyConcepts: [
+      { keyword: "partial changes", matchTerms: ["change", "alter", "adjust", "adapt", "revise", "amend", "tweak", "partial", "slight"], label: "Partial changes", hint: "The definition says 'make partial changes to something' -- not a complete overhaul." },
+      { keyword: "without transforming completely", matchTerms: ["without", "not complet", "maintain", "keep", "preserve", "limit", "moderate", "temper"], label: "Without transforming completely", hint: "The definition says 'alter without transforming completely' -- the essence remains." },
+    ],
+    synonyms: ["alter", "adjust", "adapt", "change", "revise"],
+  },
+  // ── 412. refine ──
+  {
+    word: "refine",
+    partOfSpeech: "verb",
+    definition: "To remove impurities or unwanted elements; to improve by making small changes.",
+    keyConcepts: [
+      { keyword: "remove impurities", matchTerms: ["remov", "impur", "unwanted", "purif", "filter", "clean", "process", "distill"], label: "Remove impurities", hint: "The definition says 'remove impurities or unwanted elements' -- purification." },
+      { keyword: "improve by small changes", matchTerms: ["improve", "small", "polish", "perfect", "enhance", "fine-tune", "hone", "develop"], label: "Improve by small changes", hint: "The definition says 'improve by making small changes' -- incremental betterment." },
+    ],
+    synonyms: ["purify", "polish", "improve", "perfect", "hone"],
   },
 ]

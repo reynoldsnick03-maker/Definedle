@@ -3358,4 +3358,149 @@ export const hardWords: DailyWord[] = [
     partOfSpeech: "adjective",
     etymology: "Latin tumultus (commotion).",
   },
+  // ── tautological ──
+  {
+    word: "tautological",
+    definition: "Using different words to say the same thing; needlessly repetitive in meaning.",
+    keyConcepts: [
+      { keyword: "same thing", matchTerms: ["same", "repeat", "redundant", "identical", "duplicate", "restat", "echo"], label: "Saying the same thing", hint: "The definition says 'using different words to say the same thing' -- repetition of meaning." },
+      { keyword: "needlessly repetitive", matchTerms: ["needless", "unnecessary", "superfluous", "redundant", "repetit", "circular", "pleonastic"], label: "Needlessly repetitive", hint: "The definition says 'needlessly repetitive in meaning' -- adds nothing new." },
+    ],
+    synonyms: ["redundant", "repetitive", "pleonastic", "circular"],
+    partOfSpeech: "adjective",
+    etymology: "Greek tautologia -- tauto (the same) + logos (word).",
+  },
+  // ── flagrant ──
+  {
+    word: "flagrant",
+    definition: "Conspicuously or obviously offensive; shockingly noticeable.",
+    keyConcepts: [
+      { keyword: "conspicuously offensive", matchTerms: ["conspicuous", "obvious", "blatant", "glaring", "offensive", "brazen", "shameless", "outrageous"], label: "Conspicuously offensive", hint: "The definition says 'conspicuously or obviously offensive' -- impossible to miss." },
+      { keyword: "shockingly noticeable", matchTerms: ["shock", "notic", "egregious", "gross", "extreme", "overt", "undisguised", "bold"], label: "Shockingly noticeable", hint: "The definition says 'shockingly noticeable' -- stands out for the wrong reasons." },
+    ],
+    synonyms: ["blatant", "glaring", "brazen", "egregious", "gross"],
+    partOfSpeech: "adjective",
+    etymology: "Latin flagrans (burning) -- flagrare (to burn).",
+  },
+  // ── aloof ──
+  {
+    word: "aloof",
+    definition: "Not friendly or forthcoming; cool and distant in manner.",
+    keyConcepts: [
+      { keyword: "not friendly", matchTerms: ["not friendly", "unfriendly", "cold", "cool", "reserved", "standoffish", "unapproach", "withdrawn"], label: "Not friendly", hint: "The definition says 'not friendly or forthcoming' -- keeping others at arm's length." },
+      { keyword: "distant in manner", matchTerms: ["distant", "detach", "remote", "indifferent", "haughty", "superior", "removed", "apart"], label: "Distant in manner", hint: "The definition says 'cool and distant in manner' -- emotionally unavailable." },
+    ],
+    synonyms: ["distant", "detached", "reserved", "standoffish", "remote"],
+    partOfSpeech: "adjective",
+    etymology: "Dutch loef (windward) -- nautical term for keeping distance.",
+  },
+  // ── astute ──
+  {
+    word: "astute",
+    definition: "Having an ability to accurately assess situations and turn them to one's advantage; shrewd.",
+    keyConcepts: [
+      { keyword: "accurately assess", matchTerms: ["accurate", "assess", "perceiv", "understand", "discern", "judg", "insight", "sharp", "keen"], label: "Accurately assess", hint: "The definition says 'ability to accurately assess situations' -- seeing clearly." },
+      { keyword: "turn to advantage", matchTerms: ["advantage", "benefit", "clever", "shrewd", "cunning", "savvy", "smart", "calculating", "opportun"], label: "Turn to advantage", hint: "The definition says 'turn them to one's advantage' -- making situations work for you." },
+    ],
+    synonyms: ["shrewd", "sharp", "clever", "perceptive", "canny"],
+    partOfSpeech: "adjective",
+    etymology: "Latin astutus (crafty) -- astus (craft, cunning).",
+  },
+  // ── shrewd ──
+  {
+    word: "shrewd",
+    definition: "Having sharp powers of judgment; clever in practical matters.",
+    keyConcepts: [
+      { keyword: "sharp judgment", matchTerms: ["sharp", "judgment", "judgement", "astute", "keen", "perceptive", "discerning", "wise"], label: "Sharp judgment", hint: "The definition says 'having sharp powers of judgment' -- making good assessments." },
+      { keyword: "clever in practical matters", matchTerms: ["clever", "practical", "smart", "cunning", "savvy", "canny", "business", "worldly", "pragmatic"], label: "Clever in practical matters", hint: "The definition says 'clever in practical matters' -- street-smart wisdom." },
+    ],
+    synonyms: ["astute", "sharp", "clever", "canny", "perceptive"],
+    partOfSpeech: "adjective",
+    etymology: "Middle English shrewed (wicked) -- from shrew.",
+  },
+  // ── incorrigible ──
+  {
+    word: "incorrigible",
+    definition: "Not able to be corrected, improved, or reformed; beyond redemption.",
+    keyConcepts: [
+      { keyword: "not able to be corrected", matchTerms: ["not", "unable", "cannot", "correct", "fix", "change", "reform", "cure", "remedy"], label: "Cannot be corrected", hint: "The definition says 'not able to be corrected, improved, or reformed' -- unchangeable." },
+      { keyword: "beyond redemption", matchTerms: ["beyond", "hopeless", "irredeemable", "hardened", "inveterate", "habitual", "chronic"], label: "Beyond redemption", hint: "The definition says 'beyond redemption' -- past the point of saving." },
+    ],
+    synonyms: ["irredeemable", "hopeless", "inveterate", "hardened", "unreformable"],
+    partOfSpeech: "adjective",
+    etymology: "Latin incorrigibilis -- in (not) + corrigere (to correct).",
+  },
+  // ── boorish ──
+  {
+    word: "boorish",
+    definition: "Rough and bad-mannered; coarse and unrefined.",
+    keyConcepts: [
+      { keyword: "bad-mannered", matchTerms: ["bad manner", "rude", "impolite", "discourteous", "uncouth", "ill-bred", "crude", "vulgar"], label: "Bad-mannered", hint: "The definition says 'rough and bad-mannered' -- lacking social grace." },
+      { keyword: "coarse and unrefined", matchTerms: ["coarse", "unrefined", "crude", "rough", "uncultured", "unsophistic", "loutish", "oafish"], label: "Coarse and unrefined", hint: "The definition says 'coarse and unrefined' -- lacking polish." },
+    ],
+    synonyms: ["crude", "uncouth", "vulgar", "rude", "loutish"],
+    partOfSpeech: "adjective",
+    etymology: "Dutch boer (farmer) -- implying rustic manners.",
+  },
+  // ── caustic ──
+  {
+    word: "caustic",
+    definition: "Able to burn or corrode organic tissue; sarcastic in a scathing way.",
+    keyConcepts: [
+      { keyword: "burn or corrode", matchTerms: ["burn", "corrod", "acid", "chemical", "erosive", "destroy", "tissue", "damage"], label: "Burn or corrode", hint: "The definition says 'able to burn or corrode organic tissue' -- chemically damaging." },
+      { keyword: "scathingly sarcastic", matchTerms: ["sarcastic", "scathing", "biting", "cutting", "harsh", "acerbic", "mordant", "bitter", "cruel"], label: "Scathingly sarcastic", hint: "The definition says 'sarcastic in a scathing way' -- words that wound." },
+    ],
+    synonyms: ["corrosive", "acidic", "biting", "acerbic", "scathing"],
+    partOfSpeech: "adjective",
+    etymology: "Greek kaustikos (capable of burning) -- kaiein (to burn).",
+  },
+  // ── judicious ──
+  {
+    word: "judicious",
+    definition: "Having or showing good judgment; sensible and wise.",
+    keyConcepts: [
+      { keyword: "good judgment", matchTerms: ["good", "judgment", "judgement", "wise", "sound", "prudent", "discerning", "astute"], label: "Good judgment", hint: "The definition says 'having or showing good judgment' -- making smart decisions." },
+      { keyword: "sensible and wise", matchTerms: ["sensible", "wise", "reasonabl", "rational", "thoughtful", "careful", "consider", "circumspect"], label: "Sensible and wise", hint: "The definition says 'sensible and wise' -- well-considered choices." },
+    ],
+    synonyms: ["wise", "prudent", "sensible", "discerning", "shrewd"],
+    partOfSpeech: "adjective",
+    etymology: "Latin judicium (judgment) -- judex (judge).",
+  },
+  // ── litigious ──
+  {
+    word: "litigious",
+    definition: "Inclined to go to law to settle disputes; relating to lawsuits.",
+    keyConcepts: [
+      { keyword: "inclined to go to law", matchTerms: ["law", "legal", "sue", "lawsuit", "court", "litigat", "lawyer", "dispute", "inclined"], label: "Inclined to go to law", hint: "The definition says 'inclined to go to law to settle disputes' -- quick to sue." },
+      { keyword: "relating to lawsuits", matchTerms: ["lawsuit", "litigation", "legal action", "court case", "judicial", "contentious", "quarrelsome"], label: "Relating to lawsuits", hint: "The definition says 'relating to lawsuits' -- legal proceedings." },
+    ],
+    synonyms: ["contentious", "quarrelsome", "disputatious", "argumentative"],
+    partOfSpeech: "adjective",
+    etymology: "Latin litigiosus -- litigare (to go to law).",
+  },
+  // ── turbulent ──
+  {
+    word: "turbulent",
+    definition: "Characterized by conflict, disorder, or confusion; not controlled or calm.",
+    keyConcepts: [
+      { keyword: "conflict or disorder", matchTerms: ["conflict", "disorder", "chaos", "confusion", "upheaval", "turmoil", "unrest", "strife"], label: "Conflict or disorder", hint: "The definition says 'characterized by conflict, disorder, or confusion' -- chaotic state." },
+      { keyword: "not calm", matchTerms: ["not calm", "unstable", "wild", "stormy", "violent", "rough", "agitat", "tempestuous", "volatile"], label: "Not calm", hint: "The definition says 'not controlled or calm' -- lacking peace." },
+    ],
+    synonyms: ["chaotic", "stormy", "volatile", "tumultuous", "wild"],
+    partOfSpeech: "adjective",
+    etymology: "Latin turbulentus -- turba (crowd, disturbance).",
+  },
+  // ── regime ──
+  {
+    word: "regime",
+    definition: "A government or system of rule, especially an authoritarian one; a systematic way of doing things.",
+    keyConcepts: [
+      { keyword: "government or system", matchTerms: ["government", "system", "rule", "administration", "authority", "leadership", "power", "control"], label: "Government or system", hint: "The definition says 'a government or system of rule' -- those in charge." },
+      { keyword: "authoritarian", matchTerms: ["authoritarian", "strict", "dictator", "oppressive", "totalitarian", "autocrat", "tyrann", "rigid"], label: "Often authoritarian", hint: "The definition says 'especially an authoritarian one' -- often implies strict control." },
+      { keyword: "systematic way", matchTerms: ["systematic", "routine", "program", "method", "plan", "schedule", "regimen", "regular"], label: "Systematic way", hint: "The definition also means 'a systematic way of doing things' -- an organized approach." },
+    ],
+    synonyms: ["government", "administration", "rule", "system", "regimen"],
+    partOfSpeech: "noun",
+    etymology: "French régime -- Latin regimen (rule, guidance).",
+  },
   ]
