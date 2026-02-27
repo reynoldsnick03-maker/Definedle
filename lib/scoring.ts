@@ -535,15 +535,23 @@ function meaningfulWords(text: string): string[] {
 
 // Check if two words share a common root by comparing prefixes and substrings.
 // Handles pairs like "crime"/"criminal", "relieve"/"relief", "free"/"freedom", etc.
+// STRICT: Avoids false positives like "reality" matching "unrealist" or "idealism" matching "idealist"
 function stemMatch(a: string, b: string): boolean {
   if (a === b) return true
-  // One contains the other as a substring
-  if (a.length >= 4 && b.includes(a)) return true
-  if (b.length >= 4 && a.includes(b)) return true
-  // Share a 4-character prefix (catches crime/criminal, charge/charged, etc.)
-  if (a.length >= 4 && b.length >= 4 && a.slice(0, 4) === b.slice(0, 4)) return true
-  // Synonym cluster match
+  
+  // One contains the other as a substring (but must be substantial overlap)
+  // e.g., "idealist" contains "ideal" - this is valid
+  // But "unrealist" contains "real" which could match "reality" - we need to be careful
+  if (a.length >= 4 && b.includes(a) && a.length >= b.length * 0.6) return true
+  if (b.length >= 4 && a.includes(b) && b.length >= a.length * 0.6) return true
+  
+  // Share a 5-character prefix (stricter than 4 to reduce false positives)
+  // This catches crime/criminal, charge/charged, but not real/unrealist
+  if (a.length >= 5 && b.length >= 5 && a.slice(0, 5) === b.slice(0, 5)) return true
+  
+  // Synonym cluster match - this is the primary way we handle related words
   if (a.length >= 3 && b.length >= 3 && areSynonyms(a, b)) return true
+  
   return false
 }
 
@@ -573,9 +581,10 @@ function fuzzyConceptMatch(inputWords: string[], negatedWords: Set<string>, conc
     }
   }
 
-  // Require at least 2 distinct hits AND 30% of concept vocabulary to appear in input.
+  // Require at least 2 distinct hits AND 40% of concept vocabulary to appear in input.
   // The minimum-2 rule prevents a single coincidental word from triggering a match.
-  return hits >= 2 && hits / unique.length >= 0.3
+  // The 40% threshold (up from 30%) ensures more deliberate concept coverage.
+  return hits >= 2 && hits / unique.length >= 0.4
 }
 
 // Score a user definition against a single set of keyConcepts + definition text.
@@ -645,18 +654,17 @@ function scoreAgainstDefinition(
     ? relevantWords / inputMeaningful.length
     : 0
 
+  // Precision scoring: no automatic 100% - always based on actual word relevance
+  // This ensures players need precise language even when concepts are matched
   const conceptRatio = conceptCount > 0 ? matchedCount / conceptCount : 0
   let precisionRatio = rawPrecisionRatio
   if (conceptRatio >= 1.0) {
-    // All concepts captured -- the player clearly knows the word.
-    // Award full precision: our vocabulary checker can't recognise every
-    // valid way to phrase a definition, so don't penalise correct answers.
-    precisionRatio = 1.0
+    // All concepts captured - give a bonus but don't auto-max
+    precisionRatio = Math.max(precisionRatio, 0.7)
   } else if (conceptRatio >= 0.75) {
-    // Most concepts captured -- generous floor
-    precisionRatio = Math.max(precisionRatio, 0.8)
-  } else if (conceptRatio >= 0.5) {
     precisionRatio = Math.max(precisionRatio, 0.5)
+  } else if (conceptRatio >= 0.5) {
+    precisionRatio = Math.max(precisionRatio, 0.3)
   }
   const precisionScore = Math.round(precisionRatio * 10)
 
