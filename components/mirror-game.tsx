@@ -95,7 +95,7 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
   const [isShaking, setIsShaking] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
-  const [hintsRevealed, setHintsRevealed] = useState(0) // 0=none, 1=first letter, 2=last letter
+  const [hintsRevealed, setHintsRevealed] = useState(0) // 0=none, 1=length, 2=first letter, 3=last letter
   const [hintUsedThisTurn, setHintUsedThisTurn] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   
@@ -181,23 +181,25 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
             &ldquo;{word.definition}&rdquo;
           </p>
           
-          {/* Hints - word length shown, others on request */}
+          {/* Hints - all on request: length, first letter, last letter */}
           <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
-            <span className="px-2 py-1 rounded bg-muted/50">
-              {word.word.length} letters
-            </span>
             {hintsRevealed >= 1 && (
               <span className="px-2 py-1 rounded bg-muted/50">
-                Starts with &ldquo;{word.word[0].toUpperCase()}&rdquo;
+                {word.word.length} letters
               </span>
             )}
             {hintsRevealed >= 2 && (
               <span className="px-2 py-1 rounded bg-muted/50">
+                Starts with &ldquo;{word.word[0].toUpperCase()}&rdquo;
+              </span>
+            )}
+            {hintsRevealed >= 3 && (
+              <span className="px-2 py-1 rounded bg-muted/50">
                 Ends with &ldquo;{word.word[word.word.length - 1]}&rdquo;
               </span>
             )}
-            {/* Hint request button */}
-            {!isComplete && hintsRevealed < 2 && (
+            {/* Hint request button - available at start and after each guess */}
+            {!isComplete && hintsRevealed < 3 && (
               <button
                 type="button"
                 disabled={hintUsedThisTurn}
@@ -207,7 +209,7 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
                 }}
                 className="px-2 py-1 rounded bg-muted/30 hover:bg-muted/50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                {hintsRevealed === 0 ? "Hint?" : "More?"}
+                Hint?
               </button>
             )}
           </div>
