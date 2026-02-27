@@ -12,7 +12,7 @@ export function GameHeader({ onStatsOpen, onHelpOpen }: GameHeaderProps) {
         {/* Empty spacer to balance the right side icons */}
         <div className="flex flex-1 items-center justify-start min-w-0" />
         <h1 className="font-serif text-3xl font-light tracking-tight text-foreground md:text-4xl">
-          Definedle <span className="text-xs text-red-500 font-sans">v2</span>
+          Definedle
         </h1>
         <div className="flex flex-1 items-center justify-end gap-1 min-w-0">
           {onHelpOpen && (
