@@ -2902,4 +2902,184 @@ export const hardWords: DailyWord[] = [
     partOfSpeech: "verb",
     etymology: "Latin approximare -- ad (to) + proximus (nearest).",
   },
+  // ── compendium ──
+  {
+    word: "compendium",
+    definition: "A collection of concise but detailed information about a particular subject.",
+    keyConcepts: [
+      { keyword: "collection", matchTerms: ["collect", "compil", "gather", "assembl", "antholog", "digest", "summary", "handbook", "reference"], label: "A collection", hint: "The definition says 'a collection' -- multiple things gathered together." },
+      { keyword: "concise but detailed", matchTerms: ["concis", "brief", "succinct", "detail", "comprehensiv", "thorough", "condensed", "summary"], label: "Concise but detailed", hint: "The definition says 'concise but detailed information' -- brief yet thorough." },
+    ],
+    synonyms: ["collection", "compilation", "anthology", "digest", "handbook"],
+    partOfSpeech: "noun",
+    etymology: "Latin compendium (saving, shortcut) -- compendere (to weigh together).",
+  },
+  // ── apoplectic ──
+  {
+    word: "apoplectic",
+    definition: "Overcome with extreme anger; furious to the point of being unable to speak coherently.",
+    keyConcepts: [
+      { keyword: "extreme anger", matchTerms: ["anger", "angry", "rage", "raging", "furious", "fury", "livid", "incensed", "enrag", "irate", "wrathful"], label: "Extreme anger", hint: "The definition says 'overcome with extreme anger' -- intensely mad." },
+      { keyword: "unable to speak", matchTerms: ["speak", "speech", "coherent", "sputter", "incoherent", "beside oneself", "speechless", "lost for words", "overwhelm"], label: "Unable to speak coherently", hint: "The definition says 'unable to speak coherently' -- so angry they can't function properly." },
+    ],
+    synonyms: ["furious", "enraged", "livid", "incensed", "wrathful"],
+    partOfSpeech: "adjective",
+    etymology: "Greek apoplektikos -- apoplexia (stroke).",
+  },
+  // ── consensual ──
+  {
+    word: "consensual",
+    definition: "Relating to or involving consent, especially mutual consent by all parties involved.",
+    keyConcepts: [
+      { keyword: "involving consent", matchTerms: ["consent", "agree", "agreement", "approv", "permission", "willing", "voluntary"], label: "Involving consent", hint: "The definition says 'involving consent' -- agreement is required." },
+      { keyword: "mutual", matchTerms: ["mutual", "shared", "joint", "reciprocal", "both parties", "all parties", "bilateral", "together"], label: "Mutual consent by all", hint: "The definition says 'mutual consent by all parties involved' -- everyone agrees." },
+    ],
+    synonyms: ["agreed", "mutual", "voluntary", "willing"],
+    partOfSpeech: "adjective",
+    etymology: "Latin consentire (to agree) -- con (together) + sentire (to feel).",
+  },
+  // ── opportunistic ──
+  {
+    word: "opportunistic",
+    definition: "Exploiting chances or circumstances for personal gain, often without regard for principles.",
+    keyConcepts: [
+      { keyword: "exploiting chances", matchTerms: ["exploit", "opportun", "chance", "circumstance", "advantage", "capitalize", "seize", "grab", "take advantage"], label: "Exploiting chances", hint: "The definition says 'exploiting chances or circumstances' -- taking advantage of situations." },
+      { keyword: "without principles", matchTerms: ["principle", "ethics", "moral", "unscrupulous", "selfish", "self-interest", "personal gain", "expedient", "pragmatic"], label: "Without regard for principles", hint: "The definition says 'often without regard for principles' -- willing to compromise values." },
+    ],
+    synonyms: ["exploitative", "calculating", "self-serving", "pragmatic", "expedient"],
+    partOfSpeech: "adjective",
+    etymology: "Latin opportunus (favorable) -- ob (toward) + portus (harbor).",
+  },
+  // ── suffrage ──
+  {
+    word: "suffrage",
+    definition: "The right to vote in political elections.",
+    keyConcepts: [
+      { keyword: "right to vote", matchTerms: ["right", "vote", "voting", "ballot", "franchise", "elector", "enfranchis"], label: "The right to vote", hint: "The definition says 'the right to vote' -- having the ability to cast a ballot." },
+      { keyword: "political elections", matchTerms: ["politic", "election", "democrat", "civic", "citizen", "government"], label: "In political elections", hint: "The definition says 'in political elections' -- participating in choosing leaders." },
+    ],
+    synonyms: ["franchise", "voting rights", "ballot"],
+    partOfSpeech: "noun",
+    etymology: "Latin suffragium (voting tablet, vote).",
+  },
+  // ── addendum ──
+  {
+    word: "addendum",
+    definition: "An item of additional material added at the end of a book or document.",
+    keyConcepts: [
+      { keyword: "additional material", matchTerms: ["addition", "extra", "supplement", "append", "attachment", "annex", "rider", "postscript"], label: "Additional material", hint: "The definition says 'additional material' -- something extra added on." },
+      { keyword: "at the end", matchTerms: ["end", "after", "following", "conclud", "final", "back", "appended", "attached"], label: "Added at the end", hint: "The definition says 'added at the end of a book or document' -- comes after the main content." },
+    ],
+    synonyms: ["supplement", "appendix", "addition", "postscript", "attachment"],
+    partOfSpeech: "noun",
+    etymology: "Latin addendum (thing to be added) -- addere (to add).",
+  },
+  // ── omnipotent ──
+  {
+    word: "omnipotent",
+    definition: "Having unlimited or universal power; able to do anything.",
+    keyConcepts: [
+      { keyword: "unlimited power", matchTerms: ["unlimit", "infinite", "boundless", "power", "powerful", "supreme", "absolute", "total", "complete"], label: "Unlimited power", hint: "The definition says 'unlimited or universal power' -- no restrictions on ability." },
+      { keyword: "able to do anything", matchTerms: ["anything", "everything", "all-powerful", "almighty", "godlike", "divine", "capable", "invincible"], label: "Able to do anything", hint: "The definition says 'able to do anything' -- no limits on what can be accomplished." },
+    ],
+    synonyms: ["all-powerful", "almighty", "supreme", "invincible"],
+    partOfSpeech: "adjective",
+    etymology: "Latin omnipotens -- omnis (all) + potens (powerful).",
+  },
+  // ── agnostic ──
+  {
+    word: "agnostic",
+    definition: "A person who believes that the existence of God is unknown or unknowable; holding no strong opinion.",
+    keyConcepts: [
+      { keyword: "existence unknown", matchTerms: ["unknown", "unknow", "uncertain", "unsure", "doubt", "question", "existence", "god", "divine", "spiritual"], label: "Existence is unknown", hint: "The definition says 'the existence of God is unknown or unknowable' -- cannot be proven." },
+      { keyword: "no strong opinion", matchTerms: ["no opinion", "neutral", "undecid", "noncommit", "open-minded", "neither", "impartial", "fence"], label: "No strong opinion", hint: "The definition says 'holding no strong opinion' -- not taking a definite stance." },
+    ],
+    synonyms: ["doubter", "skeptic", "nonbeliever", "freethinker"],
+    partOfSpeech: "noun",
+    etymology: "Greek agnostos (unknown) -- a (not) + gnostos (known).",
+  },
+  // ── capitulate ──
+  {
+    word: "capitulate",
+    definition: "To cease to resist an opponent or demand; to surrender.",
+    keyConcepts: [
+      { keyword: "cease to resist", matchTerms: ["cease", "stop", "resist", "give up", "give in", "yield", "relent", "concede", "back down"], label: "Cease to resist", hint: "The definition says 'cease to resist' -- stopping the fight." },
+      { keyword: "surrender", matchTerms: ["surrender", "submit", "capitulat", "defeat", "accept", "acquiesce", "cave", "buckle", "fold"], label: "Surrender", hint: "The definition says 'surrender' -- accepting defeat." },
+    ],
+    synonyms: ["surrender", "yield", "submit", "concede", "give in"],
+    partOfSpeech: "verb",
+    etymology: "Latin capitulare (to draw up under headings) -- caput (head).",
+  },
+  // ── onomatopoeia ──
+  {
+    word: "onomatopoeia",
+    definition: "The formation of a word from a sound associated with what it represents, such as 'buzz' or 'sizzle'.",
+    keyConcepts: [
+      { keyword: "word from sound", matchTerms: ["word", "sound", "noise", "represent", "imitat", "mimic", "echo", "resembl"], label: "Word formed from sound", hint: "The definition says 'formation of a word from a sound' -- the word sounds like the thing." },
+      { keyword: "associated with", matchTerms: ["associat", "connect", "link", "relat", "buzz", "sizzle", "bang", "crash", "meow", "splash", "pop", "hiss"], label: "Sound it represents", hint: "The definition says 'associated with what it represents' -- like 'buzz' or 'sizzle'." },
+    ],
+    synonyms: ["sound word", "echoism", "imitative word"],
+    partOfSpeech: "noun",
+    etymology: "Greek onomatopoiia -- onoma (name) + poiein (to make).",
+  },
+  // ── derelict ──
+  {
+    word: "derelict",
+    definition: "In a very poor condition as a result of disuse and neglect; a person without a home or job.",
+    keyConcepts: [
+      { keyword: "poor condition", matchTerms: ["poor", "bad", "dilapidat", "decay", "run-down", "crumbl", "ruined", "deteriorat", "abandoned", "decrepit"], label: "Poor condition from neglect", hint: "The definition says 'very poor condition as a result of disuse and neglect' -- falling apart." },
+      { keyword: "homeless person", matchTerms: ["homeless", "vagrant", "tramp", "drifter", "outcast", "beggar", "down-and-out", "unemployed", "jobless"], label: "Person without home or job", hint: "The definition also means 'a person without a home or job' -- someone marginalized." },
+    ],
+    synonyms: ["abandoned", "dilapidated", "neglected", "vagrant", "homeless"],
+    partOfSpeech: "adjective/noun",
+    etymology: "Latin derelictus (abandoned) -- derelinquere (to forsake).",
+  },
+  // ── dereliction ──
+  {
+    word: "dereliction",
+    definition: "The shameful failure to fulfill one's obligations; the state of being abandoned and neglected.",
+    keyConcepts: [
+      { keyword: "failure of duty", matchTerms: ["fail", "failure", "duty", "obligation", "responsib", "neglect", "negligent", "shirk", "derelict"], label: "Failure to fulfill obligations", hint: "The definition says 'shameful failure to fulfill one's obligations' -- not doing what you should." },
+      { keyword: "abandoned state", matchTerms: ["abandon", "neglect", "disuse", "decay", "ruin", "disrepair", "deteriorat"], label: "State of being abandoned", hint: "The definition also means 'state of being abandoned and neglected' -- left to fall apart." },
+    ],
+    synonyms: ["neglect", "negligence", "abandonment", "failure"],
+    partOfSpeech: "noun",
+    etymology: "Latin derelictio -- derelinquere (to forsake).",
+  },
+  // ── amnesty ──
+  {
+    word: "amnesty",
+    definition: "An official pardon for people who have committed political offenses; forgiveness granted by authority.",
+    keyConcepts: [
+      { keyword: "official pardon", matchTerms: ["official", "pardon", "forgive", "forgiveness", "absolv", "exonerat", "clemency", "mercy", "reprieve"], label: "Official pardon", hint: "The definition says 'official pardon' -- formal forgiveness from authority." },
+      { keyword: "political offenses", matchTerms: ["politic", "offense", "crime", "criminal", "prisoner", "rebel", "dissident", "protest", "illegal", "conviction"], label: "For political offenses", hint: "The definition says 'for people who have committed political offenses' -- often dissidents or rebels." },
+    ],
+    synonyms: ["pardon", "forgiveness", "clemency", "reprieve", "absolution"],
+    partOfSpeech: "noun",
+    etymology: "Greek amnestia (forgetfulness) -- a (not) + mnestis (remembrance).",
+  },
+  // ── bespoke ──
+  {
+    word: "bespoke",
+    definition: "Made to order according to the buyer's specifications; custom-made.",
+    keyConcepts: [
+      { keyword: "made to order", matchTerms: ["made to order", "order", "custom", "tailor", "commission", "personalis", "individual", "specific"], label: "Made to order", hint: "The definition says 'made to order' -- created specifically for someone." },
+      { keyword: "buyer's specifications", matchTerms: ["specification", "requirement", "request", "buyer", "customer", "client", "unique", "one-of-a-kind", "handmade", "crafted"], label: "According to specifications", hint: "The definition says 'according to the buyer's specifications' -- customized to exact needs." },
+    ],
+    synonyms: ["custom-made", "tailored", "made-to-order", "personalized"],
+    partOfSpeech: "adjective",
+    etymology: "Past participle of bespeak (to speak for, order).",
+  },
+  // ── correlate ──
+  {
+    word: "correlate",
+    definition: "To have a mutual relationship or connection; to establish a relationship between two things.",
+    keyConcepts: [
+      { keyword: "mutual relationship", matchTerms: ["mutual", "relationship", "relation", "connect", "connection", "link", "associat", "correspond", "parallel"], label: "Mutual relationship", hint: "The definition says 'have a mutual relationship or connection' -- things are linked together." },
+      { keyword: "establish connection", matchTerms: ["establish", "show", "demonstrat", "prove", "find", "identify", "determine", "relate", "tie", "match"], label: "Establish a relationship", hint: "The definition says 'establish a relationship between two things' -- showing how they connect." },
+    ],
+    synonyms: ["connect", "associate", "link", "relate", "correspond"],
+    partOfSpeech: "verb",
+    etymology: "Latin correlatus -- com (together) + relatus (related).",
+  },
   ]
