@@ -2417,4 +2417,48 @@ export const hardWords: DailyWord[] = [
     partOfSpeech: "noun",
     etymology: "Old English willan (to wish, will) + -ness. Of Germanic origin.",
   },
+  {
+    word: "discerning",
+    definition: "Having or showing good judgment and keen perception.",
+    keyConcepts: [
+      { keyword: "good judgment", matchTerms: ["judgment", "judgement", "wise", "shrewd", "astute", "discriminat"], label: "Good judgment", hint: "The definition describes quality decision-making." },
+      { keyword: "keen perception", matchTerms: ["percept", "insight", "aware", "observ", "sharp", "acute", "penetrat"], label: "Keen perception", hint: "The definition describes sharp awareness." },
+    ],
+    synonyms: ["perceptive", "astute", "shrewd", "judicious", "discriminating"],
+    partOfSpeech: "adjective",
+    etymology: "Latin discernere -- dis (apart) + cernere (to separate, sift).",
+  },
+  {
+    word: "discombobulated",
+    definition: "Confused and disconcerted; thrown into disorder.",
+    keyConcepts: [
+      { keyword: "confused", matchTerms: ["confus", "bewild", "perplex", "baffl", "fluster", "muddl"], label: "Confused", hint: "The definition describes mental confusion." },
+      { keyword: "disconcerted", matchTerms: ["disconcert", "unsettle", "disturb", "discompos", "rattl", "thrown off"], label: "Disconcerted", hint: "The definition describes being unsettled." },
+    ],
+    synonyms: ["confused", "flustered", "bewildered", "disoriented", "rattled"],
+    partOfSpeech: "adjective",
+    etymology: "American English, fanciful alteration of discompose or discomfort. Origin uncertain, possibly humorous coinage.",
+  },
+  {
+    word: "vexed",
+    definition: "Annoyed, frustrated, or worried; also, a problem that is difficult and much debated.",
+    keyConcepts: [
+      { keyword: "annoyed", matchTerms: ["annoy", "irritat", "frustrat", "bother", "irk", "exasperat"], label: "Annoyed or frustrated", hint: "The definition describes irritation." },
+      { keyword: "difficult problem", matchTerms: ["difficult", "problem", "troubl", "debat", "complex", "contentious"], label: "Difficult problem", hint: "A vexed question is one that's hard to resolve." },
+    ],
+    synonyms: ["annoyed", "irritated", "frustrated", "troubled", "agitated"],
+    partOfSpeech: "adjective",
+    etymology: "Latin vexare (to shake, agitate, annoy).",
+  },
+  {
+    word: "tessellate",
+    definition: "To cover a surface with repeated geometric shapes that fit together without gaps or overlaps.",
+    keyConcepts: [
+      { keyword: "repeated shapes", matchTerms: ["repeat", "pattern", "tile", "mosaic", "geometr", "shape"], label: "Repeated shapes", hint: "The definition describes a pattern of shapes." },
+      { keyword: "no gaps", matchTerms: ["gap", "overlap", "fit", "cover", "seamless", "interlock", "together"], label: "Fitting without gaps", hint: "The shapes must fit perfectly together." },
+    ],
+    synonyms: ["tile", "mosaic", "pattern", "interlock", "pave"],
+    partOfSpeech: "verb",
+    etymology: "Latin tessella (small square stone), diminutive of tessera (a square tablet or die used in mosaics).",
+  },
 ]
