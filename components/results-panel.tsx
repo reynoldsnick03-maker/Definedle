@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { compressToEncodedURIComponent } from "lz-string"
 import { ScoreDisplay } from "./score-display"
 import { ConceptBreakdown } from "./concept-breakdown"
 import { ScoreCelebration } from "./score-celebration"
@@ -60,22 +59,10 @@ export function ResultsPanel({
   const matchedCount = safeConcepts.filter((c) => c.matched).length
 
   const handleShare = () => {
-    const conceptLine = safeConcepts
-      .map((c) => (c.matched ? "+" : "-"))
-      .join("")
-    const siteUrl = typeof window !== "undefined" ? window.location.origin : ""
-
     // Calculate breakdown percentages for emoji display
     const conceptPct = breakdown ? Math.round((breakdown.concepts.earned / breakdown.concepts.max) * 100) : 0
     const precisionPct = breakdown ? Math.round((breakdown.precision.earned / breakdown.precision.max) * 100) : 0
     const detailPct = breakdown ? Math.round((breakdown.detail.earned / breakdown.detail.max) * 100) : 0
-
-    // Compact URL with LZ compression - includes definition
-    // Format: word|score|concepts|k|p|t|mode|definition
-    const mode = difficulty === "hard" ? "h" : "e"
-    const data = `${word}|${score}|${conceptLine}|${conceptPct}|${precisionPct}|${detailPct}|${mode}|${playerDefinition.slice(0, 150)}`
-    const compressed = compressToEncodedURIComponent(data)
-    const shareUrl = `${siteUrl}?r=${compressed}`
 
     // Generate emoji bars for each category (5 squares each)
     const toBar = (pct: number) => {
@@ -88,13 +75,16 @@ export function ResultsPanel({
     const precisionBar = toBar(precisionPct)
     const detailBar = toBar(detailPct)
 
+    // Clean text-only share format
     const text = `Definedle${modeLabel} - ${score}/100
 
 Concepts:  ${conceptBar} ${matchedCount}/${safeConcepts.length}
 Precision: ${precisionBar}
 Detail:    ${detailBar}
 
-${shareUrl}`
+"${playerDefinition}"
+
+definedle.com`
 
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true)
