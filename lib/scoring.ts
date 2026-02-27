@@ -5,6 +5,9 @@ export interface ConceptResult {
   label: string
   hint: string
   matched: boolean
+  nearMiss?: boolean // almost matched (30-39% coverage) - shows as yellow
+  matchedWords?: string[] // which user words triggered this match (for transparency)
+  matchedTerm?: string // which matchTerm was matched (for transparency)
 }
 
 export interface ScoreBreakdown {
@@ -557,34 +560,39 @@ function stemMatch(a: string, b: string): boolean {
 
 // Check if a user's input fuzzy-matches a concept by overlapping meaningful
 // words with the concept's definition, label, and hint text.
-// Returns true when enough of the concept's key vocabulary appears in the input.
+// Returns matched words when enough of the concept's key vocabulary appears in the input.
+// Also returns nearMiss flag for 25-39% coverage (close but not quite).
 // Negated words are excluded from matching since they indicate the opposite meaning.
-function fuzzyConceptMatch(inputWords: string[], negatedWords: Set<string>, concept: { label: string; hint: string; keyword: string }): boolean {
+function fuzzyConceptMatch(inputWords: string[], negatedWords: Set<string>, concept: { label: string; hint: string; keyword: string }): { matched: boolean; nearMiss: boolean; matchedWords: string[] } {
   const conceptText = `${concept.label} ${concept.hint} ${concept.keyword}`
   const conceptWords = meaningfulWords(conceptText)
 
   // De-duplicate concept words
   const unique = [...new Set(conceptWords)]
-  if (unique.length === 0) return false
+  if (unique.length === 0) return { matched: false, nearMiss: false, matchedWords: [] }
 
   // Filter out negated input words - they indicate the opposite meaning
   const nonNegatedInputWords = inputWords.filter(w => !negatedWords.has(w))
 
   // Count how many concept words appear via stem matching with any non-negated input word
   let hits = 0
+  const matchedWords: string[] = []
   for (const cw of unique) {
     for (const iw of nonNegatedInputWords) {
       if (stemMatch(cw, iw)) {
         hits++
+        if (!matchedWords.includes(iw)) matchedWords.push(iw)
         break
       }
     }
   }
 
-  // Require at least 2 distinct hits AND 40% of concept vocabulary to appear in input.
-  // The minimum-2 rule prevents a single coincidental word from triggering a match.
-  // The 40% threshold (up from 30%) ensures more deliberate concept coverage.
-  return hits >= 2 && hits / unique.length >= 0.4
+  const ratio = hits / unique.length
+  // Full match: at least 2 hits AND 40%+ coverage
+  const matched = hits >= 2 && ratio >= 0.4
+  // Near miss: at least 1 hit AND 25-39% coverage (close but not quite)
+  const nearMiss = !matched && hits >= 1 && ratio >= 0.25 && ratio < 0.4
+  return { matched, nearMiss, matchedWords: (matched || nearMiss) ? matchedWords : [] }
 }
 
 // Score a user definition against a single set of keyConcepts + definition text.
@@ -602,13 +610,28 @@ function scoreAgainstDefinition(
   const pointsPerConcept = Math.round(75 / conceptCount)
 
   const concepts: ConceptResult[] = keyConcepts.map((concept) => {
-    const explicitMatch = concept.matchTerms.some((t) => termMatches(input, t))
-    const fuzzyMatch = !explicitMatch && fuzzyConceptMatch(inputMeaningful, negatedWords, concept)
+    // Find explicit match and track which term matched
+    let explicitMatchTerm: string | undefined
+    for (const t of concept.matchTerms) {
+      if (termMatches(input, t)) {
+        explicitMatchTerm = t
+        break
+      }
+    }
+    
+    // If no explicit match, try fuzzy matching
+    const fuzzyResult = !explicitMatchTerm ? fuzzyConceptMatch(inputMeaningful, negatedWords, concept) : { matched: false, nearMiss: false, matchedWords: [] }
+    
+    const matched = !!explicitMatchTerm || fuzzyResult.matched
+    
     return {
       keyword: concept.keyword,
       label: concept.label,
       hint: concept.hint,
-      matched: explicitMatch || fuzzyMatch,
+      matched,
+      nearMiss: !matched && fuzzyResult.nearMiss,
+      matchedTerm: explicitMatchTerm,
+      matchedWords: explicitMatchTerm ? undefined : ((fuzzyResult.matched || fuzzyResult.nearMiss) ? fuzzyResult.matchedWords : undefined),
     }
   })
 

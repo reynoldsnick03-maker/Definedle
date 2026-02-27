@@ -102,32 +102,18 @@ export function ResultsPanel({
   }, [word, score, difficulty, isPractice, submittedKey])
 
   const handleShare = () => {
-    // Calculate breakdown percentages for emoji display
-    const conceptPct = breakdown ? Math.round((breakdown.concepts.earned / breakdown.concepts.max) * 100) : 0
-    const precisionPct = breakdown ? Math.round((breakdown.precision.earned / breakdown.precision.max) * 100) : 0
-    const detailPct = breakdown ? Math.round((breakdown.detail.earned / breakdown.detail.max) * 100) : 0
+    // Generate a single progress bar (10 blocks total)
+    const filled = Math.round(score / 10)
+    const progressBar = "█".repeat(filled) + "░".repeat(10 - filled)
 
-    // Generate emoji bars for each category (5 squares each)
-    const toBar = (pct: number) => {
-      const filled = Math.round(pct / 20) // 0-5 squares
-      return "🟩".repeat(filled) + "⬜".repeat(5 - filled)
-    }
-
-    const modeLabel = difficulty === "hard" ? " (Hard)" : ""
-    const conceptBar = toBar(conceptPct)
-    const precisionBar = toBar(precisionPct)
-    const detailBar = toBar(detailPct)
-
-    // Clean text-only share format
+    const modeLabel = difficulty === "hard" ? " Hard" : ""
+    
+    // Viral share format: challenge question + clean bar
     const text = `Definedle${modeLabel} - ${score}/100
 
-${word.toUpperCase()}
+${progressBar}
 
-Concepts:  ${conceptBar} ${matchedCount}/${safeConcepts.length}
-Precision: ${precisionBar}
-Detail:    ${detailBar}
-
-"${playerDefinition}"
+Can you define "${word.toUpperCase()}"?
 
 definedle.com`
 
