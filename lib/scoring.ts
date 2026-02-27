@@ -714,6 +714,15 @@ function scoreAgainstDefinition(
   // This ensures players need precise language even when concepts are matched
   const conceptRatio = conceptCount > 0 ? matchedCount / conceptCount : 0
   let precisionRatio = rawPrecisionRatio
+  
+  // Penalize very short answers - you can't get full precision credit with just 2-3 words
+  // This prevents gaming with etymology phrases or minimal answers
+  const minMeaningfulWords = 4
+  if (inputMeaningful.length < minMeaningfulWords) {
+    const shortnessPenalty = inputMeaningful.length / minMeaningfulWords
+    precisionRatio = precisionRatio * shortnessPenalty
+  }
+  
   if (conceptRatio >= 1.0) {
     // All concepts captured - give a bonus but don't auto-max
     precisionRatio = Math.max(precisionRatio, 0.7)
