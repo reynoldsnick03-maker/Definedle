@@ -690,10 +690,12 @@ function scoreAgainstDefinition(
   let relevantWords = 0
   const irrelevantWords: string[] = []
   for (const iw of inputMeaningful) {
-    // If the word is negated (e.g., "not clear"), treat it as irrelevant
-    // because it means the opposite of what the concept requires
+    // If the word is negated (e.g., "not moving"), don't count it as irrelevant
+    // The negation is intentional and the concept matching already handles this
+    // We just skip negated words from the precision count entirely
     if (negatedWords.has(iw)) {
-      irrelevantWords.push(iw)
+      // Negated words are neutral - neither relevant nor irrelevant
+      // They express meaning through negation which is valid
       continue
     }
     
@@ -706,8 +708,11 @@ function scoreAgainstDefinition(
       irrelevantWords.push(iw)
     }
   }
-  const rawPrecisionRatio = inputMeaningful.length > 0
-    ? relevantWords / inputMeaningful.length
+  
+  // Adjust the total for precision calculation - exclude negated words
+  const nonNegatedCount = inputMeaningful.length - negatedWords.size
+  const rawPrecisionRatio = nonNegatedCount > 0
+    ? relevantWords / nonNegatedCount
     : 0
 
   // Precision scoring: no automatic 100% - always based on actual word relevance
@@ -718,8 +723,8 @@ function scoreAgainstDefinition(
   // Penalize very short answers - you can't get full precision credit with just 2-3 words
   // This prevents gaming with etymology phrases or minimal answers
   const minMeaningfulWords = 4
-  if (inputMeaningful.length < minMeaningfulWords) {
-    const shortnessPenalty = inputMeaningful.length / minMeaningfulWords
+  if (nonNegatedCount < minMeaningfulWords) {
+    const shortnessPenalty = nonNegatedCount / minMeaningfulWords
     precisionRatio = precisionRatio * shortnessPenalty
   }
   
