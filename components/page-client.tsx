@@ -8,7 +8,7 @@ import { HowToPlay } from "@/components/how-to-play"
 import { SharedResult, type ShareData } from "@/components/shared-result"
 import { ModeToggle, type TabMode } from "@/components/mode-toggle"
 import type { DailyWord, GameMode } from "@/lib/game-data"
-import { getRandomPracticeWord } from "@/lib/game-data"
+import { getRandomPracticeWord, getWordByName } from "@/lib/game-data"
 
 interface PageClientProps {
   dailyWord: DailyWord
@@ -22,10 +22,15 @@ interface PageClientProps {
 }
 
 export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: PageClientProps) {
+  // Track if we loaded a summoned word from URL
+  const [summonedWord, setSummonedWord] = useState<{ word: DailyWord; difficulty: GameMode } | null>(null)
+
   // ?reset in URL clears all saved state and reloads clean
+  // ?word=xyz summons a specific word in practice mode
   useEffect(() => {
     if (typeof window === "undefined") return
     const params = new URLSearchParams(window.location.search)
+    
     if (params.has("reset")) {
       // Clear daily result cookies
       document.cookie = "definedle-today=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
@@ -35,6 +40,29 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
       Object.keys(localStorage).filter(k => k.startsWith("definedle-improve-")).forEach(k => localStorage.removeItem(k))
       // Redirect without ?reset
       window.location.replace(window.location.pathname)
+      return
+    }
+    
+    // Check for summoned word (first non-standard param key is treated as word name)
+    // e.g., ?obsolete or ?word=obsolete
+    const wordParam = params.get("word") || Array.from(params.keys()).find(k => k !== "reset" && k !== "r")
+    if (wordParam) {
+      const found = getWordByName(wordParam)
+      if (found) {
+        setSummonedWord(found)
+        setTab("practice")
+        setDifficulty(found.difficulty)
+        // Set as the practice word for that difficulty
+        if (found.difficulty === "easy") {
+          setPracticeEasy(found.word)
+          setPracticeKeyEasy((k) => k + 1)
+        } else {
+          setPracticeHard(found.word)
+          setPracticeKeyHard((k) => k + 1)
+        }
+        // Clean URL without reloading
+        window.history.replaceState({}, "", window.location.pathname)
+      }
     }
   }, [])
 
