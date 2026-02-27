@@ -3082,4 +3082,280 @@ export const hardWords: DailyWord[] = [
     partOfSpeech: "verb",
     etymology: "Latin correlatus -- com (together) + relatus (related).",
   },
+  // ── cudgel ──
+  {
+    word: "cudgel",
+    definition: "A short thick stick used as a weapon; to beat with a cudgel.",
+    keyConcepts: [
+      { keyword: "thick stick", matchTerms: ["stick", "club", "bat", "baton", "rod", "staff", "thick", "heavy", "blunt"], label: "A thick stick", hint: "The definition says 'a short thick stick' -- a blunt weapon." },
+      { keyword: "weapon or beat", matchTerms: ["weapon", "beat", "hit", "strike", "bludgeon", "attack", "assault", "pummel"], label: "Used as weapon", hint: "The definition says 'used as a weapon' or 'to beat with' -- for striking." },
+    ],
+    synonyms: ["club", "bludgeon", "truncheon", "baton"],
+    partOfSpeech: "noun/verb",
+    etymology: "Old English cycgel.",
+  },
+  // ── contract (verb) ──
+  {
+    word: "contract",
+    definition: "To decrease in size, number, or range; to catch or develop a disease.",
+    keyConcepts: [
+      { keyword: "decrease in size", matchTerms: ["decrease", "shrink", "reduce", "smaller", "tighten", "constrict", "compress", "narrow", "lessen"], label: "Decrease in size", hint: "The definition says 'decrease in size, number, or range' -- getting smaller." },
+      { keyword: "catch disease", matchTerms: ["catch", "develop", "disease", "illness", "infect", "acquire", "get", "come down with", "sick"], label: "Catch a disease", hint: "The definition also says 'catch or develop a disease' -- becoming ill." },
+    ],
+    synonyms: ["shrink", "reduce", "catch", "acquire"],
+    partOfSpeech: "verb",
+    etymology: "Latin contrahere -- con (together) + trahere (to draw).",
+  },
+  // ── contract (adjective - contracted) ──
+  {
+    word: "contracted",
+    definition: "Having become smaller or shorter; bound by the terms of an agreement.",
+    keyConcepts: [
+      { keyword: "become smaller", matchTerms: ["smaller", "shorter", "shrunk", "reduced", "tightened", "constricted", "compressed"], label: "Become smaller", hint: "The definition says 'having become smaller or shorter' -- reduced in size." },
+      { keyword: "bound by agreement", matchTerms: ["bound", "agreement", "contract", "obligat", "commit", "hired", "engaged", "agreed"], label: "Bound by agreement", hint: "The definition also says 'bound by the terms of an agreement' -- legally committed." },
+    ],
+    synonyms: ["shrunk", "reduced", "bound", "obligated"],
+    partOfSpeech: "adjective",
+    etymology: "Latin contrahere -- con (together) + trahere (to draw).",
+  },
+  // ── defunct ──
+  {
+    word: "defunct",
+    definition: "No longer existing or functioning; dead or extinct.",
+    keyConcepts: [
+      { keyword: "no longer existing", matchTerms: ["no longer", "not exist", "gone", "ceased", "ended", "finished", "terminated", "dissolved", "closed"], label: "No longer existing", hint: "The definition says 'no longer existing or functioning' -- it's over." },
+      { keyword: "dead or extinct", matchTerms: ["dead", "extinct", "obsolete", "expired", "inactive", "inoperative", "kaput", "finished"], label: "Dead or extinct", hint: "The definition says 'dead or extinct' -- completely finished." },
+    ],
+    synonyms: ["extinct", "dead", "obsolete", "inactive", "inoperative"],
+    partOfSpeech: "adjective",
+    etymology: "Latin defunctus (dead) -- defungi (to finish).",
+  },
+  // ── episodic ──
+  {
+    word: "episodic",
+    definition: "Occurring occasionally and at irregular intervals; consisting of separate episodes.",
+    keyConcepts: [
+      { keyword: "occasionally", matchTerms: ["occasion", "irregular", "intermittent", "sporadic", "periodic", "infrequent", "scattered", "random"], label: "Occasionally", hint: "The definition says 'occurring occasionally and at irregular intervals' -- not constant." },
+      { keyword: "separate episodes", matchTerms: ["episode", "separate", "distinct", "part", "segment", "installment", "chapter", "scene", "serial"], label: "Separate episodes", hint: "The definition says 'consisting of separate episodes' -- divided into parts." },
+    ],
+    synonyms: ["sporadic", "intermittent", "occasional", "irregular"],
+    partOfSpeech: "adjective",
+    etymology: "Greek epeisodion (addition) -- epi (upon) + eisodos (entrance).",
+  },
+  // ── affluent ──
+  {
+    word: "affluent",
+    definition: "Having a great deal of money; wealthy and prosperous.",
+    keyConcepts: [
+      { keyword: "great deal of money", matchTerms: ["money", "rich", "wealth", "fortune", "prosper", "well-off", "well-to-do", "moneyed", "loaded"], label: "Having money", hint: "The definition says 'having a great deal of money' -- financially well-off." },
+      { keyword: "wealthy", matchTerms: ["wealthy", "prosper", "opulent", "luxur", "comfortable", "privileged", "successful", "thriving"], label: "Wealthy and prosperous", hint: "The definition says 'wealthy and prosperous' -- living comfortably." },
+    ],
+    synonyms: ["wealthy", "rich", "prosperous", "well-off", "opulent"],
+    partOfSpeech: "adjective",
+    etymology: "Latin affluere (to flow toward) -- ad (to) + fluere (to flow).",
+  },
+  // ── effluence ──
+  {
+    word: "effluence",
+    definition: "Something that flows out or emanates from a source; an outflow or emanation.",
+    keyConcepts: [
+      { keyword: "flows out", matchTerms: ["flow", "out", "emanat", "discharge", "stream", "pour", "issue", "emerge", "escape"], label: "Flows out", hint: "The definition says 'something that flows out' -- moving outward from a source." },
+      { keyword: "emanation", matchTerms: ["emanat", "emission", "outflow", "output", "release", "exud", "radiat", "source"], label: "Emanation from source", hint: "The definition says 'emanates from a source' -- originating from somewhere." },
+    ],
+    synonyms: ["outflow", "emanation", "discharge", "emission"],
+    partOfSpeech: "noun",
+    etymology: "Latin effluere (to flow out) -- ex (out) + fluere (to flow).",
+  },
+  // ── perturb ──
+  {
+    word: "perturb",
+    definition: "To make someone anxious or unsettled; to disturb the normal state of something.",
+    keyConcepts: [
+      { keyword: "make anxious", matchTerms: ["anxious", "anxiety", "worried", "unsettle", "agitat", "distress", "trouble", "bother", "concern", "alarm"], label: "Make anxious", hint: "The definition says 'make someone anxious or unsettled' -- causing worry." },
+      { keyword: "disturb normal", matchTerms: ["disturb", "disrupt", "upset", "unbalance", "throw off", "destabiliz", "disorder", "affect", "alter"], label: "Disturb normal state", hint: "The definition says 'disturb the normal state' -- disrupting equilibrium." },
+    ],
+    synonyms: ["disturb", "unsettle", "agitate", "worry", "disquiet"],
+    partOfSpeech: "verb",
+    etymology: "Latin perturbare -- per (through) + turbare (to disturb).",
+  },
+  // ── excruciating ──
+  {
+    word: "excruciating",
+    definition: "Intensely painful; causing great physical or mental suffering.",
+    keyConcepts: [
+      { keyword: "intensely painful", matchTerms: ["intense", "painful", "pain", "agony", "agoniz", "tortur", "unbearable", "severe", "extreme", "acute"], label: "Intensely painful", hint: "The definition says 'intensely painful' -- extreme pain." },
+      { keyword: "great suffering", matchTerms: ["suffer", "torment", "distress", "misery", "anguish", "harrowing", "grueling", "terrible", "awful"], label: "Great suffering", hint: "The definition says 'causing great physical or mental suffering' -- deeply agonizing." },
+    ],
+    synonyms: ["agonizing", "painful", "unbearable", "torturous", "harrowing"],
+    partOfSpeech: "adjective",
+    etymology: "Latin excruciare (to torture) -- ex (out) + cruciare (to crucify).",
+  },
+  // ── hermetic ──
+  {
+    word: "hermetic",
+    definition: "Completely airtight; relating to an ancient occult tradition; isolated from outside influences.",
+    keyConcepts: [
+      { keyword: "airtight", matchTerms: ["airtight", "sealed", "tight", "impermeable", "watertight", "closed", "secure", "vacuum"], label: "Airtight", hint: "The definition says 'completely airtight' -- nothing can get in or out." },
+      { keyword: "isolated", matchTerms: ["isolat", "secluded", "insulated", "cut off", "separate", "protected", "removed", "occult", "esoteric", "mysterious"], label: "Isolated from outside", hint: "The definition says 'isolated from outside influences' -- protected from external contact." },
+    ],
+    synonyms: ["airtight", "sealed", "isolated", "secluded"],
+    partOfSpeech: "adjective",
+    etymology: "Greek Hermes Trismegistus (legendary alchemist).",
+  },
+  // ── stupendous ──
+  {
+    word: "stupendous",
+    definition: "Extremely impressive; amazingly large, excellent, or great.",
+    keyConcepts: [
+      { keyword: "extremely impressive", matchTerms: ["impressive", "amazing", "astonish", "astound", "stagger", "remarkable", "extraordinar", "phenomenal", "incredible"], label: "Extremely impressive", hint: "The definition says 'extremely impressive' -- causing amazement." },
+      { keyword: "amazingly large", matchTerms: ["large", "huge", "enormous", "massive", "great", "vast", "tremendous", "immense", "colossal", "excellent"], label: "Amazingly large or great", hint: "The definition says 'amazingly large, excellent, or great' -- exceptional in scale or quality." },
+    ],
+    synonyms: ["amazing", "tremendous", "remarkable", "extraordinary", "phenomenal"],
+    partOfSpeech: "adjective",
+    etymology: "Latin stupendus (to be wondered at) -- stupere (to be stunned).",
+  },
+  // ── fissure ──
+  {
+    word: "fissure",
+    definition: "A long, narrow opening or crack, especially in rock or the earth's surface.",
+    keyConcepts: [
+      { keyword: "narrow opening", matchTerms: ["narrow", "opening", "crack", "split", "gap", "crevice", "cleft", "breach", "rift", "fracture"], label: "Narrow opening", hint: "The definition says 'a long, narrow opening or crack' -- a thin gap." },
+      { keyword: "in rock or earth", matchTerms: ["rock", "earth", "ground", "surface", "geological", "fault", "rupture", "break"], label: "In rock or earth", hint: "The definition says 'especially in rock or the earth's surface' -- geological context." },
+    ],
+    synonyms: ["crack", "crevice", "split", "rift", "fracture"],
+    partOfSpeech: "noun",
+    etymology: "Latin fissura -- findere (to split).",
+  },
+  // ── despot ──
+  {
+    word: "despot",
+    definition: "A ruler or other person who holds absolute power, typically exercising it cruelly.",
+    keyConcepts: [
+      { keyword: "absolute power", matchTerms: ["absolute", "power", "authority", "control", "ruler", "dictator", "tyrant", "autocrat", "sovereign"], label: "Absolute power", hint: "The definition says 'holds absolute power' -- complete authority." },
+      { keyword: "exercised cruelly", matchTerms: ["cruel", "tyrann", "oppress", "harsh", "brutal", "authoritarian", "domineering", "ruthless", "iron fist"], label: "Exercised cruelly", hint: "The definition says 'typically exercising it cruelly' -- using power harshly." },
+    ],
+    synonyms: ["tyrant", "dictator", "autocrat", "oppressor"],
+    partOfSpeech: "noun",
+    etymology: "Greek despotes (master, lord).",
+  },
+  // ── dapper ──
+  {
+    word: "dapper",
+    definition: "Neat and trim in dress and appearance; stylishly dressed.",
+    keyConcepts: [
+      { keyword: "neat and trim", matchTerms: ["neat", "trim", "tidy", "smart", "spruce", "well-groomed", "clean", "crisp", "polished"], label: "Neat and trim", hint: "The definition says 'neat and trim in dress and appearance' -- well put together." },
+      { keyword: "stylish", matchTerms: ["stylish", "fashion", "elegant", "sharp", "chic", "dashing", "debonair", "suave", "sophisticated"], label: "Stylishly dressed", hint: "The definition says 'stylishly dressed' -- looking good with effort." },
+    ],
+    synonyms: ["smart", "stylish", "spruce", "debonair", "elegant"],
+    partOfSpeech: "adjective",
+    etymology: "Middle Dutch dapper (brave, strong).",
+  },
+  // ── blasé ──
+  {
+    word: "blasé",
+    definition: "Unimpressed or indifferent due to overexposure; bored from excessive worldly pleasures.",
+    keyConcepts: [
+      { keyword: "unimpressed", matchTerms: ["unimpress", "indifferen", "unconcern", "nonchalant", "unmoved", "apathetic", "casual", "cool"], label: "Unimpressed", hint: "The definition says 'unimpressed or indifferent' -- not easily excited." },
+      { keyword: "due to overexposure", matchTerms: ["overexpos", "excessive", "too much", "jaded", "world-weary", "satiat", "bored", "tired", "seen it all"], label: "Due to overexposure", hint: "The definition says 'due to overexposure' -- having seen too much to care." },
+    ],
+    synonyms: ["indifferent", "jaded", "nonchalant", "unimpressed", "world-weary"],
+    partOfSpeech: "adjective",
+    etymology: "French blasé (exhausted by pleasure).",
+  },
+  // ── collude ──
+  {
+    word: "collude",
+    definition: "To cooperate in a secret or unlawful way to deceive or cheat others.",
+    keyConcepts: [
+      { keyword: "secret cooperation", matchTerms: ["secret", "cooperat", "conspir", "plot", "scheme", "conniv", "collaborate", "together", "coordinate"], label: "Secret cooperation", hint: "The definition says 'cooperate in a secret or unlawful way' -- working together covertly." },
+      { keyword: "deceive or cheat", matchTerms: ["deceiv", "cheat", "defraud", "trick", "swindle", "mislead", "dishonest", "corrupt", "fraud"], label: "To deceive or cheat", hint: "The definition says 'to deceive or cheat others' -- harmful intent." },
+    ],
+    synonyms: ["conspire", "connive", "scheme", "plot"],
+    partOfSpeech: "verb",
+    etymology: "Latin colludere -- com (together) + ludere (to play).",
+  },
+  // ── egotistic ──
+  {
+    word: "egotistic",
+    definition: "Excessively conceited or self-centered; having an inflated sense of self-importance.",
+    keyConcepts: [
+      { keyword: "excessively conceited", matchTerms: ["conceit", "vain", "arrogant", "narcissist", "self-absorbed", "selfish", "self-centered"], label: "Excessively conceited", hint: "The definition says 'excessively conceited or self-centered' -- focused on oneself." },
+      { keyword: "inflated self-importance", matchTerms: ["inflat", "self-import", "ego", "proud", "superior", "boastful", "smug", "self-satisfied"], label: "Inflated self-importance", hint: "The definition says 'inflated sense of self-importance' -- thinking too highly of oneself." },
+    ],
+    synonyms: ["conceited", "narcissistic", "self-centered", "vain", "arrogant"],
+    partOfSpeech: "adjective",
+    etymology: "Latin ego (I) + -istic.",
+  },
+  // ── affront ──
+  {
+    word: "affront",
+    definition: "An action or remark that causes outrage or offense; to insult or offend someone openly.",
+    keyConcepts: [
+      { keyword: "causes outrage", matchTerms: ["outrage", "offense", "offend", "insult", "slight", "indignity", "disrespect", "provok"], label: "Causes outrage", hint: "The definition says 'an action or remark that causes outrage or offense' -- something that angers." },
+      { keyword: "insult openly", matchTerms: ["insult", "openly", "public", "deliberate", "direct", "bold", "brazen", "confront"], label: "Insult openly", hint: "The definition says 'to insult or offend someone openly' -- done without hiding." },
+    ],
+    synonyms: ["insult", "offense", "slight", "indignity"],
+    partOfSpeech: "noun/verb",
+    etymology: "Old French afronter (to confront) -- Latin ad (to) + frons (forehead).",
+  },
+  // ── conglomerate ──
+  {
+    word: "conglomerate",
+    definition: "A large corporation formed by merging different businesses; a mass of various materials gathered together.",
+    keyConcepts: [
+      { keyword: "large corporation", matchTerms: ["large", "corporation", "company", "business", "merger", "enterprise", "firm", "multinational", "holding"], label: "Large corporation", hint: "The definition says 'a large corporation formed by merging different businesses' -- a big combined company." },
+      { keyword: "various materials together", matchTerms: ["various", "material", "gather", "collect", "mix", "diverse", "different", "combined", "mass", "heterogen"], label: "Various things together", hint: "The definition says 'a mass of various materials gathered together' -- different things combined." },
+    ],
+    synonyms: ["corporation", "conglomeration", "combination", "aggregate"],
+    partOfSpeech: "noun",
+    etymology: "Latin conglomerare -- con (together) + glomerare (to wind into a ball).",
+  },
+  // ── foist ──
+  {
+    word: "foist",
+    definition: "To impose an unwelcome or unnecessary thing on someone; to force upon.",
+    keyConcepts: [
+      { keyword: "impose unwelcome", matchTerms: ["impose", "unwelcome", "unwanted", "force", "thrust", "push", "inflict", "burden", "saddle"], label: "Impose unwelcome thing", hint: "The definition says 'impose an unwelcome or unnecessary thing' -- forcing something undesired." },
+      { keyword: "force upon", matchTerms: ["force", "upon", "on", "onto", "palm off", "pass off", "unload", "dump", "fob off"], label: "Force upon someone", hint: "The definition says 'force upon' -- making someone accept something." },
+    ],
+    synonyms: ["impose", "force", "thrust", "palm off", "inflict"],
+    partOfSpeech: "verb",
+    etymology: "Dutch vuisten (to take in hand).",
+  },
+  // ── harangue ──
+  {
+    word: "harangue",
+    definition: "A lengthy and aggressive speech; to lecture someone at length in an aggressive manner.",
+    keyConcepts: [
+      { keyword: "lengthy speech", matchTerms: ["lengthy", "long", "speech", "lecture", "tirade", "diatribe", "rant", "sermon", "discourse"], label: "Lengthy speech", hint: "The definition says 'a lengthy and aggressive speech' -- going on and on." },
+      { keyword: "aggressive manner", matchTerms: ["aggressive", "forceful", "attack", "criticiz", "berat", "scold", "rebuke", "reprimand", "bombastic", "vehement"], label: "Aggressive manner", hint: "The definition says 'in an aggressive manner' -- not gentle or brief." },
+    ],
+    synonyms: ["tirade", "diatribe", "rant", "lecture"],
+    partOfSpeech: "noun/verb",
+    etymology: "Old French harangue (public address).",
+  },
+  // ── beguile ──
+  {
+    word: "beguile",
+    definition: "To charm or enchant someone, often in a deceptive way; to trick into doing something.",
+    keyConcepts: [
+      { keyword: "charm or enchant", matchTerms: ["charm", "enchant", "captivat", "fascinate", "entrance", "allure", "attract", "seduc", "bewitch"], label: "Charm or enchant", hint: "The definition says 'charm or enchant someone' -- making someone delighted." },
+      { keyword: "deceptive trick", matchTerms: ["deceptive", "deceiv", "trick", "mislead", "manipulat", "dupe", "fool", "lure", "entice"], label: "Often deceptive", hint: "The definition says 'often in a deceptive way' -- the charm may hide trickery." },
+    ],
+    synonyms: ["charm", "enchant", "deceive", "captivate", "seduce"],
+    partOfSpeech: "verb",
+    etymology: "be- (thoroughly) + guile (deceit).",
+  },
+  // ── tumultuous ──
+  {
+    word: "tumultuous",
+    definition: "Making a loud, confused noise; excited, confused, or disorderly.",
+    keyConcepts: [
+      { keyword: "loud confused noise", matchTerms: ["loud", "noise", "noisy", "confused", "uproar", "clamor", "din", "commotion", "racket", "chaos"], label: "Loud confused noise", hint: "The definition says 'making a loud, confused noise' -- chaotic sound." },
+      { keyword: "excited or disorderly", matchTerms: ["excit", "disorder", "turbulent", "stormy", "tempestuous", "wild", "hectic", "frenzied", "riotous", "boisterous"], label: "Excited or disorderly", hint: "The definition says 'excited, confused, or disorderly' -- lacking calm order." },
+    ],
+    synonyms: ["chaotic", "turbulent", "stormy", "riotous", "boisterous"],
+    partOfSpeech: "adjective",
+    etymology: "Latin tumultus (commotion).",
+  },
   ]
