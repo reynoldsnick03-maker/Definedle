@@ -7,6 +7,7 @@ import { StatsPanel } from "@/components/stats-panel"
 import { HowToPlay } from "@/components/how-to-play"
 import { SharedResult, type ShareData } from "@/components/shared-result"
 import { ModeToggle, type TabMode } from "@/components/mode-toggle"
+import { MirrorGame } from "@/components/mirror-game"
 import { StreakBadge } from "@/components/streak-badge"
 import type { DailyWord, GameMode } from "@/lib/game-data"
 import { getRandomPracticeWord, getWordByName } from "@/lib/game-data"
@@ -29,6 +30,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   const [tab, setTab] = useState<TabMode>("daily")
   const [difficulty, setDifficulty] = useState<GameMode>("easy")
   const [streak, setStreak] = useState(0)
+  const [mirrorMode, setMirrorMode] = useState(false)
   
   // Practice state -- separate per difficulty so switching doesn't reset
   const [practiceEasy, setPracticeEasy] = useState<DailyWord | null>(null)
@@ -133,6 +135,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
 
   const handleTabChange = useCallback((newTab: TabMode) => {
     setTab(newTab)
+    setMirrorMode(false) // Reset mirror mode when switching tabs
     if (newTab === "practice") {
       const current = difficulty === "easy" ? practiceEasy : practiceHard
       if (!current) startPractice(difficulty)
@@ -189,6 +192,22 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
             onTabChange={handleTabChange}
             onDifficultyChange={handleDifficultyChange}
           />
+          
+          {/* Mirror mode flip button - only in practice mode */}
+          {tab === "practice" && !mirrorMode && (
+            <button
+              type="button"
+              onClick={() => setMirrorMode(true)}
+              className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+              title="Flip to Mirror Mode - guess the word from its definition"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0"/>
+              </svg>
+              Mirror Mode
+            </button>
+          )}
           {/* Render both daily games to preserve state (incl. dropdown) when switching */}
           <div className={tab === "daily" && difficulty === "easy" ? "" : "hidden"}>
             <Game
@@ -211,13 +230,26 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
             />
           </div>
           {/* Practice game */}
-          {tab === "practice" && practiceWord && (
+          {tab === "practice" && practiceWord && !mirrorMode && (
             <Game
               key={`practice-${difficulty}-${practiceKey}-${practiceWord.word}`}
               dailyWord={practiceWord}
               difficulty={difficulty}
               isPractice={true}
               onNextWord={handleNextPracticeWord}
+            />
+          )}
+          
+          {/* Mirror Mode - guess the word from its definition */}
+          {tab === "practice" && practiceWord && mirrorMode && (
+            <MirrorGame
+              key={`mirror-${difficulty}-${practiceKey}-${practiceWord.word}`}
+              word={practiceWord}
+              isPractice={true}
+              onFlipBack={() => setMirrorMode(false)}
+              onNextWord={() => {
+                handleNextPracticeWord()
+              }}
             />
           )}
         </>
