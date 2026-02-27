@@ -1,5 +1,4 @@
 import { BarChart3, CircleHelp } from "lucide-react"
-import { StreakBadge } from "./streak-badge"
 
 interface GameHeaderProps {
   onStatsOpen?: () => void
@@ -10,10 +9,8 @@ export function GameHeader({ onStatsOpen, onHelpOpen }: GameHeaderProps) {
   return (
     <header className="flex flex-col items-center gap-1 pt-10 pb-6 md:pt-14 md:pb-8 w-full max-w-md px-5">
       <div className="flex w-full items-center justify-between">
-        {/* Streak badge on the left -- flex-1 to balance the right side */}
-        <div className="flex flex-1 items-center justify-start min-w-0">
-          <StreakBadge />
-        </div>
+        {/* Empty spacer to balance the right side icons */}
+        <div className="flex flex-1 items-center justify-start min-w-0" />
         <h1 className="font-serif text-3xl font-light tracking-tight text-foreground md:text-4xl">
           Definedle
         </h1>
