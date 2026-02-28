@@ -422,7 +422,10 @@ definedle.com`
       {isPractice && onNextWord ? (
         <button
           type="button"
-          onClick={onNextWord}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" })
+            onNextWord()
+          }}
           className="flex items-center justify-center gap-2 self-center rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           Next word

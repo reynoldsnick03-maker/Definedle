@@ -327,7 +327,10 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
             {isPractice && onNextWord && (
               <button
                 type="button"
-                onClick={onNextWord}
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: "smooth" })
+                  onNextWord()
+                }}
                 className="rounded-lg bg-foreground px-6 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
               >
                 Next word
