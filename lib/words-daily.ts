@@ -3818,7 +3818,7 @@ export const dailyWords: DailyWord[] = [
     ],
     synonyms: ["cross", "bisect", "meet", "converge", "overlap"],
   },
-  // ─��� 388. drawl ──
+  // ─����� 388. drawl ──
   {
     word: "drawl",
     partOfSpeech: "verb/noun",
@@ -4092,5 +4092,1820 @@ export const dailyWords: DailyWord[] = [
       { keyword: "improve by small changes", matchTerms: ["improve", "small", "polish", "perfect", "enhance", "fine-tune", "hone", "develop"], label: "Improve by small changes", hint: "The definition says 'improve by making small changes' -- incremental betterment." },
     ],
     synonyms: ["purify", "polish", "improve", "perfect", "hone"],
+  },
+  // ── 413. adapt ──
+  {
+    word: "adapt",
+    partOfSpeech: "verb",
+    definition: "To adjust or modify to suit new conditions or purposes.",
+    keyConcepts: [
+      { keyword: "adjust", matchTerms: ["adjust", "modif", "change", "alter", "tailor", "fit"], label: "Adjust", hint: "The definition says 'adjust or modify' -- making changes." },
+      { keyword: "suit new conditions", matchTerms: ["suit", "new", "condition", "purpose", "environment", "situation", "circumstance"], label: "Suit new conditions", hint: "The definition says 'to suit new conditions or purposes' -- fitting a different context." },
+    ],
+    synonyms: ["adjust", "modify", "acclimate", "conform", "tailor"],
+  },
+  // ── 414. adequate ──
+  {
+    word: "adequate",
+    partOfSpeech: "adjective",
+    definition: "Sufficient or satisfactory for a particular purpose; acceptable but not exceptional.",
+    keyConcepts: [
+      { keyword: "sufficient", matchTerms: ["sufficient", "enough", "satisf", "acceptable", "suitable"], label: "Sufficient", hint: "The definition says 'sufficient or satisfactory' -- meeting the requirement." },
+      { keyword: "not exceptional", matchTerms: ["not exceptional", "acceptable", "passable", "tolerable", "decent", "fair"], label: "Not exceptional", hint: "The definition says 'acceptable but not exceptional' -- just good enough." },
+    ],
+    synonyms: ["sufficient", "satisfactory", "acceptable", "passable", "decent"],
+  },
+  // ── 415. adverse ──
+  {
+    word: "adverse",
+    partOfSpeech: "adjective",
+    definition: "Unfavorable or harmful; working against one's interests.",
+    keyConcepts: [
+      { keyword: "unfavorable", matchTerms: ["unfavor", "negative", "bad", "harmful", "detrimental", "damaging"], label: "Unfavorable", hint: "The definition says 'unfavorable or harmful' -- not good." },
+      { keyword: "against interests", matchTerms: ["against", "interest", "oppose", "contrary", "hostile", "disadvantage"], label: "Against interests", hint: "The definition says 'working against one's interests' -- opposing you." },
+    ],
+    synonyms: ["unfavorable", "harmful", "detrimental", "negative", "hostile"],
+  },
+  // ── 416. agreeable ──
+  {
+    word: "agreeable",
+    partOfSpeech: "adjective",
+    definition: "Pleasant and enjoyable; willing to agree or consent.",
+    keyConcepts: [
+      { keyword: "pleasant", matchTerms: ["pleasant", "enjoy", "nice", "pleasing", "delightful", "likeable"], label: "Pleasant", hint: "The definition says 'pleasant and enjoyable' -- nice to experience." },
+      { keyword: "willing to agree", matchTerms: ["willing", "agree", "consent", "amenable", "accommodating", "cooperative"], label: "Willing to agree", hint: "The definition says 'willing to agree or consent' -- easy to work with." },
+    ],
+    synonyms: ["pleasant", "enjoyable", "amenable", "willing", "congenial"],
+  },
+  // ── 417. alternative ──
+  {
+    word: "alternative",
+    partOfSpeech: "noun",
+    definition: "One of two or more available possibilities; a choice or option.",
+    keyConcepts: [
+      { keyword: "available possibilities", matchTerms: ["possibil", "available", "other", "different", "another"], label: "Available possibilities", hint: "The definition says 'available possibilities' -- things you could choose." },
+      { keyword: "choice or option", matchTerms: ["choice", "option", "select", "pick", "substitute", "replacement"], label: "Choice or option", hint: "The definition says 'a choice or option' -- something else you could do." },
+    ],
+    synonyms: ["option", "choice", "substitute", "replacement", "backup"],
+  },
+  // ── 418. apparent ──
+  {
+    word: "apparent",
+    partOfSpeech: "adjective",
+    definition: "Clearly visible or understood; seeming to be true but not necessarily so.",
+    keyConcepts: [
+      { keyword: "clearly visible", matchTerms: ["clear", "visible", "obvious", "evident", "plain", "manifest"], label: "Clearly visible", hint: "The definition says 'clearly visible or understood' -- easy to see." },
+      { keyword: "seeming", matchTerms: ["seem", "appear", "ostensible", "surface", "outward", "supposed"], label: "Seeming", hint: "The definition says 'seeming to be true but not necessarily so' -- might not be real." },
+    ],
+    synonyms: ["obvious", "evident", "seeming", "ostensible", "clear"],
+  },
+  // ── 419. aspire ──
+  {
+    word: "aspire",
+    partOfSpeech: "verb",
+    definition: "To have a strong desire to achieve something; to aim high.",
+    keyConcepts: [
+      { keyword: "strong desire", matchTerms: ["desire", "want", "wish", "hope", "dream", "yearn", "long"], label: "Strong desire", hint: "The definition says 'strong desire to achieve' -- wanting something badly." },
+      { keyword: "aim high", matchTerms: ["aim", "high", "achiev", "goal", "ambition", "strive", "seek"], label: "Aim high", hint: "The definition says 'aim high' -- reaching for something great." },
+    ],
+    synonyms: ["aim", "strive", "dream", "hope", "seek"],
+  },
+  // ── 420. assess ──
+  {
+    word: "assess",
+    partOfSpeech: "verb",
+    definition: "To evaluate or estimate the nature, quality, or value of something.",
+    keyConcepts: [
+      { keyword: "evaluate", matchTerms: ["evaluat", "judge", "appraise", "review", "examine", "analyze"], label: "Evaluate", hint: "The definition says 'evaluate or estimate' -- making a judgment." },
+      { keyword: "nature quality value", matchTerms: ["nature", "quality", "value", "worth", "merit", "condition"], label: "Nature, quality, or value", hint: "The definition says 'the nature, quality, or value' -- what something is like." },
+    ],
+    synonyms: ["evaluate", "appraise", "judge", "estimate", "analyze"],
+  },
+  // ── 421. assume ──
+  {
+    word: "assume",
+    partOfSpeech: "verb",
+    definition: "To take for granted without proof; to take on a responsibility or role.",
+    keyConcepts: [
+      { keyword: "take for granted", matchTerms: ["take for granted", "presume", "suppose", "believe", "expect", "without proof"], label: "Take for granted", hint: "The definition says 'take for granted without proof' -- believing without evidence." },
+      { keyword: "take on responsibility", matchTerms: ["take on", "responsib", "role", "duty", "accept", "undertake"], label: "Take on responsibility", hint: "The definition says 'take on a responsibility or role' -- accepting a duty." },
+    ],
+    synonyms: ["presume", "suppose", "undertake", "adopt", "accept"],
+  },
+  // ── 422. attain ──
+  {
+    word: "attain",
+    partOfSpeech: "verb",
+    definition: "To succeed in achieving something, especially after effort.",
+    keyConcepts: [
+      { keyword: "succeed in achieving", matchTerms: ["succeed", "achiev", "accomplish", "reach", "gain", "obtain"], label: "Succeed in achieving", hint: "The definition says 'succeed in achieving' -- getting what you worked for." },
+      { keyword: "after effort", matchTerms: ["effort", "work", "strive", "earn", "hard"], label: "After effort", hint: "The definition says 'especially after effort' -- it takes work." },
+    ],
+    synonyms: ["achieve", "accomplish", "reach", "gain", "obtain"],
+  },
+  // ── 423. aware ──
+  {
+    word: "aware",
+    partOfSpeech: "adjective",
+    definition: "Having knowledge or perception of a situation or fact; conscious of something.",
+    keyConcepts: [
+      { keyword: "having knowledge", matchTerms: ["knowledge", "know", "informed", "cognizant", "understand"], label: "Having knowledge", hint: "The definition says 'having knowledge or perception' -- knowing about it." },
+      { keyword: "conscious of", matchTerms: ["conscious", "perceiv", "sense", "realiz", "notice", "alert"], label: "Conscious of", hint: "The definition says 'conscious of something' -- mentally present to it." },
+    ],
+    synonyms: ["conscious", "cognizant", "informed", "alert", "mindful"],
+  },
+  // ── 424. backlash ──
+  {
+    word: "backlash",
+    partOfSpeech: "noun",
+    definition: "A strong negative reaction by a group of people to a change or event.",
+    keyConcepts: [
+      { keyword: "strong negative reaction", matchTerms: ["strong", "negative", "reaction", "response", "opposition", "resistance"], label: "Strong negative reaction", hint: "The definition says 'strong negative reaction' -- people pushing back hard." },
+      { keyword: "to a change", matchTerms: ["change", "event", "decision", "action", "policy", "development"], label: "To a change or event", hint: "The definition says 'to a change or event' -- responding to something new." },
+    ],
+    synonyms: ["reaction", "retaliation", "repercussion", "resistance", "counteraction"],
+  },
+  // ── 425. baseline ──
+  {
+    word: "baseline",
+    partOfSpeech: "noun",
+    definition: "A starting point used for comparison; a minimum standard or level.",
+    keyConcepts: [
+      { keyword: "starting point", matchTerms: ["start", "point", "beginning", "origin", "reference", "benchmark"], label: "Starting point", hint: "The definition says 'starting point used for comparison' -- where you begin measuring." },
+      { keyword: "minimum standard", matchTerms: ["minimum", "standard", "level", "base", "foundation", "threshold"], label: "Minimum standard", hint: "The definition says 'minimum standard or level' -- the lowest acceptable point." },
+    ],
+    synonyms: ["benchmark", "standard", "reference", "foundation", "basis"],
+  },
+  // ── 426. bias ──
+  {
+    word: "bias",
+    partOfSpeech: "noun",
+    definition: "A tendency to favor or oppose something unfairly; prejudice.",
+    keyConcepts: [
+      { keyword: "tendency to favor", matchTerms: ["tendency", "favor", "lean", "inclin", "prefer", "partial"], label: "Tendency to favor", hint: "The definition says 'tendency to favor or oppose' -- leaning one way." },
+      { keyword: "unfairly", matchTerms: ["unfair", "prejudice", "discriminat", "unjust", "one-sided", "skewed"], label: "Unfairly", hint: "The definition says 'unfairly' -- not based on facts." },
+    ],
+    synonyms: ["prejudice", "partiality", "favoritism", "inclination", "slant"],
+  },
+  // ── 427. burden ──
+  {
+    word: "burden",
+    partOfSpeech: "noun",
+    definition: "A heavy load to carry; a duty or responsibility that causes worry or hardship.",
+    keyConcepts: [
+      { keyword: "heavy load", matchTerms: ["heavy", "load", "weight", "carry", "bear"], label: "Heavy load", hint: "The definition says 'heavy load to carry' -- something weighing you down." },
+      { keyword: "causes worry", matchTerms: ["duty", "responsib", "worry", "hardship", "trouble", "strain", "stress"], label: "Causes worry or hardship", hint: "The definition says 'causes worry or hardship' -- something difficult to bear." },
+    ],
+    synonyms: ["load", "weight", "responsibility", "obligation", "strain"],
+  },
+  // ── 428. calibrate ──
+  {
+    word: "calibrate",
+    partOfSpeech: "verb",
+    definition: "To adjust or fine-tune for accuracy; to mark with a standard scale of readings.",
+    keyConcepts: [
+      { keyword: "adjust for accuracy", matchTerms: ["adjust", "fine-tune", "accura", "precise", "correct", "set"], label: "Adjust for accuracy", hint: "The definition says 'adjust or fine-tune for accuracy' -- making it precise." },
+      { keyword: "standard scale", matchTerms: ["standard", "scale", "measure", "mark", "reading", "graduat"], label: "Standard scale", hint: "The definition says 'mark with a standard scale' -- using consistent measurements." },
+    ],
+    synonyms: ["adjust", "fine-tune", "regulate", "standardize", "set"],
+  },
+  // ── 429. capacity ──
+  {
+    word: "capacity",
+    partOfSpeech: "noun",
+    definition: "The maximum amount that something can contain or produce; an ability or role.",
+    keyConcepts: [
+      { keyword: "maximum amount", matchTerms: ["maximum", "amount", "contain", "hold", "volume", "limit", "produce"], label: "Maximum amount", hint: "The definition says 'maximum amount that something can contain' -- how much it can hold." },
+      { keyword: "ability or role", matchTerms: ["ability", "role", "capabil", "function", "position", "power"], label: "Ability or role", hint: "The definition says 'an ability or role' -- what you can do." },
+    ],
+    synonyms: ["volume", "capability", "ability", "potential", "role"],
+  },
+  // ── 430. cautious ──
+  {
+    word: "cautious",
+    partOfSpeech: "adjective",
+    definition: "Careful to avoid potential problems or dangers; not taking risks.",
+    keyConcepts: [
+      { keyword: "careful to avoid", matchTerms: ["careful", "avoid", "wary", "watchful", "alert", "prudent"], label: "Careful to avoid", hint: "The definition says 'careful to avoid potential problems' -- watching out for trouble." },
+      { keyword: "not taking risks", matchTerms: ["risk", "danger", "safe", "hesitant", "guarded", "circumspect"], label: "Not taking risks", hint: "The definition says 'not taking risks' -- playing it safe." },
+    ],
+    synonyms: ["careful", "wary", "prudent", "guarded", "circumspect"],
+  },
+  // ── 431. clarify ──
+  {
+    word: "clarify",
+    partOfSpeech: "verb",
+    definition: "To make something clearer or easier to understand; to remove confusion.",
+    keyConcepts: [
+      { keyword: "make clearer", matchTerms: ["clear", "easier", "understand", "explain", "illuminat", "elucidat"], label: "Make clearer", hint: "The definition says 'make something clearer' -- helping people get it." },
+      { keyword: "remove confusion", matchTerms: ["remov", "confusion", "ambiguity", "doubt", "uncertain"], label: "Remove confusion", hint: "The definition says 'remove confusion' -- eliminating misunderstanding." },
+    ],
+    synonyms: ["explain", "elucidate", "illuminate", "simplify", "define"],
+  },
+  // ── 432. coincide ──
+  {
+    word: "coincide",
+    partOfSpeech: "verb",
+    definition: "To occur at the same time or place; to correspond or agree.",
+    keyConcepts: [
+      { keyword: "occur at same time", matchTerms: ["occur", "same", "time", "place", "simultaneous", "together", "overlap"], label: "Occur at same time", hint: "The definition says 'occur at the same time or place' -- happening together." },
+      { keyword: "correspond or agree", matchTerms: ["correspond", "agree", "match", "align", "accord", "concur"], label: "Correspond or agree", hint: "The definition says 'correspond or agree' -- matching up." },
+    ],
+    synonyms: ["overlap", "correspond", "concur", "synchronize", "align"],
+  },
+  // ── 433. collapse ──
+  {
+    word: "collapse",
+    partOfSpeech: "verb",
+    definition: "To fall down or give way suddenly; to fail completely.",
+    keyConcepts: [
+      { keyword: "fall down suddenly", matchTerms: ["fall", "down", "sudden", "give way", "cave", "crumble", "tumble"], label: "Fall down suddenly", hint: "The definition says 'fall down or give way suddenly' -- structural failure." },
+      { keyword: "fail completely", matchTerms: ["fail", "complet", "break down", "crash", "implode", "disintegrat"], label: "Fail completely", hint: "The definition says 'fail completely' -- total breakdown." },
+    ],
+    synonyms: ["fall", "crumble", "fail", "break down", "cave in"],
+  },
+  // ── 434. compatible ──
+  {
+    word: "compatible",
+    partOfSpeech: "adjective",
+    definition: "Able to exist or work together without conflict; well-suited.",
+    keyConcepts: [
+      { keyword: "able to work together", matchTerms: ["work together", "exist", "function", "operat", "coexist"], label: "Able to work together", hint: "The definition says 'able to exist or work together' -- they function as a pair." },
+      { keyword: "without conflict", matchTerms: ["without conflict", "harmonious", "suited", "match", "fit", "agreeable"], label: "Without conflict", hint: "The definition says 'without conflict' -- no clashing." },
+    ],
+    synonyms: ["harmonious", "consistent", "congruent", "suited", "matching"],
+  },
+  // ── 435. compensate ──
+  {
+    word: "compensate",
+    partOfSpeech: "verb",
+    definition: "To give something to make up for loss or suffering; to balance out.",
+    keyConcepts: [
+      { keyword: "make up for", matchTerms: ["make up", "loss", "suffer", "damage", "pay", "reimburse", "repay"], label: "Make up for loss", hint: "The definition says 'make up for loss or suffering' -- giving something back." },
+      { keyword: "balance out", matchTerms: ["balance", "offset", "counteract", "neutralize", "equalize"], label: "Balance out", hint: "The definition says 'balance out' -- evening things up." },
+    ],
+    synonyms: ["reimburse", "repay", "offset", "balance", "make up for"],
+  },
+  // ── 436. complement ──
+  {
+    word: "complement",
+    partOfSpeech: "verb",
+    definition: "To add to something in a way that enhances or improves it; to complete.",
+    keyConcepts: [
+      { keyword: "add to enhance", matchTerms: ["add", "enhance", "improve", "supplement", "augment", "enrich"], label: "Add to enhance", hint: "The definition says 'add to something in a way that enhances' -- making it better." },
+      { keyword: "complete", matchTerms: ["complete", "round out", "perfect", "finish", "fulfill"], label: "Complete", hint: "The definition says 'to complete' -- making it whole." },
+    ],
+    synonyms: ["enhance", "supplement", "complete", "augment", "accompany"],
+  },
+  // ── 437. concurrent ──
+  {
+    word: "concurrent",
+    partOfSpeech: "adjective",
+    definition: "Happening at the same time; existing or operating simultaneously.",
+    keyConcepts: [
+      { keyword: "happening at same time", matchTerms: ["happen", "same time", "simultaneous", "together", "coincid"], label: "Happening at same time", hint: "The definition says 'happening at the same time' -- occurring together." },
+      { keyword: "operating simultaneously", matchTerms: ["operat", "simultaneous", "parallel", "coexist", "alongside"], label: "Operating simultaneously", hint: "The definition says 'operating simultaneously' -- running at the same time." },
+    ],
+    synonyms: ["simultaneous", "parallel", "coinciding", "synchronous", "coexisting"],
+  },
+  // ── 438. consume ──
+  {
+    word: "consume",
+    partOfSpeech: "verb",
+    definition: "To use up a resource; to eat or drink something.",
+    keyConcepts: [
+      { keyword: "use up", matchTerms: ["use up", "resource", "deplet", "exhaust", "spend", "expend"], label: "Use up", hint: "The definition says 'use up a resource' -- spending until gone." },
+      { keyword: "eat or drink", matchTerms: ["eat", "drink", "ingest", "devour", "swallow"], label: "Eat or drink", hint: "The definition says 'eat or drink something' -- taking in food." },
+    ],
+    synonyms: ["use", "eat", "devour", "deplete", "exhaust"],
+  },
+  // ── 439. controversial ──
+  {
+    word: "controversial",
+    partOfSpeech: "adjective",
+    definition: "Causing or likely to cause disagreement or argument; disputed.",
+    keyConcepts: [
+      { keyword: "causing disagreement", matchTerms: ["caus", "disagree", "argument", "debate", "dispute", "contention"], label: "Causing disagreement", hint: "The definition says 'causing or likely to cause disagreement' -- people argue about it." },
+      { keyword: "disputed", matchTerms: ["disputed", "contentious", "divisive", "polariz", "contested"], label: "Disputed", hint: "The definition says 'disputed' -- not everyone agrees." },
+    ],
+    synonyms: ["contentious", "disputed", "debatable", "divisive", "polarizing"],
+  },
+  // ── 440. convenient ──
+  {
+    word: "convenient",
+    partOfSpeech: "adjective",
+    definition: "Fitting well with one's needs or plans; easy to use or access.",
+    keyConcepts: [
+      { keyword: "fitting with needs", matchTerms: ["fit", "need", "plan", "suit", "useful", "helpful"], label: "Fitting with needs", hint: "The definition says 'fitting well with one's needs' -- works for you." },
+      { keyword: "easy to use", matchTerms: ["easy", "use", "access", "handy", "practical", "accessible"], label: "Easy to use", hint: "The definition says 'easy to use or access' -- not difficult." },
+    ],
+    synonyms: ["handy", "practical", "accessible", "useful", "suitable"],
+  },
+  // ── 441. coordinate ──
+  {
+    word: "coordinate",
+    partOfSpeech: "verb",
+    definition: "To organize different elements to work together effectively.",
+    keyConcepts: [
+      { keyword: "organize elements", matchTerms: ["organiz", "element", "part", "arrange", "manage", "direct"], label: "Organize elements", hint: "The definition says 'organize different elements' -- bringing things together." },
+      { keyword: "work together effectively", matchTerms: ["work together", "effective", "harmonize", "synchronize", "integrate", "unify"], label: "Work together effectively", hint: "The definition says 'work together effectively' -- functioning as a unit." },
+    ],
+    synonyms: ["organize", "arrange", "harmonize", "synchronize", "integrate"],
+  },
+  // ── 442. crucial ──
+  {
+    word: "crucial",
+    partOfSpeech: "adjective",
+    definition: "Of great importance; decisive or critical.",
+    keyConcepts: [
+      { keyword: "great importance", matchTerms: ["great", "import", "vital", "essential", "key", "significant"], label: "Great importance", hint: "The definition says 'of great importance' -- really matters." },
+      { keyword: "decisive or critical", matchTerms: ["decisive", "critical", "pivotal", "determining", "turning point"], label: "Decisive or critical", hint: "The definition says 'decisive or critical' -- makes or breaks the outcome." },
+    ],
+    synonyms: ["critical", "vital", "essential", "pivotal", "key"],
+  },
+  // ── 443. cumulative ──
+  {
+    word: "cumulative",
+    partOfSpeech: "adjective",
+    definition: "Increasing by successive additions; growing as more is added.",
+    keyConcepts: [
+      { keyword: "successive additions", matchTerms: ["success", "addition", "accumul", "add up", "build", "compound"], label: "Successive additions", hint: "The definition says 'increasing by successive additions' -- adding up over time." },
+      { keyword: "growing", matchTerms: ["grow", "increas", "mount", "expand", "snowball"], label: "Growing", hint: "The definition says 'growing as more is added' -- getting bigger." },
+    ],
+    synonyms: ["accumulating", "collective", "aggregate", "mounting", "compounding"],
+  },
+  // ── 444. defer ──
+  {
+    word: "defer",
+    partOfSpeech: "verb",
+    definition: "To put off to a later time; to yield respectfully to someone's opinion.",
+    keyConcepts: [
+      { keyword: "put off", matchTerms: ["put off", "later", "time", "postpone", "delay", "shelve"], label: "Put off", hint: "The definition says 'put off to a later time' -- not doing it now." },
+      { keyword: "yield respectfully", matchTerms: ["yield", "respect", "opinion", "submit", "bow", "acquiesce"], label: "Yield respectfully", hint: "The definition says 'yield respectfully to someone's opinion' -- giving way to another." },
+    ],
+    synonyms: ["postpone", "delay", "yield", "submit", "acquiesce"],
+  },
+  // ── 445. demonstrate ──
+  {
+    word: "demonstrate",
+    partOfSpeech: "verb",
+    definition: "To show clearly by giving proof or evidence; to explain by example.",
+    keyConcepts: [
+      { keyword: "show clearly", matchTerms: ["show", "clear", "proof", "evidence", "prove", "establish"], label: "Show clearly", hint: "The definition says 'show clearly by giving proof' -- making something evident." },
+      { keyword: "explain by example", matchTerms: ["explain", "example", "illustrat", "display", "exhibit"], label: "Explain by example", hint: "The definition says 'explain by example' -- showing how it works." },
+    ],
+    synonyms: ["show", "prove", "illustrate", "exhibit", "display"],
+  },
+  // ── 446. denial ──
+  {
+    word: "denial",
+    partOfSpeech: "noun",
+    definition: "A refusal to accept something as true; a statement saying something is not true.",
+    keyConcepts: [
+      { keyword: "refusal to accept", matchTerms: ["refus", "accept", "reject", "disbelief", "unwilling"], label: "Refusal to accept", hint: "The definition says 'refusal to accept something as true' -- not believing." },
+      { keyword: "statement not true", matchTerms: ["statement", "not true", "contradict", "disavow", "repudiat"], label: "Statement not true", hint: "The definition says 'statement saying something is not true' -- saying no." },
+    ],
+    synonyms: ["refusal", "rejection", "disavowal", "contradiction", "repudiation"],
+  },
+  // ── 447. dependable ──
+  {
+    word: "dependable",
+    partOfSpeech: "adjective",
+    definition: "Trustworthy and reliable; able to be counted on.",
+    keyConcepts: [
+      { keyword: "trustworthy", matchTerms: ["trust", "reliable", "faithful", "loyal", "honest"], label: "Trustworthy", hint: "The definition says 'trustworthy and reliable' -- you can trust them." },
+      { keyword: "counted on", matchTerms: ["count on", "rely", "depend", "consistent", "steady", "stable"], label: "Counted on", hint: "The definition says 'able to be counted on' -- always there." },
+    ],
+    synonyms: ["reliable", "trustworthy", "steady", "consistent", "faithful"],
+  },
+  // ── 448. derive ──
+  {
+    word: "derive",
+    partOfSpeech: "verb",
+    definition: "To obtain something from a source; to trace the origin of.",
+    keyConcepts: [
+      { keyword: "obtain from source", matchTerms: ["obtain", "source", "get", "draw", "extract", "gain"], label: "Obtain from source", hint: "The definition says 'obtain something from a source' -- getting it from somewhere." },
+      { keyword: "trace origin", matchTerms: ["trace", "origin", "root", "stem", "come from", "descend"], label: "Trace origin", hint: "The definition says 'trace the origin of' -- finding where it comes from." },
+    ],
+    synonyms: ["obtain", "extract", "originate", "stem", "arise"],
+  },
+  // ── 449. desirable ──
+  {
+    word: "desirable",
+    partOfSpeech: "adjective",
+    definition: "Worth having or wanting; pleasing or attractive.",
+    keyConcepts: [
+      { keyword: "worth having", matchTerms: ["worth", "having", "want", "sought", "valuable", "prized"], label: "Worth having", hint: "The definition says 'worth having or wanting' -- something you'd like." },
+      { keyword: "pleasing", matchTerms: ["pleas", "attract", "appeal", "enviable", "covetable"], label: "Pleasing", hint: "The definition says 'pleasing or attractive' -- nice to have." },
+    ],
+    synonyms: ["attractive", "appealing", "sought-after", "enviable", "advantageous"],
+  },
+  // ── 450. detect ──
+  {
+    word: "detect",
+    partOfSpeech: "verb",
+    definition: "To discover or notice something, especially something hidden or subtle.",
+    keyConcepts: [
+      { keyword: "discover or notice", matchTerms: ["discover", "notice", "find", "spot", "perceiv", "identify"], label: "Discover or notice", hint: "The definition says 'discover or notice something' -- finding it." },
+      { keyword: "hidden or subtle", matchTerms: ["hidden", "subtle", "faint", "obscur", "conceal", "unobvious"], label: "Hidden or subtle", hint: "The definition says 'especially something hidden or subtle' -- not easy to see." },
+    ],
+    synonyms: ["discover", "notice", "spot", "identify", "uncover"],
+  },
+  // ── 451. differentiate ──
+  {
+    word: "differentiate",
+    partOfSpeech: "verb",
+    definition: "To recognize or show the difference between things; to make distinct.",
+    keyConcepts: [
+      { keyword: "recognize difference", matchTerms: ["recogniz", "difference", "distinguish", "tell apart", "discern"], label: "Recognize difference", hint: "The definition says 'recognize or show the difference' -- seeing what's not the same." },
+      { keyword: "make distinct", matchTerms: ["make", "distinct", "separate", "set apart", "unique"], label: "Make distinct", hint: "The definition says 'make distinct' -- creating a difference." },
+    ],
+    synonyms: ["distinguish", "discriminate", "separate", "discern", "contrast"],
+  },
+  // ── 452. disrupt ──
+  {
+    word: "disrupt",
+    partOfSpeech: "verb",
+    definition: "To interrupt the normal progress or activity of something; to cause disorder.",
+    keyConcepts: [
+      { keyword: "interrupt normal progress", matchTerms: ["interrupt", "normal", "progress", "activity", "disturb", "interfere"], label: "Interrupt normal progress", hint: "The definition says 'interrupt the normal progress' -- stopping the flow." },
+      { keyword: "cause disorder", matchTerms: ["disorder", "chaos", "upset", "unsettle", "destabilize", "throw off"], label: "Cause disorder", hint: "The definition says 'cause disorder' -- making things chaotic." },
+    ],
+    synonyms: ["interrupt", "disturb", "upset", "interfere", "derail"],
+  },
+  // ── 453. distort ──
+  {
+    word: "distort",
+    partOfSpeech: "verb",
+    definition: "To twist out of shape; to give a misleading account or impression.",
+    keyConcepts: [
+      { keyword: "twist out of shape", matchTerms: ["twist", "shape", "warp", "bend", "deform", "contort"], label: "Twist out of shape", hint: "The definition says 'twist out of shape' -- changing the form." },
+      { keyword: "misleading account", matchTerms: ["mislead", "account", "impression", "misrepresent", "falsif", "skew"], label: "Misleading account", hint: "The definition says 'give a misleading account' -- not telling it straight." },
+    ],
+    synonyms: ["warp", "twist", "misrepresent", "skew", "falsify"],
+  },
+  // ── 454. diverse ──
+  {
+    word: "diverse",
+    partOfSpeech: "adjective",
+    definition: "Showing great variety; including people or things that are different from each other.",
+    keyConcepts: [
+      { keyword: "great variety", matchTerms: ["variety", "varied", "different", "range", "assort", "mixed"], label: "Great variety", hint: "The definition says 'showing great variety' -- many different kinds." },
+      { keyword: "different from each other", matchTerms: ["different", "unlike", "distinct", "heterogeneous", "multifaceted"], label: "Different from each other", hint: "The definition says 'different from each other' -- not all the same." },
+    ],
+    synonyms: ["varied", "assorted", "mixed", "heterogeneous", "multifaceted"],
+  },
+  // ── 455. dominant ──
+  {
+    word: "dominant",
+    partOfSpeech: "adjective",
+    definition: "Having power or influence over others; most important or prominent.",
+    keyConcepts: [
+      { keyword: "power over others", matchTerms: ["power", "influenc", "control", "authority", "command", "ruling"], label: "Power over others", hint: "The definition says 'having power or influence over others' -- being in charge." },
+      { keyword: "most important", matchTerms: ["most", "important", "prominent", "main", "chief", "primary", "leading"], label: "Most important", hint: "The definition says 'most important or prominent' -- standing out above others." },
+    ],
+    synonyms: ["powerful", "commanding", "prevailing", "prominent", "chief"],
+  },
+  // ── 456. durable ──
+  {
+    word: "durable",
+    partOfSpeech: "adjective",
+    definition: "Able to withstand wear, pressure, or damage; long-lasting.",
+    keyConcepts: [
+      { keyword: "withstand wear", matchTerms: ["withstand", "wear", "pressure", "damage", "resist", "endur", "tough"], label: "Withstand wear", hint: "The definition says 'able to withstand wear, pressure, or damage' -- can take a beating." },
+      { keyword: "long-lasting", matchTerms: ["long-lasting", "lasting", "permanent", "sturdy", "robust", "resilient"], label: "Long-lasting", hint: "The definition says 'long-lasting' -- doesn't break easily." },
+    ],
+    synonyms: ["sturdy", "robust", "resilient", "tough", "long-lasting"],
+  },
+  // ── 457. dynamic ──
+  {
+    word: "dynamic",
+    partOfSpeech: "adjective",
+    definition: "Characterized by constant change or activity; energetic and forceful.",
+    keyConcepts: [
+      { keyword: "constant change", matchTerms: ["constant", "change", "activity", "moving", "evolving", "shifting"], label: "Constant change", hint: "The definition says 'characterized by constant change' -- always moving." },
+      { keyword: "energetic", matchTerms: ["energetic", "forceful", "vigorous", "lively", "active", "powerful"], label: "Energetic", hint: "The definition says 'energetic and forceful' -- full of energy." },
+    ],
+    synonyms: ["energetic", "active", "vigorous", "lively", "changing"],
+  },
+  // ── 458. eliminate ──
+  {
+    word: "eliminate",
+    partOfSpeech: "verb",
+    definition: "To completely remove or get rid of something.",
+    keyConcepts: [
+      { keyword: "completely remove", matchTerms: ["complet", "remove", "get rid", "eradicat", "abolish", "destroy"], label: "Completely remove", hint: "The definition says 'completely remove' -- taking it out entirely." },
+      { keyword: "get rid of", matchTerms: ["rid", "discard", "expel", "exclude", "wipe out", "exterminate"], label: "Get rid of", hint: "The definition says 'get rid of something' -- making it gone." },
+    ],
+    synonyms: ["remove", "eradicate", "abolish", "exclude", "exterminate"],
+  },
+  // ── 459. emerge ──
+  {
+    word: "emerge",
+    partOfSpeech: "verb",
+    definition: "To come out into view or existence; to become known or apparent.",
+    keyConcepts: [
+      { keyword: "come out into view", matchTerms: ["come out", "view", "appear", "surface", "arise", "materialize"], label: "Come out into view", hint: "The definition says 'come out into view' -- becoming visible." },
+      { keyword: "become known", matchTerms: ["become", "known", "apparent", "evident", "reveal", "unfold"], label: "Become known", hint: "The definition says 'become known or apparent' -- coming to light." },
+    ],
+    synonyms: ["appear", "surface", "arise", "materialize", "unfold"],
+  },
+  // ── 460. emphasize ──
+  {
+    word: "emphasize",
+    partOfSpeech: "verb",
+    definition: "To give special importance or attention to something; to stress.",
+    keyConcepts: [
+      { keyword: "special importance", matchTerms: ["special", "import", "attention", "focus", "highlight", "underscore"], label: "Special importance", hint: "The definition says 'give special importance' -- making it stand out." },
+      { keyword: "stress", matchTerms: ["stress", "accent", "accentuat", "point out", "underline"], label: "Stress", hint: "The definition says 'to stress' -- putting weight on it." },
+    ],
+    synonyms: ["stress", "highlight", "underscore", "accentuate", "underline"],
+  },
+  // ── 461. enable ──
+  {
+    word: "enable",
+    partOfSpeech: "verb",
+    definition: "To make possible or easy; to give someone the means or ability to do something.",
+    keyConcepts: [
+      { keyword: "make possible", matchTerms: ["make", "possible", "easy", "allow", "permit", "facilitate"], label: "Make possible", hint: "The definition says 'make possible or easy' -- opening the way." },
+      { keyword: "give means or ability", matchTerms: ["give", "means", "ability", "empower", "equip", "authorize"], label: "Give means or ability", hint: "The definition says 'give someone the means or ability' -- providing what's needed." },
+    ],
+    synonyms: ["allow", "permit", "empower", "facilitate", "authorize"],
+  },
+  // ── 462. encounter ──
+  {
+    word: "encounter",
+    partOfSpeech: "verb",
+    definition: "To unexpectedly meet or experience something, especially a difficulty.",
+    keyConcepts: [
+      { keyword: "unexpectedly meet", matchTerms: ["unexpect", "meet", "come across", "run into", "stumble upon"], label: "Unexpectedly meet", hint: "The definition says 'unexpectedly meet' -- not planned." },
+      { keyword: "experience difficulty", matchTerms: ["experience", "difficult", "face", "confront", "problem", "challenge"], label: "Experience difficulty", hint: "The definition says 'especially a difficulty' -- often something hard." },
+    ],
+    synonyms: ["meet", "face", "confront", "experience", "come across"],
+  },
+  // ── 463. endure ──
+  {
+    word: "endure",
+    partOfSpeech: "verb",
+    definition: "To suffer through something painful or difficult; to last over time.",
+    keyConcepts: [
+      { keyword: "suffer through", matchTerms: ["suffer", "through", "painful", "difficult", "bear", "withstand", "tolerat"], label: "Suffer through", hint: "The definition says 'suffer through something painful' -- bearing hardship." },
+      { keyword: "last over time", matchTerms: ["last", "time", "persist", "survive", "continue", "remain"], label: "Last over time", hint: "The definition says 'last over time' -- continuing to exist." },
+    ],
+    synonyms: ["bear", "withstand", "tolerate", "survive", "persist"],
+  },
+  // ── 464. enhance ──
+  {
+    word: "enhance",
+    partOfSpeech: "verb",
+    definition: "To increase or improve the quality, value, or extent of something.",
+    keyConcepts: [
+      { keyword: "increase or improve", matchTerms: ["increase", "improve", "boost", "heighten", "elevat", "amplif"], label: "Increase or improve", hint: "The definition says 'increase or improve' -- making better." },
+      { keyword: "quality value extent", matchTerms: ["quality", "value", "extent", "strength", "appeal", "effect"], label: "Quality, value, or extent", hint: "The definition says 'quality, value, or extent' -- various aspects to boost." },
+    ],
+    synonyms: ["improve", "boost", "augment", "elevate", "intensify"],
+  },
+  // ── 465. ensure ──
+  {
+    word: "ensure",
+    partOfSpeech: "verb",
+    definition: "To make certain that something will happen or be the case.",
+    keyConcepts: [
+      { keyword: "make certain", matchTerms: ["make", "certain", "sure", "guarantee", "confirm", "secure"], label: "Make certain", hint: "The definition says 'make certain' -- removing doubt." },
+      { keyword: "will happen", matchTerms: ["will", "happen", "occur", "result", "outcome", "achieve"], label: "Will happen", hint: "The definition says 'something will happen' -- guaranteeing the result." },
+    ],
+    synonyms: ["guarantee", "secure", "confirm", "assure", "verify"],
+  },
+  // ── 466. entire ──
+  {
+    word: "entire",
+    partOfSpeech: "adjective",
+    definition: "With no part left out; whole and complete.",
+    keyConcepts: [
+      { keyword: "no part left out", matchTerms: ["no part", "left out", "all", "every", "nothing missing"], label: "No part left out", hint: "The definition says 'with no part left out' -- everything included." },
+      { keyword: "whole and complete", matchTerms: ["whole", "complete", "total", "full", "intact", "unbroken"], label: "Whole and complete", hint: "The definition says 'whole and complete' -- not partial." },
+    ],
+    synonyms: ["whole", "complete", "total", "full", "intact"],
+  },
+  // ── 467. equitable ──
+  {
+    word: "equitable",
+    partOfSpeech: "adjective",
+    definition: "Fair and impartial; treating everyone equally.",
+    keyConcepts: [
+      { keyword: "fair and impartial", matchTerms: ["fair", "impartial", "just", "unbiased", "objective", "neutral"], label: "Fair and impartial", hint: "The definition says 'fair and impartial' -- not favoring anyone." },
+      { keyword: "treating equally", matchTerms: ["treat", "equal", "even-handed", "balanced", "same"], label: "Treating equally", hint: "The definition says 'treating everyone equally' -- same treatment for all." },
+    ],
+    synonyms: ["fair", "just", "impartial", "unbiased", "even-handed"],
+  },
+  // ── 468. essential ──
+  {
+    word: "essential",
+    partOfSpeech: "adjective",
+    definition: "Absolutely necessary or extremely important; fundamental.",
+    keyConcepts: [
+      { keyword: "absolutely necessary", matchTerms: ["absolut", "necessary", "need", "required", "vital", "indispensable"], label: "Absolutely necessary", hint: "The definition says 'absolutely necessary' -- can't do without it." },
+      { keyword: "fundamental", matchTerms: ["fundamental", "basic", "core", "key", "crucial", "critical"], label: "Fundamental", hint: "The definition says 'fundamental' -- at the heart of it." },
+    ],
+    synonyms: ["necessary", "vital", "crucial", "fundamental", "indispensable"],
+  },
+  // ── 469. evident ──
+  {
+    word: "evident",
+    partOfSpeech: "adjective",
+    definition: "Clearly seen or understood; obvious.",
+    keyConcepts: [
+      { keyword: "clearly seen", matchTerms: ["clear", "seen", "visible", "apparent", "plain", "manifest"], label: "Clearly seen", hint: "The definition says 'clearly seen' -- easy to see." },
+      { keyword: "obvious", matchTerms: ["obvious", "understand", "unmistakable", "patent", "noticeable"], label: "Obvious", hint: "The definition says 'obvious' -- no doubt about it." },
+    ],
+    synonyms: ["obvious", "apparent", "clear", "plain", "manifest"],
+  },
+  // ── 470. excessive ──
+  {
+    word: "excessive",
+    partOfSpeech: "adjective",
+    definition: "More than is necessary, normal, or desirable; too much.",
+    keyConcepts: [
+      { keyword: "more than necessary", matchTerms: ["more", "necessary", "normal", "desirable", "beyond", "over"], label: "More than necessary", hint: "The definition says 'more than is necessary' -- beyond what's needed." },
+      { keyword: "too much", matchTerms: ["too much", "extreme", "immoderate", "unreasonable", "inordinate"], label: "Too much", hint: "The definition says 'too much' -- going overboard." },
+    ],
+    synonyms: ["extreme", "immoderate", "inordinate", "undue", "extravagant"],
+  },
+  // ── 471. exclude ──
+  {
+    word: "exclude",
+    partOfSpeech: "verb",
+    definition: "To keep out or leave out; to prevent from being included.",
+    keyConcepts: [
+      { keyword: "keep out", matchTerms: ["keep out", "leave out", "bar", "prohibit", "reject", "ban"], label: "Keep out", hint: "The definition says 'keep out or leave out' -- not letting in." },
+      { keyword: "prevent from being included", matchTerms: ["prevent", "includ", "omit", "except", "shut out"], label: "Prevent from being included", hint: "The definition says 'prevent from being included' -- making sure it's not part of it." },
+    ],
+    synonyms: ["omit", "bar", "reject", "prohibit", "ban"],
+  },
+  // ── 472. execute ──
+  {
+    word: "execute",
+    partOfSpeech: "verb",
+    definition: "To carry out or put into effect a plan or action; to perform.",
+    keyConcepts: [
+      { keyword: "carry out", matchTerms: ["carry out", "put into effect", "implement", "accomplish", "complete"], label: "Carry out", hint: "The definition says 'carry out or put into effect' -- doing what was planned." },
+      { keyword: "perform", matchTerms: ["perform", "conduct", "do", "enact", "fulfill", "achieve"], label: "Perform", hint: "The definition says 'to perform' -- making it happen." },
+    ],
+    synonyms: ["implement", "perform", "accomplish", "carry out", "fulfill"],
+  },
+  // ── 473. exhaust ──
+  {
+    word: "exhaust",
+    partOfSpeech: "verb",
+    definition: "To use up completely; to make someone extremely tired.",
+    keyConcepts: [
+      { keyword: "use up completely", matchTerms: ["use up", "complet", "deplet", "drain", "consume", "empty"], label: "Use up completely", hint: "The definition says 'use up completely' -- nothing left." },
+      { keyword: "make tired", matchTerms: ["tired", "fatigue", "weary", "wear out", "drain", "sap"], label: "Make tired", hint: "The definition says 'make someone extremely tired' -- no energy left." },
+    ],
+    synonyms: ["deplete", "drain", "tire", "fatigue", "wear out"],
+  },
+  // ── 474. expand ──
+  {
+    word: "expand",
+    partOfSpeech: "verb",
+    definition: "To become or make larger in size, amount, or scope.",
+    keyConcepts: [
+      { keyword: "become larger", matchTerms: ["become", "larger", "size", "grow", "increase", "extend"], label: "Become larger", hint: "The definition says 'become or make larger' -- getting bigger." },
+      { keyword: "amount or scope", matchTerms: ["amount", "scope", "range", "scale", "extent", "broaden"], label: "Amount or scope", hint: "The definition says 'in size, amount, or scope' -- various ways to grow." },
+    ],
+    synonyms: ["grow", "enlarge", "extend", "increase", "broaden"],
+  },
+  // ── 475. exploit ──
+  {
+    word: "exploit",
+    partOfSpeech: "verb",
+    definition: "To make full use of a resource; to use unfairly for one's own advantage.",
+    keyConcepts: [
+      { keyword: "make full use", matchTerms: ["make", "full", "use", "utilize", "capitalize", "harness"], label: "Make full use", hint: "The definition says 'make full use of a resource' -- getting the most out of it." },
+      { keyword: "use unfairly", matchTerms: ["unfair", "advantage", "abuse", "take advantage", "manipulat"], label: "Use unfairly", hint: "The definition says 'use unfairly for one's own advantage' -- taking advantage of." },
+    ],
+    synonyms: ["utilize", "capitalize on", "abuse", "manipulate", "harness"],
+  },
+  // ── 476. extract ──
+  {
+    word: "extract",
+    partOfSpeech: "verb",
+    definition: "To remove or take out, especially by force or effort.",
+    keyConcepts: [
+      { keyword: "remove or take out", matchTerms: ["remove", "take out", "pull", "withdraw", "draw out"], label: "Remove or take out", hint: "The definition says 'remove or take out' -- getting it out." },
+      { keyword: "by force or effort", matchTerms: ["force", "effort", "difficult", "struggle", "pry", "wrench"], label: "By force or effort", hint: "The definition says 'especially by force or effort' -- not easily removed." },
+    ],
+    synonyms: ["remove", "withdraw", "pull out", "obtain", "derive"],
+  },
+  // ── 477. feasible ──
+  {
+    word: "feasible",
+    partOfSpeech: "adjective",
+    definition: "Possible to do easily or conveniently; likely to succeed.",
+    keyConcepts: [
+      { keyword: "possible to do", matchTerms: ["possible", "do", "achiev", "accomplish", "practic", "workable"], label: "Possible to do", hint: "The definition says 'possible to do' -- can be done." },
+      { keyword: "likely to succeed", matchTerms: ["likely", "succeed", "viable", "realistic", "attainable"], label: "Likely to succeed", hint: "The definition says 'likely to succeed' -- has a good chance." },
+    ],
+    synonyms: ["possible", "practical", "viable", "workable", "achievable"],
+  },
+  // ── 478. forecast ──
+  {
+    word: "forecast",
+    partOfSpeech: "verb",
+    definition: "To predict or estimate a future event or trend.",
+    keyConcepts: [
+      { keyword: "predict", matchTerms: ["predict", "foresee", "anticipat", "project", "prophesy"], label: "Predict", hint: "The definition says 'predict or estimate' -- saying what will happen." },
+      { keyword: "future event", matchTerms: ["future", "event", "trend", "outcome", "development"], label: "Future event", hint: "The definition says 'a future event or trend' -- what's coming." },
+    ],
+    synonyms: ["predict", "project", "anticipate", "foresee", "estimate"],
+  },
+  // ── 479. fortify ──
+  {
+    word: "fortify",
+    partOfSpeech: "verb",
+    definition: "To strengthen a place against attack; to invigorate or encourage.",
+    keyConcepts: [
+      { keyword: "strengthen against attack", matchTerms: ["strengthen", "attack", "defend", "protect", "reinforce", "secure"], label: "Strengthen against attack", hint: "The definition says 'strengthen a place against attack' -- building defenses." },
+      { keyword: "invigorate", matchTerms: ["invigorat", "encourage", "bolster", "boost", "energize", "empower"], label: "Invigorate", hint: "The definition says 'invigorate or encourage' -- giving strength." },
+    ],
+    synonyms: ["strengthen", "reinforce", "bolster", "secure", "invigorate"],
+  },
+  // ── 480. fundamental ──
+  {
+    word: "fundamental",
+    partOfSpeech: "adjective",
+    definition: "Forming a necessary base or core; of central importance.",
+    keyConcepts: [
+      { keyword: "necessary base", matchTerms: ["necessary", "base", "core", "foundation", "basic", "essential"], label: "Necessary base", hint: "The definition says 'forming a necessary base' -- the foundation." },
+      { keyword: "central importance", matchTerms: ["central", "import", "key", "crucial", "primary", "principal"], label: "Central importance", hint: "The definition says 'of central importance' -- at the heart of things." },
+    ],
+    synonyms: ["basic", "essential", "core", "primary", "foundational"],
+  },
+  // ── 481. generate ──
+  {
+    word: "generate",
+    partOfSpeech: "verb",
+    definition: "To produce or create something; to cause to arise.",
+    keyConcepts: [
+      { keyword: "produce or create", matchTerms: ["produce", "create", "make", "yield", "bring about"], label: "Produce or create", hint: "The definition says 'produce or create something' -- making it exist." },
+      { keyword: "cause to arise", matchTerms: ["cause", "arise", "give rise", "spawn", "engender", "trigger"], label: "Cause to arise", hint: "The definition says 'cause to arise' -- bringing into being." },
+    ],
+    synonyms: ["produce", "create", "cause", "yield", "spawn"],
+  },
+  // ── 482. gradual ──
+  {
+    word: "gradual",
+    partOfSpeech: "adjective",
+    definition: "Happening slowly over a period of time; not sudden.",
+    keyConcepts: [
+      { keyword: "happening slowly", matchTerms: ["happen", "slow", "steady", "incremental", "progressive", "bit by bit"], label: "Happening slowly", hint: "The definition says 'happening slowly' -- taking time." },
+      { keyword: "not sudden", matchTerms: ["not sudden", "gentle", "moderate", "measured", "step by step"], label: "Not sudden", hint: "The definition says 'not sudden' -- no abrupt changes." },
+    ],
+    synonyms: ["slow", "steady", "incremental", "progressive", "moderate"],
+  },
+  // ── 483. guarantee ──
+  {
+    word: "guarantee",
+    partOfSpeech: "verb",
+    definition: "To promise with certainty that something will happen; to assure.",
+    keyConcepts: [
+      { keyword: "promise with certainty", matchTerms: ["promise", "certain", "assure", "pledge", "vow", "commit"], label: "Promise with certainty", hint: "The definition says 'promise with certainty' -- making a firm commitment." },
+      { keyword: "will happen", matchTerms: ["will happen", "ensure", "secure", "warrant", "vouch"], label: "Will happen", hint: "The definition says 'something will happen' -- it's assured." },
+    ],
+    synonyms: ["assure", "ensure", "promise", "pledge", "warrant"],
+  },
+  // ── 484. harsh ──
+  {
+    word: "harsh",
+    partOfSpeech: "adjective",
+    definition: "Unpleasantly rough or severe; cruel or unkind.",
+    keyConcepts: [
+      { keyword: "unpleasantly rough", matchTerms: ["unpleasant", "rough", "severe", "hard", "grating", "jarring"], label: "Unpleasantly rough", hint: "The definition says 'unpleasantly rough or severe' -- not gentle." },
+      { keyword: "cruel or unkind", matchTerms: ["cruel", "unkind", "brutal", "stern", "strict", "merciless"], label: "Cruel or unkind", hint: "The definition says 'cruel or unkind' -- lacking warmth." },
+    ],
+    synonyms: ["severe", "cruel", "brutal", "stern", "rough"],
+  },
+  // ── 485. hesitate ──
+  {
+    word: "hesitate",
+    partOfSpeech: "verb",
+    definition: "To pause before doing something, often due to uncertainty or reluctance.",
+    keyConcepts: [
+      { keyword: "pause before doing", matchTerms: ["pause", "before", "doing", "wait", "delay", "hold back"], label: "Pause before doing", hint: "The definition says 'pause before doing something' -- not acting immediately." },
+      { keyword: "uncertainty or reluctance", matchTerms: ["uncertain", "reluctan", "doubt", "unsure", "waver", "indecisive"], label: "Uncertainty or reluctance", hint: "The definition says 'due to uncertainty or reluctance' -- not sure or willing." },
+    ],
+    synonyms: ["pause", "waver", "delay", "vacillate", "falter"],
+  },
+  // ── 486. hypothetical ──
+  {
+    word: "hypothetical",
+    partOfSpeech: "adjective",
+    definition: "Based on a hypothesis or assumption; imagined rather than real.",
+    keyConcepts: [
+      { keyword: "based on hypothesis", matchTerms: ["based", "hypothesis", "assumption", "theory", "suppos", "speculat"], label: "Based on hypothesis", hint: "The definition says 'based on a hypothesis' -- not proven." },
+      { keyword: "imagined rather than real", matchTerms: ["imagin", "rather than", "real", "theoretical", "supposed", "potential"], label: "Imagined rather than real", hint: "The definition says 'imagined rather than real' -- just a possibility." },
+    ],
+    synonyms: ["theoretical", "supposed", "assumed", "speculative", "imaginary"],
+  },
+  // ── 487. identify ──
+  {
+    word: "identify",
+    partOfSpeech: "verb",
+    definition: "To recognize or establish what something is; to determine the identity of.",
+    keyConcepts: [
+      { keyword: "recognize", matchTerms: ["recogniz", "establish", "determine", "discern", "detect", "spot"], label: "Recognize", hint: "The definition says 'recognize or establish' -- figuring out what it is." },
+      { keyword: "determine identity", matchTerms: ["identity", "name", "classify", "pinpoint", "distinguish"], label: "Determine identity", hint: "The definition says 'determine the identity of' -- knowing who or what." },
+    ],
+    synonyms: ["recognize", "determine", "distinguish", "pinpoint", "discern"],
+  },
+  // ── 488. illustrate ──
+  {
+    word: "illustrate",
+    partOfSpeech: "verb",
+    definition: "To explain or make clear by using examples or pictures.",
+    keyConcepts: [
+      { keyword: "explain or make clear", matchTerms: ["explain", "make clear", "clarify", "elucidat", "demonstrat"], label: "Explain or make clear", hint: "The definition says 'explain or make clear' -- helping people understand." },
+      { keyword: "using examples", matchTerms: ["example", "picture", "diagram", "show", "depict", "portray"], label: "Using examples", hint: "The definition says 'by using examples or pictures' -- visual or concrete aid." },
+    ],
+    synonyms: ["demonstrate", "show", "depict", "clarify", "exemplify"],
+  },
+  // ── 489. impact ──
+  {
+    word: "impact",
+    partOfSpeech: "noun",
+    definition: "A strong effect or influence on something; the force of one thing hitting another.",
+    keyConcepts: [
+      { keyword: "strong effect", matchTerms: ["strong", "effect", "influence", "consequence", "impression", "bearing"], label: "Strong effect", hint: "The definition says 'strong effect or influence' -- makes a difference." },
+      { keyword: "force of hitting", matchTerms: ["force", "hitting", "collision", "contact", "strike", "blow"], label: "Force of hitting", hint: "The definition says 'force of one thing hitting another' -- physical contact." },
+    ],
+    synonyms: ["effect", "influence", "consequence", "impression", "collision"],
+  },
+  // ── 490. implement ──
+  {
+    word: "implement",
+    partOfSpeech: "verb",
+    definition: "To put a plan or decision into effect; to carry out.",
+    keyConcepts: [
+      { keyword: "put into effect", matchTerms: ["put", "effect", "action", "practice", "enact", "execute"], label: "Put into effect", hint: "The definition says 'put a plan or decision into effect' -- making it happen." },
+      { keyword: "carry out", matchTerms: ["carry out", "perform", "accomplish", "realize", "apply"], label: "Carry out", hint: "The definition says 'carry out' -- doing what was planned." },
+    ],
+    synonyms: ["execute", "enact", "apply", "carry out", "perform"],
+  },
+  // ── 491. improve ──
+  {
+    word: "improve",
+    partOfSpeech: "verb",
+    definition: "To make or become better in quality; to enhance.",
+    keyConcepts: [
+      { keyword: "make better", matchTerms: ["make", "better", "enhance", "upgrade", "ameliorat", "advance"], label: "Make better", hint: "The definition says 'make or become better' -- increasing quality." },
+      { keyword: "quality", matchTerms: ["quality", "standard", "condition", "performance", "develop", "refine"], label: "Quality", hint: "The definition says 'better in quality' -- higher standard." },
+    ],
+    synonyms: ["enhance", "better", "upgrade", "refine", "advance"],
+  },
+  // ── 492. incentive ──
+  {
+    word: "incentive",
+    partOfSpeech: "noun",
+    definition: "Something that motivates or encourages someone to do something.",
+    keyConcepts: [
+      { keyword: "motivates or encourages", matchTerms: ["motivat", "encourag", "induce", "prompt", "spur", "drive"], label: "Motivates or encourages", hint: "The definition says 'motivates or encourages' -- gives a reason to act." },
+      { keyword: "to do something", matchTerms: ["do", "action", "behavior", "reward", "benefit", "stimulus"], label: "To do something", hint: "The definition says 'to do something' -- pushing toward action." },
+    ],
+    synonyms: ["motivation", "encouragement", "stimulus", "inducement", "reward"],
+  },
+  // ── 493. incidental ──
+  {
+    word: "incidental",
+    partOfSpeech: "adjective",
+    definition: "Occurring as a minor part or by chance; not essential.",
+    keyConcepts: [
+      { keyword: "minor part", matchTerms: ["minor", "part", "secondary", "subordinate", "peripheral", "small"], label: "Minor part", hint: "The definition says 'occurring as a minor part' -- not the main thing." },
+      { keyword: "by chance", matchTerms: ["chance", "accident", "coincident", "random", "unplanned"], label: "By chance", hint: "The definition says 'by chance' -- not intentional." },
+    ],
+    synonyms: ["minor", "secondary", "peripheral", "accidental", "casual"],
+  },
+  // ── 494. incline ──
+  {
+    word: "incline",
+    partOfSpeech: "verb",
+    definition: "To have a tendency or preference; to lean or slope.",
+    keyConcepts: [
+      { keyword: "have a tendency", matchTerms: ["tendency", "prefer", "disposed", "prone", "apt", "likely"], label: "Have a tendency", hint: "The definition says 'have a tendency or preference' -- leaning toward something." },
+      { keyword: "lean or slope", matchTerms: ["lean", "slope", "tilt", "slant", "angle", "gradient"], label: "Lean or slope", hint: "The definition says 'lean or slope' -- not level." },
+    ],
+    synonyms: ["tend", "lean", "slope", "prefer", "dispose"],
+  },
+  // ── 495. incompatible ──
+  {
+    word: "incompatible",
+    partOfSpeech: "adjective",
+    definition: "Unable to exist or work together; conflicting or inconsistent.",
+    keyConcepts: [
+      { keyword: "unable to work together", matchTerms: ["unable", "work together", "coexist", "function", "clash"], label: "Unable to work together", hint: "The definition says 'unable to exist or work together' -- they don't mix." },
+      { keyword: "conflicting", matchTerms: ["conflict", "inconsistent", "contradict", "oppose", "mismatch"], label: "Conflicting", hint: "The definition says 'conflicting or inconsistent' -- at odds." },
+    ],
+    synonyms: ["conflicting", "inconsistent", "mismatched", "clashing", "unsuitable"],
+  },
+  // ── 496. inconsistent ──
+  {
+    word: "inconsistent",
+    partOfSpeech: "adjective",
+    definition: "Not staying the same; having contradictory elements.",
+    keyConcepts: [
+      { keyword: "not staying the same", matchTerms: ["not", "same", "chang", "variable", "erratic", "uneven"], label: "Not staying the same", hint: "The definition says 'not staying the same' -- varies unpredictably." },
+      { keyword: "contradictory", matchTerms: ["contradict", "conflict", "incompatible", "discrepant", "at odds"], label: "Contradictory", hint: "The definition says 'having contradictory elements' -- doesn't match up." },
+    ],
+    synonyms: ["variable", "erratic", "contradictory", "irregular", "unpredictable"],
+  },
+  // ── 497. inevitable ──
+  {
+    word: "inevitable",
+    partOfSpeech: "adjective",
+    definition: "Certain to happen; unavoidable.",
+    keyConcepts: [
+      { keyword: "certain to happen", matchTerms: ["certain", "happen", "sure", "definite", "guaranteed", "bound"], label: "Certain to happen", hint: "The definition says 'certain to happen' -- will definitely occur." },
+      { keyword: "unavoidable", matchTerms: ["unavoidable", "inescapable", "inevitabl", "destined", "fated"], label: "Unavoidable", hint: "The definition says 'unavoidable' -- can't be prevented." },
+    ],
+    synonyms: ["unavoidable", "inescapable", "certain", "destined", "fated"],
+  },
+  // ── 498. informal ──
+  {
+    word: "informal",
+    partOfSpeech: "adjective",
+    definition: "Relaxed and casual in style; not official or formal.",
+    keyConcepts: [
+      { keyword: "relaxed and casual", matchTerms: ["relaxed", "casual", "laid-back", "easygoing", "friendly"], label: "Relaxed and casual", hint: "The definition says 'relaxed and casual' -- not stiff." },
+      { keyword: "not official", matchTerms: ["not official", "unofficial", "unceremonious", "unpretentious"], label: "Not official", hint: "The definition says 'not official or formal' -- no strict rules." },
+    ],
+    synonyms: ["casual", "relaxed", "unofficial", "unceremonious", "easygoing"],
+  },
+  // ── 499. initial ──
+  {
+    word: "initial",
+    partOfSpeech: "adjective",
+    definition: "Existing or occurring at the beginning; first.",
+    keyConcepts: [
+      { keyword: "at the beginning", matchTerms: ["beginning", "start", "first", "early", "opening", "commenc"], label: "At the beginning", hint: "The definition says 'at the beginning' -- the starting point." },
+      { keyword: "first", matchTerms: ["first", "original", "primary", "earliest", "introductory"], label: "First", hint: "The definition says 'first' -- before all others." },
+    ],
+    synonyms: ["first", "original", "beginning", "opening", "primary"],
+  },
+  // ── 500. insert ──
+  {
+    word: "insert",
+    partOfSpeech: "verb",
+    definition: "To place or put something inside or into something else.",
+    keyConcepts: [
+      { keyword: "place inside", matchTerms: ["place", "inside", "into", "put", "introduce", "add"], label: "Place inside", hint: "The definition says 'place or put something inside' -- putting it in." },
+      { keyword: "into something else", matchTerms: ["into", "something else", "between", "embed", "implant"], label: "Into something else", hint: "The definition says 'into something else' -- inside another thing." },
+    ],
+    synonyms: ["put in", "introduce", "add", "embed", "implant"],
+  },
+  // ── 501. inspect ──
+  {
+    word: "inspect",
+    partOfSpeech: "verb",
+    definition: "To look at something carefully to check its quality or condition.",
+    keyConcepts: [
+      { keyword: "look carefully", matchTerms: ["look", "careful", "examine", "scrutinize", "study", "survey"], label: "Look carefully", hint: "The definition says 'look at something carefully' -- close examination." },
+      { keyword: "check quality", matchTerms: ["check", "quality", "condition", "assess", "evaluate", "review"], label: "Check quality", hint: "The definition says 'check its quality or condition' -- making sure it's okay." },
+    ],
+    synonyms: ["examine", "check", "scrutinize", "survey", "review"],
+  },
+  // ── 502. instance ──
+  {
+    word: "instance",
+    partOfSpeech: "noun",
+    definition: "A particular example or case of something.",
+    keyConcepts: [
+      { keyword: "particular example", matchTerms: ["particular", "example", "specific", "individual", "single"], label: "Particular example", hint: "The definition says 'a particular example' -- one specific occurrence." },
+      { keyword: "case of something", matchTerms: ["case", "occurrence", "occasion", "situation", "incident"], label: "Case of something", hint: "The definition says 'case of something' -- an occurrence." },
+    ],
+    synonyms: ["example", "case", "occurrence", "occasion", "illustration"],
+  },
+  // ── 503. instruct ──
+  {
+    word: "instruct",
+    partOfSpeech: "verb",
+    definition: "To teach someone or tell them how to do something; to direct or order.",
+    keyConcepts: [
+      { keyword: "teach or tell how", matchTerms: ["teach", "tell", "how", "educate", "train", "show"], label: "Teach or tell how", hint: "The definition says 'teach someone or tell them how' -- giving knowledge." },
+      { keyword: "direct or order", matchTerms: ["direct", "order", "command", "guide", "advise"], label: "Direct or order", hint: "The definition says 'direct or order' -- giving instructions." },
+    ],
+    synonyms: ["teach", "direct", "guide", "train", "order"],
+  },
+  // ── 504. integrate ──
+  {
+    word: "integrate",
+    partOfSpeech: "verb",
+    definition: "To combine things so they work together as a whole; to bring into equal participation.",
+    keyConcepts: [
+      { keyword: "combine to work together", matchTerms: ["combine", "work together", "unify", "merge", "incorporate", "blend"], label: "Combine to work together", hint: "The definition says 'combine things so they work together' -- making them one." },
+      { keyword: "equal participation", matchTerms: ["equal", "participat", "include", "desegregate", "unite"], label: "Equal participation", hint: "The definition says 'bring into equal participation' -- including everyone." },
+    ],
+    synonyms: ["combine", "merge", "unify", "incorporate", "blend"],
+  },
+  // ── 505. intense ──
+  {
+    word: "intense",
+    partOfSpeech: "adjective",
+    definition: "Very strong or extreme in degree or force; deeply felt.",
+    keyConcepts: [
+      { keyword: "very strong", matchTerms: ["very", "strong", "extreme", "powerful", "great", "severe"], label: "Very strong", hint: "The definition says 'very strong or extreme' -- not mild." },
+      { keyword: "deeply felt", matchTerms: ["deep", "felt", "profound", "passionate", "fervent", "ardent"], label: "Deeply felt", hint: "The definition says 'deeply felt' -- with strong emotion." },
+    ],
+    synonyms: ["extreme", "powerful", "strong", "fierce", "profound"],
+  },
+  // ── 506. interact ──
+  {
+    word: "interact",
+    partOfSpeech: "verb",
+    definition: "To communicate or work with others; to have an effect on each other.",
+    keyConcepts: [
+      { keyword: "communicate or work with", matchTerms: ["communicat", "work with", "engage", "connect", "relate"], label: "Communicate or work with", hint: "The definition says 'communicate or work with others' -- engaging with people." },
+      { keyword: "effect on each other", matchTerms: ["effect", "each other", "mutual", "reciprocal", "influence"], label: "Effect on each other", hint: "The definition says 'have an effect on each other' -- mutual influence." },
+    ],
+    synonyms: ["communicate", "engage", "relate", "connect", "cooperate"],
+  },
+  // ── 507. intervene ──
+  {
+    word: "intervene",
+    partOfSpeech: "verb",
+    definition: "To become involved in a situation to change or prevent something.",
+    keyConcepts: [
+      { keyword: "become involved", matchTerms: ["become", "involved", "step in", "enter", "intercede", "mediate"], label: "Become involved", hint: "The definition says 'become involved in a situation' -- stepping in." },
+      { keyword: "change or prevent", matchTerms: ["change", "prevent", "stop", "alter", "influence", "interfere"], label: "Change or prevent", hint: "The definition says 'to change or prevent something' -- affecting the outcome." },
+    ],
+    synonyms: ["interfere", "intercede", "mediate", "step in", "interpose"],
+  },
+  // ── 508. intuitive ──
+  {
+    word: "intuitive",
+    partOfSpeech: "adjective",
+    definition: "Based on instinct rather than conscious reasoning; easy to understand naturally.",
+    keyConcepts: [
+      { keyword: "based on instinct", matchTerms: ["based", "instinct", "gut", "feel", "innate", "natural"], label: "Based on instinct", hint: "The definition says 'based on instinct rather than conscious reasoning' -- just knowing." },
+      { keyword: "easy to understand", matchTerms: ["easy", "understand", "natural", "obvious", "self-evident", "clear"], label: "Easy to understand", hint: "The definition says 'easy to understand naturally' -- makes sense without explanation." },
+    ],
+    synonyms: ["instinctive", "natural", "innate", "automatic", "spontaneous"],
+  },
+  // ── 509. irrelevant ──
+  {
+    word: "irrelevant",
+    partOfSpeech: "adjective",
+    definition: "Not connected or related to the matter at hand; not important.",
+    keyConcepts: [
+      { keyword: "not connected", matchTerms: ["not connected", "unrelated", "beside the point", "off-topic", "extraneous"], label: "Not connected", hint: "The definition says 'not connected or related' -- doesn't apply." },
+      { keyword: "not important", matchTerms: ["not important", "immaterial", "insignificant", "inconsequential", "trivial"], label: "Not important", hint: "The definition says 'not important' -- doesn't matter here." },
+    ],
+    synonyms: ["unrelated", "immaterial", "extraneous", "beside the point", "inapplicable"],
+  },
+  // ── 510. isolate ──
+  {
+    word: "isolate",
+    partOfSpeech: "verb",
+    definition: "To set apart from others; to place alone or separate.",
+    keyConcepts: [
+      { keyword: "set apart", matchTerms: ["set apart", "separate", "detach", "segregate", "cut off"], label: "Set apart", hint: "The definition says 'set apart from others' -- making distinct." },
+      { keyword: "place alone", matchTerms: ["alone", "single out", "quarantine", "seclude", "remove"], label: "Place alone", hint: "The definition says 'place alone or separate' -- away from the rest." },
+    ],
+    synonyms: ["separate", "segregate", "detach", "seclude", "quarantine"],
+  },
+  // ── 511. latent ──
+  {
+    word: "latent",
+    partOfSpeech: "adjective",
+    definition: "Present but not visible or active; hidden or dormant.",
+    keyConcepts: [
+      { keyword: "present but not visible", matchTerms: ["present", "not visible", "hidden", "concealed", "unseen"], label: "Present but not visible", hint: "The definition says 'present but not visible' -- there but not showing." },
+      { keyword: "dormant", matchTerms: ["dormant", "inactive", "potential", "underlying", "suppressed"], label: "Dormant", hint: "The definition says 'hidden or dormant' -- waiting to emerge." },
+    ],
+    synonyms: ["hidden", "dormant", "potential", "concealed", "underlying"],
+  },
+  // ── 512. liberal ──
+  {
+    word: "liberal",
+    partOfSpeech: "adjective",
+    definition: "Open to new ideas and willing to change; generous or ample.",
+    keyConcepts: [
+      { keyword: "open to new ideas", matchTerms: ["open", "new", "ideas", "tolerant", "broad-minded", "progressive"], label: "Open to new ideas", hint: "The definition says 'open to new ideas' -- accepting of change." },
+      { keyword: "generous", matchTerms: ["generous", "ample", "abundant", "plentiful", "lavish", "giving"], label: "Generous", hint: "The definition says 'generous or ample' -- giving freely." },
+    ],
+    synonyms: ["open-minded", "tolerant", "generous", "progressive", "broad-minded"],
+  },
+  // ── 513. likelihood ──
+  {
+    word: "likelihood",
+    partOfSpeech: "noun",
+    definition: "The chance or probability that something will happen.",
+    keyConcepts: [
+      { keyword: "chance", matchTerms: ["chance", "probability", "odds", "prospect", "possibility"], label: "Chance", hint: "The definition says 'the chance or probability' -- how likely it is." },
+      { keyword: "will happen", matchTerms: ["will happen", "occur", "event", "outcome", "expectation"], label: "Will happen", hint: "The definition says 'something will happen' -- future occurrence." },
+    ],
+    synonyms: ["probability", "chance", "possibility", "prospect", "odds"],
+  },
+  // ── 514. limit ──
+  {
+    word: "limit",
+    partOfSpeech: "verb",
+    definition: "To set or serve as a boundary; to restrict the extent of something.",
+    keyConcepts: [
+      { keyword: "set a boundary", matchTerms: ["set", "boundary", "cap", "ceiling", "maximum", "threshold"], label: "Set a boundary", hint: "The definition says 'set or serve as a boundary' -- defining the edge." },
+      { keyword: "restrict extent", matchTerms: ["restrict", "extent", "constrain", "confine", "curb", "control"], label: "Restrict extent", hint: "The definition says 'restrict the extent' -- keeping within bounds." },
+    ],
+    synonyms: ["restrict", "constrain", "cap", "curb", "confine"],
+  },
+  // ── 515. maintain ──
+  {
+    word: "maintain",
+    partOfSpeech: "verb",
+    definition: "To keep in good condition; to continue to have or hold.",
+    keyConcepts: [
+      { keyword: "keep in good condition", matchTerms: ["keep", "good", "condition", "preserve", "upkeep", "care for"], label: "Keep in good condition", hint: "The definition says 'keep in good condition' -- taking care of." },
+      { keyword: "continue to have", matchTerms: ["continue", "have", "hold", "sustain", "retain", "persist"], label: "Continue to have", hint: "The definition says 'continue to have or hold' -- keeping possession." },
+    ],
+    synonyms: ["preserve", "sustain", "keep", "retain", "uphold"],
+  },
+  // ── 516. margin ──
+  {
+    word: "margin",
+    partOfSpeech: "noun",
+    definition: "The edge or border of something; an amount beyond what is necessary.",
+    keyConcepts: [
+      { keyword: "edge or border", matchTerms: ["edge", "border", "boundary", "perimeter", "rim", "side"], label: "Edge or border", hint: "The definition says 'the edge or border' -- the outer part." },
+      { keyword: "amount beyond necessary", matchTerms: ["amount", "beyond", "necessary", "extra", "surplus", "buffer", "leeway"], label: "Amount beyond necessary", hint: "The definition says 'amount beyond what is necessary' -- extra room." },
+    ],
+    synonyms: ["edge", "border", "buffer", "leeway", "surplus"],
+  },
+  // ── 517. mediate ──
+  {
+    word: "mediate",
+    partOfSpeech: "verb",
+    definition: "To intervene between parties to bring about agreement; to settle a dispute.",
+    keyConcepts: [
+      { keyword: "intervene between parties", matchTerms: ["intervene", "between", "parties", "middle", "go-between", "arbitrate"], label: "Intervene between parties", hint: "The definition says 'intervene between parties' -- being in the middle." },
+      { keyword: "bring about agreement", matchTerms: ["agreement", "settle", "dispute", "resolve", "reconcile", "negotiate"], label: "Bring about agreement", hint: "The definition says 'bring about agreement' -- helping them agree." },
+    ],
+    synonyms: ["arbitrate", "negotiate", "reconcile", "intercede", "referee"],
+  },
+  // ── 518. monitor ──
+  {
+    word: "monitor",
+    partOfSpeech: "verb",
+    definition: "To observe and check over a period of time; to keep track of.",
+    keyConcepts: [
+      { keyword: "observe and check", matchTerms: ["observe", "check", "watch", "survey", "supervise", "oversee"], label: "Observe and check", hint: "The definition says 'observe and check' -- keeping an eye on." },
+      { keyword: "over time", matchTerms: ["over time", "period", "track", "follow", "record", "continuous"], label: "Over time", hint: "The definition says 'over a period of time' -- ongoing observation." },
+    ],
+    synonyms: ["observe", "watch", "track", "supervise", "oversee"],
+  },
+  // ── 519. motivate ──
+  {
+    word: "motivate",
+    partOfSpeech: "verb",
+    definition: "To provide someone with a reason to act; to inspire or encourage.",
+    keyConcepts: [
+      { keyword: "provide reason to act", matchTerms: ["provide", "reason", "act", "cause", "drive", "prompt"], label: "Provide reason to act", hint: "The definition says 'provide someone with a reason to act' -- giving them a why." },
+      { keyword: "inspire or encourage", matchTerms: ["inspire", "encourage", "stimulat", "spur", "energize", "galvanize"], label: "Inspire or encourage", hint: "The definition says 'inspire or encourage' -- pushing them forward." },
+    ],
+    synonyms: ["inspire", "encourage", "drive", "stimulate", "spur"],
+  },
+  // ── 520. mutual ──
+  {
+    word: "mutual",
+    partOfSpeech: "adjective",
+    definition: "Experienced or done by each of two or more parties toward the other; shared.",
+    keyConcepts: [
+      { keyword: "by each toward the other", matchTerms: ["each", "toward", "other", "reciprocal", "two-way", "both"], label: "By each toward the other", hint: "The definition says 'done by each toward the other' -- goes both ways." },
+      { keyword: "shared", matchTerms: ["shared", "common", "joint", "collective", "together"], label: "Shared", hint: "The definition says 'shared' -- held in common." },
+    ],
+    synonyms: ["reciprocal", "shared", "common", "joint", "collective"],
+  },
+  // ── 521. negotiate ──
+  {
+    word: "negotiate",
+    partOfSpeech: "verb",
+    definition: "To discuss something to reach an agreement; to find a way through an obstacle.",
+    keyConcepts: [
+      { keyword: "discuss to reach agreement", matchTerms: ["discuss", "reach", "agreement", "bargain", "deal", "settle", "terms"], label: "Discuss to reach agreement", hint: "The definition says 'discuss something to reach an agreement' -- working out terms." },
+      { keyword: "find way through", matchTerms: ["find", "way", "through", "obstacle", "navigate", "maneuver", "handle"], label: "Find way through", hint: "The definition says 'find a way through an obstacle' -- getting past difficulties." },
+    ],
+    synonyms: ["bargain", "discuss", "mediate", "arrange", "navigate"],
+  },
+  // ── 522. notion ──
+  {
+    word: "notion",
+    partOfSpeech: "noun",
+    definition: "A general idea or concept; a belief or opinion.",
+    keyConcepts: [
+      { keyword: "general idea", matchTerms: ["general", "idea", "concept", "thought", "understanding", "impression"], label: "General idea", hint: "The definition says 'a general idea or concept' -- a thought about something." },
+      { keyword: "belief or opinion", matchTerms: ["belief", "opinion", "view", "theory", "fancy", "whim"], label: "Belief or opinion", hint: "The definition says 'a belief or opinion' -- what someone thinks." },
+    ],
+    synonyms: ["idea", "concept", "belief", "opinion", "thought"],
+  },
+  // ── 523. obtain ──
+  {
+    word: "obtain",
+    partOfSpeech: "verb",
+    definition: "To get or acquire something; to come into possession of.",
+    keyConcepts: [
+      { keyword: "get or acquire", matchTerms: ["get", "acquire", "gain", "secure", "procure", "attain"], label: "Get or acquire", hint: "The definition says 'get or acquire something' -- coming to have it." },
+      { keyword: "come into possession", matchTerms: ["come into", "possession", "receive", "collect", "earn"], label: "Come into possession", hint: "The definition says 'come into possession of' -- now you have it." },
+    ],
+    synonyms: ["acquire", "get", "gain", "secure", "procure"],
+  },
+  // ── 524. offset ──
+  {
+    word: "offset",
+    partOfSpeech: "verb",
+    definition: "To counterbalance or compensate for something.",
+    keyConcepts: [
+      { keyword: "counterbalance", matchTerms: ["counterbalance", "balance", "neutralize", "cancel out", "counteract"], label: "Counterbalance", hint: "The definition says 'counterbalance' -- evening things out." },
+      { keyword: "compensate for", matchTerms: ["compensate", "make up for", "counter", "mitigate", "equalize"], label: "Compensate for", hint: "The definition says 'compensate for something' -- making up for it." },
+    ],
+    synonyms: ["counterbalance", "compensate", "neutralize", "counteract", "cancel out"],
+  },
+  // ── 525. ongoing ──
+  {
+    word: "ongoing",
+    partOfSpeech: "adjective",
+    definition: "Continuing without stopping; in progress.",
+    keyConcepts: [
+      { keyword: "continuing", matchTerms: ["continu", "without stopping", "constant", "persistent", "unceasing"], label: "Continuing", hint: "The definition says 'continuing without stopping' -- keeps going." },
+      { keyword: "in progress", matchTerms: ["in progress", "current", "active", "underway", "unfinished"], label: "In progress", hint: "The definition says 'in progress' -- happening now." },
+    ],
+    synonyms: ["continuing", "current", "in progress", "persistent", "unceasing"],
+  },
+  // ── 526. option ──
+  {
+    word: "option",
+    partOfSpeech: "noun",
+    definition: "A choice or alternative available; the freedom to choose.",
+    keyConcepts: [
+      { keyword: "choice available", matchTerms: ["choice", "available", "alternative", "possibility", "selection"], label: "Choice available", hint: "The definition says 'a choice or alternative available' -- something you can pick." },
+      { keyword: "freedom to choose", matchTerms: ["freedom", "choose", "right", "opportunity", "discretion"], label: "Freedom to choose", hint: "The definition says 'the freedom to choose' -- having the power to decide." },
+    ],
+    synonyms: ["choice", "alternative", "selection", "possibility", "preference"],
+  },
+  // ── 527. ordinary ──
+  {
+    word: "ordinary",
+    partOfSpeech: "adjective",
+    definition: "Normal or usual; not special or different.",
+    keyConcepts: [
+      { keyword: "normal or usual", matchTerms: ["normal", "usual", "regular", "typical", "standard", "common"], label: "Normal or usual", hint: "The definition says 'normal or usual' -- nothing out of the ordinary." },
+      { keyword: "not special", matchTerms: ["not special", "different", "average", "plain", "unremarkable", "mundane"], label: "Not special", hint: "The definition says 'not special or different' -- just like the rest." },
+    ],
+    synonyms: ["normal", "usual", "common", "typical", "average"],
+  },
+  // ── 528. parallel ──
+  {
+    word: "parallel",
+    partOfSpeech: "adjective",
+    definition: "Side by side at an equal distance; similar or corresponding.",
+    keyConcepts: [
+      { keyword: "side by side", matchTerms: ["side by side", "equal distance", "alongside", "running together"], label: "Side by side", hint: "The definition says 'side by side at an equal distance' -- never meeting." },
+      { keyword: "similar or corresponding", matchTerms: ["similar", "corresponding", "analogous", "comparable", "equivalent"], label: "Similar or corresponding", hint: "The definition says 'similar or corresponding' -- alike in nature." },
+    ],
+    synonyms: ["similar", "corresponding", "analogous", "comparable", "equivalent"],
+  },
+  // ── 529. parameter ──
+  {
+    word: "parameter",
+    partOfSpeech: "noun",
+    definition: "A limit or boundary that defines the scope of something; a factor or variable.",
+    keyConcepts: [
+      { keyword: "limit or boundary", matchTerms: ["limit", "boundary", "constraint", "guideline", "framework"], label: "Limit or boundary", hint: "The definition says 'a limit or boundary' -- what defines the edges." },
+      { keyword: "factor or variable", matchTerms: ["factor", "variable", "element", "criterion", "specification"], label: "Factor or variable", hint: "The definition says 'a factor or variable' -- something that can change." },
+    ],
+    synonyms: ["limit", "boundary", "guideline", "variable", "specification"],
+  },
+  // ── 530. partial ──
+  {
+    word: "partial",
+    partOfSpeech: "adjective",
+    definition: "Existing only in part; not complete or whole.",
+    keyConcepts: [
+      { keyword: "only in part", matchTerms: ["part", "incomplete", "fragment", "portion", "some"], label: "Only in part", hint: "The definition says 'existing only in part' -- not the whole thing." },
+      { keyword: "not complete", matchTerms: ["not complete", "whole", "unfinished", "limited", "fractional"], label: "Not complete", hint: "The definition says 'not complete or whole' -- something is missing." },
+    ],
+    synonyms: ["incomplete", "fragmentary", "limited", "fractional", "half"],
+  },
+  // ── 531. participate ──
+  {
+    word: "participate",
+    partOfSpeech: "verb",
+    definition: "To take part in an activity or event; to be involved.",
+    keyConcepts: [
+      { keyword: "take part in", matchTerms: ["take part", "activity", "event", "join", "engage", "contribute"], label: "Take part in", hint: "The definition says 'take part in an activity' -- being part of it." },
+      { keyword: "be involved", matchTerms: ["involved", "share", "partake", "cooperate", "collaborate"], label: "Be involved", hint: "The definition says 'be involved' -- actively doing something." },
+    ],
+    synonyms: ["join", "engage", "take part", "contribute", "partake"],
+  },
+  // ── 532. persist ──
+  {
+    word: "persist",
+    partOfSpeech: "verb",
+    definition: "To continue firmly despite difficulty or opposition; to endure.",
+    keyConcepts: [
+      { keyword: "continue firmly", matchTerms: ["continue", "firmly", "keep on", "carry on", "persevere", "insist"], label: "Continue firmly", hint: "The definition says 'continue firmly' -- not giving up." },
+      { keyword: "despite difficulty", matchTerms: ["despite", "difficult", "opposition", "obstacle", "challenge", "hardship"], label: "Despite difficulty", hint: "The definition says 'despite difficulty or opposition' -- even when it's hard." },
+    ],
+    synonyms: ["persevere", "continue", "endure", "insist", "carry on"],
+  },
+  // ── 533. predict ──
+  {
+    word: "predict",
+    partOfSpeech: "verb",
+    definition: "To say or estimate that something will happen in the future.",
+    keyConcepts: [
+      { keyword: "say will happen", matchTerms: ["say", "will happen", "foretell", "forecast", "prophesy", "foresee"], label: "Say will happen", hint: "The definition says 'say that something will happen' -- telling the future." },
+      { keyword: "estimate future", matchTerms: ["estimate", "future", "anticipat", "expect", "project"], label: "Estimate future", hint: "The definition says 'estimate that something will happen in the future' -- making a guess about what's coming." },
+    ],
+    synonyms: ["forecast", "foresee", "anticipate", "foretell", "project"],
+  },
+  // ── 534. preference ──
+  {
+    word: "preference",
+    partOfSpeech: "noun",
+    definition: "A greater liking for one thing over another; a favored choice.",
+    keyConcepts: [
+      { keyword: "greater liking", matchTerms: ["greater", "liking", "favor", "prefer", "inclin", "lean toward"], label: "Greater liking", hint: "The definition says 'a greater liking for one thing' -- what you like more." },
+      { keyword: "over another", matchTerms: ["over another", "choice", "alternative", "option", "instead of"], label: "Over another", hint: "The definition says 'over another' -- compared to something else." },
+    ],
+    synonyms: ["choice", "favorite", "inclination", "liking", "predilection"],
+  },
+  // ── 535. preliminary ──
+  {
+    word: "preliminary",
+    partOfSpeech: "adjective",
+    definition: "Done in preparation for something more important; introductory.",
+    keyConcepts: [
+      { keyword: "in preparation", matchTerms: ["preparation", "preparatory", "advance", "prior", "preceding"], label: "In preparation", hint: "The definition says 'done in preparation' -- getting ready for what's next." },
+      { keyword: "introductory", matchTerms: ["introductory", "initial", "opening", "early", "first"], label: "Introductory", hint: "The definition says 'introductory' -- before the main event." },
+    ],
+    synonyms: ["preparatory", "introductory", "initial", "prior", "opening"],
+  },
+  // ── 536. preserve ──
+  {
+    word: "preserve",
+    partOfSpeech: "verb",
+    definition: "To maintain something in its original state; to keep safe from harm.",
+    keyConcepts: [
+      { keyword: "maintain original state", matchTerms: ["maintain", "original", "state", "keep", "conserve", "protect"], label: "Maintain original state", hint: "The definition says 'maintain something in its original state' -- keeping it as it was." },
+      { keyword: "keep safe from harm", matchTerms: ["safe", "harm", "protect", "safeguard", "defend", "shield"], label: "Keep safe from harm", hint: "The definition says 'keep safe from harm' -- protecting it." },
+    ],
+    synonyms: ["maintain", "protect", "conserve", "safeguard", "keep"],
+  },
+  // ── 537. priority ──
+  {
+    word: "priority",
+    partOfSpeech: "noun",
+    definition: "Something that is regarded as more important than others; precedence.",
+    keyConcepts: [
+      { keyword: "more important", matchTerms: ["more", "important", "first", "primary", "chief", "main"], label: "More important", hint: "The definition says 'regarded as more important' -- it comes first." },
+      { keyword: "precedence", matchTerms: ["precedence", "preference", "rank", "order", "urgency"], label: "Precedence", hint: "The definition says 'precedence' -- taking priority over others." },
+    ],
+    synonyms: ["precedence", "importance", "preference", "urgency", "primacy"],
+  },
+  // ── 538. prominent ──
+  {
+    word: "prominent",
+    partOfSpeech: "adjective",
+    definition: "Important or well-known; standing out so as to be easily seen.",
+    keyConcepts: [
+      { keyword: "important or well-known", matchTerms: ["important", "well-known", "famous", "notable", "distinguished", "eminent"], label: "Important or well-known", hint: "The definition says 'important or well-known' -- people recognize them." },
+      { keyword: "standing out", matchTerms: ["stand out", "conspicuous", "noticeable", "visible", "striking"], label: "Standing out", hint: "The definition says 'standing out so as to be easily seen' -- hard to miss." },
+    ],
+    synonyms: ["notable", "distinguished", "conspicuous", "eminent", "outstanding"],
+  },
+  // ── 539. proportion ──
+  {
+    word: "proportion",
+    partOfSpeech: "noun",
+    definition: "A part or share of a whole; the relationship of one thing to another in size or amount.",
+    keyConcepts: [
+      { keyword: "part of a whole", matchTerms: ["part", "share", "whole", "portion", "fraction", "percentage"], label: "Part of a whole", hint: "The definition says 'a part or share of a whole' -- how much of the total." },
+      { keyword: "relationship in size", matchTerms: ["relationship", "size", "amount", "ratio", "scale", "relative"], label: "Relationship in size", hint: "The definition says 'the relationship in size or amount' -- how things compare." },
+    ],
+    synonyms: ["ratio", "share", "portion", "fraction", "percentage"],
+  },
+  // ── 540. prospect ──
+  {
+    word: "prospect",
+    partOfSpeech: "noun",
+    definition: "The possibility of something happening; a person regarded as likely to succeed.",
+    keyConcepts: [
+      { keyword: "possibility of happening", matchTerms: ["possibil", "happen", "chance", "likelihood", "potential", "outlook"], label: "Possibility of happening", hint: "The definition says 'the possibility of something happening' -- what might come." },
+      { keyword: "likely to succeed", matchTerms: ["likely", "succeed", "candidate", "potential", "promising"], label: "Likely to succeed", hint: "The definition says 'a person regarded as likely to succeed' -- has potential." },
+    ],
+    synonyms: ["possibility", "chance", "potential", "outlook", "candidate"],
+  },
+  // ── 541. protocol ──
+  {
+    word: "protocol",
+    partOfSpeech: "noun",
+    definition: "The official procedure or system of rules governing affairs; accepted code of behavior.",
+    keyConcepts: [
+      { keyword: "official procedure", matchTerms: ["official", "procedure", "system", "rules", "guideline", "regulation"], label: "Official procedure", hint: "The definition says 'official procedure or system of rules' -- the proper way." },
+      { keyword: "code of behavior", matchTerms: ["code", "behavior", "conduct", "etiquette", "convention", "custom"], label: "Code of behavior", hint: "The definition says 'accepted code of behavior' -- how to act." },
+    ],
+    synonyms: ["procedure", "rules", "convention", "etiquette", "guidelines"],
+  },
+  // ── 542. react ──
+  {
+    word: "react",
+    partOfSpeech: "verb",
+    definition: "To respond to something in a particular way; to act in opposition.",
+    keyConcepts: [
+      { keyword: "respond to something", matchTerms: ["respond", "reply", "answer", "response", "return"], label: "Respond to something", hint: "The definition says 'respond to something' -- giving a response." },
+      { keyword: "in a particular way", matchTerms: ["particular", "way", "manner", "behave", "act", "reciprocat"], label: "In a particular way", hint: "The definition says 'in a particular way' -- how you respond." },
+    ],
+    synonyms: ["respond", "reply", "answer", "retaliate", "reciprocate"],
+  },
+  // ── 543. reasonable ──
+  {
+    word: "reasonable",
+    partOfSpeech: "adjective",
+    definition: "Fair and sensible; not excessive or extreme.",
+    keyConcepts: [
+      { keyword: "fair and sensible", matchTerms: ["fair", "sensible", "rational", "logical", "sound", "wise"], label: "Fair and sensible", hint: "The definition says 'fair and sensible' -- makes sense." },
+      { keyword: "not excessive", matchTerms: ["not excessive", "extreme", "moderate", "acceptable", "within reason"], label: "Not excessive", hint: "The definition says 'not excessive or extreme' -- in moderation." },
+    ],
+    synonyms: ["fair", "sensible", "rational", "moderate", "logical"],
+  },
+  // ── 544. recover ──
+  {
+    word: "recover",
+    partOfSpeech: "verb",
+    definition: "To return to a normal state after illness or difficulty; to get back something lost.",
+    keyConcepts: [
+      { keyword: "return to normal", matchTerms: ["return", "normal", "state", "heal", "recuperat", "improve", "bounce back"], label: "Return to normal", hint: "The definition says 'return to a normal state' -- getting better." },
+      { keyword: "get back", matchTerms: ["get back", "lost", "regain", "retrieve", "reclaim", "recoup"], label: "Get back something lost", hint: "The definition says 'get back something lost' -- recovering what was yours." },
+    ],
+    synonyms: ["regain", "recuperate", "retrieve", "reclaim", "heal"],
+  },
+  // ── 545. reduce ──
+  {
+    word: "reduce",
+    partOfSpeech: "verb",
+    definition: "To make smaller or less in amount, degree, or size.",
+    keyConcepts: [
+      { keyword: "make smaller", matchTerms: ["make", "smaller", "less", "decrease", "diminish", "lower", "cut"], label: "Make smaller", hint: "The definition says 'make smaller or less' -- bringing it down." },
+      { keyword: "amount degree size", matchTerms: ["amount", "degree", "size", "quantity", "level", "extent"], label: "Amount, degree, or size", hint: "The definition says 'in amount, degree, or size' -- various measures." },
+    ],
+    synonyms: ["decrease", "diminish", "lower", "cut", "lessen"],
+  },
+  // ── 546. reinforce ──
+  {
+    word: "reinforce",
+    partOfSpeech: "verb",
+    definition: "To strengthen or support, especially with additional material or help.",
+    keyConcepts: [
+      { keyword: "strengthen or support", matchTerms: ["strengthen", "support", "bolster", "fortify", "buttress"], label: "Strengthen or support", hint: "The definition says 'strengthen or support' -- making it stronger." },
+      { keyword: "additional material", matchTerms: ["additional", "material", "help", "extra", "supplement", "backup"], label: "Additional material", hint: "The definition says 'with additional material or help' -- adding more." },
+    ],
+    synonyms: ["strengthen", "bolster", "fortify", "support", "buttress"],
+  },
+  // ── 547. reject ──
+  {
+    word: "reject",
+    partOfSpeech: "verb",
+    definition: "To refuse to accept, consider, or use; to dismiss as inadequate.",
+    keyConcepts: [
+      { keyword: "refuse to accept", matchTerms: ["refuse", "accept", "decline", "turn down", "say no", "deny"], label: "Refuse to accept", hint: "The definition says 'refuse to accept' -- saying no." },
+      { keyword: "dismiss as inadequate", matchTerms: ["dismiss", "inadequate", "discard", "rebuff", "spurn", "exclude"], label: "Dismiss as inadequate", hint: "The definition says 'dismiss as inadequate' -- not good enough." },
+    ],
+    synonyms: ["refuse", "decline", "dismiss", "spurn", "rebuff"],
+  },
+  // ── 548. rely ──
+  {
+    word: "rely",
+    partOfSpeech: "verb",
+    definition: "To depend on with full trust or confidence.",
+    keyConcepts: [
+      { keyword: "depend on", matchTerms: ["depend", "count on", "lean on", "trust", "bank on"], label: "Depend on", hint: "The definition says 'depend on' -- needing something." },
+      { keyword: "trust or confidence", matchTerms: ["trust", "confidence", "faith", "belief", "assurance"], label: "Trust or confidence", hint: "The definition says 'with full trust or confidence' -- believing in it." },
+    ],
+    synonyms: ["depend", "count on", "trust", "lean on", "bank on"],
+  },
+  // ── 549. remove ──
+  {
+    word: "remove",
+    partOfSpeech: "verb",
+    definition: "To take away from a place or position; to eliminate.",
+    keyConcepts: [
+      { keyword: "take away", matchTerms: ["take away", "place", "position", "withdraw", "extract", "move"], label: "Take away", hint: "The definition says 'take away from a place' -- relocating it." },
+      { keyword: "eliminate", matchTerms: ["eliminat", "get rid of", "delete", "erase", "abolish"], label: "Eliminate", hint: "The definition says 'eliminate' -- getting rid of it." },
+    ],
+    synonyms: ["take away", "eliminate", "withdraw", "extract", "delete"],
+  },
+  // ── 550. resolve ──
+  {
+    word: "resolve",
+    partOfSpeech: "verb",
+    definition: "To settle or find a solution to a problem; to decide firmly.",
+    keyConcepts: [
+      { keyword: "settle or find solution", matchTerms: ["settle", "find", "solution", "solve", "fix", "clear up"], label: "Settle or find solution", hint: "The definition says 'settle or find a solution' -- fixing the problem." },
+      { keyword: "decide firmly", matchTerms: ["decide", "firmly", "determine", "make up mind", "commit"], label: "Decide firmly", hint: "The definition says 'decide firmly' -- making a strong decision." },
+    ],
+    synonyms: ["solve", "settle", "determine", "decide", "fix"],
+  },
+  // ── 551. resource ──
+  {
+    word: "resource",
+    partOfSpeech: "noun",
+    definition: "A supply of something that can be used when needed; a source of help or information.",
+    keyConcepts: [
+      { keyword: "supply that can be used", matchTerms: ["supply", "used", "available", "stock", "reserve", "asset"], label: "Supply that can be used", hint: "The definition says 'a supply of something that can be used' -- something valuable." },
+      { keyword: "source of help", matchTerms: ["source", "help", "information", "support", "aid", "reference"], label: "Source of help", hint: "The definition says 'a source of help or information' -- where to go for assistance." },
+    ],
+    synonyms: ["supply", "asset", "reserve", "source", "means"],
+  },
+  // ── 552. restrain ──
+  {
+    word: "restrain",
+    partOfSpeech: "verb",
+    definition: "To hold back or prevent from doing something; to keep under control.",
+    keyConcepts: [
+      { keyword: "hold back", matchTerms: ["hold back", "prevent", "stop", "check", "curb", "inhibit"], label: "Hold back", hint: "The definition says 'hold back or prevent' -- stopping something." },
+      { keyword: "keep under control", matchTerms: ["keep", "control", "contain", "limit", "restrict", "suppress"], label: "Keep under control", hint: "The definition says 'keep under control' -- not letting it loose." },
+    ],
+    synonyms: ["hold back", "control", "check", "curb", "contain"],
+  },
+  // ── 553. retain ──
+  {
+    word: "retain",
+    partOfSpeech: "verb",
+    definition: "To continue to have or keep; to not lose or let go of.",
+    keyConcepts: [
+      { keyword: "continue to have", matchTerms: ["continue", "have", "keep", "hold", "maintain", "preserve"], label: "Continue to have", hint: "The definition says 'continue to have or keep' -- keeping it." },
+      { keyword: "not lose", matchTerms: ["not lose", "let go", "hold onto", "save", "reserve"], label: "Not lose", hint: "The definition says 'not lose or let go of' -- keeping possession." },
+    ],
+    synonyms: ["keep", "hold", "maintain", "preserve", "save"],
+  },
+  // ── 554. reverse ──
+  {
+    word: "reverse",
+    partOfSpeech: "verb",
+    definition: "To move backward or in the opposite direction; to turn something the other way.",
+    keyConcepts: [
+      { keyword: "move backward", matchTerms: ["move", "backward", "back", "retreat", "revers"], label: "Move backward", hint: "The definition says 'move backward' -- going in reverse." },
+      { keyword: "opposite direction", matchTerms: ["opposite", "direction", "invert", "flip", "turn around", "undo"], label: "Opposite direction", hint: "The definition says 'in the opposite direction' -- the other way." },
+    ],
+    synonyms: ["invert", "overturn", "undo", "flip", "turn around"],
+  },
+  // ── 555. simulate ──
+  {
+    word: "simulate",
+    partOfSpeech: "verb",
+    definition: "To imitate the appearance or character of; to create a model of.",
+    keyConcepts: [
+      { keyword: "imitate appearance", matchTerms: ["imitat", "appearance", "character", "mimic", "replicate", "copy"], label: "Imitate appearance", hint: "The definition says 'imitate the appearance or character' -- copying something." },
+      { keyword: "create a model", matchTerms: ["create", "model", "reproduc", "emulat", "represent"], label: "Create a model", hint: "The definition says 'create a model of' -- making a representation." },
+    ],
+    synonyms: ["imitate", "replicate", "mimic", "model", "emulate"],
+  },
+  // ── 556. source ──
+  {
+    word: "source",
+    partOfSpeech: "noun",
+    definition: "A place or thing from which something originates; a person who provides information.",
+    keyConcepts: [
+      { keyword: "place thing originates", matchTerms: ["place", "thing", "originat", "come from", "beginning", "root", "origin"], label: "Place something originates", hint: "The definition says 'place or thing from which something originates' -- where it starts." },
+      { keyword: "provides information", matchTerms: ["provid", "information", "person", "supplier", "reference"], label: "Provides information", hint: "The definition says 'a person who provides information' -- gives you the facts." },
+    ],
+    synonyms: ["origin", "root", "basis", "supplier", "reference"],
+  },
+  // ── 557. stable ──
+  {
+    word: "stable",
+    partOfSpeech: "adjective",
+    definition: "Not likely to change or fail; firmly established.",
+    keyConcepts: [
+      { keyword: "not likely to change", matchTerms: ["not", "likely", "change", "fail", "steady", "constant", "secure"], label: "Not likely to change", hint: "The definition says 'not likely to change or fail' -- dependable." },
+      { keyword: "firmly established", matchTerms: ["firmly", "established", "solid", "fixed", "permanent", "lasting"], label: "Firmly established", hint: "The definition says 'firmly established' -- well-founded." },
+    ],
+    synonyms: ["steady", "secure", "solid", "constant", "permanent"],
+  },
+  // ── 558. standard ──
+  {
+    word: "standard",
+    partOfSpeech: "noun",
+    definition: "A level of quality or achievement; a rule or model for comparison.",
+    keyConcepts: [
+      { keyword: "level of quality", matchTerms: ["level", "quality", "achievement", "grade", "benchmark", "criterion"], label: "Level of quality", hint: "The definition says 'a level of quality' -- how good something should be." },
+      { keyword: "rule for comparison", matchTerms: ["rule", "model", "comparison", "measure", "norm", "guideline"], label: "Rule for comparison", hint: "The definition says 'a rule or model for comparison' -- what to compare against." },
+    ],
+    synonyms: ["benchmark", "criterion", "norm", "measure", "guideline"],
+  },
+  // ── 559. strategy ──
+  {
+    word: "strategy",
+    partOfSpeech: "noun",
+    definition: "A plan of action designed to achieve a long-term goal.",
+    keyConcepts: [
+      { keyword: "plan of action", matchTerms: ["plan", "action", "approach", "method", "scheme", "tactic"], label: "Plan of action", hint: "The definition says 'a plan of action' -- how you'll do it." },
+      { keyword: "achieve long-term goal", matchTerms: ["achieve", "long-term", "goal", "objective", "aim", "target"], label: "Achieve long-term goal", hint: "The definition says 'achieve a long-term goal' -- big picture planning." },
+    ],
+    synonyms: ["plan", "approach", "tactic", "method", "scheme"],
+  },
+  // ── 560. sustain ──
+  {
+    word: "sustain",
+    partOfSpeech: "verb",
+    definition: "To maintain or support over a period of time; to keep going.",
+    keyConcepts: [
+      { keyword: "maintain or support", matchTerms: ["maintain", "support", "keep", "preserve", "continue", "uphold"], label: "Maintain or support", hint: "The definition says 'maintain or support' -- keeping it going." },
+      { keyword: "over time", matchTerms: ["over time", "period", "prolonged", "lasting", "endur"], label: "Over time", hint: "The definition says 'over a period of time' -- for the long term." },
+    ],
+    synonyms: ["maintain", "support", "uphold", "continue", "preserve"],
+  },
+  // ── 561. symbolic ──
+  {
+    word: "symbolic",
+    partOfSpeech: "adjective",
+    definition: "Serving as a symbol or representation of something; having significance beyond the literal.",
+    keyConcepts: [
+      { keyword: "serving as symbol", matchTerms: ["symbol", "represent", "stand for", "signif", "emblem", "token"], label: "Serving as symbol", hint: "The definition says 'serving as a symbol' -- standing for something else." },
+      { keyword: "beyond the literal", matchTerms: ["beyond", "literal", "meaning", "figurative", "abstract", "deeper"], label: "Beyond the literal", hint: "The definition says 'significance beyond the literal' -- deeper meaning." },
+    ],
+    synonyms: ["representative", "emblematic", "figurative", "metaphorical", "significant"],
+  },
+  // ── 562. tactic ──
+  {
+    word: "tactic",
+    partOfSpeech: "noun",
+    definition: "A specific action or method used to achieve a particular end.",
+    keyConcepts: [
+      { keyword: "specific action", matchTerms: ["specific", "action", "method", "move", "maneuver", "approach"], label: "Specific action", hint: "The definition says 'a specific action or method' -- a particular move." },
+      { keyword: "achieve particular end", matchTerms: ["achieve", "particular", "end", "goal", "result", "purpose"], label: "Achieve particular end", hint: "The definition says 'to achieve a particular end' -- getting a specific result." },
+    ],
+    synonyms: ["strategy", "method", "approach", "maneuver", "move"],
+  },
+  // ── 563. temporary ──
+  {
+    word: "temporary",
+    partOfSpeech: "adjective",
+    definition: "Lasting for only a limited period of time; not permanent.",
+    keyConcepts: [
+      { keyword: "limited period", matchTerms: ["limited", "period", "time", "short", "brief", "finite"], label: "Limited period", hint: "The definition says 'lasting for only a limited period' -- not forever." },
+      { keyword: "not permanent", matchTerms: ["not permanent", "transient", "passing", "momentary", "interim"], label: "Not permanent", hint: "The definition says 'not permanent' -- will end." },
+    ],
+    synonyms: ["short-term", "brief", "transient", "passing", "interim"],
+  },
+  // ── 564. tendency ──
+  {
+    word: "tendency",
+    partOfSpeech: "noun",
+    definition: "An inclination toward a particular way of behaving or thinking.",
+    keyConcepts: [
+      { keyword: "inclination toward", matchTerms: ["inclination", "toward", "lean", "propensity", "disposition", "prone"], label: "Inclination toward", hint: "The definition says 'an inclination toward' -- leaning in a direction." },
+      { keyword: "way of behaving", matchTerms: ["way", "behaving", "thinking", "act", "habit", "pattern", "trend"], label: "Way of behaving", hint: "The definition says 'a particular way of behaving or thinking' -- how someone tends to act." },
+    ],
+    synonyms: ["inclination", "propensity", "disposition", "trend", "leaning"],
+  },
+  // ── 565. terminate ──
+  {
+    word: "terminate",
+    partOfSpeech: "verb",
+    definition: "To bring to an end; to conclude or stop.",
+    keyConcepts: [
+      { keyword: "bring to an end", matchTerms: ["bring", "end", "finish", "stop", "cease", "conclude"], label: "Bring to an end", hint: "The definition says 'bring to an end' -- making it stop." },
+      { keyword: "conclude or stop", matchTerms: ["conclude", "stop", "discontinue", "close", "complete"], label: "Conclude or stop", hint: "The definition says 'conclude or stop' -- ending it." },
+    ],
+    synonyms: ["end", "conclude", "stop", "finish", "discontinue"],
+  },
+  // ── 566. theoretical ──
+  {
+    word: "theoretical",
+    partOfSpeech: "adjective",
+    definition: "Based on or involving theory rather than practical application; hypothetical.",
+    keyConcepts: [
+      { keyword: "based on theory", matchTerms: ["based", "theory", "concept", "abstract", "academic", "intellectual"], label: "Based on theory", hint: "The definition says 'based on theory' -- ideas, not practice." },
+      { keyword: "not practical", matchTerms: ["not practical", "application", "hypothetical", "speculative", "idealistic"], label: "Not practical", hint: "The definition says 'rather than practical application' -- in theory only." },
+    ],
+    synonyms: ["hypothetical", "abstract", "conceptual", "speculative", "academic"],
+  },
+  // ── 567. transform ──
+  {
+    word: "transform",
+    partOfSpeech: "verb",
+    definition: "To change completely in form, appearance, or character.",
+    keyConcepts: [
+      { keyword: "change completely", matchTerms: ["change", "complet", "total", "radical", "dramatic", "thorough"], label: "Change completely", hint: "The definition says 'change completely' -- a total transformation." },
+      { keyword: "form appearance character", matchTerms: ["form", "appearance", "character", "nature", "shape", "structure"], label: "Form, appearance, or character", hint: "The definition says 'in form, appearance, or character' -- fundamental aspects." },
+    ],
+    synonyms: ["change", "convert", "alter", "metamorphose", "revolutionize"],
+  },
+  // ── 568. transition ──
+  {
+    word: "transition",
+    partOfSpeech: "noun",
+    definition: "The process of changing from one state or condition to another.",
+    keyConcepts: [
+      { keyword: "process of changing", matchTerms: ["process", "changing", "shift", "movement", "passage", "switch"], label: "Process of changing", hint: "The definition says 'the process of changing' -- how it happens." },
+      { keyword: "one state to another", matchTerms: ["one", "state", "condition", "another", "phase", "stage"], label: "One state to another", hint: "The definition says 'from one state or condition to another' -- between two points." },
+    ],
+    synonyms: ["change", "shift", "passage", "switch", "conversion"],
+  },
+  // ── 569. trigger ──
+  {
+    word: "trigger",
+    partOfSpeech: "verb",
+    definition: "To cause something to happen or exist; to set off.",
+    keyConcepts: [
+      { keyword: "cause to happen", matchTerms: ["cause", "happen", "exist", "start", "initiat", "spark", "prompt"], label: "Cause to happen", hint: "The definition says 'cause something to happen' -- making it start." },
+      { keyword: "set off", matchTerms: ["set off", "activate", "provoke", "precipitat", "bring about"], label: "Set off", hint: "The definition says 'set off' -- starting a reaction." },
+    ],
+    synonyms: ["cause", "spark", "provoke", "initiate", "activate"],
+  },
+  // ── 570. ultimate ──
+  {
+    word: "ultimate",
+    partOfSpeech: "adjective",
+    definition: "Being the best or most extreme of its kind; final or fundamental.",
+    keyConcepts: [
+      { keyword: "best or most extreme", matchTerms: ["best", "most", "extreme", "greatest", "supreme", "utmost"], label: "Best or most extreme", hint: "The definition says 'being the best or most extreme' -- the highest level." },
+      { keyword: "final or fundamental", matchTerms: ["final", "fundamental", "basic", "primary", "underlying", "essential"], label: "Final or fundamental", hint: "The definition says 'final or fundamental' -- at the core." },
+    ],
+    synonyms: ["supreme", "greatest", "final", "fundamental", "utmost"],
+  },
+  // ── 571. undergo ──
+  {
+    word: "undergo",
+    partOfSpeech: "verb",
+    definition: "To experience or be subjected to something, typically something unpleasant.",
+    keyConcepts: [
+      { keyword: "experience or be subjected", matchTerms: ["experience", "subjected", "go through", "endure", "suffer", "face"], label: "Experience or be subjected", hint: "The definition says 'experience or be subjected to' -- having something happen to you." },
+      { keyword: "typically unpleasant", matchTerms: ["unpleasant", "difficult", "challenging", "demanding", "ordeal"], label: "Typically unpleasant", hint: "The definition says 'typically something unpleasant' -- often not enjoyable." },
+    ],
+    synonyms: ["experience", "endure", "go through", "suffer", "face"],
+  },
+  // ── 572. underlying ──
+  {
+    word: "underlying",
+    partOfSpeech: "adjective",
+    definition: "Being the basis or cause of something; fundamental but not obvious.",
+    keyConcepts: [
+      { keyword: "basis or cause", matchTerms: ["basis", "cause", "foundation", "root", "source", "reason"], label: "Basis or cause", hint: "The definition says 'being the basis or cause' -- what's beneath." },
+      { keyword: "not obvious", matchTerms: ["not obvious", "hidden", "fundamental", "basic", "implicit", "latent"], label: "Not obvious", hint: "The definition says 'fundamental but not obvious' -- below the surface." },
+    ],
+    synonyms: ["fundamental", "basic", "hidden", "root", "essential"],
+  },
+  // ── 573. utilize ──
+  {
+    word: "utilize",
+    partOfSpeech: "verb",
+    definition: "To make practical and effective use of something.",
+    keyConcepts: [
+      { keyword: "make use of", matchTerms: ["make", "use", "employ", "apply", "harness", "exploit"], label: "Make use of", hint: "The definition says 'make practical and effective use' -- putting it to work." },
+      { keyword: "practical and effective", matchTerms: ["practical", "effective", "useful", "productive", "efficient"], label: "Practical and effective", hint: "The definition says 'practical and effective' -- actually helpful." },
+    ],
+    synonyms: ["use", "employ", "apply", "exploit", "harness"],
+  },
+  // ── 574. valid ──
+  {
+    word: "valid",
+    partOfSpeech: "adjective",
+    definition: "Having a sound basis in logic or fact; legally acceptable.",
+    keyConcepts: [
+      { keyword: "sound basis", matchTerms: ["sound", "basis", "logic", "fact", "reason", "legitimate", "justified"], label: "Sound basis", hint: "The definition says 'having a sound basis in logic or fact' -- well-founded." },
+      { keyword: "legally acceptable", matchTerms: ["legal", "acceptable", "binding", "official", "enforceable", "in force"], label: "Legally acceptable", hint: "The definition says 'legally acceptable' -- recognized by law." },
+    ],
+    synonyms: ["legitimate", "sound", "justified", "legal", "well-founded"],
+  },
+  // ── 575. variable ──
+  {
+    word: "variable",
+    partOfSpeech: "adjective",
+    definition: "Liable to change; not consistent or fixed.",
+    keyConcepts: [
+      { keyword: "liable to change", matchTerms: ["liable", "change", "vary", "fluctuat", "shift", "alter"], label: "Liable to change", hint: "The definition says 'liable to change' -- can be different." },
+      { keyword: "not consistent", matchTerms: ["not consistent", "fixed", "irregular", "unpredictable", "unstable", "inconstant"], label: "Not consistent", hint: "The definition says 'not consistent or fixed' -- doesn't stay the same." },
+    ],
+    synonyms: ["changeable", "inconsistent", "fluctuating", "unpredictable", "unstable"],
+  },
+  // ── 576. viable ──
+  {
+    word: "viable",
+    partOfSpeech: "adjective",
+    definition: "Capable of working successfully; feasible.",
+    keyConcepts: [
+      { keyword: "capable of working", matchTerms: ["capable", "working", "function", "succeed", "operat", "effective"], label: "Capable of working", hint: "The definition says 'capable of working successfully' -- it can function." },
+      { keyword: "feasible", matchTerms: ["feasible", "practical", "possible", "workable", "realistic", "achievable"], label: "Feasible", hint: "The definition says 'feasible' -- can actually be done." },
+    ],
+    synonyms: ["feasible", "workable", "practical", "possible", "achievable"],
+  },
+  // ── 577. visible ──
+  {
+    word: "visible",
+    partOfSpeech: "adjective",
+    definition: "Able to be seen; perceptible to the eye.",
+    keyConcepts: [
+      { keyword: "able to be seen", matchTerms: ["able", "seen", "see", "view", "sight", "observable", "perceivable"], label: "Able to be seen", hint: "The definition says 'able to be seen' -- you can see it." },
+      { keyword: "perceptible", matchTerms: ["perceptible", "eye", "apparent", "noticeable", "detectable", "discernible"], label: "Perceptible", hint: "The definition says 'perceptible to the eye' -- can be noticed visually." },
+    ],
+    synonyms: ["apparent", "observable", "noticeable", "discernible", "evident"],
   },
 ]
