@@ -349,7 +349,6 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
                 className={`w-full rounded-lg border bg-background px-4 py-3 text-base placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-ring ${
                   validationError ? "border-red-400 focus:border-red-400" : "border-border focus:border-foreground/30"
                 }`}
-                autoFocus
                 autoComplete="off"
                 autoCapitalize="off"
                 disabled={isValidating}
