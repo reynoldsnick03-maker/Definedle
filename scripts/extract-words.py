@@ -1,16 +1,15 @@
 import re
-import os
 
-# Find files relative to script location
-script_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.dirname(script_dir)
+# Relative paths from scripts folder
+easy_path = '../lib/words-daily.ts'
+hard_path = '../lib/words-hard.ts'
 
 # Read easy words
-with open(os.path.join(project_root, 'lib/words-daily.ts'), 'r') as f:
+with open(easy_path, 'r') as f:
     easy_content = f.read()
     
 # Read hard words  
-with open(os.path.join(project_root, 'lib/words-hard.ts'), 'r') as f:
+with open(hard_path, 'r') as f:
     hard_content = f.read()
 
 # Extract unique word values (only from word: "xxx" lines, not matchTerms)
