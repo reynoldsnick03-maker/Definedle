@@ -36,7 +36,10 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   
   // Load mirror streak on mount
   useEffect(() => {
-    setMirrorStreak(getMirrorStreak())
+    console.log("[v0] Loading mirror streak")
+    const loaded = getMirrorStreak()
+    console.log("[v0] Loaded mirror streak:", loaded)
+    setMirrorStreak(loaded)
   }, [])
   
   // Practice state -- separate per difficulty so switching doesn't reset
