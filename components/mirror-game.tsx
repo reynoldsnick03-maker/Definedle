@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useCallback, useEffect, useRef } from "react"
+import { Flame } from "lucide-react"
 import type { DailyWord } from "@/lib/game-data"
 import { stemMatch, areSynonyms } from "@/lib/scoring"
 
@@ -126,6 +127,7 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
   const [hintsRevealed, setHintsRevealed] = useState(0) // 0=none, 1=length, 2=first letter, 3=last letter
   const [isValidating, setIsValidating] = useState(false)
   const [validationError, setValidationError] = useState<string | null>(null)
+  const [showFlawless, setShowFlawless] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   
   const maxGuesses = 3
@@ -139,6 +141,7 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
     setIsCorrect(false)
     setHintsRevealed(0)
     setValidationError(null)
+    setShowFlawless(false)
   }, [word.word])
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
@@ -178,6 +181,10 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
       // Correct!
       setIsCorrect(true)
       setIsComplete(true)
+      // Trigger flawless animation if first guess with no hints
+      if (newGuesses.length === 1 && hintsRevealed === 0) {
+        setShowFlawless(true)
+      }
       onComplete?.({ correct: true, guesses: newGuesses.length, hintsUsed: hintsRevealed })
     } else if (newGuesses.length >= maxGuesses) {
       // Out of guesses
@@ -195,27 +202,33 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
   return (
     <div className="mx-auto w-full max-w-md px-5">
       <div 
-        className={`rounded-xl border border-border bg-card p-6 shadow-sm md:p-8 transition-transform ${
+        className={`relative rounded-xl border border-border bg-card p-6 shadow-sm md:p-8 transition-transform ${
           isShaking ? "animate-shake" : ""
         }`}
       >
+        {/* Flawless animation */}
+        {showFlawless && (
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
+            <span className="text-score-high font-bold text-lg animate-flawless">
+              Flawless!
+            </span>
+          </div>
+        )}
+
         {/* Flip back button + streak display */}
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-3">
             <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">
               Mirror Mode
             </span>
-            {streak && typeof streak.current === "number" && typeof streak.best === "number" && (streak.current > 0 || streak.best > 0) && (
-              <span className="text-[10px] text-muted-foreground">
-                {streak.current > 0 ? (
-                  <span className="text-score-high font-medium">{streak.current}</span>
-                ) : (
-                  <span>0</span>
-                )}
-                {streak.best > 0 && (
-                  <span className="text-muted-foreground/60"> (best: {streak.best})</span>
-                )}
-              </span>
+            {/* Streak badge with flame icon */}
+            {streak && typeof streak.current === "number" && streak.current > 0 && (
+              <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-score-high/10 border border-score-high/20">
+                <Flame className="h-3 w-3 text-score-high" aria-hidden="true" />
+                <span className="text-xs font-medium tabular-nums text-score-high">
+                  {streak.current}
+                </span>
+              </div>
             )}
           </div>
           <button
@@ -371,6 +384,15 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
               </button>
             </div>
           </form>
+        )}
+        
+        {/* Best streak footer */}
+        {streak && typeof streak.best === "number" && streak.best > 0 && (
+          <div className="mt-4 pt-3 border-t border-border/50 text-center">
+            <span className="text-[10px] uppercase tracking-widest text-muted-foreground/60">
+              Best flawless streak: {streak.best}
+            </span>
+          </div>
         )}
       </div>
     </div>

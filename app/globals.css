@@ -107,3 +107,19 @@
 .animate-shake {
   animation: shake 0.3s ease-out;
 }
+
+/* Flawless animation - float up and fade out */
+@keyframes flawless {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+.animate-flawless {
+  animation: flawless 1.5s ease-out forwards;
+}
