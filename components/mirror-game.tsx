@@ -9,6 +9,10 @@ interface MirrorGameProps {
   onFlipBack: () => void
   onNextWord?: () => void
   isPractice?: boolean
+  /** Called when the game completes with result info */
+  onComplete?: (result: { correct: boolean; guesses: number; hintsUsed: number }) => void
+  /** Current streak info to display */
+  streak?: { current: number; best: number }
 }
 
 interface Guess {
@@ -113,7 +117,8 @@ async function isValidWord(word: string): Promise<{ valid: boolean; uncertain: b
   }
 }
 
-export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorGameProps) {
+export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplete, streak }: MirrorGameProps) {
+  console.log("[v0] MirrorGame rendered with streak:", streak, "word:", word?.word)
   const [guesses, setGuesses] = useState<Guess[]>([])
   const [currentGuess, setCurrentGuess] = useState("")
   const [isShaking, setIsShaking] = useState(false)
@@ -174,17 +179,19 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
       // Correct!
       setIsCorrect(true)
       setIsComplete(true)
+      onComplete?.({ correct: true, guesses: newGuesses.length, hintsUsed: hintsRevealed })
     } else if (newGuesses.length >= maxGuesses) {
       // Out of guesses
       setIsComplete(true)
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
+      onComplete?.({ correct: false, guesses: newGuesses.length, hintsUsed: hintsRevealed })
     } else {
       // Wrong - shake
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
     }
-  }, [currentGuess, guesses, isComplete, isValidating, word.word, word.synonyms])
+  }, [currentGuess, guesses, isComplete, isValidating, word.word, word.synonyms, hintsRevealed, onComplete])
 
   return (
     <div className="mx-auto w-full max-w-md px-5">
@@ -193,11 +200,25 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
           isShaking ? "animate-shake" : ""
         }`}
       >
-        {/* Flip back button */}
+        {/* Flip back button + streak display */}
         <div className="flex justify-between items-center mb-4">
-          <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">
-            Mirror Mode
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">
+              Mirror Mode
+            </span>
+            {streak && typeof streak.current === "number" && typeof streak.best === "number" && (streak.current > 0 || streak.best > 0) && (
+              <span className="text-[10px] text-muted-foreground">
+                {streak.current > 0 ? (
+                  <span className="text-score-high font-medium">{streak.current}</span>
+                ) : (
+                  <span>0</span>
+                )}
+                {streak.best > 0 && (
+                  <span className="text-muted-foreground/60"> (best: {streak.best})</span>
+                )}
+              </span>
+            )}
+          </div>
           <button
             type="button"
             onClick={onFlipBack}
@@ -333,7 +354,10 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
                 </span>
                 <button
                   type="button"
-                  onClick={() => setIsComplete(true)}
+                  onClick={() => {
+                    setIsComplete(true)
+                    onComplete?.({ correct: false, guesses: guesses.length, hintsUsed: hintsRevealed })
+                  }}
                   className="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors px-2 py-1 rounded border border-border/50 hover:border-border"
                 >
                   give up
