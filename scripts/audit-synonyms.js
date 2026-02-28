@@ -11,7 +11,7 @@ const candidates = [
 
 let projectRoot = null
 for (const c of candidates) {
-  const testPath = c + "/lib/words-daily.ts"
+  const testPath = c + "/lib/words-easy.ts"
   console.log(`Trying: ${testPath} -> ${existsSync(testPath)}`)
   if (existsSync(testPath)) {
     projectRoot = c
@@ -34,10 +34,9 @@ if (!projectRoot) {
 }
 
 function runAudit(root) {
-  const dailyContent = readFileSync(root + "/lib/words-daily.ts", "utf-8")
-  const practiceContent = readFileSync(root + "/lib/words-practice.ts", "utf-8")
+  const easyContent = readFileSync(root + "/lib/words-easy.ts", "utf-8")
   
-  const allWords = [...extractWords(dailyContent), ...extractWords(practiceContent)]
+  const allWords = extractWords(easyContent)
   console.log(`\nAuditing ${allWords.length} words for synonym penalty issues...\n`)
   
   // Count words by concept count

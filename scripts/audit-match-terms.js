@@ -95,12 +95,11 @@ var OVERLY_GENERIC_SET = {}
 OVERLY_GENERIC.forEach(function(w) { OVERLY_GENERIC_SET[w] = true })
 
 function audit() {
-  var daily = extractWords("lib/words-daily.ts", "dailyWords").map(function(w) { w._list = "daily"; return w })
+  var easy = extractWords("lib/words-easy.ts", "easyWords").map(function(w) { w._list = "easy"; return w })
   var hard = extractWords("lib/words-hard.ts", "hardWords").map(function(w) { w._list = "hard"; return w })
-  var practice = extractWords("lib/words-practice.ts", "practiceWords").map(function(w) { w._list = "practice"; return w })
-  var allWords = daily.concat(hard).concat(practice)
+  var allWords = easy.concat(hard)
 
-  console.log("Parsed: " + daily.length + " daily, " + hard.length + " hard, " + practice.length + " practice = " + allWords.length + " total\n")
+  console.log("Parsed: " + easy.length + " easy, " + hard.length + " hard = " + allWords.length + " total\n")
 
   var issues = []
 

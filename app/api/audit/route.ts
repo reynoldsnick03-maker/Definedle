@@ -1,6 +1,5 @@
-import { dailyWords } from "@/lib/words-daily"
+import { easyWords } from "@/lib/words-easy"
 import { hardWords } from "@/lib/words-hard"
-import { practiceWords } from "@/lib/words-practice"
 import type { DailyWord } from "@/lib/game-data"
 import { NextResponse } from "next/server"
 
@@ -44,9 +43,8 @@ export async function GET() {
   const wordLocations: Record<string, string[]> = {}
 
   const allLists: { words: DailyWord[]; name: string }[] = [
-    { words: dailyWords, name: "daily" },
+    { words: easyWords, name: "easy" },
     { words: hardWords, name: "hard" },
-    { words: practiceWords, name: "practice" },
   ]
 
   for (const { words, name } of allLists) {
@@ -130,9 +128,8 @@ export async function GET() {
 
   return NextResponse.json({
     totalWords: {
-      daily: dailyWords.length,
+      easy: easyWords.length,
       hard: hardWords.length,
-      practice: practiceWords.length,
     },
     issueCount: issues.length,
     issues: issues.slice(0, 100), // Cap at 100 to keep response readable
