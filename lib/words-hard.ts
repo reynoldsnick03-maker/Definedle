@@ -3503,4 +3503,1312 @@ export const hardWords: DailyWord[] = [
     partOfSpeech: "noun",
     etymology: "French régime -- Latin regimen (rule, guidance).",
   },
-  ]
+  // ── aberrant ──
+  {
+    word: "aberrant",
+    definition: "Departing from an accepted standard; deviating from the normal type.",
+    keyConcepts: [
+      { keyword: "departing from standard", matchTerms: ["depart", "standard", "deviat", "abnormal", "unusual", "atypical", "irregular"], label: "Departing from standard", hint: "The definition says 'departing from an accepted standard' -- not following the norm." },
+      { keyword: "deviating from normal", matchTerms: ["deviat", "normal", "type", "anomalous", "divergent", "exceptional", "odd"], label: "Deviating from normal", hint: "The definition says 'deviating from the normal type' -- straying from what's typical." },
+    ],
+    synonyms: ["abnormal", "deviant", "anomalous", "atypical", "irregular"],
+    partOfSpeech: "adjective",
+    etymology: "Latin aberrans -- aberrare (to wander away).",
+  },
+  // ── abrasive ──
+  {
+    word: "abrasive",
+    definition: "Harsh or rough in manner; tending to annoy or cause ill will.",
+    keyConcepts: [
+      { keyword: "harsh or rough", matchTerms: ["harsh", "rough", "coarse", "grating", "irritating", "caustic"], label: "Harsh or rough", hint: "The definition says 'harsh or rough in manner' -- not gentle." },
+      { keyword: "tending to annoy", matchTerms: ["annoy", "ill will", "offensive", "rude", "brusque", "cutting", "sharp"], label: "Tending to annoy", hint: "The definition says 'tending to annoy or cause ill will' -- rubs people the wrong way." },
+    ],
+    synonyms: ["harsh", "caustic", "brusque", "cutting", "grating"],
+    partOfSpeech: "adjective",
+    etymology: "Latin abradere (to scrape off).",
+  },
+  // ── accountable ──
+  {
+    word: "accountable",
+    definition: "Required or expected to justify actions or decisions; responsible.",
+    keyConcepts: [
+      { keyword: "required to justify", matchTerms: ["required", "justify", "explain", "answer for", "answerable", "liable"], label: "Required to justify", hint: "The definition says 'required to justify actions' -- must explain yourself." },
+      { keyword: "responsible", matchTerms: ["responsible", "liable", "obligated", "duty", "beholden", "chargeable"], label: "Responsible", hint: "The definition says 'responsible' -- held to account." },
+    ],
+    synonyms: ["responsible", "answerable", "liable", "obligated", "beholden"],
+    partOfSpeech: "adjective",
+    etymology: "Old French aconter (to count, reckon).",
+  },
+  // ── acrimonious ──
+  {
+    word: "acrimonious",
+    definition: "Angry and bitter in tone or manner; harsh and sharp in language.",
+    keyConcepts: [
+      { keyword: "angry and bitter", matchTerms: ["angry", "bitter", "hostile", "resentful", "rancorous", "vitriolic"], label: "Angry and bitter", hint: "The definition says 'angry and bitter in tone' -- full of resentment." },
+      { keyword: "harsh in language", matchTerms: ["harsh", "sharp", "language", "caustic", "cutting", "venomous", "scathing"], label: "Harsh in language", hint: "The definition says 'harsh and sharp in language' -- biting words." },
+    ],
+    synonyms: ["bitter", "caustic", "rancorous", "vitriolic", "hostile"],
+    partOfSpeech: "adjective",
+    etymology: "Latin acrimonia (sharpness, pungency).",
+  },
+  // ── adaptable ──
+  {
+    word: "adaptable",
+    definition: "Able to adjust to new conditions or circumstances; flexible.",
+    keyConcepts: [
+      { keyword: "able to adjust", matchTerms: ["able", "adjust", "change", "modify", "accommodate", "conform"], label: "Able to adjust", hint: "The definition says 'able to adjust to new conditions' -- can change as needed." },
+      { keyword: "flexible", matchTerms: ["flexible", "versatile", "malleable", "pliant", "resilient", "responsive"], label: "Flexible", hint: "The definition says 'flexible' -- bends without breaking." },
+    ],
+    synonyms: ["flexible", "versatile", "adjustable", "malleable", "resilient"],
+    partOfSpeech: "adjective",
+    etymology: "Latin adaptare (to fit).",
+  },
+  // ── adversarial ──
+  {
+    word: "adversarial",
+    definition: "Involving conflict or opposition; characteristic of an opponent or enemy.",
+    keyConcepts: [
+      { keyword: "involving conflict", matchTerms: ["conflict", "opposition", "hostile", "combative", "confrontational", "contentious"], label: "Involving conflict", hint: "The definition says 'involving conflict or opposition' -- at odds with each other." },
+      { keyword: "opponent or enemy", matchTerms: ["opponent", "enemy", "rival", "antagonist", "adversary", "foe"], label: "Opponent or enemy", hint: "The definition says 'characteristic of an opponent' -- like enemies." },
+    ],
+    synonyms: ["hostile", "antagonistic", "combative", "confrontational", "opposing"],
+    partOfSpeech: "adjective",
+    etymology: "Latin adversarius (opponent).",
+  },
+  // ── advantageous ──
+  {
+    word: "advantageous",
+    definition: "Involving or creating favorable circumstances; beneficial or profitable.",
+    keyConcepts: [
+      { keyword: "favorable circumstances", matchTerms: ["favorable", "circumstances", "opportune", "auspicious", "propitious", "fortunate"], label: "Favorable circumstances", hint: "The definition says 'creating favorable circumstances' -- sets you up well." },
+      { keyword: "beneficial", matchTerms: ["beneficial", "profitable", "useful", "helpful", "gain", "positive", "rewarding"], label: "Beneficial", hint: "The definition says 'beneficial or profitable' -- works in your favor." },
+    ],
+    synonyms: ["beneficial", "profitable", "favorable", "useful", "helpful"],
+    partOfSpeech: "adjective",
+    etymology: "Old French avantage (advantage).",
+  },
+  // ── amplify ──
+  {
+    word: "amplify",
+    definition: "To increase the strength or amount of something; to make larger or more powerful.",
+    keyConcepts: [
+      { keyword: "increase strength", matchTerms: ["increase", "strength", "amount", "intensify", "boost", "magnify", "enhance"], label: "Increase strength", hint: "The definition says 'increase the strength or amount' -- making it more." },
+      { keyword: "make larger", matchTerms: ["larger", "powerful", "expand", "extend", "augment", "heighten", "escalate"], label: "Make larger", hint: "The definition says 'make larger or more powerful' -- scaling up." },
+    ],
+    synonyms: ["increase", "magnify", "intensify", "boost", "enhance"],
+    partOfSpeech: "verb",
+    etymology: "Latin amplificare (to enlarge).",
+  },
+  // ── anachronistic ──
+  {
+    word: "anachronistic",
+    definition: "Belonging to a period other than that being portrayed; out of date.",
+    keyConcepts: [
+      { keyword: "wrong period", matchTerms: ["period", "time", "era", "historical", "misplaced", "chronological", "temporal"], label: "Wrong period", hint: "The definition says 'belonging to a period other than that being portrayed' -- wrong time." },
+      { keyword: "out of date", matchTerms: ["out of date", "outdated", "obsolete", "archaic", "old-fashioned", "antiquated"], label: "Out of date", hint: "The definition says 'out of date' -- no longer current." },
+    ],
+    synonyms: ["outdated", "obsolete", "archaic", "antiquated", "old-fashioned"],
+    partOfSpeech: "adjective",
+    etymology: "Greek anachronismos (wrong time reference).",
+  },
+  // ── antagonistic ──
+  {
+    word: "antagonistic",
+    definition: "Showing or feeling active opposition or hostility toward someone.",
+    keyConcepts: [
+      { keyword: "active opposition", matchTerms: ["active", "opposition", "oppose", "against", "contrary", "resistant"], label: "Active opposition", hint: "The definition says 'showing active opposition' -- working against." },
+      { keyword: "hostility", matchTerms: ["hostil", "unfriendly", "aggressive", "combative", "belligerent", "adversarial"], label: "Hostility", hint: "The definition says 'hostility toward someone' -- ill will." },
+    ],
+    synonyms: ["hostile", "opposing", "unfriendly", "adversarial", "combative"],
+    partOfSpeech: "adjective",
+    etymology: "Greek antagonistes (opponent, competitor).",
+  },
+  // ── arrogant ──
+  {
+    word: "arrogant",
+    definition: "Having an exaggerated sense of one's own importance or abilities; overbearingly proud.",
+    keyConcepts: [
+      { keyword: "exaggerated sense of importance", matchTerms: ["exaggerat", "sense", "importance", "abilities", "superior", "self-important", "conceited"], label: "Exaggerated importance", hint: "The definition says 'exaggerated sense of one's own importance' -- thinks too highly of oneself." },
+      { keyword: "overbearingly proud", matchTerms: ["overbear", "proud", "haughty", "pompous", "presumptuous", "supercilious"], label: "Overbearingly proud", hint: "The definition says 'overbearingly proud' -- excessive pride." },
+    ],
+    synonyms: ["conceited", "haughty", "pompous", "presumptuous", "supercilious"],
+    partOfSpeech: "adjective",
+    etymology: "Latin arrogare (to claim for oneself).",
+  },
+  // ── authoritative ──
+  {
+    word: "authoritative",
+    definition: "Commanding and self-confident; recognized as being reliable or accurate.",
+    keyConcepts: [
+      { keyword: "commanding", matchTerms: ["command", "self-confident", "assertive", "decisive", "forceful", "masterful"], label: "Commanding", hint: "The definition says 'commanding and self-confident' -- speaks with authority." },
+      { keyword: "reliable or accurate", matchTerms: ["reliable", "accurate", "trustworthy", "definitive", "official", "credible", "expert"], label: "Reliable or accurate", hint: "The definition says 'recognized as being reliable' -- can be trusted." },
+    ],
+    synonyms: ["commanding", "definitive", "reliable", "official", "expert"],
+    partOfSpeech: "adjective",
+    etymology: "Latin auctoritas (authority, influence).",
+  },
+  // ── autonomous ──
+  {
+    word: "autonomous",
+    definition: "Having the freedom to govern itself or control its own affairs; self-governing.",
+    keyConcepts: [
+      { keyword: "freedom to govern", matchTerms: ["freedom", "govern", "control", "self-determin", "sovereign", "self-ruling"], label: "Freedom to govern", hint: "The definition says 'freedom to govern itself' -- ruling itself." },
+      { keyword: "self-governing", matchTerms: ["self-govern", "independent", "self-direct", "self-sufficient", "free", "sovereign"], label: "Self-governing", hint: "The definition says 'self-governing' -- makes its own decisions." },
+    ],
+    synonyms: ["independent", "self-governing", "sovereign", "self-sufficient", "free"],
+    partOfSpeech: "adjective",
+    etymology: "Greek autonomos (having its own laws).",
+  },
+  // ── bellwether ──
+  {
+    word: "bellwether",
+    definition: "An indicator or predictor of something; a leader or trendsetter.",
+    keyConcepts: [
+      { keyword: "indicator or predictor", matchTerms: ["indicator", "predictor", "sign", "signal", "harbinger", "barometer", "gauge"], label: "Indicator or predictor", hint: "The definition says 'an indicator or predictor' -- shows what's coming." },
+      { keyword: "leader or trendsetter", matchTerms: ["leader", "trendsetter", "forerunner", "pioneer", "pacesetter", "guide"], label: "Leader or trendsetter", hint: "The definition says 'a leader or trendsetter' -- others follow." },
+    ],
+    synonyms: ["indicator", "harbinger", "leader", "trendsetter", "barometer"],
+    partOfSpeech: "noun",
+    etymology: "Middle English -- bell + wether (castrated ram leading a flock).",
+  },
+  // ── blatant ──
+  {
+    word: "blatant",
+    definition: "Done openly and unashamedly; completely lacking in subtlety.",
+    keyConcepts: [
+      { keyword: "done openly", matchTerms: ["open", "unasham", "obvious", "overt", "flagrant", "brazen", "bold"], label: "Done openly", hint: "The definition says 'done openly and unashamedly' -- not hiding it." },
+      { keyword: "lacking subtlety", matchTerms: ["lacking subtlety", "glaring", "conspicuous", "unmistakable", "undisguised", "shameless"], label: "Lacking subtlety", hint: "The definition says 'completely lacking in subtlety' -- impossible to miss." },
+    ],
+    synonyms: ["obvious", "flagrant", "glaring", "brazen", "shameless"],
+    partOfSpeech: "adjective",
+    etymology: "Coined by Edmund Spenser, possibly from Latin blatire (to babble).",
+  },
+  // ── brazen ──
+  {
+    word: "brazen",
+    definition: "Bold and shameless; showing no embarrassment about one's behavior.",
+    keyConcepts: [
+      { keyword: "bold and shameless", matchTerms: ["bold", "shameless", "audacious", "impudent", "insolent", "unabashed"], label: "Bold and shameless", hint: "The definition says 'bold and shameless' -- no apologies." },
+      { keyword: "no embarrassment", matchTerms: ["no embarrassment", "unembarrassed", "unashamed", "barefaced", "brash", "forward"], label: "No embarrassment", hint: "The definition says 'showing no embarrassment' -- doesn't feel bad about it." },
+    ],
+    synonyms: ["bold", "shameless", "audacious", "impudent", "unabashed"],
+    partOfSpeech: "adjective",
+    etymology: "Old English bræsen (made of brass).",
+  },
+  // ── calculated ──
+  {
+    word: "calculated",
+    definition: "Done with full awareness of the likely consequences; deliberately planned.",
+    keyConcepts: [
+      { keyword: "full awareness", matchTerms: ["aware", "consequenc", "deliberat", "intentional", "conscious", "knowing"], label: "Full awareness", hint: "The definition says 'done with full awareness of consequences' -- knowing what will happen." },
+      { keyword: "deliberately planned", matchTerms: ["deliberat", "planned", "premeditat", "purposeful", "strategic", "considered"], label: "Deliberately planned", hint: "The definition says 'deliberately planned' -- thought out in advance." },
+    ],
+    synonyms: ["deliberate", "intentional", "premeditated", "strategic", "planned"],
+    partOfSpeech: "adjective",
+    etymology: "Latin calculare (to reckon, compute).",
+  },
+  // ── censorious ──
+  {
+    word: "censorious",
+    definition: "Severely critical of others; quick to find fault.",
+    keyConcepts: [
+      { keyword: "severely critical", matchTerms: ["severe", "critical", "harsh", "judgmental", "condemnatory", "disapproving"], label: "Severely critical", hint: "The definition says 'severely critical of others' -- harsh judgment." },
+      { keyword: "quick to find fault", matchTerms: ["quick", "fault", "criticize", "nitpick", "carping", "captious", "hypercritical"], label: "Quick to find fault", hint: "The definition says 'quick to find fault' -- always looking for problems." },
+    ],
+    synonyms: ["critical", "judgmental", "fault-finding", "carping", "hypercritical"],
+    partOfSpeech: "adjective",
+    etymology: "Latin censorius (relating to a censor).",
+  },
+  // ── circumspect ──
+  {
+    word: "circumspect",
+    definition: "Wary and unwilling to take risks; careful to consider all circumstances.",
+    keyConcepts: [
+      { keyword: "wary and unwilling", matchTerms: ["wary", "unwilling", "risk", "cautious", "careful", "guarded", "prudent"], label: "Wary and unwilling", hint: "The definition says 'wary and unwilling to take risks' -- playing it safe." },
+      { keyword: "consider all circumstances", matchTerms: ["consider", "circumstanc", "thoughtful", "deliberat", "vigilant", "watchful"], label: "Consider all circumstances", hint: "The definition says 'careful to consider all circumstances' -- thinking things through." },
+    ],
+    synonyms: ["cautious", "careful", "prudent", "guarded", "wary"],
+    partOfSpeech: "adjective",
+    etymology: "Latin circumspicere (to look around).",
+  },
+  // ── coercive ──
+  {
+    word: "coercive",
+    definition: "Using force or threats to persuade someone; compelling through pressure.",
+    keyConcepts: [
+      { keyword: "using force or threats", matchTerms: ["force", "threat", "intimidat", "pressure", "compel", "bully", "strong-arm"], label: "Using force or threats", hint: "The definition says 'using force or threats to persuade' -- not voluntary." },
+      { keyword: "compelling through pressure", matchTerms: ["compel", "pressure", "coerce", "constrain", "obligate", "impose"], label: "Compelling through pressure", hint: "The definition says 'compelling through pressure' -- making someone do it." },
+    ],
+    synonyms: ["forceful", "compelling", "oppressive", "intimidating", "pressuring"],
+    partOfSpeech: "adjective",
+    etymology: "Latin coercere (to restrain, control).",
+  },
+  // ── collaborative ──
+  {
+    word: "collaborative",
+    definition: "Involving two or more parties working together; produced by cooperation.",
+    keyConcepts: [
+      { keyword: "working together", matchTerms: ["work together", "joint", "combined", "collective", "cooperative", "team"], label: "Working together", hint: "The definition says 'two or more parties working together' -- joint effort." },
+      { keyword: "produced by cooperation", matchTerms: ["cooperat", "partner", "mutual", "shared", "united", "coordinated"], label: "Produced by cooperation", hint: "The definition says 'produced by cooperation' -- working as a team." },
+    ],
+    synonyms: ["cooperative", "joint", "collective", "combined", "shared"],
+    partOfSpeech: "adjective",
+    etymology: "Latin collaborare (to labor together).",
+  },
+  // ── combative ──
+  {
+    word: "combative",
+    definition: "Ready or eager to fight or argue; aggressively competitive.",
+    keyConcepts: [
+      { keyword: "ready to fight", matchTerms: ["ready", "fight", "argue", "aggressive", "belligerent", "pugnacious", "hostile"], label: "Ready to fight", hint: "The definition says 'ready or eager to fight' -- looking for a battle." },
+      { keyword: "aggressively competitive", matchTerms: ["aggressive", "competitive", "confrontational", "contentious", "quarrelsome", "militant"], label: "Aggressively competitive", hint: "The definition says 'aggressively competitive' -- wants to win at all costs." },
+    ],
+    synonyms: ["aggressive", "belligerent", "pugnacious", "hostile", "confrontational"],
+    partOfSpeech: "adjective",
+    etymology: "Latin combattere (to fight with).",
+  },
+  // ── complicit ──
+  {
+    word: "complicit",
+    definition: "Involved with others in an illegal activity or wrongdoing; being an accomplice.",
+    keyConcepts: [
+      { keyword: "involved in wrongdoing", matchTerms: ["involved", "illegal", "wrongdoing", "crime", "guilty", "implicated", "participat"], label: "Involved in wrongdoing", hint: "The definition says 'involved with others in an illegal activity' -- part of the crime." },
+      { keyword: "being an accomplice", matchTerms: ["accomplice", "partner", "conspirator", "accessory", "collaborator", "abettor"], label: "Being an accomplice", hint: "The definition says 'being an accomplice' -- helping do wrong." },
+    ],
+    synonyms: ["involved", "implicated", "guilty", "colluding", "conspiring"],
+    partOfSpeech: "adjective",
+    etymology: "Latin complicare (to fold together).",
+  },
+  // ── conscientious ──
+  {
+    word: "conscientious",
+    definition: "Wishing to do what is right; thorough and careful in one's work.",
+    keyConcepts: [
+      { keyword: "wishing to do right", matchTerms: ["wish", "right", "moral", "ethical", "principled", "scrupulous", "dutiful"], label: "Wishing to do right", hint: "The definition says 'wishing to do what is right' -- having a conscience." },
+      { keyword: "thorough and careful", matchTerms: ["thorough", "careful", "diligent", "meticulous", "painstaking", "attentive"], label: "Thorough and careful", hint: "The definition says 'thorough and careful in one's work' -- doing a good job." },
+    ],
+    synonyms: ["diligent", "careful", "thorough", "meticulous", "scrupulous"],
+    partOfSpeech: "adjective",
+    etymology: "Latin conscientia (conscience, knowledge within oneself).",
+  },
+  // ── consequential ──
+  {
+    word: "consequential",
+    definition: "Following as a result or effect; important in significance or outcome.",
+    keyConcepts: [
+      { keyword: "following as result", matchTerms: ["follow", "result", "effect", "resulting", "ensuing", "subsequent"], label: "Following as result", hint: "The definition says 'following as a result' -- comes from something else." },
+      { keyword: "important in significance", matchTerms: ["important", "significan", "outcome", "momentous", "weighty", "substantial", "major"], label: "Important in significance", hint: "The definition says 'important in significance' -- matters a lot." },
+    ],
+    synonyms: ["significant", "important", "momentous", "substantial", "weighty"],
+    partOfSpeech: "adjective",
+    etymology: "Latin consequi (to follow closely).",
+  },
+  // ── conservative ──
+  {
+    word: "conservative",
+    definition: "Favoring traditional views and values; cautious about change or innovation.",
+    keyConcepts: [
+      { keyword: "favoring traditional", matchTerms: ["favor", "traditional", "convention", "established", "orthodox", "classic"], label: "Favoring traditional", hint: "The definition says 'favoring traditional views and values' -- preferring the old ways." },
+      { keyword: "cautious about change", matchTerms: ["cautious", "change", "innovation", "risk-averse", "moderate", "careful", "restrained"], label: "Cautious about change", hint: "The definition says 'cautious about change or innovation' -- slow to adopt new things." },
+    ],
+    synonyms: ["traditional", "cautious", "conventional", "moderate", "restrained"],
+    partOfSpeech: "adjective",
+    etymology: "Latin conservare (to preserve).",
+  },
+  // ── constructive ──
+  {
+    word: "constructive",
+    definition: "Serving a useful purpose; intended to be helpful or improve something.",
+    keyConcepts: [
+      { keyword: "serving useful purpose", matchTerms: ["useful", "purpose", "productive", "beneficial", "positive", "valuable"], label: "Serving useful purpose", hint: "The definition says 'serving a useful purpose' -- actually helps." },
+      { keyword: "intended to improve", matchTerms: ["intended", "helpful", "improve", "build", "develop", "advance", "contribute"], label: "Intended to improve", hint: "The definition says 'intended to be helpful or improve something' -- making things better." },
+    ],
+    synonyms: ["helpful", "productive", "positive", "beneficial", "useful"],
+    partOfSpeech: "adjective",
+    etymology: "Latin construere (to build together).",
+  },
+  // ── contentious ──
+  {
+    word: "contentious",
+    definition: "Causing or likely to cause an argument; involving heated disagreement.",
+    keyConcepts: [
+      { keyword: "causing argument", matchTerms: ["caus", "argument", "controversy", "dispute", "conflict", "debate"], label: "Causing argument", hint: "The definition says 'causing or likely to cause an argument' -- sparks conflict." },
+      { keyword: "heated disagreement", matchTerms: ["heated", "disagreement", "divisive", "polarizing", "combative", "quarrelsome"], label: "Heated disagreement", hint: "The definition says 'involving heated disagreement' -- people fight about it." },
+    ],
+    synonyms: ["controversial", "disputed", "divisive", "argumentative", "combative"],
+    partOfSpeech: "adjective",
+    etymology: "Latin contentiosus (quarrelsome).",
+  },
+  // ── conventional ──
+  {
+    word: "conventional",
+    definition: "Based on or in accordance with what is generally done or believed; traditional.",
+    keyConcepts: [
+      { keyword: "generally done", matchTerms: ["general", "done", "believed", "accepted", "standard", "typical", "usual"], label: "Generally done", hint: "The definition says 'in accordance with what is generally done' -- following the norm." },
+      { keyword: "traditional", matchTerms: ["traditional", "customary", "established", "orthodox", "mainstream", "normal"], label: "Traditional", hint: "The definition says 'traditional' -- the usual way." },
+    ],
+    synonyms: ["traditional", "standard", "typical", "orthodox", "customary"],
+    partOfSpeech: "adjective",
+    etymology: "Latin conventio (assembly, agreement).",
+  },
+  // ── corroborative ──
+  {
+    word: "corroborative",
+    definition: "Serving to confirm or support a statement, theory, or finding.",
+    keyConcepts: [
+      { keyword: "serving to confirm", matchTerms: ["confirm", "support", "verify", "validate", "substantiat", "back up"], label: "Serving to confirm", hint: "The definition says 'serving to confirm or support' -- adds proof." },
+      { keyword: "statement or theory", matchTerms: ["statement", "theory", "finding", "evidence", "testimony", "claim"], label: "Statement or theory", hint: "The definition says 'a statement, theory, or finding' -- something claimed." },
+    ],
+    synonyms: ["confirming", "supporting", "substantiating", "validating", "verifying"],
+    partOfSpeech: "adjective",
+    etymology: "Latin corroborare (to strengthen).",
+  },
+  // ── counterproductive ──
+  {
+    word: "counterproductive",
+    definition: "Having the opposite of the desired effect; hindering the achievement of a goal.",
+    keyConcepts: [
+      { keyword: "opposite of desired effect", matchTerms: ["opposite", "desired", "effect", "contrary", "reverse", "backfire"], label: "Opposite of desired effect", hint: "The definition says 'having the opposite of the desired effect' -- backfires." },
+      { keyword: "hindering achievement", matchTerms: ["hinder", "achievement", "goal", "obstruct", "impede", "undermine", "sabotage"], label: "Hindering achievement", hint: "The definition says 'hindering the achievement of a goal' -- getting in the way." },
+    ],
+    synonyms: ["harmful", "detrimental", "self-defeating", "unhelpful", "obstructive"],
+    partOfSpeech: "adjective",
+    etymology: "Counter- + productive.",
+  },
+  // ── debilitating ──
+  {
+    word: "debilitating",
+    definition: "Causing weakness or loss of strength; severely impairing function.",
+    keyConcepts: [
+      { keyword: "causing weakness", matchTerms: ["caus", "weakness", "weaken", "drain", "exhaust", "sap", "enfeeble"], label: "Causing weakness", hint: "The definition says 'causing weakness or loss of strength' -- makes you weak." },
+      { keyword: "impairing function", matchTerms: ["impair", "function", "crippling", "disabling", "incapacitat", "paralyzing"], label: "Impairing function", hint: "The definition says 'severely impairing function' -- can't work properly." },
+    ],
+    synonyms: ["weakening", "crippling", "incapacitating", "disabling", "exhausting"],
+    partOfSpeech: "adjective",
+    etymology: "Latin debilitare (to weaken).",
+  },
+  // ── decisive ──
+  {
+    word: "decisive",
+    definition: "Settling an issue or producing a definite result; able to make decisions quickly.",
+    keyConcepts: [
+      { keyword: "settling an issue", matchTerms: ["settl", "issue", "definite", "result", "conclusive", "determining", "final"], label: "Settling an issue", hint: "The definition says 'settling an issue or producing a definite result' -- ends the question." },
+      { keyword: "make decisions quickly", matchTerms: ["decision", "quickly", "resolute", "determined", "firm", "unhesitating"], label: "Make decisions quickly", hint: "The definition says 'able to make decisions quickly' -- doesn't hesitate." },
+    ],
+    synonyms: ["conclusive", "definitive", "determined", "resolute", "firm"],
+    partOfSpeech: "adjective",
+    etymology: "Latin decidere (to cut off, determine).",
+  },
+  // ── definitive ──
+  {
+    word: "definitive",
+    definition: "Done or reached decisively and with authority; serving as a standard or reference.",
+    keyConcepts: [
+      { keyword: "decisively with authority", matchTerms: ["decisive", "authority", "final", "conclusive", "ultimate", "absolute"], label: "Decisively with authority", hint: "The definition says 'done decisively and with authority' -- the final word." },
+      { keyword: "standard or reference", matchTerms: ["standard", "reference", "authoritative", "classic", "benchmark", "quintessential"], label: "Standard or reference", hint: "The definition says 'serving as a standard or reference' -- the one to look to." },
+    ],
+    synonyms: ["conclusive", "authoritative", "final", "ultimate", "decisive"],
+    partOfSpeech: "adjective",
+    etymology: "Latin definitivus (defining, limiting).",
+  },
+  // ── dehumanizing ──
+  {
+    word: "dehumanizing",
+    definition: "Depriving someone of human qualities or dignity; degrading.",
+    keyConcepts: [
+      { keyword: "depriving of human qualities", matchTerms: ["depriv", "human", "qualities", "dignity", "humanity", "personhood"], label: "Depriving of human qualities", hint: "The definition says 'depriving someone of human qualities' -- treating them as less than human." },
+      { keyword: "degrading", matchTerms: ["degrad", "demean", "humiliat", "belittl", "debase", "objectify"], label: "Degrading", hint: "The definition says 'degrading' -- lowering their worth." },
+    ],
+    synonyms: ["degrading", "demeaning", "humiliating", "debasing", "objectifying"],
+    partOfSpeech: "adjective",
+    etymology: "De- + humanize.",
+  },
+  // ── demoralizing ──
+  {
+    word: "demoralizing",
+    definition: "Causing someone to lose confidence or hope; disheartening.",
+    keyConcepts: [
+      { keyword: "lose confidence", matchTerms: ["lose", "confidence", "hope", "spirit", "morale", "discourag"], label: "Lose confidence", hint: "The definition says 'causing someone to lose confidence' -- breaks their spirit." },
+      { keyword: "disheartening", matchTerms: ["dishearten", "deflat", "dispirit", "depress", "crush", "undermin"], label: "Disheartening", hint: "The definition says 'disheartening' -- takes away hope." },
+    ],
+    synonyms: ["discouraging", "disheartening", "dispiriting", "deflating", "crushing"],
+    partOfSpeech: "adjective",
+    etymology: "French démoraliser (to corrupt morals).",
+  },
+  // ── destructive ──
+  {
+    word: "destructive",
+    definition: "Causing great damage or harm; tending to destroy or undermine.",
+    keyConcepts: [
+      { keyword: "causing damage", matchTerms: ["caus", "damage", "harm", "devastat", "ruin", "wreck", "ravage"], label: "Causing damage", hint: "The definition says 'causing great damage or harm' -- breaks things." },
+      { keyword: "tending to destroy", matchTerms: ["destroy", "undermine", "demolish", "annihilat", "dismantle", "wreck"], label: "Tending to destroy", hint: "The definition says 'tending to destroy or undermine' -- tears down." },
+    ],
+    synonyms: ["damaging", "harmful", "devastating", "ruinous", "detrimental"],
+    partOfSpeech: "adjective",
+    etymology: "Latin destruere (to pull down).",
+  },
+  // ── detached ──
+  {
+    word: "detached",
+    definition: "Separate or disconnected; not emotionally involved or objective.",
+    keyConcepts: [
+      { keyword: "separate or disconnected", matchTerms: ["separate", "disconnect", "apart", "isolated", "removed", "independent"], label: "Separate or disconnected", hint: "The definition says 'separate or disconnected' -- not attached." },
+      { keyword: "not emotionally involved", matchTerms: ["not emotion", "objective", "impartial", "aloof", "dispassionate", "indifferent"], label: "Not emotionally involved", hint: "The definition says 'not emotionally involved' -- keeps distance." },
+    ],
+    synonyms: ["disconnected", "aloof", "objective", "impartial", "dispassionate"],
+    partOfSpeech: "adjective",
+    etymology: "French détacher (to unfasten).",
+  },
+  // ── discernible ──
+  {
+    word: "discernible",
+    definition: "Able to be perceived or recognized; distinguishable.",
+    keyConcepts: [
+      { keyword: "able to be perceived", matchTerms: ["able", "perceiv", "recogniz", "detect", "notice", "see", "observe"], label: "Able to be perceived", hint: "The definition says 'able to be perceived or recognized' -- can be detected." },
+      { keyword: "distinguishable", matchTerms: ["distinguish", "identifiable", "visible", "apparent", "noticeable", "evident"], label: "Distinguishable", hint: "The definition says 'distinguishable' -- can tell it apart." },
+    ],
+    synonyms: ["perceptible", "noticeable", "detectable", "visible", "apparent"],
+    partOfSpeech: "adjective",
+    etymology: "Latin discernere (to separate, distinguish).",
+  },
+  // ── discretionary ──
+  {
+    word: "discretionary",
+    definition: "Available for use at one's own judgment; not required or fixed.",
+    keyConcepts: [
+      { keyword: "at one's own judgment", matchTerms: ["own", "judgment", "choice", "decision", "option", "preference"], label: "At one's own judgment", hint: "The definition says 'available for use at one's own judgment' -- you decide." },
+      { keyword: "not required", matchTerms: ["not required", "fixed", "optional", "elective", "voluntary", "flexible"], label: "Not required", hint: "The definition says 'not required or fixed' -- up to you." },
+    ],
+    synonyms: ["optional", "elective", "voluntary", "flexible", "arbitrary"],
+    partOfSpeech: "adjective",
+    etymology: "Medieval Latin discretionarius (of discretion).",
+  },
+  // ── dismissive ──
+  {
+    word: "dismissive",
+    definition: "Showing that something is unworthy of consideration; rejecting or disregarding.",
+    keyConcepts: [
+      { keyword: "unworthy of consideration", matchTerms: ["unworthy", "consideration", "trivial", "unimportant", "insignificant", "beneath"], label: "Unworthy of consideration", hint: "The definition says 'showing that something is unworthy of consideration' -- not worth thinking about." },
+      { keyword: "rejecting or disregarding", matchTerms: ["reject", "disregard", "ignore", "brush off", "scorn", "disdain", "contempt"], label: "Rejecting or disregarding", hint: "The definition says 'rejecting or disregarding' -- pushing aside." },
+    ],
+    synonyms: ["contemptuous", "disdainful", "scornful", "disparaging", "condescending"],
+    partOfSpeech: "adjective",
+    etymology: "Latin dimittere (to send away).",
+  },
+  // ── disproportionate ──
+  {
+    word: "disproportionate",
+    definition: "Too large or too small in relation to something else; out of proportion.",
+    keyConcepts: [
+      { keyword: "too large or too small", matchTerms: ["too large", "too small", "excessive", "inadequate", "unbalanced", "unequal"], label: "Too large or too small", hint: "The definition says 'too large or too small' -- wrong size." },
+      { keyword: "out of proportion", matchTerms: ["out of proportion", "uneven", "asymmetric", "lopsided", "skewed", "incommensurate"], label: "Out of proportion", hint: "The definition says 'out of proportion' -- doesn't match up." },
+    ],
+    synonyms: ["excessive", "unequal", "unbalanced", "incommensurate", "lopsided"],
+    partOfSpeech: "adjective",
+    etymology: "Dis- + proportionate.",
+  },
+  // ── disruptive ──
+  {
+    word: "disruptive",
+    definition: "Causing or tending to cause disruption; innovative in a way that upsets the status quo.",
+    keyConcepts: [
+      { keyword: "causing disruption", matchTerms: ["caus", "disruption", "interrupt", "disturb", "unsettle", "disorder"], label: "Causing disruption", hint: "The definition says 'causing or tending to cause disruption' -- breaks the flow." },
+      { keyword: "upsets status quo", matchTerms: ["innovative", "upsets", "status quo", "revolutionary", "transformative", "radical"], label: "Upsets status quo", hint: "The definition says 'innovative in a way that upsets the status quo' -- changes everything." },
+    ],
+    synonyms: ["disturbing", "unsettling", "troublesome", "revolutionary", "transformative"],
+    partOfSpeech: "adjective",
+    etymology: "Latin disrumpere (to break apart).",
+  },
+  // ── divisive ──
+  {
+    word: "divisive",
+    definition: "Tending to cause disagreement or hostility between people; creating division.",
+    keyConcepts: [
+      { keyword: "cause disagreement", matchTerms: ["caus", "disagreement", "hostility", "conflict", "discord", "strife"], label: "Cause disagreement", hint: "The definition says 'tending to cause disagreement or hostility' -- makes people fight." },
+      { keyword: "creating division", matchTerms: ["creating", "division", "polariz", "split", "alienat", "estrang"], label: "Creating division", hint: "The definition says 'creating division' -- splits people apart." },
+    ],
+    synonyms: ["polarizing", "contentious", "controversial", "alienating", "splitting"],
+    partOfSpeech: "adjective",
+    etymology: "Latin dividere (to divide).",
+  },
+  // ── elusive ──
+  {
+    word: "elusive",
+    definition: "Difficult to find, catch, or achieve; skillfully evading capture.",
+    keyConcepts: [
+      { keyword: "difficult to find", matchTerms: ["difficult", "find", "catch", "achieve", "hard to grasp", "slippery"], label: "Difficult to find", hint: "The definition says 'difficult to find, catch, or achieve' -- hard to get." },
+      { keyword: "skillfully evading", matchTerms: ["evad", "captur", "escap", "evasive", "fleeting", "intangible"], label: "Skillfully evading", hint: "The definition says 'skillfully evading capture' -- slips away." },
+    ],
+    synonyms: ["evasive", "slippery", "fleeting", "intangible", "hard to catch"],
+    partOfSpeech: "adjective",
+    etymology: "Latin eludere (to escape from).",
+  },
+  // ── embittered ──
+  {
+    word: "embittered",
+    definition: "Made bitter or resentful by unfair treatment; feeling angry and disappointed.",
+    keyConcepts: [
+      { keyword: "made bitter", matchTerms: ["bitter", "resentful", "unfair", "treatment", "sour", "cynical"], label: "Made bitter", hint: "The definition says 'made bitter or resentful by unfair treatment' -- turned sour." },
+      { keyword: "angry and disappointed", matchTerms: ["angry", "disappointed", "disillusion", "hurt", "aggrieved", "disenfranchised"], label: "Angry and disappointed", hint: "The definition says 'feeling angry and disappointed' -- let down." },
+    ],
+    synonyms: ["resentful", "bitter", "cynical", "disillusioned", "aggrieved"],
+    partOfSpeech: "adjective",
+    etymology: "En- + bitter.",
+  },
+  // ── empirical ──
+  {
+    word: "empirical",
+    definition: "Based on observation or experience rather than theory; verifiable by observation.",
+    keyConcepts: [
+      { keyword: "based on observation", matchTerms: ["based", "observation", "experience", "practical", "hands-on", "experimental"], label: "Based on observation", hint: "The definition says 'based on observation or experience' -- from real evidence." },
+      { keyword: "rather than theory", matchTerms: ["rather than theory", "verifiable", "factual", "measurable", "demonstrable", "concrete"], label: "Rather than theory", hint: "The definition says 'rather than theory' -- not just ideas." },
+    ],
+    synonyms: ["observational", "experiential", "practical", "factual", "experimental"],
+    partOfSpeech: "adjective",
+    etymology: "Greek empeirikos (experienced).",
+  },
+  // ── enduring ──
+  {
+    word: "enduring",
+    definition: "Lasting over a long period of time; able to withstand hardship.",
+    keyConcepts: [
+      { keyword: "lasting long", matchTerms: ["lasting", "long", "period", "time", "permanent", "persistent", "durable"], label: "Lasting long", hint: "The definition says 'lasting over a long period of time' -- doesn't fade." },
+      { keyword: "withstand hardship", matchTerms: ["withstand", "hardship", "survive", "resilient", "steadfast", "stalwart"], label: "Withstand hardship", hint: "The definition says 'able to withstand hardship' -- tough and lasting." },
+    ],
+    synonyms: ["lasting", "durable", "permanent", "persistent", "resilient"],
+    partOfSpeech: "adjective",
+    etymology: "Latin indurare (to make hard).",
+  },
+  // ── enlightened ──
+  {
+    word: "enlightened",
+    definition: "Having or showing a rational and well-informed outlook; spiritually aware.",
+    keyConcepts: [
+      { keyword: "rational and well-informed", matchTerms: ["rational", "well-informed", "knowledgeable", "educated", "wise", "progressive"], label: "Rational and well-informed", hint: "The definition says 'having a rational and well-informed outlook' -- knows better." },
+      { keyword: "spiritually aware", matchTerms: ["spiritual", "aware", "awakened", "illuminated", "insightful", "conscious"], label: "Spiritually aware", hint: "The definition says 'spiritually aware' -- higher understanding." },
+    ],
+    synonyms: ["informed", "educated", "wise", "progressive", "aware"],
+    partOfSpeech: "adjective",
+    etymology: "En- + lighten.",
+  },
+  // ── entrenched ──
+  {
+    word: "entrenched",
+    definition: "Firmly established and difficult to change; deeply rooted.",
+    keyConcepts: [
+      { keyword: "firmly established", matchTerms: ["firm", "established", "fixed", "set", "ingrained", "embedded"], label: "Firmly established", hint: "The definition says 'firmly established' -- solidly in place." },
+      { keyword: "difficult to change", matchTerms: ["difficult", "change", "immovable", "stubborn", "persistent", "rooted", "deep"], label: "Difficult to change", hint: "The definition says 'difficult to change' -- won't budge." },
+    ],
+    synonyms: ["established", "ingrained", "deep-rooted", "embedded", "fixed"],
+    partOfSpeech: "adjective",
+    etymology: "En- + trench.",
+  },
+  // ── estranged ──
+  {
+    word: "estranged",
+    definition: "No longer close or affectionate to someone; alienated.",
+    keyConcepts: [
+      { keyword: "no longer close", matchTerms: ["no longer", "close", "affectionate", "distant", "separated", "apart"], label: "No longer close", hint: "The definition says 'no longer close or affectionate' -- relationship ended." },
+      { keyword: "alienated", matchTerms: ["alienat", "isolated", "detached", "disaffected", "withdrawn", "removed"], label: "Alienated", hint: "The definition says 'alienated' -- pushed away." },
+    ],
+    synonyms: ["alienated", "separated", "distant", "divided", "isolated"],
+    partOfSpeech: "adjective",
+    etymology: "Latin extraneare (to treat as a stranger).",
+  },
+  // ── exclusionary ──
+  {
+    word: "exclusionary",
+    definition: "Tending to exclude people from a group or activity; restrictive.",
+    keyConcepts: [
+      { keyword: "tending to exclude", matchTerms: ["exclude", "keep out", "bar", "prohibit", "reject", "omit"], label: "Tending to exclude", hint: "The definition says 'tending to exclude people' -- keeping them out." },
+      { keyword: "restrictive", matchTerms: ["restrictive", "selective", "discriminatory", "limiting", "narrow", "closed"], label: "Restrictive", hint: "The definition says 'restrictive' -- limits who can participate." },
+    ],
+    synonyms: ["restrictive", "discriminatory", "selective", "limiting", "closed"],
+    partOfSpeech: "adjective",
+    etymology: "Latin excludere (to shut out).",
+  },
+  // ── exploitative ──
+  {
+    word: "exploitative",
+    definition: "Taking unfair advantage of someone for one's own benefit; using selfishly.",
+    keyConcepts: [
+      { keyword: "unfair advantage", matchTerms: ["unfair", "advantage", "take advantage", "abuse", "misuse", "manipulat"], label: "Unfair advantage", hint: "The definition says 'taking unfair advantage of someone' -- using them." },
+      { keyword: "for own benefit", matchTerms: ["own benefit", "selfish", "self-serving", "predatory", "opportunistic", "parasitic"], label: "For own benefit", hint: "The definition says 'for one's own benefit' -- profiting at their expense." },
+    ],
+    synonyms: ["abusive", "manipulative", "predatory", "opportunistic", "selfish"],
+    partOfSpeech: "adjective",
+    etymology: "Latin exploitare (to accomplish).",
+  },
+  // ── formative ──
+  {
+    word: "formative",
+    definition: "Having a lasting influence on character or development; shaping.",
+    keyConcepts: [
+      { keyword: "lasting influence", matchTerms: ["lasting", "influence", "impact", "effect", "impression", "significant"], label: "Lasting influence", hint: "The definition says 'having a lasting influence' -- leaves a mark." },
+      { keyword: "on character or development", matchTerms: ["character", "development", "growth", "shaping", "molding", "defining"], label: "On character or development", hint: "The definition says 'on character or development' -- shapes who you become." },
+    ],
+    synonyms: ["influential", "shaping", "developmental", "defining", "foundational"],
+    partOfSpeech: "adjective",
+    etymology: "Latin formare (to form).",
+  },
+  // ── fortuitous ──
+  {
+    word: "fortuitous",
+    definition: "Happening by chance rather than intention; lucky or fortunate.",
+    keyConcepts: [
+      { keyword: "happening by chance", matchTerms: ["happen", "chance", "accident", "coincidenc", "unplanned", "random"], label: "Happening by chance", hint: "The definition says 'happening by chance rather than intention' -- not planned." },
+      { keyword: "lucky or fortunate", matchTerms: ["lucky", "fortunate", "serendipitous", "providential", "auspicious", "favorable"], label: "Lucky or fortunate", hint: "The definition says 'lucky or fortunate' -- good luck." },
+    ],
+    synonyms: ["accidental", "lucky", "serendipitous", "chance", "providential"],
+    partOfSpeech: "adjective",
+    etymology: "Latin fortuitus (happening by chance).",
+  },
+  // ── grounded ──
+  {
+    word: "grounded",
+    definition: "Well-balanced and sensible; based on a solid foundation.",
+    keyConcepts: [
+      { keyword: "well-balanced", matchTerms: ["well-balanced", "sensible", "stable", "level-headed", "practical", "down-to-earth"], label: "Well-balanced", hint: "The definition says 'well-balanced and sensible' -- has their feet on the ground." },
+      { keyword: "solid foundation", matchTerms: ["solid", "foundation", "based", "rooted", "founded", "established"], label: "Solid foundation", hint: "The definition says 'based on a solid foundation' -- built on something real." },
+    ],
+    synonyms: ["sensible", "stable", "level-headed", "practical", "down-to-earth"],
+    partOfSpeech: "adjective",
+    etymology: "From ground.",
+  },
+  // ── habitual ──
+  {
+    word: "habitual",
+    definition: "Done constantly or as a habit; regular or usual.",
+    keyConcepts: [
+      { keyword: "done constantly", matchTerms: ["constant", "habit", "repeat", "routine", "regular", "frequent"], label: "Done constantly", hint: "The definition says 'done constantly or as a habit' -- keeps doing it." },
+      { keyword: "regular or usual", matchTerms: ["regular", "usual", "customary", "typical", "normal", "accustomed"], label: "Regular or usual", hint: "The definition says 'regular or usual' -- happens all the time." },
+    ],
+    synonyms: ["regular", "customary", "routine", "frequent", "chronic"],
+    partOfSpeech: "adjective",
+    etymology: "Latin habitus (condition, habit).",
+  },
+  // ── hierarchical ──
+  {
+    word: "hierarchical",
+    definition: "Arranged in a graded order or ranking; having levels of authority.",
+    keyConcepts: [
+      { keyword: "graded order", matchTerms: ["graded", "order", "rank", "tier", "level", "graduated", "layered"], label: "Graded order", hint: "The definition says 'arranged in a graded order' -- organized by rank." },
+      { keyword: "levels of authority", matchTerms: ["level", "authority", "power", "structured", "stratified", "organized"], label: "Levels of authority", hint: "The definition says 'having levels of authority' -- some above others." },
+    ],
+    synonyms: ["ranked", "tiered", "stratified", "graded", "structured"],
+    partOfSpeech: "adjective",
+    etymology: "Greek hierarchia (rule of a high priest).",
+  },
+  // ── hypocritical ──
+  {
+    word: "hypocritical",
+    definition: "Behaving in a way that contradicts one's stated beliefs or feelings; insincere.",
+    keyConcepts: [
+      { keyword: "contradicts stated beliefs", matchTerms: ["contradict", "stated", "beliefs", "inconsistent", "double", "two-faced"], label: "Contradicts stated beliefs", hint: "The definition says 'behaving in a way that contradicts one's stated beliefs' -- says one thing, does another." },
+      { keyword: "insincere", matchTerms: ["insincere", "false", "phony", "fake", "deceitful", "duplicitous"], label: "Insincere", hint: "The definition says 'insincere' -- not genuine." },
+    ],
+    synonyms: ["insincere", "two-faced", "phony", "deceitful", "duplicitous"],
+    partOfSpeech: "adjective",
+    etymology: "Greek hypokrites (actor, pretender).",
+  },
+  // ── idealistic ──
+  {
+    word: "idealistic",
+    definition: "Characterized by high ideals that may be unrealistic; visionary.",
+    keyConcepts: [
+      { keyword: "high ideals", matchTerms: ["high", "ideals", "principled", "noble", "lofty", "ambitious"], label: "High ideals", hint: "The definition says 'characterized by high ideals' -- aiming for perfection." },
+      { keyword: "may be unrealistic", matchTerms: ["unrealistic", "impractical", "utopian", "naive", "romantic", "quixotic"], label: "May be unrealistic", hint: "The definition says 'that may be unrealistic' -- perhaps not achievable." },
+    ],
+    synonyms: ["visionary", "utopian", "romantic", "optimistic", "quixotic"],
+    partOfSpeech: "adjective",
+    etymology: "Greek idea (form, pattern).",
+  },
+  // ── illusory ──
+  {
+    word: "illusory",
+    definition: "Based on illusion; not real or true despite appearances.",
+    keyConcepts: [
+      { keyword: "based on illusion", matchTerms: ["illusion", "deceptive", "misleading", "false", "imaginary", "phantom"], label: "Based on illusion", hint: "The definition says 'based on illusion' -- tricks you." },
+      { keyword: "not real despite appearances", matchTerms: ["not real", "true", "appearances", "seeming", "apparent", "fake", "fictitious"], label: "Not real despite appearances", hint: "The definition says 'not real or true despite appearances' -- looks real but isn't." },
+    ],
+    synonyms: ["false", "deceptive", "imaginary", "unreal", "misleading"],
+    partOfSpeech: "adjective",
+    etymology: "Latin illusio (a mocking).",
+  },
+  // ── imperative ──
+  {
+    word: "imperative",
+    definition: "Of vital importance; absolutely necessary or urgent.",
+    keyConcepts: [
+      { keyword: "vital importance", matchTerms: ["vital", "importance", "essential", "critical", "crucial", "paramount"], label: "Vital importance", hint: "The definition says 'of vital importance' -- really matters." },
+      { keyword: "absolutely necessary", matchTerms: ["absolut", "necessary", "urgent", "pressing", "compulsory", "mandatory"], label: "Absolutely necessary", hint: "The definition says 'absolutely necessary or urgent' -- must be done." },
+    ],
+    synonyms: ["essential", "crucial", "vital", "urgent", "necessary"],
+    partOfSpeech: "adjective",
+    etymology: "Latin imperare (to command).",
+  },
+  // ── implausible ──
+  {
+    word: "implausible",
+    definition: "Not seeming reasonable or probable; difficult to believe.",
+    keyConcepts: [
+      { keyword: "not reasonable", matchTerms: ["not reasonable", "probable", "unlikely", "doubtful", "questionable", "dubious"], label: "Not reasonable", hint: "The definition says 'not seeming reasonable or probable' -- doesn't add up." },
+      { keyword: "difficult to believe", matchTerms: ["difficult", "believe", "incredible", "far-fetched", "unconvincing", "unbelievable"], label: "Difficult to believe", hint: "The definition says 'difficult to believe' -- hard to accept." },
+    ],
+    synonyms: ["unlikely", "unbelievable", "unconvincing", "far-fetched", "dubious"],
+    partOfSpeech: "adjective",
+    etymology: "Latin in- + plausibilis (worthy of applause).",
+  },
+  // ── inadvertent ──
+  {
+    word: "inadvertent",
+    definition: "Not resulting from or achieved through deliberate planning; unintentional.",
+    keyConcepts: [
+      { keyword: "not deliberate", matchTerms: ["not deliberat", "planning", "accidental", "unplanned", "unwitting", "chance"], label: "Not deliberate", hint: "The definition says 'not resulting from deliberate planning' -- wasn't meant to happen." },
+      { keyword: "unintentional", matchTerms: ["unintentional", "mistake", "oversight", "careless", "thoughtless", "involuntary"], label: "Unintentional", hint: "The definition says 'unintentional' -- by accident." },
+    ],
+    synonyms: ["unintentional", "accidental", "unplanned", "unwitting", "careless"],
+    partOfSpeech: "adjective",
+    etymology: "Latin inadvertens (not paying attention).",
+  },
+  // ── incongruous ──
+  {
+    word: "incongruous",
+    definition: "Not in harmony or keeping with the surroundings; out of place.",
+    keyConcepts: [
+      { keyword: "not in harmony", matchTerms: ["not", "harmony", "keeping", "discord", "clash", "incompatible", "inconsistent"], label: "Not in harmony", hint: "The definition says 'not in harmony or keeping' -- doesn't fit." },
+      { keyword: "out of place", matchTerms: ["out of place", "inappropriate", "unsuitable", "mismatched", "odd", "jarring"], label: "Out of place", hint: "The definition says 'out of place' -- doesn't belong there." },
+    ],
+    synonyms: ["inappropriate", "incompatible", "inconsistent", "unsuitable", "mismatched"],
+    partOfSpeech: "adjective",
+    etymology: "Latin incongruus (not agreeing).",
+  },
+  // ── indiscriminate ──
+  {
+    word: "indiscriminate",
+    definition: "Done at random or without careful judgment; not making distinctions.",
+    keyConcepts: [
+      { keyword: "at random", matchTerms: ["random", "without", "judgment", "haphazard", "arbitrary", "aimless"], label: "At random", hint: "The definition says 'done at random' -- no pattern." },
+      { keyword: "not making distinctions", matchTerms: ["not making", "distinction", "undiscriminating", "wholesale", "blanket", "sweeping"], label: "Not making distinctions", hint: "The definition says 'not making distinctions' -- treats everything the same." },
+    ],
+    synonyms: ["random", "arbitrary", "haphazard", "wholesale", "undiscriminating"],
+    partOfSpeech: "adjective",
+    etymology: "Latin in- + discriminare (to distinguish).",
+  },
+  // ── inequitable ──
+  {
+    word: "inequitable",
+    definition: "Unfair or unjust; not treating people equally.",
+    keyConcepts: [
+      { keyword: "unfair or unjust", matchTerms: ["unfair", "unjust", "biased", "partial", "one-sided", "discriminatory"], label: "Unfair or unjust", hint: "The definition says 'unfair or unjust' -- not right." },
+      { keyword: "not treating equally", matchTerms: ["not", "treating", "equal", "unequal", "imbalanced", "disproportionate"], label: "Not treating equally", hint: "The definition says 'not treating people equally' -- some get more than others." },
+    ],
+    synonyms: ["unfair", "unjust", "unequal", "biased", "partial"],
+    partOfSpeech: "adjective",
+    etymology: "Latin in- + aequitas (fairness).",
+  },
+  // ── inflexible ──
+  {
+    word: "inflexible",
+    definition: "Unwilling to change or compromise; rigid and unbending.",
+    keyConcepts: [
+      { keyword: "unwilling to change", matchTerms: ["unwilling", "change", "compromise", "stubborn", "obstinate", "unyielding"], label: "Unwilling to change", hint: "The definition says 'unwilling to change or compromise' -- won't budge." },
+      { keyword: "rigid and unbending", matchTerms: ["rigid", "unbending", "stiff", "fixed", "immutable", "immovable"], label: "Rigid and unbending", hint: "The definition says 'rigid and unbending' -- can't be bent." },
+    ],
+    synonyms: ["rigid", "stubborn", "unyielding", "unbending", "obstinate"],
+    partOfSpeech: "adjective",
+    etymology: "Latin inflexibilis (that cannot be bent).",
+  },
+  // ── influential ──
+  {
+    word: "influential",
+    definition: "Having great influence on someone or something; powerful in shaping opinions.",
+    keyConcepts: [
+      { keyword: "great influence", matchTerms: ["great", "influence", "impact", "effect", "sway", "weight", "power"], label: "Great influence", hint: "The definition says 'having great influence' -- makes a difference." },
+      { keyword: "shaping opinions", matchTerms: ["shaping", "opinions", "persuasive", "authoritative", "leading", "prominent"], label: "Shaping opinions", hint: "The definition says 'powerful in shaping opinions' -- changes minds." },
+    ],
+    synonyms: ["powerful", "authoritative", "prominent", "leading", "significant"],
+    partOfSpeech: "adjective",
+    etymology: "Latin influere (to flow in).",
+  },
+  // ── inhibited ──
+  {
+    word: "inhibited",
+    definition: "Unable to act in a relaxed and natural way; restrained or held back.",
+    keyConcepts: [
+      { keyword: "unable to act naturally", matchTerms: ["unable", "act", "relaxed", "natural", "self-conscious", "uncomfortable"], label: "Unable to act naturally", hint: "The definition says 'unable to act in a relaxed and natural way' -- feeling constrained." },
+      { keyword: "restrained", matchTerms: ["restrain", "held back", "repressed", "reserved", "shy", "withdrawn"], label: "Restrained", hint: "The definition says 'restrained or held back' -- holding oneself back." },
+    ],
+    synonyms: ["reserved", "restrained", "self-conscious", "repressed", "shy"],
+    partOfSpeech: "adjective",
+    etymology: "Latin inhibere (to hold in, restrain).",
+  },
+  // ── insular ──
+  {
+    word: "insular",
+    definition: "Ignorant of or uninterested in ideas beyond one's own experience; narrow-minded.",
+    keyConcepts: [
+      { keyword: "ignorant of outside ideas", matchTerms: ["ignorant", "uninterested", "ideas", "outside", "provincial", "parochial"], label: "Ignorant of outside ideas", hint: "The definition says 'ignorant of or uninterested in ideas beyond one's own experience' -- closed off." },
+      { keyword: "narrow-minded", matchTerms: ["narrow-minded", "limited", "isolated", "inward-looking", "blinkered", "restricted"], label: "Narrow-minded", hint: "The definition says 'narrow-minded' -- can't see beyond themselves." },
+    ],
+    synonyms: ["narrow-minded", "provincial", "parochial", "isolated", "limited"],
+    partOfSpeech: "adjective",
+    etymology: "Latin insula (island).",
+  },
+  // ── intangible ──
+  {
+    word: "intangible",
+    definition: "Unable to be touched or grasped; not having physical presence.",
+    keyConcepts: [
+      { keyword: "unable to be touched", matchTerms: ["unable", "touch", "grasp", "incorporeal", "immaterial", "abstract"], label: "Unable to be touched", hint: "The definition says 'unable to be touched or grasped' -- can't feel it." },
+      { keyword: "not physical", matchTerms: ["not physical", "presence", "invisible", "ethereal", "impalpable", "insubstantial"], label: "Not physical", hint: "The definition says 'not having physical presence' -- exists but isn't solid." },
+    ],
+    synonyms: ["abstract", "immaterial", "incorporeal", "impalpable", "ethereal"],
+    partOfSpeech: "adjective",
+    etymology: "Latin in- + tangere (to touch).",
+  },
+  // ── intermittent ──
+  {
+    word: "intermittent",
+    definition: "Occurring at irregular intervals; not continuous or steady.",
+    keyConcepts: [
+      { keyword: "irregular intervals", matchTerms: ["irregular", "interval", "sporadic", "occasional", "periodic", "scattered"], label: "Irregular intervals", hint: "The definition says 'occurring at irregular intervals' -- comes and goes." },
+      { keyword: "not continuous", matchTerms: ["not continuous", "steady", "broken", "interrupted", "fitful", "on and off"], label: "Not continuous", hint: "The definition says 'not continuous or steady' -- stops and starts." },
+    ],
+    synonyms: ["sporadic", "occasional", "irregular", "periodic", "fitful"],
+    partOfSpeech: "adjective",
+    etymology: "Latin intermittere (to discontinue).",
+  },
+  // ── intrusive ──
+  {
+    word: "intrusive",
+    definition: "Causing disruption or annoyance through being unwelcome; invasive.",
+    keyConcepts: [
+      { keyword: "causing disruption", matchTerms: ["caus", "disruption", "annoyance", "disturbing", "bothersome", "interfering"], label: "Causing disruption", hint: "The definition says 'causing disruption or annoyance' -- gets in the way." },
+      { keyword: "unwelcome", matchTerms: ["unwelcome", "invasive", "intruding", "pushy", "obtrusive", "prying"], label: "Unwelcome", hint: "The definition says 'through being unwelcome' -- not wanted there." },
+    ],
+    synonyms: ["invasive", "obtrusive", "interfering", "meddlesome", "pushy"],
+    partOfSpeech: "adjective",
+    etymology: "Latin intrudere (to thrust in).",
+  },
+  // ── liberating ──
+  {
+    word: "liberating",
+    definition: "Providing a feeling of freedom from restrictions; setting free.",
+    keyConcepts: [
+      { keyword: "feeling of freedom", matchTerms: ["feeling", "freedom", "free", "release", "emancipat", "relief"], label: "Feeling of freedom", hint: "The definition says 'providing a feeling of freedom' -- feels free." },
+      { keyword: "from restrictions", matchTerms: ["restriction", "constraint", "limit", "bound", "unfetter", "unshackle"], label: "From restrictions", hint: "The definition says 'freedom from restrictions' -- breaking loose." },
+    ],
+    synonyms: ["freeing", "emancipating", "releasing", "unbinding", "empowering"],
+    partOfSpeech: "adjective",
+    etymology: "Latin liberare (to set free).",
+  },
+  // ── marginalized ──
+  {
+    word: "marginalized",
+    definition: "Treated as insignificant or peripheral; pushed to the edge of society.",
+    keyConcepts: [
+      { keyword: "treated as insignificant", matchTerms: ["insignificant", "peripheral", "unimportant", "neglect", "overlook", "dismiss"], label: "Treated as insignificant", hint: "The definition says 'treated as insignificant or peripheral' -- not considered important." },
+      { keyword: "edge of society", matchTerms: ["edge", "society", "exclude", "disenfranchise", "sidelined", "ostracize"], label: "Edge of society", hint: "The definition says 'pushed to the edge of society' -- left out." },
+    ],
+    synonyms: ["excluded", "sidelined", "disenfranchised", "neglected", "overlooked"],
+    partOfSpeech: "adjective",
+    etymology: "Latin margo (edge, border).",
+  },
+  // ── misguided ──
+  {
+    word: "misguided",
+    definition: "Having or showing faulty judgment or reasoning; wrongly directed.",
+    keyConcepts: [
+      { keyword: "faulty judgment", matchTerms: ["faulty", "judgment", "reasoning", "wrong", "mistaken", "erroneous", "flawed"], label: "Faulty judgment", hint: "The definition says 'having faulty judgment or reasoning' -- thinking wrong." },
+      { keyword: "wrongly directed", matchTerms: ["wrongly", "directed", "ill-advised", "unwise", "foolish", "misled"], label: "Wrongly directed", hint: "The definition says 'wrongly directed' -- going the wrong way." },
+    ],
+    synonyms: ["mistaken", "erroneous", "ill-advised", "foolish", "unwise"],
+    partOfSpeech: "adjective",
+    etymology: "Mis- + guided.",
+  },
+  // ── misleading ──
+  {
+    word: "misleading",
+    definition: "Giving the wrong idea or impression; deceptive.",
+    keyConcepts: [
+      { keyword: "wrong idea", matchTerms: ["wrong", "idea", "impression", "false", "inaccurate", "distort"], label: "Wrong idea", hint: "The definition says 'giving the wrong idea or impression' -- not the truth." },
+      { keyword: "deceptive", matchTerms: ["deceptive", "deceitful", "dishonest", "confusing", "delusive", "illusory"], label: "Deceptive", hint: "The definition says 'deceptive' -- tricks you." },
+    ],
+    synonyms: ["deceptive", "confusing", "deceiving", "false", "delusive"],
+    partOfSpeech: "adjective",
+    etymology: "Mis- + leading.",
+  },
+  // ── myriad ──
+  {
+    word: "myriad",
+    definition: "A countless or extremely great number; innumerable.",
+    keyConcepts: [
+      { keyword: "countless number", matchTerms: ["countless", "number", "innumerable", "endless", "infinite", "limitless"], label: "Countless number", hint: "The definition says 'a countless or extremely great number' -- too many to count." },
+      { keyword: "extremely great", matchTerms: ["extreme", "great", "vast", "multitude", "numerous", "many"], label: "Extremely great", hint: "The definition says 'extremely great number' -- a huge amount." },
+    ],
+    synonyms: ["countless", "innumerable", "numerous", "multitudinous", "endless"],
+    partOfSpeech: "adjective",
+    etymology: "Greek myrias (ten thousand).",
+  },
+  // ── nuanced ──
+  {
+    word: "nuanced",
+    definition: "Characterized by subtle distinctions or variations; showing delicate complexity.",
+    keyConcepts: [
+      { keyword: "subtle distinctions", matchTerms: ["subtle", "distinction", "variation", "fine", "delicate", "gradation"], label: "Subtle distinctions", hint: "The definition says 'characterized by subtle distinctions' -- small but important differences." },
+      { keyword: "delicate complexity", matchTerms: ["delicate", "complex", "sophisticated", "refined", "intricate", "layered"], label: "Delicate complexity", hint: "The definition says 'showing delicate complexity' -- many layers of meaning." },
+    ],
+    synonyms: ["subtle", "refined", "sophisticated", "complex", "intricate"],
+    partOfSpeech: "adjective",
+    etymology: "French nuance (shade, subtlety).",
+  },
+  // ── objectionable ──
+  {
+    word: "objectionable",
+    definition: "Arousing distaste or opposition; offensive or unacceptable.",
+    keyConcepts: [
+      { keyword: "arousing distaste", matchTerms: ["arous", "distaste", "opposition", "dislik", "disapproval", "repugnant"], label: "Arousing distaste", hint: "The definition says 'arousing distaste or opposition' -- people don't like it." },
+      { keyword: "offensive", matchTerms: ["offensive", "unacceptable", "disagreeable", "repulsive", "deplorable", "intolerable"], label: "Offensive", hint: "The definition says 'offensive or unacceptable' -- not okay." },
+    ],
+    synonyms: ["offensive", "unacceptable", "disagreeable", "repugnant", "deplorable"],
+    partOfSpeech: "adjective",
+    etymology: "Latin obiectare (to throw against).",
+  },
+  // ── obstructive ──
+  {
+    word: "obstructive",
+    definition: "Causing a blockage or obstacle; deliberately creating difficulties.",
+    keyConcepts: [
+      { keyword: "causing blockage", matchTerms: ["caus", "blockage", "obstacle", "barrier", "hindrance", "impediment"], label: "Causing blockage", hint: "The definition says 'causing a blockage or obstacle' -- in the way." },
+      { keyword: "creating difficulties", matchTerms: ["creat", "difficult", "deliberat", "unhelpful", "uncooperative", "thwart"], label: "Creating difficulties", hint: "The definition says 'deliberately creating difficulties' -- making things hard." },
+    ],
+    synonyms: ["hindering", "blocking", "unhelpful", "impeding", "uncooperative"],
+    partOfSpeech: "adjective",
+    etymology: "Latin obstruere (to block up).",
+  },
+  // ── overbearing ──
+  {
+    word: "overbearing",
+    definition: "Unpleasantly dominating; attempting to control others in an oppressive way.",
+    keyConcepts: [
+      { keyword: "unpleasantly dominating", matchTerms: ["unpleasant", "dominat", "control", "bossy", "dictatorial", "imperious"], label: "Unpleasantly dominating", hint: "The definition says 'unpleasantly dominating' -- too controlling." },
+      { keyword: "oppressive way", matchTerms: ["oppressive", "way", "heavy-handed", "tyrannical", "autocratic", "high-handed"], label: "Oppressive way", hint: "The definition says 'attempting to control in an oppressive way' -- pushes people around." },
+    ],
+    synonyms: ["domineering", "bossy", "dictatorial", "imperious", "autocratic"],
+    partOfSpeech: "adjective",
+    etymology: "Over- + bearing.",
+  },
+  // ── overstated ──
+  {
+    word: "overstated",
+    definition: "Expressed too strongly; exaggerated beyond what is accurate.",
+    keyConcepts: [
+      { keyword: "expressed too strongly", matchTerms: ["express", "too strongly", "excessive", "extreme", "inflated", "overblown"], label: "Expressed too strongly", hint: "The definition says 'expressed too strongly' -- more than necessary." },
+      { keyword: "exaggerated", matchTerms: ["exaggerat", "beyond", "accurate", "overemphasiz", "overdone", "embellish"], label: "Exaggerated", hint: "The definition says 'exaggerated beyond what is accurate' -- blown out of proportion." },
+    ],
+    synonyms: ["exaggerated", "overblown", "inflated", "embellished", "overemphasized"],
+    partOfSpeech: "adjective",
+    etymology: "Over- + stated.",
+  },
+  // ── paradoxical ──
+  {
+    word: "paradoxical",
+    definition: "Seemingly absurd or self-contradictory; having contradictory qualities.",
+    keyConcepts: [
+      { keyword: "seemingly absurd", matchTerms: ["seem", "absurd", "strange", "puzzling", "baffling", "perplexing"], label: "Seemingly absurd", hint: "The definition says 'seemingly absurd or self-contradictory' -- doesn't make sense at first." },
+      { keyword: "contradictory qualities", matchTerms: ["contradict", "qualities", "inconsistent", "ironic", "anomalous", "conflicting"], label: "Contradictory qualities", hint: "The definition says 'having contradictory qualities' -- opposites together." },
+    ],
+    synonyms: ["contradictory", "inconsistent", "ironic", "puzzling", "anomalous"],
+    partOfSpeech: "adjective",
+    etymology: "Greek paradoxos (contrary to expectation).",
+  },
+  // ── pervasive ──
+  {
+    word: "pervasive",
+    definition: "Spreading widely throughout an area or group of people; prevalent.",
+    keyConcepts: [
+      { keyword: "spreading widely", matchTerms: ["spread", "widely", "throughout", "everywhere", "extensive", "far-reaching"], label: "Spreading widely", hint: "The definition says 'spreading widely throughout' -- gets everywhere." },
+      { keyword: "prevalent", matchTerms: ["prevalent", "common", "ubiquitous", "omnipresent", "rife", "rampant"], label: "Prevalent", hint: "The definition says 'prevalent' -- found everywhere." },
+    ],
+    synonyms: ["widespread", "prevalent", "ubiquitous", "omnipresent", "extensive"],
+    partOfSpeech: "adjective",
+    etymology: "Latin pervadere (to go through).",
+  },
+  // ── polarizing ──
+  {
+    word: "polarizing",
+    definition: "Causing division into two opposing groups; creating strong contrasting positions.",
+    keyConcepts: [
+      { keyword: "causing division", matchTerms: ["caus", "division", "opposing", "split", "divide", "separate"], label: "Causing division", hint: "The definition says 'causing division into two opposing groups' -- splits people." },
+      { keyword: "contrasting positions", matchTerms: ["contrast", "positions", "extreme", "opposed", "conflict", "contentious"], label: "Contrasting positions", hint: "The definition says 'creating strong contrasting positions' -- people take sides." },
+    ],
+    synonyms: ["divisive", "controversial", "contentious", "splitting", "alienating"],
+    partOfSpeech: "adjective",
+    etymology: "From pole (opposite ends).",
+  },
+  // ── presumptive ──
+  {
+    word: "presumptive",
+    definition: "Based on presumption rather than proof; giving grounds for a belief.",
+    keyConcepts: [
+      { keyword: "based on presumption", matchTerms: ["based", "presumption", "assumption", "supposed", "probable", "likely"], label: "Based on presumption", hint: "The definition says 'based on presumption rather than proof' -- assumed, not proven." },
+      { keyword: "giving grounds for belief", matchTerms: ["grounds", "belief", "infer", "deduc", "reason", "expect"], label: "Giving grounds for belief", hint: "The definition says 'giving grounds for a belief' -- reasonable to assume." },
+    ],
+    synonyms: ["assumed", "supposed", "probable", "likely", "expected"],
+    partOfSpeech: "adjective",
+    etymology: "Latin praesumptivus (taking beforehand).",
+  },
+  // ── problematic ──
+  {
+    word: "problematic",
+    definition: "Constituting or presenting a problem; difficult to deal with.",
+    keyConcepts: [
+      { keyword: "presenting a problem", matchTerms: ["present", "problem", "issue", "concern", "trouble", "complicat"], label: "Presenting a problem", hint: "The definition says 'constituting or presenting a problem' -- causes issues." },
+      { keyword: "difficult to deal with", matchTerms: ["difficult", "deal", "troublesome", "awkward", "challenging", "thorny"], label: "Difficult to deal with", hint: "The definition says 'difficult to deal with' -- hard to handle." },
+    ],
+    synonyms: ["troublesome", "difficult", "challenging", "complicated", "thorny"],
+    partOfSpeech: "adjective",
+    etymology: "Greek problema (something thrown forward).",
+  },
+  // ── productive ──
+  {
+    word: "productive",
+    definition: "Producing or able to produce large amounts; achieving significant results.",
+    keyConcepts: [
+      { keyword: "producing large amounts", matchTerms: ["produc", "large", "amount", "much", "yield", "prolific", "fertile"], label: "Producing large amounts", hint: "The definition says 'producing or able to produce large amounts' -- makes a lot." },
+      { keyword: "achieving results", matchTerms: ["achiev", "result", "effective", "efficient", "useful", "fruitful"], label: "Achieving results", hint: "The definition says 'achieving significant results' -- gets things done." },
+    ],
+    synonyms: ["fruitful", "prolific", "effective", "efficient", "constructive"],
+    partOfSpeech: "adjective",
+    etymology: "Latin producere (to bring forth).",
+  },
+  // ── prohibitive ──
+  {
+    word: "prohibitive",
+    definition: "Serving to forbid or restrict; so high as to prevent purchase or use.",
+    keyConcepts: [
+      { keyword: "forbid or restrict", matchTerms: ["forbid", "restrict", "prevent", "ban", "bar", "disallow"], label: "Forbid or restrict", hint: "The definition says 'serving to forbid or restrict' -- stops you." },
+      { keyword: "so high as to prevent", matchTerms: ["so high", "prevent", "purchase", "use", "cost", "price", "expensive"], label: "So high as to prevent", hint: "The definition says 'so high as to prevent purchase' -- too expensive." },
+    ],
+    synonyms: ["forbidding", "restrictive", "excessive", "exorbitant", "steep"],
+    partOfSpeech: "adjective",
+    etymology: "Latin prohibere (to hold back).",
+  },
+  // ── provisional ──
+  {
+    word: "provisional",
+    definition: "Arranged or existing for the present but likely to change; temporary.",
+    keyConcepts: [
+      { keyword: "for the present", matchTerms: ["present", "now", "current", "interim", "stopgap", "short-term"], label: "For the present", hint: "The definition says 'arranged for the present' -- just for now." },
+      { keyword: "likely to change", matchTerms: ["likely", "change", "temporary", "conditional", "tentative", "subject to change"], label: "Likely to change", hint: "The definition says 'but likely to change' -- not permanent." },
+    ],
+    synonyms: ["temporary", "interim", "tentative", "conditional", "stopgap"],
+    partOfSpeech: "adjective",
+    etymology: "Latin provisio (a providing).",
+  },
+  // ── reactionary ──
+  {
+    word: "reactionary",
+    definition: "Opposing political or social progress or reform; extremely conservative.",
+    keyConcepts: [
+      { keyword: "opposing progress", matchTerms: ["oppos", "progress", "reform", "change", "resist", "anti-reform"], label: "Opposing progress", hint: "The definition says 'opposing political or social progress' -- against change." },
+      { keyword: "extremely conservative", matchTerms: ["extreme", "conservative", "regressive", "traditional", "backward-looking", "right-wing"], label: "Extremely conservative", hint: "The definition says 'extremely conservative' -- wants to go back." },
+    ],
+    synonyms: ["conservative", "traditional", "regressive", "right-wing", "ultraconservative"],
+    partOfSpeech: "adjective",
+    etymology: "French réactionnaire.",
+  },
+  // ── reconciliatory ──
+  {
+    word: "reconciliatory",
+    definition: "Intended to restore friendly relations; aimed at making peace.",
+    keyConcepts: [
+      { keyword: "restore friendly relations", matchTerms: ["restore", "friendly", "relations", "repair", "mend", "heal"], label: "Restore friendly relations", hint: "The definition says 'intended to restore friendly relations' -- bringing back harmony." },
+      { keyword: "making peace", matchTerms: ["peace", "conciliat", "pacify", "appeas", "harmonize", "settle"], label: "Making peace", hint: "The definition says 'aimed at making peace' -- ending conflict." },
+    ],
+    synonyms: ["conciliatory", "peacemaking", "pacifying", "appeasing", "harmonizing"],
+    partOfSpeech: "adjective",
+    etymology: "Latin reconciliare (to bring together again).",
+  },
+  // ── regressive ──
+  {
+    word: "regressive",
+    definition: "Returning to a less developed or earlier state; moving backward.",
+    keyConcepts: [
+      { keyword: "returning to earlier state", matchTerms: ["return", "earlier", "state", "previous", "former", "revert"], label: "Returning to earlier state", hint: "The definition says 'returning to a less developed or earlier state' -- going back." },
+      { keyword: "moving backward", matchTerms: ["moving", "backward", "decline", "retreat", "deteriorat", "retrogress"], label: "Moving backward", hint: "The definition says 'moving backward' -- opposite of progress." },
+    ],
+    synonyms: ["backward", "retrograde", "declining", "deteriorating", "reverting"],
+    partOfSpeech: "adjective",
+    etymology: "Latin regredi (to go back).",
+  },
+  // ── resentful ──
+  {
+    word: "resentful",
+    definition: "Feeling or expressing bitterness or indignation at being treated unfairly.",
+    keyConcepts: [
+      { keyword: "feeling bitterness", matchTerms: ["feel", "bitter", "indignation", "anger", "grudge", "hostil"], label: "Feeling bitterness", hint: "The definition says 'feeling or expressing bitterness' -- sour feelings." },
+      { keyword: "treated unfairly", matchTerms: ["treated", "unfair", "wronged", "aggrieved", "offended", "hurt"], label: "Treated unfairly", hint: "The definition says 'at being treated unfairly' -- feels wronged." },
+    ],
+    synonyms: ["bitter", "aggrieved", "indignant", "grudging", "embittered"],
+    partOfSpeech: "adjective",
+    etymology: "French ressentir (to feel strongly).",
+  },
+  // ── resistant ──
+  {
+    word: "resistant",
+    definition: "Offering resistance to something; not affected by something.",
+    keyConcepts: [
+      { keyword: "offering resistance", matchTerms: ["offer", "resistance", "oppose", "withstand", "defy", "repel"], label: "Offering resistance", hint: "The definition says 'offering resistance to something' -- pushes back." },
+      { keyword: "not affected", matchTerms: ["not affected", "immune", "impervious", "unsusceptible", "unaffected", "proof"], label: "Not affected", hint: "The definition says 'not affected by something' -- doesn't respond to it." },
+    ],
+    synonyms: ["opposing", "impervious", "immune", "defiant", "unyielding"],
+    partOfSpeech: "adjective",
+    etymology: "Latin resistere (to stand against).",
+  },
+  // ── retaliatory ──
+  {
+    word: "retaliatory",
+    definition: "Characterized by a desire to hurt someone in return for harm done; vengeful.",
+    keyConcepts: [
+      { keyword: "hurt in return", matchTerms: ["hurt", "return", "harm", "payback", "revenge", "reciprocat"], label: "Hurt in return", hint: "The definition says 'desire to hurt someone in return for harm done' -- getting back at them." },
+      { keyword: "vengeful", matchTerms: ["vengeful", "revengeful", "vindictive", "punitive", "reprisal", "counter"], label: "Vengeful", hint: "The definition says 'vengeful' -- wants revenge." },
+    ],
+    synonyms: ["vengeful", "vindictive", "punitive", "revengeful", "counter"],
+    partOfSpeech: "adjective",
+    etymology: "Latin retaliare (to repay in kind).",
+  },
+  // ── sanctioned ──
+  {
+    word: "sanctioned",
+    definition: "Given official permission or approval; authorized or endorsed.",
+    keyConcepts: [
+      { keyword: "official permission", matchTerms: ["official", "permission", "approval", "authorized", "legal", "legitimate"], label: "Official permission", hint: "The definition says 'given official permission or approval' -- allowed by authorities." },
+      { keyword: "endorsed", matchTerms: ["endorse", "support", "ratif", "approve", "validate", "back"], label: "Endorsed", hint: "The definition says 'authorized or endorsed' -- backed officially." },
+    ],
+    synonyms: ["authorized", "approved", "endorsed", "permitted", "ratified"],
+    partOfSpeech: "adjective",
+    etymology: "Latin sanctio (decree, ordinance).",
+  },
+  // ── self-serving ──
+  {
+    word: "self-serving",
+    definition: "Having concern for one's own welfare above others; serving one's own interests.",
+    keyConcepts: [
+      { keyword: "concern for own welfare", matchTerms: ["concern", "own", "welfare", "interest", "benefit", "advantage"], label: "Concern for own welfare", hint: "The definition says 'having concern for one's own welfare above others' -- puts self first." },
+      { keyword: "serving own interests", matchTerms: ["serv", "interest", "selfish", "egotistical", "self-centered", "opportunistic"], label: "Serving own interests", hint: "The definition says 'serving one's own interests' -- looking out for number one." },
+    ],
+    synonyms: ["selfish", "egotistical", "self-centered", "opportunistic", "self-interested"],
+    partOfSpeech: "adjective",
+    etymology: "Self- + serving.",
+  },
+  // ── situational ──
+  {
+    word: "situational",
+    definition: "Relating to or dependent on a set of circumstances; context-specific.",
+    keyConcepts: [
+      { keyword: "dependent on circumstances", matchTerms: ["depend", "circumstanc", "condition", "context", "case", "scenario"], label: "Dependent on circumstances", hint: "The definition says 'dependent on a set of circumstances' -- varies by situation." },
+      { keyword: "context-specific", matchTerms: ["context", "specific", "particular", "variable", "conditional", "relative"], label: "Context-specific", hint: "The definition says 'context-specific' -- depends on the situation." },
+    ],
+    synonyms: ["contextual", "circumstantial", "conditional", "contingent", "case-specific"],
+    partOfSpeech: "adjective",
+    etymology: "Latin situare (to place).",
+  },
+  // ── subordinate ──
+  {
+    word: "subordinate",
+    definition: "Lower in rank or position; placed in or occupying a less important position.",
+    keyConcepts: [
+      { keyword: "lower in rank", matchTerms: ["lower", "rank", "position", "junior", "inferior", "lesser"], label: "Lower in rank", hint: "The definition says 'lower in rank or position' -- not as high up." },
+      { keyword: "less important", matchTerms: ["less important", "secondary", "subsidiary", "auxiliary", "ancillary", "dependent"], label: "Less important", hint: "The definition says 'occupying a less important position' -- secondary role." },
+    ],
+    synonyms: ["junior", "inferior", "secondary", "lesser", "subsidiary"],
+    partOfSpeech: "adjective",
+    etymology: "Latin subordinare (to place in a lower order).",
+  },
+  // ── substantive ──
+  {
+    word: "substantive",
+    definition: "Having a firm basis in reality; important, meaningful, or considerable.",
+    keyConcepts: [
+      { keyword: "firm basis in reality", matchTerms: ["firm", "basis", "reality", "real", "solid", "tangible", "concrete"], label: "Firm basis in reality", hint: "The definition says 'having a firm basis in reality' -- actually exists." },
+      { keyword: "important and meaningful", matchTerms: ["important", "meaningful", "considerable", "significant", "substantial", "weighty"], label: "Important and meaningful", hint: "The definition says 'important, meaningful, or considerable' -- matters." },
+    ],
+    synonyms: ["significant", "substantial", "meaningful", "considerable", "important"],
+    partOfSpeech: "adjective",
+    etymology: "Latin substantivus (self-existent).",
+  },
+  // ── systemic ──
+  {
+    word: "systemic",
+    definition: "Relating to a system as a whole; affecting an entire system or organization.",
+    keyConcepts: [
+      { keyword: "relating to system as whole", matchTerms: ["relat", "system", "whole", "overall", "comprehensive", "total"], label: "Relating to system as whole", hint: "The definition says 'relating to a system as a whole' -- the entire structure." },
+      { keyword: "affecting entire system", matchTerms: ["affect", "entire", "organization", "widespread", "pervasive", "institutional"], label: "Affecting entire system", hint: "The definition says 'affecting an entire system' -- throughout everything." },
+    ],
+    synonyms: ["systematic", "structural", "organizational", "institutional", "pervasive"],
+    partOfSpeech: "adjective",
+    etymology: "Greek systema (organized whole).",
+  },
+  // ── transactional ──
+  {
+    word: "transactional",
+    definition: "Relating to the conducting of business; based on exchange of goods or services.",
+    keyConcepts: [
+      { keyword: "conducting business", matchTerms: ["conduct", "business", "commerce", "trade", "deal", "commercial"], label: "Conducting business", hint: "The definition says 'relating to the conducting of business' -- about deals." },
+      { keyword: "exchange of goods", matchTerms: ["exchange", "goods", "services", "reciprocal", "give-and-take", "quid pro quo"], label: "Exchange of goods", hint: "The definition says 'based on exchange of goods or services' -- trading." },
+    ],
+    synonyms: ["commercial", "business", "exchange-based", "reciprocal", "mercantile"],
+    partOfSpeech: "adjective",
+    etymology: "Latin transactio (a settlement).",
+  },
+  // ── transformative ──
+  {
+    word: "transformative",
+    definition: "Causing a major change in form, nature, or character; revolutionary.",
+    keyConcepts: [
+      { keyword: "causing major change", matchTerms: ["caus", "major", "change", "dramatic", "profound", "fundamental", "radical"], label: "Causing major change", hint: "The definition says 'causing a major change' -- big transformation." },
+      { keyword: "in form or character", matchTerms: ["form", "nature", "character", "revolutionar", "groundbreaking", "game-changing"], label: "In form or character", hint: "The definition says 'in form, nature, or character' -- changes what it is." },
+    ],
+    synonyms: ["revolutionary", "radical", "groundbreaking", "life-changing", "profound"],
+    partOfSpeech: "adjective",
+    etymology: "Latin transformare (to change shape).",
+  },
+  // ── understated ──
+  {
+    word: "understated",
+    definition: "Presented or expressed with restraint; subtle rather than obvious.",
+    keyConcepts: [
+      { keyword: "expressed with restraint", matchTerms: ["express", "restraint", "modest", "muted", "low-key", "downplay"], label: "Expressed with restraint", hint: "The definition says 'presented or expressed with restraint' -- not making a big deal." },
+      { keyword: "subtle rather than obvious", matchTerms: ["subtle", "rather than", "obvious", "understated", "quiet", "unassuming"], label: "Subtle rather than obvious", hint: "The definition says 'subtle rather than obvious' -- doesn't shout." },
+    ],
+    synonyms: ["subtle", "restrained", "modest", "muted", "low-key"],
+    partOfSpeech: "adjective",
+    etymology: "Under- + stated.",
+  },
+  // ── unfounded ──
+  {
+    word: "unfounded",
+    definition: "Having no foundation or basis in fact; groundless.",
+    keyConcepts: [
+      { keyword: "no foundation", matchTerms: ["no foundation", "basis", "fact", "unsupported", "unsubstantiat", "baseless"], label: "No foundation", hint: "The definition says 'having no foundation or basis in fact' -- nothing to support it." },
+      { keyword: "groundless", matchTerms: ["groundless", "unwarranted", "unjustified", "idle", "spurious", "fabricat"], label: "Groundless", hint: "The definition says 'groundless' -- no evidence." },
+    ],
+    synonyms: ["baseless", "groundless", "unsubstantiated", "unsupported", "unwarranted"],
+    partOfSpeech: "adjective",
+    etymology: "Un- + founded.",
+  },
+  // ── unsustainable ──
+  {
+    word: "unsustainable",
+    definition: "Not able to be maintained at the current rate or level; not environmentally sound.",
+    keyConcepts: [
+      { keyword: "not able to be maintained", matchTerms: ["not", "maintain", "current", "rate", "level", "continue", "keep up"], label: "Not able to be maintained", hint: "The definition says 'not able to be maintained at the current rate' -- can't keep going." },
+      { keyword: "not environmentally sound", matchTerms: ["environmental", "sound", "viable", "harmful", "depleting", "destructive"], label: "Not environmentally sound", hint: "The definition says 'not environmentally sound' -- bad for the planet." },
+    ],
+    synonyms: ["untenable", "unviable", "unworkable", "impractical", "harmful"],
+    partOfSpeech: "adjective",
+    etymology: "Un- + sustainable.",
+  },
+]
