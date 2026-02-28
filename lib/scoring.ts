@@ -839,8 +839,12 @@ function normalizeForComparison(text: string): string {
 
 // Check if user input closely matches the official definition
 function isOfficialDefinitionMatch(userInput: string, officialDef: string, altDefs?: { definition: string }[]): boolean {
+  if (!userInput || !officialDef) return false
+  
   const normalizedUser = normalizeForComparison(userInput)
   const normalizedOfficial = normalizeForComparison(officialDef)
+  
+  if (!normalizedUser || !normalizedOfficial) return false
   
   // Exact match
   if (normalizedUser === normalizedOfficial) return true
@@ -861,8 +865,9 @@ function isOfficialDefinitionMatch(userInput: string, officialDef: string, altDe
   }
   
   // Check alt definitions too
-  if (altDefs) {
+  if (altDefs && Array.isArray(altDefs)) {
     for (const alt of altDefs) {
+      if (!alt?.definition) continue
       const normalizedAlt = normalizeForComparison(alt.definition)
       if (normalizedUser === normalizedAlt) return true
       

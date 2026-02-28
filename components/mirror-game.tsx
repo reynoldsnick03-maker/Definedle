@@ -205,7 +205,7 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
             <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">
               Mirror Mode
             </span>
-            {streak && (streak.current > 0 || streak.best > 0) && (
+            {streak && typeof streak.current === "number" && typeof streak.best === "number" && (streak.current > 0 || streak.best > 0) && (
               <span className="text-[10px] text-muted-foreground">
                 {streak.current > 0 ? (
                   <span className="text-score-high font-medium">{streak.current}</span>
