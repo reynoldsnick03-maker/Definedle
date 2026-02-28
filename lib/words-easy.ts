@@ -1,14 +1,15 @@
 import type { DailyWord } from "./game-data"
 
 // -----------------------------------------------------------------------
-// 365 DAILY WORDS
+// EASY WORDS
 //
+// Used for both daily easy mode and easy practice mode.
 // RULE: every key concept MUST be directly present in the official
 //       definition. If the definition doesn't express an idea, it is
 //       NOT a concept. Words may have 1, 2 or 3 concepts -- never force.
 // -----------------------------------------------------------------------
 
-export const dailyWords: DailyWord[] = [
+export const easyWords: DailyWord[] = [
   // DAY 1-30
   {
     word: "context",
@@ -3818,7 +3819,7 @@ export const dailyWords: DailyWord[] = [
     ],
     synonyms: ["cross", "bisect", "meet", "converge", "overlap"],
   },
-  // ─����� 388. drawl ──
+  // ─������� 388. drawl ──
   {
     word: "drawl",
     partOfSpeech: "verb/noun",

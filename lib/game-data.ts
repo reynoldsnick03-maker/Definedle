@@ -1,5 +1,4 @@
-import { dailyWords } from "./words-daily"
-import { practiceWords } from "./words-practice"
+import { easyWords } from "./words-easy"
 import { hardWords } from "./words-hard"
 
 export interface KeyConcept {
@@ -27,7 +26,7 @@ export interface DailyWord {
 export type GameMode = "easy" | "hard"
 
 // Re-export for convenience
-export { dailyWords, practiceWords, hardWords }
+export { easyWords, hardWords }
 
 function getDayOfYear(): number {
   const now = new Date()
@@ -40,8 +39,8 @@ function getDayOfYear(): number {
 }
 
 export function getTodaysWord(): DailyWord {
-  const index = getDayOfYear() % dailyWords.length
-  return dailyWords[index]
+  const index = getDayOfYear() % easyWords.length
+  return easyWords[index]
 }
 
 // Hard mode start date: February 26, 2026 (word list refresh)
@@ -88,11 +87,11 @@ function getUpcomingDailyWords(days: number): Set<string> {
   const daysSinceHardStart = getDaysSinceHardModeStart()
   const upcoming = new Set<string>()
   for (let d = 0; d < days; d++) {
-    const easyIdx = (dayOfYear + d) % dailyWords.length
+    const easyIdx = (dayOfYear + d) % easyWords.length
     // Use shuffled index for hard words
     const shuffleIdx = ((daysSinceHardStart + d) % HARD_WORD_SHUFFLE.length + HARD_WORD_SHUFFLE.length) % HARD_WORD_SHUFFLE.length
     const hardIdx = HARD_WORD_SHUFFLE[shuffleIdx] % hardWords.length
-    upcoming.add(dailyWords[easyIdx].word)
+    upcoming.add(easyWords[easyIdx].word)
     upcoming.add(hardWords[hardIdx].word)
   }
   return upcoming
@@ -109,19 +108,15 @@ export function getWordByName(wordName: string): { word: DailyWord; difficulty: 
   const hardMatch = hardWords.find((w) => w.word.toLowerCase() === normalized)
   if (hardMatch) return { word: hardMatch, difficulty: "hard" }
   
-  // Check daily words
-  const dailyMatch = dailyWords.find((w) => w.word.toLowerCase() === normalized)
-  if (dailyMatch) return { word: dailyMatch, difficulty: "easy" }
-  
-  // Check practice words
-  const practiceMatch = practiceWords.find((w) => w.word.toLowerCase() === normalized)
-  if (practiceMatch) return { word: practiceMatch, difficulty: "easy" }
+  // Check easy words
+  const easyMatch = easyWords.find((w) => w.word.toLowerCase() === normalized)
+  if (easyMatch) return { word: easyMatch, difficulty: "easy" }
   
   return null
 }
 
 export function getRandomPracticeWord(excludeWords: string[] = [], difficulty: GameMode = "easy"): DailyWord {
-  const pool = difficulty === "hard" ? hardWords : [...dailyWords, ...practiceWords]
+  const pool = difficulty === "hard" ? hardWords : easyWords
   const upcoming = getUpcomingDailyWords(7)
   const available = pool.filter(
     (w) => !excludeWords.includes(w.word) && !upcoming.has(w.word)

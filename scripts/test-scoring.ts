@@ -1,8 +1,7 @@
-import { dailyWords } from "../lib/words-daily"
-import { practiceWords } from "../lib/words-practice"
+import { easyWords } from "../lib/words-easy"
 import { scoreDefinition } from "../lib/scoring"
 
-const allWords = [...dailyWords, ...practiceWords]
+const allWords = easyWords
 
 // Test cases: [word, player definition, expected minimum score, description]
 const testCases: [string, string, number, string][] = [
@@ -154,7 +153,7 @@ for (const word of allWords) {
   }
 }
 
-console.log(`\n  Total words: ${allWords.length} (${dailyWords.length} daily + ${practiceWords.length} practice)`)
+console.log(`\n  Total words: ${allWords.length}`)
 console.log(`  Unique words: ${seenWords.size}`)
 console.log(`  Data issues found: ${dataIssues}`)
 

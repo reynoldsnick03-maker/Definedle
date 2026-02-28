@@ -1,15 +1,32 @@
 // Audit script to find duplicates and issues in word lists
 
-import { dailyWords } from "../lib/words-daily.ts"
-import { practiceWords } from "../lib/words-practice.ts"
-import { hardWords } from "../lib/words-hard.ts"
+import fs from "fs"
+
+// Parse word entries from TypeScript file content
+function extractWords(content) {
+  const words = []
+  const regex = /word:\s*["']([^"']+)["']/g
+  let match
+  while ((match = regex.exec(content)) !== null) {
+    words.push(match[1].toLowerCase())
+  }
+  return words
+}
+
+const dailyContent = fs.readFileSync("./lib/words-daily.ts", "utf-8")
+const practiceContent = fs.readFileSync("./lib/words-practice.ts", "utf-8")
+const hardContent = fs.readFileSync("./lib/words-hard.ts", "utf-8")
+
+const dailyWords = extractWords(dailyContent)
+const practiceWords = extractWords(practiceContent)
+const hardWords = extractWords(hardContent)
 
 console.log("=== WORD LIST AUDIT ===\n")
 
 // Get all words from each list
-const dailyWordSet = new Set(dailyWords.map(w => w.word.toLowerCase()))
-const practiceWordSet = new Set(practiceWords.map(w => w.word.toLowerCase()))
-const hardWordSet = new Set(hardWords.map(w => w.word.toLowerCase()))
+const dailyWordSet = new Set(dailyWords)
+const practiceWordSet = new Set(practiceWords)
+const hardWordSet = new Set(hardWords)
 
 console.log(`Daily words: ${dailyWords.length}`)
 console.log(`Practice words: ${practiceWords.length}`)
@@ -18,24 +35,24 @@ console.log("")
 
 // Find duplicates within daily list
 const dailyDupes = dailyWords.filter((w, i) => 
-  dailyWords.findIndex(x => x.word.toLowerCase() === w.word.toLowerCase()) !== i
-).map(w => w.word)
+  dailyWords.findIndex(x => x === w) !== i
+)
 if (dailyDupes.length > 0) {
   console.log(`DUPLICATES IN DAILY LIST: ${dailyDupes.join(", ")}`)
 }
 
 // Find duplicates within practice list
 const practiceDupes = practiceWords.filter((w, i) => 
-  practiceWords.findIndex(x => x.word.toLowerCase() === w.word.toLowerCase()) !== i
-).map(w => w.word)
+  practiceWords.findIndex(x => x === w) !== i
+)
 if (practiceDupes.length > 0) {
   console.log(`DUPLICATES IN PRACTICE LIST: ${practiceDupes.join(", ")}`)
 }
 
 // Find duplicates within hard list
 const hardDupes = hardWords.filter((w, i) => 
-  hardWords.findIndex(x => x.word.toLowerCase() === w.word.toLowerCase()) !== i
-).map(w => w.word)
+  hardWords.findIndex(x => x === w) !== i
+)
 if (hardDupes.length > 0) {
   console.log(`DUPLICATES IN HARD LIST: ${hardDupes.join(", ")}`)
 }
