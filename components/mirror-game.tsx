@@ -118,7 +118,6 @@ async function isValidWord(word: string): Promise<{ valid: boolean; uncertain: b
 }
 
 export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplete, streak }: MirrorGameProps) {
-  console.log("[v0] MirrorGame rendered with streak:", streak, "word:", word?.word)
   const [guesses, setGuesses] = useState<Guess[]>([])
   const [currentGuess, setCurrentGuess] = useState("")
   const [isShaking, setIsShaking] = useState(false)
