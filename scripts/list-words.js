@@ -2,10 +2,10 @@ import { readFileSync } from 'fs'
 import { execSync } from 'child_process'
 
 // Find the actual project path
-const projectRoot = execSync('find / -name "words-daily.ts" -path "*/lib/*" 2>/dev/null | head -1', { encoding: 'utf-8' }).trim()
+const projectRoot = execSync('find / -name "words-easy.ts" -path "*/lib/*" 2>/dev/null | head -1', { encoding: 'utf-8' }).trim()
 console.log("Found file at:", projectRoot)
-const daily = readFileSync(projectRoot, 'utf-8')
-const words = [...daily.matchAll(/word:\s*"([^"]+)"/g)].map(m => m[1])
+const easy = readFileSync(projectRoot, 'utf-8')
+const words = [...easy.matchAll(/word:\s*"([^"]+)"/g)].map(m => m[1])
 
 // Find duplicates
 const seen = new Map()

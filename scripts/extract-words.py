@@ -1,7 +1,7 @@
 import re
 
 # Relative paths from scripts folder
-easy_path = '../lib/words-daily.ts'
+easy_path = '../lib/words-easy.ts'
 hard_path = '../lib/words-hard.ts'
 
 # Read easy words
