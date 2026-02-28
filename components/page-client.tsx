@@ -11,6 +11,7 @@ import { MirrorGame } from "@/components/mirror-game"
 import { StreakBadge } from "@/components/streak-badge"
 import type { DailyWord, GameMode } from "@/lib/game-data"
 import { getRandomPracticeWord, getWordByName } from "@/lib/game-data"
+import { getMirrorStreak, updateMirrorStreak, type MirrorStreak } from "@/lib/history"
 
 interface PageClientProps {
   dailyWord: DailyWord
@@ -31,6 +32,12 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   const [difficulty, setDifficulty] = useState<GameMode>("easy")
   const [streak, setStreak] = useState(0)
   const [mirrorMode, setMirrorMode] = useState(false)
+  const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
+  
+  // Load mirror streak on mount
+  useEffect(() => {
+    setMirrorStreak(getMirrorStreak())
+  }, [])
   
   // Practice state -- separate per difficulty so switching doesn't reset
   const [practiceEasy, setPracticeEasy] = useState<DailyWord | null>(null)
@@ -256,6 +263,16 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               }}
               onNextWord={() => {
                 handleNextPracticeWord()
+              }}
+              streak={difficulty === "easy" 
+                ? { current: mirrorStreak.easyStreak, best: mirrorStreak.easyBest }
+                : { current: mirrorStreak.hardStreak, best: mirrorStreak.hardBest }
+              }
+              onComplete={(result) => {
+                // Perfect = correct on first guess with no hints
+                const isPerfect = result.correct && result.guesses === 1 && result.hintsUsed === 0
+                const updated = updateMirrorStreak(difficulty, isPerfect)
+                setMirrorStreak(updated)
               }}
             />
           )}

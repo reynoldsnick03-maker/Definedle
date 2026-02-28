@@ -92,3 +92,72 @@ export function formatDateKey(date: Date): string {
 export function getCookieName(): string {
   return COOKIE_NAME
 }
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Mirror Mode Streak - localStorage based (practice mode only)
+// ══════════════════════════════════════════════════════════════════════════════
+
+export interface MirrorStreak {
+  easyStreak: number
+  easyBest: number
+  hardStreak: number
+  hardBest: number
+}
+
+const MIRROR_STREAK_KEY = "definedle-mirror-streak"
+
+export function getMirrorStreak(): MirrorStreak {
+  if (typeof window === "undefined") {
+    return { easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 }
+  }
+  try {
+    const stored = localStorage.getItem(MIRROR_STREAK_KEY)
+    if (stored) {
+      return JSON.parse(stored)
+    }
+  } catch {
+    // Ignore parse errors
+  }
+  return { easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 }
+}
+
+export function saveMirrorStreak(streak: MirrorStreak): void {
+  if (typeof window === "undefined") return
+  try {
+    localStorage.setItem(MIRROR_STREAK_KEY, JSON.stringify(streak))
+  } catch {
+    // Ignore storage errors
+  }
+}
+
+/**
+ * Update mirror streak after a game.
+ * @param difficulty - "easy" or "hard"
+ * @param isPerfect - true if solved in 1 guess with 0 hints
+ * @returns the updated streak object
+ */
+export function updateMirrorStreak(
+  difficulty: "easy" | "hard",
+  isPerfect: boolean
+): MirrorStreak {
+  const current = getMirrorStreak()
+  
+  if (difficulty === "easy") {
+    if (isPerfect) {
+      current.easyStreak += 1
+      current.easyBest = Math.max(current.easyBest, current.easyStreak)
+    } else {
+      current.easyStreak = 0
+    }
+  } else {
+    if (isPerfect) {
+      current.hardStreak += 1
+      current.hardBest = Math.max(current.hardBest, current.hardStreak)
+    } else {
+      current.hardStreak = 0
+    }
+  }
+  
+  saveMirrorStreak(current)
+  return current
+}
