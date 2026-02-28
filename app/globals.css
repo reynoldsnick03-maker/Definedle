@@ -108,18 +108,22 @@
   animation: shake 0.3s ease-out;
 }
 
-/* Flawless animation - float up and fade out */
+/* Flawless animation - stay visible then float up and fade out */
 @keyframes flawless {
   0% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0) scale(1.05);
   }
   100% {
     opacity: 0;
-    transform: translateY(-30px);
+    transform: translateY(-20px) scale(1);
   }
 }
 
 .animate-flawless {
-  animation: flawless 1.5s ease-out forwards;
+  animation: flawless 2.5s ease-out forwards;
 }
