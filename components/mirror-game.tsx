@@ -255,17 +255,24 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
               <>
                 {hintsRevealed >= 1 && (
                   <span className="px-2 py-1 rounded bg-muted/50">
-                    {word.word.length} letters
+                    Starts with &ldquo;{word.word[0].toUpperCase()}&rdquo;
                   </span>
                 )}
                 {hintsRevealed >= 2 && (
                   <span className="px-2 py-1 rounded bg-muted/50">
-                    Starts with &ldquo;{word.word[0].toUpperCase()}&rdquo;
+                    Ends with &ldquo;{word.word[word.word.length - 1].toLowerCase()}&rdquo;
                   </span>
                 )}
                 {hintsRevealed >= 3 && (
                   <span className="px-2 py-1 rounded bg-muted/50">
-                    Ends with &ldquo;{word.word[word.word.length - 1]}&rdquo;
+                    {(() => {
+                      // Count syllables by counting vowel groups
+                      const syllables = word.word.toLowerCase()
+                        .replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '')
+                        .replace(/^y/, '')
+                        .match(/[aeiouy]{1,2}/g)?.length || 1
+                      return `${syllables} ${syllables === 1 ? 'syllable' : 'syllables'}`
+                    })()}
                   </span>
                 )}
                 {/* Hint request button - use all 3 hints anytime */}
