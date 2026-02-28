@@ -206,15 +206,6 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
           isShaking ? "animate-shake" : ""
         }`}
       >
-        {/* Flawless animation */}
-        {showFlawless && (
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
-            <span className="text-score-high font-bold text-lg animate-flawless">
-              Flawless!
-            </span>
-          </div>
-        )}
-
         {/* Flip back button + streak display */}
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-3">
@@ -254,32 +245,40 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
             &ldquo;{word.definition}&rdquo;
           </p>
           
-          {/* Hints - all on request: length, first letter, last letter */}
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
-            {hintsRevealed >= 1 && (
-              <span className="px-2 py-1 rounded bg-muted/50">
-                {word.word.length} letters
+          {/* Hints area - shows flawless banner when achieved, otherwise hints */}
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground min-h-[32px]">
+            {showFlawless ? (
+              <span className="text-score-high font-bold text-xl animate-flawless">
+                Flawless!
               </span>
-            )}
-            {hintsRevealed >= 2 && (
-              <span className="px-2 py-1 rounded bg-muted/50">
-                Starts with &ldquo;{word.word[0].toUpperCase()}&rdquo;
-              </span>
-            )}
-            {hintsRevealed >= 3 && (
-              <span className="px-2 py-1 rounded bg-muted/50">
-                Ends with &ldquo;{word.word[word.word.length - 1]}&rdquo;
-              </span>
-            )}
-            {/* Hint request button - use all 3 hints anytime */}
-            {!isComplete && hintsRevealed < 3 && (
-              <button
-                type="button"
-                onClick={() => setHintsRevealed(h => h + 1)}
-                className="px-2 py-1 rounded bg-muted/30 hover:bg-muted/50 transition-colors"
-              >
-                Hint?
-              </button>
+            ) : (
+              <>
+                {hintsRevealed >= 1 && (
+                  <span className="px-2 py-1 rounded bg-muted/50">
+                    {word.word.length} letters
+                  </span>
+                )}
+                {hintsRevealed >= 2 && (
+                  <span className="px-2 py-1 rounded bg-muted/50">
+                    Starts with &ldquo;{word.word[0].toUpperCase()}&rdquo;
+                  </span>
+                )}
+                {hintsRevealed >= 3 && (
+                  <span className="px-2 py-1 rounded bg-muted/50">
+                    Ends with &ldquo;{word.word[word.word.length - 1]}&rdquo;
+                  </span>
+                )}
+                {/* Hint request button - use all 3 hints anytime */}
+                {!isComplete && hintsRevealed < 3 && (
+                  <button
+                    type="button"
+                    onClick={() => setHintsRevealed(h => h + 1)}
+                    className="px-2 py-1 rounded bg-muted/30 hover:bg-muted/50 transition-colors"
+                  >
+                    Hint?
+                  </button>
+                )}
+              </>
             )}
           </div>
         </div>
