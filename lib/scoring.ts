@@ -1,4 +1,4 @@
-import type { DailyWord } from “./game-data”
+import type { DailyWord } from "./game-data"
 
 export interface ConceptResult {
 keyword: string
