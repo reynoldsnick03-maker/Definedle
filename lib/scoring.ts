@@ -638,12 +638,10 @@ function fuzzyConceptMatch(inputWords: string[], negatedWords: Set<string>, conc
   }
 
   const ratio = hits / unique.length
-  // Full match: at least 2 hits AND 40%+ coverage
-  const matched = hits >= 2 && ratio >= 0.4
-  // Near miss: at least 1 hit AND 25-39% coverage (close but not quite)
-  const nearMiss = !matched && hits >= 1 && ratio >= 0.25 && ratio < 0.4
-  return { matched, nearMiss, matchedWords: (matched || nearMiss) ? matchedWords : [] }
-}
+  // Full match: at least 2 hits AND 35%+ coverage, or a single strong hit on a short concept
+  const matched = (hits >= 2 && ratio >= 0.35) || (hits >= 1 && ratio >= 0.6)
+  // Near miss: at least 1 hit AND 20-34% coverage (close but not quite)
+  const nearMiss = !matched && hits >= 1 && ratio >= 0.2 && ratio < 0.35
 
 // Score a user definition against a single set of keyConcepts + definition text.
 // Returns an intermediate result used to compare primary vs alternate definitions.
@@ -825,8 +823,8 @@ function scoreAgainstDefinition(
   const detailRatio = Math.min(wc / targetWc, 1)
   const lengthScore = Math.round(Math.pow(detailRatio, 0.6) * 15)
 
-  return { concepts, matchedCount, conceptScore, precisionScore, precisionRatio, relevantWords, irrelevantWords, lengthScore, synonymWarning }
-}
+  const lengthScore = wc >= targetWc ? 15 : Math.round(Math.pow(detailRatio, 0.5) * 15)
+
 
 // Normalize text for comparison: lowercase, strip punctuation, collapse spaces
 function normalizeForComparison(text: string): string {
