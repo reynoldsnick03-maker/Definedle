@@ -1818,25 +1818,6 @@ export const easyWords: DailyWord[] = [
   },
   // DAY 201-230
   {
-    word: "apprehensive",
-    partOfSpeech: "adjective",
-    definition: "Anxious or fearful that something bad or unpleasant will happen.",
-    keyConcepts: [
-      { keyword: "anxious", matchTerms: ["anxious", "nervous", "worried", "uneasy", "fearful", "afraid", "dread", "tense", "concern", "alarm"], label: "Anxious or fearful", hint: "The definition says 'anxious or fearful' -- a state of worry." },
-      { keyword: "something bad will happen", matchTerms: ["something bad", "unpleasant", "danger", "threat", "harm", "trouble", "misfortune", "negative", "impending", "anticipat"], label: "Something bad will happen", hint: "The definition says 'something bad or unpleasant will happen' -- the fear is forward-looking." },
-    ],
-    synonyms: ["anxious", "worried", "fearful"],
-  },
-  {
-    word: "candid",
-    partOfSpeech: "adjective",
-    definition: "Truthful and straightforward; frank.",
-    keyConcepts: [
-      { keyword: "truthful", matchTerms: ["truthful", "honest", "sincere", "genuine", "authentic", "open", "transparent", "forthright", "candid", "direct", "blunt", "upfront", "plainspoken"], label: "Truthful and straightforward", hint: "The definition says 'truthful and straightforward; frank' -- saying what you actually think." },
-    ],
-    synonyms: ["frank", "honest", "forthright"],
-  },
-  {
     word: "contemplate",
     partOfSpeech: "verb",
     definition: "To look at thoughtfully for a long time, or to think deeply about something.",
@@ -1846,25 +1827,6 @@ export const easyWords: DailyWord[] = [
     synonyms: ["ponder", "reflect", "consider"],
   },
   {
-    word: "deter",
-    partOfSpeech: "verb",
-    definition: "To discourage someone from doing something by instilling doubt or fear.",
-    keyConcepts: [
-      { keyword: "discourage", matchTerms: ["discourag", "prevent", "dissuad", "stop", "put off", "warn", "inhibit", "restrain", "hinder", "repel", "scare", "frighten"], label: "Discourage from doing something", hint: "The definition says 'discourage someone from doing something' -- making them not want to act." },
-      { keyword: "doubt or fear", matchTerms: ["doubt", "fear", "hesitat", "uncertain", "intimidat", "threat", "consequenc", "risk", "penalty", "punish"], label: "By instilling doubt or fear", hint: "The definition says 'by instilling doubt or fear' -- the discouragement works through apprehension." },
-    ],
-    synonyms: ["discourage", "dissuade", "prevent"],
-  },
-  {
-    word: "elaborate",
-    partOfSpeech: "adjective",
-    definition: "Involving many carefully arranged parts or details; detailed and complicated.",
-    keyConcepts: [
-      { keyword: "many parts", matchTerms: ["many", "numerous", "multiple", "complex", "intricate", "complic", "extensive", "detailed", "thorough", "comprehensive", "sophisticated"], label: "Many carefully arranged parts", hint: "The definition says 'involving many carefully arranged parts or details' -- lots of interlocking pieces." },
-    ],
-    synonyms: ["intricate", "detailed", "complex"],
-  },
-  {
     word: "fathom",
     partOfSpeech: "verb",
     definition: "To understand something after much thought.",
@@ -1872,36 +1834,6 @@ export const easyWords: DailyWord[] = [
       { keyword: "understand", matchTerms: ["understand", "comprehend", "grasp", "perceiv", "make sense", "figure out", "work out", "puzzle out", "get to the bottom", "penetrat", "decipher", "unravel"], label: "Understand", hint: "The definition says 'understand something after much thought' -- reaching comprehension of something difficult." },
     ],
     synonyms: ["understand", "comprehend", "grasp"],
-  },
-  {
-    word: "gratitude",
-    partOfSpeech: "noun",
-    definition: "The quality of being thankful; readiness to show appreciation for and to return kindness.",
-    keyConcepts: [
-      { keyword: "thankful", matchTerms: ["thankful", "grateful", "appreciat", "gratitude", "indebt", "recogniz", "acknowledg", "bless"], label: "Being thankful", hint: "The definition says 'the quality of being thankful' -- a feeling of thanks." },
-      { keyword: "return kindness", matchTerms: ["return", "kindness", "reciprocat", "repay", "give back", "generous", "goodwill", "favor", "favour", "benevolenc"], label: "Readiness to return kindness", hint: "The definition says 'readiness to show appreciation for and to return kindness' -- gratitude includes giving back." },
-    ],
-    synonyms: ["thankfulness", "appreciation", "gratefulness"],
-  },
-  {
-    word: "hinder",
-    partOfSpeech: "verb",
-    definition: "To create difficulties for someone or something, resulting in delay or obstruction.",
-    keyConcepts: [
-      { keyword: "create difficulties", matchTerms: ["difficult", "obstruct", "impede", "hamper", "block", "inhibit", "restrict", "constrain", "interfere", "thwart", "frustrat", "stall"], label: "Create difficulties", hint: "The definition says 'create difficulties' -- making progress harder." },
-      { keyword: "delay", matchTerms: ["delay", "slow", "hold up", "hold back", "set back", "retard", "stall", "prevent", "curb", "check", "encumber"], label: "Resulting in delay or obstruction", hint: "The definition says 'resulting in delay or obstruction' -- the outcome is slowed progress." },
-    ],
-    synonyms: ["impede", "hamper", "obstruct"],
-  },
-  {
-    word: "impartial",
-    partOfSpeech: "adjective",
-    definition: "Treating all rivals or disputants equally; fair and just.",
-    keyConcepts: [
-      { keyword: "equally", matchTerms: ["equal", "even-handed", "unbiased", "neutral", "objective", "balanced", "impartial", "non-partisan", "disinterested", "detach"], label: "Treating all equally", hint: "The definition says 'treating all rivals or disputants equally' -- no favoritism." },
-      { keyword: "fair", matchTerms: ["fair", "just", "equitab", "right", "honest", "principled", "ethical", "honorabl", "above board", "scrupulous"], label: "Fair and just", hint: "The definition says 'fair and just' -- impartiality is a moral quality." },
-    ],
-    synonyms: ["fair", "unbiased", "neutral"],
   },
   {
     word: "jubilant",
@@ -1924,25 +1856,6 @@ export const easyWords: DailyWord[] = [
     synonyms: ["ignite", "spark", "arouse"],
   },
   {
-    word: "lucid",
-    partOfSpeech: "adjective",
-    definition: "Expressed clearly; easy to understand.",
-    keyConcepts: [
-      { keyword: "clear", matchTerms: ["clear", "clarity", "plain", "transparent", "intelligib", "comprehensib", "coherent", "articulat", "explicit", "straightforward", "accessible", "simple", "unambiguous", "crisp", "sharp"], label: "Expressed clearly", hint: "The definition says 'expressed clearly; easy to understand' -- lucid communication is effortlessly clear." },
-    ],
-    synonyms: ["clear", "coherent", "intelligible"],
-  },
-  {
-    word: "mundane",
-    partOfSpeech: "adjective",
-    definition: "Lacking interest or excitement; dull and ordinary.",
-    keyConcepts: [
-      { keyword: "lacking interest", matchTerms: ["lacking interest", "uninteresting", "boring", "dull", "tedious", "monotonous", "humdrum", "dreary", "bland", "tiresome", "wearisome", "uninspir", "unexcit", "dry"], label: "Lacking interest or excitement", hint: "The definition says 'lacking interest or excitement' -- nothing to hold your attention." },
-      { keyword: "ordinary", matchTerms: ["ordinary", "everyday", "routine", "commonplace", "banal", "prosaic", "unremarkab", "pedestrian", "usual", "regular", "normal", "plain", "run-of-the-mill"], label: "Dull and ordinary", hint: "The definition says 'dull and ordinary' -- nothing special or noteworthy." },
-    ],
-    synonyms: ["boring", "dull", "ordinary"],
-  },
-  {
     word: "nurture",
     partOfSpeech: "verb",
     definition: "To care for and encourage the growth or development of.",
@@ -1962,15 +1875,6 @@ export const easyWords: DailyWord[] = [
     synonyms: ["compulsory", "mandatory", "required"],
   },
   {
-    word: "plausible",
-    partOfSpeech: "adjective",
-    definition: "Seeming reasonable or probable.",
-    keyConcepts: [
-      { keyword: "reasonable", matchTerms: ["reasonable", "probable", "likely", "believab", "credibl", "conceivab", "feasib", "plausib", "convinc", "logical", "rational", "possible", "sound", "tenable", "viable"], label: "Seeming reasonable or probable", hint: "The definition says 'seeming reasonable or probable' -- it could be true." },
-    ],
-    synonyms: ["believable", "credible", "likely"],
-  },
-  {
     word: "quarantine",
     partOfSpeech: "noun",
     definition: "A state of isolation imposed to prevent the spread of disease.",
@@ -1979,16 +1883,6 @@ export const easyWords: DailyWord[] = [
       { keyword: "prevent spread of disease", matchTerms: ["prevent", "spread", "disease", "infect", "contagi", "illness", "sickness", "epidem", "pandem", "health", "protect", "contain"], label: "Prevent spread of disease", hint: "The definition says 'to prevent the spread of disease' -- the isolation serves a medical purpose." },
     ],
     synonyms: ["isolation", "confinement", "seclusion"],
-  },
-  {
-    word: "reconcile",
-    partOfSpeech: "verb",
-    definition: "To restore friendly relations between; to make compatible or consistent.",
-    keyConcepts: [
-      { keyword: "restore relations", matchTerms: ["restore", "friendly", "relations", "reunite", "make up", "resolve", "mend", "repair", "heal", "settle", "patch up", "bring together"], label: "Restore friendly relations", hint: "The definition says 'restore friendly relations between' -- fixing a broken relationship." },
-      { keyword: "make compatible", matchTerms: ["compatibl", "consistent", "harmoniz", "align", "match", "balance", "integrat", "unif", "bring in line", "adjust", "accommodat", "agree"], label: "Make compatible or consistent", hint: "The definition says 'make compatible or consistent' -- getting two things to work together." },
-    ],
-    synonyms: ["resolve", "reunite", "harmonize"],
   },
   {
     word: "saturate",
@@ -2007,16 +1901,6 @@ export const easyWords: DailyWord[] = [
       { keyword: "little value", matchTerms: ["little value", "unimportant", "insignificant", "minor", "petty", "small", "negligib", "trifling", "inconsequenti", "slight", "marginal", "paltry", "frivolous", "superficial", "meaningless", "irrelevant", "worthless"], label: "Of little value or importance", hint: "The definition says 'of little value or importance' -- not worth much attention." },
     ],
     synonyms: ["insignificant", "minor", "petty"],
-  },
-  {
-    word: "undermine",
-    partOfSpeech: "verb",
-    definition: "To damage or weaken someone or something, especially gradually or insidiously.",
-    keyConcepts: [
-      { keyword: "damage or weaken", matchTerms: ["damage", "weaken", "erode", "diminish", "sabotag", "destabiliz", "compromise", "impair", "hurt", "reduce", "lessen", "subvert", "corrode"], label: "Damage or weaken", hint: "The definition says 'damage or weaken' -- making something less strong or effective." },
-      { keyword: "gradually", matchTerms: ["gradual", "slowly", "insidious", "subtle", "incremental", "bit by bit", "steadily", "progressiv", "covert", "secret", "hidden", "stealthi", "quiet"], label: "Especially gradually or insidiously", hint: "The definition says 'especially gradually or insidiously' -- the damage happens slowly and often unseen." },
-    ],
-    synonyms: ["weaken", "erode", "sabotage"],
   },
   {
     word: "versatile",
@@ -2047,66 +1931,7 @@ export const easyWords: DailyWord[] = [
     ],
     synonyms: ["long", "crave", "pine"],
   },
-  {
-    word: "advocate",
-    partOfSpeech: "verb",
-    definition: "To publicly recommend or support a particular cause or policy.",
-    keyConcepts: [
-      { keyword: "publicly recommend", matchTerms: ["publicly", "recommend", "support", "champion", "promot", "endors", "back", "defend", "campaign", "push for", "argue for", "speak for", "stand up for", "lobby"], label: "Publicly recommend or support", hint: "The definition says 'publicly recommend or support' -- openly backing something." },
-      { keyword: "cause or policy", matchTerms: ["cause", "policy", "position", "idea", "belief", "principle", "movement", "reform", "initiative", "proposal"], label: "A particular cause or policy", hint: "The definition says 'a particular cause or policy' -- the support is directed at something specific." },
-    ],
-    synonyms: ["champion", "promote", "endorse"],
-  },
-  {
-    word: "benevolent",
-    partOfSpeech: "adjective",
-    definition: "Well-meaning and kindly; showing goodwill.",
-    keyConcepts: [
-      { keyword: "well-meaning", matchTerms: ["well-meaning", "kindly", "kind", "generous", "charitable", "compassionat", "caring", "warm", "gentle", "benign", "altruistic", "philanthropic", "considerat", "tender"], label: "Well-meaning and kindly", hint: "The definition says 'well-meaning and kindly' -- genuinely wanting to help." },
-      { keyword: "goodwill", matchTerms: ["goodwill", "good intentions", "benevolenc", "humanitari", "magnanimous", "selfless", "gracious", "bountiful", "giving", "noble"], label: "Showing goodwill", hint: "The definition says 'showing goodwill' -- a disposition of wanting good things for others." },
-    ],
-    synonyms: ["kind", "charitable", "generous"],
-  },
-  {
-    word: "coerce",
-    partOfSpeech: "verb",
-    definition: "To persuade someone to do something by using force or threats.",
-    keyConcepts: [
-      { keyword: "persuade", matchTerms: ["persuad", "compel", "pressure", "make", "forc", "coerce", "push", "drive", "oblige", "constrain", "bully", "intimidat"], label: "Persuade someone", hint: "The definition says 'persuade someone to do something' -- getting them to act." },
-      { keyword: "force or threats", matchTerms: ["force", "threat", "intimidat", "violent", "aggress", "power", "duress", "bully", "menac", "blackmail", "harass", "extort"], label: "By using force or threats", hint: "The definition says 'by using force or threats' -- the persuasion isn't voluntary." },
-    ],
-    synonyms: ["force", "compel", "pressure"],
-  },
-  {
-    word: "diligent",
-    partOfSpeech: "adjective",
-    definition: "Having or showing careful and persistent effort.",
-    keyConcepts: [
-      { keyword: "careful", matchTerms: ["careful", "thorough", "meticulous", "conscienti", "painstaking", "attentiv", "precise", "scrupulous", "rigorous"], label: "Careful", hint: "The definition says 'careful' -- paying close attention to what you're doing." },
-      { keyword: "persistent", matchTerms: ["persistent", "steady", "industrious", "hardworking", "tireless", "dedicated", "committed", "unflagging", "assiduous", "tenacious", "disciplined", "devoted", "constant"], label: "Persistent effort", hint: "The definition says 'persistent effort' -- keeping at it over time." },
-    ],
-    synonyms: ["industrious", "hardworking", "meticulous"],
-  },
-  {
-    word: "exacerbate",
-    partOfSpeech: "verb",
-    definition: "To make a problem, bad situation, or negative feeling worse.",
-    keyConcepts: [
-      { keyword: "make worse", matchTerms: ["worse", "worsen", "aggravat", "intensif", "heighten", "amplif", "escalat", "inflam", "compound", "increase", "magnif", "deepen", "exacerbat"], label: "Make worse", hint: "The definition says 'make...worse' -- increasing the severity of something already negative." },
-    ],
-    synonyms: ["worsen", "aggravate", "intensify"],
-  },
   // DAY 231-260
-  {
-    word: "fluctuate",
-    partOfSpeech: "verb",
-    definition: "To rise and fall irregularly in number or amount.",
-    keyConcepts: [
-      { keyword: "rise and fall", matchTerms: ["rise and fall", "go up and down", "vary", "swing", "oscillat", "waver", "shift", "change", "alter", "move", "undulat"], label: "Rise and fall", hint: "The definition says 'rise and fall' -- going up then down then up again." },
-      { keyword: "irregularly", matchTerms: ["irregular", "unpredictab", "erratic", "inconsistent", "unstable", "unsteady", "variable", "uneven", "volatile", "sporadic"], label: "Irregularly", hint: "The definition says 'irregularly' -- the changes don't follow a pattern." },
-    ],
-    synonyms: ["vary", "oscillate", "waver"],
-  },
   {
     word: "gregarious",
     partOfSpeech: "adjective",
@@ -2127,15 +1952,6 @@ export const easyWords: DailyWord[] = [
     synonyms: ["antagonistic", "aggressive", "unfriendly"],
   },
   {
-    word: "imminent",
-    partOfSpeech: "adjective",
-    definition: "About to happen; impending.",
-    keyConcepts: [
-      { keyword: "about to happen", matchTerms: ["about to happen", "impending", "approaching", "forthcoming", "near", "close", "looming", "upon us", "at hand", "around the corner", "on the horizon", "inevitable", "unavoidable", "coming soon", "momentarily"], label: "About to happen; impending", hint: "The definition says 'about to happen; impending' -- very close in time." },
-    ],
-    synonyms: ["impending", "approaching", "forthcoming"],
-  },
-  {
     word: "jeopardize",
     partOfSpeech: "verb",
     definition: "To put something or someone into a situation where there is a danger of loss or harm.",
@@ -2144,25 +1960,6 @@ export const easyWords: DailyWord[] = [
       { keyword: "loss or harm", matchTerms: ["loss", "harm", "damage", "injury", "destruc", "ruin", "devastat", "detriment", "peril", "hurt"], label: "Of loss or harm", hint: "The definition says 'danger of loss or harm' -- the risk involves real negative consequences." },
     ],
     synonyms: ["endanger", "risk", "threaten"],
-  },
-  {
-    word: "lament",
-    partOfSpeech: "verb",
-    definition: "To mourn a loss or express passionate grief about something.",
-    keyConcepts: [
-      { keyword: "mourn", matchTerms: ["mourn", "grieve", "sorrow", "weep", "cry", "wail", "bemoan", "bewail", "deplore", "regret"], label: "Mourn a loss", hint: "The definition says 'mourn a loss' -- deep sadness over something gone." },
-      { keyword: "passionate grief", matchTerms: ["passionate", "grief", "heartbreak", "anguish", "despair", "torment", "agony", "painful", "intense sadness", "devastat"], label: "Express passionate grief", hint: "The definition says 'express passionate grief' -- the mourning is deep and vocal." },
-    ],
-    synonyms: ["mourn", "grieve", "bewail"],
-  },
-  {
-    word: "meticulous",
-    partOfSpeech: "adjective",
-    definition: "Showing great attention to detail; very careful and precise.",
-    keyConcepts: [
-      { keyword: "attention to detail", matchTerms: ["attention", "detail", "thorough", "careful", "precise", "exact", "painstaking", "scrupulous", "fastidious", "methodical", "rigorous", "diligent", "conscienti", "perfectionist"], label: "Great attention to detail", hint: "The definition says 'great attention to detail' -- nothing escapes notice." },
-    ],
-    synonyms: ["thorough", "careful", "precise"],
   },
   {
     word: "nominal",
@@ -2185,16 +1982,6 @@ export const easyWords: DailyWord[] = [
     synonyms: ["threatening", "menacing", "sinister"],
   },
   {
-    word: "perpetuate",
-    partOfSpeech: "verb",
-    definition: "To make something continue indefinitely.",
-    keyConcepts: [
-      { keyword: "make continue", matchTerms: ["make continue", "maintain", "sustain", "preserv", "prolong", "extend", "keep alive", "keep going", "carry on", "uphold", "entrench", "reinforce", "perpetuat"], label: "Make something continue", hint: "The definition says 'make something continue' -- actively keeping it going." },
-      { keyword: "indefinitely", matchTerms: ["indefinit", "forever", "endlessly", "permanent", "ongoing", "lasting", "unending", "without end", "ceaseless", "eternal"], label: "Indefinitely", hint: "The definition says 'continue indefinitely' -- no planned end point." },
-    ],
-    synonyms: ["maintain", "sustain", "prolong"],
-  },
-  {
     word: "quell",
     partOfSpeech: "verb",
     definition: "To put an end to something, typically by the use of force; to suppress.",
@@ -2204,92 +1991,7 @@ export const easyWords: DailyWord[] = [
     ],
     synonyms: ["suppress", "crush", "subdue"],
   },
-  {
-    word: "refute",
-    partOfSpeech: "verb",
-    definition: "To prove a statement or theory to be wrong or false.",
-    keyConcepts: [
-      { keyword: "prove wrong", matchTerms: ["prove wrong", "prove false", "disprove", "debunk", "contradict", "counter", "rebut", "invalidat", "discredit", "demolish", "overturn", "refut", "negate", "deny", "challenge"], label: "Prove wrong or false", hint: "The definition says 'prove a statement or theory to be wrong or false' -- definitively showing something is incorrect." },
-    ],
-    synonyms: ["disprove", "debunk", "rebut"],
-  },
-  {
-    word: "scrutinize",
-    partOfSpeech: "verb",
-    definition: "To examine or inspect closely and thoroughly.",
-    keyConcepts: [
-      { keyword: "examine closely", matchTerms: ["examine", "inspect", "study", "analyz", "investigat", "review", "survey", "observ", "scruti", "probe", "dissect", "pore over", "check", "audit", "apprais", "assess", "evaluat"], label: "Examine closely and thoroughly", hint: "The definition says 'examine or inspect closely and thoroughly' -- looking at something with great care." },
-    ],
-    synonyms: ["examine", "inspect", "analyze"],
-  },
-  {
-    word: "tenacious",
-    partOfSpeech: "adjective",
-    definition: "Tending to keep a firm hold of something; persistent and determined.",
-    keyConcepts: [
-      { keyword: "firm hold", matchTerms: ["firm hold", "grip", "cling", "grasp", "hold on", "not let go", "resolut", "steadfast", "unwavering", "unflinching", "unyielding", "stubbornly"], label: "Keeping a firm hold", hint: "The definition says 'tending to keep a firm hold' -- refusing to let go." },
-      { keyword: "persistent", matchTerms: ["persistent", "determined", "dogged", "relentless", "persever", "tireless", "indefatigab", "unrelenting", "single-minded", "driven", "committ", "dedicated"], label: "Persistent and determined", hint: "The definition says 'persistent and determined' -- not giving up no matter what." },
-    ],
-    synonyms: ["persistent", "determined", "dogged"],
-  },
-  {
-    word: "ubiquitous",
-    partOfSpeech: "adjective",
-    definition: "Present, appearing, or found everywhere.",
-    keyConcepts: [
-      { keyword: "everywhere", matchTerms: ["everywhere", "omnipresent", "pervasive", "widespread", "universal", "all-pervading", "prevalent", "common", "far-reaching", "all around", "inescapable", "all over", "ever-present", "across"], label: "Present everywhere", hint: "The definition says 'present, appearing, or found everywhere' -- you encounter it wherever you go." },
-    ],
-    synonyms: ["omnipresent", "pervasive", "widespread"],
-  },
-  {
-    word: "vindicate",
-    partOfSpeech: "verb",
-    definition: "To clear someone of blame or suspicion; to prove to be right or justified.",
-    keyConcepts: [
-      { keyword: "clear of blame", matchTerms: ["clear", "blame", "suspicion", "exonerat", "absolv", "acquit", "free", "discharg", "pardon", "redeem", "rehabilitat"], label: "Clear of blame", hint: "The definition says 'clear someone of blame or suspicion' -- removing an accusation." },
-      { keyword: "prove right", matchTerms: ["prove right", "justified", "justify", "confirm", "validat", "substantiat", "verify", "uphold", "support", "back up", "demonstrat"], label: "Prove right or justified", hint: "The definition says 'prove to be right or justified' -- showing a decision or action was correct." },
-    ],
-    synonyms: ["exonerate", "justify", "validate"],
-  },
   // DAY 261-290
-  {
-    word: "alleviate",
-    partOfSpeech: "verb",
-    definition: "To make suffering, a problem, or a bad situation less severe.",
-    keyConcepts: [
-      { keyword: "make less severe", matchTerms: ["less severe", "reduce", "lessen", "diminish", "ease", "relieve", "mitigat", "alleviat", "lighten", "soothe", "soften", "moderate", "palliat", "dull", "calm"], label: "Make less severe", hint: "The definition says 'make...less severe' -- not eliminating, but easing the burden." },
-    ],
-    synonyms: ["ease", "relieve", "mitigate"],
-  },
-  {
-    word: "brevity",
-    partOfSpeech: "noun",
-    definition: "Concise and exact use of words in writing or speech; shortness of time.",
-    keyConcepts: [
-      { keyword: "concise", matchTerms: ["concise", "brief", "short", "succinct", "terse", "pithy", "compact", "crisp", "economical", "to the point", "condensed"], label: "Concise use of words", hint: "The definition says 'concise and exact use of words' -- saying much with few words." },
-    ],
-    synonyms: ["conciseness", "succinctness", "briefness"],
-  },
-  {
-    word: "complacent",
-    partOfSpeech: "adjective",
-    definition: "Showing smug or uncritical satisfaction with oneself or one's achievements.",
-    keyConcepts: [
-      { keyword: "smug satisfaction", matchTerms: ["smug", "satisfaction", "self-satisfied", "self-congratulat", "pleased with oneself", "content", "unconcern", "untroubl", "complacen"], label: "Smug satisfaction", hint: "The definition says 'smug or uncritical satisfaction' -- a lazy sense of being good enough." },
-      { keyword: "uncritical", matchTerms: ["uncritical", "unaware", "oblivious", "blind", "ignoring", "overconfid", "dismissive", "careless", "lazy", "apathetic", "indifferent", "not concern"], label: "Uncritical", hint: "The definition says 'uncritical' -- not examining whether things are actually as good as assumed." },
-    ],
-    synonyms: ["self-satisfied", "smug", "unconcerned"],
-  },
-  {
-    word: "denounce",
-    partOfSpeech: "verb",
-    definition: "To publicly declare to be wrong or evil; to condemn openly.",
-    keyConcepts: [
-      { keyword: "publicly declare", matchTerms: ["publicly", "declare", "announce", "proclaim", "state", "voice", "speak out", "call out", "openly", "outspoken"], label: "Publicly declare", hint: "The definition says 'publicly declare' -- making the condemnation open and known." },
-      { keyword: "wrong or evil", matchTerms: ["wrong", "evil", "condemn", "criticiz", "censure", "attack", "vilif", "stigmatiz", "decry", "repudiat", "damn", "berate", "castigat", "pillory"], label: "Wrong or evil; condemn", hint: "The definition says 'to be wrong or evil; to condemn openly' -- strong moral judgment." },
-    ],
-    synonyms: ["condemn", "criticize", "censure"],
-  },
   {
     word: "eccentric",
     partOfSpeech: "adjective",
@@ -2319,16 +2021,6 @@ export const easyWords: DailyWord[] = [
       { keyword: "easily deceived", matchTerms: ["easily deceived", "easily tricked", "fooled", "duped", "manipulat", "taken in", "misled", "exploited", "hoodwinked", "conned"], label: "Easily deceived", hint: "The definition says 'easily deceived' -- vulnerable to being misled." },
     ],
     synonyms: ["naive", "credulous", "trusting"],
-  },
-  {
-    word: "hypothesis",
-    partOfSpeech: "noun",
-    definition: "A proposed explanation made on the basis of limited evidence as a starting point for further investigation.",
-    keyConcepts: [
-      { keyword: "proposed explanation", matchTerms: ["proposed", "explanation", "theory", "idea", "proposition", "assumption", "conjecture", "supposition", "thesis", "premis", "postulat"], label: "Proposed explanation", hint: "The definition says 'a proposed explanation' -- a suggested answer, not a proven one." },
-      { keyword: "starting point for investigation", matchTerms: ["starting point", "investigat", "research", "experiment", "test", "further", "basis", "evidence", "limited", "preliminary", "initial", "tentative", "unproven"], label: "Starting point for investigation", hint: "The definition says 'as a starting point for further investigation' -- a hypothesis needs to be tested." },
-    ],
-    synonyms: ["theory", "conjecture", "proposition"],
   },
   {
     word: "indifferent",
@@ -2361,15 +2053,6 @@ export const easyWords: DailyWord[] = [
     synonyms: ["lawful", "valid", "genuine"],
   },
   {
-    word: "mitigate",
-    partOfSpeech: "verb",
-    definition: "To make less severe, serious, or painful.",
-    keyConcepts: [
-      { keyword: "make less severe", matchTerms: ["less severe", "less serious", "less painful", "reduce", "diminish", "lessen", "alleviat", "ease", "reliev", "moderate", "soften", "temper", "lighten", "dull", "cushion", "blunt", "mitigat"], label: "Make less severe", hint: "The definition says 'make less severe, serious, or painful' -- reducing the impact of something negative." },
-    ],
-    synonyms: ["alleviate", "lessen", "reduce"],
-  },
-  {
     word: "negligent",
     partOfSpeech: "adjective",
     definition: "Failing to take proper care in doing something.",
@@ -2377,15 +2060,6 @@ export const easyWords: DailyWord[] = [
       { keyword: "failing to take care", matchTerms: ["failing", "careless", "negligent", "irresponsib", "inattentiv", "neglectful", "lax", "slack", "remiss", "derelict", "sloppy", "reckless", "heedless"], label: "Failing to take proper care", hint: "The definition says 'failing to take proper care' -- not doing what a responsible person would do." },
     ],
     synonyms: ["careless", "neglectful", "irresponsible"],
-  },
-  {
-    word: "obsolete",
-    partOfSpeech: "adjective",
-    definition: "No longer produced or used; out of date.",
-    keyConcepts: [
-      { keyword: "no longer used", matchTerms: ["no longer", "outdated", "out of date", "old-fashioned", "antiquated", "archaic", "defunct", "retired", "discarded", "abandoned", "superseded", "replaced", "bygone", "dated", "extinct"], label: "No longer produced or used", hint: "The definition says 'no longer produced or used' -- it's been left behind." },
-    ],
-    synonyms: ["outdated", "antiquated", "defunct"],
   },
   {
     word: "paradox",
