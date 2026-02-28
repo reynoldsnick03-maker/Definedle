@@ -89,14 +89,27 @@ function getSimilarityBorderColor(similarity: number): string {
   return "border-red-200"
 }
 
-// Check if a word is valid using the Dictionary API
-async function isValidWord(word: string): Promise<boolean> {
+// Check if a word is valid using the Dictionary API (non-blocking with timeout)
+async function isValidWord(word: string): Promise<{ valid: boolean; uncertain: boolean }> {
+  // Only check words that are alphabetic
+  if (!/^[a-zA-Z]+$/.test(word)) {
+    return { valid: false, uncertain: false }
+  }
+  
   try {
-    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word.toLowerCase())}`)
-    return response.ok
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 2000) // 2 second timeout
+    
+    const response = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word.toLowerCase())}`,
+      { signal: controller.signal }
+    )
+    clearTimeout(timeoutId)
+    
+    return { valid: response.ok, uncertain: false }
   } catch {
-    // On network error, allow the word to avoid blocking gameplay
-    return true
+    // On network error or timeout, allow the word (uncertain = true means we couldn't verify)
+    return { valid: true, uncertain: true }
   }
 }
 
@@ -132,12 +145,14 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice }: MirrorG
     setValidationError(null)
     setIsValidating(true)
     
-    // Validate the word first
-    const valid = await isValidWord(trimmedGuess)
+    // Validate the word (non-blocking with timeout)
+    const { valid, uncertain } = await isValidWord(trimmedGuess)
     setIsValidating(false)
     
-    if (!valid) {
-      setValidationError("Not a valid word")
+    // Only block if we're certain it's not a word (API returned 404)
+    // If uncertain (timeout/error), allow the guess to proceed
+    if (!valid && !uncertain) {
+      setValidationError("Not a recognized word")
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 300)
       return

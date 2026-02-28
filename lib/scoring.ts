@@ -657,7 +657,8 @@ function scoreAgainstDefinition(
   definitionText: string,
 ): { concepts: ConceptResult[]; matchedCount: number; conceptScore: number; precisionScore: number; precisionRatio: number; relevantWords: number; irrelevantWords: string[]; lengthScore: number; synonymWarning: boolean } {
   const conceptCount = keyConcepts.length
-  const pointsPerConcept = Math.round(75 / conceptCount)
+  // Use floor to avoid exceeding 75 total (e.g., 3 concepts at 25 each = 75, not 26*3=78)
+  const pointsPerConcept = Math.floor(75 / conceptCount)
 
   // Extract meaningful words from the official definition for overlap checking
   const officialDefWords = meaningfulWords(definitionText.toLowerCase())
@@ -721,9 +722,16 @@ function scoreAgainstDefinition(
   const matchedCount = concepts.filter((c) => c.matched).length
   const conceptScore = matchedCount * pointsPerConcept
 
-  // Synonym-only penalty
+  // Synonym-only penalty - use token-based matching, not substring
   let synonymWarning = false
-  const isSynonymOnly = synonyms.some((syn) => input.includes(syn.toLowerCase()))
+  const inputTokens = input.toLowerCase().split(/\s+/)
+  const isSynonymOnly = synonyms.some((syn) => {
+    const synLower = syn.toLowerCase()
+    // Check for exact token match or stem match, not substring
+    return inputTokens.some(token => token === synLower || stemMatch(token, synLower))
+  })
+  // Only penalize if the answer is basically just a synonym with no real definition
+  // Changed from hard cap (35) to a penalty (-20) so good attempts aren't crushed
   if (isSynonymOnly && words.length <= 3 && matchedCount <= conceptCount / 2) {
     synonymWarning = true
   }
@@ -820,6 +828,61 @@ function scoreAgainstDefinition(
   return { concepts, matchedCount, conceptScore, precisionScore, precisionRatio, relevantWords, irrelevantWords, lengthScore, synonymWarning }
 }
 
+// Normalize text for comparison: lowercase, strip punctuation, collapse spaces
+function normalizeForComparison(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s]/g, " ")  // Replace punctuation with space
+    .replace(/\s+/g, " ")       // Collapse multiple spaces
+    .trim()
+}
+
+// Check if user input closely matches the official definition
+function isOfficialDefinitionMatch(userInput: string, officialDef: string, altDefs?: { definition: string }[]): boolean {
+  const normalizedUser = normalizeForComparison(userInput)
+  const normalizedOfficial = normalizeForComparison(officialDef)
+  
+  // Exact match
+  if (normalizedUser === normalizedOfficial) return true
+  
+  // Very close match (90%+ of words overlap in same order)
+  const userWords = normalizedUser.split(" ").filter(w => w.length > 2)
+  const officialWords = normalizedOfficial.split(" ").filter(w => w.length > 2)
+  
+  if (userWords.length >= 3 && officialWords.length >= 3) {
+    let matchCount = 0
+    for (const uw of userWords) {
+      if (officialWords.some(ow => ow === uw || stemMatch(ow, uw))) {
+        matchCount++
+      }
+    }
+    const overlapRatio = matchCount / Math.max(userWords.length, officialWords.length)
+    if (overlapRatio >= 0.85) return true
+  }
+  
+  // Check alt definitions too
+  if (altDefs) {
+    for (const alt of altDefs) {
+      const normalizedAlt = normalizeForComparison(alt.definition)
+      if (normalizedUser === normalizedAlt) return true
+      
+      const altWords = normalizedAlt.split(" ").filter(w => w.length > 2)
+      if (userWords.length >= 3 && altWords.length >= 3) {
+        let matchCount = 0
+        for (const uw of userWords) {
+          if (altWords.some(aw => aw === uw || stemMatch(aw, uw))) {
+            matchCount++
+          }
+        }
+        const overlapRatio = matchCount / Math.max(userWords.length, altWords.length)
+        if (overlapRatio >= 0.85) return true
+      }
+    }
+  }
+  
+  return false
+}
+
 export function scoreDefinition(
   userDefinition: string,
   dailyWord: DailyWord,
@@ -827,6 +890,34 @@ export function scoreDefinition(
   ): ScoreResult {
   const raw = userDefinition.toLowerCase().trim()
   const words = raw.split(/\s+/)
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // FIX #1: If user essentially typed the dictionary definition, give 95-100
+  // ══════════════════════════════════════════════════════════════════════════
+  if (isOfficialDefinitionMatch(raw, dailyWord.definition, dailyWord.altDefinitions)) {
+    const conceptCount = dailyWord.keyConcepts.length
+    const concepts: ConceptResult[] = dailyWord.keyConcepts.map(c => ({
+      keyword: c.keyword,
+      label: c.label,
+      hint: c.hint,
+      matched: true,
+      matchedTerm: "official definition",
+    }))
+    
+    return {
+      score: usedHint ? 93 : 98,
+      feedback: "You matched the official definition almost exactly. Well done!",
+      concepts,
+      synonymWarning: false,
+      missedSummary: null,
+      breakdown: {
+        concepts: { earned: 75, max: 75 },
+        precision: { earned: 10, max: 10, ratio: 1, relevantCount: words.length, totalMeaningful: words.length, irrelevantWords: [] },
+        detail: { earned: usedHint ? 8 : 13, max: 15, wordCount: words.length },
+        hintPenalty: usedHint ? 5 : 0,
+      },
+    }
+  }
 
   // Strip the target word itself (and morphological variants) from the input
   const stem = dailyWord.word.toLowerCase()
@@ -869,9 +960,9 @@ export function scoreDefinition(
   // --- Total ---
   let score = conceptScore + precisionScore + lengthScore
 
-  // Apply synonym penalty
+  // Apply synonym penalty (-20 instead of hard cap to 35)
   if (synonymWarning) {
-    score = Math.min(score, 35)
+    score = Math.max(0, score - 20)
   }
 
   // Apply hint penalty
