@@ -253,19 +253,21 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
               </span>
             ) : (
               <>
-                {hintsRevealed >= 1 && (
+                {hintsRevealed >= 1 && word.synonyms && word.synonyms.length > 0 && (
                   <span className="px-2 py-1 rounded bg-muted/50">
-                    {word.word.length} letters
+                    Similar to &ldquo;{word.synonyms[0]}&rdquo;
                   </span>
                 )}
                 {hintsRevealed >= 2 && (
                   <span className="px-2 py-1 rounded bg-muted/50">
-                    Starts with &ldquo;{word.word[0].toUpperCase()}&rdquo;
+                    Starts with &ldquo;{word.word[0].toUpperCase()}&rdquo; ({word.word.length} letters)
                   </span>
                 )}
-                {hintsRevealed >= 3 && (
+                {hintsRevealed >= 3 && word.etymology && (
                   <span className="px-2 py-1 rounded bg-muted/50">
-                    Ends with &ldquo;{word.word[word.word.length - 1]}&rdquo;
+                    {word.etymology.match(/^(Latin|Greek|French|Old English|German|Old French|Middle English|Old Norse|Italian|Spanish|Arabic|Hebrew|Sanskrit|Dutch|Portuguese|Japanese|Chinese)/i)?.[0] 
+                      ? `From ${word.etymology.match(/^(Latin|Greek|French|Old English|German|Old French|Middle English|Old Norse|Italian|Spanish|Arabic|Hebrew|Sanskrit|Dutch|Portuguese|Japanese|Chinese)/i)?.[0]}`
+                      : `Origin: ${word.etymology.split(/[—,]/)[0].trim().slice(0, 30)}`}
                   </span>
                 )}
                 {/* Hint request button - use all 3 hints anytime */}
