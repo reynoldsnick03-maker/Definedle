@@ -35,12 +35,51 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   const [mirrorMode, setMirrorMode] = useState(false)
   const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
 
+  const [sessionScore, setSessionScore] = useState(0)
+  const [sessionStreak, setSessionStreak] = useState(0)
+  const [sessionBestStreak, setSessionBestStreak] = useState(0)
+  const [sessionWordsAttempted, setSessionWordsAttempted] = useState(0)
+  const [sessionWordsSolved, setSessionWordsSolved] = useState(0)
+
+  const handleSessionUpdate = useCallback(({ points, correct }: { points: number; correct: boolean }) => {
+    setSessionScore(prev => prev + points)
+    setSessionWordsAttempted(prev => prev + 1)
+    if (correct) {
+      setSessionWordsSolved(prev => prev + 1)
+      setSessionStreak(prev => {
+        const next = prev + 1
+        setSessionBestStreak(best => Math.max(best, next))
+        return next
+      })
+    } else {
+      setSessionStreak(0)
+    }
+  }, [])
+
+  const saveSessionIfNeeded = useCallback(async (attempted: number, score: number, best: number, solved: number) => {
+    if (attempted < 3) return
+    try {
+      const playerId = getPlayerId()
+      if (!playerId) return
+      await fetch("/api/mirror-sessions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          player_id: playerId,
+          session_score: score,
+          best_streak: best,
+          words_solved: solved,
+          words_attempted: attempted,
+          difficulty,
+        }),
+      })
+    } catch {}
+  }, [difficulty])
+
   useEffect(() => {
     try {
       setMirrorStreak(getMirrorStreak())
-    } catch {
-      // Ignore
-    }
+    } catch {}
   }, [])
 
   const [practiceEasy, setPracticeEasy] = useState<DailyWord | null>(null)
@@ -84,9 +123,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
           const data = await res.json()
           setStreak(data.streak || 0)
         }
-      } catch {
-        // Ignore
-      }
+      } catch {}
     }
     fetchStreak()
   }, [])
@@ -179,9 +216,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
         const data = await res.json()
         setStreak(data.streak || 0)
       }
-    } catch {
-      // Ignore
-    }
+    } catch {}
   }, [])
 
   return (
@@ -256,20 +291,26 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
 
           {tab === "practice" && practiceWord && mirrorMode && (
             <MirrorGame
-              key={`mirror-${difficulty}-${practiceKey}-${practiceWord.word}`}
+              key={`mirror-${difficulty}-${practiceWord.word}`}
               word={practiceWord}
               isPractice={true}
               onFlipBack={() => {
+                saveSessionIfNeeded(sessionWordsAttempted, sessionScore, sessionBestStreak, sessionWordsSolved)
                 handleNextPracticeWord()
                 setMirrorMode(false)
+                setSessionScore(0)
+                setSessionStreak(0)
+                setSessionBestStreak(0)
+                setSessionWordsAttempted(0)
+                setSessionWordsSolved(0)
               }}
               onNextWord={() => {
                 handleNextPracticeWord()
               }}
-              streak={difficulty === "easy"
-                ? { current: mirrorStreak.easyStreak, best: mirrorStreak.easyBest }
-                : { current: mirrorStreak.hardStreak, best: mirrorStreak.hardBest }
-              }
+              sessionScore={sessionScore}
+              sessionStreak={sessionStreak}
+              sessionBestStreak={sessionBestStreak}
+              onSessionUpdate={handleSessionUpdate}
               onComplete={(result) => {
                 const isPerfect = result.correct && result.guesses === 1 && result.hintsUsed === 0
                 const updated = updateMirrorStreak(difficulty, isPerfect)
