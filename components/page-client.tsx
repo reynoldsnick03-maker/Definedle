@@ -12,6 +12,7 @@ import { StreakBadge } from "@/components/streak-badge"
 import type { DailyWord, GameMode } from "@/lib/game-data"
 import { getRandomPracticeWord, getWordByName } from "@/lib/game-data"
 import { getMirrorStreak, updateMirrorStreak, type MirrorStreak } from "@/lib/history"
+import { getPlayerId } from "@/lib/player-id"
 
 interface PageClientProps {
   dailyWord: DailyWord
@@ -33,53 +34,51 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   const [streak, setStreak] = useState(0)
   const [mirrorMode, setMirrorMode] = useState(false)
   const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
-  
-  // Load mirror streak on mount
+
   useEffect(() => {
     try {
       setMirrorStreak(getMirrorStreak())
     } catch {
-      // Ignore errors loading streak
+      // Ignore
     }
   }, [])
-  
-  // Practice state -- separate per difficulty so switching doesn't reset
+
   const [practiceEasy, setPracticeEasy] = useState<DailyWord | null>(null)
   const [practiceHard, setPracticeHard] = useState<DailyWord | null>(null)
   const [urlWordHandled, setUrlWordHandled] = useState(false)
 
-  // Handle ?word= parameter on client mount
   useEffect(() => {
     if (urlWordHandled) return
-    
     const params = new URLSearchParams(window.location.search)
     const wordParam = params.get("word") || Array.from(params.keys()).find(k => k !== "reset" && k !== "r")
-    
     if (wordParam) {
       const found = getWordByName(wordParam)
       if (found) {
-        // Set tab to practice and load the word
         setTab("practice")
         setDifficulty(found.difficulty)
-        
         if (found.difficulty === "easy") {
           setPracticeEasy(found.word)
         } else {
           setPracticeHard(found.word)
         }
-        
-        // Clean URL without reloading
         window.history.replaceState({}, "", window.location.pathname)
       }
     }
-    
     setUrlWordHandled(true)
   }, [urlWordHandled])
 
-  // Fetch streak on mount
   useEffect(() => {
     const fetchStreak = async () => {
       try {
+        const playerId = getPlayerId()
+        if (playerId) {
+          const res = await fetch(`/api/streak?player_id=${encodeURIComponent(playerId)}`)
+          if (res.ok) {
+            const data = await res.json()
+            setStreak(data.streak || 0)
+            return
+          }
+        }
         const res = await fetch("/api/history")
         if (res.ok) {
           const data = await res.json()
@@ -91,24 +90,20 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
     }
     fetchStreak()
   }, [])
+
   const [playedEasy, setPlayedEasy] = useState<string[]>([])
   const [playedHard, setPlayedHard] = useState<string[]>([])
   const [practiceKeyEasy, setPracticeKeyEasy] = useState(0)
   const [practiceKeyHard, setPracticeKeyHard] = useState(0)
 
-  // ?reset in URL clears all saved state and reloads clean
   useEffect(() => {
     if (typeof window === "undefined") return
     const params = new URLSearchParams(window.location.search)
-    
     if (params.has("reset")) {
-      // Clear daily result cookies
       document.cookie = "definedle-today=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
       document.cookie = "definedle-today-hard=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
-      // Clear history and dropdown state
       localStorage.removeItem("definedle-history")
       Object.keys(localStorage).filter(k => k.startsWith("definedle-improve-")).forEach(k => localStorage.removeItem(k))
-      // Redirect without ?reset
       window.location.replace(window.location.pathname)
     }
   }, [])
@@ -146,7 +141,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
 
   const handleTabChange = useCallback((newTab: TabMode) => {
     setTab(newTab)
-    setMirrorMode(false) // Reset mirror mode when switching tabs
+    setMirrorMode(false)
     if (newTab === "practice") {
       const current = difficulty === "easy" ? practiceEasy : practiceHard
       if (!current) startPractice(difficulty)
@@ -155,7 +150,6 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
 
   const handleDifficultyChange = useCallback((newDifficulty: GameMode) => {
     setDifficulty(newDifficulty)
-    // If switching difficulty in practice, ensure that difficulty has a word
     if (tab === "practice") {
       const current = newDifficulty === "easy" ? practiceEasy : practiceHard
       if (!current) startPractice(newDifficulty)
@@ -169,9 +163,17 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
     setShowingShare(false)
   }
 
-  // Callback to refresh streak after game completion
   const refreshStreak = useCallback(async () => {
     try {
+      const playerId = getPlayerId()
+      if (playerId) {
+        const res = await fetch(`/api/streak?player_id=${encodeURIComponent(playerId)}`)
+        if (res.ok) {
+          const data = await res.json()
+          setStreak(data.streak || 0)
+          return
+        }
+      }
       const res = await fetch("/api/history")
       if (res.ok) {
         const data = await res.json()
@@ -185,7 +187,6 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   return (
     <main className="flex min-h-svh flex-col items-center bg-background pb-16">
       <GameHeader onStatsOpen={() => setStatsOpen(true)} onHelpOpen={() => setHelpOpen(true)} />
-      {/* Streak badge - only show on daily mode when streak > 0 */}
       {tab === "daily" && streak > 0 && <StreakBadge streak={streak} />}
       {showingShare && shareData && shareWordData ? (
         <SharedResult
@@ -203,13 +204,11 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
             onTabChange={handleTabChange}
             onDifficultyChange={handleDifficultyChange}
           />
-          
-          {/* Mirror mode flip button - only in practice mode */}
+
           {tab === "practice" && !mirrorMode && (
             <button
               type="button"
               onClick={() => {
-                // Get a new word when entering mirror mode so they can't see the answer
                 handleNextPracticeWord()
                 setMirrorMode(true)
               }}
@@ -223,7 +222,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               Mirror Mode
             </button>
           )}
-          {/* Render both daily games to preserve state (incl. dropdown) when switching */}
+
           <div className={tab === "daily" && difficulty === "easy" ? "" : "hidden"}>
             <Game
               key="daily-easy"
@@ -244,7 +243,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               onComplete={refreshStreak}
             />
           </div>
-          {/* Practice game */}
+
           {tab === "practice" && practiceWord && !mirrorMode && (
             <Game
               key={`practice-${difficulty}-${practiceKey}-${practiceWord.word}`}
@@ -254,26 +253,24 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               onNextWord={handleNextPracticeWord}
             />
           )}
-          
-          {/* Mirror Mode - guess the word from its definition */}
+
           {tab === "practice" && practiceWord && mirrorMode && (
             <MirrorGame
               key={`mirror-${difficulty}-${practiceKey}-${practiceWord.word}`}
               word={practiceWord}
               isPractice={true}
               onFlipBack={() => {
-                handleNextPracticeWord() // Get a new word when flipping back
+                handleNextPracticeWord()
                 setMirrorMode(false)
               }}
               onNextWord={() => {
                 handleNextPracticeWord()
               }}
-              streak={difficulty === "easy" 
+              streak={difficulty === "easy"
                 ? { current: mirrorStreak.easyStreak, best: mirrorStreak.easyBest }
                 : { current: mirrorStreak.hardStreak, best: mirrorStreak.hardBest }
               }
               onComplete={(result) => {
-                // Perfect = correct on first guess with no hints
                 const isPerfect = result.correct && result.guesses === 1 && result.hintsUsed === 0
                 const updated = updateMirrorStreak(difficulty, isPerfect)
                 setMirrorStreak(updated)
