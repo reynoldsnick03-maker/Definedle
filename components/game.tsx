@@ -5,6 +5,7 @@ import type { DailyWord, GameMode } from "@/lib/game-data"
 import type { ScoreResult, ConceptResult, ScoreBreakdown } from "@/lib/scoring"
 import { scoreDefinition } from "@/lib/scoring"
 import { formatDateKey, type HistoryEntry } from "@/lib/history"
+import { getPlayerId } from "@/lib/player-id"
 import { WordDisplay } from "./word-display"
 import { DefinitionInput } from "./definition-input"
 import { ResultsPanel } from "./results-panel"
@@ -60,13 +61,11 @@ export function Game({
   const [usedHint, setUsedHint] = useState(false)
   const [showHint, setShowHint] = useState(false)
 
-  // Reset hint state when word changes (for practice mode)
   useEffect(() => {
     setShowHint(false)
     setUsedHint(false)
   }, [dailyWord.word])
 
-  // Check cookie for previous daily submission (daily mode only)
   useEffect(() => {
     if (isPractice) return
     try {
@@ -137,6 +136,24 @@ export function Game({
       } catch {
         // Ignore network errors
       }
+      try {
+        const playerId = getPlayerId()
+        if (playerId) {
+          await fetch("/api/streak", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              player_id: playerId,
+              date: getDateKey(),
+              difficulty,
+              score: scoreResult.score,
+              word: word.word,
+            }),
+          })
+        }
+      } catch {
+        // Ignore — streak will fall back to cookie-based
+      }
     },
     [difficulty]
   )
@@ -148,7 +165,6 @@ export function Game({
       setPlayerDefinition(definition)
       setSubmitted(true)
 
-      // Save daily result to cookie and history (daily mode only)
       if (!isPractice) {
         try {
           const slimConcepts = scoreResult.concepts.map((c) => ({
@@ -173,7 +189,6 @@ export function Game({
           // Ignore
         }
         saveToHistory(scoreResult, dailyWord)
-        // Notify parent that game is complete (for streak refresh)
         onComplete?.()
       }
     },
@@ -183,7 +198,6 @@ export function Game({
   return (
     <div className="mx-auto w-full max-w-md px-5">
       <div className="rounded-xl border border-border bg-card p-6 shadow-sm md:p-8">
-        {/* Difficulty badge */}
         {difficulty === "hard" && (
           <div className="mb-4 flex items-center justify-center">
             <span className="rounded-full border border-destructive/30 bg-destructive/10 px-3 py-0.5 text-[10px] uppercase tracking-widest text-destructive font-medium">
@@ -199,7 +213,6 @@ export function Game({
 
         <div className="my-6 h-px bg-border" aria-hidden="true" />
 
-        {/* Etymology hint */}
         {!submitted && dailyWord.etymology && (
           <div className="mb-5">
             {showHint ? (
