@@ -1,408 +1,85 @@
 "use client"
 
 import { useState, useCallback, useEffect, useRef } from "react"
-import { Flame } from "lucide-react"
+import { Flame, Star, Trophy } from "lucide-react"
 import type { DailyWord } from "@/lib/game-data"
 import { stemMatch, areSynonyms } from "@/lib/scoring"
+import { getPlayerId } from "@/lib/player-id"
 
 interface MirrorGameProps {
   word: DailyWord
   onFlipBack: () => void
   onNextWord?: () => void
   isPractice?: boolean
-  /** Called when the game completes with result info */
   onComplete?: (result: { correct: boolean; guesses: number; hintsUsed: number }) => void
-  /** Current streak info to display */
   streak?: { current: number; best: number }
 }
 
 interface Guess {
   word: string
-  similarity: number // 0-100
+  similarity: number
 }
 
-// Calculate similarity between guess and target word
+interface SessionState {
+  score: number
+  streak: number
+  bestStreak: number
+  wordsSolved: number
+  wordsAttempted: number
+}
+
+function roundPoints(guesses: number, hintsUsed: number): number {
+  const base = guesses === 1 ? 3 : guesses === 2 ? 2 : 1
+  return Math.max(0, base - hintsUsed)
+}
+
 function calculateSimilarity(guess: string, target: string, synonyms?: string[]): number {
   const g = guess.toLowerCase().trim()
   const t = target.toLowerCase()
-  
-  // Exact match
   if (g === t) return 100
-  
-  // Check synonyms for high match
-  if (synonyms?.some(s => s.toLowerCase() === g)) return 85
-  
-  // Check if it's a synonym via our synonym clusters
-  if (areSynonyms(g, t)) return 80
-  
-  // Stem match (e.g., "running" matches "run")
   if (stemMatch(g, t)) return 90
-  
-  // Levenshtein-based similarity for close spellings
+  if (synonyms?.some(s => s.toLowerCase() === g)) return 75
+  if (areSynonyms(g, t)) return 70
   const distance = levenshtein(g, t)
   const maxLen = Math.max(g.length, t.length)
   const similarity = Math.round((1 - distance / maxLen) * 100)
-  
-  // Check partial synonym match
-  if (synonyms?.some(s => stemMatch(g, s.toLowerCase()))) {
-    return Math.max(similarity, 70)
-  }
-  
+  if (synonyms?.some(s => stemMatch(g, s.toLowerCase()))) return Math.max(similarity, 60)
   return Math.max(0, similarity)
 }
 
 function levenshtein(a: string, b: string): number {
   const matrix: number[][] = []
-  for (let i = 0; i <= b.length; i++) {
-    matrix[i] = [i]
-  }
-  for (let j = 0; j <= a.length; j++) {
-    matrix[0][j] = j
-  }
+  for (let i = 0; i <= b.length; i++) matrix[i] = [i]
+  for (let j = 0; j <= a.length; j++) matrix[0][j] = j
   for (let i = 1; i <= b.length; i++) {
     for (let j = 1; j <= a.length; j++) {
-      if (b.charAt(i - 1) === a.charAt(j - 1)) {
-        matrix[i][j] = matrix[i - 1][j - 1]
-      } else {
-        matrix[i][j] = Math.min(
-          matrix[i - 1][j - 1] + 1,
-          matrix[i][j - 1] + 1,
-          matrix[i - 1][j] + 1
-        )
-      }
+      matrix[i][j] = b[i-1] === a[j-1]
+        ? matrix[i-1][j-1]
+        : Math.min(matrix[i-1][j-1] + 1, matrix[i][j-1] + 1, matrix[i-1][j] + 1)
     }
   }
   return matrix[b.length][a.length]
 }
 
-// Get color based on similarity score - softer, muted tones
-function getSimilarityColor(similarity: number): string {
-  if (similarity >= 100) return "bg-score-high/80 text-white"
-  if (similarity >= 80) return "bg-emerald-400/60 text-emerald-900"
-  if (similarity >= 60) return "bg-amber-300/50 text-amber-900"
-  if (similarity >= 40) return "bg-orange-300/50 text-orange-900"
-  if (similarity >= 20) return "bg-red-300/50 text-red-900"
-  return "bg-red-200/60 text-red-800"
+function getSimilarityColor(s: number) {
+  if (s >= 100) return "bg-score-high/80 text-white"
+  if (s >= 80) return "bg-emerald-400/60 text-emerald-900"
+  if (s >= 60) return "bg-amber-300/50 text-amber-900"
+  if (s >= 40) return "bg-orange-300/50 text-orange-900"
+  return "bg-red-300/50 text-red-900"
 }
 
-function getSimilarityBorderColor(similarity: number): string {
-  if (similarity >= 100) return "border-score-high/60"
-  if (similarity >= 80) return "border-emerald-300"
-  if (similarity >= 60) return "border-amber-300"
-  if (similarity >= 40) return "border-orange-300"
-  if (similarity >= 20) return "border-red-300"
-  return "border-red-200"
+function getSimilarityBorderColor(s: number) {
+  if (s >= 100) return "border-score-high/60"
+  if (s >= 80) return "border-emerald-300"
+  if (s >= 60) return "border-amber-300"
+  if (s >= 40) return "border-orange-300"
+  return "border-red-300"
 }
 
-// Check if a word is valid using the Dictionary API (non-blocking with timeout)
 async function isValidWord(word: string): Promise<{ valid: boolean; uncertain: boolean }> {
-  // Only check words that are alphabetic
-  if (!/^[a-zA-Z]+$/.test(word)) {
-    return { valid: false, uncertain: false }
-  }
-  
+  if (!/^[a-zA-Z]+$/.test(word)) return { valid: false, uncertain: false }
   try {
     const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), 2000) // 2 second timeout
-    
-    const response = await fetch(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word.toLowerCase())}`,
-      { signal: controller.signal }
-    )
-    clearTimeout(timeoutId)
-    
-    return { valid: response.ok, uncertain: false }
-  } catch {
-    // On network error or timeout, allow the word (uncertain = true means we couldn't verify)
-    return { valid: true, uncertain: true }
-  }
-}
-
-export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplete, streak }: MirrorGameProps) {
-  const [guesses, setGuesses] = useState<Guess[]>([])
-  const [currentGuess, setCurrentGuess] = useState("")
-  const [isShaking, setIsShaking] = useState(false)
-  const [isComplete, setIsComplete] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
-  const [hintsRevealed, setHintsRevealed] = useState(0) // 0=none, 1=length, 2=first letter, 3=last letter
-  const [isValidating, setIsValidating] = useState(false)
-  const [validationError, setValidationError] = useState<string | null>(null)
-  const [showFlawless, setShowFlawless] = useState(false)
-  const inputRef = useRef<HTMLInputElement>(null)
-  
-  const maxGuesses = 3
-  const remainingGuesses = maxGuesses - guesses.length
-
-  // Reset state when word changes
-  useEffect(() => {
-    setGuesses([])
-    setCurrentGuess("")
-    setIsComplete(false)
-    setIsCorrect(false)
-    setHintsRevealed(0)
-    setValidationError(null)
-    setShowFlawless(false)
-  }, [word.word])
-
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault()
-    const trimmedGuess = currentGuess.trim()
-    if (!trimmedGuess || isComplete || isValidating) return
-    
-    setValidationError(null)
-    setIsValidating(true)
-    
-    // Validate the word (non-blocking with timeout)
-    const { valid, uncertain } = await isValidWord(trimmedGuess)
-    setIsValidating(false)
-    
-    // Only block if we're certain it's not a word (API returned 404)
-    // If uncertain (timeout/error), allow the guess to proceed
-    if (!valid && !uncertain) {
-      setValidationError("Not a recognized word")
-      setIsShaking(true)
-      setTimeout(() => setIsShaking(false), 300)
-      return
-    }
-    
-    const gLower = trimmedGuess.toLowerCase()
-    const tLower = word.word.toLowerCase()
-    
-    // Check for exact or stem match (correct answer)
-    const isExactMatch = gLower === tLower || stemMatch(gLower, tLower)
-    const similarity = isExactMatch ? 100 : calculateSimilarity(trimmedGuess, word.word, word.synonyms)
-    
-    const newGuess: Guess = { word: trimmedGuess, similarity }
-    const newGuesses = [...guesses, newGuess]
-    setGuesses(newGuesses)
-    setCurrentGuess("")
-    
-    if (isExactMatch) {
-      // Correct!
-      setIsCorrect(true)
-      setIsComplete(true)
-      // Trigger flawless animation if first guess with no hints
-      if (newGuesses.length === 1 && hintsRevealed === 0) {
-        setShowFlawless(true)
-      }
-      onComplete?.({ correct: true, guesses: newGuesses.length, hintsUsed: hintsRevealed })
-    } else if (newGuesses.length >= maxGuesses) {
-      // Out of guesses
-      setIsComplete(true)
-      setIsShaking(true)
-      setTimeout(() => setIsShaking(false), 500)
-      onComplete?.({ correct: false, guesses: newGuesses.length, hintsUsed: hintsRevealed })
-    } else {
-      // Wrong - shake
-      setIsShaking(true)
-      setTimeout(() => setIsShaking(false), 500)
-    }
-  }, [currentGuess, guesses, isComplete, isValidating, word.word, word.synonyms, hintsRevealed, onComplete])
-
-  return (
-    <div className="mx-auto w-full max-w-md px-5">
-      <div 
-        className={`relative rounded-xl border border-border bg-card p-6 shadow-sm md:p-8 transition-transform ${
-          isShaking ? "animate-shake" : ""
-        }`}
-      >
-        {/* Flip back button + streak display */}
-        <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center gap-3">
-            <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">
-              Mirror Mode
-            </span>
-            {/* Streak badge with flame icon */}
-            {streak && typeof streak.current === "number" && streak.current > 0 && (
-              <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-score-high/10 border border-score-high/20">
-                <Flame className="h-3 w-3 text-score-high" aria-hidden="true" />
-                <span className="text-xs font-medium tabular-nums text-score-high">
-                  {streak.current}
-                </span>
-              </div>
-            )}
-          </div>
-          <button
-            type="button"
-            onClick={onFlipBack}
-            className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Flip back to normal mode"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 7v6h6"/>
-              <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>
-            </svg>
-            Flip back
-          </button>
-        </div>
-
-        {/* Definition display */}
-        <div className="text-center mb-6">
-          <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
-            {word.partOfSpeech}
-          </p>
-          <p className="text-lg leading-relaxed text-foreground font-serif italic">
-            &ldquo;{word.definition}&rdquo;
-          </p>
-          
-          {/* Hints area - shows flawless banner when achieved, otherwise hints */}
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground min-h-[32px]">
-            {showFlawless ? (
-              <span className="text-score-high font-bold text-xl animate-flawless">
-                Flawless!
-              </span>
-            ) : (
-              <>
-                {hintsRevealed >= 1 && (
-                  <span className="px-2 py-1 rounded bg-muted/50">
-                    Starts with &ldquo;{word.word[0].toUpperCase()}&rdquo;
-                  </span>
-                )}
-                {hintsRevealed >= 2 && (
-                  <span className="px-2 py-1 rounded bg-muted/50">
-                    Ends with &ldquo;{word.word[word.word.length - 1].toLowerCase()}&rdquo;
-                  </span>
-                )}
-                {hintsRevealed >= 3 && (
-                  <span className="px-2 py-1 rounded bg-muted/50">
-                    {(() => {
-                      // Count syllables by counting vowel groups
-                      const syllables = word.word.toLowerCase()
-                        .replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '')
-                        .replace(/^y/, '')
-                        .match(/[aeiouy]{1,2}/g)?.length || 1
-                      return `${syllables} ${syllables === 1 ? 'syllable' : 'syllables'}`
-                    })()}
-                  </span>
-                )}
-                {/* Hint request button - use all 3 hints anytime */}
-                {!isComplete && hintsRevealed < 3 && (
-                  <button
-                    type="button"
-                    onClick={() => setHintsRevealed(h => h + 1)}
-                    className="px-2 py-1 rounded bg-muted/30 hover:bg-muted/50 transition-colors"
-                  >
-                    Hint?
-                  </button>
-                )}
-              </>
-            )}
-          </div>
-        </div>
-
-        <div className="my-6 h-px bg-border" aria-hidden="true" />
-
-        {/* Guess history */}
-        {guesses.length > 0 && (
-          <div className="mb-5 space-y-2">
-            {guesses.map((guess, i) => (
-              <div
-                key={i}
-                className={`flex items-center justify-between rounded-lg border-2 px-4 py-2.5 ${getSimilarityBorderColor(guess.similarity)}`}
-              >
-                <span className="font-medium">{guess.word}</span>
-                <span className={`text-xs font-bold px-2 py-0.5 rounded ${getSimilarityColor(guess.similarity)}`}>
-                  {guess.similarity >= 100 ? "Correct!" : `${guess.similarity}%`}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Input or result */}
-        {isComplete ? (
-          <div className="text-center">
-            {isCorrect ? (
-              <div className="mb-4">
-                <div className="inline-flex items-center gap-2 rounded-full bg-score-high/10 px-4 py-2 text-score-high">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                    <polyline points="22 4 12 14.01 9 11.01"/>
-                  </svg>
-                  <span className="font-semibold">
-                    Got it in {guesses.length} {guesses.length === 1 ? "guess" : "guesses"}!
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <div className="mb-4">
-                <p className="text-muted-foreground mb-2">The word was:</p>
-                <p className="text-2xl font-serif font-medium text-foreground">{word.word}</p>
-              </div>
-            )}
-            
-            {isPractice && onNextWord && (
-              <button
-                type="button"
-                onClick={() => {
-                  window.scrollTo({ top: 0, behavior: "smooth" })
-                  onNextWord()
-                }}
-                className="rounded-lg bg-foreground px-6 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
-              >
-                Next word
-              </button>
-            )}
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <input
-                ref={inputRef}
-                type="text"
-                value={currentGuess}
-                onChange={(e) => {
-                  setCurrentGuess(e.target.value)
-                  setValidationError(null)
-                }}
-                placeholder="Type your guess..."
-                className={`w-full rounded-lg border bg-background px-4 py-3 text-base placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-ring ${
-                  validationError ? "border-red-400 focus:border-red-400" : "border-border focus:border-foreground/30"
-                }`}
-                autoComplete="off"
-                autoCapitalize="off"
-                disabled={isValidating}
-              />
-              {validationError && (
-                <p className="mt-1.5 text-xs text-red-500">{validationError}</p>
-              )}
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-muted-foreground">
-                  {remainingGuesses} {remainingGuesses === 1 ? "guess" : "guesses"} left
-                </span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsComplete(true)
-                    onComplete?.({ correct: false, guesses: guesses.length, hintsUsed: hintsRevealed })
-                  }}
-                  className="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors px-2 py-1 rounded border border-border/50 hover:border-border"
-                >
-                  give up
-                </button>
-              </div>
-              <button
-                type="submit"
-                disabled={!currentGuess.trim() || isValidating}
-                className="rounded-lg bg-foreground px-5 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90 disabled:opacity-50"
-              >
-                {isValidating ? "Checking..." : "Guess"}
-              </button>
-            </div>
-          </form>
-        )}
-        
-        {/* Best streak footer */}
-        {streak && typeof streak.best === "number" && streak.best > 0 && (
-          <div className="mt-4 pt-3 border-t border-border/50 text-center">
-            <span className="text-[10px] uppercase tracking-widest text-muted-foreground/60">
-              Best flawless streak: {streak.best}
-            </span>
-          </div>
-        )}
-      </div>
-    </div>
-  )
-}
+    const timeoutId = setTimeout(() => controller.abort(), 2000)
+    const response = a
