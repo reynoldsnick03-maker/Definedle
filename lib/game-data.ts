@@ -70,25 +70,18 @@ function getDaysSinceHardModeStart(): number {
 }
 
 export function getTodaysHardWord(): DailyWord {
-  // Cycles through the hard word list in shuffled order starting from Feb 26, 2026
   const daysSinceStart = getDaysSinceHardModeStart()
   const shuffleIndex = ((daysSinceStart % HARD_WORD_SHUFFLE.length) + HARD_WORD_SHUFFLE.length) % HARD_WORD_SHUFFLE.length
   const actualIndex = HARD_WORD_SHUFFLE[shuffleIndex] % hardWords.length
   return hardWords[actualIndex]
 }
 
-/**
- * Returns the set of words that will appear as a daily word within
- * the next `days` days (including today). These are excluded from
- * practice so players don't spoil an upcoming daily.
- */
 function getUpcomingDailyWords(days: number): Set<string> {
   const dayOfYear = getDayOfYear()
   const daysSinceHardStart = getDaysSinceHardModeStart()
   const upcoming = new Set<string>()
   for (let d = 0; d < days; d++) {
     const easyIdx = (dayOfYear + d) % easyWords.length
-    // Use shuffled index for hard words
     const shuffleIdx = ((daysSinceHardStart + d) % HARD_WORD_SHUFFLE.length + HARD_WORD_SHUFFLE.length) % HARD_WORD_SHUFFLE.length
     const hardIdx = HARD_WORD_SHUFFLE[shuffleIdx] % hardWords.length
     upcoming.add(easyWords[easyIdx].word)
@@ -97,21 +90,12 @@ function getUpcomingDailyWords(days: number): Set<string> {
   return upcoming
 }
 
-/**
- * Look up a specific word by name across all word lists.
- * Returns the word and which difficulty pool it belongs to, or null if not found.
- */
 export function getWordByName(wordName: string): { word: DailyWord; difficulty: GameMode } | null {
   const normalized = wordName.toLowerCase().trim()
-  
-  // Check hard words first (more specific pool)
   const hardMatch = hardWords.find((w) => w.word.toLowerCase() === normalized)
   if (hardMatch) return { word: hardMatch, difficulty: "hard" }
-  
-  // Check easy words
   const easyMatch = easyWords.find((w) => w.word.toLowerCase() === normalized)
   if (easyMatch) return { word: easyMatch, difficulty: "easy" }
-  
   return null
 }
 
@@ -122,12 +106,18 @@ export function getRandomPracticeWord(excludeWords: string[] = [], difficulty: G
     (w) => !excludeWords.includes(w.word) && !upcoming.has(w.word)
   )
   if (available.length === 0) {
-    // Fallback: ignore the blackout window but still respect already-played words
     const fallback = pool.filter((w) => !excludeWords.includes(w.word))
     if (fallback.length === 0) {
       return pool[Math.floor(Math.random() * pool.length)]
     }
     return fallback[Math.floor(Math.random() * fallback.length)]
   }
-  return available[Math.floor(Math.random() * available.length)]
+  // Shuffle a sample of candidates for better distribution
+  const sampleSize = Math.min(20, available.length)
+  const shuffled = available
+    .map(w => ({ w, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .slice(0, sampleSize)
+    .map(({ w }) => w)
+  return shuffled[0]
 }
