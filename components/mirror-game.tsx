@@ -11,8 +11,11 @@ interface MirrorGameProps {
   onFlipBack: () => void
   onNextWord?: () => void
   isPractice?: boolean
-  onComplete?: (result: { correct: boolean; guesses: number; hintsUsed: number }) => void
-  streak?: { current: number; best: number }
+  onComplete?: (result: { correct: boolean; guesses: number; hintsUsed: number; points: number }) => void
+  sessionScore: number
+  sessionStreak: number
+  sessionBestStreak: number
+  onSessionUpdate: (delta: { points: number; correct: boolean }) => void
 }
 
 interface Guess {
@@ -20,17 +23,8 @@ interface Guess {
   similarity: number
 }
 
-interface SessionState {
-  score: number
-  streak: number
-  bestStreak: number
-  wordsSolved: number
-  wordsAttempted: number
-}
-
-function roundPoints(guesses: number, hintsUsed: number): number {
-  const base = guesses === 1 ? 3 : guesses === 2 ? 2 : 1
-  return Math.max(0, base - hintsUsed)
+function calcPoints(guesses: number, hintsUsed: number): number {
+  return Math.max(1, 4 - guesses - hintsUsed)
 }
 
 function calculateSimilarity(guess: string, target: string, synonyms?: string[]): number {
@@ -93,66 +87,59 @@ async function isValidWord(word: string): Promise<{ valid: boolean; uncertain: b
   }
 }
 
-async function saveSession(session: SessionState, difficulty: string) {
-  if (session.wordsAttempted < 3) return
-  try {
-    const playerId = getPlayerId()
-    if (!playerId) return
-    await fetch("/api/mirror-sessions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        player_id: playerId,
-        session_score: session.score,
-        best_streak: session.bestStreak,
-        words_solved: session.wordsSolved,
-        words_attempted: session.wordsAttempted,
-        difficulty,
-      }),
-    })
-  } catch {
-    // Ignore
-  }
+function getRevealedLetters(word: string, count: number): number[] {
+  const indices = Array.from({ length: word.length }, (_, i) => i)
+  const shuffled = indices
+    .map(i => ({ i, sort: Math.sin(i * 7 + word.length * 13) }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(x => x.i)
+  return shuffled.slice(0, count).sort((a, b) => a - b)
 }
 
-export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplete }: MirrorGameProps) {
+export function MirrorGame({
+  word,
+  onFlipBack,
+  onNextWord,
+  isPractice,
+  onComplete,
+  sessionScore,
+  sessionStreak,
+  sessionBestStreak,
+  onSessionUpdate,
+}: MirrorGameProps) {
   const [guesses, setGuesses] = useState<Guess[]>([])
   const [currentGuess, setCurrentGuess] = useState("")
   const [isShaking, setIsShaking] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
-  const [hintsRevealed, setHintsRevealed] = useState(0)
+  const [hintsUsed, setHintsUsed] = useState(0)
   const [isValidating, setIsValidating] = useState(false)
   const [validationError, setValidationError] = useState<string | null>(null)
   const [showFlawless, setShowFlawless] = useState(false)
   const [pointsEarned, setPointsEarned] = useState<number | null>(null)
-  const [session, setSession] = useState<SessionState>({
-    score: 0, streak: 0, bestStreak: 0, wordsSolved: 0, wordsAttempted: 0
-  })
-  const sessionSavedRef = useRef(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const maxGuesses = 3
+  const maxHints = 3
   const remainingGuesses = maxGuesses - guesses.length
+
+  const revealedIndices = getRevealedLetters(word.word, hintsUsed)
 
   useEffect(() => {
     setGuesses([])
     setCurrentGuess("")
     setIsComplete(false)
     setIsCorrect(false)
-    setHintsRevealed(0)
+    setHintsUsed(0)
     setValidationError(null)
     setShowFlawless(false)
     setPointsEarned(null)
   }, [word.word])
 
-  useEffect(() => {
-    return () => {
-      if (!sessionSavedRef.current && session.wordsAttempted >= 3) {
-        sessionSavedRef.current = true
-        saveSession(session, "easy")
-      }
+  const handleRevealLetter = () => {
+    if (hintsUsed < maxHints && !isComplete) {
+      setHintsUsed(h => h + 1)
     }
-  }, [session])
+  }
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
@@ -188,65 +175,47 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
     setCurrentGuess("")
 
     if (isActuallyCorrect) {
-      const pts = roundPoints(newGuesses.length, hintsRevealed)
+      const pts = calcPoints(newGuesses.length, hintsUsed)
       setPointsEarned(pts)
       setIsCorrect(true)
       setIsComplete(true)
-      if (newGuesses.length === 1 && hintsRevealed === 0) setShowFlawless(true)
-      setSession(prev => {
-        const newStreak = prev.streak + 1
-        return {
-          score: prev.score + pts,
-          streak: newStreak,
-          bestStreak: Math.max(prev.bestStreak, newStreak),
-          wordsSolved: prev.wordsSolved + 1,
-          wordsAttempted: prev.wordsAttempted + 1,
-        }
-      })
-      onComplete?.({ correct: true, guesses: newGuesses.length, hintsUsed: hintsRevealed })
+      if (newGuesses.length === 1 && hintsUsed === 0) setShowFlawless(true)
+      onSessionUpdate({ points: pts, correct: true })
+      onComplete?.({ correct: true, guesses: newGuesses.length, hintsUsed, points: pts })
     } else if (newGuesses.length >= maxGuesses) {
       setPointsEarned(0)
       setIsComplete(true)
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
-      setSession(prev => ({ ...prev, streak: 0, wordsAttempted: prev.wordsAttempted + 1 }))
-      onComplete?.({ correct: false, guesses: newGuesses.length, hintsUsed: hintsRevealed })
+      onSessionUpdate({ points: 0, correct: false })
+      onComplete?.({ correct: false, guesses: newGuesses.length, hintsUsed, points: 0 })
     } else {
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
     }
-  }, [currentGuess, guesses, isComplete, isValidating, word.word, word.definition, word.synonyms, hintsRevealed, onComplete])
-
-  const handleFlipBack = () => {
-    if (session.wordsAttempted >= 3 && !sessionSavedRef.current) {
-      sessionSavedRef.current = true
-      saveSession(session, "easy")
-    }
-    onFlipBack()
-  }
+  }, [currentGuess, guesses, isComplete, isValidating, word.word, word.definition, word.synonyms, hintsUsed, onComplete, onSessionUpdate])
 
   return (
     <div className="mx-auto w-full max-w-md px-5">
       <div className={`relative rounded-xl border border-border bg-card p-6 shadow-sm md:p-8 transition-transform ${isShaking ? "animate-shake" : ""}`}>
 
-        {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-3">
             <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">Mirror Mode</span>
-            {session.streak > 0 && (
+            {sessionStreak > 0 && (
               <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-score-high/10 border border-score-high/20">
                 <Flame className="h-3 w-3 text-score-high" />
-                <span className="text-xs font-medium tabular-nums text-score-high">{session.streak}</span>
+                <span className="text-xs font-medium tabular-nums text-score-high">{sessionStreak}</span>
               </div>
             )}
           </div>
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5">
               <Star className="h-3.5 w-3.5 text-amber-500" />
-              <span className="text-sm font-medium tabular-nums">{session.score}</span>
+              <span className="text-sm font-medium tabular-nums">{sessionScore}</span>
               <span className="text-xs text-muted-foreground">pts</span>
             </div>
-            <button type="button" onClick={handleFlipBack} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <button type="button" onClick={onFlipBack} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>
               </svg>
@@ -255,38 +224,51 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
           </div>
         </div>
 
-        {/* Definition */}
         <div className="text-center mb-6">
           <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">{word.partOfSpeech}</p>
           <p className="text-lg leading-relaxed text-foreground font-serif italic">&ldquo;{word.definition}&rdquo;</p>
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground min-h-[32px]">
+
+          {hintsUsed > 0 && (
+            <div className="mt-4 flex items-center justify-center gap-1.5 flex-wrap">
+              {word.word.split("").map((letter, i) => {
+                const isRevealed = revealedIndices.includes(i)
+                return (
+                  <div
+                    key={i}
+                    className={`w-7 h-8 flex items-end justify-center pb-0.5 border-b-2 text-sm font-medium transition-all duration-300 ${
+                      isRevealed
+                        ? "border-foreground text-foreground"
+                        : "border-muted-foreground/30 text-transparent"
+                    }`}
+                  >
+                    {isRevealed ? letter.toUpperCase() : "_"}
+                  </div>
+                )
+              })}
+            </div>
+          )}
+
+          <div className="mt-4 flex items-center justify-center">
             {showFlawless ? (
-              <span className="text-score-high font-bold text-xl animate-flawless">Flawless!</span>
-            ) : (
-              <>
-                {hintsRevealed >= 1 && <span className="px-2 py-1 rounded bg-muted/50">Starts with &ldquo;{word.word[0].toUpperCase()}&rdquo;</span>}
-                {hintsRevealed >= 2 && <span className="px-2 py-1 rounded bg-muted/50">Ends with &ldquo;{word.word[word.word.length - 1].toLowerCase()}&rdquo;</span>}
-                {hintsRevealed >= 3 && (
-                  <span className="px-2 py-1 rounded bg-muted/50">
-                    {(() => {
-                      const syllables = word.word.toLowerCase().replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, "").replace(/^y/, "").match(/[aeiouy]{1,2}/g)?.length || 1
-                      return `${syllables} ${syllables === 1 ? "syllable" : "syllables"}`
-                    })()}
-                  </span>
-                )}
-                {!isComplete && hintsRevealed < 3 && (
-                  <button type="button" onClick={() => setHintsRevealed(h => h + 1)} className="px-2 py-1 rounded bg-muted/30 hover:bg-muted/50 transition-colors text-xs">
-                    Hint? {hintsRevealed > 0 ? `(${hintsRevealed}/3)` : ""}
-                  </button>
-                )}
-              </>
-            )}
+              <span className="text-score-high font-bold text-xl">Flawless!</span>
+            ) : !isComplete && hintsUsed < maxHints ? (
+              <button
+                type="button"
+                onClick={handleRevealLetter}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted/40 hover:bg-muted/60 transition-colors text-xs text-muted-foreground hover:text-foreground border border-border/50"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
+                Reveal a letter
+                <span className="text-muted-foreground/60">−1 pt ({hintsUsed}/{maxHints})</span>
+              </button>
+            ) : null}
           </div>
         </div>
 
-        <div className="my-6 h-px bg-border" />
+        <div className="my-4 h-px bg-border" />
 
-        {/* Guesses */}
         {guesses.length > 0 && (
           <div className="mb-5 space-y-2">
             {guesses.map((guess, i) => (
@@ -300,7 +282,6 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
           </div>
         )}
 
-        {/* Result or input */}
         {isComplete ? (
           <div className="text-center">
             {isCorrect ? (
@@ -315,7 +296,7 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
                   <div className="flex items-center gap-1.5 text-sm">
                     <Star className="h-4 w-4 text-amber-500" />
                     <span className="font-medium text-amber-600">+{pointsEarned} {pointsEarned === 1 ? "point" : "points"}</span>
-                    <span className="text-muted-foreground">· Total: {session.score}</span>
+                    <span className="text-muted-foreground">· Total: {sessionScore}</span>
                   </div>
                 )}
               </div>
@@ -356,8 +337,8 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
                   onClick={() => {
                     setIsComplete(true)
                     setPointsEarned(0)
-                    setSession(prev => ({ ...prev, streak: 0, wordsAttempted: prev.wordsAttempted + 1 }))
-                    onComplete?.({ correct: false, guesses: guesses.length, hintsUsed: hintsRevealed })
+                    onSessionUpdate({ points: 0, correct: false })
+                    onComplete?.({ correct: false, guesses: guesses.length, hintsUsed, points: 0 })
                   }}
                   className="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors px-2 py-1 rounded border border-border/50 hover:border-border"
                 >
@@ -371,10 +352,10 @@ export function MirrorGame({ word, onFlipBack, onNextWord, isPractice, onComplet
           </form>
         )}
 
-        {session.bestStreak > 1 && (
+        {sessionBestStreak > 1 && (
           <div className="mt-4 pt-3 border-t border-border/50 flex items-center justify-center gap-1.5">
             <Trophy className="h-3 w-3 text-muted-foreground/60" />
-            <span className="text-[10px] uppercase tracking-widest text-muted-foreground/60">Best streak this session: {session.bestStreak}</span>
+            <span className="text-[10px] uppercase tracking-widest text-muted-foreground/60">Best streak this session: {sessionBestStreak}</span>
           </div>
         )}
       </div>
