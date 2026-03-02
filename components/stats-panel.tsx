@@ -1,13 +1,21 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import { X, Flame, Trophy, Hash, Star, Zap } from "lucide-react"
+import { X, Flame, Trophy, Hash, Star, Zap, ChevronDown, ChevronUp } from "lucide-react"
 import type { GameHistory } from "@/lib/history"
 import { getPlayerId } from "@/lib/player-id"
 
 interface StatsPanelProps {
   open: boolean
   onClose: () => void
+}
+
+interface WordHistoryEntry {
+  word: string
+  points: number
+  multDelta: number
+  guesses: number
+  hintsUsed: number
 }
 
 interface MirrorSession {
@@ -18,6 +26,7 @@ interface MirrorSession {
   words_attempted: number
   difficulty: string
   played_at: string
+  word_history?: WordHistoryEntry[]
 }
 
 interface MirrorHighScores {
@@ -26,6 +35,57 @@ interface MirrorHighScores {
 }
 
 type StatsTab = "daily" | "mirror"
+
+function SessionRow({ session, rank }: { session: MirrorSession; rank: number }) {
+  const [expanded, setExpanded] = useState(false)
+  const hasHistory = session.word_history && session.word_history.length > 0
+
+  function formatDate(isoStr: string) {
+    const d = new Date(isoStr)
+    return `${String(d.getMonth() + 1).padStart(2, "0")}/${String(d.getDate()).padStart(2, "0")}`
+  }
+
+  return (
+    <div className="rounded-lg bg-muted/30 overflow-hidden">
+      <button
+        type="button"
+        onClick={() => hasHistory && setExpanded(e => !e)}
+        className={`w-full flex items-center justify-between px-3 py-2 ${hasHistory ? "cursor-pointer hover:bg-muted/50 transition-colors" : "cursor-default"}`}
+      >
+        <div className="flex items-center gap-2.5">
+          <span className="text-xs tabular-nums text-muted-foreground w-4 text-right">{rank}.</span>
+          <span className="text-sm font-medium tabular-nums">{session.session_score} pts</span>
+          <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium uppercase tracking-wider ${session.difficulty === "hard" ? "bg-destructive/10 text-destructive" : "bg-muted text-muted-foreground"}`}>
+            {session.difficulty}
+          </span>
+        </div>
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <span>{session.words_solved}/{session.words_attempted}</span>
+          <span>{formatDate(session.played_at)}</span>
+          {hasHistory && (
+            expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />
+          )}
+        </div>
+      </button>
+
+      {expanded && hasHistory && (
+        <div className="border-t border-border/50 px-3 py-2 flex flex-col gap-1">
+          {session.word_history!.map((entry, i) => (
+            <div key={i} className="flex items-center justify-between text-xs py-0.5">
+              <span className="capitalize text-foreground font-medium">{entry.word}</span>
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <span className="text-amber-600 font-medium">+{entry.points} pts</span>
+                <span className={`font-medium tabular-nums ${entry.multDelta > 0 ? "text-score-high" : entry.multDelta < 0 ? "text-score-low" : "text-muted-foreground"}`}>
+                  {entry.multDelta > 0 ? `▲ +${entry.multDelta}×` : entry.multDelta < 0 ? `▼ ${entry.multDelta}×` : "— 0×"}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 export function StatsPanel({ open, onClose }: StatsPanelProps) {
   const [activeTab, setActiveTab] = useState<StatsTab>("daily")
@@ -40,9 +100,7 @@ export function StatsPanel({ open, onClose }: StatsPanelProps) {
         const data = await res.json()
         setStats(data)
       }
-    } catch {
-      // Ignore
-    }
+    } catch {}
   }, [])
 
   const fetchMirrorScores = useCallback(async () => {
@@ -55,9 +113,7 @@ export function StatsPanel({ open, onClose }: StatsPanelProps) {
         const data = await res.json()
         setMirrorScores(data)
       }
-    } catch {
-      // Ignore
-    } finally {
+    } catch {} finally {
       setMirrorLoading(false)
     }
   }, [])
@@ -146,7 +202,7 @@ export function StatsPanel({ open, onClose }: StatsPanelProps) {
         {/* Scrollable body */}
         <div className="overflow-y-auto overscroll-contain px-6 pb-6 flex flex-col gap-6">
 
-          {/* DAILY TAB */}
+          {/* ── DAILY TAB ── */}
           {activeTab === "daily" && (
             <>
               {!stats || stats.played === 0 ? (
@@ -158,21 +214,21 @@ export function StatsPanel({ open, onClose }: StatsPanelProps) {
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div className="flex flex-col items-center gap-1">
                       <div className="flex items-center gap-1.5 text-muted-foreground">
-                        <Hash className="h-3.5 w-3.5" aria-hidden="true" />
+                        <Hash className="h-3.5 w-3.5" />
                         <span className="text-[10px] uppercase tracking-widest font-medium">Played</span>
                       </div>
                       <span className="font-serif text-2xl font-light tabular-nums text-foreground">{stats.played}</span>
                     </div>
                     <div className="flex flex-col items-center gap-1">
                       <div className="flex items-center gap-1.5 text-muted-foreground">
-                        <Flame className="h-3.5 w-3.5" aria-hidden="true" />
+                        <Flame className="h-3.5 w-3.5" />
                         <span className="text-[10px] uppercase tracking-widest font-medium">Streak</span>
                       </div>
                       <span className="font-serif text-2xl font-light tabular-nums text-foreground">{stats.streak}</span>
                     </div>
                     <div className="flex flex-col items-center gap-1">
                       <div className="flex items-center gap-1.5 text-muted-foreground">
-                        <Trophy className="h-3.5 w-3.5" aria-hidden="true" />
+                        <Trophy className="h-3.5 w-3.5" />
                         <span className="text-[10px] uppercase tracking-widest font-medium">Best</span>
                       </div>
                       <span className="font-serif text-2xl font-light tabular-nums text-foreground">{stats.best}</span>
@@ -217,14 +273,14 @@ export function StatsPanel({ open, onClose }: StatsPanelProps) {
             </>
           )}
 
-          {/* MIRROR TAB */}
+          {/* ── MIRROR TAB ── */}
           {activeTab === "mirror" && (
             <>
               {mirrorLoading ? (
                 <p className="text-sm text-muted-foreground text-center py-8">Loading...</p>
               ) : !mirrorScores || (mirrorScores.topScores.length === 0 && mirrorScores.topStreaks.length === 0) ? (
                 <p className="text-sm text-muted-foreground text-center py-8">
-                  Complete a Mirror Mode session (3+ words) to see your high scores here.
+                  Complete a Mirror Mode session to see your high scores here.
                 </p>
               ) : (
                 <>
@@ -233,22 +289,11 @@ export function StatsPanel({ open, onClose }: StatsPanelProps) {
                       <div className="flex items-center gap-2">
                         <Star className="h-3.5 w-3.5 text-amber-500" />
                         <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Best Sessions</span>
+                        <span className="text-[10px] text-muted-foreground/60 ml-auto">tap to expand</span>
                       </div>
                       <div className="flex flex-col gap-1.5">
                         {mirrorScores.topScores.slice(0, 10).map((session, i) => (
-                          <div key={session.id} className="flex items-center justify-between rounded-lg px-3 py-2 bg-muted/30">
-                            <div className="flex items-center gap-2.5">
-                              <span className="text-xs tabular-nums text-muted-foreground w-4 text-right">{i + 1}.</span>
-                              <span className="text-sm font-medium tabular-nums">{session.session_score} pts</span>
-                              <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium uppercase tracking-wider ${session.difficulty === "hard" ? "bg-destructive/10 text-destructive" : "bg-muted text-muted-foreground"}`}>
-                                {session.difficulty}
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                              <span>{session.words_solved}/{session.words_attempted}</span>
-                              <span>{formatDate(session.played_at)}</span>
-                            </div>
-                          </div>
+                          <SessionRow key={session.id} session={session} rank={i + 1} />
                         ))}
                       </div>
                     </div>
@@ -261,25 +306,11 @@ export function StatsPanel({ open, onClose }: StatsPanelProps) {
                       <div className="flex items-center gap-2">
                         <Flame className="h-3.5 w-3.5 text-score-high" />
                         <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Best Streaks</span>
+                        <span className="text-[10px] text-muted-foreground/60 ml-auto">tap to expand</span>
                       </div>
                       <div className="flex flex-col gap-1.5">
                         {mirrorScores.topStreaks.slice(0, 10).map((session, i) => (
-                          <div key={session.id} className="flex items-center justify-between rounded-lg px-3 py-2 bg-muted/30">
-                            <div className="flex items-center gap-2.5">
-                              <span className="text-xs tabular-nums text-muted-foreground w-4 text-right">{i + 1}.</span>
-                              <div className="flex items-center gap-1">
-                                <Flame className="h-3 w-3 text-score-high" />
-                                <span className="text-sm font-medium tabular-nums">{session.best_streak}</span>
-                              </div>
-                              <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium uppercase tracking-wider ${session.difficulty === "hard" ? "bg-destructive/10 text-destructive" : "bg-muted text-muted-foreground"}`}>
-                                {session.difficulty}
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                              <span>{session.words_solved}/{session.words_attempted}</span>
-                              <span>{formatDate(session.played_at)}</span>
-                            </div>
-                          </div>
+                          <SessionRow key={session.id} session={session} rank={i + 1} />
                         ))}
                       </div>
                     </div>
