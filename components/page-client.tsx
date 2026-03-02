@@ -7,7 +7,7 @@ import { StatsPanel } from "@/components/stats-panel"
 import { HowToPlay } from "@/components/how-to-play"
 import { SharedResult, type ShareData } from "@/components/shared-result"
 import { ModeToggle, type TabMode } from "@/components/mode-toggle"
-import { MirrorGame } from "@/components/mirror-game"
+import { MirrorGame, type WordHistoryEntry } from "@/components/mirror-game"
 import { MirrorSessionSummary } from "@/components/mirror-session-summary"
 import { StreakBadge } from "@/components/streak-badge"
 import type { DailyWord, GameMode } from "@/lib/game-data"
@@ -26,12 +26,14 @@ interface PageClientProps {
   } | null
 }
 
-const MULTIPLIER_STEPS = [1, 1.5, 2, 2.5, 3, 3.5, 4]
+const MULTIPLIER_STEPS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8]
 
-function applyMultiplierStep(current: number, delta: number): number {
-  const idx = MULTIPLIER_STEPS.indexOf(current)
+function applyMultiplierStep(current: number, effect: "flawless" | "good" | "poor"): number {
+  const idx = MULTIPLIER_STEPS.findIndex(s => Math.abs(s - current) < 0.01)
   const safeIdx = idx === -1 ? 0 : idx
-  return MULTIPLIER_STEPS[Math.min(Math.max(safeIdx + delta, 0), MULTIPLIER_STEPS.length - 1)]
+  if (effect === "flawless") return MULTIPLIER_STEPS[Math.min(safeIdx + 2, MULTIPLIER_STEPS.length - 1)]
+  if (effect === "good") return MULTIPLIER_STEPS[Math.min(safeIdx + 1, MULTIPLIER_STEPS.length - 1)]
+  return MULTIPLIER_STEPS[Math.max(safeIdx - 1, 0)]
 }
 
 export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: PageClientProps) {
@@ -52,9 +54,18 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   const [multiplier, setMultiplier] = useState(1)
   const [bestMultiplier, setBestMultiplier] = useState(1)
   const [showSummary, setShowSummary] = useState(false)
-  const [summaryData, setSummaryData] = useState<{ score: number; wordsSolved: number; bestMultiplier: number } | null>(null)
+  const [summaryData, setSummaryData] = useState<{
+    score: number
+    wordsSolved: number
+    bestMultiplier: number
+    wordHistory: WordHistoryEntry[]
+  } | null>(null)
 
-  const handleSessionUpdate = useCallback(({ points, correct, multiplierEffect }: { points: number; correct: boolean; multiplierEffect: "up" | "hold" | "down" }) => {
+  const handleSessionUpdate = useCallback(({ points, correct, multiplierEffect }: {
+    points: number
+    correct: boolean
+    multiplierEffect: "flawless" | "good" | "poor"
+  }) => {
     setSessionScore(prev => prev + points)
     if (correct) {
       setSessionWordsSolved(prev => prev + 1)
@@ -64,16 +75,20 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
         return next
       })
       setMultiplier(prev => {
-        const delta = multiplierEffect === "up" ? 2 : multiplierEffect === "hold" ? 1 : -1
-        const next = applyMultiplierStep(prev, delta)
+        const next = applyMultiplierStep(prev, multiplierEffect)
         setBestMultiplier(best => Math.max(best, next))
         return next
       })
     }
   }, [])
 
-  const handleSessionEnd = useCallback(async (finalScore: number, wordsSolved: number, peakMultiplier: number) => {
-    setSummaryData({ score: finalScore, wordsSolved, bestMultiplier: peakMultiplier })
+  const handleSessionEnd = useCallback(async (
+    finalScore: number,
+    wordsSolved: number,
+    peakMultiplier: number,
+    wordHistory: WordHistoryEntry[]
+  ) => {
+    setSummaryData({ score: finalScore, wordsSolved, bestMultiplier: peakMultiplier, wordHistory })
     setShowSummary(true)
     if (wordsSolved >= 1) {
       try {
@@ -89,6 +104,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
             words_solved: wordsSolved,
             words_attempted: wordsSolved + 1,
             difficulty,
+            word_history: wordHistory,
           }),
         })
       } catch {}
@@ -270,21 +286,29 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
             onDifficultyChange={handleDifficultyChange}
           />
 
-          {tab === "practice" && !mirrorMode && (
+          {/* Mirror mode toggle button — only shown in practice, not during summary */}
+          {tab === "practice" && !showSummary && (
             <button
               type="button"
               onClick={() => {
-                handleNextPracticeWord()
-                setMirrorMode(true)
+                if (mirrorMode) {
+                  // Switch to normal mode — reset session
+                  resetSession()
+                  handleNextPracticeWord()
+                  setMirrorMode(false)
+                } else {
+                  // Switch to mirror mode
+                  handleNextPracticeWord()
+                  setMirrorMode(true)
+                }
               }}
-              className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-              title="Flip to Mirror Mode - guess the word from its definition"
+              className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors leading-tight"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
                 <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0"/>
               </svg>
-              Mirror Mode
+              {mirrorMode ? "Normal\nmode" : "Mirror\nmode"}
             </button>
           )}
 
@@ -324,14 +348,12 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               key={`mirror-${difficulty}-${practiceWord.word}`}
               word={practiceWord}
               isPractice={true}
-              onFlipBack={() => {
+              onFlipToNormal={() => {
                 resetSession()
                 handleNextPracticeWord()
                 setMirrorMode(false)
               }}
-              onNextWord={() => {
-                handleNextPracticeWord()
-              }}
+              onNextWord={handleNextPracticeWord}
               sessionScore={sessionScore}
               sessionStreak={sessionStreak}
               sessionBestStreak={sessionBestStreak}
@@ -351,6 +373,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               score={summaryData.score}
               wordsSolved={summaryData.wordsSolved}
               bestMultiplier={summaryData.bestMultiplier}
+              wordHistory={summaryData.wordHistory}
               onPlayAgain={() => {
                 resetSession()
                 handleNextPracticeWord()
