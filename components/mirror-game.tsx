@@ -22,7 +22,7 @@ interface MirrorGameProps {
   sessionStreak: number
   sessionBestStreak: number
   multiplier: number
-  onSessionUpdate: (delta: { points: number; correct: boolean; multiplierEffect: "flawless" | "good" | "poor" }) => void
+  onSessionUpdate: (delta: { points: number; correct: boolean; multiplierEffect: "flawless" | "good" | "decent" | "poor" }) => void
   onSessionEnd: (finalScore: number, wordsSolved: number, bestMultiplier: number, wordHistory: WordHistoryEntry[]) => void
   onFlipToNormal: () => void
 }
@@ -39,20 +39,22 @@ function getMultiplierIndex(m: number): number {
   return idx === -1 ? 0 : idx
 }
 
-function applyMultiplierEffect(current: number, effect: "flawless" | "good" | "poor"): number {
+function applyMultiplierEffect(current: number, effect: "flawless" | "good" | "decent" | "poor"): number {
   const idx = getMultiplierIndex(current)
   if (effect === "flawless") return MULTIPLIER_STEPS[Math.min(idx + 2, MULTIPLIER_STEPS.length - 1)]
   if (effect === "good") return MULTIPLIER_STEPS[Math.min(idx + 1, MULTIPLIER_STEPS.length - 1)]
+  if (effect === "decent") return current
   return MULTIPLIER_STEPS[Math.max(idx - 1, 0)]
 }
 
-function classifyPlay(guesses: number, hintsUsed: number): "flawless" | "good" | "poor" {
+function classifyPlay(guesses: number, hintsUsed: number): "flawless" | "good" | "decent" | "poor" {
   if (guesses === 1 && hintsUsed === 0) return "flawless"
   if (
     (guesses === 1 && hintsUsed === 1) ||
     (guesses === 2 && hintsUsed === 0) ||
     (guesses === 2 && hintsUsed === 1)
   ) return "good"
+  if (guesses === 1 && hintsUsed === 2) return "decent"
   return "poor"
 }
 
@@ -155,7 +157,7 @@ export function MirrorGame({
   const [validationError, setValidationError] = useState<string | null>(null)
   const [showFlawless, setShowFlawless] = useState(false)
   const [pointsEarned, setPointsEarned] = useState<number | null>(null)
-  const [playQuality, setPlayQuality] = useState<"flawless" | "good" | "poor" | null>(null)
+  const [playQuality, setPlayQuality] = useState<"flawless" | "good" | "decent" | "poor" | null>(null)
   const [wordHistory, setWordHistory] = useState<WordHistoryEntry[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
   const maxGuesses = 3
@@ -244,6 +246,8 @@ export function MirrorGame({
     ? <span className="text-score-high font-medium">▲ flawless</span>
     : playQuality === "good"
     ? <span className="text-amber-500 font-medium">▲ good</span>
+    : playQuality === "decent"
+    ? <span className="text-muted-foreground font-medium">— decent</span>
     : playQuality === "poor"
     ? <span className="text-score-low font-medium">▼ poor</span>
     : null
@@ -254,16 +258,19 @@ export function MirrorGame({
 
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center gap-3">
-            <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium leading-tight">Mirror<br/>Mode</span>
+          {/* Left: static mode label only */}
+          <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium leading-tight">
+            Mirror<br/>Mode
+          </span>
+
+          {/* Right: streak, score, multiplier — evenly spaced, no flip button */}
+          <div className="flex items-center gap-4">
             {sessionStreak > 0 && (
               <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-score-high/10 border border-score-high/20">
                 <Flame className="h-3 w-3 text-score-high" />
                 <span className="text-xs font-medium tabular-nums text-score-high">{sessionStreak}</span>
               </div>
             )}
-          </div>
-          <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5">
               <Star className="h-3.5 w-3.5 text-amber-500" />
               <span className="text-sm font-medium tabular-nums">{sessionScore}</span>
@@ -272,13 +279,6 @@ export function MirrorGame({
               <Zap className={`h-3 w-3 ${multiplierColor}`} />
               <span className={`text-xs font-bold tabular-nums ${multiplierColor}`}>×{multiplier}</span>
             </div>
-            <button
-              type="button"
-              onClick={onFlipToNormal}
-              className="text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors leading-tight text-right"
-            >
-              Normal<br/>mode
-            </button>
           </div>
         </div>
 
