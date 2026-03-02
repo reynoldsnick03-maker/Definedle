@@ -141,11 +141,8 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
       if (found) {
         setTab("practice")
         setDifficulty(found.difficulty)
-        if (found.difficulty === "easy") {
-          setPracticeEasy(found.word)
-        } else {
-          setPracticeHard(found.word)
-        }
+        if (found.difficulty === "easy") setPracticeEasy(found.word)
+        else setPracticeHard(found.word)
         window.history.replaceState({}, "", window.location.pathname)
       }
     }
@@ -240,9 +237,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   }, [tab, practiceEasy, practiceHard, startPractice])
 
   const handlePlayYourself = () => {
-    if (typeof window !== "undefined") {
-      window.history.replaceState({}, "", window.location.pathname)
-    }
+    if (typeof window !== "undefined") window.history.replaceState({}, "", window.location.pathname)
     setShowingShare(false)
   }
 
@@ -286,51 +281,35 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
             onDifficultyChange={handleDifficultyChange}
           />
 
-          {/* Mirror mode toggle button — only shown in practice, not during summary */}
+          {/* Mirror mode button — only in practice, not during summary, lives above the card */}
           {tab === "practice" && !showSummary && (
             <button
               type="button"
               onClick={() => {
                 if (mirrorMode) {
-                  // Switch to normal mode — reset session
                   resetSession()
                   handleNextPracticeWord()
                   setMirrorMode(false)
                 } else {
-                  // Switch to mirror mode
                   handleNextPracticeWord()
                   setMirrorMode(true)
                 }
               }}
-              className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors leading-tight"
+              className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
                 <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0"/>
               </svg>
-              {mirrorMode ? "Normal\nmode" : "Mirror\nmode"}
+              {mirrorMode ? "Normal mode" : "Mirror mode"}
             </button>
           )}
 
           <div className={tab === "daily" && difficulty === "easy" ? "" : "hidden"}>
-            <Game
-              key="daily-easy"
-              dailyWord={dailyWord}
-              difficulty="easy"
-              isPractice={false}
-              onStartPractice={() => handleTabChange("practice")}
-              onComplete={refreshStreak}
-            />
+            <Game key="daily-easy" dailyWord={dailyWord} difficulty="easy" isPractice={false} onStartPractice={() => handleTabChange("practice")} onComplete={refreshStreak} />
           </div>
           <div className={tab === "daily" && difficulty === "hard" ? "" : "hidden"}>
-            <Game
-              key="daily-hard"
-              dailyWord={hardWord}
-              difficulty="hard"
-              isPractice={false}
-              onStartPractice={() => handleTabChange("practice")}
-              onComplete={refreshStreak}
-            />
+            <Game key="daily-hard" dailyWord={hardWord} difficulty="hard" isPractice={false} onStartPractice={() => handleTabChange("practice")} onComplete={refreshStreak} />
           </div>
 
           {tab === "practice" && practiceWord && !mirrorMode && (
