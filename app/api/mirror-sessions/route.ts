@@ -1,7 +1,6 @@
 import { createClient } from "@/lib/supabase/server"
 import { NextResponse } from "next/server"
 
-// GET: fetch top 10 sessions for a player
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
@@ -19,12 +18,10 @@ export async function GET(request: Request) {
 
     if (error || !data) return NextResponse.json({ topScores: [], topStreaks: [] })
 
-    // Top 10 by session score
     const topScores = [...data]
       .sort((a, b) => b.session_score - a.session_score)
       .slice(0, 10)
 
-    // Top 10 by best streak
     const topStreaks = [...data]
       .sort((a, b) => b.best_streak - a.best_streak)
       .slice(0, 10)
@@ -35,18 +32,16 @@ export async function GET(request: Request) {
   }
 }
 
-// POST: save a completed mirror session
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { player_id, session_score, best_streak, words_solved, words_attempted, difficulty } = body
+    const { player_id, session_score, best_streak, words_solved, words_attempted, difficulty, word_history } = body
 
     if (!player_id || typeof session_score !== "number" || !difficulty) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 })
     }
 
-    // Only save sessions where at least 3 words were attempted (prevents noise)
-    if (words_attempted < 3) {
+    if (words_attempted < 1) {
       return NextResponse.json({ saved: false })
     }
 
@@ -59,6 +54,7 @@ export async function POST(request: Request) {
       words_solved,
       words_attempted,
       difficulty,
+      word_history: word_history ?? null,
     })
 
     if (error) {
