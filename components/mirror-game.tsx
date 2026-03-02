@@ -32,7 +32,6 @@ interface Guess {
   similarity: number
 }
 
-// No cap — extends as far as skill allows
 const MULTIPLIER_STEPS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8]
 
 function getMultiplierIndex(m: number): number {
@@ -156,7 +155,7 @@ export function MirrorGame({
   const [validationError, setValidationError] = useState<string | null>(null)
   const [showFlawless, setShowFlawless] = useState(false)
   const [pointsEarned, setPointsEarned] = useState<number | null>(null)
-  const [nextMult, setNextMult] = useState<number | null>(null)
+  const [playQuality, setPlayQuality] = useState<"flawless" | "good" | "poor" | null>(null)
   const [wordHistory, setWordHistory] = useState<WordHistoryEntry[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
   const maxGuesses = 3
@@ -173,7 +172,7 @@ export function MirrorGame({
     setValidationError(null)
     setShowFlawless(false)
     setPointsEarned(null)
-    setNextMult(null)
+    setPlayQuality(null)
   }, [word.word])
 
   const handleRevealLetter = () => {
@@ -213,29 +212,22 @@ export function MirrorGame({
       const quality = classifyPlay(newGuesses.length, hintsUsed)
       const basePoints = calcBasePoints(newGuesses.length, hintsUsed)
       const earned = Math.floor(basePoints * multiplier)
-      const newMult = applyMultiplierEffect(multiplier, quality)
-      const multDelta = parseFloat((newMult - multiplier).toFixed(1))
+      const nextMult = applyMultiplierEffect(multiplier, quality)
+      const multDelta = parseFloat((nextMult - multiplier).toFixed(1))
 
       setPointsEarned(earned)
+      setPlayQuality(quality)
       setIsCorrect(true)
       setIsComplete(true)
-      setNextMult(newMult)
       if (newGuesses.length === 1 && hintsUsed === 0) setShowFlawless(true)
 
-      const entry: WordHistoryEntry = {
-        word: word.word,
-        points: earned,
-        multDelta,
-        guesses: newGuesses.length,
-        hintsUsed,
-      }
+      const entry: WordHistoryEntry = { word: word.word, points: earned, multDelta, guesses: newGuesses.length, hintsUsed }
       const newHistory = [...wordHistory, entry]
       setWordHistory(newHistory)
 
       onSessionUpdate({ points: earned, correct: true, multiplierEffect: quality })
       onComplete?.({ correct: true, guesses: newGuesses.length, hintsUsed, points: earned })
     } else if (newGuesses.length >= maxGuesses) {
-      setPointsEarned(0)
       setIsComplete(true)
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
@@ -247,6 +239,14 @@ export function MirrorGame({
   }, [currentGuess, guesses, isComplete, isValidating, word, hintsUsed, multiplier, onComplete, onSessionUpdate, onSessionEnd, sessionScore, sessionStreak, wordHistory])
 
   const multiplierColor = multiplier >= 4 ? "text-score-high" : multiplier >= 2.5 ? "text-amber-500" : "text-muted-foreground"
+
+  const qualityLabel = playQuality === "flawless"
+    ? <span className="text-score-high font-medium">▲ flawless</span>
+    : playQuality === "good"
+    ? <span className="text-amber-500 font-medium">▲ good</span>
+    : playQuality === "poor"
+    ? <span className="text-score-low font-medium">▼ poor</span>
+    : null
 
   return (
     <div className="mx-auto w-full max-w-md px-5">
@@ -287,14 +287,15 @@ export function MirrorGame({
           <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">{word.partOfSpeech}</p>
           <p className="text-lg leading-relaxed text-foreground font-serif italic">&ldquo;{word.definition}&rdquo;</p>
 
+          {/* Letter reveal — smaller tiles so long words fit one line */}
           {hintsUsed > 0 && (
-            <div className="mt-4 flex items-center justify-center gap-1.5 flex-wrap">
+            <div className="mt-4 flex items-center justify-center gap-1 flex-nowrap overflow-hidden">
               {word.word.split("").map((letter, i) => {
                 const isRevealed = revealedIndices.includes(i)
                 return (
                   <div
                     key={i}
-                    className={`w-7 h-8 flex items-end justify-center pb-0.5 border-b-2 text-sm font-medium transition-all duration-300 ${
+                    className={`flex-shrink-0 w-5 h-7 flex items-end justify-center pb-0.5 border-b-2 text-xs font-medium transition-all duration-300 ${
                       isRevealed ? "border-foreground text-foreground" : "border-muted-foreground/30 text-transparent"
                     }`}
                   >
@@ -351,13 +352,11 @@ export function MirrorGame({
                   </svg>
                   <span className="font-semibold">Got it in {guesses.length} {guesses.length === 1 ? "guess" : "guesses"}!</span>
                 </div>
-                {pointsEarned !== null && nextMult !== null && (
+                {pointsEarned !== null && (
                   <div className="flex items-center gap-1.5 text-sm flex-wrap justify-center">
                     <Star className="h-4 w-4 text-amber-500" />
                     <span className="font-medium text-amber-600">+{pointsEarned} pts</span>
-                    <span className={`text-xs font-medium ${nextMult > multiplier ? "text-score-high" : nextMult < multiplier ? "text-score-low" : "text-muted-foreground"}`}>
-                      · ×{multiplier}{nextMult > multiplier ? " ▲ " : nextMult < multiplier ? " ▼ " : " — "}×{nextMult}
-                    </span>
+                    {qualityLabel && <span className="text-xs">· {qualityLabel}</span>}
                   </div>
                 )}
               </div>
