@@ -8,6 +8,7 @@ import { HowToPlay } from "@/components/how-to-play"
 import { SharedResult, type ShareData } from "@/components/shared-result"
 import { ModeToggle, type TabMode } from "@/components/mode-toggle"
 import { MirrorGame } from "@/components/mirror-game"
+import { MirrorSessionSummary } from "@/components/mirror-session-summary"
 import { StreakBadge } from "@/components/streak-badge"
 import type { DailyWord, GameMode } from "@/lib/game-data"
 import { getRandomPracticeWord, getWordByName } from "@/lib/game-data"
@@ -25,6 +26,14 @@ interface PageClientProps {
   } | null
 }
 
+const MULTIPLIER_STEPS = [1, 1.5, 2, 2.5, 3, 3.5, 4]
+
+function applyMultiplierStep(current: number, delta: number): number {
+  const idx = MULTIPLIER_STEPS.indexOf(current)
+  const safeIdx = idx === -1 ? 0 : idx
+  return MULTIPLIER_STEPS[Math.min(Math.max(safeIdx + delta, 0), MULTIPLIER_STEPS.length - 1)]
+}
+
 export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: PageClientProps) {
   const [statsOpen, setStatsOpen] = useState(false)
   const [helpOpen, setHelpOpen] = useState(false)
@@ -35,15 +44,18 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   const [mirrorMode, setMirrorMode] = useState(false)
   const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
 
+  // Session state
   const [sessionScore, setSessionScore] = useState(0)
   const [sessionStreak, setSessionStreak] = useState(0)
   const [sessionBestStreak, setSessionBestStreak] = useState(0)
-  const [sessionWordsAttempted, setSessionWordsAttempted] = useState(0)
   const [sessionWordsSolved, setSessionWordsSolved] = useState(0)
+  const [multiplier, setMultiplier] = useState(1)
+  const [bestMultiplier, setBestMultiplier] = useState(1)
+  const [showSummary, setShowSummary] = useState(false)
+  const [summaryData, setSummaryData] = useState<{ score: number; wordsSolved: number; bestMultiplier: number } | null>(null)
 
-  const handleSessionUpdate = useCallback(({ points, correct }: { points: number; correct: boolean }) => {
+  const handleSessionUpdate = useCallback(({ points, correct, multiplierEffect }: { points: number; correct: boolean; multiplierEffect: "up" | "hold" | "down" }) => {
     setSessionScore(prev => prev + points)
-    setSessionWordsAttempted(prev => prev + 1)
     if (correct) {
       setSessionWordsSolved(prev => prev + 1)
       setSessionStreak(prev => {
@@ -51,30 +63,48 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
         setSessionBestStreak(best => Math.max(best, next))
         return next
       })
-    } else {
-      setSessionStreak(0)
+      setMultiplier(prev => {
+        const delta = multiplierEffect === "up" ? 2 : multiplierEffect === "hold" ? 1 : -1
+        const next = applyMultiplierStep(prev, delta)
+        setBestMultiplier(best => Math.max(best, next))
+        return next
+      })
     }
   }, [])
 
-  const saveSessionIfNeeded = useCallback(async (attempted: number, score: number, best: number, solved: number) => {
-    if (attempted < 3) return
-    try {
-      const playerId = getPlayerId()
-      if (!playerId) return
-      await fetch("/api/mirror-sessions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          player_id: playerId,
-          session_score: score,
-          best_streak: best,
-          words_solved: solved,
-          words_attempted: attempted,
-          difficulty,
-        }),
-      })
-    } catch {}
+  const handleSessionEnd = useCallback(async (finalScore: number, wordsSolved: number, peakMultiplier: number) => {
+    setSummaryData({ score: finalScore, wordsSolved, bestMultiplier: peakMultiplier })
+    setShowSummary(true)
+    if (wordsSolved >= 1) {
+      try {
+        const playerId = getPlayerId()
+        if (!playerId) return
+        await fetch("/api/mirror-sessions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            player_id: playerId,
+            session_score: finalScore,
+            best_streak: wordsSolved,
+            words_solved: wordsSolved,
+            words_attempted: wordsSolved + 1,
+            difficulty,
+          }),
+        })
+      } catch {}
+    }
   }, [difficulty])
+
+  const resetSession = useCallback(() => {
+    setSessionScore(0)
+    setSessionStreak(0)
+    setSessionBestStreak(0)
+    setSessionWordsSolved(0)
+    setMultiplier(1)
+    setBestMultiplier(1)
+    setShowSummary(false)
+    setSummaryData(null)
+  }, [])
 
   useEffect(() => {
     try {
@@ -154,11 +184,11 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
     if (diff === "easy") {
       setPracticeEasy(word)
       setPlayedEasy([word.word])
-      setPracticeKeyEasy((k) => k + 1)
+      setPracticeKeyEasy(k => k + 1)
     } else {
       setPracticeHard(word)
       setPlayedHard([word.word])
-      setPracticeKeyHard((k) => k + 1)
+      setPracticeKeyHard(k => k + 1)
     }
   }, [playedEasy, playedHard])
 
@@ -166,13 +196,13 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
     const played = difficulty === "easy" ? playedEasy : playedHard
     const word = getRandomPracticeWord(played, difficulty)
     if (difficulty === "easy") {
-      setPlayedEasy((prev) => [...prev, word.word])
+      setPlayedEasy(prev => [...prev, word.word])
       setPracticeEasy(word)
-      setPracticeKeyEasy((k) => k + 1)
+      setPracticeKeyEasy(k => k + 1)
     } else {
-      setPlayedHard((prev) => [...prev, word.word])
+      setPlayedHard(prev => [...prev, word.word])
       setPracticeHard(word)
-      setPracticeKeyHard((k) => k + 1)
+      setPracticeKeyHard(k => k + 1)
     }
   }, [playedEasy, playedHard, difficulty])
 
@@ -289,20 +319,15 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
             />
           )}
 
-          {tab === "practice" && practiceWord && mirrorMode && (
+          {tab === "practice" && practiceWord && mirrorMode && !showSummary && (
             <MirrorGame
               key={`mirror-${difficulty}-${practiceWord.word}`}
               word={practiceWord}
               isPractice={true}
               onFlipBack={() => {
-                saveSessionIfNeeded(sessionWordsAttempted, sessionScore, sessionBestStreak, sessionWordsSolved)
+                resetSession()
                 handleNextPracticeWord()
                 setMirrorMode(false)
-                setSessionScore(0)
-                setSessionStreak(0)
-                setSessionBestStreak(0)
-                setSessionWordsAttempted(0)
-                setSessionWordsSolved(0)
               }}
               onNextWord={() => {
                 handleNextPracticeWord()
@@ -310,11 +335,30 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               sessionScore={sessionScore}
               sessionStreak={sessionStreak}
               sessionBestStreak={sessionBestStreak}
+              multiplier={multiplier}
               onSessionUpdate={handleSessionUpdate}
+              onSessionEnd={handleSessionEnd}
               onComplete={(result) => {
                 const isPerfect = result.correct && result.guesses === 1 && result.hintsUsed === 0
                 const updated = updateMirrorStreak(difficulty, isPerfect)
                 setMirrorStreak(updated)
+              }}
+            />
+          )}
+
+          {tab === "practice" && mirrorMode && showSummary && summaryData && (
+            <MirrorSessionSummary
+              score={summaryData.score}
+              wordsSolved={summaryData.wordsSolved}
+              bestMultiplier={summaryData.bestMultiplier}
+              onPlayAgain={() => {
+                resetSession()
+                handleNextPracticeWord()
+              }}
+              onFlipBack={() => {
+                resetSession()
+                handleNextPracticeWord()
+                setMirrorMode(false)
               }}
             />
           )}
