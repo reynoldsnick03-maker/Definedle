@@ -356,21 +356,7 @@ export function MirrorGame({
 
         <div className="my-4 h-px bg-border" />
 
-        {/* Guesses */}
-        {guesses.length > 0 && (
-          <div className="mb-5 space-y-2">
-            {guesses.map((guess, i) => (
-              <div key={i} className={`flex items-center justify-between rounded-lg border-2 px-4 py-2.5 ${getSimilarityBorderColor(guess.similarity)}`}>
-                <span className="font-medium">{guess.word}</span>
-                <span className={`text-xs font-bold px-2 py-0.5 rounded ${getSimilarityColor(guess.similarity)}`}>
-                  {guess.similarity >= 100 ? "Correct!" : `${guess.similarity}%`}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Result or input */}
+        {/* Result or input — always above guesses */}
         {isComplete ? (
           <div className="text-center">
             {isCorrect ? (
@@ -446,6 +432,20 @@ export function MirrorGame({
               </button>
             </div>
           </form>
+        )}
+
+        {/* Guesses — below input so they don't interfere with typing */}
+        {guesses.length > 0 && (
+          <div className="mt-4 space-y-2">
+            {guesses.map((guess, i) => (
+              <div key={i} className={`flex items-center justify-between rounded-lg border-2 px-4 py-2.5 ${getSimilarityBorderColor(guess.similarity)}`}>
+                <span className="font-medium">{guess.word}</span>
+                <span className={`text-xs font-bold px-2 py-0.5 rounded ${getSimilarityColor(guess.similarity)}`}>
+                  {guess.similarity >= 100 ? "Correct!" : `${guess.similarity}%`}
+                </span>
+              </div>
+            ))}
+          </div>
         )}
 
 
