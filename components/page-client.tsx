@@ -56,6 +56,8 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   const [multiplier, setMultiplier] = useState(1)
   const [bestMultiplier, setBestMultiplier] = useState(1)
   const [showSummary, setShowSummary] = useState(false)
+  const [wordsPlayed, setWordsPlayed] = useState(0)
+  const [consecutiveAwful, setConsecutiveAwful] = useState(0)
   const [summaryData, setSummaryData] = useState<{
     score: number
     wordsSolved: number
@@ -125,6 +127,8 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
     setBestMultiplier(1)
     setShowSummary(false)
     setSummaryData(null)
+    setWordsPlayed(0)
+    setConsecutiveAwful(0)
   }, [])
 
   useEffect(() => {
@@ -349,6 +353,12 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               sessionStreak={sessionStreak}
               sessionBestStreak={sessionBestStreak}
               multiplier={multiplier}
+              wordsPlayed={wordsPlayed}
+              consecutiveAwful={consecutiveAwful}
+              onWordPlayed={(wasAwful: boolean) => {
+                setConsecutiveAwful(wasAwful ? consecutiveAwful + 1 : 0)
+                setWordsPlayed(w => w + 1)
+              }}
               onSessionUpdate={handleSessionUpdate}
               onSessionEnd={handleSessionEnd}
               onComplete={(result) => {
