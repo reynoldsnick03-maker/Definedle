@@ -23,7 +23,7 @@ interface MirrorGameProps {
   sessionBestStreak: number
   multiplier: number
   onSessionUpdate: (delta: { points: number; correct: boolean; multiplierEffect: "flawless" | "good" | "decent" | "poor" | "awful" }) => void
-  onSessionEnd: (finalScore: number, wordsSolved: number, bestMultiplier: number, wordHistory: WordHistoryEntry[]) => void
+  onSessionEnd: (finalScore: number, wordsSolved: number, bestMultiplier: number, wordHistory: WordHistoryEntry[], reason: "failed" | "awful" | "complete") => void
   onFlipToNormal: () => void
 }
 
@@ -205,6 +205,8 @@ export function MirrorGame({
   const [pointsEarned, setPointsEarned] = useState<number | null>(null)
   const [playQuality, setPlayQuality] = useState<"flawless" | "good" | "decent" | "poor" | "awful" | null>(null)
   const [wordHistory, setWordHistory] = useState<WordHistoryEntry[]>([])
+  const [consecutiveAwful, setConsecutiveAwful] = useState(0)
+  const [wordsPlayed, setWordsPlayed] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const maxGuesses = 3
   const maxHints = 3
@@ -285,14 +287,25 @@ export function MirrorGame({
       const newHistory = [...wordHistory, entry]
       setWordHistory(newHistory)
 
+      const newConsecutiveAwful = quality === "awful" ? consecutiveAwful + 1 : 0
+      setConsecutiveAwful(newConsecutiveAwful)
+      const newWordsPlayed = wordsPlayed + 1
+      setWordsPlayed(newWordsPlayed)
+
       onSessionUpdate({ points: earned, correct: true, multiplierEffect: quality })
       onComplete?.({ correct: true, guesses: newGuesses.length, hintsUsed, points: earned })
+
+      if (newConsecutiveAwful >= 3) {
+        setTimeout(() => onSessionEnd(sessionScore + earned, newWordsPlayed, nextMult, newHistory, "awful"), 1600)
+      } else if (newWordsPlayed >= 15) {
+        setTimeout(() => onSessionEnd(sessionScore + earned, newWordsPlayed, nextMult, newHistory, "complete"), 1600)
+      }
     } else if (newGuesses.length >= maxGuesses) {
       setIsComplete(true)
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
       // Use wordHistory directly (no new entry on failure)
-      setTimeout(() => onSessionEnd(sessionScore, sessionStreak, multiplier, [...wordHistory]), 1400)
+      setTimeout(() => onSessionEnd(sessionScore, sessionStreak, multiplier, [...wordHistory], "failed"), 1400)
     } else {
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
@@ -324,8 +337,9 @@ export function MirrorGame({
             Mirror<br/>Mode
           </span>
 
-          {/* Right: streak, score, multiplier — evenly spaced, no flip button */}
+          {/* Right: word progress, streak, score, multiplier */}
           <div className="flex items-center gap-4">
+            <span className="text-[10px] tabular-nums text-muted-foreground">{wordsPlayed}/15</span>
             {sessionStreak > 0 && (
               <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-score-high/10 border border-score-high/20">
                 <Flame className="h-3 w-3 text-score-high" />
@@ -446,17 +460,7 @@ export function MirrorGame({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <span className="text-xs text-muted-foreground">{remainingGuesses} {remainingGuesses === 1 ? "guess" : "guesses"} left</span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsComplete(true)
-                    const snapshot = [...wordHistory]
-                    setTimeout(() => onSessionEnd(sessionScore, sessionStreak, multiplier, snapshot), 800)
-                  }}
-                  className="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors px-2 py-1 rounded border border-border/50 hover:border-border"
-                >
-                  give up
-                </button>
+
               </div>
               <button
                 type="submit"
