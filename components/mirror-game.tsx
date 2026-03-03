@@ -55,7 +55,7 @@ function classifyPlay(guesses: number, hintsUsed: number): "flawless" | "good" |
     (guesses === 2 && hintsUsed === 0) ||
     (guesses === 2 && hintsUsed === 1)
   ) return "good"
-  if (guesses === 1 && hintsUsed === 2) return "decent"
+  if ((guesses === 1 && hintsUsed === 2) || (guesses === 3 && hintsUsed === 0)) return "decent"
   if (
     (guesses === 1 && hintsUsed >= 5) ||
     (guesses === 2 && hintsUsed >= 4) ||
@@ -68,7 +68,7 @@ function hintsAccounted(guesses: number, hintsUsed: number): number {
   const q = classifyPlay(guesses, hintsUsed)
   if (q === "flawless") return 0
   if (q === "good") return guesses === 1 ? 1 : guesses === 2 && hintsUsed === 0 ? 0 : 1
-  if (q === "decent") return 2
+  if (q === "decent") return guesses === 3 ? 0 : 2
   if (q === "awful") return guesses === 1 ? 5 : guesses === 2 ? 4 : 3
   // poor
   if (guesses === 1) return 3
