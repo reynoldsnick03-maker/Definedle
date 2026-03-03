@@ -1,271 +1,409 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useState, useCallback, useEffect } from "react"
+import { GameHeader } from "@/components/game-header"
+import { Game } from "@/components/game"
+import { StatsPanel } from "@/components/stats-panel"
+import { HowToPlay } from "@/components/how-to-play"
+import { SharedResult, type ShareData } from "@/components/shared-result"
+import { ModeToggle, type TabMode } from "@/components/mode-toggle"
+import { MirrorGame, type WordHistoryEntry } from "@/components/mirror-game"
+import { MirrorSessionSummary } from "@/components/mirror-session-summary"
+import { StreakBadge } from "@/components/streak-badge"
 import type { DailyWord, GameMode } from "@/lib/game-data"
-import type { ScoreResult, ConceptResult, ScoreBreakdown } from "@/lib/scoring"
-import { scoreDefinition } from "@/lib/scoring"
-import { formatDateKey, type HistoryEntry } from "@/lib/history"
+import { getRandomPracticeWord, getWordByName } from "@/lib/game-data"
+import { getMirrorStreak, updateMirrorStreak, type MirrorStreak } from "@/lib/history"
 import { getPlayerId } from "@/lib/player-id"
-import { WordDisplay } from "./word-display"
-import { DefinitionInput } from "./definition-input"
-import { ResultsPanel } from "./results-panel"
 
-interface CachedResult {
-  date: string
-  score: number
-  feedback: string
-  concepts: ConceptResult[]
-  synonymWarning: boolean
-  missedSummary: string | null
-  definition: string
-  breakdown?: ScoreBreakdown
-  altDefinitionUsed?: string
-}
-
-function getDateKey(): string {
-  return formatDateKey(new Date())
-}
-
-function getCookie(name: string): string | undefined {
-  if (typeof document === "undefined") return undefined
-  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`))
-  return match ? decodeURIComponent(match[1]) : undefined
-}
-
-function setCookie(name: string, value: string, days: number) {
-  const expires = new Date(Date.now() + days * 864e5).toUTCString()
-  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`
-}
-
-interface GameProps {
+interface PageClientProps {
   dailyWord: DailyWord
-  difficulty?: GameMode
-  isPractice?: boolean
-  onNextWord?: () => void
-  onStartPractice?: () => void
-  onComplete?: () => void
+  hardWord: DailyWord
+  shareData?: ShareData | null
+  shareWordData?: {
+    definition: string
+    partOfSpeech: string
+    conceptLabels: string[]
+  } | null
 }
 
-export function Game({
-  dailyWord,
-  difficulty = "easy",
-  isPractice = false,
-  onNextWord,
-  onStartPractice,
-  onComplete,
-}: GameProps) {
-  const DAILY_RESULT_COOKIE = difficulty === "hard" ? "definedle-today-hard" : "definedle-today"
-  const [result, setResult] = useState<ScoreResult | null>(null)
-  const [submitted, setSubmitted] = useState(false)
-  const [playerDefinition, setPlayerDefinition] = useState("")
-  const [usedHint, setUsedHint] = useState(false)
-  const [showHint, setShowHint] = useState(false)
+const MULTIPLIER_STEPS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8]
 
-  useEffect(() => {
-    setShowHint(false)
-    setUsedHint(false)
-  }, [dailyWord.word])
+function applyMultiplierStep(current: number, effect: "flawless" | "good" | "decent" | "poor" | "awful"): number {
+  const idx = MULTIPLIER_STEPS.findIndex(s => Math.abs(s - current) < 0.01)
+  const safeIdx = idx === -1 ? 0 : idx
+  if (effect === "flawless") return MULTIPLIER_STEPS[Math.min(safeIdx + 2, MULTIPLIER_STEPS.length - 1)]
+  if (effect === "good") return MULTIPLIER_STEPS[Math.min(safeIdx + 1, MULTIPLIER_STEPS.length - 1)]
+  if (effect === "decent") return current
+  if (effect === "awful") return MULTIPLIER_STEPS[Math.max(safeIdx - 4, 0)]
+  return MULTIPLIER_STEPS[Math.max(safeIdx - 1, 0)]
+}
 
-  useEffect(() => {
-    if (isPractice) return
-    try {
-      const raw = getCookie(DAILY_RESULT_COOKIE)
-      if (raw) {
-        const parsed: CachedResult = JSON.parse(raw)
-        if (parsed.date === getDateKey()) {
-          const hasValidConcepts =
-            Array.isArray(parsed.concepts) &&
-            parsed.concepts.length > 0 &&
-            typeof parsed.concepts[0].keyword === "string"
+type SessionState = {
+  sessionScore: number
+  sessionStreak: number
+  sessionBestStreak: number
+  sessionWordsSolved: number
+  multiplier: number
+  bestMultiplier: number
+  showSummary: boolean
+  wordsPlayed: number
+  consecutiveAwful: number
+  sessionWordHistory: WordHistoryEntry[]
+  summaryData: { score: number; wordsSolved: number; bestMultiplier: number; wordHistory: WordHistoryEntry[]; reason: "failed" | "awful" | "complete" } | null
+}
 
-          if (hasValidConcepts) {
-            const rehydrated = parsed.concepts.map((c: ConceptResult) => {
-              const source = dailyWord.keyConcepts.find((k) => k.keyword === c.keyword)
-              return { ...c, hint: source?.hint ?? c.hint ?? "" }
-            })
-            const missedConcepts = rehydrated.filter((c: ConceptResult) => !c.matched)
-            const conceptCount = rehydrated.length
-            let missedSummary: string | null = null
-            if (missedConcepts.length > 0 && missedConcepts.length < conceptCount) {
-              missedSummary = missedConcepts.length === 1
-                ? `Your definition covered the word well, but didn't capture the idea of "${missedConcepts[0].label.toLowerCase()}." ${missedConcepts[0].hint}`
-                : `Your definition was missing the ideas of ${missedConcepts.map((c: ConceptResult) => `"${c.label.toLowerCase()}"`).join(" and ")}. Expand on these to strengthen your answer.`
-            } else if (missedConcepts.length === conceptCount) {
-              missedSummary = "The core ideas were missing from your definition. Review each concept below."
-            }
-            setResult({
-              score: parsed.score,
-              feedback: parsed.feedback,
-              concepts: rehydrated,
-              synonymWarning: parsed.synonymWarning,
-              missedSummary,
-              altDefinitionUsed: parsed.altDefinitionUsed,
-              breakdown: parsed.breakdown ?? {
-                concepts: { earned: 0, max: 75 },
-                precision: { earned: 0, max: 10, ratio: 0, relevantCount: 0, totalMeaningful: 0, irrelevantWords: [] },
-                detail: { earned: 0, max: 15, wordCount: 0 },
-                hintPenalty: 0,
-              },
-            })
-            setPlayerDefinition(parsed.definition ?? "")
-            setSubmitted(true)
-          }
-        }
-      }
-    } catch {
-      // Corrupt cookie, ignore
-    }
+const emptySession = (): SessionState => ({
+  sessionScore: 0, sessionStreak: 0, sessionBestStreak: 0, sessionWordsSolved: 0,
+  multiplier: 1, bestMultiplier: 1, showSummary: false, wordsPlayed: 0,
+  consecutiveAwful: 0, sessionWordHistory: [], summaryData: null,
+})
+
+export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: PageClientProps) {
+  const [statsOpen, setStatsOpen] = useState(false)
+  const [helpOpen, setHelpOpen] = useState(false)
+  const [showingShare, setShowingShare] = useState(!!shareData && !!shareWordData)
+  const [tab, setTab] = useState<TabMode>("daily")
+  const [difficulty, setDifficulty] = useState<GameMode>("easy")
+  const [streak, setStreak] = useState(0)
+  const [mirrorMode, setMirrorMode] = useState(false)
+  const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
+
+  // Per-difficulty session state
+  const [sessions, setSessions] = useState<Record<GameMode, SessionState>>({
+    easy: emptySession(),
+    hard: emptySession(),
+  })
+  const sess = sessions[difficulty]
+  const { sessionScore, sessionStreak, sessionBestStreak, sessionWordsSolved,
+    multiplier, bestMultiplier, showSummary, wordsPlayed, consecutiveAwful,
+    sessionWordHistory, summaryData } = sess
+
+  const updateSession = useCallback((diff: GameMode, patch: Partial<SessionState>) => {
+    setSessions(prev => ({ ...prev, [diff]: { ...prev[diff], ...patch } }))
   }, [])
 
-  const saveToHistory = useCallback(
-    async (scoreResult: ScoreResult, word: DailyWord) => {
-      const matchedCount = scoreResult.concepts.filter((c) => c.matched).length
-      const entry: HistoryEntry = {
-        d: getDateKey(),
-        s: scoreResult.score,
-        c: `${matchedCount}/${scoreResult.concepts.length}`,
-        w: word.word,
-        m: difficulty,
-      }
+  const handleSessionUpdate = useCallback(({ points, correct, multiplierEffect }: {
+    points: number
+    correct: boolean
+    multiplierEffect: "flawless" | "good" | "decent" | "poor" | "awful"
+  }) => {
+    setSessions(prev => {
+      const s = prev[difficulty]
+      const newScore = Math.max(0, s.sessionScore + points)
+      if (!correct) return { ...prev, [difficulty]: { ...s, sessionScore: newScore } }
+      const newStreak = s.sessionStreak + 1
+      const newMult = applyMultiplierStep(s.multiplier, multiplierEffect)
+      return { ...prev, [difficulty]: {
+        ...s,
+        sessionScore: newScore,
+        sessionWordsSolved: s.sessionWordsSolved + 1,
+        sessionStreak: newStreak,
+        sessionBestStreak: Math.max(s.sessionBestStreak, newStreak),
+        multiplier: newMult,
+        bestMultiplier: Math.max(s.bestMultiplier, newMult),
+      }}
+    })
+  }, [difficulty])
+
+  const handleSessionEnd = useCallback(async (
+    finalScore: number,
+    wordsSolved: number,
+    peakMultiplier: number,
+    wordHistory: WordHistoryEntry[],
+    reason: "failed" | "awful" | "complete"
+  ) => {
+    updateSession(difficulty, {
+      summaryData: { score: finalScore, wordsSolved, bestMultiplier: peakMultiplier, wordHistory, reason },
+      showSummary: true,
+    })
+    if (wordsSolved >= 1) {
       try {
-        await fetch("/api/history", {
+        const playerId = getPlayerId()
+        if (!playerId) return
+        await fetch("/api/mirror-sessions", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(entry),
+          body: JSON.stringify({
+            player_id: playerId,
+            session_score: finalScore,
+            best_streak: wordsSolved,
+            words_solved: wordsSolved,
+            words_attempted: wordsSolved + 1,
+            difficulty,
+            word_history: wordHistory,
+          }),
         })
-      } catch {
-        // Ignore network errors
+      } catch {}
+    }
+  }, [difficulty, updateSession])
+
+  const resetSession = useCallback((diff?: GameMode) => {
+    const target = diff ?? difficulty
+    setSessions(prev => ({ ...prev, [target]: emptySession() }))
+  }, [difficulty])
+
+  useEffect(() => {
+    try {
+      setMirrorStreak(getMirrorStreak())
+    } catch {}
+  }, [])
+
+  const [practiceEasy, setPracticeEasy] = useState<DailyWord | null>(null)
+  const [practiceHard, setPracticeHard] = useState<DailyWord | null>(null)
+  const [urlWordHandled, setUrlWordHandled] = useState(false)
+
+  useEffect(() => {
+    if (urlWordHandled) return
+    const params = new URLSearchParams(window.location.search)
+    const wordParam = params.get("word") || Array.from(params.keys()).find(k => k !== "reset" && k !== "r")
+    if (wordParam) {
+      const found = getWordByName(wordParam)
+      if (found) {
+        setTab("practice")
+        setDifficulty(found.difficulty)
+        if (found.difficulty === "easy") setPracticeEasy(found.word)
+        else setPracticeHard(found.word)
+        window.history.replaceState({}, "", window.location.pathname)
       }
+    }
+    setUrlWordHandled(true)
+  }, [urlWordHandled])
+
+  useEffect(() => {
+    const fetchStreak = async () => {
       try {
         const playerId = getPlayerId()
         if (playerId) {
-          await fetch("/api/streak", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              player_id: playerId,
-              date: getDateKey(),
-              difficulty,
-              score: scoreResult.score,
-              word: word.word,
-            }),
-          })
-        }
-      } catch {
-        // Ignore — streak will fall back to cookie-based
-      }
-    },
-    [difficulty]
-  )
-
-  const handleSubmit = useCallback(
-    (definition: string) => {
-      const scoreResult = scoreDefinition(definition, dailyWord, usedHint)
-      setResult(scoreResult)
-      setPlayerDefinition(definition)
-      setSubmitted(true)
-
-      if (!isPractice) {
-        try {
-          const slimConcepts = scoreResult.concepts.map((c) => ({
-            keyword: c.keyword,
-            label: c.label,
-            hint: "",
-            matched: c.matched,
-          }))
-          const cached: CachedResult = {
-            date: getDateKey(),
-            score: scoreResult.score,
-            feedback: scoreResult.feedback,
-            concepts: slimConcepts,
-            synonymWarning: scoreResult.synonymWarning,
-            missedSummary: null,
-            definition: definition.slice(0, 200),
-            breakdown: scoreResult.breakdown,
-            altDefinitionUsed: scoreResult.altDefinitionUsed,
+          const res = await fetch(`/api/streak?player_id=${encodeURIComponent(playerId)}`)
+          if (res.ok) {
+            const data = await res.json()
+            setStreak(data.streak || 0)
+            return
           }
-          setCookie(DAILY_RESULT_COOKIE, JSON.stringify(cached), 1)
-        } catch {
-          // Ignore
         }
-        saveToHistory(scoreResult, dailyWord)
-        onComplete?.()
+        const res = await fetch("/api/history")
+        if (res.ok) {
+          const data = await res.json()
+          setStreak(data.streak || 0)
+        }
+      } catch {}
+    }
+    fetchStreak()
+  }, [])
+
+  const [playedEasy, setPlayedEasy] = useState<string[]>([])
+  const [playedHard, setPlayedHard] = useState<string[]>([])
+  const [practiceKeyEasy, setPracticeKeyEasy] = useState(0)
+  const [practiceKeyHard, setPracticeKeyHard] = useState(0)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const params = new URLSearchParams(window.location.search)
+    if (params.has("reset")) {
+      document.cookie = "definedle-today=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+      document.cookie = "definedle-today-hard=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+      localStorage.removeItem("definedle-history")
+      Object.keys(localStorage).filter(k => k.startsWith("definedle-improve-")).forEach(k => localStorage.removeItem(k))
+      window.location.replace(window.location.pathname)
+    }
+  }, [])
+
+  const practiceWord = difficulty === "easy" ? practiceEasy : practiceHard
+  const practiceKey = difficulty === "easy" ? practiceKeyEasy : practiceKeyHard
+
+  const startPractice = useCallback((diff: GameMode) => {
+    const played = diff === "easy" ? playedEasy : playedHard
+    const word = getRandomPracticeWord(played, diff)
+    if (diff === "easy") {
+      setPracticeEasy(word)
+      setPlayedEasy([word.word])
+      setPracticeKeyEasy(k => k + 1)
+    } else {
+      setPracticeHard(word)
+      setPlayedHard([word.word])
+      setPracticeKeyHard(k => k + 1)
+    }
+  }, [playedEasy, playedHard])
+
+  const handleNextPracticeWord = useCallback(() => {
+    const played = difficulty === "easy" ? playedEasy : playedHard
+    const word = getRandomPracticeWord(played, difficulty)
+    if (difficulty === "easy") {
+      setPlayedEasy(prev => [...prev, word.word])
+      setPracticeEasy(word)
+      setPracticeKeyEasy(k => k + 1)
+    } else {
+      setPlayedHard(prev => [...prev, word.word])
+      setPracticeHard(word)
+      setPracticeKeyHard(k => k + 1)
+    }
+  }, [playedEasy, playedHard, difficulty])
+
+  const handleTabChange = useCallback((newTab: TabMode) => {
+    setTab(newTab)
+    setMirrorMode(false)
+    if (newTab === "practice") {
+      const current = difficulty === "easy" ? practiceEasy : practiceHard
+      if (!current) startPractice(difficulty)
+    }
+  }, [practiceEasy, practiceHard, difficulty, startPractice])
+
+  const handleDifficultyChange = useCallback((newDifficulty: GameMode) => {
+    setDifficulty(newDifficulty)
+    if (tab === "practice") {
+      const current = newDifficulty === "easy" ? practiceEasy : practiceHard
+      if (!current) startPractice(newDifficulty)
+    }
+  }, [tab, practiceEasy, practiceHard, startPractice])
+
+  const handlePlayYourself = () => {
+    if (typeof window !== "undefined") window.history.replaceState({}, "", window.location.pathname)
+    setShowingShare(false)
+  }
+
+  const refreshStreak = useCallback(async () => {
+    try {
+      const playerId = getPlayerId()
+      if (playerId) {
+        const res = await fetch(`/api/streak?player_id=${encodeURIComponent(playerId)}`)
+        if (res.ok) {
+          const data = await res.json()
+          setStreak(data.streak || 0)
+          return
+        }
       }
-    },
-    [dailyWord, isPractice, saveToHistory, DAILY_RESULT_COOKIE, usedHint, onComplete]
-  )
+      const res = await fetch("/api/history")
+      if (res.ok) {
+        const data = await res.json()
+        setStreak(data.streak || 0)
+      }
+    } catch {}
+  }, [])
 
   return (
-    <div className="mx-auto w-full max-w-md px-5">
-      <div className="rounded-xl border border-border bg-card p-6 shadow-sm md:p-8">
-        {difficulty === "hard" && (
-          <div className="mb-4 flex items-center justify-center">
-            <span className="rounded-full border border-destructive/30 bg-destructive/10 px-3 py-0.5 text-[10px] uppercase tracking-widest text-destructive font-medium">
-              Hard
-            </span>
-          </div>
-        )}
-
-        <WordDisplay
-          word={dailyWord.word}
-          partOfSpeech={dailyWord.partOfSpeech}
+    <main className="flex min-h-svh flex-col items-center bg-background pb-16">
+      <GameHeader onStatsOpen={() => setStatsOpen(true)} onHelpOpen={() => setHelpOpen(true)} />
+      {tab === "daily" && streak > 0 && <StreakBadge streak={streak} />}
+      {showingShare && shareData && shareWordData ? (
+        <SharedResult
+          data={shareData}
+          officialDefinition={shareWordData.definition}
+          partOfSpeech={shareWordData.partOfSpeech}
+          conceptLabels={shareWordData.conceptLabels}
+          onPlayYourself={handlePlayYourself}
         />
-
-        <div className="my-6 h-px bg-border" aria-hidden="true" />
-
-        {!submitted && dailyWord.etymology && (
-          <div className="mb-5">
-            {showHint ? (
-              <div className="rounded-lg border border-border bg-muted/40 px-4 py-3">
-                <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground mb-1.5">
-                  Etymology
-                </p>
-                <p className="text-sm leading-relaxed text-foreground/80 italic">
-                  {dailyWord.etymology}
-                </p>
-                {!isPractice && (
-                  <p className="mt-2 text-[11px] text-muted-foreground">
-                    -5 point penalty applied
-                  </p>
-                )}
-              </div>
-            ) : (
-              <button
-                type="button"
-                onClick={() => {
-                  if (!isPractice) setUsedHint(true)
-                  setShowHint(true)
-                }}
-                className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-border py-2.5 text-xs font-medium tracking-wide text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-                {isPractice ? "Show etymology hint" : "Show etymology hint (-5 pts)"}
-              </button>
-            )}
-          </div>
-        )}
-
-        {submitted && result ? (
-          <ResultsPanel
-            score={result.score}
-            feedback={result.feedback}
-            concepts={result.concepts}
-            synonymWarning={result.synonymWarning}
-            missedSummary={result.missedSummary}
-            breakdown={result.breakdown}
-            playerDefinition={playerDefinition}
-            officialDefinition={dailyWord.definition}
-            altDefinitionUsed={result.altDefinitionUsed}
-            word={dailyWord.word}
-            isPractice={isPractice}
+      ) : (
+        <>
+          <ModeToggle
+            tab={tab}
             difficulty={difficulty}
-            onPractice={!isPractice ? onStartPractice : undefined}
-            onNextWord={isPractice ? onNextWord : undefined}
+            onTabChange={handleTabChange}
+            onDifficultyChange={handleDifficultyChange}
           />
-        ) : (
-          <DefinitionInput key={dailyWord.word} onSubmit={handleSubmit} />
-        )}
-      </div>
-    </div>
+
+          {/* External mode toggle — always visible in practice (not during summary).
+               Shows the OPPOSITE mode to what is currently active. */}
+          {tab === "practice" && !showSummary && (
+            <button
+              type="button"
+              onClick={() => {
+                if (mirrorMode) {
+                  resetSession()
+                  handleNextPracticeWord()
+                  setMirrorMode(false)
+                } else {
+                  handleNextPracticeWord()
+                  setMirrorMode(true)
+                }
+              }}
+              className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0"/>
+              </svg>
+              {mirrorMode ? "Normal mode" : "Mirror mode"}
+            </button>
+          )}
+
+          <div className={tab === "daily" && difficulty === "easy" ? "" : "hidden"}>
+            <Game key="daily-easy" dailyWord={dailyWord} difficulty="easy" isPractice={false} onStartPractice={() => handleTabChange("practice")} onComplete={refreshStreak} />
+          </div>
+          <div className={tab === "daily" && difficulty === "hard" ? "" : "hidden"}>
+            <Game key="daily-hard" dailyWord={hardWord} difficulty="hard" isPractice={false} onStartPractice={() => handleTabChange("practice")} onComplete={refreshStreak} />
+          </div>
+
+          {tab === "practice" && practiceWord && !mirrorMode && (
+            <Game
+              key={`practice-${difficulty}-${practiceKey}-${practiceWord.word}`}
+              dailyWord={practiceWord}
+              difficulty={difficulty}
+              isPractice={true}
+              onNextWord={handleNextPracticeWord}
+            />
+          )}
+
+          {tab === "practice" && practiceWord && mirrorMode && !showSummary && (
+            <MirrorGame
+              key={`mirror-${difficulty}-${practiceWord.word}`}
+              word={practiceWord}
+              isPractice={true}
+              onFlipToNormal={() => {
+                resetSession()
+                handleNextPracticeWord()
+                setMirrorMode(false)
+              }}
+              onNextWord={handleNextPracticeWord}
+              sessionScore={sessionScore}
+              sessionStreak={sessionStreak}
+              sessionBestStreak={sessionBestStreak}
+              multiplier={multiplier}
+              wordsPlayed={wordsPlayed}
+              consecutiveAwful={consecutiveAwful}
+              wordHistory={sessionWordHistory}
+              onWordPlayed={(wasAwful: boolean, entry: WordHistoryEntry) => {
+                setSessions(prev => {
+                  const s = prev[difficulty]
+                  return { ...prev, [difficulty]: {
+                    ...s,
+                    consecutiveAwful: wasAwful ? s.consecutiveAwful + 1 : 0,
+                    wordsPlayed: s.wordsPlayed + 1,
+                    sessionWordHistory: [...s.sessionWordHistory, entry],
+                  }}
+                })
+              }}
+              onSessionUpdate={handleSessionUpdate}
+              onSessionEnd={handleSessionEnd}
+              onComplete={(result) => {
+                const isPerfect = result.correct && result.guesses === 1 && result.hintsUsed === 0
+                const updated = updateMirrorStreak(difficulty, isPerfect)
+                setMirrorStreak(updated)
+              }}
+            />
+          )}
+
+          {tab === "practice" && mirrorMode && showSummary && summaryData && (
+            <MirrorSessionSummary
+              score={summaryData.score}
+              wordsSolved={summaryData.wordsSolved}
+              bestMultiplier={summaryData.bestMultiplier}
+              wordHistory={summaryData.wordHistory}
+              reason={summaryData.reason}
+              onPlayAgain={() => {
+                resetSession()
+                handleNextPracticeWord()
+              }}
+              onFlipBack={() => {
+                resetSession()
+                handleNextPracticeWord()
+                setMirrorMode(false)
+              }}
+            />
+          )}
+        </>
+      )}
+      <StatsPanel open={statsOpen} onClose={() => setStatsOpen(false)} />
+      <HowToPlay open={helpOpen} onClose={() => setHelpOpen(false)} />
+    </main>
   )
 }
