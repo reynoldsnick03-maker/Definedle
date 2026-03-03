@@ -67,7 +67,8 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
     correct: boolean
     multiplierEffect: "flawless" | "good" | "decent" | "poor"
   }) => {
-    setSessionScore(prev => prev + points)
+    // Always apply points (can be negative for extra letter reveals)
+    setSessionScore(prev => Math.max(0, prev + points))
     if (correct) {
       setSessionWordsSolved(prev => prev + 1)
       setSessionStreak(prev => {
