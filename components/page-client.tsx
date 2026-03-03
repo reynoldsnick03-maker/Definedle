@@ -38,6 +38,26 @@ function applyMultiplierStep(current: number, effect: "flawless" | "good" | "dec
   return MULTIPLIER_STEPS[Math.max(safeIdx - 1, 0)]
 }
 
+type SessionState = {
+  sessionScore: number
+  sessionStreak: number
+  sessionBestStreak: number
+  sessionWordsSolved: number
+  multiplier: number
+  bestMultiplier: number
+  showSummary: boolean
+  wordsPlayed: number
+  consecutiveAwful: number
+  sessionWordHistory: WordHistoryEntry[]
+  summaryData: { score: number; wordsSolved: number; bestMultiplier: number; wordHistory: WordHistoryEntry[]; reason: "failed" | "awful" | "complete" } | null
+}
+
+const emptySession = (): SessionState => ({
+  sessionScore: 0, sessionStreak: 0, sessionBestStreak: 0, sessionWordsSolved: 0,
+  multiplier: 1, bestMultiplier: 1, showSummary: false, wordsPlayed: 0,
+  consecutiveAwful: 0, sessionWordHistory: [], summaryData: null,
+})
+
 export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: PageClientProps) {
   const [statsOpen, setStatsOpen] = useState(false)
   const [helpOpen, setHelpOpen] = useState(false)
@@ -48,46 +68,42 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   const [mirrorMode, setMirrorMode] = useState(false)
   const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
 
-  // Session state
-  const [sessionScore, setSessionScore] = useState(0)
-  const [sessionStreak, setSessionStreak] = useState(0)
-  const [sessionBestStreak, setSessionBestStreak] = useState(0)
-  const [sessionWordsSolved, setSessionWordsSolved] = useState(0)
-  const [multiplier, setMultiplier] = useState(1)
-  const [bestMultiplier, setBestMultiplier] = useState(1)
-  const [showSummary, setShowSummary] = useState(false)
-  const [wordsPlayed, setWordsPlayed] = useState(0)
-  const [consecutiveAwful, setConsecutiveAwful] = useState(0)
-  const [sessionWordHistory, setSessionWordHistory] = useState<WordHistoryEntry[]>([])
-  const [summaryData, setSummaryData] = useState<{
-    score: number
-    wordsSolved: number
-    bestMultiplier: number
-    wordHistory: WordHistoryEntry[]
-    reason: "failed" | "awful" | "complete"
-  } | null>(null)
+  // Per-difficulty session state
+  const [sessions, setSessions] = useState<Record<GameMode, SessionState>>({
+    easy: emptySession(),
+    hard: emptySession(),
+  })
+  const sess = sessions[difficulty]
+  const { sessionScore, sessionStreak, sessionBestStreak, sessionWordsSolved,
+    multiplier, bestMultiplier, showSummary, wordsPlayed, consecutiveAwful,
+    sessionWordHistory, summaryData } = sess
+
+  const updateSession = useCallback((diff: GameMode, patch: Partial<SessionState>) => {
+    setSessions(prev => ({ ...prev, [diff]: { ...prev[diff], ...patch } }))
+  }, [])
 
   const handleSessionUpdate = useCallback(({ points, correct, multiplierEffect }: {
     points: number
     correct: boolean
     multiplierEffect: "flawless" | "good" | "decent" | "poor" | "awful"
   }) => {
-    // Always apply points (can be negative for extra letter reveals)
-    setSessionScore(prev => Math.max(0, prev + points))
-    if (correct) {
-      setSessionWordsSolved(prev => prev + 1)
-      setSessionStreak(prev => {
-        const next = prev + 1
-        setSessionBestStreak(best => Math.max(best, next))
-        return next
-      })
-      setMultiplier(prev => {
-        const next = applyMultiplierStep(prev, multiplierEffect)
-        setBestMultiplier(best => Math.max(best, next))
-        return next
-      })
-    }
-  }, [])
+    setSessions(prev => {
+      const s = prev[difficulty]
+      const newScore = Math.max(0, s.sessionScore + points)
+      if (!correct) return { ...prev, [difficulty]: { ...s, sessionScore: newScore } }
+      const newStreak = s.sessionStreak + 1
+      const newMult = applyMultiplierStep(s.multiplier, multiplierEffect)
+      return { ...prev, [difficulty]: {
+        ...s,
+        sessionScore: newScore,
+        sessionWordsSolved: s.sessionWordsSolved + 1,
+        sessionStreak: newStreak,
+        sessionBestStreak: Math.max(s.sessionBestStreak, newStreak),
+        multiplier: newMult,
+        bestMultiplier: Math.max(s.bestMultiplier, newMult),
+      }}
+    })
+  }, [difficulty])
 
   const handleSessionEnd = useCallback(async (
     finalScore: number,
@@ -96,8 +112,10 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
     wordHistory: WordHistoryEntry[],
     reason: "failed" | "awful" | "complete"
   ) => {
-    setSummaryData({ score: finalScore, wordsSolved, bestMultiplier: peakMultiplier, wordHistory, reason })
-    setShowSummary(true)
+    updateSession(difficulty, {
+      summaryData: { score: finalScore, wordsSolved, bestMultiplier: peakMultiplier, wordHistory, reason },
+      showSummary: true,
+    })
     if (wordsSolved >= 1) {
       try {
         const playerId = getPlayerId()
@@ -117,21 +135,12 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
         })
       } catch {}
     }
-  }, [difficulty])
+  }, [difficulty, updateSession])
 
-  const resetSession = useCallback(() => {
-    setSessionScore(0)
-    setSessionStreak(0)
-    setSessionBestStreak(0)
-    setSessionWordsSolved(0)
-    setMultiplier(1)
-    setBestMultiplier(1)
-    setShowSummary(false)
-    setSummaryData(null)
-    setWordsPlayed(0)
-    setConsecutiveAwful(0)
-    setSessionWordHistory([])
-  }, [])
+  const resetSession = useCallback((diff?: GameMode) => {
+    const target = diff ?? difficulty
+    setSessions(prev => ({ ...prev, [target]: emptySession() }))
+  }, [difficulty])
 
   useEffect(() => {
     try {
@@ -353,9 +362,15 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               consecutiveAwful={consecutiveAwful}
               wordHistory={sessionWordHistory}
               onWordPlayed={(wasAwful: boolean, entry: WordHistoryEntry) => {
-                setConsecutiveAwful(wasAwful ? consecutiveAwful + 1 : 0)
-                setWordsPlayed(w => w + 1)
-                setSessionWordHistory(h => [...h, entry])
+                setSessions(prev => {
+                  const s = prev[difficulty]
+                  return { ...prev, [difficulty]: {
+                    ...s,
+                    consecutiveAwful: wasAwful ? s.consecutiveAwful + 1 : 0,
+                    wordsPlayed: s.wordsPlayed + 1,
+                    sessionWordHistory: [...s.sessionWordHistory, entry],
+                  }}
+                })
               }}
               onSessionUpdate={handleSessionUpdate}
               onSessionEnd={handleSessionEnd}
