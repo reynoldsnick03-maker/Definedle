@@ -232,10 +232,13 @@ export function MirrorGame({
 
   const handleRevealLetter = () => {
     if (isComplete) return
+    // Never reveal the last letter
+    if (hintsUsed >= word.word.length - 1) return
     if (hintsUsed < maxHints) {
       setHintsUsed(h => h + 1)
-    } else if (hintsUsed < word.word.length) {
-      // Extra reveals cost 1pt from session score
+    } else {
+      // Extra reveals cost 1pt — only allow if player can afford it
+      if (sessionScore < 1) return
       setHintsUsed(h => h + 1)
       onSessionUpdate({ points: -1, correct: false, multiplierEffect: "poor" })
     }
@@ -345,7 +348,7 @@ export function MirrorGame({
 
           {/* Right: word progress, streak, score, multiplier */}
           <div className="flex items-center gap-4">
-            <span className="text-[10px] tabular-nums text-muted-foreground">{wordsPlayed}/15</span>
+            <span className="text-[10px] tabular-nums text-muted-foreground">{wordsPlayed + 1}/15</span>
             <div className="flex items-center gap-1.5">
               <Star className="h-3.5 w-3.5 text-amber-500" />
               <span className="text-sm font-medium tabular-nums">{sessionScore}</span>
@@ -384,7 +387,7 @@ export function MirrorGame({
           <div className="mt-4 flex items-center justify-center">
             {showFlawless ? (
               <span className="text-score-high font-bold text-xl">Flawless!</span>
-            ) : !isComplete && hintsUsed < word.word.length ? (
+            ) : !isComplete && hintsUsed < word.word.length - 1 && (hintsUsed < maxHints || sessionScore >= 1) ? (
               <button
                 type="button"
                 onClick={handleRevealLetter}
