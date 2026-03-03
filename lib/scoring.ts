@@ -721,7 +721,7 @@ function scoreAgainstDefinition(
   })
 
   const matchedCount = concepts.filter((c) => c.matched).length
-  const conceptScore = matchedCount * pointsPerConcept
+  const conceptScore = matchedCount === conceptCount ? 75 : matchedCount * pointsPerConcept
 
   // Synonym-only penalty - use token-based matching, not substring
   let synonymWarning = false
