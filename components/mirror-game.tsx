@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useCallback, useEffect, useRef } from "react"
-import { Flame, Star, Trophy, Zap } from "lucide-react"
+import { Flame, Star, Zap } from "lucide-react"
 import type { DailyWord } from "@/lib/game-data"
 import { stemMatch, areSynonyms } from "@/lib/scoring"
 
@@ -233,7 +233,8 @@ export function MirrorGame({
       setIsComplete(true)
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
-      setTimeout(() => onSessionEnd(sessionScore, sessionStreak, multiplier, wordHistory), 1400)
+      // Use wordHistory directly (no new entry on failure)
+      setTimeout(() => onSessionEnd(sessionScore, sessionStreak, multiplier, [...wordHistory]), 1400)
     } else {
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
@@ -319,7 +320,7 @@ export function MirrorGame({
                   <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
                 </svg>
                 Reveal a letter
-                <span className="text-muted-foreground/60">−0.5 mult ({hintsUsed}/{maxHints})</span>
+                <span className="text-muted-foreground/60">(−0.5× multiplier, {hintsUsed}/{maxHints} used)</span>
               </button>
             ) : null}
           </div>
@@ -400,7 +401,8 @@ export function MirrorGame({
                   type="button"
                   onClick={() => {
                     setIsComplete(true)
-                    setTimeout(() => onSessionEnd(sessionScore, sessionStreak, multiplier, wordHistory), 800)
+                    const snapshot = [...wordHistory]
+                    setTimeout(() => onSessionEnd(sessionScore, sessionStreak, multiplier, snapshot), 800)
                   }}
                   className="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors px-2 py-1 rounded border border-border/50 hover:border-border"
                 >
@@ -418,12 +420,7 @@ export function MirrorGame({
           </form>
         )}
 
-        {sessionBestStreak > 1 && (
-          <div className="mt-4 pt-3 border-t border-border/50 flex items-center justify-center gap-1.5">
-            <Trophy className="h-3 w-3 text-muted-foreground/60" />
-            <span className="text-[10px] uppercase tracking-widest text-muted-foreground/60">Best streak: {sessionBestStreak}</span>
-          </div>
-        )}
+
       </div>
     </div>
   )
