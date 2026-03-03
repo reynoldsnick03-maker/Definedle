@@ -9,11 +9,12 @@ interface MirrorSessionSummaryProps {
   wordsSolved: number
   bestMultiplier: number
   wordHistory: WordHistoryEntry[]
+  reason: "failed" | "awful" | "complete"
   onPlayAgain: () => void
   onFlipBack: () => void
 }
 
-export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordHistory, onPlayAgain, onFlipBack }: MirrorSessionSummaryProps) {
+export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordHistory, reason, onPlayAgain, onFlipBack }: MirrorSessionSummaryProps) {
   const [showHistory, setShowHistory] = useState(false)
 
   const rating =
@@ -28,7 +29,9 @@ export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordH
       <div className="rounded-xl border border-border bg-card p-8 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
 
         <div className="text-center mb-8">
-          <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium mb-2">Session Over</p>
+          <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium mb-2">{reason === "complete" ? "Session Complete" : "Session Over"}</p>
+          {reason === "awful" && <p className="text-xs text-red-500 mb-2">Three awful rounds in a row ended your session.</p>}
+          {reason === "complete" && <p className="text-xs text-score-high mb-2">You completed all 15 words!</p>}
           <div className="flex items-center justify-center gap-2 mb-1">
             <Star className="h-5 w-5 text-amber-500" />
             <span className="font-serif text-4xl font-light text-foreground">{score}</span>
