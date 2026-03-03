@@ -61,6 +61,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
     wordsSolved: number
     bestMultiplier: number
     wordHistory: WordHistoryEntry[]
+    reason: "failed" | "awful" | "complete"
   } | null>(null)
 
   const handleSessionUpdate = useCallback(({ points, correct, multiplierEffect }: {
@@ -89,9 +90,10 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
     finalScore: number,
     wordsSolved: number,
     peakMultiplier: number,
-    wordHistory: WordHistoryEntry[]
+    wordHistory: WordHistoryEntry[],
+    reason: "failed" | "awful" | "complete"
   ) => {
-    setSummaryData({ score: finalScore, wordsSolved, bestMultiplier: peakMultiplier, wordHistory })
+    setSummaryData({ score: finalScore, wordsSolved, bestMultiplier: peakMultiplier, wordHistory, reason })
     setShowSummary(true)
     if (wordsSolved >= 1) {
       try {
@@ -234,10 +236,16 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   const handleDifficultyChange = useCallback((newDifficulty: GameMode) => {
     setDifficulty(newDifficulty)
     if (tab === "practice") {
+      // Always reset mirror session when switching difficulty
+      if (mirrorMode) resetSession()
       const current = newDifficulty === "easy" ? practiceEasy : practiceHard
       if (!current) startPractice(newDifficulty)
+      else {
+        // Load a fresh word for the new difficulty
+        if (newDifficulty === "easy") setPracticeEasy(prev => prev)
+      }
     }
-  }, [tab, practiceEasy, practiceHard, startPractice])
+  }, [tab, mirrorMode, practiceEasy, practiceHard, startPractice, resetSession])
 
   const handlePlayYourself = () => {
     if (typeof window !== "undefined") window.history.replaceState({}, "", window.location.pathname)
@@ -357,6 +365,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               wordsSolved={summaryData.wordsSolved}
               bestMultiplier={summaryData.bestMultiplier}
               wordHistory={summaryData.wordHistory}
+              reason={summaryData.reason}
               onPlayAgain={() => {
                 resetSession()
                 handleNextPracticeWord()
