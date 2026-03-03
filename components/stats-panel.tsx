@@ -285,7 +285,7 @@ export function StatsPanel({ open, onClose }: StatsPanelProps) {
             <>
               {mirrorLoading ? (
                 <p className="text-sm text-muted-foreground text-center py-8">Loading...</p>
-              ) : !mirrorScores || (mirrorScores.topScores.length === 0 && mirrorScores.topStreaks.length === 0) ? (
+              ) : !mirrorScores || mirrorScores.topScores.length === 0 ? (
                 <p className="text-sm text-muted-foreground text-center py-8">
                   Complete a Mirror Mode session to see your high scores here.
                 </p>
@@ -308,22 +308,6 @@ export function StatsPanel({ open, onClose }: StatsPanelProps) {
                     </div>
                   )}
 
-                  <div className="h-px bg-border" />
-
-                  {mirrorScores.topStreaks.length > 0 && (
-                    <div className="flex flex-col gap-3">
-                      <div className="flex items-center gap-2">
-                        <Flame className="h-3.5 w-3.5 text-score-high" />
-                        <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Best Streaks</span>
-                        <span className="text-[10px] text-muted-foreground/60 ml-auto">tap to expand</span>
-                      </div>
-                      <div className="flex flex-col gap-1.5">
-                        {mirrorScores.topStreaks.slice(0, 10).map((session, i) => (
-                          <SessionRow key={session.id} session={session} rank={i + 1} />
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </>
               )}
             </>
