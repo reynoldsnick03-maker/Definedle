@@ -5,7 +5,8 @@ import { ScoreDisplay } from "./score-display"
 import { ConceptBreakdown } from "./concept-breakdown"
 import { ScoreCelebration } from "./score-celebration"
 import { CountdownTimer } from "./countdown-timer"
-import { Check, Copy, ChevronDown, Users, MessageSquare } from "lucide-react"
+import { Check, Copy, ChevronDown, Users } from "lucide-react"
+import { ThumbsUp, ThumbsDown } from "lucide-react"
 import type { ConceptResult, ScoreBreakdown } from "@/lib/scoring"
 
 interface ResultsPanelProps {
@@ -23,6 +24,7 @@ interface ResultsPanelProps {
   isPractice?: boolean
   onNextWord?: () => void
   difficulty?: "easy" | "hard"
+  streak?: number
 }
 
 export function ResultsPanel({
@@ -40,6 +42,7 @@ export function ResultsPanel({
   isPractice,
   onNextWord,
   difficulty = "easy",
+  streak = 0,
 }: ResultsPanelProps) {
   const [copied, setCopied] = useState(false)
   const [averageData, setAverageData] = useState<{ average: number; count: number } | null>(null)
@@ -47,7 +50,8 @@ export function ResultsPanel({
   const [showFeedback, setShowFeedback] = useState(false)
   const [feedbackSent, setFeedbackSent] = useState(false)
   const [feedbackError, setFeedbackError] = useState<string | null>(null)
-
+  const [thumbsUp, setThumbsUp] = useState(false)
+  
   const improveKey = `definedle-improve-${word}-${difficulty}`
   const submittedKey = `definedle-submitted-${word}-${difficulty}`
   const [showImprove, setShowImprove] = useState(() => {
@@ -65,12 +69,17 @@ export function ResultsPanel({
   const safeConcepts = concepts ?? []
   const matchedCount = safeConcepts.filter((c) => c.matched).length
 
+  // Submit score and fetch average (only for daily words, not practice)
   useEffect(() => {
     if (isPractice) return
+    
+    // Check if already submitted for this word
     const alreadySubmitted = localStorage.getItem(submittedKey) === "1"
+    
     const submitAndFetch = async () => {
       try {
         if (!alreadySubmitted) {
+          // Submit score and get average
           const res = await fetch("/api/scores", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -83,6 +92,7 @@ export function ResultsPanel({
             localStorage.setItem(submittedKey, "1")
           }
         } else {
+          // Already submitted, just fetch the average
           const res = await fetch(`/api/scores?word=${encodeURIComponent(word)}&difficulty=${difficulty}`)
           if (res.ok) {
             const data = await res.json()
@@ -94,6 +104,7 @@ export function ResultsPanel({
         console.error("Failed to submit/fetch score:", error)
       }
     }
+    
     submitAndFetch()
   }, [word, score, difficulty, isPractice, submittedKey])
 
@@ -131,7 +142,8 @@ export function ResultsPanel({
     const conceptLine = matchedConcepts === totalConcepts
       ? `${matchedConcepts}/${totalConcepts} concepts ✓`
       : `${matchedConcepts}/${totalConcepts} concepts`
-    const text = `Definedle${modeLabel} — ${score}/100\n${progressBar}\n${conceptLine}\n\nCan you define "${word.toUpperCase()}"?\nv0-definedle-word-game.vercel.app`
+    const text = `Definedle${modeLabel} — ${score}/100\n${progressBar}\n${conceptLine}\n\nCan you define \"${word.toUpperCase()}\"?\nv0-definedle-word-game.vercel.app`
+
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
@@ -143,6 +155,7 @@ export function ResultsPanel({
       <ScoreCelebration score={score} />
       <ScoreDisplay score={score} />
 
+      {/* Average score display */}
       {!isPractice && averageData && averageData.count > 1 && (
         <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
           <Users className="h-4 w-4" aria-hidden="true" />
@@ -153,14 +166,18 @@ export function ResultsPanel({
         </div>
       )}
 
+      {/* Summary feedback */}
       <p className="text-sm leading-relaxed text-foreground/80 text-center">
         {feedback}
       </p>
 
+      {/* Divider */}
       <div className="h-px bg-border" aria-hidden="true" />
 
+      {/* Concept breakdown */}
       <ConceptBreakdown concepts={safeConcepts} synonymWarning={synonymWarning} missedSummary={missedSummary} />
 
+      {/* How to improve -- only shown when score < 100 and breakdown available */}
       {score < 100 && breakdown && (
         <div className="flex flex-col">
           <button
@@ -175,6 +192,7 @@ export function ResultsPanel({
 
           {showImprove && (
             <div className="mt-3 flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
+              {/* Score bars with contextual explanations */}
               {(() => {
                 const conceptPct = Math.round((breakdown.concepts.earned / breakdown.concepts.max) * 100)
                 const precisionPct = Math.round((breakdown.precision.earned / breakdown.precision.max) * 100)
@@ -184,6 +202,7 @@ export function ResultsPanel({
                   .filter((c) => !c.matched)
                   .map((c) => c.label.toLowerCase())
 
+                // Build contextual explanation for each factor
                 const conceptExplanation = (() => {
                   const matched = concepts.filter((c) => c.matched).length
                   const total = concepts.length
@@ -195,14 +214,20 @@ export function ResultsPanel({
 
                 const precisionExplanation = (() => {
                   const { ratio, relevantCount, totalMeaningful, irrelevantWords } = breakdown.precision
+                  const allConceptsHit = concepts.every((c) => c.matched)
                   const pick = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)]
+
                   if (totalMeaningful === 0) return "Your definition didn't contain enough meaningful words to evaluate."
+
+                  // When all concepts are hit, scoring now awards full precision (10/10).
+                  // The ratio stored in the breakdown reflects this, so >= 0.9 catches it.
                   if (ratio >= 0.9) return pick([
                     `${relevantCount} of ${totalMeaningful} meaningful words were on-topic. Very precise.`,
-                    `Tight vocabulary — ${relevantCount} of ${totalMeaningful} words were directly relevant.`,
+                    `Tight vocabulary -- ${relevantCount} of ${totalMeaningful} words were directly relevant.`,
                     `Nearly every word counted. Sharp, focused phrasing.`,
                     `Excellent word choice. Almost nothing wasted.`,
                   ])
+
                   if (ratio >= 0.7) {
                     const sample = irrelevantWords.slice(0, 2)
                     return pick([
@@ -211,6 +236,7 @@ export function ResultsPanel({
                       `Good vocabulary overall.${sample.length > 0 ? ` A couple of words like "${sample.join('", "')}" fell outside the expected range.` : ""}`,
                     ])
                   }
+
                   if (ratio >= 0.4) {
                     const sample = irrelevantWords.slice(0, 3)
                     const sampleText = sample.length > 0 ? ` "${sample.join('", "')}" ${sample.length === 1 ? "wasn't" : "weren't"} recognised as related.` : ""
@@ -220,8 +246,11 @@ export function ResultsPanel({
                       `A mix of relevant and off-topic words.${sampleText} Think about the exact ideas the word describes.`,
                     ])
                   }
+
                   const sample = irrelevantWords.slice(0, 3)
                   const sampleText = sample.length > 0 ? ` Words like "${sample.join('", "')}" were off-target.` : ""
+                  
+                  // Handle zero case with better grammar
                   if (relevantCount === 0) {
                     return pick([
                       `None of your ${totalMeaningful} words matched the expected meaning.${sampleText} Focus on the specific ideas in the definition.`,
@@ -229,6 +258,7 @@ export function ResultsPanel({
                       `The wording was too far from the definition.${sampleText} Compare your answer to the official definition below for guidance.`,
                     ])
                   }
+                  
                   return pick([
                     `Only ${relevantCount} of ${totalMeaningful} words matched the expected meaning.${sampleText} Focus on the specific ideas in the definition.`,
                     `Most of your vocabulary didn't align with the definition.${sampleText} Try to capture the exact meaning rather than general associations.`,
@@ -246,14 +276,14 @@ export function ResultsPanel({
                   return `${wc} word${wc === 1 ? "" : "s"} isn't enough to capture a definition. Try writing a fuller sentence.`
                 })()
 
-                const factors: { label: string; earned: number; max: number; pct: number; explanation: string; isPenalty?: boolean }[] = [
-                  { label: "Key concepts", earned: breakdown.concepts.earned, max: breakdown.concepts.max, pct: conceptPct, explanation: conceptExplanation },
-                  { label: "Precision", earned: breakdown.precision.earned, max: breakdown.precision.max, pct: precisionPct, explanation: precisionExplanation },
-                  { label: "Detail", earned: breakdown.detail.earned, max: breakdown.detail.max, pct: detailPct, explanation: detailExplanation },
-                ]
-                if (breakdown.hintPenalty > 0) {
-                  factors.push({ label: "Hint used", earned: -breakdown.hintPenalty, max: 0, pct: 0, explanation: "Etymology hint was revealed before answering.", isPenalty: true })
-                }
+  const factors: { label: string; earned: number; max: number; pct: number; explanation: string; isPenalty?: boolean }[] = [
+  { label: "Key concepts", earned: breakdown.concepts.earned, max: breakdown.concepts.max, pct: conceptPct, explanation: conceptExplanation },
+  { label: "Precision", earned: breakdown.precision.earned, max: breakdown.precision.max, pct: precisionPct, explanation: precisionExplanation },
+  { label: "Detail", earned: breakdown.detail.earned, max: breakdown.detail.max, pct: detailPct, explanation: detailExplanation },
+  ]
+  if (breakdown.hintPenalty > 0) {
+    factors.push({ label: "Hint used", earned: -breakdown.hintPenalty, max: 0, pct: 0, explanation: "Etymology hint was revealed before answering.", isPenalty: true })
+  }
 
                 return factors.map((item) =>
                   item.isPenalty ? (
@@ -262,23 +292,23 @@ export function ResultsPanel({
                       <span className="tabular-nums text-destructive/60">{item.earned}</span>
                     </div>
                   ) : (
-                    <div key={item.label} className="flex flex-col gap-1.5">
-                      <div className="flex items-center justify-between text-[11px]">
-                        <span className="text-foreground/70">{item.label}</span>
-                        <span className="tabular-nums text-foreground/50">{item.earned}/{item.max}</span>
-                      </div>
-                      <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
-                        <div
-                          className={`h-full rounded-full transition-all duration-500 ${
-                            item.pct >= 80 ? "bg-score-high" : item.pct >= 50 ? "bg-score-mid" : "bg-score-low"
-                          }`}
-                          style={{ width: `${item.pct}%` }}
-                        />
-                      </div>
-                      {item.pct < 100 && (
-                        <p className="text-[11px] leading-relaxed text-muted-foreground">{item.explanation}</p>
-                      )}
+                  <div key={item.label} className="flex flex-col gap-1.5">
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span className="text-foreground/70">{item.label}</span>
+                      <span className="tabular-nums text-foreground/50">{item.earned}/{item.max}</span>
                     </div>
+                    <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
+                      <div
+                        className={`h-full rounded-full transition-all duration-500 ${
+                          item.pct >= 80 ? "bg-score-high" : item.pct >= 50 ? "bg-score-mid" : "bg-score-low"
+                        }`}
+                        style={{ width: `${item.pct}%` }}
+                      />
+                    </div>
+                    {item.pct < 100 && (
+                      <p className="text-[11px] leading-relaxed text-muted-foreground">{item.explanation}</p>
+                    )}
+                  </div>
                   )
                 )
               })()}
@@ -287,25 +317,36 @@ export function ResultsPanel({
         </div>
       )}
 
+      {/* Divider */}
       <div className="h-px bg-border" aria-hidden="true" />
 
+      {/* Player vs official definitions */}
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Your definition</span>
-          <p className="text-sm leading-relaxed text-foreground/80">{playerDefinition}</p>
+          <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">
+            Your definition
+          </span>
+          <p className="text-sm leading-relaxed text-foreground/80">
+            {playerDefinition}
+          </p>
         </div>
-        <div className="flex flex-col gap-2">
-          <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Official definition</span>
-          <p className="font-serif text-base leading-relaxed text-foreground italic">{officialDefinition}</p>
+      <div className="flex flex-col gap-2">
+      <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">
+      Official definition
+      </span>
+      <p className="font-serif text-base leading-relaxed text-foreground italic">
+      {officialDefinition}
+      </p>
+      </div>
+      {altDefinitionUsed && (
+        <div className="rounded-lg border border-border bg-muted/30 px-4 py-3">
+          <p className="text-xs font-medium text-muted-foreground mb-1">Your answer matched a different valid meaning:</p>
+          <p className="text-sm leading-relaxed text-foreground/80 italic">{altDefinitionUsed}</p>
         </div>
-        {altDefinitionUsed && (
-          <div className="rounded-lg border border-border bg-muted/30 px-4 py-3">
-            <p className="text-xs font-medium text-muted-foreground mb-1">Your answer matched a different valid meaning:</p>
-            <p className="text-sm leading-relaxed text-foreground/80 italic">{altDefinitionUsed}</p>
-          </div>
-        )}
+      )}
       </div>
 
+      {/* Share (daily only) */}
       {!isPractice && (
         <div className="flex flex-col items-center gap-3">
           <button
@@ -327,19 +368,48 @@ export function ResultsPanel({
             )}
           </button>
 
+          {/* Thumbs feedback */}
           {!feedbackSent ? (
-            <button
-              type="button"
-              onClick={() => setShowFeedback(!showFeedback)}
-              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <MessageSquare className="h-3 w-3" />
-              Report scoring issue
-            </button>
+            <div className="flex flex-col items-center gap-2">
+              {!thumbsUp && (
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setThumbsUp(true)}
+                    className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-score-high transition-colors"
+                    aria-label="Scoring felt fair"
+                  >
+                    <ThumbsUp className="h-3.5 w-3.5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowFeedback(!showFeedback)}
+                    className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-destructive transition-colors"
+                    aria-label="Report scoring issue"
+                  >
+                    <ThumbsDown className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              )}
+              {thumbsUp && <p className="text-xs text-score-high">Thanks!</p>}
+              {score < 30 && !showFeedback && !thumbsUp && (
+                <p className="text-xs text-muted-foreground">
+                  Did this feel unfair?{" "}
+                  <button
+                    type="button"
+                    onClick={() => setShowFeedback(true)}
+                    className="underline hover:text-foreground transition-colors"
+                  >
+                    Tell us.
+                  </button>
+                </p>
+              )}
+            </div>
           ) : (
             <p className="text-xs text-score-high">Thanks for your feedback!</p>
           )}
 
+          {/* Feedback form */}
           {showFeedback && !feedbackSent && (
             <div className="w-full max-w-sm rounded-lg border border-border bg-muted/30 p-4 animate-in fade-in slide-in-from-top-2 duration-200">
               <p className="text-sm font-medium mb-3">What went wrong?</p>
@@ -374,6 +444,7 @@ export function ResultsPanel({
         </div>
       )}
 
+      {/* Practice mode CTA or next word */}
       {isPractice && onNextWord ? (
         <button
           type="button"
@@ -387,6 +458,17 @@ export function ResultsPanel({
         </button>
       ) : (
         <div className="flex flex-col items-center gap-4">
+          {/* Streak acknowledgment */}
+          {!isPractice && streak > 0 && (
+            <div className="flex flex-col items-center gap-1">
+              <p className="text-sm font-medium text-foreground">
+                {streak === 1 ? "Streak started! 🔥" : `🔥 ${streak} day streak`}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {streak > 1 ? "Come back tomorrow to keep your streak" : "See you tomorrow"}
+              </p>
+            </div>
+          )}
           {onPractice && (
             <button
               type="button"
