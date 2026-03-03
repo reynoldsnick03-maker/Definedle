@@ -22,11 +22,7 @@ export async function GET(request: Request) {
       .sort((a, b) => b.session_score - a.session_score)
       .slice(0, 10)
 
-    const topStreaks = [...data]
-      .sort((a, b) => b.best_streak - a.best_streak)
-      .slice(0, 10)
-
-    return NextResponse.json({ topScores, topStreaks })
+    return NextResponse.json({ topScores, topStreaks: [] })
   } catch {
     return NextResponse.json({ topScores: [], topStreaks: [] })
   }
