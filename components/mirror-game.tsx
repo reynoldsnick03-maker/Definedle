@@ -245,6 +245,9 @@ export function MirrorGame({
     const trimmedGuess = currentGuess.trim()
     if (!trimmedGuess || isComplete || isValidating) return
 
+    // Dismiss keyboard on mobile immediately
+    inputRef.current?.blur()
+
     setValidationError(null)
     setIsValidating(true)
     const { valid, uncertain } = await isValidWord(trimmedGuess)
