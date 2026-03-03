@@ -28,12 +28,13 @@ interface PageClientProps {
 
 const MULTIPLIER_STEPS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8]
 
-function applyMultiplierStep(current: number, effect: "flawless" | "good" | "decent" | "poor"): number {
+function applyMultiplierStep(current: number, effect: "flawless" | "good" | "decent" | "poor" | "awful"): number {
   const idx = MULTIPLIER_STEPS.findIndex(s => Math.abs(s - current) < 0.01)
   const safeIdx = idx === -1 ? 0 : idx
   if (effect === "flawless") return MULTIPLIER_STEPS[Math.min(safeIdx + 2, MULTIPLIER_STEPS.length - 1)]
   if (effect === "good") return MULTIPLIER_STEPS[Math.min(safeIdx + 1, MULTIPLIER_STEPS.length - 1)]
   if (effect === "decent") return current
+  if (effect === "awful") return MULTIPLIER_STEPS[Math.max(safeIdx - 4, 0)]
   return MULTIPLIER_STEPS[Math.max(safeIdx - 1, 0)]
 }
 
@@ -65,7 +66,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   const handleSessionUpdate = useCallback(({ points, correct, multiplierEffect }: {
     points: number
     correct: boolean
-    multiplierEffect: "flawless" | "good" | "decent" | "poor"
+    multiplierEffect: "flawless" | "good" | "decent" | "poor" | "awful"
   }) => {
     // Always apply points (can be negative for extra letter reveals)
     setSessionScore(prev => Math.max(0, prev + points))
