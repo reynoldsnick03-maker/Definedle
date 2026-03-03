@@ -27,7 +27,8 @@ interface MirrorGameProps {
   onFlipToNormal: () => void
   wordsPlayed: number
   consecutiveAwful: number
-  onWordPlayed: (wasAwful: boolean) => void
+  wordHistory: WordHistoryEntry[]
+  onWordPlayed: (wasAwful: boolean, entry: WordHistoryEntry) => void
 }
 
 interface Guess {
@@ -197,6 +198,7 @@ export function MirrorGame({
   onFlipToNormal,
   wordsPlayed,
   consecutiveAwful,
+  wordHistory,
   onWordPlayed,
 }: MirrorGameProps) {
   const [guesses, setGuesses] = useState<Guess[]>([])
@@ -210,7 +212,6 @@ export function MirrorGame({
   const [showFlawless, setShowFlawless] = useState(false)
   const [pointsEarned, setPointsEarned] = useState<number | null>(null)
   const [playQuality, setPlayQuality] = useState<"flawless" | "good" | "decent" | "poor" | "awful" | null>(null)
-  const [wordHistory, setWordHistory] = useState<WordHistoryEntry[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
   const maxGuesses = 3
   const maxHints = 3
@@ -292,14 +293,13 @@ export function MirrorGame({
 
       const entry: WordHistoryEntry = { word: word.word, points: earned, multDelta, guesses: newGuesses.length, hintsUsed }
       const newHistory = [...wordHistory, entry]
-      setWordHistory(newHistory)
 
       const newConsecutiveAwful = quality === "awful" ? consecutiveAwful + 1 : 0
       const newWordsPlayed = wordsPlayed + 1
 
       onSessionUpdate({ points: earned, correct: true, multiplierEffect: quality })
       onComplete?.({ correct: true, guesses: newGuesses.length, hintsUsed, points: earned })
-      onWordPlayed(quality === "awful")
+      onWordPlayed(quality === "awful", entry)
 
       if (newConsecutiveAwful >= 3) {
         setTimeout(() => onSessionEnd(sessionScore + earned, newWordsPlayed, nextMult, newHistory, "awful"), 1600)
