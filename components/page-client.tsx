@@ -327,10 +327,10 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
           )}
 
           <div className={tab === "daily" && difficulty === "easy" ? "" : "hidden"}>
-            <Game key="daily-easy" dailyWord={dailyWord} difficulty="easy" isPractice={false} onStartPractice={() => handleTabChange("practice")} onComplete={refreshStreak} />
+            <Game key="daily-easy" dailyWord={dailyWord} difficulty="easy" isPractice={false} streak={streak} onStartPractice={() => handleTabChange("practice")} onComplete={refreshStreak} />
           </div>
           <div className={tab === "daily" && difficulty === "hard" ? "" : "hidden"}>
-            <Game key="daily-hard" dailyWord={hardWord} difficulty="hard" isPractice={false} onStartPractice={() => handleTabChange("practice")} onComplete={refreshStreak} />
+            <Game key="daily-hard" dailyWord={hardWord} difficulty="hard" isPractice={false} streak={streak} onStartPractice={() => handleTabChange("practice")} onComplete={refreshStreak} />
           </div>
 
           {tab === "practice" && practiceWord && !mirrorMode && (
