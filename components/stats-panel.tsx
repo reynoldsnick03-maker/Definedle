@@ -36,7 +36,7 @@ interface MirrorHighScores {
 
 type StatsTab = "daily" | "mirror"
 
-function SessionRow({ session, rank, mode }: { session: MirrorSession; rank: number; mode: "score" | "streak" }) {
+function SessionRow({ session, rank }: { session: MirrorSession; rank: number }) {
   const [expanded, setExpanded] = useState(false)
   const hasHistory = session.word_history && session.word_history.length > 0
 
@@ -54,20 +54,10 @@ function SessionRow({ session, rank, mode }: { session: MirrorSession; rank: num
       >
         <div className="flex items-center gap-2.5">
           <span className="text-xs tabular-nums text-muted-foreground w-4 text-right">{rank}.</span>
-          {mode === "score" ? (
-            <span className="text-sm font-medium tabular-nums">{session.session_score} pts</span>
-          ) : (
-            <div className="flex items-center gap-1">
-              <Flame className="h-3.5 w-3.5 text-score-high" />
-              <span className="text-sm font-medium tabular-nums">{session.best_streak} words</span>
-            </div>
-          )}
-          <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium uppercase tracking-wider ${session.difficulty === "hard" ? "bg-destructive/10 text-destructive" : "bg-muted text-muted-foreground"}`}>
-            {session.difficulty}
-          </span>
+          <span className="text-sm font-medium tabular-nums">{session.session_score} pts</span>
         </div>
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
-          <span>{session.words_solved}/{session.words_attempted}</span>
+          <span>{session.words_solved} words</span>
           <span>{formatDate(session.played_at)}</span>
           {hasHistory && (
             expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />
@@ -291,22 +281,43 @@ export function StatsPanel({ open, onClose }: StatsPanelProps) {
                 </p>
               ) : (
                 <>
-                  {mirrorScores.topScores.length > 0 && (
-                    <div className="flex flex-col gap-3">
-                      <div className="flex items-center gap-2">
-                        <Star className="h-3.5 w-3.5 text-amber-500" />
-                        <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Best Sessions</span>
-                        {mirrorScores.topScores.some(s => s.word_history && s.word_history.length > 0) && (
-                        <span className="text-[10px] text-muted-foreground/60 ml-auto">tap to expand</span>
-                      )}
-                      </div>
-                      <div className="flex flex-col gap-1.5">
-                        {mirrorScores.topScores.slice(0, 10).map((session, i) => (
-                          <SessionRow key={session.id} session={session} rank={i + 1} mode="score" />
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  {(() => {
+                    const easySessions = mirrorScores.topScores.filter(s => s.difficulty === "easy").slice(0, 5)
+                    const hardSessions = mirrorScores.topScores.filter(s => s.difficulty === "hard").slice(0, 5)
+                    const hasHistory = mirrorScores.topScores.some(s => s.word_history && s.word_history.length > 0)
+                    return (
+                      <>
+                        {easySessions.length > 0 && (
+                          <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-2">
+                              <Star className="h-3.5 w-3.5 text-amber-500" />
+                              <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Easy — Best Sessions</span>
+                              {hasHistory && <span className="text-[10px] text-muted-foreground/60 ml-auto">tap to expand</span>}
+                            </div>
+                            <div className="flex flex-col gap-1.5">
+                              {easySessions.map((session, i) => (
+                                <SessionRow key={session.id} session={session} rank={i + 1} />
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        {hardSessions.length > 0 && (
+                          <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-2">
+                              <Star className="h-3.5 w-3.5 text-amber-500" />
+                              <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Hard — Best Sessions</span>
+                              {hasHistory && <span className="text-[10px] text-muted-foreground/60 ml-auto">tap to expand</span>}
+                            </div>
+                            <div className="flex flex-col gap-1.5">
+                              {hardSessions.map((session, i) => (
+                                <SessionRow key={session.id} session={session} rank={i + 1} />
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    )
+                  })()}
 
                 </>
               )}
