@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useCallback, useEffect, useRef } from "react"
-import { Flame, Star, Zap } from "lucide-react"
+import { Star, Zap } from "lucide-react"
 import type { DailyWord } from "@/lib/game-data"
 import { stemMatch, areSynonyms } from "@/lib/scoring"
 
@@ -346,12 +346,6 @@ export function MirrorGame({
           {/* Right: word progress, streak, score, multiplier */}
           <div className="flex items-center gap-4">
             <span className="text-[10px] tabular-nums text-muted-foreground">{wordsPlayed}/15</span>
-            {sessionStreak > 0 && (
-              <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-score-high/10 border border-score-high/20">
-                <Flame className="h-3 w-3 text-score-high" />
-                <span className="text-xs font-medium tabular-nums text-score-high">{sessionStreak}</span>
-              </div>
-            )}
             <div className="flex items-center gap-1.5">
               <Star className="h-3.5 w-3.5 text-amber-500" />
               <span className="text-sm font-medium tabular-nums">{sessionScore}</span>
