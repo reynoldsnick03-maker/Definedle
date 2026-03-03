@@ -22,7 +22,7 @@ interface MirrorGameProps {
   sessionStreak: number
   sessionBestStreak: number
   multiplier: number
-  onSessionUpdate: (delta: { points: number; correct: boolean; multiplierEffect: "flawless" | "good" | "decent" | "poor" }) => void
+  onSessionUpdate: (delta: { points: number; correct: boolean; multiplierEffect: "flawless" | "good" | "decent" | "poor" | "awful" }) => void
   onSessionEnd: (finalScore: number, wordsSolved: number, bestMultiplier: number, wordHistory: WordHistoryEntry[]) => void
   onFlipToNormal: () => void
 }
@@ -39,15 +39,16 @@ function getMultiplierIndex(m: number): number {
   return idx === -1 ? 0 : idx
 }
 
-function applyMultiplierEffect(current: number, effect: "flawless" | "good" | "decent" | "poor"): number {
+function applyMultiplierEffect(current: number, effect: "flawless" | "good" | "decent" | "poor" | "awful"): number {
   const idx = getMultiplierIndex(current)
   if (effect === "flawless") return MULTIPLIER_STEPS[Math.min(idx + 2, MULTIPLIER_STEPS.length - 1)]
   if (effect === "good") return MULTIPLIER_STEPS[Math.min(idx + 1, MULTIPLIER_STEPS.length - 1)]
   if (effect === "decent") return current
+  if (effect === "awful") return MULTIPLIER_STEPS[Math.max(idx - 4, 0)]
   return MULTIPLIER_STEPS[Math.max(idx - 1, 0)]
 }
 
-function classifyPlay(guesses: number, hintsUsed: number): "flawless" | "good" | "decent" | "poor" {
+function classifyPlay(guesses: number, hintsUsed: number): "flawless" | "good" | "decent" | "poor" | "awful" {
   if (guesses === 1 && hintsUsed === 0) return "flawless"
   if (
     (guesses === 1 && hintsUsed === 1) ||
@@ -55,7 +56,24 @@ function classifyPlay(guesses: number, hintsUsed: number): "flawless" | "good" |
     (guesses === 2 && hintsUsed === 1)
   ) return "good"
   if (guesses === 1 && hintsUsed === 2) return "decent"
+  if (
+    (guesses === 1 && hintsUsed >= 5) ||
+    (guesses === 2 && hintsUsed >= 4) ||
+    (guesses === 3 && hintsUsed >= 3)
+  ) return "awful"
   return "poor"
+}
+
+function hintsAccounted(guesses: number, hintsUsed: number): number {
+  const q = classifyPlay(guesses, hintsUsed)
+  if (q === "flawless") return 0
+  if (q === "good") return guesses === 1 ? 1 : guesses === 2 && hintsUsed === 0 ? 0 : 1
+  if (q === "decent") return 2
+  if (q === "awful") return guesses === 1 ? 5 : guesses === 2 ? 4 : 3
+  // poor
+  if (guesses === 1) return 3
+  if (guesses === 2) return 2
+  return 0
 }
 
 function calcBasePoints(guesses: number, hintsUsed: number): number {
@@ -175,7 +193,7 @@ export function MirrorGame({
   const [validationError, setValidationError] = useState<string | null>(null)
   const [showFlawless, setShowFlawless] = useState(false)
   const [pointsEarned, setPointsEarned] = useState<number | null>(null)
-  const [playQuality, setPlayQuality] = useState<"flawless" | "good" | "decent" | "poor" | null>(null)
+  const [playQuality, setPlayQuality] = useState<"flawless" | "good" | "decent" | "poor" | "awful" | null>(null)
   const [wordHistory, setWordHistory] = useState<WordHistoryEntry[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
   const maxGuesses = 3
@@ -239,7 +257,12 @@ export function MirrorGame({
       const quality = classifyPlay(newGuesses.length, hintsUsed)
       const basePoints = calcBasePoints(newGuesses.length, hintsUsed)
       const earned = Math.floor(basePoints * multiplier)
-      const nextMult = applyMultiplierEffect(multiplier, quality)
+      // Apply quality step, then one poor step per hint beyond what quality accounts for
+      let nextMult = applyMultiplierEffect(multiplier, quality)
+      const extraHints = Math.max(0, hintsUsed - hintsAccounted(newGuesses.length, hintsUsed))
+      for (let h = 0; h < extraHints; h++) {
+        nextMult = applyMultiplierEffect(nextMult, "poor")
+      }
       const multDelta = parseFloat((nextMult - multiplier).toFixed(1))
 
       setPointsEarned(earned)
@@ -276,6 +299,8 @@ export function MirrorGame({
     ? <span className="text-muted-foreground font-medium">— decent</span>
     : playQuality === "poor"
     ? <span className="text-score-low font-medium">▼ poor</span>
+    : playQuality === "awful"
+    ? <span className="text-red-600 font-bold">▼ awful</span>
     : null
 
   return (
