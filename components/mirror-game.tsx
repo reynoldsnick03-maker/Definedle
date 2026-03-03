@@ -68,7 +68,7 @@ function classifyPlay(guesses: number, hintsUsed: number): "flawless" | "good" |
   if (
     (guesses === 1 && hintsUsed >= 5) ||
     (guesses === 2 && hintsUsed >= 4) ||
-    (guesses === 3 && hintsUsed >= 3)
+    (guesses === 3 && hintsUsed >= 4)
   ) return "awful"
   return "poor"
 }
@@ -83,7 +83,7 @@ function hintsAccounted(guesses: number, hintsUsed: number): number {
     if (guesses === 1) return hintsUsed  // 1g2h and 1g3h — all hints accounted
     return 2
   }
-  if (q === "awful") return guesses === 1 ? 5 : guesses === 2 ? 4 : 3
+  if (q === "awful") return guesses === 1 ? 5 : guesses === 2 ? 4 : 4
   // poor
   if (guesses === 1) return 3
   if (guesses === 2) return 2
