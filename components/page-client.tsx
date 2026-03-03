@@ -242,16 +242,10 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
   const handleDifficultyChange = useCallback((newDifficulty: GameMode) => {
     setDifficulty(newDifficulty)
     if (tab === "practice") {
-      // Always reset mirror session when switching difficulty
-      if (mirrorMode) resetSession()
       const current = newDifficulty === "easy" ? practiceEasy : practiceHard
       if (!current) startPractice(newDifficulty)
-      else {
-        // Load a fresh word for the new difficulty
-        if (newDifficulty === "easy") setPracticeEasy(prev => prev)
-      }
     }
-  }, [tab, mirrorMode, practiceEasy, practiceHard, startPractice, resetSession])
+  }, [tab, practiceEasy, practiceHard, startPractice])
 
   const handlePlayYourself = () => {
     if (typeof window !== "undefined") window.history.replaceState({}, "", window.location.pathname)
