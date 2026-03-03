@@ -600,7 +600,7 @@ export function stemMatch(a: string, b: string): boolean {
   
   // Share a 5-character prefix (stricter than 4 to reduce false positives)
   // This catches crime/criminal, charge/charged, but not real/unrealist
-  if (a.length >= 5 && b.length >= 5 && a.slice(0, 5) === b.slice(0, 5)) return true
+  if (a.length >= 6 && b.length >= 6 && a.slice(0, 6) === b.slice(0, 6)) return true
   
   // Synonym cluster match - this is the primary way we handle related words
   if (a.length >= 3 && b.length >= 3 && areSynonyms(a, b)) return true
@@ -638,11 +638,10 @@ function fuzzyConceptMatch(inputWords: string[], negatedWords: Set<string>, conc
   }
 
   const ratio = hits / unique.length
-  // Full match: at least 2 hits AND 35%+ coverage (lowered from 40% to catch paraphrased-but-equivalent definitions)
-  // Also allow a single hit if it covers >=60% of a short concept (1-2 unique words)
-  const matched = (hits >= 2 && ratio >= 0.35) || (hits >= 1 && ratio >= 0.6)
-  // Near miss: at least 1 hit AND 20-34% coverage (close but not quite)
-  const nearMiss = !matched && hits >= 1 && ratio >= 0.2 && ratio < 0.35
+  // Full match: at least 2 hits AND 40%+ coverage
+  const matched = hits >= 2 && ratio >= 0.4
+  // Near miss: at least 1 hit AND 25-39% coverage (close but not quite)
+  const nearMiss = !matched && hits >= 1 && ratio >= 0.25 && ratio < 0.4
   return { matched, nearMiss, matchedWords: (matched || nearMiss) ? matchedWords : [] }
 }
 
@@ -658,8 +657,8 @@ function scoreAgainstDefinition(
   definitionText: string,
 ): { concepts: ConceptResult[]; matchedCount: number; conceptScore: number; precisionScore: number; precisionRatio: number; relevantWords: number; irrelevantWords: string[]; lengthScore: number; synonymWarning: boolean } {
   const conceptCount = keyConcepts.length
-  // Use floor to avoid exceeding 75 total (e.g., 3 concepts at 25 each = 75, not 26*3=78)
   const pointsPerConcept = Math.floor(75 / conceptCount)
+  const conceptRemainder = 75 - (pointsPerConcept * conceptCount)
 
   // Extract meaningful words from the official definition for overlap checking
   const officialDefWords = meaningfulWords(definitionText.toLowerCase())
@@ -721,7 +720,7 @@ function scoreAgainstDefinition(
   })
 
   const matchedCount = concepts.filter((c) => c.matched).length
-  const conceptScore = matchedCount * pointsPerConcept
+  const conceptScore = matchedCount * pointsPerConcept + (matchedCount === conceptCount ? conceptRemainder : 0)
 
   // Synonym-only penalty - use token-based matching, not substring
   let synonymWarning = false
@@ -820,17 +819,11 @@ function scoreAgainstDefinition(
   const precisionScore = Math.round(precisionRatio * 10)
 
   // Detail
-  // Detail: tied to the official definition length.
-  // Full marks (15/15) when the player's word count >= the official definition's word count.
-  // Below that, score scales smoothly. This prevents penalising players who match the
-  // exact definition length — the screenshot case where word-for-word got 13/15.
   const wc = words.length
   const officialWc = definitionText.trim().split(/\s+/).length
   const targetWc = Math.max(officialWc, 3)
   const detailRatio = Math.min(wc / targetWc, 1)
-  // Use a gentler curve (0.5 exponent vs 0.6) so medium-length answers score better,
-  // and give 15/15 automatically when the player meets or exceeds the official word count.
-  const lengthScore = wc >= targetWc ? 15 : Math.round(Math.pow(detailRatio, 0.5) * 15)
+  const lengthScore = Math.round(Math.pow(detailRatio, 0.6) * 15)
 
   return { concepts, matchedCount, conceptScore, precisionScore, precisionRatio, relevantWords, irrelevantWords, lengthScore, synonymWarning }
 }
