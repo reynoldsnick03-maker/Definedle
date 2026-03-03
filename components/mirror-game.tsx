@@ -125,13 +125,31 @@ async function isValidWord(word: string): Promise<{ valid: boolean; uncertain: b
   }
 }
 
+// Letter rarity — uncommon letters revealed before common ones
+const LETTER_RARITY: Record<string, number> = {
+  z: 1, q: 2, x: 3, j: 4, k: 5, v: 6, w: 7, y: 8, b: 9, f: 10,
+  g: 11, h: 12, m: 13, p: 14, d: 15, c: 16, u: 17, l: 18, n: 19,
+  t: 20, s: 21, r: 22, o: 23, i: 24, a: 25, e: 26,
+}
+
 function getRevealedLetters(word: string, count: number): number[] {
-  const indices = Array.from({ length: word.length }, (_, i) => i)
-  const shuffled = indices
-    .map(i => ({ i, sort: Math.sin(i * 7 + word.length * 13) }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(x => x.i)
-  return shuffled.slice(0, count).sort((a, b) => a - b)
+  const w = word.toLowerCase()
+  const len = w.length
+  if (count === 0) return []
+
+  // Build ordered list of indices to reveal:
+  // 1st: first letter, 2nd: last letter, 3rd+: remaining by rarity (uncommon first)
+  const remaining = Array.from({ length: len }, (_, i) => i)
+    .filter(i => i !== 0 && i !== len - 1)
+    .sort((a, b) => (LETTER_RARITY[w[a]] ?? 13) - (LETTER_RARITY[w[b]] ?? 13))
+
+  const ordered = len === 1
+    ? [0]
+    : len === 2
+    ? [0, 1]
+    : [0, len - 1, ...remaining]
+
+  return ordered.slice(0, count).sort((a, b) => a - b)
 }
 
 export function MirrorGame({
@@ -178,7 +196,14 @@ export function MirrorGame({
   }, [word.word])
 
   const handleRevealLetter = () => {
-    if (hintsUsed < maxHints && !isComplete) setHintsUsed(h => h + 1)
+    if (isComplete) return
+    if (hintsUsed < maxHints) {
+      setHintsUsed(h => h + 1)
+    } else if (hintsUsed < word.word.length) {
+      // Extra reveals cost 1pt from session score
+      setHintsUsed(h => h + 1)
+      onSessionUpdate({ points: -1, correct: false, multiplierEffect: "poor" })
+    }
   }
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
@@ -310,7 +335,7 @@ export function MirrorGame({
           <div className="mt-4 flex items-center justify-center">
             {showFlawless ? (
               <span className="text-score-high font-bold text-xl">Flawless!</span>
-            ) : !isComplete && hintsUsed < maxHints ? (
+            ) : !isComplete && hintsUsed < word.word.length ? (
               <button
                 type="button"
                 onClick={handleRevealLetter}
@@ -320,7 +345,10 @@ export function MirrorGame({
                   <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
                 </svg>
                 Reveal a letter
-                <span className="text-muted-foreground/60">(−0.5× multiplier, {hintsUsed}/{maxHints} used)</span>
+                {hintsUsed < maxHints
+                  ? <span className="text-muted-foreground/60">(−0.5× multiplier, {hintsUsed}/{maxHints} used)</span>
+                  : <span className="text-score-low/80">(−1 pt from score)</span>
+                }
               </button>
             ) : null}
           </div>
