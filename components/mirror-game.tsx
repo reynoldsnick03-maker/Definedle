@@ -358,7 +358,7 @@ export function MirrorGame({
             <span className="text-[10px] tabular-nums text-muted-foreground">{wordsPlayed + 1}/15</span>
             <div className="flex items-center gap-1.5">
               <Star className="h-3.5 w-3.5 text-amber-500" />
-              <span className="text-sm font-medium tabular-nums">{sessionScore}</span>
+              <span className="text-sm font-medium tabular-nums">{String(sessionScore)}</span>
             </div>
             <div className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-muted/40 border border-border/50">
               <Zap className={`h-3 w-3 ${multiplierColor}`} />
