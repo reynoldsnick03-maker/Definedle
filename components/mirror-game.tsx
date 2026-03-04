@@ -30,6 +30,7 @@ interface MirrorGameProps {
   wordHistory: WordHistoryEntry[]
   onWordPlayed: (wasAwful: boolean, entry: WordHistoryEntry) => void
   isDark?: boolean
+  nemesisEntry?: { points: number; guesses: number; hintsUsed: number } | null
 }
 
 interface Guess {
@@ -207,6 +208,7 @@ export function MirrorGame({
   wordHistory,
   onWordPlayed,
   isDark = false,
+  nemesisEntry = null,
 }: MirrorGameProps) {
   const [guesses, setGuesses] = useState<Guess[]>([])
   const [currentGuess, setCurrentGuess] = useState("")
@@ -395,6 +397,14 @@ export function MirrorGame({
         <div className="text-center mb-6">
           <p className={`text-xs uppercase tracking-widest mb-3 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{word.partOfSpeech}</p>
           <p className={`text-lg leading-relaxed font-serif italic ${isDark ? "text-[#d4cfc8]" : "text-foreground"}`}>&ldquo;{word.definition}&rdquo;</p>
+
+          {/* Nemesis banner — shown if player previously struggled here */}
+          {nemesisEntry && (
+            <div className={`mt-3 px-3 py-2 rounded-lg text-xs flex items-center gap-2 ${isDark ? "bg-red-500/10 border border-red-500/20 text-red-400" : "bg-red-50 border border-red-200 text-red-600"}`}>
+              <span>⚔️</span>
+              <span>You scored <strong>{Math.round(nemesisEntry.points)} pts</strong> here before — {nemesisEntry.guesses} {nemesisEntry.guesses === 1 ? "guess" : "guesses"}, {nemesisEntry.hintsUsed} {nemesisEntry.hintsUsed === 1 ? "hint" : "hints"}. Redeem yourself.</span>
+            </div>
+          )}
 
           {/* Letter reveal — smaller tiles so long words fit one line */}
           {hintsUsed > 0 && (

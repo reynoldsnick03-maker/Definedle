@@ -143,3 +143,12 @@
     transform: translateY(-28px) scale(0.9);
   }
 }
+
+/* Reduce motion — applied via data attribute from settings */
+[data-reduce-motion="true"] *,
+[data-reduce-motion="true"] *::before,
+[data-reduce-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}

@@ -11,6 +11,56 @@ import { getRandomPracticeWord, getDailyBlitzSequence } from "@/lib/game-data"
 import { getMirrorStreak, updateMirrorStreak, type MirrorStreak } from "@/lib/history"
 import { getPlayerId } from "@/lib/player-id"
 
+// Nemesis Words — look up previous result for a word from stored session history
+function getNemesisEntry(
+  wordName: string,
+  threshold: "poor" | "awful"
+): { points: number; guesses: number; hintsUsed: number } | null {
+  try {
+    const raw = localStorage.getItem("definedle-settings")
+    const settings = raw ? JSON.parse(raw) : {}
+    if (!settings.nemesisWords) return null
+    const thresh = settings.nemesisThreshold || "awful"
+
+    // Load all saved word history from mirror sessions stored locally
+    const histRaw = localStorage.getItem("definedle-blitz-word-history")
+    if (!histRaw) return null
+    const history: Array<{ word: string; points: number; guesses: number; hintsUsed: number; tier: string }> = JSON.parse(histRaw)
+
+    const match = history.filter(e => e.word === wordName)
+    if (match.length === 0) return null
+
+    // Most recent match
+    const last = match[match.length - 1]
+
+    // Only surface if below threshold
+    const isPoor = last.tier === "poor" || last.tier === "awful" || last.guesses === 0
+    const isAwful = last.tier === "awful" || last.guesses === 0
+    const qualifies = thresh === "poor" ? isPoor : isAwful
+    // Never show if previously flawless
+    const wasFlawless = last.guesses === 1 && last.hintsUsed === 0
+    if (wasFlawless || !qualifies) return null
+
+    return { points: last.points, guesses: last.guesses, hintsUsed: last.hintsUsed }
+  } catch {
+    return null
+  }
+}
+
+// Save word to local blitz history for nemesis lookup
+function saveWordToBlitzHistory(entry: {
+  word: string; points: number; guesses: number; hintsUsed: number; tier: string
+}) {
+  try {
+    const raw = localStorage.getItem("definedle-blitz-word-history")
+    const history = raw ? JSON.parse(raw) : []
+    history.push(entry)
+    // Keep last 500 entries
+    if (history.length > 500) history.splice(0, history.length - 500)
+    localStorage.setItem("definedle-blitz-word-history", JSON.stringify(history))
+  } catch {}
+}
+
 const MULTIPLIER_STEPS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8]
 
 function applyMultiplierStep(current: number, effect: "flawless" | "good" | "decent" | "poor" | "awful"): number {
@@ -48,12 +98,29 @@ interface BlitzClientProps {
 }
 
 export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
+  // Load settings from localStorage
+  const [isDark, setIsDark] = useState(true)
+  const [reduceMotion, setReduceMotion] = useState(false)
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("definedle-settings")
+      if (raw) {
+        const s = JSON.parse(raw)
+        if (typeof s.blitzDarkMode === "boolean") setIsDark(s.blitzDarkMode)
+        if (typeof s.reduceMotion === "boolean") setReduceMotion(s.reduceMotion)
+        if (s.defaultHard === true) setDifficulty("hard")
+      }
+    } catch {}
+  }, [])
+
   const [helpOpen, setHelpOpen] = useState(false)
   const [statsOpen, setStatsOpen] = useState(false)
   const [difficulty, setDifficulty] = useState<GameMode>("easy")
   const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
 
   const [blitzTab, setBlitzTab] = useState<"practice" | "daily">("practice")
+  const [nemesisEntry, setNemesisEntry] = useState<{ points: number; guesses: number; hintsUsed: number } | null>(null)
   const [dailySequenceEasy, setDailySequenceEasy] = useState<DailyWord[]>([])
   const [dailySequenceHard, setDailySequenceHard] = useState<DailyWord[]>([])
   const [dailyWordIndex, setDailyWordIndex] = useState(0)
@@ -76,6 +143,12 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const dailySequence = difficulty === "easy" ? dailySequenceEasy : dailySequenceHard
   const currentWord = blitzTab === "daily" ? dailySequence[dailyWordIndex] ?? null : practiceWord
 
+  // Update nemesis entry when word changes
+  useEffect(() => {
+    if (currentWord) setNemesisEntry(getNemesisEntry(currentWord.word, "awful"))
+    else setNemesisEntry(null)
+  }, [currentWord?.word])
+
   useEffect(() => {
     try { setMirrorStreak(getMirrorStreak()) } catch {}
     setDailySequenceEasy(getDailyBlitzSequence("easy"))
@@ -94,7 +167,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   }, [difficulty]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const updateSession = useCallback((diff: GameMode, patch: Partial<SessionState>) => {
-    setSessions(prev => ({ ...prev, [diff]: { ...prev[diff], ...patch } }))
+    setSessions((prev: Record<GameMode, SessionState>) => ({ ...prev, [diff]: { ...prev[diff], ...patch } }))
   }, [])
 
   const handleSessionUpdate = useCallback(({ points, correct, multiplierEffect }: {
@@ -102,7 +175,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
     correct: boolean
     multiplierEffect: "flawless" | "good" | "decent" | "poor" | "awful"
   }) => {
-    setSessions(prev => {
+    setSessions((prev: Record<GameMode, SessionState>) => {
       const s = prev[difficulty]
       const newScore = Math.max(0, s.sessionScore + points)
       if (!correct) return { ...prev, [difficulty]: { ...s, sessionScore: newScore } }
@@ -154,32 +227,37 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
 
   const resetSession = useCallback((diff?: GameMode) => {
     const target = diff ?? difficulty
-    setSessions(prev => ({ ...prev, [target]: emptySession() }))
+    setSessions((prev: Record<GameMode, SessionState>) => ({ ...prev, [target]: emptySession() }))
   }, [difficulty])
 
   const handleNextWord = useCallback(() => {
-    setSessions(prev => ({
+    setSessions((prev: Record<GameMode, SessionState>) => ({
       ...prev,
       [difficulty]: { ...prev[difficulty], wordsPlayed: prev[difficulty].wordsPlayed + 1 }
     }))
     const played = difficulty === "easy" ? playedEasy : playedHard
     const word = getRandomPracticeWord(played, difficulty)
     if (difficulty === "easy") {
-      setPlayedEasy(prev => [...prev, word.word])
+      setPlayedEasy((prev: string[]) => [...prev, word.word])
       setPracticeEasy(word)
     } else {
-      setPlayedHard(prev => [...prev, word.word])
+      setPlayedHard((prev: string[]) => [...prev, word.word])
       setPracticeHard(word)
     }
   }, [difficulty, playedEasy, playedHard])
 
   const handleNextDailyWord = useCallback(() => {
-    setSessions(prev => ({
+    setSessions((prev: Record<GameMode, SessionState>) => ({
       ...prev,
       [difficulty]: { ...prev[difficulty], wordsPlayed: prev[difficulty].wordsPlayed + 1 }
     }))
-    setDailyWordIndex(i => i + 1)
-  }, [difficulty])
+    const nextIndex = dailyWordIndex + 1
+    if (nextIndex >= 15) {
+      // All 15 daily words done — session end is handled by MirrorGame's onSessionEnd
+      // just advance index so currentWord becomes null and summary shows
+    }
+    setDailyWordIndex((i: number) => i + 1)
+  }, [difficulty, dailyWordIndex])
 
   const handleDifficultyChange = useCallback((diff: GameMode) => {
     setDifficulty(diff)
@@ -187,13 +265,13 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   }, [])
 
   return (
-    <main className="flex min-h-svh flex-col bg-[#111110] pb-24">
+    <main className={`flex min-h-svh flex-col pb-24 ${isDark ? "bg-[#111110]" : "bg-background"}`} data-reduce-motion={reduceMotion}>
       {/* Blitz header */}
       <header className="flex items-center justify-between px-5 pt-10 pb-4 md:pt-14 w-full max-w-md mx-auto">
         <button
           type="button"
           onClick={onSettingsOpen}
-          className="flex h-9 w-9 items-center justify-center rounded-lg text-[#6b6560] hover:text-[#d4cfc8] transition-colors focus-visible:outline-none"
+          className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors focus-visible:outline-none ${isDark ? "text-[#6b6560] hover:text-[#d4cfc8]" : "text-muted-foreground hover:text-foreground"}`}
           aria-label="Settings"
         >
           <Settings className="h-[18px] w-[18px]" />
@@ -298,7 +376,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           consecutiveAwful={consecutiveAwful}
           wordHistory={sessionWordHistory}
           onWordPlayed={(wasAwful: boolean, entry: WordHistoryEntry) => {
-            setSessions(prev => {
+            setSessions((prev: Record<GameMode, SessionState>) => {
               const s = prev[difficulty]
               return { ...prev, [difficulty]: {
                 ...s,
@@ -306,10 +384,19 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
                 sessionWordHistory: [...s.sessionWordHistory, entry],
               }}
             })
+            // Save for nemesis lookup
+            saveWordToBlitzHistory({
+              word: entry.word,
+              points: entry.points,
+              guesses: entry.guesses,
+              hintsUsed: entry.hintsUsed,
+              tier: wasAwful ? "awful" : entry.guesses === 0 ? "failed" : "other",
+            })
           }}
           onSessionUpdate={handleSessionUpdate}
           onSessionEnd={handleSessionEnd}
-          isDark={true}
+          isDark={isDark}
+          nemesisEntry={nemesisEntry}
           onComplete={(result) => {
             const isPerfect = result.correct && result.guesses === 1 && result.hintsUsed === 0
             const updated = updateMirrorStreak(difficulty, isPerfect)
@@ -329,7 +416,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             resetSession()
             handleNextWord()
           }}
-          isDark={true}
+          isDark={isDark}
           onFlipBack={() => {
             resetSession()
             handleNextWord()
