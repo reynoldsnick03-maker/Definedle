@@ -93,7 +93,7 @@ export function HowToPlay({ open, onClose }: HowToPlayProps) {
               Tap <span className="text-foreground font-medium">Reveal a letter</span> to uncover letters one at a time &mdash; first letter, last letter, then rarest letters first. You have 3 free hints per word; further reveals cost 1 point from your score.
             </p>
             <p>
-              Your score accumulates across 15 words. A multiplier rewards consistent performance &mdash; flawless rounds push it up, poor rounds bring it down. Failing all 3 guesses ends your session early, as does three awful rounds in a row.
+              Your score accumulates across 15 words. A multiplier rewards consistent performance &mdash; good rounds push it up, poor rounds bring it down. Failing all 3 guesses ends your session early, as does three awful rounds in a row.
             </p>
           </div>
 
