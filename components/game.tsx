@@ -5,7 +5,6 @@ import type { DailyWord, GameMode } from "@/lib/game-data"
 import type { ScoreResult, ConceptResult, ScoreBreakdown } from "@/lib/scoring"
 import { scoreDefinition } from "@/lib/scoring"
 import { formatDateKey, type HistoryEntry } from "@/lib/history"
-import { getPlayerId } from "@/lib/player-id"
 import { WordDisplay } from "./word-display"
 import { DefinitionInput } from "./definition-input"
 import { ResultsPanel } from "./results-panel"
@@ -23,7 +22,8 @@ interface CachedResult {
 }
 
 function getDateKey(): string {
-  return formatDateKey(new Date())
+  const d = new Date()
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
 }
 
 function getCookie(name: string): string | undefined {
@@ -44,7 +44,6 @@ interface GameProps {
   onNextWord?: () => void
   onStartPractice?: () => void
   onComplete?: () => void
-  streak?: number
 }
 
 export function Game({
@@ -54,7 +53,6 @@ export function Game({
   onNextWord,
   onStartPractice,
   onComplete,
-  streak = 0,
 }: GameProps) {
   const DAILY_RESULT_COOKIE = difficulty === "hard" ? "definedle-today-hard" : "definedle-today"
   const [result, setResult] = useState<ScoreResult | null>(null)
@@ -132,7 +130,6 @@ export function Game({
         m: difficulty,
       }
       try {
-        // Save to cookie-based history (for local stats panel)
         await fetch("/api/history", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -140,25 +137,6 @@ export function Game({
         })
       } catch {
         // Ignore network errors
-      }
-      try {
-        // Save to Supabase streak (persistent across sessions)
-        const playerId = getPlayerId()
-        if (playerId) {
-          await fetch("/api/streak", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              player_id: playerId,
-              date: getDateKey(),
-              difficulty,
-              score: scoreResult.score,
-              word: word.word,
-            }),
-          })
-        }
-      } catch {
-        // Ignore — streak will fall back to cookie-based
       }
     },
     [difficulty]
@@ -222,16 +200,16 @@ export function Game({
 
         <div className="my-6 h-px bg-border" aria-hidden="true" />
 
-        {/* Hint — synonym for hard, etymology for easy */}
-        {!submitted && (difficulty === "hard" ? dailyWord.synonyms?.length > 0 : dailyWord.etymology) && (
+        {/* Etymology hint */}
+        {!submitted && dailyWord.etymology && (
           <div className="mb-5">
             {showHint ? (
               <div className="rounded-lg border border-border bg-muted/40 px-4 py-3">
                 <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground mb-1.5">
-                  {difficulty === "hard" ? "Synonym" : "Etymology"}
+                  Etymology
                 </p>
                 <p className="text-sm leading-relaxed text-foreground/80 italic">
-                  {difficulty === "hard" ? dailyWord.synonyms[0] : dailyWord.etymology}
+                  {dailyWord.etymology}
                 </p>
                 {!isPractice && (
                   <p className="mt-2 text-[11px] text-muted-foreground">
@@ -249,9 +227,7 @@ export function Game({
                 className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-border py-2.5 text-xs font-medium tracking-wide text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-                {isPractice
-                  ? (difficulty === "hard" ? "Show synonym hint" : "Show etymology hint")
-                  : (difficulty === "hard" ? "Show synonym hint (-5 pts)" : "Show etymology hint (-5 pts)")}
+                {isPractice ? "Show etymology hint" : "Show etymology hint (-5 pts)"}
               </button>
             )}
           </div>
@@ -271,7 +247,6 @@ export function Game({
             word={dailyWord.word}
             isPractice={isPractice}
             difficulty={difficulty}
-            streak={streak}
             onPractice={!isPractice ? onStartPractice : undefined}
             onNextWord={isPractice ? onNextWord : undefined}
           />

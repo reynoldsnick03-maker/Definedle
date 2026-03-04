@@ -7,7 +7,7 @@ import { HowToPlayBlitz } from "@/components/how-to-play-blitz"
 import { StatsPanel } from "@/components/stats-panel"
 import { BarChart3, CircleHelp, Settings, Zap } from "lucide-react"
 import type { DailyWord, GameMode } from "@/lib/game-data"
-import { getRandomPracticeWord } from "@/lib/game-data"
+import { getRandomPracticeWord, getDailyBlitzSequence } from "@/lib/game-data"
 import { getMirrorStreak, updateMirrorStreak, type MirrorStreak } from "@/lib/history"
 import { getPlayerId } from "@/lib/player-id"
 
@@ -53,6 +53,11 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const [difficulty, setDifficulty] = useState<GameMode>("easy")
   const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
 
+  const [blitzTab, setBlitzTab] = useState<"practice" | "daily">("practice")
+  const [dailySequenceEasy, setDailySequenceEasy] = useState<DailyWord[]>([])
+  const [dailySequenceHard, setDailySequenceHard] = useState<DailyWord[]>([])
+  const [dailyWordIndex, setDailyWordIndex] = useState(0)
+
   const [sessions, setSessions] = useState<Record<GameMode, SessionState>>({
     easy: emptySession(),
     hard: emptySession(),
@@ -68,9 +73,13 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const [playedHard, setPlayedHard] = useState<string[]>([])
 
   const practiceWord = difficulty === "easy" ? practiceEasy : practiceHard
+  const dailySequence = difficulty === "easy" ? dailySequenceEasy : dailySequenceHard
+  const currentWord = blitzTab === "daily" ? dailySequence[dailyWordIndex] ?? null : practiceWord
 
   useEffect(() => {
     try { setMirrorStreak(getMirrorStreak()) } catch {}
+    setDailySequenceEasy(getDailyBlitzSequence("easy"))
+    setDailySequenceHard(getDailyBlitzSequence("hard"))
   }, [])
 
   // Start first word on mount
@@ -164,8 +173,17 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
     }
   }, [difficulty, playedEasy, playedHard])
 
+  const handleNextDailyWord = useCallback(() => {
+    setSessions(prev => ({
+      ...prev,
+      [difficulty]: { ...prev[difficulty], wordsPlayed: prev[difficulty].wordsPlayed + 1 }
+    }))
+    setDailyWordIndex(i => i + 1)
+  }, [difficulty])
+
   const handleDifficultyChange = useCallback((diff: GameMode) => {
     setDifficulty(diff)
+    setDailyWordIndex(0)
   }, [])
 
   return (
@@ -237,17 +255,41 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         </div>
       </div>
 
+      {/* Daily / Practice tab */}
+      <div className="flex justify-center mb-4">
+        <div className="inline-flex items-center gap-1 rounded-lg border border-[#2a2926] bg-[#1c1b19] p-0.5">
+          <button
+            type="button"
+            onClick={() => { setBlitzTab("practice"); resetSession() }}
+            className={`rounded-md px-5 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 min-h-[32px] ${
+              blitzTab === "practice" ? "bg-[#2a2926] text-white" : "text-[#6b6560] hover:text-[#9b9589]"
+            }`}
+          >
+            Practice
+          </button>
+          <button
+            type="button"
+            onClick={() => { setBlitzTab("daily"); resetSession(); setDailyWordIndex(0) }}
+            className={`rounded-md px-5 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 min-h-[32px] ${
+              blitzTab === "daily" ? "bg-[#2a2926] text-amber-400" : "text-[#6b6560] hover:text-[#9b9589]"
+            }`}
+          >
+            Daily
+          </button>
+        </div>
+      </div>
+
       {/* Game area */}
-      {practiceWord && !showSummary && (
+      {currentWord && !showSummary && (
         <MirrorGame
-          key={`blitz-${difficulty}-${practiceWord.word}`}
-          word={practiceWord}
+          key={`blitz-${difficulty}-${blitzTab}-${currentWord?.word}`}
+          word={currentWord!}
           isPractice={true}
           onFlipToNormal={() => {
             resetSession()
             handleNextWord()
           }}
-          onNextWord={handleNextWord}
+          onNextWord={blitzTab === "daily" ? handleNextDailyWord : handleNextWord}
           sessionScore={sessionScore}
           sessionStreak={sessionStreak}
           sessionBestStreak={sessionBestStreak}

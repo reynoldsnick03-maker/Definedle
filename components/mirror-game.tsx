@@ -219,6 +219,8 @@ export function MirrorGame({
   const [showFlawless, setShowFlawless] = useState(false)
   const [pointsEarned, setPointsEarned] = useState<number | null>(null)
   const [playQuality, setPlayQuality] = useState<"flawless" | "good" | "decent" | "poor" | "awful" | null>(null)
+  const [floatingPoints, setFloatingPoints] = useState<{value: number, key: number} | null>(null)
+  const [hintHover, setHintHover] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const maxGuesses = 3
   const maxHints = 3
@@ -296,6 +298,8 @@ export function MirrorGame({
       const multDelta = parseFloat((nextMult - multiplier).toFixed(1))
 
       setPointsEarned(earned)
+      setFloatingPoints({ value: earned, key: Date.now() })
+      setTimeout(() => setFloatingPoints(null), 1200)
       setPlayQuality(quality)
       setIsCorrect(true)
       setIsComplete(true)
@@ -367,12 +371,25 @@ export function MirrorGame({
               <Star className="h-3.5 w-3.5 text-amber-500" />
               <span className={`text-sm font-medium tabular-nums ${isDark ? "text-white" : ""}`}>{Math.round(sessionScore)}</span>
             </div>
-            <div className={`flex items-center gap-1 px-2 py-0.5 rounded-md border ${isDark ? "bg-[#111110] border-[#2a2926]" : "bg-muted/40 border-border/50"}`}>
+            <div className={`flex items-center gap-1 px-2 py-0.5 rounded-md border transition-all duration-200 ${isDark ? "bg-[#111110] border-[#2a2926]" : "bg-muted/40 border-border/50"} ${hintHover ? "scale-110 " + (isDark ? "border-amber-500/50" : "border-foreground/30") : ""}`}>
               <Zap className={`h-3 w-3 ${multiplierColor}`} />
               <span className={`text-xs font-bold tabular-nums ${multiplierColor}`}>×{multiplier}</span>
             </div>
           </div>
         </div>
+
+        {/* Floating points animation */}
+        {floatingPoints && (
+          <div
+            key={floatingPoints.key}
+            className="absolute top-4 right-4 pointer-events-none animate-in fade-in slide-in-from-bottom-2 duration-200"
+            style={{ animation: "floatUp 1.2s ease-out forwards" }}
+          >
+            <span className={`text-sm font-bold ${isDark ? "text-amber-400" : "text-amber-600"}`}>
+              +{Math.round(floatingPoints.value)}
+            </span>
+          </div>
+        )}
 
         {/* Definition */}
         <div className="text-center mb-6">
@@ -398,24 +415,47 @@ export function MirrorGame({
             </div>
           )}
 
-          <div className="mt-4 flex items-center justify-center">
+          <div className="mt-4 flex flex-col items-center gap-2">
             {showFlawless ? (
               <span className="text-score-high font-bold text-xl">Flawless!</span>
             ) : !isComplete && hintsUsed < word.word.length - 1 ? (
-              <button
-                type="button"
-                onClick={handleRevealLetter}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors text-xs border ${isDark ? "bg-[#111110] hover:bg-[#2a2926] text-[#6b6560] hover:text-[#9b9589] border-[#2a2926]" : "bg-muted/40 hover:bg-muted/60 text-muted-foreground hover:text-foreground border-border/50"}`}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-                </svg>
-                Reveal a letter
-                {hintsUsed < maxHints
-                  ? <span className="text-muted-foreground/60">(−0.5× multiplier, {hintsUsed}/{maxHints} used)</span>
-                  : <span className={isDark ? "text-red-400/70" : "text-score-low/80"}>(−1× multiplier)</span>
-                }
-              </button>
+              <>
+                {/* Hint dots — show up to maxHints used */}
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  {Array.from({ length: maxHints }).map((_, i) => (
+                    <span
+                      key={i}
+                      className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                        i < hintsUsed
+                          ? isDark ? "bg-amber-500" : "bg-foreground"
+                          : isDark ? "bg-[#3a3936]" : "bg-muted-foreground/25"
+                      }`}
+                    />
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={handleRevealLetter}
+                  onMouseEnter={() => setHintHover(true)}
+                  onMouseLeave={() => setHintHover(false)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-200 text-xs border ${
+                    isDark
+                      ? `bg-[#111110] text-[#6b6560] border-[#2a2926] hover:text-[#9b9589] hover:border-amber-500/40 ${hintHover ? "border-amber-500/40" : ""}`
+                      : `bg-muted/40 hover:bg-muted/60 text-muted-foreground hover:text-foreground border-border/50`
+                  }`}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                  </svg>
+                  Reveal a letter
+                </button>
+                {/* Multiplier cost preview — shown on hover */}
+                {hintHover && (
+                  <span className={`text-[10px] animate-in fade-in duration-150 ${isDark ? "text-amber-500/70" : "text-muted-foreground/70"}`}>
+                    −0.5× multiplier
+                  </span>
+                )}
+              </>
             ) : null}
           </div>
         </div>

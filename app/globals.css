@@ -127,3 +127,19 @@
 .animate-flawless {
   animation: flawless 2.5s ease-out forwards;
 }
+
+/* Floating points animation */
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-12px) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-28px) scale(0.9);
+  }
+}
