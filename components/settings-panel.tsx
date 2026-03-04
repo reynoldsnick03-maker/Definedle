@@ -6,6 +6,7 @@ import { X } from "lucide-react"
 interface SettingsPanelProps {
   open: boolean
   onClose: () => void
+  isBlitz?: boolean
 }
 
 interface Settings {
@@ -33,10 +34,13 @@ function loadSettings(): Settings {
 }
 
 function saveSettings(s: Settings) {
-  try { localStorage.setItem("definedle-settings", JSON.stringify(s)) } catch {}
+  try {
+    localStorage.setItem("definedle-settings", JSON.stringify(s))
+    window.dispatchEvent(new Event("definedle-settings-changed"))
+  } catch {}
 }
 
-export function SettingsPanel({ open, onClose }: SettingsPanelProps) {
+export function SettingsPanel({ open, onClose, isBlitz = false }: SettingsPanelProps) {
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS)
 
   useEffect(() => {
@@ -98,7 +102,7 @@ export function SettingsPanel({ open, onClose }: SettingsPanelProps) {
 
             <SettingRow
               label="Enable Nemesis Words"
-              description="When you replay a word you previously struggled with, see your past definition and score"
+              description={isBlitz ? "When you replay a word you previously struggled with, see your past word guesses and score" : "When you replay a word you previously struggled with, see your past definition and score"}
               checked={settings.nemesisWords}
               onChange={v => update({ nemesisWords: v })}
             />

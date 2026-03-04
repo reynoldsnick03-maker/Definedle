@@ -246,6 +246,8 @@ export function MirrorGame({
   const handleRevealLetter = () => {
     if (isComplete) return
     if (hintsUsed >= word.word.length - 1) return
+    // Block paid hints if already at multiplier floor (×1)
+    if (hintsUsed >= maxHints && multiplier <= 1) return
     setHintsUsed(h => h + 1)
     // Hints 1-3 are free. Hints 4+ cost -0.5 multiplier step each.
     if (hintsUsed >= maxHints) {
@@ -255,13 +257,16 @@ export function MirrorGame({
 
   const handleSkip = useCallback(() => {
     if (isComplete || isSkipped) return
-    // Must have made at least 1 guess or used 1 hint
     if (guesses.length === 0 && hintsUsed === 0) return
     setIsSkipped(true)
     setIsComplete(true)
-    // -1 multiplier step penalty
-    onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
-    const entry: WordHistoryEntry = { word: word.word, points: 0, multDelta: -0.5, guesses: 0, hintsUsed }
+    const atFloor = multiplier <= 1
+    // At ×1 floor — no penalty, losing the scoring opportunity is punishment enough
+    if (!atFloor) {
+      onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
+    }
+    const multDelta = atFloor ? 0 : -0.5
+    const entry: WordHistoryEntry = { word: word.word, points: 0, multDelta, guesses: 0, hintsUsed }
     const newHistory = [...wordHistory, entry]
     const newWordsPlayed = wordsPlayed + 1
     onWordPlayed(false, entry)
@@ -292,6 +297,15 @@ export function MirrorGame({
       setValidationError("Not a recognized word")
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 300)
+      return
+    }
+
+    // Block repeated guesses
+    if (guesses.some(g => g.word.toLowerCase() === trimmedGuess.toLowerCase())) {
+      setValidationError("Already guessed")
+      setIsShaking(true)
+      setTimeout(() => setIsShaking(false), 300)
+      setIsValidating(false)
       return
     }
 
@@ -348,8 +362,23 @@ export function MirrorGame({
       setIsComplete(true)
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
-      // Use wordHistory directly (no new entry on failure)
-      setTimeout(() => onSessionEnd(sessionScore, sessionStreak, multiplier, [...wordHistory], "failed"), 1400)
+      // Three wrong guesses — move to next word (0pts, −0.5× if above floor)
+      const atFloor = multiplier <= 1
+      if (!atFloor) {
+        onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
+      }
+      const failDelta = atFloor ? 0 : -0.5
+      const failEntry: WordHistoryEntry = { word: word.word, points: 0, multDelta: failDelta, guesses: newGuesses.length, hintsUsed }
+      const newFailHistory = [...wordHistory, failEntry]
+      const newFailWordsPlayed = wordsPlayed + 1
+      onWordPlayed(false, failEntry)
+      setTimeout(() => {
+        if (newFailWordsPlayed >= 15) {
+          onSessionEnd(sessionScore, newFailWordsPlayed, multiplier, newFailHistory, "complete")
+        } else {
+          onNextWord?.()
+        }
+      }, 1800)
     } else {
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
@@ -376,24 +405,16 @@ export function MirrorGame({
     <div className="mx-auto w-full max-w-md px-5">
       <div className={`relative rounded-xl border p-6 shadow-sm md:p-8 transition-transform ${isShaking ? "animate-shake" : ""} ${isDark ? "border-[#2a2926] bg-[#1c1b19]" : "border-border bg-card"}`}>
 
-        {/* Header */}
+        {/* Header — x/15 left, score + multiplier right */}
         <div className="flex justify-between items-center mb-4">
-          {/* Left: static mode label only */}
-          <span className={`text-[10px] uppercase tracking-widest font-medium leading-tight ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
-            Blitz
+          <span className={`text-sm font-medium tabular-nums ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
+            {wordsPlayed + 1}<span className={`text-xs ${isDark ? "text-[#4a4845]" : "text-muted-foreground/50"}`}>/15</span>
           </span>
 
-          {/* Right: word progress, streak, score, multiplier */}
-          <div className="flex items-center gap-4">
-            {devReveal && (
-              <span className="text-[11px] font-mono text-muted-foreground/40 select-none" aria-hidden="true">
-                {word.word}
-              </span>
-            )}
-            <span className={`text-[10px] tabular-nums ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{wordsPlayed + 1}/15</span>
+          <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5">
               <Star className="h-3.5 w-3.5 text-amber-500" />
-              <span className={`text-sm font-medium tabular-nums ${isDark ? "text-white" : ""}`}>{Math.round(sessionScore)}</span>
+              <span className={`text-sm font-semibold tabular-nums ${isDark ? "text-white" : "text-foreground"}`}>{Math.round(sessionScore)}</span>
             </div>
             <div className={`flex items-center gap-1 px-2 py-0.5 rounded-md border transition-all duration-200 ${isDark ? "bg-[#111110] border-[#2a2926]" : "bg-muted/40 border-border/50"} ${hintHover && hintsUsed >= maxHints ? "scale-110 " + (isDark ? "border-amber-500/50" : "border-foreground/30") : ""}`}>
               <Zap className={`h-3 w-3 ${multiplierColor}`} />
@@ -517,7 +538,7 @@ export function MirrorGame({
               <div className="mb-4">
                 <p className={`mb-2 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>The word was:</p>
                 <p className={`text-2xl font-serif font-medium ${isDark ? "text-white" : ""}`}>{word.word}</p>
-                <p className="text-sm text-muted-foreground mt-2">Calculating final score...</p>
+                <p className={`text-xs mt-2 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{multiplier <= 1 ? "Moving on..." : "−0.5× · Moving on..."}</p>
               </div>
             )}
             {isCorrect && isPractice && onNextWord && wordsPlayed + 1 < 15 && (
@@ -533,7 +554,7 @@ export function MirrorGame({
               <div className="mt-2 text-center">
                 <p className={`mb-1 text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Skipped — the word was:</p>
                 <p className={`text-2xl font-serif font-medium mb-1 ${isDark ? "text-white" : ""}`}>{word.word}</p>
-                <p className={`text-xs ${isDark ? "text-red-400" : "text-red-500"}`}>−0.5× multiplier</p>
+                <p className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{multiplier <= 1 ? "No penalty at ×1" : "−0.5× multiplier"}</p>
               </div>
             )}
           </div>
@@ -562,7 +583,7 @@ export function MirrorGame({
                     onClick={handleSkip}
                     className={`text-xs transition-colors ${isDark ? "text-[#4a4845] hover:text-red-400" : "text-muted-foreground/50 hover:text-red-400"}`}
                   >
-                    Skip (−0.5×)
+                    {multiplier <= 1 ? "Skip" : "Skip (−0.5×)"}
                   </button>
                 )}
               </div>

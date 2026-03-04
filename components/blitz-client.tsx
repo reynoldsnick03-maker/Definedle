@@ -102,7 +102,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const [isDark, setIsDark] = useState(true)
   const [reduceMotion, setReduceMotion] = useState(false)
 
-  useEffect(() => {
+  const applySettings = () => {
     try {
       const raw = localStorage.getItem("definedle-settings")
       if (raw) {
@@ -112,7 +112,15 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         if (s.defaultHard === true) setDifficulty("hard")
       }
     } catch {}
-  }, [])
+  }
+
+  useEffect(() => {
+    applySettings()
+    // Re-apply when settings panel closes (storage event won't fire same-tab)
+    const handler = () => applySettings()
+    window.addEventListener("definedle-settings-changed", handler)
+    return () => window.removeEventListener("definedle-settings-changed", handler)
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const [helpOpen, setHelpOpen] = useState(false)
   const [statsOpen, setStatsOpen] = useState(false)
@@ -121,6 +129,19 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
 
   const [blitzTab, setBlitzTab] = useState<"practice" | "daily">("practice")
   const [nemesisEntry, setNemesisEntry] = useState<{ points: number; guesses: number; hintsUsed: number } | null>(null)
+  const [dailyDone, setDailyDone] = useState<{ easy: boolean; hard: boolean }>({ easy: false, hard: false })
+
+  // Load daily completion status
+  useEffect(() => {
+    try {
+      const today = new Date()
+      const dateKey = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`
+      const raw = localStorage.getItem("definedle-blitz-daily") || "{}"
+      const rec = JSON.parse(raw)
+      const todayRec = rec[dateKey] || {}
+      setDailyDone({ easy: !!todayRec.easy?.completed, hard: !!todayRec.hard?.completed })
+    } catch {}
+  }, [showSummary]) // refresh after session ends
   const [dailySequenceEasy, setDailySequenceEasy] = useState<DailyWord[]>([])
   const [dailySequenceHard, setDailySequenceHard] = useState<DailyWord[]>([])
   const [dailyWordIndex, setDailyWordIndex] = useState(0)
@@ -205,6 +226,18 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       showSummary: true,
     })
     if (wordsSolved >= 1) {
+      // Mark daily as completed if applicable
+      if (blitzTab === "daily") {
+        try {
+          const today = new Date()
+          const dateKey = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`
+          const raw = localStorage.getItem("definedle-blitz-daily") || "{}"
+          const dailyRecord = JSON.parse(raw)
+          if (!dailyRecord[dateKey]) dailyRecord[dateKey] = {}
+          dailyRecord[dateKey][difficulty] = { score: finalScore, completed: true }
+          localStorage.setItem("definedle-blitz-daily", JSON.stringify(dailyRecord))
+        } catch {}
+      }
       try {
         const playerId = getPlayerId()
         if (!playerId) return
@@ -214,16 +247,16 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           body: JSON.stringify({
             player_id: playerId,
             session_score: finalScore,
-            best_streak: wordsSolved,
+            best_streak: peakMultiplier,
             words_solved: wordsSolved,
-            words_attempted: wordsSolved + 1,
+            words_attempted: wordsPlayed + 1,
             difficulty,
             word_history: wordHistory,
           }),
         })
       } catch {}
     }
-  }, [difficulty, updateSession])
+  }, [difficulty, updateSession, blitzTab, wordsPlayed])
 
   const resetSession = useCallback((diff?: GameMode) => {
     const target = diff ?? difficulty
@@ -278,11 +311,12 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         </button>
 
         <div className="flex flex-col items-center gap-0.5">
-          <h1 className="font-serif text-3xl font-light tracking-tight text-white md:text-4xl flex items-center gap-2">
-            Blitz
+          <h1 className="flex items-center gap-2">
+            <span className={`font-serif text-3xl font-light tracking-tight ${isDark ? "text-white" : "text-foreground"}`}>Definedle</span>
+            <span className="text-3xl font-bold tracking-tight text-amber-500">Blitz</span>
             <Zap className="h-5 w-5 text-amber-500 fill-amber-500" aria-hidden="true" />
           </h1>
-          <p className="text-[11px] text-[#6b6560] tracking-wide">Name the word from its definition</p>
+          <p className={`text-[11px] tracking-wide ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Name the word from its definition</p>
         </div>
 
         <div className="flex items-center gap-1">
@@ -305,54 +339,60 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         </div>
       </header>
 
-      {/* Difficulty toggle */}
-      <div className="flex justify-center mb-4">
-        <div className="inline-flex items-center gap-1 rounded-lg border border-[#2a2926] bg-[#1c1b19] p-0.5">
+      {/* Daily / Practice toggle — Daily on left, above Easy/Hard */}
+      <div className="flex justify-center mb-2">
+        <div className={`inline-flex items-center rounded-lg border p-0.5 ${isDark ? "border-[#2a2926] bg-[#1c1b19]" : "border-border bg-muted/50"}`}>
           <button
             type="button"
-            onClick={() => handleDifficultyChange("easy")}
-            className={`rounded-md px-5 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 min-h-[32px] ${
-              difficulty === "easy"
-                ? "bg-[#2a2926] text-white"
-                : "text-[#6b6560] hover:text-[#9b9589]"
+            onClick={() => { setBlitzTab("daily"); resetSession(); setDailyWordIndex(0) }}
+            className={`rounded-md px-6 py-2 text-sm font-medium transition-all duration-200 min-h-[36px] ${
+              blitzTab === "daily"
+                ? isDark ? "bg-[#2a2926] text-amber-400 shadow-sm" : "bg-card text-amber-500 shadow-sm"
+                : isDark ? "text-[#6b6560] hover:text-[#9b9589]" : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            Easy
+            Daily
           </button>
-          <button
-            type="button"
-            onClick={() => handleDifficultyChange("hard")}
-            className={`rounded-md px-5 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 min-h-[32px] ${
-              difficulty === "hard"
-                ? "bg-[#2a2926] text-white"
-                : "text-[#6b6560] hover:text-[#9b9589]"
-            }`}
-          >
-            Hard
-          </button>
-        </div>
-      </div>
-
-      {/* Daily / Practice tab */}
-      <div className="flex justify-center mb-4">
-        <div className="inline-flex items-center gap-1 rounded-lg border border-[#2a2926] bg-[#1c1b19] p-0.5">
           <button
             type="button"
             onClick={() => { setBlitzTab("practice"); resetSession() }}
-            className={`rounded-md px-5 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 min-h-[32px] ${
-              blitzTab === "practice" ? "bg-[#2a2926] text-white" : "text-[#6b6560] hover:text-[#9b9589]"
+            className={`rounded-md px-6 py-2 text-sm font-medium transition-all duration-200 min-h-[36px] ${
+              blitzTab === "practice"
+                ? isDark ? "bg-[#2a2926] text-white shadow-sm" : "bg-card text-foreground shadow-sm"
+                : isDark ? "text-[#6b6560] hover:text-[#9b9589]" : "text-muted-foreground hover:text-foreground"
             }`}
           >
             Practice
           </button>
+        </div>
+      </div>
+
+      {/* Easy / Hard toggle — with green ticks for completed daily */}
+      <div className="flex justify-center mb-4">
+        <div className={`inline-flex items-center rounded-lg border p-0.5 ${isDark ? "border-[#2a2926] bg-[#1c1b19]" : "border-border bg-muted/50"}`}>
           <button
             type="button"
-            onClick={() => { setBlitzTab("daily"); resetSession(); setDailyWordIndex(0) }}
-            className={`rounded-md px-5 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 min-h-[32px] ${
-              blitzTab === "daily" ? "bg-[#2a2926] text-amber-400" : "text-[#6b6560] hover:text-[#9b9589]"
+            onClick={() => handleDifficultyChange("easy")}
+            className={`rounded-md px-6 py-2 text-sm font-medium transition-all duration-200 min-h-[36px] flex items-center gap-1.5 ${
+              difficulty === "easy"
+                ? isDark ? "bg-[#2a2926] text-white shadow-sm" : "bg-card text-foreground shadow-sm"
+                : isDark ? "text-[#6b6560] hover:text-[#9b9589]" : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            Daily
+            Easy
+            {blitzTab === "daily" && dailyDone.easy && <span className="text-emerald-400 text-xs">✓</span>}
+          </button>
+          <button
+            type="button"
+            onClick={() => handleDifficultyChange("hard")}
+            className={`rounded-md px-6 py-2 text-sm font-medium transition-all duration-200 min-h-[36px] flex items-center gap-1.5 ${
+              difficulty === "hard"
+                ? isDark ? "bg-[#2a2926] text-white shadow-sm" : "bg-card text-foreground shadow-sm"
+                : isDark ? "text-[#6b6560] hover:text-[#9b9589]" : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Hard
+            {blitzTab === "daily" && dailyDone.hard && <span className="text-emerald-400 text-xs">✓</span>}
           </button>
         </div>
       </div>

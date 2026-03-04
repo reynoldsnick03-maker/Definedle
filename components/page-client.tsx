@@ -41,7 +41,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
 
       <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
 
-      <SettingsPanel open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <SettingsPanel open={settingsOpen} onClose={() => setSettingsOpen(false)} isBlitz={activeTab === "blitz"} />
     </>
   )
 }
