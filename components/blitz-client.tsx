@@ -98,50 +98,16 @@ interface BlitzClientProps {
 }
 
 export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
-  // Load settings from localStorage
+  // ── All state declarations first ──────────────────────────────────────────
   const [isDark, setIsDark] = useState(true)
   const [reduceMotion, setReduceMotion] = useState(false)
-
-  const applySettings = () => {
-    try {
-      const raw = localStorage.getItem("definedle-settings")
-      if (raw) {
-        const s = JSON.parse(raw)
-        if (typeof s.blitzDarkMode === "boolean") setIsDark(s.blitzDarkMode)
-        if (typeof s.reduceMotion === "boolean") setReduceMotion(s.reduceMotion)
-        if (s.defaultHard === true) setDifficulty("hard")
-      }
-    } catch {}
-  }
-
-  useEffect(() => {
-    applySettings()
-    // Re-apply when settings panel closes (storage event won't fire same-tab)
-    const handler = () => applySettings()
-    window.addEventListener("definedle-settings-changed", handler)
-    return () => window.removeEventListener("definedle-settings-changed", handler)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
   const [helpOpen, setHelpOpen] = useState(false)
   const [statsOpen, setStatsOpen] = useState(false)
   const [difficulty, setDifficulty] = useState<GameMode>("easy")
   const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
-
   const [blitzTab, setBlitzTab] = useState<"practice" | "daily">("practice")
   const [nemesisEntry, setNemesisEntry] = useState<{ points: number; guesses: number; hintsUsed: number } | null>(null)
   const [dailyDone, setDailyDone] = useState<{ easy: boolean; hard: boolean }>({ easy: false, hard: false })
-
-  // Load daily completion status
-  useEffect(() => {
-    try {
-      const today = new Date()
-      const dateKey = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`
-      const raw = localStorage.getItem("definedle-blitz-daily") || "{}"
-      const rec = JSON.parse(raw)
-      const todayRec = rec[dateKey] || {}
-      setDailyDone({ easy: !!todayRec.easy?.completed, hard: !!todayRec.hard?.completed })
-    } catch {}
-  }, [showSummary]) // refresh after session ends
   const [dailySequenceEasy, setDailySequenceEasy] = useState<DailyWord[]>([])
   const [dailySequenceHard, setDailySequenceHard] = useState<DailyWord[]>([])
   const [dailyWordIndex, setDailyWordIndex] = useState(0)
@@ -154,6 +120,36 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const { sessionScore, sessionStreak, sessionBestStreak,
     multiplier, bestMultiplier, showSummary, wordsPlayed,
     consecutiveAwful, sessionWordHistory, summaryData } = sess
+
+  // Apply settings on mount and when settings change
+  useEffect(() => {
+    const applySettings = () => {
+      try {
+        const raw = localStorage.getItem("definedle-settings")
+        if (raw) {
+          const s = JSON.parse(raw)
+          if (typeof s.blitzDarkMode === "boolean") setIsDark(s.blitzDarkMode)
+          if (typeof s.reduceMotion === "boolean") setReduceMotion(s.reduceMotion)
+          if (s.defaultHard === true) setDifficulty("hard")
+        }
+      } catch {}
+    }
+    applySettings()
+    window.addEventListener("definedle-settings-changed", applySettings)
+    return () => window.removeEventListener("definedle-settings-changed", applySettings)
+  }, [])
+
+  // Load daily completion status — refresh after each session ends
+  useEffect(() => {
+    try {
+      const today = new Date()
+      const dateKey = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`
+      const raw = localStorage.getItem("definedle-blitz-daily") || "{}"
+      const rec = JSON.parse(raw)
+      const todayRec = rec[dateKey] || {}
+      setDailyDone({ easy: !!todayRec.easy?.completed, hard: !!todayRec.hard?.completed })
+    } catch {}
+  }, [showSummary])
 
   const [practiceEasy, setPracticeEasy] = useState<DailyWord | null>(null)
   const [practiceHard, setPracticeHard] = useState<DailyWord | null>(null)
