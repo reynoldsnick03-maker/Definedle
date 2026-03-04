@@ -49,9 +49,9 @@ function applyMultiplierEffect(current: number, effect: "flawless" | "good" | "d
   const idx = getMultiplierIndex(current)
   if (effect === "flawless") return MULTIPLIER_STEPS[Math.min(idx + 2, MULTIPLIER_STEPS.length - 1)]
   if (effect === "good") return MULTIPLIER_STEPS[Math.min(idx + 1, MULTIPLIER_STEPS.length - 1)]
-  if (effect === "decent") return current
+  if (effect === "decent") return MULTIPLIER_STEPS[Math.max(idx - 1, 0)] // −0.5 step
   if (effect === "awful") return MULTIPLIER_STEPS[Math.max(idx - 2, 0)]
-  return MULTIPLIER_STEPS[Math.max(idx - 1, 0)]
+  return MULTIPLIER_STEPS[Math.max(idx - 1, 0)] // poor = −0.5 step
 }
 
 function classifyPlay(guesses: number, hintsUsed: number): "flawless" | "good" | "decent" | "poor" | "awful" {
@@ -223,6 +223,7 @@ export function MirrorGame({
   const [playQuality, setPlayQuality] = useState<"flawless" | "good" | "decent" | "poor" | "awful" | null>(null)
   const [floatingPoints, setFloatingPoints] = useState<{value: number, key: number} | null>(null)
   const [hintHover, setHintHover] = useState(false)
+  const [isSkipped, setIsSkipped] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const maxGuesses = 3
   const maxHints = 3
@@ -239,21 +240,40 @@ export function MirrorGame({
     setShowFlawless(false)
     setPointsEarned(null)
     setPlayQuality(null)
+    setIsSkipped(false)
   }, [word.word])
 
   const handleRevealLetter = () => {
     if (isComplete) return
-    // Never reveal the last letter
     if (hintsUsed >= word.word.length - 1) return
-    if (hintsUsed < maxHints) {
-      setHintsUsed(h => h + 1)
-    } else {
-      // Extra reveals cost 1pt — only allow if player can afford it
-      if (sessionScore < 1) return
-      setHintsUsed(h => h + 1)
-      // No direct point cost — multiplier handles hint penalty
+    setHintsUsed(h => h + 1)
+    // Hints 1-3 are free. Hints 4+ cost -0.5 multiplier step each.
+    if (hintsUsed >= maxHints) {
+      onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
     }
   }
+
+  const handleSkip = useCallback(() => {
+    if (isComplete || isSkipped) return
+    // Must have made at least 1 guess or used 1 hint
+    if (guesses.length === 0 && hintsUsed === 0) return
+    setIsSkipped(true)
+    setIsComplete(true)
+    // -1 multiplier step penalty
+    onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
+    const entry: WordHistoryEntry = { word: word.word, points: 0, multDelta: -0.5, guesses: 0, hintsUsed }
+    const newHistory = [...wordHistory, entry]
+    const newWordsPlayed = wordsPlayed + 1
+    onWordPlayed(false, entry)
+    setTimeout(() => {
+      if (newWordsPlayed >= 15) {
+        onSessionEnd(sessionScore, newWordsPlayed, multiplier, newHistory, "complete")
+      } else {
+        onNextWord?.()
+      }
+    }, 2000)
+  }, [isComplete, isSkipped, guesses.length, hintsUsed, word.word, wordHistory, wordsPlayed,
+      onSessionUpdate, onWordPlayed, onNextWord, onSessionEnd, sessionScore, multiplier])
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
@@ -291,12 +311,8 @@ export function MirrorGame({
       const quality = classifyPlay(newGuesses.length, hintsUsed)
       const basePoints = calcBasePoints(newGuesses.length, hintsUsed)
       const earned = basePoints * multiplier // keep fractional; session total rounded at display
-      // Apply quality step, then one poor step per hint beyond what quality accounts for
-      let nextMult = applyMultiplierEffect(multiplier, quality)
-      const extraHints = Math.max(0, hintsUsed - hintsAccounted(newGuesses.length, hintsUsed))
-      for (let h = 0; h < extraHints; h++) {
-        nextMult = applyMultiplierEffect(nextMult, "poor")
-      }
+      // nextMult is purely from quality tier — hint costs applied separately via onSessionUpdate
+      const nextMult = applyMultiplierEffect(multiplier, quality)
       const multDelta = parseFloat((nextMult - multiplier).toFixed(1))
 
       setPointsEarned(earned)
@@ -313,7 +329,7 @@ export function MirrorGame({
       const newConsecutiveAwful = quality === "awful" ? consecutiveAwful + 1 : 0
       const newWordsPlayed = wordsPlayed + 1
 
-      onSessionUpdate({ points: earned, correct: true, multiplierEffect: quality })
+      onSessionUpdate({ points: earned, correct: true, multiplierEffect: quality }) // hint costs already applied per-reveal
       onComplete?.({ correct: true, guesses: newGuesses.length, hintsUsed, points: earned })
       onWordPlayed(quality === "awful", entry)
 
@@ -341,7 +357,7 @@ export function MirrorGame({
     : playQuality === "good"
     ? <span className="text-amber-500 font-medium">▲ good</span>
     : playQuality === "decent"
-    ? <span className="text-muted-foreground font-medium">— decent</span>
+    ? <span className="text-muted-foreground font-medium">▼ decent</span>
     : playQuality === "poor"
     ? <span className="text-score-low font-medium">▼ poor</span>
     : playQuality === "awful"
@@ -430,14 +446,16 @@ export function MirrorGame({
               <span className="text-score-high font-bold text-xl">Flawless!</span>
             ) : !isComplete && hintsUsed < word.word.length - 1 ? (
               <>
-                {/* Hint dots — show up to maxHints used */}
+                {/* Hint dots — 3 free slots, then red dots for paid hints */}
                 <div className="flex items-center gap-1.5 mb-0.5">
-                  {Array.from({ length: maxHints }).map((_, i) => (
+                  {Array.from({ length: Math.max(maxHints, hintsUsed) }).map((_, i) => (
                     <span
                       key={i}
                       className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
                         i < hintsUsed
-                          ? isDark ? "bg-amber-500" : "bg-foreground"
+                          ? i < maxHints
+                            ? isDark ? "bg-amber-500" : "bg-foreground"
+                            : "bg-red-500" // paid hint
                           : isDark ? "bg-[#3a3936]" : "bg-muted-foreground/25"
                       }`}
                     />
@@ -462,7 +480,7 @@ export function MirrorGame({
                 {/* Multiplier cost preview — shown on hover */}
                 {hintHover && (
                   <span className={`text-[10px] animate-in fade-in duration-150 ${isDark ? "text-amber-500/70" : "text-muted-foreground/70"}`}>
-                    −0.5× multiplier
+                    {hintsUsed < maxHints ? "free hint" : "−0.5× multiplier"}
                   </span>
                 )}
               </>
@@ -507,6 +525,13 @@ export function MirrorGame({
                 Next word
               </button>
             )}
+            {isSkipped && (
+              <div className="mt-2 text-center">
+                <p className={`mb-1 text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Skipped — the word was:</p>
+                <p className={`text-2xl font-serif font-medium mb-1 ${isDark ? "text-white" : ""}`}>{word.word}</p>
+                <p className={`text-xs ${isDark ? "text-red-400" : "text-red-500"}`}>−0.5× multiplier</p>
+              </div>
+            )}
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
@@ -527,7 +552,15 @@ export function MirrorGame({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <span className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{remainingGuesses} {remainingGuesses === 1 ? "guess" : "guesses"} left</span>
-
+                {(guesses.length > 0 || hintsUsed > 0) && (
+                  <button
+                    type="button"
+                    onClick={handleSkip}
+                    className={`text-xs transition-colors ${isDark ? "text-[#4a4845] hover:text-red-400" : "text-muted-foreground/50 hover:text-red-400"}`}
+                  >
+                    Skip (−0.5×)
+                  </button>
+                )}
               </div>
               <button
                 type="submit"
