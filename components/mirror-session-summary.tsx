@@ -17,12 +17,51 @@ interface MirrorSessionSummaryProps {
 export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordHistory, reason, onPlayAgain, onFlipBack }: MirrorSessionSummaryProps) {
   const [showHistory, setShowHistory] = useState(false)
 
-  const rating =
-    score >= 80 ? "Legendary" :
-    score >= 50 ? "Expert" :
-    score >= 25 ? "Solid" :
-    score >= 10 ? "Getting there" :
-    "Keep practising"
+  const pick = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)]
+
+  const rating = score === 276 ? "Perfect" :
+    score >= 200 ? pick([
+      "Suspiciously good",
+      "Are you cheating?",
+      "Vocabulary is not your weakness",
+      "The dictionary fears you",
+      "Save some words for the rest of us",
+    ]) :
+    score >= 140 ? pick([
+      "Showing off now",
+      "Genuinely impressive",
+      "That's a proper score",
+      "Sharp mind, sharper vocabulary",
+      "You clearly read books",
+    ]) :
+    score >= 80 ? pick([
+      "Solid grasp of words",
+      "Not bad at all",
+      "You know your way around a definition",
+      "Respectable stuff",
+      "More than passable",
+    ]) :
+    score >= 40 ? pick([
+      "Dictionary adjacent",
+      "Getting somewhere",
+      "The basics are there",
+      "A valiant effort",
+      "Potential detected",
+    ]) :
+    score >= 15 ? pick([
+      "You tried",
+      "Room to grow",
+      "Everyone starts somewhere",
+      "The words were hard, probably",
+      "Points were scored, technically",
+    ]) :
+    pick([
+      "Keep practising",
+      "The dictionary awaits",
+      "A brave attempt",
+      "Words are hard",
+      "Tomorrow's another word",
+    ])"
 
   return (
     <div className="mx-auto w-full max-w-md px-5">
