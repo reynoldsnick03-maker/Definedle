@@ -46,12 +46,12 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
   }
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 flex border-t border-border bg-card">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 flex border-t border-border bg-card" style={{paddingBottom: "env(safe-area-inset-bottom)"}}>
       {/* Definedle tab */}
       <button
         type="button"
         onClick={() => handleTabChange("definedle")}
-        className={`flex flex-1 flex-col items-center gap-1 pb-5 pt-3 transition-colors focus-visible:outline-none ${
+        className={`flex flex-1 flex-col items-center gap-0.5 pb-3 pt-2.5 transition-colors focus-visible:outline-none ${
           activeTab === "definedle" ? "text-foreground" : "text-muted-foreground hover:text-foreground/70"
         }`}
         aria-label="Definedle"
@@ -69,7 +69,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
       <button
         type="button"
         onClick={() => handleTabChange("blitz")}
-        className={`relative flex flex-1 flex-col items-center gap-1 pb-5 pt-3 transition-colors focus-visible:outline-none ${
+        className={`relative flex flex-1 flex-col items-center gap-0.5 pb-3 pt-2.5 transition-colors focus-visible:outline-none ${
           activeTab === "blitz" ? "text-amber-500" : "text-muted-foreground hover:text-foreground/70"
         }`}
         aria-label="Blitz"

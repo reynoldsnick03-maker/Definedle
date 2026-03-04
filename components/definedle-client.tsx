@@ -171,7 +171,7 @@ export function DefinedleClient({
   }
 
   return (
-    <main className="flex min-h-svh flex-col items-center bg-background pb-20">
+    <main className="flex min-h-svh flex-col items-center bg-background pb-24">
       {/* Header */}
       <header className="flex flex-col items-center gap-1 pt-10 pb-6 md:pt-14 md:pb-8 w-full max-w-md px-5">
         <div className="flex w-full items-center justify-between">

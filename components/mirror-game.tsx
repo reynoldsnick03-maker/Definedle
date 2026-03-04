@@ -29,6 +29,7 @@ interface MirrorGameProps {
   consecutiveAwful: number
   wordHistory: WordHistoryEntry[]
   onWordPlayed: (wasAwful: boolean, entry: WordHistoryEntry) => void
+  isDark?: boolean
 }
 
 interface Guess {
@@ -48,7 +49,7 @@ function applyMultiplierEffect(current: number, effect: "flawless" | "good" | "d
   if (effect === "flawless") return MULTIPLIER_STEPS[Math.min(idx + 2, MULTIPLIER_STEPS.length - 1)]
   if (effect === "good") return MULTIPLIER_STEPS[Math.min(idx + 1, MULTIPLIER_STEPS.length - 1)]
   if (effect === "decent") return current
-  if (effect === "awful") return MULTIPLIER_STEPS[Math.max(idx - 4, 0)]
+  if (effect === "awful") return MULTIPLIER_STEPS[Math.max(idx - 2, 0)]
   return MULTIPLIER_STEPS[Math.max(idx - 1, 0)]
 }
 
@@ -63,12 +64,16 @@ function classifyPlay(guesses: number, hintsUsed: number): "flawless" | "good" |
     (guesses === 1 && hintsUsed === 2) ||
     (guesses === 1 && hintsUsed === 3) ||
     (guesses === 2 && hintsUsed === 2) ||
-    (guesses === 3 && hintsUsed === 0)
+    (guesses === 2 && hintsUsed === 3) ||
+    (guesses === 3 && hintsUsed === 0) ||
+    (guesses === 3 && hintsUsed === 1) ||
+    (guesses === 3 && hintsUsed === 2) ||
+    (guesses === 3 && hintsUsed === 3)
   ) return "decent"
   if (
-    (guesses === 1 && hintsUsed >= 5) ||
-    (guesses === 2 && hintsUsed >= 4) ||
-    (guesses === 3 && hintsUsed >= 4)
+    (guesses === 1 && hintsUsed >= 6) ||
+    (guesses === 2 && hintsUsed >= 5) ||
+    (guesses === 3 && hintsUsed >= 5)
   ) return "awful"
   return "poor"
 }
@@ -91,10 +96,11 @@ function hintsAccounted(guesses: number, hintsUsed: number): number {
 }
 
 function calcBasePoints(guesses: number, hintsUsed: number): number {
-  if (guesses === 1 && hintsUsed === 0) return 3
-  if (guesses === 1 && hintsUsed === 1) return 2
-  if (guesses === 2 && hintsUsed === 0) return 2
-  return 1
+  const quality = classifyPlay(guesses, hintsUsed)
+  if (quality === "flawless") return 3
+  if (quality === "good") return 2
+  return 1 // decent, poor, awful all earn 1 base point
+  // failed word (guesses === 0) handled separately — returns 0
 }
 
 function calculateSimilarity(guess: string, target: string, synonyms?: string[]): number {
@@ -200,6 +206,7 @@ export function MirrorGame({
   consecutiveAwful,
   wordHistory,
   onWordPlayed,
+  isDark = false,
 }: MirrorGameProps) {
   const [guesses, setGuesses] = useState<Guess[]>([])
   const [currentGuess, setCurrentGuess] = useState("")
@@ -240,7 +247,7 @@ export function MirrorGame({
       // Extra reveals cost 1pt — only allow if player can afford it
       if (sessionScore < 1) return
       setHintsUsed(h => h + 1)
-      onSessionUpdate({ points: -1, correct: false, multiplierEffect: "poor" })
+      // No direct point cost — multiplier handles hint penalty
     }
   }
 
@@ -279,7 +286,7 @@ export function MirrorGame({
     if (isActuallyCorrect) {
       const quality = classifyPlay(newGuesses.length, hintsUsed)
       const basePoints = calcBasePoints(newGuesses.length, hintsUsed)
-      const earned = Math.floor(basePoints * multiplier)
+      const earned = basePoints * multiplier // keep fractional; session total rounded at display
       // Apply quality step, then one poor step per hint beyond what quality accounts for
       let nextMult = applyMultiplierEffect(multiplier, quality)
       const extraHints = Math.max(0, hintsUsed - hintsAccounted(newGuesses.length, hintsUsed))
@@ -335,17 +342,17 @@ export function MirrorGame({
     ? <span className="text-red-600 font-bold">▼ awful</span>
     : null
 
-  const devReveal = typeof window !== "undefined" && new URLSearchParams(window.location.search).has("reveal")
+  const devReveal = false // dev reveal removed
 
   return (
     <div className="mx-auto w-full max-w-md px-5">
-      <div className={`relative rounded-xl border border-border bg-card p-6 shadow-sm md:p-8 transition-transform ${isShaking ? "animate-shake" : ""}`}>
+      <div className={`relative rounded-xl border p-6 shadow-sm md:p-8 transition-transform ${isShaking ? "animate-shake" : ""} ${isDark ? "border-[#2a2926] bg-[#1c1b19]" : "border-border bg-card"}`}>
 
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
           {/* Left: static mode label only */}
-          <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium leading-tight">
-            Mirror<br/>Mode
+          <span className={`text-[10px] uppercase tracking-widest font-medium leading-tight ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
+            Blitz
           </span>
 
           {/* Right: word progress, streak, score, multiplier */}
@@ -355,12 +362,12 @@ export function MirrorGame({
                 {word.word}
               </span>
             )}
-            <span className="text-[10px] tabular-nums text-muted-foreground">{wordsPlayed + 1}/15</span>
+            <span className={`text-[10px] tabular-nums ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{wordsPlayed + 1}/15</span>
             <div className="flex items-center gap-1.5">
               <Star className="h-3.5 w-3.5 text-amber-500" />
-              <span className="text-sm font-medium tabular-nums">{String(sessionScore)}</span>
+              <span className={`text-sm font-medium tabular-nums ${isDark ? "text-white" : ""}`}>{Math.round(sessionScore)}</span>
             </div>
-            <div className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-muted/40 border border-border/50">
+            <div className={`flex items-center gap-1 px-2 py-0.5 rounded-md border ${isDark ? "bg-[#111110] border-[#2a2926]" : "bg-muted/40 border-border/50"}`}>
               <Zap className={`h-3 w-3 ${multiplierColor}`} />
               <span className={`text-xs font-bold tabular-nums ${multiplierColor}`}>×{multiplier}</span>
             </div>
@@ -369,8 +376,8 @@ export function MirrorGame({
 
         {/* Definition */}
         <div className="text-center mb-6">
-          <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">{word.partOfSpeech}</p>
-          <p className="text-lg leading-relaxed text-foreground font-serif italic">&ldquo;{word.definition}&rdquo;</p>
+          <p className={`text-xs uppercase tracking-widest mb-3 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{word.partOfSpeech}</p>
+          <p className={`text-lg leading-relaxed font-serif italic ${isDark ? "text-[#d4cfc8]" : "text-foreground"}`}>&ldquo;{word.definition}&rdquo;</p>
 
           {/* Letter reveal — smaller tiles so long words fit one line */}
           {hintsUsed > 0 && (
@@ -381,7 +388,7 @@ export function MirrorGame({
                   <div
                     key={i}
                     className={`flex-shrink-0 w-5 h-7 flex items-end justify-center pb-0.5 border-b-2 text-xs font-medium transition-all duration-300 ${
-                      isRevealed ? "border-foreground text-foreground" : "border-muted-foreground/30 text-transparent"
+                      isRevealed ? (isDark ? "border-amber-500 text-amber-400" : "border-foreground text-foreground") : (isDark ? "border-[#3a3936] text-transparent" : "border-muted-foreground/30 text-transparent")
                     }`}
                   >
                     {isRevealed ? letter.toUpperCase() : "_"}
@@ -394,11 +401,11 @@ export function MirrorGame({
           <div className="mt-4 flex items-center justify-center">
             {showFlawless ? (
               <span className="text-score-high font-bold text-xl">Flawless!</span>
-            ) : !isComplete && hintsUsed < word.word.length - 1 && (hintsUsed < maxHints || sessionScore >= 1) ? (
+            ) : !isComplete && hintsUsed < word.word.length - 1 ? (
               <button
                 type="button"
                 onClick={handleRevealLetter}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted/40 hover:bg-muted/60 transition-colors text-xs text-muted-foreground hover:text-foreground border border-border/50"
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors text-xs border ${isDark ? "bg-[#111110] hover:bg-[#2a2926] text-[#6b6560] hover:text-[#9b9589] border-[#2a2926]" : "bg-muted/40 hover:bg-muted/60 text-muted-foreground hover:text-foreground border-border/50"}`}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -406,21 +413,21 @@ export function MirrorGame({
                 Reveal a letter
                 {hintsUsed < maxHints
                   ? <span className="text-muted-foreground/60">(−0.5× multiplier, {hintsUsed}/{maxHints} used)</span>
-                  : <span className="text-score-low/80">(−1 pt from score)</span>
+                  : <span className={isDark ? "text-red-400/70" : "text-score-low/80"}>(−1× multiplier)</span>
                 }
               </button>
             ) : null}
           </div>
         </div>
 
-        <div className="my-4 h-px bg-border" />
+        <div className={`my-4 h-px ${isDark ? "bg-[#2a2926]" : "bg-border"}`} />
 
         {/* Result or input — always above guesses */}
         {isComplete ? (
           <div className="text-center">
             {isCorrect ? (
               <div className="mb-4 flex flex-col items-center gap-2">
-                <div className="inline-flex items-center gap-2 rounded-full bg-score-high/10 px-4 py-2 text-score-high">
+                <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-score-high ${isDark ? "bg-emerald-500/10" : "bg-score-high/10"}`}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
                   </svg>
@@ -429,15 +436,15 @@ export function MirrorGame({
                 {pointsEarned !== null && (
                   <div className="flex items-center gap-1.5 text-sm flex-wrap justify-center">
                     <Star className="h-4 w-4 text-amber-500" />
-                    <span className="font-medium text-amber-600">+{pointsEarned} pts</span>
+                    <span className="font-medium text-amber-600">+{Math.round(pointsEarned)} pts</span>
                     {qualityLabel && <span className="text-xs">· {qualityLabel}</span>}
                   </div>
                 )}
               </div>
             ) : (
               <div className="mb-4">
-                <p className="text-muted-foreground mb-2">The word was:</p>
-                <p className="text-2xl font-serif font-medium">{word.word}</p>
+                <p className={`mb-2 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>The word was:</p>
+                <p className={`text-2xl font-serif font-medium ${isDark ? "text-white" : ""}`}>{word.word}</p>
                 <p className="text-sm text-muted-foreground mt-2">Calculating final score...</p>
               </div>
             )}
@@ -445,7 +452,7 @@ export function MirrorGame({
               <button
                 type="button"
                 onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); onNextWord() }}
-                className="rounded-lg bg-foreground px-6 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
+                className={`rounded-lg px-6 py-2.5 text-sm font-medium transition-opacity hover:opacity-90 ${isDark ? "bg-amber-500 text-white" : "bg-foreground text-background"}`}
               >
                 Next word
               </button>
@@ -460,7 +467,7 @@ export function MirrorGame({
                 value={currentGuess}
                 onChange={(e) => { setCurrentGuess(e.target.value); setValidationError(null) }}
                 placeholder="Type your guess..."
-                className={`w-full rounded-lg border bg-background px-4 py-3 text-base placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-ring ${validationError ? "border-red-400" : "border-border focus:border-foreground/30"}`}
+                className={`w-full rounded-lg border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-ring ${isDark ? "bg-[#111110] text-white placeholder:text-[#4a4845] border-[#2a2926] focus:border-amber-500/50 focus:ring-amber-500/20" : "bg-background placeholder:text-muted-foreground/60 border-border focus:border-foreground/30"} ${validationError ? "border-red-400" : ""}`}
                 autoComplete="off"
                 autoCapitalize="off"
                 disabled={isValidating}
@@ -469,13 +476,13 @@ export function MirrorGame({
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="text-xs text-muted-foreground">{remainingGuesses} {remainingGuesses === 1 ? "guess" : "guesses"} left</span>
+                <span className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{remainingGuesses} {remainingGuesses === 1 ? "guess" : "guesses"} left</span>
 
               </div>
               <button
                 type="submit"
                 disabled={!currentGuess.trim() || isValidating}
-                className="rounded-lg bg-foreground px-5 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90 disabled:opacity-50"
+                className={`rounded-lg px-5 py-2 text-sm font-medium transition-opacity hover:opacity-90 disabled:opacity-50 ${isDark ? "bg-amber-500 text-white" : "bg-foreground text-background"}`}
               >
                 {isValidating ? "Checking..." : "Guess"}
               </button>
@@ -487,8 +494,8 @@ export function MirrorGame({
         {guesses.length > 0 && (
           <div className="mt-4 space-y-2">
             {guesses.map((guess, i) => (
-              <div key={i} className={`flex items-center justify-between rounded-lg border-2 px-4 py-2.5 ${getSimilarityBorderColor(guess.similarity)}`}>
-                <span className="font-medium">{guess.word}</span>
+              <div key={i} className={`flex items-center justify-between rounded-lg border-2 px-4 py-2.5 ${isDark ? "border-[#2a2926] bg-[#111110]" : getSimilarityBorderColor(guess.similarity)}`}>
+                <span className={`font-medium ${isDark ? "text-[#9b9589]" : ""}`}>{guess.word}</span>
                 <span className={`text-xs font-bold px-2 py-0.5 rounded ${getSimilarityColor(guess.similarity)}`}>
                   {guess.similarity >= 100 ? "Correct!" : `${guess.similarity}%`}
                 </span>

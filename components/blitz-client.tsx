@@ -169,7 +169,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   }, [])
 
   return (
-    <main className="flex min-h-svh flex-col bg-[#111110] pb-20">
+    <main className="flex min-h-svh flex-col bg-[#111110] pb-24">
       {/* Blitz header */}
       <header className="flex items-center justify-between px-5 pt-10 pb-4 md:pt-14 w-full max-w-md mx-auto">
         <button
@@ -267,6 +267,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           }}
           onSessionUpdate={handleSessionUpdate}
           onSessionEnd={handleSessionEnd}
+          isDark={true}
           onComplete={(result) => {
             const isPerfect = result.correct && result.guesses === 1 && result.hintsUsed === 0
             const updated = updateMirrorStreak(difficulty, isPerfect)
@@ -286,6 +287,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             resetSession()
             handleNextWord()
           }}
+          isDark={true}
           onFlipBack={() => {
             resetSession()
             handleNextWord()
