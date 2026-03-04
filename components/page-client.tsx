@@ -353,8 +353,10 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
                 handleNextPracticeWord()
                 setMirrorMode(false)
               }}
-              onNextWord={handleNextPracticeWord}
-              sessionScore={sessionScore}
+              onNextWord={() => {
+                setSessions(prev => ({ ...prev, [difficulty]: { ...prev[difficulty], wordsPlayed: prev[difficulty].wordsPlayed + 1 } }))
+                handleNextPracticeWord()
+              }}
               sessionStreak={sessionStreak}
               sessionBestStreak={sessionBestStreak}
               multiplier={multiplier}
@@ -367,7 +369,6 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
                   return { ...prev, [difficulty]: {
                     ...s,
                     consecutiveAwful: wasAwful ? s.consecutiveAwful + 1 : 0,
-                    wordsPlayed: s.wordsPlayed + 1,
                     sessionWordHistory: [...s.sessionWordHistory, entry],
                   }}
                 })
