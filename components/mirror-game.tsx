@@ -434,7 +434,7 @@ export function MirrorGame({
                 <p className="text-sm text-muted-foreground mt-2">Calculating final score...</p>
               </div>
             )}
-            {isCorrect && isPractice && onNextWord && (
+            {isCorrect && isPractice && onNextWord && wordsPlayed + 1 < 15 && (
               <button
                 type="button"
                 onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); onNextWord() }}
