@@ -335,6 +335,8 @@ export function MirrorGame({
     ? <span className="text-red-600 font-bold">▼ awful</span>
     : null
 
+  const devReveal = typeof window !== "undefined" && new URLSearchParams(window.location.search).has("reveal")
+
   return (
     <div className="mx-auto w-full max-w-md px-5">
       <div className={`relative rounded-xl border border-border bg-card p-6 shadow-sm md:p-8 transition-transform ${isShaking ? "animate-shake" : ""}`}>
@@ -348,6 +350,11 @@ export function MirrorGame({
 
           {/* Right: word progress, streak, score, multiplier */}
           <div className="flex items-center gap-4">
+            {devReveal && (
+              <span className="text-[11px] font-mono text-muted-foreground/40 select-none" aria-hidden="true">
+                {word.word}
+              </span>
+            )}
             <span className="text-[10px] tabular-nums text-muted-foreground">{wordsPlayed + 1}/15</span>
             <div className="flex items-center gap-1.5">
               <Star className="h-3.5 w-3.5 text-amber-500" />
