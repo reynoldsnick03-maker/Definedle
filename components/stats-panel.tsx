@@ -9,6 +9,7 @@ interface StatsPanelProps {
   open: boolean
   onClose: () => void
   blitzMode?: boolean
+  isDark?: boolean
 }
 
 interface BlitzSession {
@@ -19,7 +20,7 @@ interface BlitzSession {
   created_at: string
 }
 
-export function StatsPanel({ open, onClose, blitzMode = false }: StatsPanelProps) {
+export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }: StatsPanelProps) {
   const [activeTab, setActiveTab] = useState<"definedle" | "blitz">(blitzMode ? "blitz" : "definedle")
   const [stats, setStats] = useState<GameHistory | null>(null)
   const [blitzEasy, setBlitzEasy] = useState<BlitzSession[]>([])
@@ -76,17 +77,17 @@ export function StatsPanel({ open, onClose, blitzMode = false }: StatsPanelProps
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
       <div className="absolute inset-0 bg-foreground/20 animate-in fade-in duration-200" onClick={onClose} aria-hidden="true" />
-      <div className="relative z-10 w-full max-w-sm max-h-[85dvh] sm:max-h-[90dvh] flex flex-col rounded-t-2xl sm:rounded-2xl border border-border bg-card shadow-lg animate-in slide-in-from-bottom-4 sm:slide-in-from-bottom-2 fade-in duration-300">
+      <div className={`relative z-10 w-full max-w-sm max-h-[85dvh] sm:max-h-[90dvh] flex flex-col rounded-t-2xl sm:rounded-2xl border shadow-lg animate-in slide-in-from-bottom-4 sm:slide-in-from-bottom-2 fade-in duration-300 ${isDark ? "bg-[#1c1b19] border-[#2a2926]" : "bg-card border-border"}`}>
 
         <div className="flex items-center justify-between px-6 pt-6 pb-4 shrink-0">
-          <h2 className="font-serif text-xl font-normal text-foreground">Your Stats</h2>
+          <h2 className={`font-serif text-xl font-normal ${isDark ? "text-white" : "text-foreground"}`}>Your Stats</h2>
           <button type="button" onClick={onClose} className="rounded-lg p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label="Close stats">
             <X className="h-4 w-4" />
           </button>
         </div>
 
         <div className="px-6 pb-4 shrink-0">
-          <div className="inline-flex w-full items-center rounded-lg border border-border bg-muted/50 p-0.5">
+          <div className={`inline-flex w-full items-center rounded-lg border p-0.5 ${isDark ? "bg-[#111110] border-[#2a2926]" : "bg-muted/50 border-border"}`}>
             <button type="button" onClick={() => setActiveTab("definedle")} className={`flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 min-h-[32px] ${activeTab === "definedle" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}>
               # Definedle
             </button>
@@ -101,7 +102,7 @@ export function StatsPanel({ open, onClose, blitzMode = false }: StatsPanelProps
           {activeTab === "definedle" && (
             <>
               {!stats || stats.played === 0 ? (
-                <p className="text-sm text-muted-foreground text-center py-8">Play your first game to start tracking stats.</p>
+                <p className={`text-sm text-center py-8 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Play your first game to start tracking stats.</p>
               ) : (
                 <>
                   <div className="grid grid-cols-3 gap-4 text-center">
@@ -111,19 +112,19 @@ export function StatsPanel({ open, onClose, blitzMode = false }: StatsPanelProps
                       { icon: <Trophy className="h-3.5 w-3.5" />, label: "Best", value: stats.best },
                     ].map(({ icon, label, value }) => (
                       <div key={label} className="flex flex-col items-center gap-1">
-                        <div className="flex items-center gap-1.5 text-muted-foreground">{icon}<span className="text-[10px] uppercase tracking-widest font-medium">{label}</span></div>
-                        <span className="font-serif text-2xl font-light tabular-nums">{value}</span>
+                        <div className={`flex items-center gap-1.5 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{icon}<span className="text-[10px] uppercase tracking-widest font-medium">{label}</span></div>
+                        <span className={`font-serif text-2xl font-light tabular-nums ${isDark ? "text-white" : "text-foreground"}`}>{value}</span>
                       </div>
                     ))}
                   </div>
-                  <div className="h-px bg-border" />
+                  <div className={`h-px ${isDark ? "bg-[#2a2926]" : "bg-border"}`} />
                   <div className="flex items-center justify-between">
-                    <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Average score</span>
-                    <span className="font-serif text-lg tabular-nums">{avgScore}</span>
+                    <span className={`text-xs uppercase tracking-widest font-medium ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Average score</span>
+                    <span className={`font-serif text-lg tabular-nums ${isDark ? "text-white" : ""}`}>{avgScore}</span>
                   </div>
                   {last7.length > 0 && (
                     <div className="flex flex-col gap-3">
-                      <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Recent games</span>
+                      <span className={`text-xs uppercase tracking-widest font-medium ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Recent games</span>
                       <div className="flex items-end gap-1.5 h-24">
                         {last7.map((entry) => {
                           const height = Math.max(entry.s, 4)
@@ -152,7 +153,7 @@ export function StatsPanel({ open, onClose, blitzMode = false }: StatsPanelProps
           {activeTab === "blitz" && (
             <>
               {blitzEasy.length === 0 && blitzHard.length === 0 ? (
-                <p className="text-sm text-muted-foreground text-center py-8">Complete a Blitz session to start tracking stats.</p>
+                <p className={`text-sm text-center py-8 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Complete a Blitz session to start tracking stats.</p>
               ) : (
                 <>
                   {blitzEasy.length > 0 && (
@@ -169,15 +170,15 @@ export function StatsPanel({ open, onClose, blitzMode = false }: StatsPanelProps
                           </div>
                         ))}
                       </div>
-                      <div className="h-px bg-border" />
+                      <div className={`h-px ${isDark ? "bg-[#2a2926]" : "bg-border"}`} />
                       <div className="flex flex-col gap-2">
-                        <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Easy — Best Sessions</span>
+                        <span className={`text-xs uppercase tracking-widest font-medium ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Easy — Best Sessions</span>
                         {blitzEasy.map((s, i) => (
-                          <div key={i} className="flex items-center justify-between px-3 py-2 rounded-lg bg-muted/30 text-sm">
+                          <div key={i} className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm ${isDark ? "bg-[#111110] border border-[#2a2926]" : "bg-muted/30"}`}>
                             <span className="text-muted-foreground font-mono text-xs w-5">{i + 1}.</span>
-                            <span className="font-medium flex-1">{Math.round(s.session_score)} pts</span>
-                            <span className="text-muted-foreground text-xs">{s.words_solved} words</span>
-                            <span className="text-muted-foreground text-xs font-mono ml-3">{s.created_at?.slice(5, 10)}</span>
+                            <span className={`font-medium flex-1 ${isDark ? "text-white" : ""}`}>{Math.round(s.session_score)} pts</span>
+                            <span className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{s.words_solved} words</span>
+                            <span className={`text-xs font-mono ml-3 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{s.created_at?.slice(5, 10)}</span>
                           </div>
                         ))}
                       </div>
@@ -185,18 +186,18 @@ export function StatsPanel({ open, onClose, blitzMode = false }: StatsPanelProps
                   )}
                   {blitzHard.length > 0 && (
                     <>
-                      <div className="h-px bg-border" />
+                      <div className={`h-px ${isDark ? "bg-[#2a2926]" : "bg-border"}`} />
                       <div className="flex flex-col gap-2">
                         <div className="flex items-center justify-between">
-                          <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Hard — Best Sessions</span>
-                          <span className="text-xs text-muted-foreground">avg {blitzAvgHard}</span>
+                          <span className={`text-xs uppercase tracking-widest font-medium ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Hard — Best Sessions</span>
+                          <span className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>avg {blitzAvgHard}</span>
                         </div>
                         {blitzHard.map((s, i) => (
-                          <div key={i} className="flex items-center justify-between px-3 py-2 rounded-lg bg-muted/30 text-sm">
+                          <div key={i} className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm ${isDark ? "bg-[#111110] border border-[#2a2926]" : "bg-muted/30"}`}>
                             <span className="text-muted-foreground font-mono text-xs w-5">{i + 1}.</span>
-                            <span className="font-medium flex-1">{Math.round(s.session_score)} pts</span>
-                            <span className="text-muted-foreground text-xs">{s.words_solved} words</span>
-                            <span className="text-muted-foreground text-xs font-mono ml-3">{s.created_at?.slice(5, 10)}</span>
+                            <span className={`font-medium flex-1 ${isDark ? "text-white" : ""}`}>{Math.round(s.session_score)} pts</span>
+                            <span className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{s.words_solved} words</span>
+                            <span className={`text-xs font-mono ml-3 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{s.created_at?.slice(5, 10)}</span>
                           </div>
                         ))}
                       </div>

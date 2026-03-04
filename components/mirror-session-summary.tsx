@@ -87,14 +87,14 @@ export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordH
               <Flame className="h-3.5 w-3.5" />
               <span className="text-[10px] uppercase tracking-widest font-medium">Words</span>
             </div>
-            <span className="font-serif text-2xl font-light tabular-nums">{wordsSolved}</span>
+            <span className={`font-serif text-2xl font-light tabular-nums ${isDark ? "text-white" : "text-foreground"}`}>{wordsSolved}</span>
           </div>
           <div className={`flex flex-col items-center gap-1.5 rounded-lg px-4 py-3 ${isDark ? "bg-[#111110] border border-[#2a2926]" : "bg-muted/30"}`}>
             <div className={`flex items-center gap-1.5 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
               <Zap className="h-3.5 w-3.5" />
               <span className="text-[10px] uppercase tracking-widest font-medium">Peak ×</span>
             </div>
-            <span className="font-serif text-2xl font-light tabular-nums">×{bestMultiplier}</span>
+            <span className={`font-serif text-2xl font-light tabular-nums ${isDark ? "text-white" : "text-foreground"}`}>×{bestMultiplier}</span>
           </div>
         </div>
 
