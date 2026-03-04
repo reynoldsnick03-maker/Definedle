@@ -61,7 +61,7 @@ export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordH
       "A brave attempt",
       "Words are hard",
       "Tomorrow's another word",
-    ])"
+    ])
 
   return (
     <div className="mx-auto w-full max-w-md px-5">
