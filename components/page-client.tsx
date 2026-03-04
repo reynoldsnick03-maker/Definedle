@@ -357,6 +357,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
                 setSessions(prev => ({ ...prev, [difficulty]: { ...prev[difficulty], wordsPlayed: prev[difficulty].wordsPlayed + 1 } }))
                 handleNextPracticeWord()
               }}
+              sessionScore={sessionScore}
               sessionStreak={sessionStreak}
               sessionBestStreak={sessionBestStreak}
               multiplier={multiplier}
