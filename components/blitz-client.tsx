@@ -110,6 +110,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const [blitzTab, setBlitzTab] = useState<"practice" | "daily">("practice")
   const [nemesisEntry, setNemesisEntry] = useState<{ points: number; guesses: number; hintsUsed: number } | null>(null)
   const [dailyDone, setDailyDone] = useState<{ easy: boolean; hard: boolean }>({ easy: false, hard: false })
+  const [dailyStoredSummary, setDailyStoredSummary] = useState<Record<string, {score: number; wordsSolved: number; bestMultiplier: number}>>({}
   const [dailySequenceEasy, setDailySequenceEasy] = useState<DailyWord[]>([])
   const [dailySequenceHard, setDailySequenceHard] = useState<DailyWord[]>([])
   const [dailyWordIndex, setDailyWordIndex] = useState(0)
@@ -151,6 +152,10 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       const rec = JSON.parse(raw)
       const todayRec = rec[dateKey] || {}
       setDailyDone({ easy: !!todayRec.easy?.completed, hard: !!todayRec.hard?.completed })
+      setDailyStoredSummary({
+        easy: todayRec.easy || null,
+        hard: todayRec.hard || null,
+      })
     } catch {}
   }, [showSummary])
 
@@ -243,7 +248,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           const raw = localStorage.getItem("definedle-blitz-daily") || "{}"
           const dailyRecord = JSON.parse(raw)
           if (!dailyRecord[dateKey]) dailyRecord[dateKey] = {}
-          dailyRecord[dateKey][difficulty] = { score: finalScore, completed: true }
+          dailyRecord[dateKey][difficulty] = { score: finalScore, completed: true, wordsSolved, bestMultiplier: peakMult }
           localStorage.setItem("definedle-blitz-daily", JSON.stringify(dailyRecord))
         } catch {}
       }
@@ -406,22 +411,19 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         </div>
       </div>
 
-      {/* Game area — show replay warning if daily already completed */}
-      {blitzTab === "daily" && dailyDone[difficulty] && !showSummary && (
-        <div className={`mx-auto w-full max-w-md px-5`}>
-          <div className={`rounded-xl border p-6 text-center ${isDark ? "border-[#2a2926] bg-[#1c1b19]" : "border-border bg-card"}`}>
-            <p className={`text-2xl mb-2 `}>✅</p>
-            <p className={`font-serif text-lg mb-1 ${isDark ? "text-white" : "text-foreground"}`}>Already completed!</p>
-            <p className={`text-sm mb-4 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>You&apos;ve already played today&apos;s {difficulty} daily. Come back tomorrow!</p>
-            <button
-              type="button"
-              onClick={() => { setBlitzTab("practice"); resetSession(); handleNextWord() }}
-              className={`rounded-lg px-5 py-2 text-sm font-medium ${isDark ? "bg-amber-500 text-white" : "bg-foreground text-background"}`}
-            >
-              Play Practice instead
-            </button>
-          </div>
-        </div>
+      {/* Game area — show previous results if daily already completed */}
+      {blitzTab === "daily" && dailyDone[difficulty] && !showSummary && dailyStoredSummary[difficulty] && (
+        <MirrorSessionSummary
+          score={dailyStoredSummary[difficulty]!.score}
+          wordsSolved={dailyStoredSummary[difficulty]!.wordsSolved}
+          bestMultiplier={dailyStoredSummary[difficulty]!.bestMultiplier}
+          wordHistory={[]}
+          reason="complete"
+          isDaily={true}
+          isDark={isDark}
+          onPlayAgain={() => { setBlitzTab("practice"); resetSession(); handleNextWord() }}
+          onFlipBack={() => { setBlitzTab("practice"); resetSession(); handleNextWord() }}
+        />
       )}
 
       {currentWord && !showSummary && !(blitzTab === "daily" && dailyDone[difficulty]) && (

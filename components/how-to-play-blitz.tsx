@@ -50,7 +50,7 @@ export function HowToPlayBlitz({ open, onClose }: HowToPlayBlitzProps) {
         {/* Body */}
         <div className="overflow-y-auto overscroll-contain px-6 pb-6 flex flex-col gap-5 text-sm leading-relaxed text-[#9b9589]">
           <p>
-            Blitz is a 15-word speed run. Each round you&apos;re shown a definition — your job is to name the word.
+            Blitz is a 15-word vocabulary challenge. Each round you&apos;re shown a definition — your job is to name the word.
           </p>
 
           <div className="h-px bg-[#2a2926]" aria-hidden="true" />

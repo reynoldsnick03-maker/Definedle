@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 
 export type AppTab = "definedle" | "blitz"
 
@@ -15,7 +15,6 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
   const [pulse, setPulse] = useState(false)
   const [visible, setVisible] = useState(true)
   const lastScrollY = useRef(0)
-  const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     try {
@@ -46,14 +45,9 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
         setVisible(false)
       }
       lastScrollY.current = currentY
-      if (scrollTimer.current) clearTimeout(scrollTimer.current)
-      scrollTimer.current = setTimeout(() => setVisible(true), 2000)
     }
     window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-      if (scrollTimer.current) clearTimeout(scrollTimer.current)
-    }
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   const handleTabChange = (tab: AppTab) => {

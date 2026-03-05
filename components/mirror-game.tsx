@@ -252,12 +252,14 @@ export function MirrorGame({
   const handleRevealLetter = () => {
     if (isComplete) return
     if (hintsUsed >= word.word.length - 1) return
-    // Block paid hints if already at multiplier floor (×1)
-    if (hintsUsed >= maxHints && multiplier <= 1) return
     setHintsUsed(h => h + 1)
-    // Hints 1-3 are free. Hints 4+ cost -0.5 multiplier step each.
     if (hintsUsed >= maxHints) {
-      onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
+      if (multiplier <= 1) {
+        // At floor — dock 1pt from score instead of multiplier
+        onSessionUpdate({ points: -1, correct: false, multiplierEffect: "decent" })
+      } else {
+        onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
+      }
     }
   }
 
@@ -319,8 +321,18 @@ export function MirrorGame({
     const definitionWordSet = new Set(
       word.definition.toLowerCase().replace(/[^a-z\s]/g, " ").split(/\s+/).filter(w => w.length > 0)
     )
-    const isMorphologicalMatch = gLower !== word.word.toLowerCase() && stemMatch(gLower, word.word.toLowerCase()) && !definitionWordSet.has(gLower)
-    const isActuallyCorrect = gLower === word.word.toLowerCase() || isMorphologicalMatch
+    // Only accept exact match OR genuine suffix variants of the target word
+    // (plurals, -ed, -ing, -s, -er, -est) — NOT other words sharing a prefix
+    const target = word.word.toLowerCase()
+    const isMorphologicalMatch = gLower !== target && !definitionWordSet.has(gLower) && (() => {
+      // Must start with the full target word or target must start with the guess
+      if (gLower.startsWith(target) || target.startsWith(gLower)) {
+        const suffix = gLower.length > target.length ? gLower.slice(target.length) : target.slice(gLower.length)
+        return ["s", "ed", "ing", "er", "est", "ly", "tion", "ness", "d"].includes(suffix)
+      }
+      return false
+    })()
+    const isActuallyCorrect = gLower === target || isMorphologicalMatch
 
     const similarity = isActuallyCorrect ? 100 : calculateSimilarity(trimmedGuess, word.word, word.synonyms)
     const newGuesses = [...guesses, { word: trimmedGuess, similarity }]
@@ -537,7 +549,7 @@ export function MirrorGame({
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
                   </svg>
-                  {hintsUsed < maxHints ? "Reveal a letter" : "Reveal a letter (−0.5×)"}
+                  {hintsUsed < maxHints ? "Reveal a letter" : multiplier <= 1 ? "Reveal a letter (−1 pt)" : "Reveal a letter (−0.5×)"}
                 </button>
                 {/* Dots below button — 3 free slots amber/filled, paid hints red */}
                 <div className="flex items-center gap-1.5 mt-1">
