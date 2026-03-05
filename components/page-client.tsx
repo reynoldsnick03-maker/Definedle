@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { TabBar, type AppTab } from "@/components/tab-bar"
 import { DefinedleClient } from "@/components/definedle-client"
 import { BlitzClient } from "@/components/blitz-client"
@@ -21,7 +21,14 @@ interface PageClientProps {
 
 export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: PageClientProps) {
   const [activeTab, setActiveTab] = useState<AppTab>("definedle")
+  const [highlightBlitz, setHighlightBlitz] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
+
+  useEffect(() => {
+    const handler = () => setHighlightBlitz(true)
+    window.addEventListener("definedle-highlight-blitz", handler)
+    return () => window.removeEventListener("definedle-highlight-blitz", handler)
+  }, [])
 
   return (
     <>
@@ -39,7 +46,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
         />
       )}
 
-      <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
+      <TabBar activeTab={activeTab} onTabChange={(t) => { setActiveTab(t); setHighlightBlitz(false) }} highlightBlitz={highlightBlitz} />
 
       <SettingsPanel open={settingsOpen} onClose={() => setSettingsOpen(false)} isBlitz={activeTab === "blitz"} />
     </>

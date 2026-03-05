@@ -113,17 +113,25 @@ export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordH
 
             {showHistory && (
               <div className="mt-2 flex flex-col gap-1">
-                {wordHistory.map((entry, i) => (
-                  <div key={i} className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm ${isDark ? "bg-[#111110] border border-[#2a2926]" : "bg-muted/20"}`}>
-                    <span className={`font-medium capitalize ${isDark ? "text-[#d4cfc8]" : ""}`}>{entry.word}</span>
-                    <div className="flex items-center gap-3 text-xs">
-                      <span className="text-amber-600 font-medium">+{entry.points} pts</span>
-                      <span className={`font-medium tabular-nums ${entry.multDelta > 0 ? "text-score-high" : entry.multDelta < 0 ? "text-score-low" : "text-muted-foreground"}`}>
-                        {entry.multDelta > 0 ? `▲ +${entry.multDelta}×` : entry.multDelta < 0 ? `▼ ${entry.multDelta}×` : "— 0×"}
-                      </span>
+                {wordHistory.map((entry, i) => {
+                  const wasSkipped = entry.guesses === 0 && entry.points === 0
+                  const wasFailed = entry.guesses > 0 && entry.points === 0
+                  return (
+                    <div key={i} className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm ${isDark ? "bg-[#111110] border border-[#2a2926]" : "bg-muted/20"}`}>
+                      <div className="flex items-center gap-2">
+                        <span className={`font-medium capitalize ${isDark ? "text-[#d4cfc8]" : ""}`}>{entry.word}</span>
+                        {wasSkipped && <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${isDark ? "bg-[#2a2926] text-[#6b6560]" : "bg-muted text-muted-foreground"}`}>skip</span>}
+                        {wasFailed && <span className="text-[10px] px-1.5 py-0.5 rounded font-medium bg-red-500/15 text-red-500">miss</span>}
+                      </div>
+                      <div className="flex items-center gap-3 text-xs">
+                        {entry.points > 0 && <span className="text-amber-600 font-medium">+{entry.points} pts</span>}
+                        <span className={`font-medium tabular-nums ${entry.multDelta > 0 ? "text-emerald-500" : entry.multDelta < 0 ? "text-orange-500" : isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
+                          {entry.multDelta > 0 ? `▲ +${entry.multDelta}×` : entry.multDelta < 0 ? `▼ ${entry.multDelta}×` : "—"}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             )}
           </div>

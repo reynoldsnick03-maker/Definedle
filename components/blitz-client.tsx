@@ -25,7 +25,7 @@ function getNemesisEntry(
     // Load all saved word history from mirror sessions stored locally
     const histRaw = localStorage.getItem("definedle-blitz-word-history")
     if (!histRaw) return null
-    const history: Array<{ word: string; points: number; guesses: number; hintsUsed: number; tier: string }> = JSON.parse(histRaw)
+    const history: Array<{ word: string; points: number; guesses: number; hintsUsed: number; tier: string; bestGuess?: string }> = JSON.parse(histRaw)
 
     const match = history.filter(e => e.word === wordName)
     if (match.length === 0) return null
@@ -41,7 +41,7 @@ function getNemesisEntry(
     const wasFlawless = last.guesses === 1 && last.hintsUsed === 0
     if (wasFlawless || !qualifies) return null
 
-    return { points: last.points, guesses: last.guesses, hintsUsed: last.hintsUsed }
+    return { points: last.points, guesses: last.guesses, hintsUsed: last.hintsUsed, bestGuess: last.bestGuess }
   } catch {
     return null
   }
@@ -49,7 +49,7 @@ function getNemesisEntry(
 
 // Save word to local blitz history for nemesis lookup
 function saveWordToBlitzHistory(entry: {
-  word: string; points: number; guesses: number; hintsUsed: number; tier: string
+  word: string; points: number; guesses: number; hintsUsed: number; tier: string; bestGuess?: string
 }) {
   try {
     const raw = localStorage.getItem("definedle-blitz-word-history")
@@ -108,9 +108,10 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const [difficulty, setDifficulty] = useState<GameMode>("easy")
   const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
   const [blitzTab, setBlitzTab] = useState<"practice" | "daily">("daily")
-  const [nemesisEntry, setNemesisEntry] = useState<{ points: number; guesses: number; hintsUsed: number } | null>(null)
+  const [nemesisEntry, setNemesisEntry] = useState<{ points: number; guesses: number; hintsUsed: number; bestGuess?: string } | null>(null)
   const [dailyDone, setDailyDone] = useState<{ easy: boolean; hard: boolean }>({ easy: false, hard: false })
-  const [dailyStoredSummary, setDailyStoredSummary] = useState<Record<string, {score: number; wordsSolved: number; bestMultiplier: number} | null>>({} as Record<string, {score: number; wordsSolved: number; bestMultiplier: number} | null>)
+  const [dailyFailed, setDailyFailed] = useState<{ easy: boolean; hard: boolean }>({ easy: false, hard: false })
+  const [dailyStoredSummary, setDailyStoredSummary] = useState<Record<string, {score: number; wordsSolved: number; bestMultiplier: number; wordHistory?: WordHistoryEntry[]} | null>>({} as Record<string, {score: number; wordsSolved: number; bestMultiplier: number; wordHistory?: WordHistoryEntry[]} | null>)
   const [dailySequenceEasy, setDailySequenceEasy] = useState<DailyWord[]>([])
   const [dailySequenceHard, setDailySequenceHard] = useState<DailyWord[]>([])
   const [dailyWordIndex, setDailyWordIndex] = useState(0)
@@ -152,9 +153,10 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       const rec = JSON.parse(raw)
       const todayRec = rec[dateKey] || {}
       setDailyDone({ easy: !!todayRec.easy?.completed, hard: !!todayRec.hard?.completed })
+      setDailyFailed({ easy: !!todayRec.easy?.failed, hard: !!todayRec.hard?.failed })
       setDailyStoredSummary({
-        easy: todayRec.easy || null,
-        hard: todayRec.hard || null,
+        easy: todayRec.easy ?? null,
+        hard: todayRec.hard ?? null,
       })
     } catch {}
   }, [showSummary])
@@ -248,8 +250,14 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           const raw = localStorage.getItem("definedle-blitz-daily") || "{}"
           const dailyRecord = JSON.parse(raw)
           if (!dailyRecord[dateKey]) dailyRecord[dateKey] = {}
-          dailyRecord[dateKey][difficulty] = { score: finalScore, completed: true, wordsSolved, bestMultiplier: peakMult }
+          dailyRecord[dateKey][difficulty] = {
+            score: finalScore, completed: true, wordsSolved, bestMultiplier: peakMult,
+            wordHistory, failed: reason === "failed" || reason === "awful"
+          }
           localStorage.setItem("definedle-blitz-daily", JSON.stringify(dailyRecord))
+          if (reason === "failed" || reason === "awful") {
+            setDailyFailed(prev => ({ ...prev, [difficulty]: true }))
+          }
         } catch {}
       }
       try {
@@ -270,7 +278,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         })
       } catch {}
     }
-  }, [difficulty, updateSession, blitzTab, wordsPlayed])
+  }, [difficulty, updateSession, blitzTab, wordsPlayed, sessions])
 
   const resetSession = useCallback((diff?: GameMode) => {
     const target = diff ?? difficulty
@@ -411,24 +419,45 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         </div>
       </div>
 
-      {/* Game area — show previous results if daily already completed */}
-      {blitzTab === "daily" && dailyDone[difficulty] && !showSummary && dailyStoredSummary[difficulty] && (
-        <MirrorSessionSummary
-          score={dailyStoredSummary[difficulty]!.score}
-          wordsSolved={dailyStoredSummary[difficulty]!.wordsSolved}
-          bestMultiplier={dailyStoredSummary[difficulty]!.bestMultiplier}
-          wordHistory={[]}
-          reason="complete"
-          isDaily={true}
-          isDark={isDark}
-          onPlayAgain={() => { setBlitzTab("practice"); resetSession(); handleNextWord() }}
-          onFlipBack={() => { setBlitzTab("practice"); resetSession(); handleNextWord() }}
-        />
+      {/* Game area — show results or failed message if daily already done */}
+      {blitzTab === "daily" && dailyDone[difficulty] && !showSummary && (
+        dailyFailed[difficulty] ? (
+          <div className={`mx-auto w-full max-w-md px-5`}>
+            <div className={`rounded-xl border p-6 text-center ${isDark ? "border-[#2a2926] bg-[#1c1b19]" : "border-border bg-card"}`}>
+              <p className="text-3xl mb-3">💀</p>
+              <p className={`font-serif text-lg mb-1 ${isDark ? "text-white" : "text-foreground"}`}>
+                Daily {difficulty} failed
+              </p>
+              <p className={`text-sm mb-4 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
+                Better luck tomorrow. Come back for a fresh daily challenge.
+              </p>
+              <button
+                type="button"
+                onClick={() => { setBlitzTab("practice"); resetSession(); handleNextWord() }}
+                className={`rounded-lg px-5 py-2 text-sm font-medium ${isDark ? "bg-amber-500 text-white" : "bg-foreground text-background"}`}
+              >
+                Play Practice instead
+              </button>
+            </div>
+          </div>
+        ) : dailyStoredSummary[difficulty] ? (
+          <MirrorSessionSummary
+            score={dailyStoredSummary[difficulty]!.score}
+            wordsSolved={dailyStoredSummary[difficulty]!.wordsSolved}
+            bestMultiplier={dailyStoredSummary[difficulty]!.bestMultiplier}
+            wordHistory={dailyStoredSummary[difficulty]!.wordHistory ?? []}
+            reason="complete"
+            isDaily={true}
+            isDark={isDark}
+            onPlayAgain={() => { setBlitzTab("practice"); resetSession(); handleNextWord() }}
+            onFlipBack={() => { setBlitzTab("practice"); resetSession(); handleNextWord() }}
+          />
+        ) : null
       )}
 
       {currentWord && !showSummary && !(blitzTab === "daily" && dailyDone[difficulty]) && (
         <MirrorGame
-          key={`blitz-${difficulty}-${blitzTab}-${currentWord?.word}`}
+          key={`blitz-${difficulty}-${currentWord?.word}`}
           word={currentWord!}
           isPractice={true}
           onFlipToNormal={() => {
@@ -459,6 +488,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
               guesses: entry.guesses,
               hintsUsed: entry.hintsUsed,
               tier: wasAwful ? "awful" : entry.guesses === 0 ? "failed" : "other",
+              bestGuess: entry.bestGuess,
             })
           }}
           onSessionUpdate={handleSessionUpdate}
