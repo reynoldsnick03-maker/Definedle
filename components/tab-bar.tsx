@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 export type AppTab = "definedle" | "blitz"
 
@@ -13,6 +13,9 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
   const [hasVisitedBlitz, setHasVisitedBlitz] = useState(true)
   const [blitzRounds, setBlitzRounds] = useState(0)
   const [pulse, setPulse] = useState(false)
+  const [visible, setVisible] = useState(true)
+  const lastScrollY = useRef(0)
+  const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     try {
@@ -23,7 +26,6 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
     } catch {}
   }, [])
 
-  // Pulse every 3 Definedle rounds until player has visited Blitz
   useEffect(() => {
     if (hasVisitedBlitz) return
     if (blitzRounds > 0 && blitzRounds % 3 === 0) {
@@ -32,6 +34,27 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
       return () => clearTimeout(t)
     }
   }, [blitzRounds, hasVisitedBlitz])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY
+      const atTop = currentY < 60
+      const scrollingDown = currentY > lastScrollY.current
+      if (atTop || scrollingDown) {
+        setVisible(true)
+      } else {
+        setVisible(false)
+      }
+      lastScrollY.current = currentY
+      if (scrollTimer.current) clearTimeout(scrollTimer.current)
+      scrollTimer.current = setTimeout(() => setVisible(true), 2000)
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      if (scrollTimer.current) clearTimeout(scrollTimer.current)
+    }
+  }, [])
 
   const handleTabChange = (tab: AppTab) => {
     if (tab === "blitz" && !hasVisitedBlitz) {
@@ -43,11 +66,14 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
       setPulse(false)
     }
     onTabChange(tab)
+    setVisible(true)
   }
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 flex border-t border-border bg-card" style={{paddingBottom: "env(safe-area-inset-bottom)"}}>
-      {/* Definedle tab */}
+    <nav
+      className={`fixed bottom-0 left-0 right-0 z-50 flex border-t border-border bg-card transition-transform duration-300 ease-in-out ${visible ? "translate-y-0" : "translate-y-full"}`}
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+    >
       <button
         type="button"
         onClick={() => handleTabChange("definedle")}
@@ -65,7 +91,6 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
         )}
       </button>
 
-      {/* Blitz tab */}
       <button
         type="button"
         onClick={() => handleTabChange("blitz")}
@@ -83,7 +108,6 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
         {activeTab === "blitz" && (
           <span className="h-1 w-1 rounded-full bg-amber-500" aria-hidden="true" />
         )}
-        {/* Pulse ring when nudging player toward Blitz */}
         {pulse && activeTab !== "blitz" && (
           <span className="absolute top-2 right-[calc(50%-18px)] h-2 w-2 rounded-full bg-amber-400 ring-4 ring-amber-400/30 animate-ping" aria-hidden="true" />
         )}

@@ -14,7 +14,8 @@ interface Settings {
   nemesisThreshold: "poor" | "awful"
   blitzDarkMode: boolean
   reduceMotion: boolean
-  defaultHard: boolean
+  showWordLength: boolean
+  showSimilarity: boolean
 }
 
 const DEFAULT_SETTINGS: Settings = {
@@ -22,7 +23,8 @@ const DEFAULT_SETTINGS: Settings = {
   nemesisThreshold: "awful",
   blitzDarkMode: true,
   reduceMotion: false,
-  defaultHard: false,
+  showWordLength: false,
+  showSimilarity: true,
 }
 
 function loadSettings(): Settings {
@@ -87,10 +89,17 @@ export function SettingsPanel({ open, onClose, isBlitz = false }: SettingsPanelP
             <h3 className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Gameplay</h3>
 
             <SettingRow
-              label="Hard mode by default"
-              description="Start each session on Hard difficulty"
-              checked={settings.defaultHard}
-              onChange={v => update({ defaultHard: v })}
+              label="Show word length"
+              description="Show how many letters the answer has before you start guessing"
+              checked={settings.showWordLength}
+              onChange={v => update({ showWordLength: v })}
+            />
+
+            <SettingRow
+              label="Show similarity score"
+              description="Show how close each Blitz guess is to the correct word"
+              checked={settings.showSimilarity}
+              onChange={v => update({ showSimilarity: v })}
             />
           </div>
 

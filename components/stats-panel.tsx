@@ -67,12 +67,18 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
   const last7 = stats?.entries.slice(-7) ?? []
   const avgScore = stats && stats.played > 0
     ? Math.round(stats.entries.reduce((sum, e) => sum + e.s, 0) / stats.played) : 0
+  const perfectCount = stats ? stats.entries.filter(e => e.s >= 100).length : 0
   const blitzAvgEasy = blitzEasy.length > 0
     ? Math.round(blitzEasy.reduce((s, b) => s + b.session_score, 0) / blitzEasy.length) : 0
   const blitzBestMultEasy = blitzEasy.length > 0
     ? Math.max(...blitzEasy.map(b => b.best_streak)) : 0
   const blitzAvgHard = blitzHard.length > 0
     ? Math.round(blitzHard.reduce((s, b) => s + b.session_score, 0) / blitzHard.length) : 0
+  const blitzFlawlessEasy = blitzEasy.filter(s => s.words_solved >= 15).length
+  const blitzFlawlessHard = blitzHard.filter(s => s.words_solved >= 15).length
+  const allBlitzSessions = [...blitzEasy, ...blitzHard]
+  const blitzTotalSessions = allBlitzSessions.length
+  const blitzBestScore = allBlitzSessions.length > 0 ? Math.max(...allBlitzSessions.map(s => s.session_score)) : 0
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
@@ -88,10 +94,10 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
 
         <div className="px-6 pb-4 shrink-0">
           <div className={`inline-flex w-full items-center rounded-lg border p-0.5 ${isDark ? "bg-[#111110] border-[#2a2926]" : "bg-muted/50 border-border"}`}>
-            <button type="button" onClick={() => setActiveTab("definedle")} className={`flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 min-h-[32px] ${activeTab === "definedle" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}>
+            <button type="button" onClick={() => setActiveTab("definedle")} className={`flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 min-h-[32px] ${activeTab === "definedle" ? (isDark ? "bg-[#2a2926] text-white shadow-sm" : "bg-card text-foreground shadow-sm") : (isDark ? "text-[#6b6560] hover:text-[#9b9589]" : "text-muted-foreground hover:text-foreground")}`}>
               # Definedle
             </button>
-            <button type="button" onClick={() => setActiveTab("blitz")} className={`flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 min-h-[32px] ${activeTab === "blitz" ? "bg-card text-amber-500 shadow-sm" : "text-muted-foreground hover:text-foreground"}`}>
+            <button type="button" onClick={() => setActiveTab("blitz")} className={`flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 min-h-[32px] ${activeTab === "blitz" ? (isDark ? "bg-[#2a2926] text-amber-400 shadow-sm" : "bg-card text-amber-500 shadow-sm") : (isDark ? "text-[#6b6560] hover:text-[#9b9589]" : "text-muted-foreground hover:text-foreground")}`}>
               ⚡ Blitz
             </button>
           </div>
@@ -105,11 +111,12 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
                 <p className={`text-sm text-center py-8 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Play your first game to start tracking stats.</p>
               ) : (
                 <>
-                  <div className="grid grid-cols-3 gap-4 text-center">
+                  <div className="grid grid-cols-4 gap-2 text-center">
                     {[
                       { icon: <Hash className="h-3.5 w-3.5" />, label: "Played", value: stats.played },
                       { icon: <Flame className="h-3.5 w-3.5" />, label: "Streak", value: stats.streak },
                       { icon: <Trophy className="h-3.5 w-3.5" />, label: "Best", value: stats.best },
+                      { icon: <Star className="h-3.5 w-3.5" />, label: "100s", value: perfectCount },
                     ].map(({ icon, label, value }) => (
                       <div key={label} className="flex flex-col items-center gap-1">
                         <div className={`flex items-center gap-1.5 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{icon}<span className="text-[10px] uppercase tracking-widest font-medium">{label}</span></div>
@@ -122,9 +129,11 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
                     <span className={`text-xs uppercase tracking-widest font-medium ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Average score</span>
                     <span className={`font-serif text-lg tabular-nums ${isDark ? "text-white" : ""}`}>{avgScore}</span>
                   </div>
-                  {last7.length > 0 && (
-                    <div className="flex flex-col gap-3">
-                      <span className={`text-xs uppercase tracking-widest font-medium ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Recent games</span>
+                  <div className="flex flex-col gap-3">
+                    <span className={`text-xs uppercase tracking-widest font-medium ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Recent games</span>
+                    {last7.length === 0 ? (
+                      <p className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>No recent games yet.</p>
+                    ) : (
                       <div className="flex items-end gap-1.5 h-24">
                         {last7.map((entry) => {
                           const height = Math.max(entry.s, 4)
@@ -143,8 +152,8 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
                           )
                         })}
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </>
               )}
             </>
@@ -158,15 +167,16 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
                 <>
                   {blitzEasy.length > 0 && (
                     <>
-                      <div className="grid grid-cols-3 gap-4 text-center">
+                      <div className="grid grid-cols-4 gap-2 text-center">
                         {[
-                          { icon: <Hash className="h-3.5 w-3.5" />, label: "Sessions", value: blitzEasy.length },
-                          { icon: <Star className="h-3.5 w-3.5" />, label: "Avg", value: blitzAvgEasy },
+                          { icon: <Hash className="h-3.5 w-3.5" />, label: "Sessions", value: blitzTotalSessions },
+                          { icon: <Trophy className="h-3.5 w-3.5" />, label: "Best", value: Math.round(blitzBestScore) },
                           { icon: <Zap className="h-3.5 w-3.5" />, label: "Peak ×", value: `×${blitzBestMultEasy}` },
+                          { icon: <Star className="h-3.5 w-3.5" />, label: "Full", value: blitzFlawlessEasy + blitzFlawlessHard },
                         ].map(({ icon, label, value }) => (
-                          <div key={label} className="flex flex-col items-center gap-1">
-                            <div className="flex items-center gap-1.5 text-muted-foreground">{icon}<span className="text-[10px] uppercase tracking-widest font-medium">{label}</span></div>
-                            <span className="font-serif text-2xl font-light tabular-nums">{value}</span>
+                          <div key={label} className={`flex flex-col items-center gap-1`}>
+                            <div className={`flex items-center gap-1.5 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{icon}<span className="text-[10px] uppercase tracking-widest font-medium">{label}</span></div>
+                            <span className={`font-serif text-2xl font-light tabular-nums ${isDark ? "text-white" : "text-foreground"}`}>{value}</span>
                           </div>
                         ))}
                       </div>

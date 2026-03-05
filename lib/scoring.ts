@@ -600,7 +600,7 @@ export function stemMatch(a: string, b: string): boolean {
   
   // Share a 5-character prefix (stricter than 4 to reduce false positives)
   // This catches crime/criminal, charge/charged, but not real/unrealist
-  if (a.length >= 6 && b.length >= 6 && a.slice(0, 6) === b.slice(0, 6)) return true
+  if (a.length >= 5 && b.length >= 5 && a.slice(0, 5) === b.slice(0, 5)) return true
   
   // Synonym cluster match - this is the primary way we handle related words
   if (a.length >= 3 && b.length >= 3 && areSynonyms(a, b)) return true
@@ -657,8 +657,8 @@ function scoreAgainstDefinition(
   definitionText: string,
 ): { concepts: ConceptResult[]; matchedCount: number; conceptScore: number; precisionScore: number; precisionRatio: number; relevantWords: number; irrelevantWords: string[]; lengthScore: number; synonymWarning: boolean } {
   const conceptCount = keyConcepts.length
+  // Use floor to avoid exceeding 75 total (e.g., 3 concepts at 25 each = 75, not 26*3=78)
   const pointsPerConcept = Math.floor(75 / conceptCount)
-  const conceptRemainder = 75 - (pointsPerConcept * conceptCount)
 
   // Extract meaningful words from the official definition for overlap checking
   const officialDefWords = meaningfulWords(definitionText.toLowerCase())
@@ -720,7 +720,7 @@ function scoreAgainstDefinition(
   })
 
   const matchedCount = concepts.filter((c) => c.matched).length
-  const conceptScore = matchedCount * pointsPerConcept + (matchedCount === conceptCount ? conceptRemainder : 0)
+  const conceptScore = matchedCount * pointsPerConcept
 
   // Synonym-only penalty - use token-based matching, not substring
   let synonymWarning = false

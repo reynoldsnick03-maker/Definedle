@@ -12,10 +12,11 @@ interface MirrorSessionSummaryProps {
   reason: "failed" | "awful" | "complete"
   onPlayAgain: () => void
   onFlipBack: () => void
+  isDaily?: boolean
   isDark?: boolean
 }
 
-export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordHistory, reason, onPlayAgain, onFlipBack, isDark = false }: MirrorSessionSummaryProps) {
+export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordHistory, reason, onPlayAgain, onFlipBack, isDark = false, isDaily = false }: MirrorSessionSummaryProps) {
   const [showHistory, setShowHistory] = useState(false)
 
   const pick = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)]
@@ -135,14 +136,14 @@ export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordH
             className={`flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-medium transition-opacity hover:opacity-90 ${isDark ? "bg-amber-500 text-white" : "bg-foreground text-background"}`}
           >
             <RotateCcw className="h-4 w-4" />
-            Play again
+            {isDaily ? "Play Practice instead" : "Play again"}
           </button>
           <button
             type="button"
             onClick={onFlipBack}
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            Back to practice
+            {isDaily ? "Back to Definedle" : "Back to practice"}
           </button>
         </div>
       </div>

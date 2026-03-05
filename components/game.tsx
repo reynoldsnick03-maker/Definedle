@@ -22,8 +22,8 @@ interface CachedResult {
 }
 
 function getDateKey(): string {
-  const d = new Date()
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
+  const now = new Date()
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`
 }
 
 function getCookie(name: string): string | undefined {
@@ -200,16 +200,16 @@ export function Game({
 
         <div className="my-6 h-px bg-border" aria-hidden="true" />
 
-        {/* Etymology hint */}
-        {!submitted && dailyWord.etymology && (
+        {/* Synonym hint — hard mode only (easy words have no synonyms) */}
+        {!submitted && dailyWord.synonyms && dailyWord.synonyms.length > 0 && (
           <div className="mb-5">
             {showHint ? (
               <div className="rounded-lg border border-border bg-muted/40 px-4 py-3">
                 <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground mb-1.5">
-                  Etymology
+                  Synonym
                 </p>
                 <p className="text-sm leading-relaxed text-foreground/80 italic">
-                  {dailyWord.etymology}
+                  {dailyWord.synonyms[Math.floor(dailyWord.synonyms.length / 2)]}
                 </p>
                 {!isPractice && (
                   <p className="mt-2 text-[11px] text-muted-foreground">
@@ -227,7 +227,7 @@ export function Game({
                 className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-border py-2.5 text-xs font-medium tracking-wide text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-                {isPractice ? "Show etymology hint" : "Show etymology hint (-5 pts)"}
+                {isPractice ? "Show synonym hint" : "Show synonym hint (-5 pts)"}
               </button>
             )}
           </div>

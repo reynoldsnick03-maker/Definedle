@@ -101,6 +101,8 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   // ── All state declarations first ──────────────────────────────────────────
   const [isDark, setIsDark] = useState(true)
   const [reduceMotion, setReduceMotion] = useState(false)
+  const [showWordLength, setShowWordLength] = useState(false)
+  const [showSimilarity, setShowSimilarity] = useState(true)
   const [helpOpen, setHelpOpen] = useState(false)
   const [statsOpen, setStatsOpen] = useState(false)
   const [difficulty, setDifficulty] = useState<GameMode>("easy")
@@ -130,8 +132,9 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           const s = JSON.parse(raw)
           if (typeof s.blitzDarkMode === "boolean") setIsDark(s.blitzDarkMode)
           if (typeof s.reduceMotion === "boolean") setReduceMotion(s.reduceMotion)
-          if (s.defaultHard === true) setDifficulty("hard")
-        }
+          if (typeof s.showWordLength === "boolean") setShowWordLength(s.showWordLength)
+          if (typeof s.showSimilarity === "boolean") setShowSimilarity(s.showSimilarity)
+          }
       } catch {}
     }
     applySettings()
@@ -195,9 +198,17 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
     setSessions((prev: Record<GameMode, SessionState>) => {
       const s = prev[difficulty]
       const newScore = Math.max(0, s.sessionScore + points)
-      if (!correct) return { ...prev, [difficulty]: { ...s, sessionScore: newScore } }
-      const newStreak = s.sessionStreak + 1
       const newMult = applyMultiplierStep(s.multiplier, multiplierEffect)
+      if (!correct) {
+        // Skip/fail — apply multiplier penalty but don't increment streak/words solved
+        return { ...prev, [difficulty]: {
+          ...s,
+          sessionScore: newScore,
+          multiplier: newMult,
+          bestMultiplier: Math.max(s.bestMultiplier, newMult),
+        }}
+      }
+      const newStreak = s.sessionStreak + 1
       return { ...prev, [difficulty]: {
         ...s,
         sessionScore: newScore,
@@ -217,8 +228,10 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
     wordHistory: WordHistoryEntry[],
     reason: "failed" | "awful" | "complete"
   ) => {
+    // Use bestMultiplier from session state — peakMultiplier from mirror-game is just last word's mult
+    const peakMult = sessions[difficulty].bestMultiplier
     updateSession(difficulty, {
-      summaryData: { score: finalScore, wordsSolved, bestMultiplier: peakMultiplier, wordHistory, reason },
+      summaryData: { score: finalScore, wordsSolved, bestMultiplier: peakMult, wordHistory, reason },
       showSummary: true,
     })
     if (wordsSolved >= 1) {
@@ -243,7 +256,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           body: JSON.stringify({
             player_id: playerId,
             session_score: finalScore,
-            best_streak: peakMultiplier,
+            best_streak: peakMult,
             words_solved: wordsSolved,
             words_attempted: wordsPlayed + 1,
             difficulty,
@@ -393,8 +406,25 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         </div>
       </div>
 
-      {/* Game area */}
-      {currentWord && !showSummary && (
+      {/* Game area — show replay warning if daily already completed */}
+      {blitzTab === "daily" && dailyDone[difficulty] && !showSummary && (
+        <div className={`mx-auto w-full max-w-md px-5`}>
+          <div className={`rounded-xl border p-6 text-center ${isDark ? "border-[#2a2926] bg-[#1c1b19]" : "border-border bg-card"}`}>
+            <p className={`text-2xl mb-2 `}>✅</p>
+            <p className={`font-serif text-lg mb-1 ${isDark ? "text-white" : "text-foreground"}`}>Already completed!</p>
+            <p className={`text-sm mb-4 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>You&apos;ve already played today&apos;s {difficulty} daily. Come back tomorrow!</p>
+            <button
+              type="button"
+              onClick={() => { setBlitzTab("practice"); resetSession(); handleNextWord() }}
+              className={`rounded-lg px-5 py-2 text-sm font-medium ${isDark ? "bg-amber-500 text-white" : "bg-foreground text-background"}`}
+            >
+              Play Practice instead
+            </button>
+          </div>
+        </div>
+      )}
+
+      {currentWord && !showSummary && !(blitzTab === "daily" && dailyDone[difficulty]) && (
         <MirrorGame
           key={`blitz-${difficulty}-${blitzTab}-${currentWord?.word}`}
           word={currentWord!}
@@ -433,6 +463,8 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           onSessionEnd={handleSessionEnd}
           isDark={isDark}
           nemesisEntry={nemesisEntry}
+          showWordLength={showWordLength}
+          showSimilarity={showSimilarity}
           onComplete={(result) => {
             const isPerfect = result.correct && result.guesses === 1 && result.hintsUsed === 0
             const updated = updateMirrorStreak(difficulty, isPerfect)
@@ -448,12 +480,21 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           bestMultiplier={summaryData.bestMultiplier}
           wordHistory={summaryData.wordHistory}
           reason={summaryData.reason}
+          isDaily={blitzTab === "daily"}
           onPlayAgain={() => {
-            resetSession()
-            handleNextWord()
+            if (blitzTab === "daily") {
+              // Daily complete — switch to practice instead of replaying
+              setBlitzTab("practice")
+              resetSession()
+              handleNextWord()
+            } else {
+              resetSession()
+              handleNextWord()
+            }
           }}
           isDark={isDark}
           onFlipBack={() => {
+            setBlitzTab("practice")
             resetSession()
             handleNextWord()
           }}

@@ -31,6 +31,8 @@ interface MirrorGameProps {
   onWordPlayed: (wasAwful: boolean, entry: WordHistoryEntry) => void
   isDark?: boolean
   nemesisEntry?: { points: number; guesses: number; hintsUsed: number } | null
+  showWordLength?: boolean
+  showSimilarity?: boolean
 }
 
 interface Guess {
@@ -209,6 +211,8 @@ export function MirrorGame({
   onWordPlayed,
   isDark = false,
   nemesisEntry = null,
+  showWordLength = false,
+  showSimilarity = true,
 }: MirrorGameProps) {
   const [guesses, setGuesses] = useState<Guess[]>([])
   const [currentGuess, setCurrentGuess] = useState("")
@@ -222,6 +226,7 @@ export function MirrorGame({
   const [pointsEarned, setPointsEarned] = useState<number | null>(null)
   const [playQuality, setPlayQuality] = useState<"flawless" | "good" | "decent" | "poor" | "awful" | null>(null)
   const [floatingPoints, setFloatingPoints] = useState<{value: number, key: number} | null>(null)
+  const [floatingMult, setFloatingMult] = useState<{value: number, key: number} | null>(null)
   const [hintHover, setHintHover] = useState(false)
   const [isSkipped, setIsSkipped] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -241,6 +246,7 @@ export function MirrorGame({
     setPointsEarned(null)
     setPlayQuality(null)
     setIsSkipped(false)
+    setFloatingMult(null)
   }, [word.word])
 
   const handleRevealLetter = () => {
@@ -336,8 +342,11 @@ export function MirrorGame({
       const multDelta = parseFloat((displayMult - multiplier).toFixed(1))
 
       setPointsEarned(earned)
-      setFloatingPoints({ value: earned, key: Date.now() })
+      const nowKey = Date.now()
+      setFloatingPoints({ value: earned, key: nowKey })
       setTimeout(() => setFloatingPoints(null), 1200)
+      setFloatingMult({ value: multDelta, key: nowKey + 1 })
+      setTimeout(() => setFloatingMult(null), 1200)
       setPlayQuality(quality)
       setIsCorrect(true)
       setIsComplete(true)
@@ -424,14 +433,31 @@ export function MirrorGame({
         </div>
 
         {/* Floating points animation */}
+        {/* Floating score popup — anchored near score display (left side of header) */}
         {floatingPoints && (
           <div
             key={floatingPoints.key}
-            className="absolute top-4 right-4 pointer-events-none animate-in fade-in slide-in-from-bottom-2 duration-200"
+            className="absolute top-2 left-6 pointer-events-none"
             style={{ animation: "floatUp 1.2s ease-out forwards" }}
           >
             <span className={`text-sm font-bold ${isDark ? "text-amber-400" : "text-amber-600"}`}>
               +{Math.round(floatingPoints.value)}
+            </span>
+          </div>
+        )}
+        {/* Floating multiplier delta popup — anchored near multiplier badge (right side) */}
+        {floatingMult && floatingMult.value !== 0 && (
+          <div
+            key={floatingMult.key}
+            className="absolute top-2 right-6 pointer-events-none"
+            style={{ animation: "floatUp 1.2s ease-out forwards" }}
+          >
+            <span className={`text-xs font-bold ${
+              floatingMult.value > 0
+                ? "text-emerald-400"
+                : isDark ? "text-red-400" : "text-red-500"
+            }`}>
+              {floatingMult.value > 0 ? "+" : ""}{floatingMult.value}×
             </span>
           </div>
         )}
@@ -441,32 +467,52 @@ export function MirrorGame({
           <p className={`text-xs uppercase tracking-widest mb-3 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{word.partOfSpeech}</p>
           <p className={`text-lg leading-relaxed font-serif italic ${isDark ? "text-[#d4cfc8]" : "text-foreground"}`}>&ldquo;{word.definition}&rdquo;</p>
 
+          {/* Word length hint — shown when setting enabled */}
+          {showWordLength && !isComplete && (
+            <p className={`mt-2 text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
+              {word.word.length} letters
+            </p>
+          )}
+
           {/* Nemesis banner — shown if player previously struggled here */}
           {nemesisEntry && (
             <div className={`mt-3 px-3 py-2 rounded-lg text-xs flex items-center gap-2 ${isDark ? "bg-red-500/10 border border-red-500/20 text-red-400" : "bg-red-50 border border-red-200 text-red-600"}`}>
               <span>⚔️</span>
-              <span>You scored <strong>{Math.round(nemesisEntry.points)} pts</strong> here before — {nemesisEntry.guesses} {nemesisEntry.guesses === 1 ? "guess" : "guesses"}, {nemesisEntry.hintsUsed} {nemesisEntry.hintsUsed === 1 ? "hint" : "hints"}. Redeem yourself.</span>
+              <span>
+                {nemesisEntry.guesses === 0
+                  ? `You couldn't get this one last time${nemesisEntry.hintsUsed > 0 ? ` (${nemesisEntry.hintsUsed} ${nemesisEntry.hintsUsed === 1 ? "hint" : "hints"} used)` : ""}. Redeem yourself.`
+                  : `You scored ${Math.round(nemesisEntry.points)} pts here before — ${nemesisEntry.guesses} ${nemesisEntry.guesses === 1 ? "guess" : "guesses"}, ${nemesisEntry.hintsUsed} ${nemesisEntry.hintsUsed === 1 ? "hint" : "hints"}. Redeem yourself.`
+                }
+              </span>
             </div>
           )}
 
           {/* Letter reveal — smaller tiles so long words fit one line */}
-          {hintsUsed > 0 && (
-            <div className="mt-4 flex items-center justify-center gap-1 flex-nowrap overflow-hidden">
-              {word.word.split("").map((letter, i) => {
-                const isRevealed = revealedIndices.includes(i)
-                return (
-                  <div
-                    key={i}
-                    className={`flex-shrink-0 w-5 h-7 flex items-end justify-center pb-0.5 border-b-2 text-xs font-medium transition-all duration-300 ${
-                      isRevealed ? (isDark ? "border-amber-500 text-amber-400" : "border-foreground text-foreground") : (isDark ? "border-[#3a3936] text-transparent" : "border-muted-foreground/30 text-transparent")
-                    }`}
-                  >
-                    {isRevealed ? letter.toUpperCase() : "_"}
-                  </div>
-                )
-              })}
-            </div>
-          )}
+          {hintsUsed > 0 && (() => {
+            const len = word.word.length
+            // Scale tile width down for longer words so they always fit
+            const tileW = len <= 8 ? "w-6" : len <= 11 ? "w-5" : len <= 14 ? "w-4" : "w-3"
+            const tileH = len <= 11 ? "h-7" : "h-6"
+            const textSize = len <= 11 ? "text-xs" : "text-[10px]"
+            const gap = len <= 11 ? "gap-1" : "gap-0.5"
+            return (
+              <div className={`mt-4 flex items-center justify-center flex-nowrap ${gap}`}>
+                {word.word.split("").map((letter, i) => {
+                  const isRevealed = revealedIndices.includes(i)
+                  return (
+                    <div
+                      key={i}
+                      className={`flex-shrink-0 ${tileW} ${tileH} flex items-end justify-center pb-0.5 border-b-2 ${textSize} font-medium transition-all duration-300 ${
+                        isRevealed ? (isDark ? "border-amber-500 text-amber-400" : "border-foreground text-foreground") : (isDark ? "border-[#3a3936] text-transparent" : "border-muted-foreground/30 text-transparent")
+                      }`}
+                    >
+                      {isRevealed ? letter.toUpperCase() : "_"}
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          })()}
 
           <div className="mt-4 flex flex-col items-center gap-2">
             {showFlawless ? (
@@ -604,9 +650,11 @@ export function MirrorGame({
             {guesses.map((guess, i) => (
               <div key={i} className={`flex items-center justify-between rounded-lg border-2 px-4 py-2.5 ${isDark ? "border-[#2a2926] bg-[#111110]" : getSimilarityBorderColor(guess.similarity)}`}>
                 <span className={`font-medium ${isDark ? "text-[#9b9589]" : ""}`}>{guess.word}</span>
-                <span className={`text-xs font-bold px-2 py-0.5 rounded ${getSimilarityColor(guess.similarity)}`}>
-                  {guess.similarity >= 100 ? "Correct!" : `${guess.similarity}%`}
-                </span>
+                {showSimilarity && (
+                  <span className={`text-xs font-bold px-2 py-0.5 rounded ${getSimilarityColor(guess.similarity)}`}>
+                    {guess.similarity >= 100 ? "Correct!" : `${guess.similarity}%`}
+                  </span>
+                )}
               </div>
             ))}
           </div>
