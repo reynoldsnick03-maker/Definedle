@@ -107,7 +107,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const [statsOpen, setStatsOpen] = useState(false)
   const [difficulty, setDifficulty] = useState<GameMode>("easy")
   const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
-  const [blitzTab, setBlitzTab] = useState<"practice" | "daily">("practice")
+  const [blitzTab, setBlitzTab] = useState<"practice" | "daily">("daily")
   const [nemesisEntry, setNemesisEntry] = useState<{ points: number; guesses: number; hintsUsed: number } | null>(null)
   const [dailyDone, setDailyDone] = useState<{ easy: boolean; hard: boolean }>({ easy: false, hard: false })
   const [dailyStoredSummary, setDailyStoredSummary] = useState<Record<string, {score: number; wordsSolved: number; bestMultiplier: number}>>({}

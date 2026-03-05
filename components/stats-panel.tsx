@@ -134,23 +134,18 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
                     {last7.length === 0 ? (
                       <p className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>No recent games yet.</p>
                     ) : (
-                      <div className="flex items-end gap-1.5 h-24">
+                      <div style={{ display: "flex", alignItems: "flex-end", gap: "6px", height: "96px" }}>
                         {last7.map((entry) => {
-                          const heightPx = Math.max((entry.s / 100) * 64, 3)
-                          const barColor = entry.s >= 70 ? "oklch(0.55 0.12 155)" : entry.s >= 40 ? "oklch(0.65 0.15 75)" : "oklch(0.55 0.18 30)"
+                          const barH = Math.max(Math.round((entry.s / 100) * 64), 4)
+                          const barColor = entry.s >= 70 ? "#4ade80" : entry.s >= 40 ? "#fbbf24" : "#f87171"
                           const isHard = (entry.m || "easy") === "hard"
                           return (
-                            <div key={entry.d} className="flex flex-1 flex-col items-center gap-1">
-                              <span className={`text-[9px] tabular-nums font-medium ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{entry.s}</span>
-                              <div className="w-full flex items-end justify-center h-16">
-                                <div
-                                  className="w-full max-w-5 rounded-sm transition-all duration-500"
-                                  style={{ height: `${heightPx}px`, backgroundColor: barColor }}
-                                />
-                              </div>
-                              <span className={`text-[9px] tabular-nums ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{entry.d.slice(5)}</span>
-                              <span className={`text-[8px] font-medium uppercase tracking-wider ${isHard ? "text-orange-400" : isDark ? "text-[#4a4845]" : "text-muted-foreground/60"}`}>
-                                {isHard ? "hard" : "easy"}
+                            <div key={entry.d} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "2px", height: "96px", justifyContent: "flex-end" }}>
+                              <span style={{ fontSize: "9px", color: isDark ? "#6b6560" : "#888", fontVariantNumeric: "tabular-nums" }}>{entry.s}</span>
+                              <div style={{ width: "100%", height: `${barH}px`, backgroundColor: barColor, borderRadius: "3px" }} />
+                              <span style={{ fontSize: "9px", color: isDark ? "#6b6560" : "#888" }}>{entry.d.slice(5)}</span>
+                              <span style={{ fontSize: "8px", color: isHard ? "#fb923c" : isDark ? "#4a4845" : "#aaa", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                                {isHard ? "H" : "E"}
                               </span>
                             </div>
                           )
