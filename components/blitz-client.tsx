@@ -110,7 +110,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const [blitzTab, setBlitzTab] = useState<"practice" | "daily">("daily")
   const [nemesisEntry, setNemesisEntry] = useState<{ points: number; guesses: number; hintsUsed: number } | null>(null)
   const [dailyDone, setDailyDone] = useState<{ easy: boolean; hard: boolean }>({ easy: false, hard: false })
-  const [dailyStoredSummary, setDailyStoredSummary] = useState<Record<string, {score: number; wordsSolved: number; bestMultiplier: number}>>({}
+  const [dailyStoredSummary, setDailyStoredSummary] = useState<Record<string, {score: number; wordsSolved: number; bestMultiplier: number} | null>>({} as Record<string, {score: number; wordsSolved: number; bestMultiplier: number} | null>)
   const [dailySequenceEasy, setDailySequenceEasy] = useState<DailyWord[]>([])
   const [dailySequenceHard, setDailySequenceHard] = useState<DailyWord[]>([])
   const [dailyWordIndex, setDailyWordIndex] = useState(0)
