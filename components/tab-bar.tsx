@@ -7,9 +7,10 @@ export type AppTab = "definedle" | "blitz"
 interface TabBarProps {
   activeTab: AppTab
   onTabChange: (tab: AppTab) => void
+  highlightBlitz?: boolean
 }
 
-export function TabBar({ activeTab, onTabChange }: TabBarProps) {
+export function TabBar({ activeTab, onTabChange, highlightBlitz = false }: TabBarProps) {
   const [hasVisitedBlitz, setHasVisitedBlitz] = useState(true)
   const [blitzRounds, setBlitzRounds] = useState(0)
   const [pulse, setPulse] = useState(false)
@@ -65,14 +66,14 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
 
   return (
     <nav
-      className={`fixed bottom-0 left-0 right-0 z-50 flex border-t border-border bg-card transition-transform duration-300 ease-in-out ${visible ? "translate-y-0" : "translate-y-full"}`}
+      className={`fixed bottom-0 left-0 right-0 z-50 flex border-t-2 border-border bg-card shadow-[0_-2px_12px_rgba(0,0,0,0.08)] transition-transform duration-300 ease-in-out ${visible ? "translate-y-0" : "translate-y-full"}`}
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <button
         type="button"
         onClick={() => handleTabChange("definedle")}
-        className={`flex flex-1 flex-col items-center gap-0.5 pb-3 pt-2.5 transition-colors focus-visible:outline-none ${
-          activeTab === "definedle" ? "text-foreground" : "text-muted-foreground hover:text-foreground/70"
+        className={`flex flex-1 flex-col items-center gap-0.5 pb-3 pt-2.5 transition-all focus-visible:outline-none border-t-2 ${
+          activeTab === "definedle" ? "border-foreground text-foreground" : "border-transparent text-muted-foreground hover:text-foreground/70"
         }`}
         aria-label="Definedle"
       >
@@ -80,16 +81,14 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
           <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
         </svg>
         <span className="text-[10px] font-medium tracking-wide">Definedle</span>
-        {activeTab === "definedle" && (
-          <span className="h-1 w-1 rounded-full bg-foreground" aria-hidden="true" />
-        )}
+
       </button>
 
       <button
         type="button"
         onClick={() => handleTabChange("blitz")}
-        className={`relative flex flex-1 flex-col items-center gap-0.5 pb-3 pt-2.5 transition-colors focus-visible:outline-none ${
-          activeTab === "blitz" ? "text-amber-500" : "text-muted-foreground hover:text-foreground/70"
+        className={`relative flex flex-1 flex-col items-center gap-0.5 pb-3 pt-2.5 transition-all focus-visible:outline-none border-t-2 ${
+          activeTab === "blitz" ? "border-amber-500 text-amber-500" : highlightBlitz ? "border-amber-400/60 text-amber-400 animate-pulse" : "border-transparent text-muted-foreground hover:text-foreground/70"
         }`}
         aria-label="Blitz"
       >
@@ -99,9 +98,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
           </svg>
         </span>
         <span className="text-[10px] font-medium tracking-wide">Blitz</span>
-        {activeTab === "blitz" && (
-          <span className="h-1 w-1 rounded-full bg-amber-500" aria-hidden="true" />
-        )}
+
         {pulse && activeTab !== "blitz" && (
           <span className="absolute top-2 right-[calc(50%-18px)] h-2 w-2 rounded-full bg-amber-400 ring-4 ring-amber-400/30 animate-ping" aria-hidden="true" />
         )}

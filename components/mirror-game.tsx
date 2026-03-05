@@ -253,10 +253,11 @@ export function MirrorGame({
   const handleRevealLetter = () => {
     if (isComplete) return
     if (hintsUsed >= word.word.length - 1) return
+    // At floor: block if score would go negative
+    if (hintsUsed >= maxHints && multiplier <= 1 && sessionScore <= 0) return
     setHintsUsed(h => h + 1)
     if (hintsUsed >= maxHints) {
       if (multiplier <= 1) {
-        // At floor — dock 1pt from score instead of multiplier
         onSessionUpdate({ points: -1, correct: false, multiplierEffect: "decent" })
       } else {
         onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
@@ -408,18 +409,18 @@ export function MirrorGame({
     }
   }, [currentGuess, guesses, isComplete, isValidating, word, hintsUsed, multiplier, onComplete, onSessionUpdate, onSessionEnd, sessionScore, sessionStreak, wordHistory])
 
-  const multiplierColor = multiplier >= 4 ? "text-score-high" : multiplier >= 2.5 ? "text-amber-500" : "text-muted-foreground"
+  const multiplierColor = multiplier > 1 ? (multiplier >= 4 ? "text-emerald-400" : multiplier >= 2.5 ? "text-emerald-500" : "text-emerald-600") : (isDark ? "text-[#6b6560]" : "text-muted-foreground")
 
   const qualityLabel = playQuality === "flawless"
-    ? <span className="text-score-high font-medium">▲ flawless</span>
+    ? <span className="text-emerald-500 font-medium">▲ +2×</span>
     : playQuality === "good"
-    ? <span className="text-amber-500 font-medium">▲ good</span>
+    ? <span className="text-emerald-600 font-medium">▲ +1×</span>
     : playQuality === "decent"
-    ? <span className="text-muted-foreground font-medium">▼ decent</span>
+    ? <span className={`${isDark ? "text-[#6b6560]" : "text-muted-foreground"} font-medium`}>▼ −0.5×</span>
     : playQuality === "poor"
-    ? <span className="text-score-low font-medium">▼ poor</span>
+    ? <span className="text-orange-500 font-medium">▼ −1×</span>
     : playQuality === "awful"
-    ? <span className="text-red-600 font-bold">▼ awful</span>
+    ? <span className="text-red-500 font-bold">▼ −1.5×</span>
     : null
 
   const devReveal = false // dev reveal removed
@@ -593,9 +594,13 @@ export function MirrorGame({
               </div>
             ) : (
               <div className="mb-4">
-                <p className={`mb-2 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>The word was:</p>
+                <p className={`mb-1 text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
+                  {isSkipped ? "Skipped" : "Not this time"}
+                </p>
                 <p className={`text-2xl font-serif font-medium ${isDark ? "text-white" : ""}`}>{word.word}</p>
-                <p className={`text-xs mt-2 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{multiplier <= 1 ? "Moving on..." : "−0.5× · Moving on..."}</p>
+                <p className={`text-xs mt-1 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
+                  {multiplier <= 1 ? "No multiplier penalty at ×1" : "−0.5× · Moving on..."}
+                </p>
               </div>
             )}
             {isCorrect && isPractice && onNextWord && wordsPlayed + 1 < 15 && (
@@ -607,13 +612,7 @@ export function MirrorGame({
                 Next word
               </button>
             )}
-            {isSkipped && (
-              <div className="mt-2 text-center">
-                <p className={`mb-1 text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Skipped — the word was:</p>
-                <p className={`text-2xl font-serif font-medium mb-1 ${isDark ? "text-white" : ""}`}>{word.word}</p>
-                <p className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{multiplier <= 1 ? "No penalty at ×1" : "−0.5× multiplier"}</p>
-              </div>
-            )}
+
           </div>
         ) : (
           <form onSubmit={handleSubmit}>

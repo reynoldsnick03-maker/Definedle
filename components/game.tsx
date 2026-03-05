@@ -83,6 +83,7 @@ export function Game({
   const [usedHint, setUsedHint] = useState(false)
   const [showHint, setShowHint] = useState(false)
   const [nemesisPrev, setNemesisPrev] = useState<{ score: number; definition: string } | null>(null)
+  const [showBlitzPrompt, setShowBlitzPrompt] = useState(false)
 
   // Reset hint state when word changes (for practice mode)
   useEffect(() => {
@@ -172,6 +173,17 @@ export function Game({
       setResult(scoreResult)
       setPlayerDefinition(definition)
       setSubmitted(true)
+      // Show Blitz prompt on first ever completed game
+      try {
+        const visited = localStorage.getItem("definedle-blitz-visited")
+        const played = parseInt(localStorage.getItem("definedle-games-played") || "0", 10)
+        localStorage.setItem("definedle-games-played", String(played + 1))
+        if (!visited && played === 0) {
+          setShowBlitzPrompt(true)
+          // Signal page-client to highlight Blitz tab
+          try { window.dispatchEvent(new CustomEvent("definedle-highlight-blitz")) } catch {}
+        }
+      } catch {}
 
       // Save daily result to cookie and history (daily mode only)
       if (!isPractice) {

@@ -25,6 +25,8 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
   const [stats, setStats] = useState<GameHistory | null>(null)
   const [blitzEasy, setBlitzEasy] = useState<BlitzSession[]>([])
   const [blitzHard, setBlitzHard] = useState<BlitzSession[]>([])
+  const [blitzError, setBlitzError] = useState<string | null>(null)
+  const [blitzLoading, setBlitzLoading] = useState(false)
 
   const fetchStats = useCallback(async () => {
     try {
@@ -34,17 +36,25 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
   }, [])
 
   const fetchBlitzStats = useCallback(async () => {
+    setBlitzLoading(true)
+    setBlitzError(null)
     try {
       const playerId = getPlayerId()
-      if (!playerId) return
+      if (!playerId) { setBlitzError("No player ID found"); setBlitzLoading(false); return }
       const res = await fetch(`/api/mirror-sessions?player_id=${encodeURIComponent(playerId)}`)
       if (res.ok) {
         const data = await res.json()
         const sessions: BlitzSession[] = data.sessions || []
         setBlitzEasy(sessions.filter(s => s.difficulty === "easy").sort((a, b) => b.session_score - a.session_score).slice(0, 5))
         setBlitzHard(sessions.filter(s => s.difficulty === "hard").sort((a, b) => b.session_score - a.session_score).slice(0, 5))
+        if (sessions.length === 0) setBlitzError("No sessions found in database")
+      } else {
+        setBlitzError(`API error: ${res.status}`)
       }
-    } catch {}
+    } catch (e) {
+      setBlitzError(`Fetch failed: ${e}`)
+    }
+    setBlitzLoading(false)
   }, [])
 
   useEffect(() => {
@@ -160,7 +170,11 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
 
           {activeTab === "blitz" && (
             <>
-              {blitzEasy.length === 0 && blitzHard.length === 0 ? (
+              {blitzLoading ? (
+                <p className={`text-sm text-center py-8 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Loading...</p>
+              ) : blitzError ? (
+                <p className={`text-xs text-center py-8 text-red-500`}>{blitzError}</p>
+              ) : blitzEasy.length === 0 && blitzHard.length === 0 ? (
                 <p className={`text-sm text-center py-8 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Complete a Blitz session to start tracking stats.</p>
               ) : (
                 <>
