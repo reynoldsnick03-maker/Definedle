@@ -25,7 +25,7 @@ function getNemesisEntry(
     // Load all saved word history from mirror sessions stored locally
     const histRaw = localStorage.getItem("definedle-blitz-word-history")
     if (!histRaw) return null
-    const history: Array<{ word: string; points: number; guesses: number; hintsUsed: number; tier: string }> = JSON.parse(histRaw)
+    const history: Array<{ word: string; points: number; guesses: number; hintsUsed: number; tier: string; bestGuess?: string }> = JSON.parse(histRaw)
 
     const match = history.filter(e => e.word === wordName)
     if (match.length === 0) return null
@@ -41,7 +41,7 @@ function getNemesisEntry(
     const wasFlawless = last.guesses === 1 && last.hintsUsed === 0
     if (wasFlawless || !qualifies) return null
 
-    return { points: last.points, guesses: last.guesses, hintsUsed: last.hintsUsed }
+    return { points: last.points, guesses: last.guesses, hintsUsed: last.hintsUsed, bestGuess: last.bestGuess }
   } catch {
     return null
   }
@@ -49,7 +49,7 @@ function getNemesisEntry(
 
 // Save word to local blitz history for nemesis lookup
 function saveWordToBlitzHistory(entry: {
-  word: string; points: number; guesses: number; hintsUsed: number; tier: string
+  word: string; points: number; guesses: number; hintsUsed: number; tier: string; bestGuess?: string
 }) {
   try {
     const raw = localStorage.getItem("definedle-blitz-word-history")
@@ -108,7 +108,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const [difficulty, setDifficulty] = useState<GameMode>("easy")
   const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
   const [blitzTab, setBlitzTab] = useState<"practice" | "daily">("daily")
-  const [nemesisEntry, setNemesisEntry] = useState<{ points: number; guesses: number; hintsUsed: number } | null>(null)
+  const [nemesisEntry, setNemesisEntry] = useState<{ points: number; guesses: number; hintsUsed: number; bestGuess?: string } | null>(null)
   const [dailyDone, setDailyDone] = useState<{ easy: boolean; hard: boolean }>({ easy: false, hard: false })
   const [dailyStoredSummary, setDailyStoredSummary] = useState<Record<string, {score: number; wordsSolved: number; bestMultiplier: number; wordHistory?: WordHistoryEntry[]} | null>>({} as Record<string, {score: number; wordsSolved: number; bestMultiplier: number; wordHistory?: WordHistoryEntry[]} | null>)
   const [dailySequenceEasy, setDailySequenceEasy] = useState<DailyWord[]>([])
@@ -459,6 +459,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
               guesses: entry.guesses,
               hintsUsed: entry.hintsUsed,
               tier: wasAwful ? "awful" : entry.guesses === 0 ? "failed" : "other",
+              bestGuess: entry.bestGuess,
             })
           }}
           onSessionUpdate={handleSessionUpdate}

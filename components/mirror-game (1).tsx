@@ -11,6 +11,7 @@ export interface WordHistoryEntry {
   multDelta: number
   guesses: number
   hintsUsed: number
+  bestGuess?: string
 }
 
 interface MirrorGameProps {
@@ -30,7 +31,7 @@ interface MirrorGameProps {
   wordHistory: WordHistoryEntry[]
   onWordPlayed: (wasAwful: boolean, entry: WordHistoryEntry) => void
   isDark?: boolean
-  nemesisEntry?: { points: number; guesses: number; hintsUsed: number } | null
+  nemesisEntry?: { points: number; guesses: number; hintsUsed: number; bestGuess?: string } | null
   showWordLength?: boolean
   showSimilarity?: boolean
 }
@@ -389,7 +390,8 @@ export function MirrorGame({
         onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
       }
       const failDelta = atFloor ? 0 : -0.5
-      const failEntry: WordHistoryEntry = { word: word.word, points: 0, multDelta: failDelta, guesses: newGuesses.length, hintsUsed }
+      const bestGuess = newGuesses.reduce((best, g) => g.similarity > (best?.similarity ?? -1) ? g : best, newGuesses[0])
+      const failEntry: WordHistoryEntry = { word: word.word, points: 0, multDelta: failDelta, guesses: newGuesses.length, hintsUsed, bestGuess: bestGuess?.word }
       const newFailHistory = [...wordHistory, failEntry]
       const newFailWordsPlayed = wordsPlayed + 1
       onWordPlayed(false, failEntry)
@@ -488,14 +490,21 @@ export function MirrorGame({
 
           {/* Nemesis banner — shown if player previously struggled here */}
           {nemesisEntry && (
-            <div className={`mt-3 px-3 py-2 rounded-lg text-xs flex items-center gap-2 ${isDark ? "bg-red-500/10 border border-red-500/20 text-red-400" : "bg-red-50 border border-red-200 text-red-600"}`}>
-              <span>⚔️</span>
-              <span>
-                {nemesisEntry.guesses === 0
-                  ? `You couldn't get this one last time${nemesisEntry.hintsUsed > 0 ? ` (${nemesisEntry.hintsUsed} ${nemesisEntry.hintsUsed === 1 ? "hint" : "hints"} used)` : ""}. Redeem yourself.`
-                  : `You scored ${Math.round(nemesisEntry.points)} pts here before — ${nemesisEntry.guesses} ${nemesisEntry.guesses === 1 ? "guess" : "guesses"}, ${nemesisEntry.hintsUsed} ${nemesisEntry.hintsUsed === 1 ? "hint" : "hints"}. Redeem yourself.`
-                }
-              </span>
+            <div className={`mt-3 px-3 py-2.5 rounded-lg text-xs ${isDark ? "bg-red-500/10 border border-red-500/20" : "bg-red-50 border border-red-200"}`}>
+              <p className={`font-medium mb-1 ${isDark ? "text-red-400" : "text-red-600"}`}>⚔️ Nemesis — you struggled here before</p>
+              {nemesisEntry.guesses === 0 ? (
+                <p className={isDark ? "text-[#9b9589]" : "text-muted-foreground"}>
+                  {`Couldn't get this one last time${nemesisEntry.hintsUsed > 0 ? ` · ${nemesisEntry.hintsUsed} hint${nemesisEntry.hintsUsed > 1 ? "s" : ""} used` : ""}. Redeem yourself.`}
+                </p>
+              ) : (
+                <div className={`flex items-center justify-between ${isDark ? "text-[#9b9589]" : "text-muted-foreground"}`}>
+                  <span>
+                    Best guess: <span className={`font-medium ${isDark ? "text-red-400" : "text-red-600"}`}>{nemesisEntry.bestGuess ?? "—"}</span>
+                    {nemesisEntry.hintsUsed > 0 && ` · ${nemesisEntry.hintsUsed} hint${nemesisEntry.hintsUsed > 1 ? "s" : ""}`}
+                  </span>
+                  <span className={`font-medium tabular-nums ${isDark ? "text-amber-500" : "text-amber-600"}`}>{Math.round(nemesisEntry.points)} pts</span>
+                </div>
+              )}
             </div>
           )}
 

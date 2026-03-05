@@ -55,11 +55,34 @@ export function Game({
   onComplete,
 }: GameProps) {
   const DAILY_RESULT_COOKIE = difficulty === "hard" ? "definedle-today-hard" : "definedle-today"
+
+  // Load nemesis entry for practice mode
+  useEffect(() => {
+    if (!isPractice) { setNemesisPrev(null); return }
+    try {
+      const raw = localStorage.getItem("definedle-settings")
+      const settings = raw ? JSON.parse(raw) : {}
+      if (!settings.nemesisWords) { setNemesisPrev(null); return }
+      const histRes = fetch("/api/history").then(r => r.json()).then((data) => {
+        const entries: HistoryEntry[] = data.entries ?? []
+        const thresh = settings.nemesisThreshold || "awful"
+        const matches = entries.filter(e => e.w === dailyWord.word && e.m === difficulty)
+        if (matches.length === 0) { setNemesisPrev(null); return }
+        const last = matches[matches.length - 1]
+        const isPoor = last.s < 60
+        const isAwful = last.s < 30
+        const qualifies = thresh === "poor" ? isPoor : isAwful
+        if (!qualifies || last.s >= 95) { setNemesisPrev(null); return }
+        setNemesisPrev({ score: last.s, definition: last.p ?? "" })
+      }).catch(() => setNemesisPrev(null))
+    } catch { setNemesisPrev(null) }
+  }, [dailyWord.word, isPractice, difficulty])
   const [result, setResult] = useState<ScoreResult | null>(null)
   const [submitted, setSubmitted] = useState(false)
   const [playerDefinition, setPlayerDefinition] = useState("")
   const [usedHint, setUsedHint] = useState(false)
   const [showHint, setShowHint] = useState(false)
+  const [nemesisPrev, setNemesisPrev] = useState<{ score: number; definition: string } | null>(null)
 
   // Reset hint state when word changes (for practice mode)
   useEffect(() => {
@@ -128,6 +151,7 @@ export function Game({
         c: `${matchedCount}/${scoreResult.concepts.length}`,
         w: word.word,
         m: difficulty,
+        p: definition.slice(0, 200), // store first 200 chars for nemesis display
       }
       try {
         await fetch("/api/history", {
@@ -199,6 +223,18 @@ export function Game({
         />
 
         <div className="my-6 h-px bg-border" aria-hidden="true" />
+
+        {/* Nemesis banner — practice mode, if previously struggled */}
+        {nemesisPrev && !submitted && (
+          <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2.5 text-xs dark:border-red-900/40 dark:bg-red-950/20">
+            <p className="font-medium text-red-600 dark:text-red-400 mb-1">⚔️ Nemesis — you scored {nemesisPrev.score} here before</p>
+            {nemesisPrev.definition ? (
+              <p className="text-muted-foreground italic">&ldquo;{nemesisPrev.definition}&rdquo;</p>
+            ) : (
+              <p className="text-muted-foreground">No definition saved from last time.</p>
+            )}
+          </div>
+        )}
 
         {/* Synonym hint — hard mode only (easy words have no synonyms) */}
         {!submitted && dailyWord.synonyms && dailyWord.synonyms.length > 0 && (
