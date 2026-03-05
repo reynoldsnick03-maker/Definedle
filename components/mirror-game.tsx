@@ -435,46 +435,36 @@ export function MirrorGame({
           </span>
 
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5">
+            {/* Score with floating +pts popup anchored inside */}
+            <div className="relative flex items-center gap-1.5">
               <Star className="h-3.5 w-3.5 text-amber-500" />
               <span className={`text-sm font-semibold tabular-nums ${isDark ? "text-white" : "text-foreground"}`}>{Math.round(sessionScore)}</span>
+              {floatingPoints && (
+                <span
+                  key={floatingPoints.key}
+                  className={`absolute -top-5 left-0 text-sm font-bold pointer-events-none ${isDark ? "text-amber-400" : "text-amber-600"}`}
+                  style={{ animation: "floatUp 1.2s ease-out forwards" }}
+                >
+                  +{Math.round(floatingPoints.value)}
+                </span>
+              )}
             </div>
-            <div className={`flex items-center gap-1 px-2 py-0.5 rounded-md border transition-all duration-200 ${isDark ? "bg-[#111110] border-[#2a2926]" : "bg-muted/40 border-border/50"} ${hintHover && hintsUsed >= maxHints ? "scale-110 " + (isDark ? "border-amber-500/50" : "border-foreground/30") : ""}`}>
+            {/* Multiplier badge with floating ×delta popup anchored inside */}
+            <div className={`relative flex items-center gap-1 px-2 py-0.5 rounded-md border transition-all duration-200 ${isDark ? "bg-[#111110] border-[#2a2926]" : "bg-muted/40 border-border/50"} ${hintHover && hintsUsed >= maxHints ? "scale-110 " + (isDark ? "border-amber-500/50" : "border-foreground/30") : ""}`}>
               <Zap className={`h-3 w-3 ${multiplierColor}`} />
               <span className={`text-xs font-bold tabular-nums ${multiplierColor}`}>×{multiplier}</span>
+              {floatingMult && floatingMult.value !== 0 && (
+                <span
+                  key={floatingMult.key}
+                  className={`absolute -top-5 left-0 text-xs font-bold pointer-events-none ${floatingMult.value > 0 ? "text-emerald-400" : isDark ? "text-red-400" : "text-red-500"}`}
+                  style={{ animation: "floatUp 1.2s ease-out forwards" }}
+                >
+                  {floatingMult.value > 0 ? "+" : ""}{floatingMult.value}×
+                </span>
+              )}
             </div>
           </div>
         </div>
-
-        {/* Floating points animation */}
-        {/* Floating score popup — rises from score area (top-left of card) */}
-        {floatingPoints && (
-          <div
-            key={floatingPoints.key}
-            className="absolute pointer-events-none"
-            style={{ top: "14px", right: "72px", animation: "floatUp 1.2s ease-out forwards" }}
-          >
-            <span className={`text-sm font-bold ${isDark ? "text-amber-400" : "text-amber-600"}`}>
-              +{Math.round(floatingPoints.value)}
-            </span>
-          </div>
-        )}
-        {/* Floating multiplier delta popup — rises from multiplier badge (top-right of card) */}
-        {floatingMult && floatingMult.value !== 0 && (
-          <div
-            key={floatingMult.key}
-            className="absolute pointer-events-none"
-            style={{ top: "14px", right: "16px", animation: "floatUp 1.2s ease-out forwards" }}
-          >
-            <span className={`text-xs font-bold ${
-              floatingMult.value > 0
-                ? "text-emerald-400"
-                : isDark ? "text-red-400" : "text-red-500"
-            }`}>
-              {floatingMult.value > 0 ? "+" : ""}{floatingMult.value}×
-            </span>
-          </div>
-        )}
 
         {/* Definition */}
         <div className="text-center mb-6">
