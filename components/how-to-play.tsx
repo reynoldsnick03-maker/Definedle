@@ -41,8 +41,9 @@ export function HowToPlay({ open, onClose }: HowToPlayProps) {
         </div>
 
         <div className="overflow-y-auto overscroll-contain px-6 pb-6 flex flex-col gap-5 text-sm leading-relaxed text-foreground/80">
-
-          <p>You are shown a word. Write its definition as if you were writing a dictionary entry.</p>
+          <p>
+            You are shown a word. Write its definition as if you were writing a dictionary entry.
+          </p>
 
           <div className="h-px bg-border" aria-hidden="true" />
 
@@ -86,28 +87,25 @@ export function HowToPlay({ open, onClose }: HowToPlayProps) {
 
           <div className="h-px bg-border" aria-hidden="true" />
 
-          <div className="flex flex-col gap-3">
-            <h3 className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Mirror Mode</h3>
-            <p>See the definition, guess the word in up to 3 tries. Available in Practice mode.</p>
+          <div className="flex flex-col gap-2">
+            <h3 className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Modes</h3>
             <p>
-              Tap <span className="text-foreground font-medium">Reveal a letter</span> to uncover letters one at a time &mdash; first letter, last letter, then rarest letters first. You have 3 free hints per word; further reveals cost 1 point from your score.
-            </p>
-            <p>
-              Your score accumulates across 15 words. A multiplier rewards consistent performance &mdash; flawless rounds push it up, poor rounds bring it down. Failing all 3 guesses ends your session early, as does three awful rounds in a row.
+              <span className="text-foreground font-medium">Daily</span> &mdash; one word per day, same for everyone.
+              <br />
+              <span className="text-foreground font-medium">Practice</span> &mdash; unlimited words to sharpen your skills.
+              <br />
+              Both have <span className="text-foreground font-medium">Easy</span> and <span className="text-foreground font-medium">Hard</span> difficulty.
             </p>
           </div>
 
           <div className="h-px bg-border" aria-hidden="true" />
 
           <div className="flex flex-col gap-2">
-            <h3 className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Modes</h3>
+            <h3 className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Blitz</h3>
             <p>
-              <span className="text-foreground font-medium">Daily</span> &mdash; one word per day, same for everyone.<br />
-              <span className="text-foreground font-medium">Practice</span> &mdash; unlimited words to sharpen your skills.<br />
-              Both have <span className="text-foreground font-medium">Easy</span> and <span className="text-foreground font-medium">Hard</span> difficulty.
+              Tap the <span className="text-foreground font-medium">⚡ Blitz</span> tab at the bottom to play Definedle&apos;s speed run mode — see the definition, name the word in 3 tries, protect your multiplier across 15 words.
             </p>
           </div>
-
         </div>
       </div>
     </div>

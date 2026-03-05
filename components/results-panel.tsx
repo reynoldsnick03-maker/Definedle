@@ -5,8 +5,7 @@ import { ScoreDisplay } from "./score-display"
 import { ConceptBreakdown } from "./concept-breakdown"
 import { ScoreCelebration } from "./score-celebration"
 import { CountdownTimer } from "./countdown-timer"
-import { Check, Copy, ChevronDown, Users } from "lucide-react"
-import { ThumbsUp, ThumbsDown } from "lucide-react"
+import { Check, Copy, ChevronDown, Users, MessageSquare } from "lucide-react"
 import type { ConceptResult, ScoreBreakdown } from "@/lib/scoring"
 
 interface ResultsPanelProps {
@@ -24,7 +23,6 @@ interface ResultsPanelProps {
   isPractice?: boolean
   onNextWord?: () => void
   difficulty?: "easy" | "hard"
-  streak?: number
 }
 
 export function ResultsPanel({
@@ -42,7 +40,6 @@ export function ResultsPanel({
   isPractice,
   onNextWord,
   difficulty = "easy",
-  streak = 0,
 }: ResultsPanelProps) {
   const [copied, setCopied] = useState(false)
   const [averageData, setAverageData] = useState<{ average: number; count: number } | null>(null)
@@ -50,7 +47,6 @@ export function ResultsPanel({
   const [showFeedback, setShowFeedback] = useState(false)
   const [feedbackSent, setFeedbackSent] = useState(false)
   const [feedbackError, setFeedbackError] = useState<string | null>(null)
-  const [thumbsUp, setThumbsUp] = useState(false)
   
   const improveKey = `definedle-improve-${word}-${difficulty}`
   const submittedKey = `definedle-submitted-${word}-${difficulty}`
@@ -134,15 +130,20 @@ export function ResultsPanel({
   }
 
   const handleShare = () => {
+    // Generate a single progress bar (10 blocks total)
     const filled = Math.round(score / 10)
     const progressBar = "█".repeat(filled) + "░".repeat(10 - filled)
+
     const modeLabel = difficulty === "hard" ? " Hard" : ""
-    const matchedConcepts = safeConcepts.filter(c => c.matched).length
-    const totalConcepts = safeConcepts.length
-    const conceptLine = matchedConcepts === totalConcepts
-      ? `${matchedConcepts}/${totalConcepts} concepts ✓`
-      : `${matchedConcepts}/${totalConcepts} concepts`
-    const text = `Definedle${modeLabel} — ${score}/100\n${progressBar}\n${conceptLine}\n\nCan you define \"${word.toUpperCase()}\"?\nv0-definedle-word-game.vercel.app`
+    
+    // Viral share format: challenge question + clean bar
+    const text = `Definedle${modeLabel} - ${score}/100
+
+${progressBar}
+
+Can you define "${word.toUpperCase()}"?
+
+definedle.com`
 
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true)
@@ -282,7 +283,7 @@ export function ResultsPanel({
   { label: "Detail", earned: breakdown.detail.earned, max: breakdown.detail.max, pct: detailPct, explanation: detailExplanation },
   ]
   if (breakdown.hintPenalty > 0) {
-    factors.push({ label: "Hint used", earned: -breakdown.hintPenalty, max: 0, pct: 0, explanation: "Etymology hint was revealed before answering.", isPenalty: true })
+    factors.push({ label: "Hint used", earned: -breakdown.hintPenalty, max: 0, pct: 0, explanation: "Synonym hint was revealed before answering.", isPenalty: true })
   }
 
                 return factors.map((item) =>
@@ -367,48 +368,21 @@ export function ResultsPanel({
               </>
             )}
           </button>
-
-          {/* Thumbs feedback */}
+          
+          {/* Feedback button */}
           {!feedbackSent ? (
-            <div className="flex flex-col items-center gap-2">
-              {!thumbsUp && (
-                <div className="flex items-center gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setThumbsUp(true)}
-                    className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-score-high transition-colors"
-                    aria-label="Scoring felt fair"
-                  >
-                    <ThumbsUp className="h-3.5 w-3.5" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowFeedback(!showFeedback)}
-                    className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-destructive transition-colors"
-                    aria-label="Report scoring issue"
-                  >
-                    <ThumbsDown className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-              )}
-              {thumbsUp && <p className="text-xs text-score-high">Thanks!</p>}
-              {score < 30 && !showFeedback && !thumbsUp && (
-                <p className="text-xs text-muted-foreground">
-                  Did this feel unfair?{" "}
-                  <button
-                    type="button"
-                    onClick={() => setShowFeedback(true)}
-                    className="underline hover:text-foreground transition-colors"
-                  >
-                    Tell us.
-                  </button>
-                </p>
-              )}
-            </div>
+            <button
+              type="button"
+              onClick={() => setShowFeedback(!showFeedback)}
+              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <MessageSquare className="h-3 w-3" />
+              Report scoring issue
+            </button>
           ) : (
             <p className="text-xs text-score-high">Thanks for your feedback!</p>
           )}
-
+          
           {/* Feedback form */}
           {showFeedback && !feedbackSent && (
             <div className="w-full max-w-sm rounded-lg border border-border bg-muted/30 p-4 animate-in fade-in slide-in-from-top-2 duration-200">
@@ -458,17 +432,6 @@ export function ResultsPanel({
         </button>
       ) : (
         <div className="flex flex-col items-center gap-4">
-          {/* Streak acknowledgment */}
-          {!isPractice && streak > 0 && (
-            <div className="flex flex-col items-center gap-1">
-              <p className="text-sm font-medium text-foreground">
-                {streak === 1 ? "Streak started! 🔥" : `🔥 ${streak} day streak`}
-              </p>
-              <p className="text-xs text-muted-foreground">
-                {streak > 1 ? "Come back tomorrow to keep your streak" : "See you tomorrow"}
-              </p>
-            </div>
-          )}
           {onPractice && (
             <button
               type="button"
