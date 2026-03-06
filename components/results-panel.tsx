@@ -15,6 +15,8 @@ interface ResultsPanelProps {
   synonymWarning: boolean
   missedSummary: string | null
   breakdown?: ScoreBreakdown
+  showScore?: boolean
+  showConceptBreakdown?: boolean
   playerDefinition: string
   officialDefinition: string
   altDefinitionUsed?: string
@@ -32,6 +34,8 @@ export function ResultsPanel({
   synonymWarning,
   missedSummary,
   breakdown,
+  showScore = true,
+  showConceptBreakdown = true,
   playerDefinition,
   officialDefinition,
   altDefinitionUsed,
@@ -154,7 +158,7 @@ definedle.com`
   return (
     <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <ScoreCelebration score={score} />
-      <ScoreDisplay score={score} />
+      {showScore && <ScoreDisplay score={score} />
 
       {/* Average score display */}
       {!isPractice && averageData && averageData.count > 1 && (
@@ -176,7 +180,7 @@ definedle.com`
       <div className="h-px bg-border" aria-hidden="true" />
 
       {/* Concept breakdown */}
-      <ConceptBreakdown concepts={safeConcepts} synonymWarning={synonymWarning} missedSummary={missedSummary} />
+      {showConceptBreakdown && <ConceptBreakdown concepts={safeConcepts} synonymWarning={synonymWarning} missedSummary={missedSummary} />
 
       {/* How to improve -- only shown when score < 100 and breakdown available */}
       {score < 100 && breakdown && (
@@ -283,7 +287,7 @@ definedle.com`
   { label: "Detail", earned: breakdown.detail.earned, max: breakdown.detail.max, pct: detailPct, explanation: detailExplanation },
   ]
   if (breakdown.hintPenalty > 0) {
-    factors.push({ label: "Hint used", earned: -breakdown.hintPenalty, max: 0, pct: 0, explanation: "Synonym hint was revealed before answering.", isPenalty: true })
+    factors.push({ label: "Hint used", earned: -breakdown.hintPenalty, max: 0, pct: 0, explanation: "Etymology hint was revealed before answering.", isPenalty: true })
   }
 
                 return factors.map((item) =>

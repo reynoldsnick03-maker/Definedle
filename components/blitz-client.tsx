@@ -138,6 +138,8 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   // ── All state declarations first ──────────────────────────────────────────
   const [isDark, setIsDark] = useState(true)
   const [reduceMotion, setReduceMotion] = useState(false)
+  const [skipPenaltyOff, setSkipPenaltyOff] = useState(false)
+  const [autoAdvance, setAutoAdvance] = useState(false)
   const [showWordLength, setShowWordLength] = useState(false)
   const [showSimilarity, setShowSimilarity] = useState(true)
   const [helpOpen, setHelpOpen] = useState(false)
@@ -171,6 +173,8 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           const s = JSON.parse(raw)
           if (typeof s.blitzDarkMode === "boolean") setIsDark(s.blitzDarkMode)
           if (typeof s.reduceMotion === "boolean") setReduceMotion(s.reduceMotion)
+          if (typeof s.skipPenaltyOff === "boolean") setSkipPenaltyOff(s.skipPenaltyOff)
+          if (typeof s.autoAdvance === "boolean") setAutoAdvance(s.autoAdvance)
           if (typeof s.showWordLength === "boolean") setShowWordLength(s.showWordLength)
           if (typeof s.showSimilarity === "boolean") setShowSimilarity(s.showSimilarity)
           }
@@ -584,6 +588,8 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           nemesisEntry={nemesisEntry}
           showWordLength={showWordLength}
           showSimilarity={showSimilarity}
+          skipPenaltyOff={skipPenaltyOff}
+          autoAdvance={autoAdvance}
           onComplete={(result) => {
             const isPerfect = result.correct && result.guesses === 1 && result.hintsUsed === 0
             const updated = updateMirrorStreak(difficulty, isPerfect)

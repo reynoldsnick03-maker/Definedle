@@ -34,6 +34,8 @@ interface MirrorGameProps {
   nemesisEntry?: { points: number; guesses: number; hintsUsed: number; bestGuess?: string } | null
   showWordLength?: boolean
   showSimilarity?: boolean
+  skipPenaltyOff?: boolean
+  autoAdvance?: boolean
 }
 
 interface Guess {
@@ -214,6 +216,8 @@ export function MirrorGame({
   nemesisEntry = null,
   showWordLength = false,
   showSimilarity = true,
+  skipPenaltyOff = false,
+  autoAdvance = false,
 }: MirrorGameProps) {
   const [guesses, setGuesses] = useState<Guess[]>([])
   const [currentGuess, setCurrentGuess] = useState("")
@@ -269,9 +273,10 @@ export function MirrorGame({
     if (isComplete || isSkipped) return
     if (guesses.length === 0 && hintsUsed === 0) return
     setIsSkipped(true)
+    // skipPenaltyOff: skip costs nothing
     setIsComplete(true)
-    const atFloor = multiplier <= 1
-    // At ×1 floor — no penalty, losing the scoring opportunity is punishment enough
+    const atFloor = multiplier <= 1 || skipPenaltyOff
+    // At ×1 floor or skipPenaltyOff — no multiplier penalty
     if (!atFloor) {
       onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
     }
@@ -379,7 +384,11 @@ export function MirrorGame({
       if (newConsecutiveAwful >= 3) {
         setTimeout(() => onSessionEnd(sessionScore + earned, newWordsPlayed, nextMult, newHistory, "awful"), 1600)
       } else if (newWordsPlayed >= 15) {
-        setTimeout(() => onSessionEnd(sessionScore + earned, newWordsPlayed, nextMult, newHistory, "complete"), 1600)
+        // Auto-advance for practice if enabled
+      if (autoAdvance && onNextWord && wordsPlayed + 1 < 15) {
+        setTimeout(() => { window.scrollTo({ top: 0, behavior: "smooth" }); onNextWord() }, 2000)
+      }
+      setTimeout(() => onSessionEnd(sessionScore + earned, newWordsPlayed, nextMult, newHistory, "complete"), 1600)
       }
     } else if (newGuesses.length >= maxGuesses) {
       setIsComplete(true)

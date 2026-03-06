@@ -84,6 +84,11 @@ export function Game({
   const [showHint, setShowHint] = useState(false)
   const [nemesisPrev, setNemesisPrev] = useState<{ score: number; definition: string } | null>(null)
   const [showBlitzPrompt, setShowBlitzPrompt] = useState(false)
+  const [strictMode, setStrictMode] = useState(false)
+  const [showScore, setShowScore] = useState(true)
+  const [showConceptBreakdown, setShowConceptBreakdown] = useState(true)
+  const [reduceMotion, setReduceMotion] = useState(false)
+  const [fontSize, setFontSize] = useState<"small"|"medium"|"large">("medium")
 
   // Reset hint state when word changes (for practice mode)
   useEffect(() => {
@@ -173,7 +178,21 @@ export function Game({
       setResult(scoreResult)
       setPlayerDefinition(definition)
       setSubmitted(true)
-      // Show Blitz prompt on first ever completed game
+      useEffect(() => {
+    const apply = () => {
+      const s = loadSettings()
+      setStrictMode(s.strictMode ?? false)
+      setShowScore(s.showScore ?? true)
+      setShowConceptBreakdown(s.showConceptBreakdown ?? true)
+      setReduceMotion(s.reduceMotion ?? false)
+      setFontSize(s.fontSize ?? "medium")
+    }
+    apply()
+    window.addEventListener("definedle-settings-changed", apply)
+    return () => window.removeEventListener("definedle-settings-changed", apply)
+  }, [])
+
+  // Show Blitz prompt on first ever completed game
       try {
         const visited = localStorage.getItem("definedle-blitz-visited")
         const played = parseInt(localStorage.getItem("definedle-games-played") || "0", 10)
@@ -232,6 +251,7 @@ export function Game({
         <WordDisplay
           word={dailyWord.word}
           partOfSpeech={dailyWord.partOfSpeech}
+          fontSize={fontSize}
         />
 
         <div className="my-6 h-px bg-border" aria-hidden="true" />
@@ -272,7 +292,8 @@ export function Game({
                   if (!isPractice) setUsedHint(true)
                   setShowHint(true)
                 }}
-                className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-border py-2.5 text-xs font-medium tracking-wide text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                disabled={strictMode}
+                className={`flex w-full items-center justify-center gap-2 rounded-lg border border-dashed py-2.5 text-xs font-medium tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${strictMode ? "border-border text-muted-foreground/40 cursor-not-allowed" : "border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground/70"}`}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
                 {isPractice ? "Show synonym hint" : "Show synonym hint (-5 pts)"}
@@ -293,6 +314,8 @@ export function Game({
             officialDefinition={dailyWord.definition}
             altDefinitionUsed={result.altDefinitionUsed}
             word={dailyWord.word}
+            showScore={showScore}
+            showConceptBreakdown={showConceptBreakdown}
             isPractice={isPractice}
             difficulty={difficulty}
             onPractice={!isPractice ? onStartPractice : undefined}

@@ -9,25 +9,43 @@ interface SettingsPanelProps {
   isBlitz?: boolean
 }
 
-interface Settings {
+export interface Settings {
+  // Definedle
+  strictMode: boolean
+  showScore: boolean
+  showConceptBreakdown: boolean
+  // Blitz
+  showSimilarity: boolean
+  showWordLength: boolean
+  skipPenaltyOff: boolean
+  autoAdvance: boolean
+  blitzDarkMode: boolean
+  // General
+  darkMode: boolean
+  reduceMotion: boolean
+  fontSize: "small" | "medium" | "large"
+  // Nemesis (kept from before)
   nemesisWords: boolean
   nemesisThreshold: "poor" | "awful"
-  blitzDarkMode: boolean
-  reduceMotion: boolean
-  showWordLength: boolean
-  showSimilarity: boolean
 }
 
-const DEFAULT_SETTINGS: Settings = {
+export const DEFAULT_SETTINGS: Settings = {
+  strictMode: false,
+  showScore: true,
+  showConceptBreakdown: true,
+  showSimilarity: true,
+  showWordLength: false,
+  skipPenaltyOff: false,
+  autoAdvance: false,
+  blitzDarkMode: true,
+  darkMode: false,
+  reduceMotion: false,
+  fontSize: "medium",
   nemesisWords: false,
   nemesisThreshold: "awful",
-  blitzDarkMode: true,
-  reduceMotion: false,
-  showWordLength: false,
-  showSimilarity: true,
 }
 
-function loadSettings(): Settings {
+export function loadSettings(): Settings {
   try {
     const raw = localStorage.getItem("definedle-settings")
     if (raw) return { ...DEFAULT_SETTINGS, ...JSON.parse(raw) }
@@ -35,7 +53,7 @@ function loadSettings(): Settings {
   return DEFAULT_SETTINGS
 }
 
-function saveSettings(s: Settings) {
+export function saveSettings(s: Settings) {
   try {
     localStorage.setItem("definedle-settings", JSON.stringify(s))
     window.dispatchEvent(new Event("definedle-settings-changed"))
@@ -67,7 +85,7 @@ export function SettingsPanel({ open, onClose, isBlitz = false }: SettingsPanelP
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
       <div className="absolute inset-0 bg-foreground/20 animate-in fade-in duration-200" onClick={onClose} aria-hidden="true" />
-      <div className="relative z-10 w-full max-w-sm max-h-[85dvh] sm:max-h-[90dvh] flex flex-col rounded-t-2xl sm:rounded-2xl border border-border bg-card shadow-lg animate-in slide-in-from-bottom-4 sm:slide-in-from-bottom-2 fade-in duration-300">
+      <div className="relative z-10 w-full max-w-sm max-h-[calc(85dvh-64px)] sm:max-h-[90dvh] flex flex-col rounded-t-2xl sm:rounded-2xl border border-border bg-card shadow-lg animate-in slide-in-from-bottom-4 sm:slide-in-from-bottom-2 fade-in duration-300 mb-[64px] sm:mb-0">
 
         {/* Header */}
         <div className="flex items-center justify-between px-6 pt-6 pb-4 shrink-0">
@@ -82,105 +100,162 @@ export function SettingsPanel({ open, onClose, isBlitz = false }: SettingsPanelP
           </button>
         </div>
 
-        <div className="overflow-y-auto overscroll-contain px-6 pb-8 flex flex-col gap-6">
+        {/* Scrollable content */}
+        <div className="overflow-y-auto overscroll-contain px-6 pb-10 flex flex-col gap-6">
 
-          {/* Gameplay section */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Gameplay</h3>
+          {/* ── Definedle ─────────────────────────────────────────── */}
+          <SectionHeader label="Definedle" />
 
-            <SettingRow
-              label="Show word length"
-              description="Show how many letters the answer has before you start guessing"
-              checked={settings.showWordLength}
-              onChange={v => update({ showWordLength: v })}
-            />
+          <SettingRow
+            label="Strict mode"
+            description="Disables the etymology hint button. It will still be visible but greyed out."
+            checked={settings.strictMode}
+            onChange={v => update({ strictMode: v })}
+          />
 
-            <SettingRow
-              label="Show similarity score"
-              description="Show how close each Blitz guess is to the correct word"
-              checked={settings.showSimilarity}
-              onChange={v => update({ showSimilarity: v })}
-            />
-          </div>
+          <SettingRow
+            label="Show score"
+            description="Show your numerical score after submitting. Turn off to play without pressure."
+            checked={settings.showScore}
+            onChange={v => update({ showScore: v })}
+          />
+
+          <SettingRow
+            label="Show concept breakdown"
+            description="After submitting, show which key concepts your definition covered."
+            checked={settings.showConceptBreakdown}
+            onChange={v => update({ showConceptBreakdown: v })}
+          />
 
           <div className="h-px bg-border" />
 
-          {/* Nemesis Words section */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Nemesis Words</h3>
+          {/* ── Blitz ─────────────────────────────────────────────── */}
+          <SectionHeader label="Blitz" />
 
-            <SettingRow
-              label="Enable Nemesis Words"
-              description={isBlitz ? "When you replay a word you previously struggled with, see your past word guesses and score" : "When you replay a word you previously struggled with, see your past definition and score"}
-              checked={settings.nemesisWords}
-              onChange={v => update({ nemesisWords: v })}
-            />
+          <SettingRow
+            label="Show similarity %"
+            description="Show how close your guess was after a wrong answer."
+            checked={settings.showSimilarity}
+            onChange={v => update({ showSimilarity: v })}
+          />
 
-            {settings.nemesisWords && (
-              <div className="flex flex-col gap-2 pl-1">
-                <p className="text-xs text-muted-foreground">Show nemesis when previous result was:</p>
-                <div className="inline-flex items-center rounded-lg border border-border bg-muted/50 p-0.5 self-start">
-                  <button
-                    type="button"
-                    onClick={() => update({ nemesisThreshold: "awful" })}
-                    className={`rounded-md px-4 py-1.5 text-xs font-medium transition-all duration-200 min-h-[28px] ${
-                      settings.nemesisThreshold === "awful"
-                        ? "bg-card text-foreground shadow-sm"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    Awful only
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => update({ nemesisThreshold: "poor" })}
-                    className={`rounded-md px-4 py-1.5 text-xs font-medium transition-all duration-200 min-h-[28px] ${
-                      settings.nemesisThreshold === "poor"
-                        ? "bg-card text-foreground shadow-sm"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    Poor or worse
-                  </button>
-                </div>
-                <p className="text-[10px] text-muted-foreground/70">
-                  A flawless previous result will never trigger Nemesis — it would just give you the answer.
-                </p>
+          <SettingRow
+            label="Show word length"
+            description="Show the number of letters in the target word before you guess."
+            checked={settings.showWordLength}
+            onChange={v => update({ showWordLength: v })}
+          />
+
+          <SettingRow
+            label="Skip penalty off"
+            description="Skipping a word costs no multiplier. Useful for casual play or learning."
+            checked={settings.skipPenaltyOff}
+            onChange={v => update({ skipPenaltyOff: v })}
+          />
+
+          <SettingRow
+            label="Auto-advance"
+            description="After a correct guess, automatically move to the next word after 2 seconds."
+            checked={settings.autoAdvance}
+            onChange={v => update({ autoAdvance: v })}
+          />
+
+          <div className="h-px bg-border" />
+
+          {/* ── General ───────────────────────────────────────────── */}
+          <SectionHeader label="General" />
+
+          <SettingRow
+            label="Dark mode"
+            description="Use a dark theme throughout the app."
+            checked={settings.darkMode}
+            onChange={v => update({ darkMode: v })}
+          />
+
+          <SettingRow
+            label="Reduce motion"
+            description="Disable floating score animations and panel transitions."
+            checked={settings.reduceMotion}
+            onChange={v => update({ reduceMotion: v })}
+          />
+
+          <div className="flex flex-col gap-2">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-col gap-0.5 flex-1">
+                <span className="text-sm font-medium text-foreground">Font size</span>
+                <span className="text-xs text-muted-foreground leading-relaxed">
+                  Adjust the size of the word display.
+                </span>
               </div>
-            )}
+              <div className="inline-flex items-center rounded-lg border border-border bg-muted/50 p-0.5 shrink-0">
+                {(["small", "medium", "large"] as const).map(size => (
+                  <button
+                    key={size}
+                    type="button"
+                    onClick={() => update({ fontSize: size })}
+                    className={`rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 capitalize ${
+                      settings.fontSize === size
+                        ? "bg-card text-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {size === "small" ? "S" : size === "medium" ? "M" : "L"}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="h-px bg-border" />
 
-          {/* Blitz section */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Blitz</h3>
+          {/* ── Nemesis Words ─────────────────────────────────────── */}
+          <SectionHeader label="Nemesis Words" />
 
-            <SettingRow
-              label="Dark theme"
-              description="Blitz uses a dark background to feel distinct from Definedle"
-              checked={settings.blitzDarkMode}
-              onChange={v => update({ blitzDarkMode: v })}
-            />
-          </div>
+          <SettingRow
+            label="Enable Nemesis Words"
+            description={isBlitz
+              ? "When you replay a word you previously struggled with, see your past guess and score."
+              : "When you replay a word you previously struggled with, see your past definition and score."}
+            checked={settings.nemesisWords}
+            onChange={v => update({ nemesisWords: v })}
+          />
 
-          <div className="h-px bg-border" />
-
-          {/* Accessibility section */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xs uppercase tracking-widest text-muted-foreground font-medium">Accessibility</h3>
-
-            <SettingRow
-              label="Reduce motion"
-              description="Minimise animations throughout the app"
-              checked={settings.reduceMotion}
-              onChange={v => update({ reduceMotion: v })}
-            />
-          </div>
+          {settings.nemesisWords && (
+            <div className="flex flex-col gap-2 pl-1">
+              <p className="text-xs text-muted-foreground">Show nemesis when previous result was:</p>
+              <div className="inline-flex items-center rounded-lg border border-border bg-muted/50 p-0.5 self-start">
+                {(["awful", "poor"] as const).map(threshold => (
+                  <button
+                    key={threshold}
+                    type="button"
+                    onClick={() => update({ nemesisThreshold: threshold })}
+                    className={`rounded-md px-4 py-1.5 text-xs font-medium transition-all duration-200 min-h-[28px] ${
+                      settings.nemesisThreshold === threshold
+                        ? "bg-card text-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {threshold === "awful" ? "Awful only" : "Poor or worse"}
+                  </button>
+                ))}
+              </div>
+              <p className="text-[10px] text-muted-foreground/70">
+                A flawless previous result will never trigger Nemesis.
+              </p>
+            </div>
+          )}
 
         </div>
       </div>
     </div>
+  )
+}
+
+function SectionHeader({ label }: { label: string }) {
+  return (
+    <h3 className="text-xs uppercase tracking-widest text-muted-foreground font-medium -mb-2">
+      {label}
+    </h3>
   )
 }
 
