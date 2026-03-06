@@ -15,8 +15,6 @@ interface ResultsPanelProps {
   synonymWarning: boolean
   missedSummary: string | null
   breakdown?: ScoreBreakdown
-  showScore?: boolean
-  showConceptBreakdown?: boolean
   playerDefinition: string
   officialDefinition: string
   altDefinitionUsed?: string
@@ -25,6 +23,8 @@ interface ResultsPanelProps {
   isPractice?: boolean
   onNextWord?: () => void
   difficulty?: "easy" | "hard"
+  showScore?: boolean
+  showConceptBreakdown?: boolean
 }
 
 export function ResultsPanel({
@@ -34,8 +34,6 @@ export function ResultsPanel({
   synonymWarning,
   missedSummary,
   breakdown,
-  showScore = true,
-  showConceptBreakdown = true,
   playerDefinition,
   officialDefinition,
   altDefinitionUsed,
@@ -44,6 +42,8 @@ export function ResultsPanel({
   isPractice,
   onNextWord,
   difficulty = "easy",
+  showScore = true,
+  showConceptBreakdown = true,
 }: ResultsPanelProps) {
   const [copied, setCopied] = useState(false)
   const [averageData, setAverageData] = useState<{ average: number; count: number } | null>(null)
@@ -157,8 +157,8 @@ definedle.com`
 
   return (
     <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <ScoreCelebration score={score} />
-      {showScore && <ScoreDisplay score={score} />
+      {showScore && <ScoreCelebration score={score} />}
+      {showScore && <ScoreDisplay score={score} />}
 
       {/* Average score display */}
       {!isPractice && averageData && averageData.count > 1 && (
@@ -180,7 +180,7 @@ definedle.com`
       <div className="h-px bg-border" aria-hidden="true" />
 
       {/* Concept breakdown */}
-      {showConceptBreakdown && <ConceptBreakdown concepts={safeConcepts} synonymWarning={synonymWarning} missedSummary={missedSummary} />
+      {showConceptBreakdown && <ConceptBreakdown concepts={safeConcepts} synonymWarning={synonymWarning} missedSummary={missedSummary} />}
 
       {/* How to improve -- only shown when score < 100 and breakdown available */}
       {score < 100 && breakdown && (
