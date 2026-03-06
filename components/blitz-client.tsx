@@ -329,7 +329,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       try {
         const playerId = getPlayerId()
         if (!playerId) return
-        await fetch("/api/mirror-sessions", {
+        const res = await fetch("/api/mirror-sessions", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -342,7 +342,11 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             word_history: wordHistory,
           }),
         })
-      } catch {}
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}))
+          console.error("mirror-sessions POST failed:", res.status, errData)
+        }
+      } catch (e) { console.error("mirror-sessions POST error:", e) }
     }
   }, [difficulty, updateSession, blitzTab, wordsPlayed, sessions])
 
@@ -423,14 +427,14 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             </button>
           </div>
         </div>
-        <p className={`text-sm tracking-wide ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
-          Name the word from its definition
-        </p>
-        <div className="flex items-center gap-2 mt-1">
+        <div className="flex items-center gap-2">
           <Zap className="h-3.5 w-3.5 text-amber-500 fill-amber-500" aria-hidden="true" />
           <span className="text-sm font-bold tracking-tight text-amber-500">Blitz</span>
           <Zap className="h-3.5 w-3.5 text-amber-500 fill-amber-500" aria-hidden="true" />
         </div>
+        <p className={`text-sm tracking-wide ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
+          Name the word from its definition
+        </p>
         <div className="mt-3 h-px w-12 bg-border" aria-hidden="true" />
       </header>
 
