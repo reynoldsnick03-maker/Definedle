@@ -6,6 +6,7 @@ import type { ScoreResult, ConceptResult, ScoreBreakdown } from "@/lib/scoring"
 import { scoreDefinition } from "@/lib/scoring"
 import { formatDateKey, type HistoryEntry } from "@/lib/history"
 import { WordDisplay } from "./word-display"
+import { loadSettings } from "./settings-panel"
 import { DefinitionInput } from "./definition-input"
 import { ResultsPanel } from "./results-panel"
 
@@ -96,6 +97,22 @@ export function Game({
     setUsedHint(false)
   }, [dailyWord.word])
 
+
+  // Load and sync settings
+  useEffect(() => {
+    const apply = () => {
+      const s = loadSettings()
+      setStrictMode(s.strictMode ?? false)
+      setShowScore(s.showScore ?? true)
+      setShowConceptBreakdown(s.showConceptBreakdown ?? true)
+      setReduceMotion(s.reduceMotion ?? false)
+      setFontSize(s.fontSize ?? "medium")
+    }
+    apply()
+    window.addEventListener("definedle-settings-changed", apply)
+    return () => window.removeEventListener("definedle-settings-changed", apply)
+  }, [])
+
   // Check cookie for previous daily submission (daily mode only)
   useEffect(() => {
     if (isPractice) return
@@ -178,21 +195,7 @@ export function Game({
       setResult(scoreResult)
       setPlayerDefinition(definition)
       setSubmitted(true)
-      useEffect(() => {
-    const apply = () => {
-      const s = loadSettings()
-      setStrictMode(s.strictMode ?? false)
-      setShowScore(s.showScore ?? true)
-      setShowConceptBreakdown(s.showConceptBreakdown ?? true)
-      setReduceMotion(s.reduceMotion ?? false)
-      setFontSize(s.fontSize ?? "medium")
-    }
-    apply()
-    window.addEventListener("definedle-settings-changed", apply)
-    return () => window.removeEventListener("definedle-settings-changed", apply)
-  }, [])
-
-  // Show Blitz prompt on first ever completed game
+      // Show Blitz prompt on first ever completed game
       try {
         const visited = localStorage.getItem("definedle-blitz-visited")
         const played = parseInt(localStorage.getItem("definedle-games-played") || "0", 10)
@@ -268,7 +271,7 @@ export function Game({
           </div>
         )}
 
-        {/* Synonym hint — hard mode only (easy words have no synonyms) */}
+        {/* Synonym hint — hard mode only, greyed out in strict mode */}
         {!submitted && dailyWord.synonyms && dailyWord.synonyms.length > 0 && (
           <div className="mb-5">
             {showHint ? (
@@ -288,15 +291,20 @@ export function Game({
             ) : (
               <button
                 type="button"
+                disabled={strictMode}
                 onClick={() => {
+                  if (strictMode) return
                   if (!isPractice) setUsedHint(true)
                   setShowHint(true)
                 }}
-                disabled={strictMode}
-                className={`flex w-full items-center justify-center gap-2 rounded-lg border border-dashed py-2.5 text-xs font-medium tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${strictMode ? "border-border text-muted-foreground/40 cursor-not-allowed" : "border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground/70"}`}
+                className={`flex w-full items-center justify-center gap-2 rounded-lg border border-dashed py-2.5 text-xs font-medium tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  strictMode
+                    ? "border-border/40 text-muted-foreground/30 cursor-not-allowed"
+                    : "border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground/70"
+                }`}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-                {isPractice ? "Show synonym hint" : "Show synonym hint (-5 pts)"}
+                {strictMode ? "Hint disabled (strict mode)" : isPractice ? "Show synonym hint" : "Show synonym hint (-5 pts)"}
               </button>
             )}
           </div>
