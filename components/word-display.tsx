@@ -5,15 +5,18 @@ interface WordDisplayProps {
 }
 
 export function WordDisplay({ word, partOfSpeech, fontSize = "medium" }: WordDisplayProps) {
-  const sizeClass = fontSize === "small"
-    ? "text-3xl md:text-4xl"
+  const sizeStyle = fontSize === "small"
+    ? { fontSize: "1.875rem", lineHeight: "2.25rem" }   // 30px
     : fontSize === "large"
-    ? "text-6xl md:text-7xl"
-    : "text-5xl md:text-6xl"
+    ? { fontSize: "4rem", lineHeight: "1" }              // 64px
+    : { fontSize: "3rem", lineHeight: "1" }              // 48px — default
 
   return (
     <div className="flex flex-col items-center gap-1.5 py-6">
-      <h2 className={`font-serif font-normal tracking-tight text-foreground italic ${sizeClass}`}>
+      <h2
+        className="font-serif font-normal tracking-tight text-foreground italic"
+        style={sizeStyle}
+      >
         {word}
       </h2>
       <span className="text-sm text-muted-foreground tracking-widest uppercase">
