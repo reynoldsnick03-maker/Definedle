@@ -93,7 +93,7 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
       <div className="absolute inset-0 bg-foreground/20 animate-in fade-in duration-200" onClick={onClose} aria-hidden="true" />
-      <div className={`relative z-10 w-full max-w-sm max-h-[85dvh] sm:max-h-[90dvh] flex flex-col rounded-t-2xl sm:rounded-2xl border shadow-lg animate-in slide-in-from-bottom-4 sm:slide-in-from-bottom-2 fade-in duration-300 ${isDark ? "bg-[#1c1b19] border-[#2a2926]" : "bg-card border-border"}`}>
+      <div className={`relative z-10 w-full max-w-sm max-h-[calc(85dvh-64px)] sm:max-h-[90dvh] flex flex-col rounded-t-2xl sm:rounded-2xl border shadow-lg animate-in slide-in-from-bottom-4 sm:slide-in-from-bottom-2 fade-in duration-300 mb-[64px] sm:mb-0 ${isDark ? "bg-[#1c1b19] border-[#2a2926]" : "bg-card border-border"}`}>
 
         <div className="flex items-center justify-between px-6 pt-6 pb-4 shrink-0">
           <h2 className={`font-serif text-xl font-normal ${isDark ? "text-white" : "text-foreground"}`}>Your Stats</h2>
@@ -113,7 +113,7 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
           </div>
         </div>
 
-        <div className="overflow-y-auto overscroll-contain px-6 pb-6 flex flex-col gap-6">
+        <div className="overflow-y-auto overscroll-contain px-6 pb-10 flex flex-col gap-6">
 
           {activeTab === "definedle" && (
             <>

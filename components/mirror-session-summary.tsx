@@ -73,7 +73,7 @@ export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordH
         <div className="text-center mb-8">
           <p className={`text-[10px] uppercase tracking-widest font-medium mb-2 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{reason === "complete" ? "Session Complete" : "Session Over"}</p>
           {reason === "awful" && <p className="text-xs text-red-500 mb-2">Three awful rounds in a row ended your session.</p>}
-          {reason === "complete" && <p className="text-xs text-score-high mb-2">You completed all 15 words!</p>}
+          {wordsSolved === 15 && <p className="text-xs text-score-high mb-2">You completed all 15 words!</p>}
           <div className="flex items-center justify-center gap-2 mb-1">
             <Star className="h-5 w-5 text-amber-500" />
             <span className={`font-serif text-4xl font-light ${isDark ? "text-white" : "text-foreground"}`}>{Math.round(score)}</span>

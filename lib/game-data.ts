@@ -156,7 +156,7 @@ export function getDailyBlitzSequence(
   const pool = difficulty === "hard" ? hardWords : easyWords
   const key = dateKey ?? (() => {
     const d = new Date()
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
+    return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}-${String(d.getUTCDate()).padStart(2, "0")}`
   })()
 
   const rand = seededRandom(dateToSeed(key) + (difficulty === "hard" ? 999999 : 0))

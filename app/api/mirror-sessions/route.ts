@@ -36,6 +36,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json()
+    console.log("mirror-sessions POST body:", JSON.stringify(body))
     const {
       player_id,
       session_score,
@@ -45,15 +46,19 @@ export async function POST(request: Request) {
       difficulty,
     } = body
 
-    if (!player_id || typeof session_score !== "number" || !difficulty) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+    const scoreNum = Number(session_score)
+    if (!player_id || isNaN(scoreNum) || !difficulty) {
+      return NextResponse.json({
+        error: "Missing required fields",
+        received: { player_id: !!player_id, session_score, scoreNum, difficulty }
+      }, { status: 400 })
     }
 
     const supabase = await createClient()
 
     const { error } = await supabase.from("mirror_sessions").insert({
       player_id,
-      session_score: Math.round(session_score),
+      session_score: Math.round(scoreNum),
       words_solved: words_solved ?? 0,
       words_attempted: words_attempted ?? 0,
       best_streak: best_streak ?? 1,
@@ -62,7 +67,7 @@ export async function POST(request: Request) {
 
     if (error) {
       console.error("Error inserting mirror session:", error)
-      return NextResponse.json({ error: "Failed to save session" }, { status: 500 })
+      return NextResponse.json({ error: error.message, details: error }, { status: 500 })
     }
 
     return NextResponse.json({ success: true })

@@ -61,6 +61,43 @@ function saveWordToBlitzHistory(entry: {
   } catch {}
 }
 
+
+// ── Session persistence helpers ──────────────────────────────────────────────
+function saveBlitzProgress(difficulty: string, tab: string, data: {
+  wordIndex: number; score: number; multiplier: number
+  bestMultiplier: number; streak: number; wordsPlayed: number
+  sessionWordHistory: WordHistoryEntry[]
+}) {
+  try {
+    localStorage.setItem(
+      `definedle-blitz-progress-${difficulty}-${tab}`,
+      JSON.stringify({ ...data, savedAt: Date.now() })
+    )
+  } catch {}
+}
+
+function loadBlitzProgress(difficulty: string, tab: string): {
+  wordIndex: number; score: number; multiplier: number
+  bestMultiplier: number; streak: number; wordsPlayed: number
+  sessionWordHistory: WordHistoryEntry[]
+} | null {
+  try {
+    const raw = localStorage.getItem(`definedle-blitz-progress-${difficulty}-${tab}`)
+    if (!raw) return null
+    const data = JSON.parse(raw)
+    // Expire after 24h
+    if (Date.now() - data.savedAt > 86400000) {
+      localStorage.removeItem(`definedle-blitz-progress-${difficulty}-${tab}`)
+      return null
+    }
+    return data
+  } catch { return null }
+}
+
+function clearBlitzProgress(difficulty: string, tab: string) {
+  try { localStorage.removeItem(`definedle-blitz-progress-${difficulty}-${tab}`) } catch {}
+}
+
 const MULTIPLIER_STEPS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8]
 
 function applyMultiplierStep(current: number, effect: "flawless" | "good" | "decent" | "poor" | "awful"): number {
@@ -148,7 +185,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   useEffect(() => {
     try {
       const today = new Date()
-      const dateKey = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`
+      const dateKey = `${today.getUTCFullYear()}-${String(today.getUTCMonth()+1).padStart(2,"0")}-${String(today.getUTCDate()).padStart(2,"0")}`
       const raw = localStorage.getItem("definedle-blitz-daily") || "{}"
       const rec = JSON.parse(raw)
       const todayRec = rec[dateKey] || {}
@@ -180,6 +217,27 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
     try { setMirrorStreak(getMirrorStreak()) } catch {}
     setDailySequenceEasy(getDailyBlitzSequence("easy"))
     setDailySequenceHard(getDailyBlitzSequence("hard"))
+
+    // Restore in-progress session if page was refreshed
+    const savedTab = localStorage.getItem("definedle-blitz-last-tab") as "daily" | "practice" | null
+    const savedDiff = localStorage.getItem("definedle-blitz-last-diff") as GameMode | null
+    if (savedTab && savedDiff) {
+      const progress = loadBlitzProgress(savedDiff, savedTab)
+      if (progress) {
+        setBlitzTab(savedTab)
+        setSessions(prev => ({
+          ...prev,
+          [savedDiff]: {
+            ...prev[savedDiff],
+            score: progress.score,
+            multiplier: progress.multiplier,
+            bestMultiplier: progress.bestMultiplier,
+            wordsPlayed: progress.wordsPlayed,
+            sessionWordHistory: progress.sessionWordHistory,
+          }
+        }))
+      }
+    }
   }, [])
 
   // Start first word on mount
@@ -192,6 +250,14 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       else { setPracticeHard(word); setPlayedHard([word.word]) }
     }
   }, [difficulty]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Track current tab and difficulty for restore on refresh
+  useEffect(() => {
+    try {
+      localStorage.setItem("definedle-blitz-last-tab", blitzTab)
+      localStorage.setItem("definedle-blitz-last-diff", difficulty)
+    } catch {}
+  }, [blitzTab, difficulty])
 
   const updateSession = useCallback((diff: GameMode, patch: Partial<SessionState>) => {
     setSessions((prev: Record<GameMode, SessionState>) => ({ ...prev, [diff]: { ...prev[diff], ...patch } }))
@@ -246,7 +312,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       if (blitzTab === "daily") {
         try {
           const today = new Date()
-          const dateKey = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`
+          const dateKey = `${today.getUTCFullYear()}-${String(today.getUTCMonth()+1).padStart(2,"0")}-${String(today.getUTCDate()).padStart(2,"0")}`
           const raw = localStorage.getItem("definedle-blitz-daily") || "{}"
           const dailyRecord = JSON.parse(raw)
           if (!dailyRecord[dateKey]) dailyRecord[dateKey] = {}
@@ -283,7 +349,8 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const resetSession = useCallback((diff?: GameMode) => {
     const target = diff ?? difficulty
     setSessions((prev: Record<GameMode, SessionState>) => ({ ...prev, [target]: emptySession() }))
-  }, [difficulty])
+    clearBlitzProgress(target, blitzTab)
+  }, [difficulty, blitzTab])
 
   const handleNextWord = useCallback(() => {
     setSessions((prev: Record<GameMode, SessionState>) => ({
@@ -321,44 +388,50 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
 
   return (
     <main className={`flex min-h-svh flex-col pb-24 ${isDark ? "bg-[#111110]" : "bg-background"}`} data-reduce-motion={reduceMotion}>
-      {/* Blitz header */}
-      <header className="flex items-center justify-between px-5 pt-10 pb-4 md:pt-14 w-full max-w-md mx-auto">
-        <button
-          type="button"
-          onClick={onSettingsOpen}
-          className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors focus-visible:outline-none ${isDark ? "text-[#6b6560] hover:text-[#d4cfc8]" : "text-muted-foreground hover:text-foreground"}`}
-          aria-label="Settings"
-        >
-          <Settings className="h-[18px] w-[18px]" />
-        </button>
-
-        <div className="flex flex-col items-center gap-0.5">
-          <h1 className="flex items-center gap-2">
-            <span className={`font-serif text-3xl font-light tracking-tight ${isDark ? "text-white" : "text-foreground"}`}>Definedle</span>
-            <span className="text-3xl font-bold tracking-tight text-amber-500">Blitz</span>
-            <Zap className="h-5 w-5 text-amber-500 fill-amber-500" aria-hidden="true" />
+      {/* Blitz header — matches Definedle header structure exactly */}
+      <header className="flex flex-col items-center gap-1 pt-10 pb-6 md:pt-14 md:pb-8 w-full max-w-md mx-auto px-5">
+        <div className="flex w-full items-center justify-between">
+          <div className="flex flex-1 items-center justify-start min-w-0">
+            <button
+              type="button"
+              onClick={onSettingsOpen}
+              className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors focus-visible:outline-none ${isDark ? "text-[#6b6560] hover:text-[#d4cfc8]" : "text-muted-foreground hover:text-foreground"}`}
+              aria-label="Settings"
+            >
+              <Settings className="h-[18px] w-[18px]" />
+            </button>
+          </div>
+          <h1 className={`font-serif text-3xl font-light tracking-tight ${isDark ? "text-white" : "text-foreground"}`}>
+            Definedle
           </h1>
-          <p className={`text-[11px] tracking-wide ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Name the word from its definition</p>
+          <div className="flex flex-1 items-center justify-end gap-1 min-w-0">
+            <button
+              type="button"
+              onClick={() => setHelpOpen(true)}
+              className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors focus-visible:outline-none ${isDark ? "text-[#6b6560] hover:text-[#d4cfc8]" : "text-muted-foreground hover:text-foreground"}`}
+              aria-label="How to play Blitz"
+            >
+              <CircleHelp className="h-[18px] w-[18px]" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setStatsOpen(true)}
+              className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors focus-visible:outline-none ${isDark ? "text-[#6b6560] hover:text-[#d4cfc8]" : "text-muted-foreground hover:text-foreground"}`}
+              aria-label="View Blitz stats"
+            >
+              <BarChart3 className="h-[18px] w-[18px]" />
+            </button>
+          </div>
         </div>
-
-        <div className="flex items-center gap-1">
-          <button
-            type="button"
-            onClick={() => setHelpOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-[#6b6560] hover:text-[#d4cfc8] transition-colors focus-visible:outline-none"
-            aria-label="How to play Blitz"
-          >
-            <CircleHelp className="h-[18px] w-[18px]" />
-          </button>
-          <button
-            type="button"
-            onClick={() => setStatsOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-[#6b6560] hover:text-[#d4cfc8] transition-colors focus-visible:outline-none"
-            aria-label="View Blitz stats"
-          >
-            <BarChart3 className="h-[18px] w-[18px]" />
-          </button>
+        <p className={`text-sm tracking-wide ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
+          Name the word from its definition
+        </p>
+        <div className="flex items-center gap-2 mt-1">
+          <Zap className="h-3.5 w-3.5 text-amber-500 fill-amber-500" aria-hidden="true" />
+          <span className="text-sm font-bold tracking-tight text-amber-500">Blitz</span>
+          <Zap className="h-3.5 w-3.5 text-amber-500 fill-amber-500" aria-hidden="true" />
         </div>
+        <div className="mt-3 h-px w-12 bg-border" aria-hidden="true" />
       </header>
 
       {/* Daily / Practice toggle — Daily on left, above Easy/Hard */}
@@ -480,6 +553,16 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
                 consecutiveAwful: wasAwful ? s.consecutiveAwful + 1 : 0,
                 sessionWordHistory: [...s.sessionWordHistory, entry],
               }}
+            })
+            // Persist session progress for page refresh recovery
+            saveBlitzProgress(difficulty, blitzTab, {
+              wordIndex: sess.wordsPlayed + 1,
+              score: sess.score + (entry.points * sess.multiplier),
+              multiplier: sess.multiplier,
+              bestMultiplier: sess.bestMultiplier,
+              streak: sess.consecutiveAwful,
+              wordsPlayed: sess.wordsPlayed + 1,
+              sessionWordHistory: [...sess.sessionWordHistory, entry],
             })
             // Save for nemesis lookup
             saveWordToBlitzHistory({
