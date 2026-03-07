@@ -67,7 +67,7 @@ export function TabBar({ activeTab, onTabChange, highlightBlitz = false }: TabBa
   return (
     <nav
       className={`fixed bottom-0 left-0 right-0 z-50 flex border-t-2 border-border bg-card shadow-[0_-2px_12px_rgba(0,0,0,0.08)] transition-transform duration-300 ease-in-out ${visible ? "translate-y-0" : "translate-y-full"}`}
-      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      style={{ paddingBottom: "max(env(safe-area-inset-bottom), 8px)" }}
     >
       <button
         type="button"

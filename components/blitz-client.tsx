@@ -325,9 +325,15 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             wordHistory, failed: reason === "failed" || reason === "awful"
           }
           localStorage.setItem("definedle-blitz-daily", JSON.stringify(dailyRecord))
+          setDailyDone(prev => ({ ...prev, [difficulty]: true }))
           if (reason === "failed" || reason === "awful") {
             setDailyFailed(prev => ({ ...prev, [difficulty]: true }))
           }
+          // Also store summary for the "already completed" screen
+          setDailyStoredSummary(prev => ({
+            ...prev,
+            [difficulty]: { score: finalScore, wordsSolved, bestMultiplier: peakMult, wordHistory }
+          }))
         } catch {}
       }
       try {
@@ -381,11 +387,6 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       ...prev,
       [difficulty]: { ...prev[difficulty], wordsPlayed: prev[difficulty].wordsPlayed + 1 }
     }))
-    const nextIndex = dailyWordIndex + 1
-    if (nextIndex >= 15) {
-      // All 15 daily words done — session end is handled by MirrorGame's onSessionEnd
-      // just advance index so currentWord becomes null and summary shows
-    }
     setDailyWordIndex((i: number) => i + 1)
   }, [difficulty, dailyWordIndex])
 
@@ -395,7 +396,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   }, [])
 
   return (
-    <main className={`flex min-h-svh flex-col pb-24 ${isDark ? "bg-[#111110]" : "bg-background"}`} data-reduce-motion={reduceMotion}>
+    <main className={`flex min-h-svh flex-col ${isDark ? "bg-[#111110]" : "bg-background"}`} style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }} data-reduce-motion={reduceMotion}>
       {/* Blitz header — matches Definedle header structure exactly */}
       <header className="flex flex-col items-center gap-1 pt-10 pb-6 md:pt-14 md:pb-8 w-full max-w-md mx-auto px-5">
         <div className="flex w-full items-center justify-between">
