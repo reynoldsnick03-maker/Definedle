@@ -1,5 +1,12 @@
-import { createClient } from "@/lib/supabase/server"
+import { createClient } from "@supabase/supabase-js"
 import { NextResponse } from "next/server"
+
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  if (!url || !key) throw new Error("Missing Supabase env vars")
+  return createClient(url, key)
+}
 
 // GET: fetch sessions for a player
 export async function GET(request: Request) {
@@ -11,8 +18,7 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "player_id required" }, { status: 400 })
     }
 
-    const supabase = await createClient()
-
+    const supabase = getSupabase()
     const { data, error } = await supabase
       .from("mirror_sessions")
       .select("session_score, words_solved, best_streak, difficulty, created_at")
@@ -21,14 +27,14 @@ export async function GET(request: Request) {
       .limit(50)
 
     if (error) {
-      console.error("Error fetching mirror sessions:", error)
-      return NextResponse.json({ sessions: [] })
+      console.error("mirror-sessions GET error:", error)
+      return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
     return NextResponse.json({ sessions: data || [] })
   } catch (err) {
-    console.error("Mirror sessions GET error:", err)
-    return NextResponse.json({ sessions: [] })
+    console.error("mirror-sessions GET exception:", err)
+    return NextResponse.json({ sessions: [], error: String(err) })
   }
 }
 
@@ -36,15 +42,9 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    console.log("mirror-sessions POST body:", JSON.stringify(body))
-    const {
-      player_id,
-      session_score,
-      words_solved,
-      words_attempted,
-      best_streak,
-      difficulty,
-    } = body
+    console.log("mirror-sessions POST received:", JSON.stringify(body))
+
+    const { player_id, session_score, words_solved, words_attempted, best_streak, difficulty } = body
 
     const scoreNum = Number(session_score)
     if (!player_id || isNaN(scoreNum) || !difficulty) {
@@ -54,8 +54,7 @@ export async function POST(request: Request) {
       }, { status: 400 })
     }
 
-    const supabase = await createClient()
-
+    const supabase = getSupabase()
     const { error } = await supabase.from("mirror_sessions").insert({
       player_id,
       session_score: Math.round(scoreNum),
@@ -66,13 +65,14 @@ export async function POST(request: Request) {
     })
 
     if (error) {
-      console.error("Error inserting mirror session:", error)
-      return NextResponse.json({ error: error.message, details: error }, { status: 500 })
+      console.error("mirror-sessions INSERT error:", error)
+      return NextResponse.json({ error: error.message, code: error.code }, { status: 500 })
     }
 
+    console.log("mirror-sessions INSERT success for player:", player_id)
     return NextResponse.json({ success: true })
   } catch (err) {
-    console.error("Mirror sessions POST error:", err)
-    return NextResponse.json({ error: "Server error" }, { status: 500 })
+    console.error("mirror-sessions POST exception:", err)
+    return NextResponse.json({ error: String(err) }, { status: 500 })
   }
 }
