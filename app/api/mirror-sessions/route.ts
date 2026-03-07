@@ -21,7 +21,7 @@ export async function GET(request: Request) {
     const supabase = getSupabase()
     const { data, error } = await supabase
       .from("mirror_sessions")
-      .select("session_score, words_solved, best_streak, difficulty, created_at")
+      .select("session_score, words_solved, best_streak, difficulty")
       .eq("player_id", playerId)
       .order("session_score", { ascending: false })
       .limit(50)
