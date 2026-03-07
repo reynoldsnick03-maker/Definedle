@@ -54,11 +54,28 @@ function saveWordToBlitzHistory(entry: {
   try {
     const raw = localStorage.getItem("definedle-blitz-word-history")
     const history = raw ? JSON.parse(raw) : []
-    history.push(entry)
+    history.push({ ...entry, playedAt: Date.now() })
     // Keep last 500 entries
     if (history.length > 500) history.splice(0, history.length - 500)
     localStorage.setItem("definedle-blitz-word-history", JSON.stringify(history))
   } catch {}
+}
+
+// Get recently played practice words to reduce repetition
+function getRecentlyPlayedPracticeWords(limit = 150): string[] {
+  try {
+    const raw = localStorage.getItem("definedle-blitz-word-history")
+    if (!raw) return []
+    const history = JSON.parse(raw) as { word: string; playedAt?: number }[]
+    // Return most recent unique words, newest first
+    const seen = new Set<string>()
+    return history
+      .slice()
+      .reverse()
+      .filter(e => { if (seen.has(e.word)) return false; seen.add(e.word); return true })
+      .slice(0, limit)
+      .map(e => e.word)
+  } catch { return [] }
 }
 
 
@@ -249,7 +266,8 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
     const played = difficulty === "easy" ? playedEasy : playedHard
     const current = difficulty === "easy" ? practiceEasy : practiceHard
     if (!current) {
-      const word = getRandomPracticeWord(played, difficulty)
+      const recentlyPlayed = getRecentlyPlayedPracticeWords(150)
+      const word = getRandomPracticeWord([...played, ...recentlyPlayed], difficulty)
       if (difficulty === "easy") { setPracticeEasy(word); setPlayedEasy([word.word]) }
       else { setPracticeHard(word); setPlayedHard([word.word]) }
     }
@@ -372,7 +390,8 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       [difficulty]: { ...prev[difficulty], wordsPlayed: prev[difficulty].wordsPlayed + 1 }
     }))
     const played = difficulty === "easy" ? playedEasy : playedHard
-    const word = getRandomPracticeWord(played, difficulty)
+    const recentlyPlayed = getRecentlyPlayedPracticeWords(150)
+    const word = getRandomPracticeWord([...played, ...recentlyPlayed], difficulty)
     if (difficulty === "easy") {
       setPlayedEasy((prev: string[]) => [...prev, word.word])
       setPracticeEasy(word)
@@ -429,6 +448,15 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
               aria-label="View Blitz stats"
             >
               <BarChart3 className="h-[18px] w-[18px]" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowWordHistory(true)}
+              className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors focus-visible:outline-none ${isDark ? "text-[#6b6560] hover:text-[#d4cfc8]" : "text-muted-foreground hover:text-foreground"}`}
+              aria-label="Word play history"
+              title="Word play history (dev)"
+            >
+              <span className="text-sm">📊</span>
             </button>
           </div>
         </div>
@@ -523,7 +551,8 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             </div>
           </div>
         ) : dailyStoredSummary[difficulty] ? (
-          <MirrorSessionSummary
+          <BlitzWordHistoryPanel open={showWordHistory} onClose={() => setShowWordHistory(false)} isDark={isDark} />
+      <MirrorSessionSummary
             score={dailyStoredSummary[difficulty]!.score}
             wordsSolved={dailyStoredSummary[difficulty]!.wordsSolved}
             bestMultiplier={dailyStoredSummary[difficulty]!.bestMultiplier}
@@ -600,7 +629,8 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       )}
 
       {showSummary && summaryData && (
-        <MirrorSessionSummary
+        <BlitzWordHistoryPanel open={showWordHistory} onClose={() => setShowWordHistory(false)} isDark={isDark} />
+      <MirrorSessionSummary
           score={summaryData.score}
           wordsSolved={summaryData.wordsSolved}
           bestMultiplier={summaryData.bestMultiplier}

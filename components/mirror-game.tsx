@@ -41,6 +41,7 @@ interface MirrorGameProps {
 interface Guess {
   word: string
   similarity: number
+  nearMiss?: "very-close" | "warm" | null
 }
 
 const MULTIPLIER_STEPS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8]
@@ -89,13 +90,12 @@ function hintsAccounted(guesses: number, hintsUsed: number): number {
   if (q === "flawless") return 0
   if (q === "good") return guesses === 1 ? 1 : guesses === 2 && hintsUsed === 0 ? 0 : 1
   if (q === "decent") {
-    if (guesses === 3) return 0   // 3g0h
-    if (guesses === 2) return 2   // 2g2h
-    if (guesses === 1) return hintsUsed  // 1g2h and 1g3h — all hints accounted
+    if (guesses === 3) return 0
+    if (guesses === 2) return 2
+    if (guesses === 1) return hintsUsed
     return 2
   }
   if (q === "awful") return guesses === 1 ? 5 : guesses === 2 ? 4 : 4
-  // poor
   if (guesses === 1) return 3
   if (guesses === 2) return 2
   return 0
@@ -105,8 +105,35 @@ function calcBasePoints(guesses: number, hintsUsed: number): number {
   const quality = classifyPlay(guesses, hintsUsed)
   if (quality === "flawless") return 3
   if (quality === "good") return 2
-  return 1 // decent, poor, awful all earn 1 base point
-  // failed word (guesses === 0) handled separately — returns 0
+  return 1
+}
+
+function getNearMissLabel(
+  guess: string,
+  target: string,
+  synonyms: string[],
+  keyConcepts: { label: string; hint: string }[]
+): "very-close" | "warm" | null {
+  const g = guess.toLowerCase().trim()
+  const t = target.toLowerCase()
+
+  // Priority 1: direct synonym match
+  if (areSynonyms(g, t)) return "very-close"
+  if (synonyms.some(s => s.toLowerCase() === g)) return "very-close"
+  if (synonyms.some(s => areSynonyms(g, s.toLowerCase()))) return "very-close"
+
+  // Priority 2: concept overlap
+  const conceptText = keyConcepts
+    .map(c => `${c.label} ${c.hint}`.toLowerCase())
+    .join(" ")
+  const conceptWords = conceptText.split(/\W+/).filter(w => w.length > 3)
+  if (conceptWords.some(w => w === g || stemMatch(g, w) || stemMatch(w, g))) return "warm"
+
+  // Priority 3: stem match against target or synonyms
+  if (stemMatch(g, t) || stemMatch(t, g)) return "warm"
+  if (synonyms.some(s => stemMatch(g, s.toLowerCase()))) return "warm"
+
+  return null
 }
 
 function calculateSimilarity(guess: string, target: string, synonyms?: string[]): number {
@@ -169,7 +196,6 @@ async function isValidWord(word: string): Promise<{ valid: boolean; uncertain: b
   }
 }
 
-// Letter rarity — uncommon letters revealed before common ones
 const LETTER_RARITY: Record<string, number> = {
   z: 1, q: 2, x: 3, j: 4, k: 5, v: 6, w: 7, y: 8, b: 9, f: 10,
   g: 11, h: 12, m: 13, p: 14, d: 15, c: 16, u: 17, l: 18, n: 19,
@@ -180,19 +206,14 @@ function getRevealedLetters(word: string, count: number): number[] {
   const w = word.toLowerCase()
   const len = w.length
   if (count === 0) return []
-
-  // Build ordered list of indices to reveal:
-  // 1st: first letter, 2nd: last letter, 3rd+: remaining by rarity (uncommon first)
   const remaining = Array.from({ length: len }, (_, i) => i)
     .filter(i => i !== 0 && i !== len - 1)
     .sort((a, b) => (LETTER_RARITY[w[a]] ?? 13) - (LETTER_RARITY[w[b]] ?? 13))
-
   const ordered = len === 1
     ? [0]
     : len === 2
     ? [0, 1]
     : [0, len - 1, ...remaining]
-
   return ordered.slice(0, count).sort((a, b) => a - b)
 }
 
@@ -257,7 +278,6 @@ export function MirrorGame({
   const handleRevealLetter = () => {
     if (isComplete) return
     if (hintsUsed >= word.word.length - 1) return
-    // At floor: block if score would go negative
     if (hintsUsed >= maxHints && multiplier <= 1 && sessionScore <= 0) return
     setHintsUsed(h => h + 1)
     if (hintsUsed >= maxHints) {
@@ -273,10 +293,8 @@ export function MirrorGame({
     if (isComplete || isSkipped) return
     if (guesses.length === 0 && hintsUsed === 0) return
     setIsSkipped(true)
-    // skipPenaltyOff: skip costs nothing
     setIsComplete(true)
     const atFloor = multiplier <= 1 || skipPenaltyOff
-    // At ×1 floor or skipPenaltyOff — no multiplier penalty
     if (!atFloor) {
       onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
     }
@@ -300,7 +318,6 @@ export function MirrorGame({
     const trimmedGuess = currentGuess.trim()
     if (!trimmedGuess || isComplete || isValidating) return
 
-    // Dismiss keyboard on mobile immediately
     inputRef.current?.blur()
 
     setValidationError(null)
@@ -315,7 +332,6 @@ export function MirrorGame({
       return
     }
 
-    // Block repeated guesses
     if (guesses.some(g => g.word.toLowerCase() === trimmedGuess.toLowerCase())) {
       setValidationError("Already guessed")
       setIsShaking(true)
@@ -328,11 +344,8 @@ export function MirrorGame({
     const definitionWordSet = new Set(
       word.definition.toLowerCase().replace(/[^a-z\s]/g, " ").split(/\s+/).filter(w => w.length > 0)
     )
-    // Only accept exact match OR genuine suffix variants of the target word
-    // (plurals, -ed, -ing, -s, -er, -est) — NOT other words sharing a prefix
     const target = word.word.toLowerCase()
     const isMorphologicalMatch = gLower !== target && !definitionWordSet.has(gLower) && (() => {
-      // Must start with the full target word or target must start with the guess
       if (gLower.startsWith(target) || target.startsWith(gLower)) {
         const suffix = gLower.length > target.length ? gLower.slice(target.length) : target.slice(gLower.length)
         return ["s", "ed", "ing", "er", "est", "ly", "tion", "ness", "d"].includes(suffix)
@@ -342,17 +355,16 @@ export function MirrorGame({
     const isActuallyCorrect = gLower === target || isMorphologicalMatch
 
     const similarity = isActuallyCorrect ? 100 : calculateSimilarity(trimmedGuess, word.word, word.synonyms)
-    const newGuesses = [...guesses, { word: trimmedGuess, similarity }]
+    const nearMiss = isActuallyCorrect ? null : getNearMissLabel(trimmedGuess, word.word, word.synonyms ?? [], word.keyConcepts ?? [])
+    const newGuesses = [...guesses, { word: trimmedGuess, similarity, nearMiss }]
     setGuesses(newGuesses)
     setCurrentGuess("")
 
     if (isActuallyCorrect) {
       const quality = classifyPlay(newGuesses.length, hintsUsed)
       const basePoints = calcBasePoints(newGuesses.length, hintsUsed)
-      const earned = basePoints * multiplier // keep fractional; session total rounded at display
-      // Tier step
+      const earned = basePoints * multiplier
       const nextMult = applyMultiplierEffect(multiplier, quality)
-      // Add paid hint steps (hints 4+ already cost -0.5 each in real-time, reflect in summary)
       const paidHints = Math.max(0, hintsUsed - maxHints)
       let displayMult = nextMult
       for (let i = 0; i < paidHints; i++) {
@@ -377,24 +389,22 @@ export function MirrorGame({
       const newConsecutiveAwful = quality === "awful" ? consecutiveAwful + 1 : 0
       const newWordsPlayed = wordsPlayed + 1
 
-      onSessionUpdate({ points: earned, correct: true, multiplierEffect: quality }) // hint costs already applied per-reveal
+      onSessionUpdate({ points: earned, correct: true, multiplierEffect: quality })
       onComplete?.({ correct: true, guesses: newGuesses.length, hintsUsed, points: earned })
       onWordPlayed(quality === "awful", entry)
 
       if (newConsecutiveAwful >= 3) {
         setTimeout(() => onSessionEnd(sessionScore + earned, newWordsPlayed, nextMult, newHistory, "awful"), 1600)
       } else if (newWordsPlayed >= 15) {
-        // Auto-advance for practice if enabled
-      if (autoAdvance && onNextWord && wordsPlayed + 1 < 15) {
-        setTimeout(() => { window.scrollTo({ top: 0, behavior: "smooth" }); onNextWord() }, 2000)
-      }
-      setTimeout(() => onSessionEnd(sessionScore + earned, newWordsPlayed, nextMult, newHistory, "complete"), 1600)
+        if (autoAdvance && onNextWord && wordsPlayed + 1 < 15) {
+          setTimeout(() => { window.scrollTo({ top: 0, behavior: "smooth" }); onNextWord() }, 2000)
+        }
+        setTimeout(() => onSessionEnd(sessionScore + earned, newWordsPlayed, nextMult, newHistory, "complete"), 1600)
       }
     } else if (newGuesses.length >= maxGuesses) {
       setIsComplete(true)
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
-      // Three wrong guesses — move to next word (0pts, −0.5× if above floor)
       const atFloor = multiplier <= 1
       if (!atFloor) {
         onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
@@ -432,20 +442,18 @@ export function MirrorGame({
     ? <span className="text-red-500 font-bold">▼ −1.5×</span>
     : null
 
-  const devReveal = false // dev reveal removed
+  const devReveal = false
 
   return (
     <div className="mx-auto w-full max-w-md px-5">
       <div className={`relative rounded-xl border p-6 shadow-sm md:p-8 transition-transform ${isShaking ? "animate-shake" : ""} ${isDark ? "border-[#2a2926] bg-[#1c1b19]" : "border-border bg-card"}`}>
 
-        {/* Header — x/15 left, score + multiplier right */}
         <div className="flex justify-between items-center mb-4">
           <span className={`text-sm font-medium tabular-nums ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
             {wordsPlayed + 1}<span className={`text-xs ${isDark ? "text-[#4a4845]" : "text-muted-foreground/50"}`}>/15</span>
           </span>
 
           <div className="flex items-center gap-3">
-            {/* Score with floating +pts popup anchored inside */}
             <div className="relative flex items-center gap-1.5">
               <Star className="h-3.5 w-3.5 text-amber-500" />
               <span className={`text-sm font-semibold tabular-nums ${isDark ? "text-white" : "text-foreground"}`}>{Math.round(sessionScore)}</span>
@@ -459,7 +467,6 @@ export function MirrorGame({
                 </span>
               )}
             </div>
-            {/* Multiplier badge with floating ×delta popup anchored inside */}
             <div className={`relative flex items-center gap-1 px-2 py-0.5 rounded-md border transition-all duration-200 ${isDark ? "bg-[#111110] border-[#2a2926]" : "bg-muted/40 border-border/50"} ${hintHover && hintsUsed >= maxHints ? "scale-110 " + (isDark ? "border-amber-500/50" : "border-foreground/30") : ""}`}>
               <Zap className={`h-3 w-3 ${multiplierColor}`} />
               <span className={`text-xs font-bold tabular-nums ${multiplierColor}`}>×{multiplier}</span>
@@ -476,19 +483,16 @@ export function MirrorGame({
           </div>
         </div>
 
-        {/* Definition */}
         <div className="text-center mb-6">
           <p className={`text-xs uppercase tracking-widest mb-3 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{word.partOfSpeech}</p>
           <p className={`text-lg leading-relaxed font-serif italic ${isDark ? "text-[#d4cfc8]" : "text-foreground"}`}>&ldquo;{word.definition}&rdquo;</p>
 
-          {/* Word length hint — shown when setting enabled */}
           {showWordLength && !isComplete && (
             <p className={`mt-2 text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
               {word.word.length} letters
             </p>
           )}
 
-          {/* Nemesis banner — shown if player previously struggled here */}
           {nemesisEntry && (
             <div className={`mt-3 px-3 py-2.5 rounded-lg text-xs ${isDark ? "bg-red-500/10 border border-red-500/20" : "bg-red-50 border border-red-200"}`}>
               <p className={`font-medium mb-1 ${isDark ? "text-red-400" : "text-red-600"}`}>⚔️ Nemesis — you struggled here before</p>
@@ -508,10 +512,8 @@ export function MirrorGame({
             </div>
           )}
 
-          {/* Letter reveal — smaller tiles so long words fit one line */}
           {hintsUsed > 0 && (() => {
             const len = word.word.length
-            // Scale tile width down for longer words so they always fit
             const tileW = len <= 8 ? "w-6" : len <= 11 ? "w-5" : len <= 14 ? "w-4" : "w-3"
             const tileH = len <= 11 ? "h-7" : "h-6"
             const textSize = len <= 11 ? "text-xs" : "text-[10px]"
@@ -560,7 +562,6 @@ export function MirrorGame({
                   </svg>
                   {hintsUsed < maxHints ? "Reveal a letter" : multiplier <= 1 ? "Reveal a letter (−1 pt)" : "Reveal a letter (−0.5×)"}
                 </button>
-                {/* Dots below button — 3 free slots amber/filled, paid hints red */}
                 <div className="flex items-center gap-1.5 mt-1">
                   {Array.from({ length: Math.max(maxHints, hintsUsed) }).map((_, i) => (
                     <span
@@ -582,7 +583,6 @@ export function MirrorGame({
 
         <div className={`my-4 h-px ${isDark ? "bg-[#2a2926]" : "bg-border"}`} />
 
-        {/* Result or input — always above guesses */}
         {isComplete ? (
           <div className="text-center">
             {isCorrect ? (
@@ -621,7 +621,6 @@ export function MirrorGame({
                 Next word
               </button>
             )}
-
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
@@ -663,12 +662,20 @@ export function MirrorGame({
           </form>
         )}
 
-        {/* Guesses — below input so they don't interfere with typing */}
+        {/* Guesses */}
         {guesses.length > 0 && (
           <div className="mt-4 space-y-2">
             {guesses.map((guess, i) => (
               <div key={i} className={`flex items-center justify-between rounded-lg border-2 px-4 py-2.5 ${isDark ? "border-[#2a2926] bg-[#111110]" : getSimilarityBorderColor(guess.similarity)}`}>
-                <span className={`font-medium ${isDark ? "text-[#9b9589]" : ""}`}>{guess.word}</span>
+                <div className="flex flex-col gap-0.5">
+                  <span className={`font-medium ${isDark ? "text-[#9b9589]" : ""}`}>{guess.word}</span>
+                  {guess.nearMiss === "very-close" && (
+                    <span className={`text-xs ${isDark ? "text-amber-400" : "text-amber-600"}`}>Very close synonym</span>
+                  )}
+                  {guess.nearMiss === "warm" && (
+                    <span className={`text-xs ${isDark ? "text-sky-400" : "text-sky-600"}`}>Related concept</span>
+                  )}
+                </div>
                 {showSimilarity && (
                   <span className={`text-xs font-bold px-2 py-0.5 rounded ${getSimilarityColor(guess.similarity)}`}>
                     {guess.similarity >= 100 ? "Correct!" : `${guess.similarity}%`}
@@ -678,7 +685,6 @@ export function MirrorGame({
             ))}
           </div>
         )}
-
 
       </div>
     </div>
