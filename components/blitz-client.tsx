@@ -10,6 +10,7 @@ import type { DailyWord, GameMode } from "@/lib/game-data"
 import { getRandomPracticeWord, getDailyBlitzSequence } from "@/lib/game-data"
 import { getMirrorStreak, updateMirrorStreak, type MirrorStreak } from "@/lib/history"
 import { getPlayerId } from "@/lib/player-id"
+import { BlitzWordHistoryPanel } from "@/components/blitz-word-history-panel"
 
 // Nemesis Words — look up previous result for a word from stored session history
 function getNemesisEntry(
@@ -161,6 +162,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const [showSimilarity, setShowSimilarity] = useState(true)
   const [helpOpen, setHelpOpen] = useState(false)
   const [statsOpen, setStatsOpen] = useState(false)
+  const [showWordHistory, setShowWordHistory] = useState(false)
   const [difficulty, setDifficulty] = useState<GameMode>("easy")
   const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
   const [blitzTab, setBlitzTab] = useState<"practice" | "daily">("daily")
@@ -416,7 +418,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
 
   return (
     <main className={`flex min-h-svh flex-col ${isDark ? "bg-[#111110]" : "bg-background"}`} style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }} data-reduce-motion={reduceMotion}>
-      {/* Blitz header — matches Definedle header structure exactly */}
+      {/* Blitz header */}
       <header className="flex flex-col items-center gap-1 pt-10 pb-6 md:pt-14 md:pb-8 w-full max-w-md mx-auto px-5">
         <div className="flex w-full items-center justify-between">
           <div className="flex flex-1 items-center justify-start min-w-0">
@@ -471,7 +473,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         <div className="mt-3 h-px w-12 bg-border" aria-hidden="true" />
       </header>
 
-      {/* Daily / Practice toggle — Daily on left, above Easy/Hard */}
+      {/* Daily / Practice toggle */}
       <div className="flex justify-center mb-2">
         <div className={`inline-flex items-center rounded-lg border p-0.5 ${isDark ? "border-[#2a2926] bg-[#1c1b19]" : "border-border bg-muted/50"}`}>
           <button
@@ -499,7 +501,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         </div>
       </div>
 
-      {/* Easy / Hard toggle — with green ticks for completed daily */}
+      {/* Easy / Hard toggle */}
       <div className="flex justify-center mb-4">
         <div className={`inline-flex items-center rounded-lg border p-0.5 ${isDark ? "border-[#2a2926] bg-[#1c1b19]" : "border-border bg-muted/50"}`}>
           <button
@@ -529,7 +531,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         </div>
       </div>
 
-      {/* Game area — show results or failed message if daily already done */}
+      {/* Game area */}
       {blitzTab === "daily" && dailyDone[difficulty] && !showSummary && (
         dailyFailed[difficulty] ? (
           <div className={`mx-auto w-full max-w-md px-5`}>
@@ -551,8 +553,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             </div>
           </div>
         ) : dailyStoredSummary[difficulty] ? (
-          <BlitzWordHistoryPanel open={showWordHistory} onClose={() => setShowWordHistory(false)} isDark={isDark} />
-      <MirrorSessionSummary
+          <MirrorSessionSummary
             score={dailyStoredSummary[difficulty]!.score}
             wordsSolved={dailyStoredSummary[difficulty]!.wordsSolved}
             bestMultiplier={dailyStoredSummary[difficulty]!.bestMultiplier}
@@ -629,8 +630,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       )}
 
       {showSummary && summaryData && (
-        <BlitzWordHistoryPanel open={showWordHistory} onClose={() => setShowWordHistory(false)} isDark={isDark} />
-      <MirrorSessionSummary
+        <MirrorSessionSummary
           score={summaryData.score}
           wordsSolved={summaryData.wordsSolved}
           bestMultiplier={summaryData.bestMultiplier}
@@ -639,7 +639,6 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           isDaily={blitzTab === "daily"}
           onPlayAgain={() => {
             if (blitzTab === "daily") {
-              // Daily complete — switch to practice instead of replaying
               setBlitzTab("practice")
               resetSession()
               handleNextWord()
@@ -657,6 +656,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         />
       )}
 
+      <BlitzWordHistoryPanel open={showWordHistory} onClose={() => setShowWordHistory(false)} isDark={isDark} />
       <HowToPlayBlitz open={helpOpen} onClose={() => setHelpOpen(false)} />
       <StatsPanel open={statsOpen} onClose={() => setStatsOpen(false)} blitzMode />
     </main>

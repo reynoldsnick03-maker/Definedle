@@ -21,7 +21,7 @@ export async function GET(request: Request) {
     const supabase = getSupabase()
     const { data, error } = await supabase
       .from("mirror_sessions")
-      .select("session_score, words_solved, best_streak, difficulty")
+      .select("session_score, words_solved, best_streak, difficulty, word_history")
       .eq("player_id", playerId)
       .order("session_score", { ascending: false })
       .limit(50)
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     const body = await request.json()
     console.log("mirror-sessions POST received:", JSON.stringify(body))
 
-    const { player_id, session_score, words_solved, words_attempted, best_streak, difficulty } = body
+    const { player_id, session_score, words_solved, words_attempted, best_streak, difficulty, word_history } = body
 
     const scoreNum = Number(session_score)
     if (!player_id || isNaN(scoreNum) || !difficulty) {
@@ -62,6 +62,7 @@ export async function POST(request: Request) {
       words_attempted: words_attempted ?? 0,
       best_streak: best_streak ?? 1,
       difficulty,
+      word_history: word_history ?? null,
     })
 
     if (error) {

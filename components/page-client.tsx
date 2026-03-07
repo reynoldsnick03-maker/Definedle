@@ -20,7 +20,13 @@ interface PageClientProps {
 }
 
 export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: PageClientProps) {
-  const [activeTab, setActiveTab] = useState<AppTab>("definedle")
+  const [activeTab, setActiveTab] = useState<AppTab>(() => {
+    if (typeof window === "undefined") return "definedle"
+    try {
+      const saved = localStorage.getItem("definedle-active-tab")
+      return (saved === "blitz" || saved === "definedle") ? saved as AppTab : "definedle"
+    } catch { return "definedle" }
+  })
   const [highlightBlitz, setHighlightBlitz] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
 
@@ -46,7 +52,11 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
         />
       )}
 
-      <TabBar activeTab={activeTab} onTabChange={(t) => { setActiveTab(t); setHighlightBlitz(false) }} highlightBlitz={highlightBlitz} />
+      <TabBar activeTab={activeTab} onTabChange={(t) => {
+        setActiveTab(t)
+        setHighlightBlitz(false)
+        try { localStorage.setItem("definedle-active-tab", t) } catch {}
+      }} highlightBlitz={highlightBlitz} />
 
       <SettingsPanel open={settingsOpen} onClose={() => setSettingsOpen(false)} isBlitz={activeTab === "blitz"} />
     </>

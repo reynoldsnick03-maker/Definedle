@@ -18,6 +18,7 @@ interface BlitzSession {
   best_streak: number
   difficulty: string
   created_at: string
+  word_history?: { word: string; points: number; multDelta: number; guesses: number; hintsUsed: number }[]
 }
 
 export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }: StatsPanelProps) {
@@ -27,6 +28,9 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
   const [blitzHard, setBlitzHard] = useState<BlitzSession[]>([])
   const [blitzError, setBlitzError] = useState<string | null>(null)
   const [blitzLoading, setBlitzLoading] = useState(false)
+  const [flawlessWordCount, setFlawlessWordCount] = useState(0)
+  const [avgWordsPerSession, setAvgWordsPerSession] = useState(0)
+  const [expandedSession, setExpandedSession] = useState<string | null>(null)
 
   const fetchStats = useCallback(async () => {
     try {
@@ -78,6 +82,17 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
   const avgScore = stats && stats.played > 0
     ? Math.round(stats.entries.reduce((sum, e) => sum + e.s, 0) / stats.played) : 0
   const perfectCount = stats ? stats.entries.filter(e => e.s >= 100).length : 0
+  // Load flawless word count from local history
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("definedle-blitz-word-history")
+      if (!raw) return
+      const history = JSON.parse(raw) as { word: string; guesses: number; hintsUsed: number; tier: string }[]
+      const flawless = history.filter(e => e.guesses === 1 && e.hintsUsed === 0).length
+      setFlawlessWordCount(flawless)
+    } catch {}
+  }, [open])
+
   const blitzAvgEasy = blitzEasy.length > 0
     ? Math.round(blitzEasy.reduce((s, b) => s + b.session_score, 0) / blitzEasy.length) : 0
   const blitzBestMultEasy = blitzEasy.length > 0
@@ -184,8 +199,8 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
                         {[
                           { icon: <Hash className="h-3.5 w-3.5" />, label: "Sessions", value: blitzTotalSessions },
                           { icon: <Trophy className="h-3.5 w-3.5" />, label: "Best", value: Math.round(blitzBestScore) },
-                          { icon: <Zap className="h-3.5 w-3.5" />, label: "Peak ×", value: `×${blitzBestMultEasy}` },
-                          { icon: <Star className="h-3.5 w-3.5" />, label: "Full", value: blitzFlawlessEasy + blitzFlawlessHard },
+                          { icon: <Zap className="h-3.5 w-3.5" />, label: "Avg", value: Math.round((blitzAvgEasy + blitzAvgHard) / (blitzEasy.length > 0 && blitzHard.length > 0 ? 2 : 1)) },
+                          { icon: <Star className="h-3.5 w-3.5" />, label: "Flawless", value: flawlessWordCount },
                         ].map(({ icon, label, value }) => (
                           <div key={label} className={`flex flex-col items-center gap-1`}>
                             <div className={`flex items-center gap-1.5 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{icon}<span className="text-[10px] uppercase tracking-widest font-medium">{label}</span></div>
@@ -196,14 +211,38 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
                       <div className={`h-px ${isDark ? "bg-[#2a2926]" : "bg-border"}`} />
                       <div className="flex flex-col gap-2">
                         <span className={`text-xs uppercase tracking-widest font-medium ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Easy — Best Sessions</span>
-                        {blitzEasy.map((s, i) => (
-                          <div key={i} className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm ${isDark ? "bg-[#111110] border border-[#2a2926]" : "bg-muted/30"}`}>
-                            <span className="text-muted-foreground font-mono text-xs w-5">{i + 1}.</span>
-                            <span className={`font-medium flex-1 ${isDark ? "text-white" : ""}`}>{Math.round(s.session_score)} pts</span>
-                            <span className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{s.words_solved} words</span>
-                            <span className={`text-xs font-mono ml-3 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{s.created_at?.slice(5, 10)}</span>
-                          </div>
-                        ))}
+                        {blitzEasy.map((s, i) => {
+                          const key = `easy-${i}`
+                          const isExpanded = expandedSession === key
+                          return (
+                            <div key={i} className={`rounded-lg text-sm overflow-hidden ${isDark ? "bg-[#111110] border border-[#2a2926]" : "bg-muted/30"}`}>
+                              <div
+                                className="flex items-center justify-between px-3 py-2 cursor-pointer"
+                                onClick={() => setExpandedSession(isExpanded ? null : key)}
+                              >
+                                <span className="text-muted-foreground font-mono text-xs w-5">{i + 1}.</span>
+                                <span className={`font-medium flex-1 ${isDark ? "text-white" : ""}`}>{Math.round(s.session_score)} pts</span>
+                                <span className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{s.words_solved}/15 words</span>
+                                <span className={`text-xs font-mono ml-3 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{s.created_at?.slice(5, 10)}</span>
+                                <span className={`ml-2 text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{isExpanded ? "▲" : "▼"}</span>
+                              </div>
+                              {isExpanded && s.word_history && s.word_history.length > 0 && (
+                                <div className={`px-3 pb-2 space-y-1 border-t ${isDark ? "border-[#2a2926]" : "border-border"}`}>
+                                  {s.word_history.map((w: {word: string; points: number; multDelta: number; guesses: number; hintsUsed: number}, wi: number) => (
+                                    <div key={wi} className="flex items-center justify-between py-1">
+                                      <span className={`text-xs font-medium ${isDark ? "text-[#9b9589]" : "text-muted-foreground"}`}>{w.word}</span>
+                                      <div className={`flex items-center gap-2 text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
+                                        {w.guesses === 0 ? <span className="text-red-400">failed</span> : <span>{w.guesses}g {w.hintsUsed > 0 ? `${w.hintsUsed}h` : ""}</span>}
+                                        <span className={w.points > 0 ? (isDark ? "text-amber-400" : "text-amber-600") : ""}>{w.points > 0 ? `+${Math.round(w.points)}` : "0"} pts</span>
+                                        {w.multDelta !== 0 && <span className={w.multDelta > 0 ? "text-emerald-500" : "text-red-400"}>{w.multDelta > 0 ? "▲" : "▼"}{Math.abs(w.multDelta)}×</span>}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          )
+                        })}
                       </div>
                     </>
                   )}
@@ -215,14 +254,38 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
                           <span className={`text-xs uppercase tracking-widest font-medium ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>Hard — Best Sessions</span>
                           <span className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>avg {blitzAvgHard}</span>
                         </div>
-                        {blitzHard.map((s, i) => (
-                          <div key={i} className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm ${isDark ? "bg-[#111110] border border-[#2a2926]" : "bg-muted/30"}`}>
-                            <span className="text-muted-foreground font-mono text-xs w-5">{i + 1}.</span>
-                            <span className={`font-medium flex-1 ${isDark ? "text-white" : ""}`}>{Math.round(s.session_score)} pts</span>
-                            <span className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{s.words_solved} words</span>
-                            <span className={`text-xs font-mono ml-3 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{s.created_at?.slice(5, 10)}</span>
-                          </div>
-                        ))}
+                        {blitzHard.map((s, i) => {
+                          const key = `hard-${i}`
+                          const isExpanded = expandedSession === key
+                          return (
+                            <div key={i} className={`rounded-lg text-sm overflow-hidden ${isDark ? "bg-[#111110] border border-[#2a2926]" : "bg-muted/30"}`}>
+                              <div
+                                className="flex items-center justify-between px-3 py-2 cursor-pointer"
+                                onClick={() => setExpandedSession(isExpanded ? null : key)}
+                              >
+                                <span className="text-muted-foreground font-mono text-xs w-5">{i + 1}.</span>
+                                <span className={`font-medium flex-1 ${isDark ? "text-white" : ""}`}>{Math.round(s.session_score)} pts</span>
+                                <span className={`text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{s.words_solved}/15 words</span>
+                                <span className={`text-xs font-mono ml-3 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{s.created_at?.slice(5, 10)}</span>
+                                <span className={`ml-2 text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{isExpanded ? "▲" : "▼"}</span>
+                              </div>
+                              {isExpanded && s.word_history && s.word_history.length > 0 && (
+                                <div className={`px-3 pb-2 space-y-1 border-t ${isDark ? "border-[#2a2926]" : "border-border"}`}>
+                                  {s.word_history.map((w: {word: string; points: number; multDelta: number; guesses: number; hintsUsed: number}, wi: number) => (
+                                    <div key={wi} className="flex items-center justify-between py-1">
+                                      <span className={`text-xs font-medium ${isDark ? "text-[#9b9589]" : "text-muted-foreground"}`}>{w.word}</span>
+                                      <div className={`flex items-center gap-2 text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
+                                        {w.guesses === 0 ? <span className="text-red-400">failed</span> : <span>{w.guesses}g {w.hintsUsed > 0 ? `${w.hintsUsed}h` : ""}</span>}
+                                        <span className={w.points > 0 ? (isDark ? "text-amber-400" : "text-amber-600") : ""}>{w.points > 0 ? `+${Math.round(w.points)}` : "0"} pts</span>
+                                        {w.multDelta !== 0 && <span className={w.multDelta > 0 ? "text-emerald-500" : "text-red-400"}>{w.multDelta > 0 ? "▲" : "▼"}{Math.abs(w.multDelta)}×</span>}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          )
+                        })}
                       </div>
                     </>
                   )}
