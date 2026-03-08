@@ -1,10 +1,11 @@
 import { getTodaysWord, getTodaysHardWord } from "@/lib/game-data"
 import { PageClient } from "@/components/page-client"
 
+export const revalidate = 0
+
 export default async function Page() {
   const dailyWord = getTodaysWord()
   const hardWord = getTodaysHardWord()
-
   return (
     <PageClient
       dailyWord={dailyWord}
