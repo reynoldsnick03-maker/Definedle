@@ -5,7 +5,7 @@ import { MirrorGame, type WordHistoryEntry } from "@/components/mirror-game"
 import { MirrorSessionSummary } from "@/components/mirror-session-summary"
 import { HowToPlayBlitz } from "@/components/how-to-play-blitz"
 import { StatsPanel } from "@/components/stats-panel"
-import { BarChart3, CircleHelp, Settings, Zap } from "lucide-react"
+import { BarChart3, CircleHelp, Search, Settings, Zap } from "lucide-react"
 import type { DailyWord, GameMode } from "@/lib/game-data"
 import { getRandomPracticeWord, getDailyBlitzSequence } from "@/lib/game-data"
 import { getMirrorStreak, updateMirrorStreak, type MirrorStreak } from "@/lib/history"
@@ -421,7 +421,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       {/* Blitz header */}
       <header className="flex flex-col items-center gap-1 pt-10 pb-6 md:pt-14 md:pb-8 w-full max-w-md mx-auto px-5">
         <div className="flex w-full items-center justify-between">
-          <div className="flex flex-1 items-center justify-start min-w-0">
+          <div className="flex flex-1 items-center justify-start gap-1 min-w-0">
             <button
               type="button"
               onClick={onSettingsOpen}
@@ -430,11 +430,6 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             >
               <Settings className="h-[18px] w-[18px]" />
             </button>
-          </div>
-          <h1 className={`font-serif text-3xl font-light tracking-tight ${isDark ? "text-white" : "text-foreground"}`}>
-            Definedle
-          </h1>
-          <div className="flex flex-1 items-center justify-end gap-1 min-w-0">
             <button
               type="button"
               onClick={() => setHelpOpen(true)}
@@ -443,6 +438,11 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             >
               <CircleHelp className="h-[18px] w-[18px]" />
             </button>
+          </div>
+          <h1 className={`font-serif text-3xl font-light tracking-tight ${isDark ? "text-white" : "text-foreground"}`}>
+            Definedle
+          </h1>
+          <div className="flex flex-1 items-center justify-end gap-1 min-w-0">
             <button
               type="button"
               onClick={() => setStatsOpen(true)}
@@ -455,10 +455,9 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
               type="button"
               onClick={() => setShowWordHistory(true)}
               className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors focus-visible:outline-none ${isDark ? "text-[#6b6560] hover:text-[#d4cfc8]" : "text-muted-foreground hover:text-foreground"}`}
-              aria-label="Word play history"
-              title="Word play history (dev)"
+              aria-label="Word history"
             >
-              <span className="text-sm">📊</span>
+              <Search className="h-[18px] w-[18px]" />
             </button>
           </div>
         </div>
