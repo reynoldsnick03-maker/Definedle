@@ -174,11 +174,14 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const [dailySequenceHard, setDailySequenceHard] = useState<DailyWord[]>([])
   const [dailyWordIndex, setDailyWordIndex] = useState(0)
 
-  const [sessions, setSessions] = useState<Record<GameMode, SessionState>>({
-    easy: emptySession(),
-    hard: emptySession(),
+  const [sessions, setSessions] = useState<Record<string, SessionState>>({
+    "easy-daily": emptySession(),
+    "easy-practice": emptySession(),
+    "hard-daily": emptySession(),
+    "hard-practice": emptySession(),
   })
-  const sess = sessions[difficulty]
+  const sessKey = `${difficulty}-${blitzTab}`
+  const sess = sessions[sessKey] ?? emptySession()
   const { sessionScore, sessionStreak, sessionBestStreak,
     multiplier, bestMultiplier, showSummary, wordsPlayed,
     consecutiveAwful, sessionWordHistory, summaryData } = sess
@@ -250,8 +253,8 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         setBlitzTab(savedTab)
         setSessions(prev => ({
           ...prev,
-          [savedDiff]: {
-            ...prev[savedDiff],
+          [`${savedDiff}-${savedTab}`]: {
+            ...(prev[`${savedDiff}-${savedTab}`] ?? emptySession()),
             score: progress.score,
             multiplier: progress.multiplier,
             bestMultiplier: progress.bestMultiplier,
@@ -284,21 +287,23 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   }, [blitzTab, difficulty])
 
   const updateSession = useCallback((diff: GameMode, patch: Partial<SessionState>) => {
-    setSessions((prev: Record<GameMode, SessionState>) => ({ ...prev, [diff]: { ...prev[diff], ...patch } }))
-  }, [])
+    const key = `${diff}-${blitzTab}`
+    setSessions((prev: Record<string, SessionState>) => ({ ...prev, [key]: { ...prev[key], ...patch } }))
+  }, [blitzTab])
 
   const handleSessionUpdate = useCallback(({ points, correct, multiplierEffect }: {
     points: number
     correct: boolean
     multiplierEffect: "flawless" | "good" | "decent" | "poor" | "awful"
   }) => {
-    setSessions((prev: Record<GameMode, SessionState>) => {
-      const s = prev[difficulty]
+    setSessions((prev: Record<string, SessionState>) => {
+      const key = `${difficulty}-${blitzTab}`
+      const s = prev[key] ?? emptySession()
       const newScore = Math.max(0, s.sessionScore + points)
       const newMult = applyMultiplierStep(s.multiplier, multiplierEffect)
       if (!correct) {
         // Skip/fail — apply multiplier penalty but don't increment streak/words solved
-        return { ...prev, [difficulty]: {
+        return { ...prev, [key]: {
           ...s,
           sessionScore: newScore,
           multiplier: newMult,
@@ -306,7 +311,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         }}
       }
       const newStreak = s.sessionStreak + 1
-      return { ...prev, [difficulty]: {
+      return { ...prev, [key]: {
         ...s,
         sessionScore: newScore,
         sessionWordsSolved: s.sessionWordsSolved + 1,
@@ -326,7 +331,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
     reason: "failed" | "awful" | "complete"
   ) => {
     // Use bestMultiplier from session state — peakMultiplier from mirror-game is just last word's mult
-    const peakMult = sessions[difficulty].bestMultiplier
+    const peakMult = sessions[sessKey]?.bestMultiplier ?? 1
     updateSession(difficulty, {
       summaryData: { score: finalScore, wordsSolved, bestMultiplier: peakMult, wordHistory, reason },
       showSummary: true,
@@ -382,14 +387,15 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
 
   const resetSession = useCallback((diff?: GameMode) => {
     const target = diff ?? difficulty
-    setSessions((prev: Record<GameMode, SessionState>) => ({ ...prev, [target]: emptySession() }))
+    const key = `${target}-${blitzTab}`
+    setSessions((prev: Record<string, SessionState>) => ({ ...prev, [key]: emptySession() }))
     clearBlitzProgress(target, blitzTab)
   }, [difficulty, blitzTab])
 
   const handleNextWord = useCallback(() => {
-    setSessions((prev: Record<GameMode, SessionState>) => ({
+    setSessions((prev: Record<string, SessionState>) => ({
       ...prev,
-      [difficulty]: { ...prev[difficulty], wordsPlayed: prev[difficulty].wordsPlayed + 1 }
+      [`${difficulty}-${blitzTab}`]: { ...prev[`${difficulty}-${blitzTab}`], wordsPlayed: (prev[`${difficulty}-${blitzTab}`] ?? emptySession()).wordsPlayed + 1 }
     }))
     const played = difficulty === "easy" ? playedEasy : playedHard
     const recentlyPlayed = getRecentlyPlayedPracticeWords(150)
@@ -404,9 +410,9 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   }, [difficulty, playedEasy, playedHard])
 
   const handleNextDailyWord = useCallback(() => {
-    setSessions((prev: Record<GameMode, SessionState>) => ({
+    setSessions((prev: Record<string, SessionState>) => ({
       ...prev,
-      [difficulty]: { ...prev[difficulty], wordsPlayed: prev[difficulty].wordsPlayed + 1 }
+      [`${difficulty}-daily`]: { ...prev[`${difficulty}-daily`], wordsPlayed: (prev[`${difficulty}-daily`] ?? emptySession()).wordsPlayed + 1 }
     }))
     setDailyWordIndex((i: number) => i + 1)
   }, [difficulty, dailyWordIndex])
@@ -477,7 +483,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         <div className={`inline-flex items-center rounded-lg border p-0.5 ${isDark ? "border-[#2a2926] bg-[#1c1b19]" : "border-border bg-muted/50"}`}>
           <button
             type="button"
-            onClick={() => { setBlitzTab("daily"); setDailyWordIndex(0) }}
+            onClick={() => { setBlitzTab("daily") }}
             className={`rounded-md px-6 py-2 text-sm font-medium transition-all duration-200 min-h-[36px] ${
               blitzTab === "daily"
                 ? isDark ? "bg-[#2a2926] text-amber-400 shadow-sm" : "bg-card text-amber-500 shadow-sm"
@@ -584,9 +590,10 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           consecutiveAwful={consecutiveAwful}
           wordHistory={sessionWordHistory}
           onWordPlayed={(wasAwful: boolean, entry: WordHistoryEntry) => {
-            setSessions((prev: Record<GameMode, SessionState>) => {
-              const s = prev[difficulty]
-              return { ...prev, [difficulty]: {
+            setSessions((prev: Record<string, SessionState>) => {
+              const key = `${difficulty}-${blitzTab}`
+              const s = prev[key] ?? emptySession()
+              return { ...prev, [key]: {
                 ...s,
                 consecutiveAwful: wasAwful ? s.consecutiveAwful + 1 : 0,
                 sessionWordHistory: [...s.sessionWordHistory, entry],
