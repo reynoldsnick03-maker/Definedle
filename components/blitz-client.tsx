@@ -566,7 +566,17 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             reason="complete"
             isDaily={true}
             isDark={isDark}
-            onPlayAgain={() => { setBlitzTab("practice"); resetSession(); handleNextWord() }}
+            difficulty={difficulty}
+            oppositeCompleted={difficulty === "easy" ? dailyDone.hard : dailyDone.easy}
+            onPlayAgain={() => {
+              const oppDoneStored = difficulty === "easy" ? dailyDone.hard : dailyDone.easy
+              if (!oppDoneStored) {
+                const opp = difficulty === "easy" ? "hard" : "easy"
+                setDifficulty(opp as any)
+              } else {
+                setBlitzTab("practice"); resetSession(); handleNextWord()
+              }
+            }}
             onFlipBack={() => { setBlitzTab("practice"); resetSession(); handleNextWord() }}
           />
         ) : null
@@ -643,17 +653,26 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           wordHistory={summaryData.wordHistory}
           reason={summaryData.reason}
           isDaily={blitzTab === "daily"}
+          isDark={isDark}
+          difficulty={difficulty}
+          oppositeCompleted={difficulty === "easy" ? dailyDone.hard : dailyDone.easy}
           onPlayAgain={() => {
             if (blitzTab === "daily") {
-              setBlitzTab("practice")
-              resetSession()
-              handleNextWord()
+              const oppDone = difficulty === "easy" ? dailyDone.hard : dailyDone.easy
+              if (!oppDone) {
+                const opp = difficulty === "easy" ? "hard" : "easy"
+                setDifficulty(opp as any)
+                resetSession(opp as any)
+              } else {
+                setBlitzTab("practice")
+                resetSession()
+                handleNextWord()
+              }
             } else {
               resetSession()
               handleNextWord()
             }
           }}
-          isDark={isDark}
           onFlipBack={() => {
             setBlitzTab("practice")
             resetSession()
