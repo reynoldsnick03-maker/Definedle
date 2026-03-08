@@ -477,7 +477,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         <div className={`inline-flex items-center rounded-lg border p-0.5 ${isDark ? "border-[#2a2926] bg-[#1c1b19]" : "border-border bg-muted/50"}`}>
           <button
             type="button"
-            onClick={() => { setBlitzTab("daily"); resetSession(); setDailyWordIndex(0) }}
+            onClick={() => { setBlitzTab("daily"); setDailyWordIndex(0) }}
             className={`rounded-md px-6 py-2 text-sm font-medium transition-all duration-200 min-h-[36px] ${
               blitzTab === "daily"
                 ? isDark ? "bg-[#2a2926] text-amber-400 shadow-sm" : "bg-card text-amber-500 shadow-sm"
@@ -488,7 +488,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           </button>
           <button
             type="button"
-            onClick={() => { setBlitzTab("practice"); resetSession() }}
+            onClick={() => { setBlitzTab("practice") }}
             className={`rounded-md px-6 py-2 text-sm font-medium transition-all duration-200 min-h-[36px] ${
               blitzTab === "practice"
                 ? isDark ? "bg-[#2a2926] text-white shadow-sm" : "bg-card text-foreground shadow-sm"

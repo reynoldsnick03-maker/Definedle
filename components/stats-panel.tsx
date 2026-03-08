@@ -76,14 +76,8 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
     return () => document.removeEventListener("keydown", handleKeyDown)
   }, [open, onClose])
 
-  if (!open) return null
-
-  const last7 = stats?.entries.slice(-7) ?? []
-  const avgScore = stats && stats.played > 0
-    ? Math.round(stats.entries.reduce((sum, e) => sum + e.s, 0) / stats.played) : 0
-  const perfectCount = stats ? stats.entries.filter(e => e.s >= 100).length : 0
-  // Load flawless word count from local history
   useEffect(() => {
+    if (!open) return
     try {
       const raw = localStorage.getItem("definedle-blitz-word-history")
       if (!raw) return
@@ -92,6 +86,13 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
       setFlawlessWordCount(flawless)
     } catch {}
   }, [open])
+
+  if (!open) return null
+
+  const last7 = stats?.entries.slice(-7) ?? []
+  const avgScore = stats && stats.played > 0
+    ? Math.round(stats.entries.reduce((sum, e) => sum + e.s, 0) / stats.played) : 0
+  const perfectCount = stats ? stats.entries.filter(e => e.s >= 100).length : 0
 
   const blitzAvgEasy = blitzEasy.length > 0
     ? Math.round(blitzEasy.reduce((s, b) => s + b.session_score, 0) / blitzEasy.length) : 0
