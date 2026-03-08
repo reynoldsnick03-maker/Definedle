@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { TabBar, type AppTab } from "@/components/tab-bar"
-import { DefinedleClient } from "@/components/definedle-client"
+import { PageClient as DefinedleClient } from "@/components/definedle-client"
 import { BlitzClient } from "@/components/blitz-client"
 import type { DailyWord } from "@/lib/game-data"
 import type { ShareData } from "@/components/shared-result"
