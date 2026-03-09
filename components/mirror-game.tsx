@@ -23,7 +23,7 @@ interface MirrorGameProps {
   sessionStreak: number
   sessionBestStreak: number
   multiplier: number
-  onSessionUpdate: (delta: { points: number; correct: boolean; multiplierEffect: "flawless" | "good" | "decent" | "poor" | "awful" }) => void
+  onSessionUpdate: (delta: { points: number; correct: boolean; multiplierEffect: "flawless" | "good" | "decent" | "poor" | "awful" | "fail" }) => void
   onSessionEnd: (finalScore: number, wordsSolved: number, bestMultiplier: number, wordHistory: WordHistoryEntry[], reason: "failed" | "awful" | "complete") => void
   onFlipToNormal: () => void
   wordsPlayed: number
@@ -36,6 +36,7 @@ interface MirrorGameProps {
   showSimilarity?: boolean
   skipPenaltyOff?: boolean
   autoAdvance?: boolean
+  difficulty?: "easy" | "hard"
 }
 
 interface Guess {
@@ -51,16 +52,34 @@ function getMultiplierIndex(m: number): number {
   return idx === -1 ? 0 : idx
 }
 
-function applyMultiplierEffect(current: number, effect: "flawless" | "good" | "decent" | "poor" | "awful"): number {
+function applyMultiplierEffect(current: number, effect: "flawless" | "good" | "decent" | "poor" | "awful" | "fail"): number {
   const idx = getMultiplierIndex(current)
   if (effect === "flawless") return MULTIPLIER_STEPS[Math.min(idx + 2, MULTIPLIER_STEPS.length - 1)]
-  if (effect === "good") return MULTIPLIER_STEPS[Math.min(idx + 1, MULTIPLIER_STEPS.length - 1)]
-  if (effect === "decent") return MULTIPLIER_STEPS[Math.max(idx - 1, 0)] // −0.5 step
-  if (effect === "awful") return MULTIPLIER_STEPS[Math.max(idx - 2, 0)]
-  return MULTIPLIER_STEPS[Math.max(idx - 1, 0)] // poor = −0.5 step
+  if (effect === "good")     return MULTIPLIER_STEPS[Math.min(idx + 1, MULTIPLIER_STEPS.length - 1)]
+  if (effect === "decent")   return MULTIPLIER_STEPS[idx] // +0 steps — holds multiplier
+  if (effect === "awful")    return MULTIPLIER_STEPS[Math.max(idx - 2, 0)]
+  if (effect === "fail")     return MULTIPLIER_STEPS[Math.max(idx - 2, 0)]
+  return MULTIPLIER_STEPS[Math.max(idx - 1, 0)] // poor = −1 step
 }
 
-function classifyPlay(guesses: number, hintsUsed: number): "flawless" | "good" | "decent" | "poor" | "awful" {
+// Easy mode: hints 0 matter for tier; Hard mode: hints 1–2 free, hint 3 loses flawless, hints 4+ degrade further
+function classifyPlay(guesses: number, hintsUsed: number, difficulty: "easy" | "hard" = "easy"): "flawless" | "good" | "decent" | "poor" | "awful" | "fail" {
+  if (guesses === 0) return "fail"
+
+  if (difficulty === "hard") {
+    // Base tier from guesses: 1g 0–2h = flawless, 1g 3h+ starts at good; 2g = good; 3g = decent
+    let base: "flawless" | "good" | "decent" | "poor" | "awful"
+    if (guesses === 1)      base = hintsUsed <= 2 ? "flawless" : "good"
+    else if (guesses === 2) base = "good"
+    else                    base = "decent"
+    // Each hint beyond 3 degrades one tier
+    const extra = Math.max(0, hintsUsed - 3)
+    const tiers: Array<"flawless" | "good" | "decent" | "poor" | "awful"> = ["flawless", "good", "decent", "poor", "awful"]
+    const idx = tiers.indexOf(base)
+    return tiers[Math.min(idx + extra, tiers.length - 1)]
+  }
+
+  // Easy mode (unchanged logic)
   if (guesses === 1 && hintsUsed === 0) return "flawless"
   if (
     (guesses === 1 && hintsUsed === 1) ||
@@ -68,14 +87,9 @@ function classifyPlay(guesses: number, hintsUsed: number): "flawless" | "good" |
     (guesses === 2 && hintsUsed === 1)
   ) return "good"
   if (
-    (guesses === 1 && hintsUsed === 2) ||
-    (guesses === 1 && hintsUsed === 3) ||
-    (guesses === 2 && hintsUsed === 2) ||
-    (guesses === 2 && hintsUsed === 3) ||
-    (guesses === 3 && hintsUsed === 0) ||
-    (guesses === 3 && hintsUsed === 1) ||
-    (guesses === 3 && hintsUsed === 2) ||
-    (guesses === 3 && hintsUsed === 3)
+    (guesses === 1 && hintsUsed <= 3) ||
+    (guesses === 2 && hintsUsed <= 3) ||
+    (guesses === 3 && hintsUsed <= 3)
   ) return "decent"
   if (
     (guesses === 1 && hintsUsed >= 6) ||
@@ -85,27 +99,14 @@ function classifyPlay(guesses: number, hintsUsed: number): "flawless" | "good" |
   return "poor"
 }
 
-function hintsAccounted(guesses: number, hintsUsed: number): number {
-  const q = classifyPlay(guesses, hintsUsed)
-  if (q === "flawless") return 0
-  if (q === "good") return guesses === 1 ? 1 : guesses === 2 && hintsUsed === 0 ? 0 : 1
-  if (q === "decent") {
-    if (guesses === 3) return 0
-    if (guesses === 2) return 2
-    if (guesses === 1) return hintsUsed
-    return 2
-  }
-  if (q === "awful") return guesses === 1 ? 5 : guesses === 2 ? 4 : 4
-  if (guesses === 1) return 3
-  if (guesses === 2) return 2
-  return 0
-}
-
-function calcBasePoints(guesses: number, hintsUsed: number): number {
-  const quality = classifyPlay(guesses, hintsUsed)
-  if (quality === "flawless") return 3
-  if (quality === "good") return 2
-  return 1
+function calcBasePoints(guesses: number, hintsUsed: number, difficulty: "easy" | "hard" = "easy"): number {
+  const quality = classifyPlay(guesses, hintsUsed, difficulty)
+  if (quality === "flawless") return 5
+  if (quality === "good")     return 4
+  if (quality === "decent")   return 3
+  if (quality === "poor")     return 2
+  if (quality === "awful")    return 1
+  return 0 // fail
 }
 
 function getNearMissLabel(
@@ -239,6 +240,7 @@ export function MirrorGame({
   showSimilarity = true,
   skipPenaltyOff = false,
   autoAdvance = false,
+  difficulty = "easy",
 }: MirrorGameProps) {
   const [guesses, setGuesses] = useState<Guess[]>([])
   const [currentGuess, setCurrentGuess] = useState("")
@@ -250,7 +252,7 @@ export function MirrorGame({
   const [validationError, setValidationError] = useState<string | null>(null)
   const [showFlawless, setShowFlawless] = useState(false)
   const [pointsEarned, setPointsEarned] = useState<number | null>(null)
-  const [playQuality, setPlayQuality] = useState<"flawless" | "good" | "decent" | "poor" | "awful" | null>(null)
+  const [playQuality, setPlayQuality] = useState<"flawless" | "good" | "decent" | "poor" | "awful" | "fail" | null>(null)
   const [floatingPoints, setFloatingPoints] = useState<{value: number, key: number} | null>(null)
   const [floatingMult, setFloatingMult] = useState<{value: number, key: number} | null>(null)
   const [hintHover, setHintHover] = useState(false)
@@ -361,16 +363,11 @@ export function MirrorGame({
     setCurrentGuess("")
 
     if (isActuallyCorrect) {
-      const quality = classifyPlay(newGuesses.length, hintsUsed)
-      const basePoints = calcBasePoints(newGuesses.length, hintsUsed)
+      const quality = classifyPlay(newGuesses.length, hintsUsed, difficulty)
+      const basePoints = calcBasePoints(newGuesses.length, hintsUsed, difficulty)
       const earned = basePoints * multiplier
       const nextMult = applyMultiplierEffect(multiplier, quality)
-      const paidHints = Math.max(0, hintsUsed - maxHints)
-      let displayMult = nextMult
-      for (let i = 0; i < paidHints; i++) {
-        displayMult = applyMultiplierEffect(displayMult, "poor")
-      }
-      const multDelta = parseFloat((displayMult - multiplier).toFixed(1))
+      const multDelta = parseFloat((nextMult - multiplier).toFixed(1))
 
       setPointsEarned(earned)
       const nowKey = Date.now()
@@ -381,7 +378,7 @@ export function MirrorGame({
       setPlayQuality(quality)
       setIsCorrect(true)
       setIsComplete(true)
-      if (newGuesses.length === 1 && hintsUsed === 0) setShowFlawless(true)
+      if (quality === "flawless") setShowFlawless(true)
 
       const entry: WordHistoryEntry = { word: word.word, points: earned, multDelta, guesses: newGuesses.length, hintsUsed }
       const newHistory = [...wordHistory, entry]
@@ -405,11 +402,9 @@ export function MirrorGame({
       setIsComplete(true)
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 500)
-      const atFloor = multiplier <= 1
-      if (!atFloor) {
-        onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
-      }
-      const failDelta = atFloor ? 0 : -0.5
+      const nextFailMult = applyMultiplierEffect(multiplier, "fail")
+      const failDelta = parseFloat((nextFailMult - multiplier).toFixed(1))
+      onSessionUpdate({ points: 0, correct: false, multiplierEffect: "awful" })
       const bestGuess = newGuesses.reduce((best, g) => g.similarity > (best?.similarity ?? -1) ? g : best, newGuesses[0])
       const failEntry: WordHistoryEntry = { word: word.word, points: 0, multDelta: failDelta, guesses: newGuesses.length, hintsUsed, bestGuess: bestGuess?.word }
       const newFailHistory = [...wordHistory, failEntry]
@@ -430,17 +425,13 @@ export function MirrorGame({
 
   const multiplierColor = multiplier > 1 ? (multiplier >= 4 ? "text-emerald-400" : multiplier >= 2.5 ? "text-emerald-500" : "text-emerald-600") : (isDark ? "text-[#6b6560]" : "text-muted-foreground")
 
-  const qualityLabel = playQuality === "flawless"
-    ? <span className="text-emerald-500 font-medium">▲ +2×</span>
-    : playQuality === "good"
-    ? <span className="text-emerald-600 font-medium">▲ +1×</span>
-    : playQuality === "decent"
-    ? <span className={`${isDark ? "text-[#6b6560]" : "text-muted-foreground"} font-medium`}>▼ −0.5×</span>
-    : playQuality === "poor"
-    ? <span className="text-orange-500 font-medium">▼ −1×</span>
-    : playQuality === "awful"
-    ? <span className="text-red-500 font-bold">▼ −1.5×</span>
-    : null
+  const qualityLabel = (() => {
+    if (!playQuality || pointsEarned === null) return null
+    const delta = parseFloat((applyMultiplierEffect(multiplier, playQuality) - multiplier).toFixed(1))
+    if (delta > 0) return <span className="text-emerald-500 font-medium">▲ +{delta}×</span>
+    if (delta < 0) return <span className={`${playQuality === "awful" || playQuality === "fail" ? "text-red-500 font-bold" : "text-orange-500 font-medium"}`}>▼ {delta}×</span>
+    return <span className={`${isDark ? "text-[#6b6560]" : "text-muted-foreground"} font-medium`}>― 0×</span>
+  })()
 
   const devReveal = false
 
