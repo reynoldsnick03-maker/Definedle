@@ -79,6 +79,7 @@ export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordH
           <div className="flex items-center justify-center gap-2 mb-1">
             <Star className="h-5 w-5 text-amber-500" />
             <span className={`font-serif text-4xl font-light ${isDark ? "text-white" : "text-foreground"}`}>{Math.round(score)}</span>
+            <span className={`font-serif text-sm font-light self-end mb-1 ${isDark ? "text-[#4a4540]" : "text-muted-foreground/50"}`}>/460</span>
           </div>
           <p className={`text-xs mb-3 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>points</p>
           <p className={`text-sm font-medium ${isDark ? "text-amber-500" : "text-foreground/70"}`}>{rating}</p>

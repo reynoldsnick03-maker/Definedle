@@ -118,14 +118,15 @@ function clearBlitzProgress(difficulty: string, tab: string) {
 
 const MULTIPLIER_STEPS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8]
 
-function applyMultiplierStep(current: number, effect: "flawless" | "good" | "decent" | "poor" | "awful"): number {
+function applyMultiplierStep(current: number, effect: "flawless" | "good" | "decent" | "poor" | "awful" | "fail"): number {
   const idx = MULTIPLIER_STEPS.findIndex(s => Math.abs(s - current) < 0.01)
   const safeIdx = idx === -1 ? 0 : idx
   if (effect === "flawless") return MULTIPLIER_STEPS[Math.min(safeIdx + 2, MULTIPLIER_STEPS.length - 1)]
-  if (effect === "good") return MULTIPLIER_STEPS[Math.min(safeIdx + 1, MULTIPLIER_STEPS.length - 1)]
-  if (effect === "decent") return MULTIPLIER_STEPS[Math.max(safeIdx - 1, 0)] // −0.5 step
-  if (effect === "awful") return MULTIPLIER_STEPS[Math.max(safeIdx - 2, 0)]
-  return MULTIPLIER_STEPS[Math.max(safeIdx - 1, 0)] // poor
+  if (effect === "good")     return MULTIPLIER_STEPS[Math.min(safeIdx + 1, MULTIPLIER_STEPS.length - 1)]
+  if (effect === "decent")   return MULTIPLIER_STEPS[safeIdx] // +0 — holds multiplier
+  if (effect === "awful")    return MULTIPLIER_STEPS[Math.max(safeIdx - 2, 0)]
+  if (effect === "fail")     return MULTIPLIER_STEPS[Math.max(safeIdx - 2, 0)]
+  return MULTIPLIER_STEPS[Math.max(safeIdx - 1, 0)] // poor = −1 step
 }
 
 type SessionState = {
@@ -294,7 +295,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const handleSessionUpdate = useCallback(({ points, correct, multiplierEffect }: {
     points: number
     correct: boolean
-    multiplierEffect: "flawless" | "good" | "decent" | "poor" | "awful"
+    multiplierEffect: "flawless" | "good" | "decent" | "poor" | "awful" | "fail"
   }) => {
     setSessions((prev: Record<string, SessionState>) => {
       const key = `${difficulty}-${blitzTab}`
@@ -637,6 +638,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           showSimilarity={showSimilarity}
           skipPenaltyOff={skipPenaltyOff}
           autoAdvance={autoAdvance}
+          difficulty={difficulty}
           onComplete={(result) => {
             const isPerfect = result.correct && result.guesses === 1 && result.hintsUsed === 0
             const updated = updateMirrorStreak(difficulty, isPerfect)
