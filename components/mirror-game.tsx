@@ -277,6 +277,20 @@ export function MirrorGame({
     setFloatingMult(null)
   }, [word.word])
 
+  // Fix iOS keyboard dismiss gap — scroll back to top when virtual keyboard closes
+  useEffect(() => {
+    const vv = window.visualViewport
+    if (!vv) return
+    const onResize = () => {
+      if (vv.height === window.innerHeight) {
+        // Keyboard dismissed — scroll back to top
+        window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior })
+      }
+    }
+    vv.addEventListener("resize", onResize)
+    return () => vv.removeEventListener("resize", onResize)
+  }, [])
+
   const handleRevealLetter = () => {
     if (isComplete) return
     if (hintsUsed >= word.word.length - 1) return
