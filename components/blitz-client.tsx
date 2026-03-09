@@ -424,7 +424,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   }, [])
 
   return (
-    <main className={`flex min-h-svh flex-col ${isDark ? "bg-[#111110]" : "bg-background"}`} style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }} data-reduce-motion={reduceMotion}>
+    <main className={`flex flex-col ${isDark ? "bg-[#111110]" : "bg-background"}`} style={{ paddingBottom: "calc(5rem + env(safe-area-inset-bottom))" }} data-reduce-motion={reduceMotion}>
       {/* Blitz header */}
       <header className="flex flex-col items-center gap-1 pt-10 pb-6 md:pt-14 md:pb-8 w-full max-w-md mx-auto px-5">
         <div className="flex w-full items-center justify-between">
@@ -613,7 +613,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             // Persist session progress for page refresh recovery
             saveBlitzProgress(difficulty, blitzTab, {
               wordIndex: sess.wordsPlayed + 1,
-              score: sess.score + (entry.points * sess.multiplier),
+              score: sess.sessionScore + (entry.points * sess.multiplier),
               multiplier: sess.multiplier,
               bestMultiplier: sess.bestMultiplier,
               streak: sess.consecutiveAwful,
