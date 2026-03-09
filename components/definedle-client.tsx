@@ -1,17 +1,17 @@
 "use client"
 
 import { useState, useCallback, useEffect } from "react"
-import { GameHeader } from "@/components/game-header"
+import { Settings, CircleHelp, BarChart3, Search } from "lucide-react"
 import { Game } from "@/components/game"
 import { StatsPanel } from "@/components/stats-panel"
 import { HowToPlay } from "@/components/how-to-play"
+import { SettingsPanel } from "@/components/settings-panel"
+import { DefinedleWordHistoryPanel } from "@/components/definedle-word-history-panel"
 import { SharedResult, type ShareData } from "@/components/shared-result"
 import { ModeToggle, type TabMode } from "@/components/mode-toggle"
-import { MirrorGame } from "@/components/mirror-game"
 import { StreakBadge } from "@/components/streak-badge"
 import type { DailyWord, GameMode } from "@/lib/game-data"
 import { getRandomPracticeWord, getWordByName } from "@/lib/game-data"
-import { getMirrorStreak, updateMirrorStreak, type MirrorStreak } from "@/lib/history"
 
 interface PageClientProps {
   dailyWord: DailyWord
@@ -27,21 +27,12 @@ interface PageClientProps {
 export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: PageClientProps) {
   const [statsOpen, setStatsOpen] = useState(false)
   const [helpOpen, setHelpOpen] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
+  const [wordHistoryOpen, setWordHistoryOpen] = useState(false)
   const [showingShare, setShowingShare] = useState(!!shareData && !!shareWordData)
   const [tab, setTab] = useState<TabMode>("daily")
   const [difficulty, setDifficulty] = useState<GameMode>("easy")
   const [streak, setStreak] = useState(0)
-  const [mirrorMode, setMirrorMode] = useState(false)
-  const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
-  
-  // Load mirror streak on mount
-  useEffect(() => {
-    try {
-      setMirrorStreak(getMirrorStreak())
-    } catch {
-      // Ignore errors loading streak
-    }
-  }, [])
   
   // Practice state -- separate per difficulty so switching doesn't reset
   const [practiceEasy, setPracticeEasy] = useState<DailyWord | null>(null)
@@ -146,8 +137,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
 
   const handleTabChange = useCallback((newTab: TabMode) => {
     setTab(newTab)
-    setMirrorMode(false) // Reset mirror mode when switching tabs
-    if (newTab === "practice") {
+if (newTab === "practice") {
       const current = difficulty === "easy" ? practiceEasy : practiceHard
       if (!current) startPractice(difficulty)
     }
@@ -184,7 +174,54 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
 
   return (
     <main className="flex min-h-svh flex-col items-center bg-background" style={{ paddingBottom: "calc(4rem + env(safe-area-inset-bottom))" }}>
-      <GameHeader onStatsOpen={() => setStatsOpen(true)} onHelpOpen={() => setHelpOpen(true)} />
+      {/* Header */}
+      <header className="flex flex-col items-center gap-1 pt-10 pb-6 md:pt-14 md:pb-8 w-full max-w-md mx-auto px-5">
+        <div className="flex w-full items-center justify-between">
+          <div className="flex flex-1 items-center justify-start gap-1 min-w-0">
+            <button
+              type="button"
+              onClick={() => setSettingsOpen(true)}
+              className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors focus-visible:outline-none text-muted-foreground hover:text-foreground"
+              aria-label="Settings"
+            >
+              <Settings className="h-[18px] w-[18px]" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setHelpOpen(true)}
+              className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors focus-visible:outline-none text-muted-foreground hover:text-foreground"
+              aria-label="How to play"
+            >
+              <CircleHelp className="h-[18px] w-[18px]" />
+            </button>
+          </div>
+          <h1 className="font-serif text-3xl font-light tracking-tight text-foreground">
+            Definedle
+          </h1>
+          <div className="flex flex-1 items-center justify-end gap-1 min-w-0">
+            <button
+              type="button"
+              onClick={() => setStatsOpen(true)}
+              className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors focus-visible:outline-none text-muted-foreground hover:text-foreground"
+              aria-label="View stats"
+            >
+              <BarChart3 className="h-[18px] w-[18px]" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setWordHistoryOpen(true)}
+              className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors focus-visible:outline-none text-muted-foreground hover:text-foreground"
+              aria-label="Word history"
+            >
+              <Search className="h-[18px] w-[18px]" />
+            </button>
+          </div>
+        </div>
+        <p className="text-sm tracking-wide text-muted-foreground">
+          Define the word
+        </p>
+        <div className="mt-3 h-px w-12 bg-border" aria-hidden="true" />
+      </header>
       {/* Streak badge - only show on daily mode when streak > 0 */}
       {tab === "daily" && streak > 0 && <StreakBadge streak={streak} />}
       {showingShare && shareData && shareWordData ? (
@@ -204,25 +241,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
             onDifficultyChange={handleDifficultyChange}
           />
           
-          {/* Mirror mode flip button - only in practice mode */}
-          {tab === "practice" && !mirrorMode && (
-            <button
-              type="button"
-              onClick={() => {
-                // Get a new word when entering mirror mode so they can't see the answer
-                handleNextPracticeWord()
-                setMirrorMode(true)
-              }}
-              className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-              title="Flip to Mirror Mode - guess the word from its definition"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
-                <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0"/>
-              </svg>
-              Mirror Mode
-            </button>
-          )}
+
           {/* Render both daily games to preserve state (incl. dropdown) when switching */}
           <div className={tab === "daily" && difficulty === "easy" ? "" : "hidden"}>
             <Game
@@ -245,7 +264,7 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
             />
           </div>
           {/* Practice game */}
-          {tab === "practice" && practiceWord && !mirrorMode && (
+          {tab === "practice" && practiceWord && (
             <Game
               key={`practice-${difficulty}-${practiceKey}-${practiceWord.word}`}
               dailyWord={practiceWord}
@@ -254,36 +273,13 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
               onNextWord={handleNextPracticeWord}
             />
           )}
-          
-          {/* Mirror Mode - guess the word from its definition */}
-          {tab === "practice" && practiceWord && mirrorMode && (
-            <MirrorGame
-              key={`mirror-${difficulty}-${practiceKey}-${practiceWord.word}`}
-              word={practiceWord}
-              isPractice={true}
-              onFlipBack={() => {
-                handleNextPracticeWord() // Get a new word when flipping back
-                setMirrorMode(false)
-              }}
-              onNextWord={() => {
-                handleNextPracticeWord()
-              }}
-              streak={difficulty === "easy" 
-                ? { current: mirrorStreak.easyStreak, best: mirrorStreak.easyBest }
-                : { current: mirrorStreak.hardStreak, best: mirrorStreak.hardBest }
-              }
-              onComplete={(result) => {
-                // Perfect = correct on first guess with no hints
-                const isPerfect = result.correct && result.guesses === 1 && result.hintsUsed === 0
-                const updated = updateMirrorStreak(difficulty, isPerfect)
-                setMirrorStreak(updated)
-              }}
-            />
-          )}
+
         </>
       )}
       <StatsPanel open={statsOpen} onClose={() => setStatsOpen(false)} />
       <HowToPlay open={helpOpen} onClose={() => setHelpOpen(false)} />
+      <SettingsPanel open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <DefinedleWordHistoryPanel open={wordHistoryOpen} onClose={() => setWordHistoryOpen(false)} />
     </main>
   )
 }

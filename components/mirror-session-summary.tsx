@@ -1,7 +1,7 @@
 "use client"
 
 import { Star, Flame, Zap, RotateCcw, ChevronDown, ChevronUp } from "lucide-react"
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import type { WordHistoryEntry } from "@/components/mirror-game"
 
 interface MirrorSessionSummaryProps {
@@ -21,52 +21,54 @@ interface MirrorSessionSummaryProps {
 export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordHistory, reason, onPlayAgain, onFlipBack, isDark = false, isDaily = false, difficulty = "easy", oppositeCompleted = false }: MirrorSessionSummaryProps) {
   const [showHistory, setShowHistory] = useState(false)
 
-  const pick = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)]
-
-  const rounded = Math.round(score)
-  const rating = rounded === 276 ? "Perfect" :
-    rounded >= 200 ? pick([
-      "Suspiciously good",
-      "Are you cheating?",
-      "Vocabulary is not your weakness",
-      "The dictionary fears you",
-      "Save some words for the rest of us",
-    ]) :
-    rounded >= 140 ? pick([
-      "Showing off now",
-      "Genuinely impressive",
-      "That's a proper score",
-      "Sharp mind, sharper vocabulary",
-      "You clearly read books",
-    ]) :
-    rounded >= 80 ? pick([
-      "Solid grasp of words",
-      "Not bad at all",
-      "You know your way around a definition",
-      "Respectable stuff",
-      "More than passable",
-    ]) :
-    rounded >= 40 ? pick([
-      "Dictionary adjacent",
-      "Getting somewhere",
-      "The basics are there",
-      "A valiant effort",
-      "Potential detected",
-    ]) :
-    rounded >= 15 ? pick([
-      "You tried",
-      "Room to grow",
-      "Everyone starts somewhere",
-      "The words were hard, probably",
-      "Points were scored, technically",
-    ]) :
-    pick([
-      "Keep practising",
-      "The dictionary awaits",
-      "A brave attempt",
-      "Words are hard",
-      "Tomorrow's another word",
-    ])
+  const { rounded, rating } = useMemo(() => {
+    const pick = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)]
+    const r = Math.round(score)
+    const rat = r === 276 ? "Perfect" :
+      r >= 200 ? pick([
+        "Suspiciously good",
+        "Are you cheating?",
+        "Vocabulary is not your weakness",
+        "The dictionary fears you",
+        "Save some words for the rest of us",
+      ]) :
+      r >= 140 ? pick([
+        "Showing off now",
+        "Genuinely impressive",
+        "That's a proper score",
+        "Sharp mind, sharper vocabulary",
+        "You clearly read books",
+      ]) :
+      r >= 80 ? pick([
+        "Solid grasp of words",
+        "Not bad at all",
+        "You know your way around a definition",
+        "Respectable stuff",
+        "More than passable",
+      ]) :
+      r >= 40 ? pick([
+        "Dictionary adjacent",
+        "Getting somewhere",
+        "The basics are there",
+        "A valiant effort",
+        "Potential detected",
+      ]) :
+      r >= 15 ? pick([
+        "You tried",
+        "Room to grow",
+        "Everyone starts somewhere",
+        "The words were hard, probably",
+        "Points were scored, technically",
+      ]) :
+      pick([
+        "Keep practising",
+        "The dictionary awaits",
+        "A brave attempt",
+        "Words are hard",
+        "Tomorrow's another word",
+      ])
+    return { rounded: r, rating: rat }
+  }, [score])
 
   return (
     <div className="mx-auto w-full max-w-md px-5">

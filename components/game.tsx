@@ -24,7 +24,21 @@ interface CachedResult {
 
 function getDateKey(): string {
   const now = new Date()
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`
+  return `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, "0")}-${String(now.getUTCDate()).padStart(2, "0")}`
+}
+
+
+// ── localStorage word history (all games) ─────────────────────────────────
+function saveWordToDefinedleHistory(entry: {
+  word: string; score: number; date: string; difficulty: string; isPractice: boolean
+}) {
+  try {
+    const raw = localStorage.getItem("definedle-word-history")
+    const history = raw ? JSON.parse(raw) : []
+    history.push(entry)
+    if (history.length > 1000) history.splice(0, history.length - 1000)
+    localStorage.setItem("definedle-word-history", JSON.stringify(history))
+  } catch {}
 }
 
 function getCookie(name: string): string | undefined {
@@ -206,6 +220,15 @@ export function Game({
           try { window.dispatchEvent(new CustomEvent("definedle-highlight-blitz")) } catch {}
         }
       } catch {}
+
+      // Always save to localStorage word history (daily + practice)
+      saveWordToDefinedleHistory({
+        word: dailyWord.word,
+        score: scoreResult.score,
+        date: getDateKey(),
+        difficulty,
+        isPractice,
+      })
 
       // Save daily result to cookie and history (daily mode only)
       if (!isPractice) {
