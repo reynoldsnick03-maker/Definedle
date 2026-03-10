@@ -14,7 +14,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["caustic", "biting", "mordant", "sharp", "tart"],
     partOfSpeech: "adjective",
-    etymology: "Latin acerbus, from acer (sharp, keen).",
   },
   {
     word: "anathema",
@@ -25,7 +24,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["abomination", "bane", "curse", "pariah"],
     partOfSpeech: "noun",
-    etymology: "Greek anathema (a thing devoted to evil, accursed thing).",
   },
   {
     word: "anodyne",
@@ -36,7 +34,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["bland", "innocuous", "inoffensive", "mild"],
     partOfSpeech: "adjective",
-    etymology: "Greek anodynos -- an (without) + odyne (pain).",
   },
   {
     word: "apocryphal",
@@ -47,7 +44,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["dubious", "questionable", "unverified", "legendary", "mythical"],
     partOfSpeech: "adjective",
-    etymology: "Greek apokryphos (hidden, obscure), from apokryptein (to hide away).",
   },
   {
     word: "baleful",
@@ -58,7 +54,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["menacing", "sinister", "malevolent", "ominous"],
     partOfSpeech: "adjective",
-    etymology: "Old English bealu (evil, harm, calamity) + -ful.",
   },
   {
     word: "belligerent",
@@ -69,7 +64,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["aggressive", "combative", "pugnacious", "hostile", "warlike"],
     partOfSpeech: "adjective",
-    etymology: "Latin bellum (war) + gerere (to wage).",
   },
   {
     word: "bombastic",
@@ -80,7 +74,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["pompous", "grandiloquent", "pretentious", "turgid", "overblown"],
     partOfSpeech: "adjective",
-    etymology: "From bombast, originally cotton padding used to stuff garments -- puffed up.",
   },
   {
     word: "bucolic",
@@ -91,7 +84,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["pastoral", "rustic", "rural", "idyllic", "countrified"],
     partOfSpeech: "adjective",
-    etymology: "Greek boukolikos, from boukolos (cowherd) -- bous (ox) + kolos (tending).",
   },
   {
     word: "capricious",
@@ -102,7 +94,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["fickle", "mercurial", "volatile", "erratic", "changeable"],
     partOfSpeech: "adjective",
-    etymology: "Italian capriccio (sudden start), perhaps from capra (goat) -- goats' unpredictable leaping.",
   },
   {
     word: "catharsis",
@@ -113,7 +104,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["release", "purging", "cleansing", "relief", "liberation"],
     partOfSpeech: "noun",
-    etymology: "Greek katharsis (purification, cleansing), from kathairein (to purify).",
   },
   {
     word: "chimerical",
@@ -124,7 +114,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["fanciful", "fantastical", "illusory", "utopian", "visionary"],
     partOfSpeech: "adjective",
-    etymology: "Greek khimaira, the Chimera -- a mythological creature combining parts of different animals.",
   },
   {
     word: "colloquial",
@@ -135,7 +124,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["informal", "conversational", "vernacular", "everyday", "casual"],
     partOfSpeech: "adjective",
-    etymology: "Latin colloquium (conversation), from com (together) + loqui (to speak).",
   },
   {
     word: "complacency",
@@ -146,7 +134,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["self-satisfaction", "smugness", "contentment", "comfortableness"],
     partOfSpeech: "noun",
-    etymology: "Latin complacere (to please greatly), from com (intensive) + placere (to please).",
   },
   {
     word: "contempt",
@@ -157,7 +144,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["disdain", "scorn", "derision", "disrespect", "denigration"],
     partOfSpeech: "noun",
-    etymology: "Latin contemptus, from contemnere (to despise).",
   },
   {
     word: "demagogue",
@@ -168,7 +154,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["agitator", "rabble-rouser", "firebrand", "populist"],
     partOfSpeech: "noun",
-    etymology: "Greek demagogos -- demos (people) + agogos (leading), from agein (to lead).",
   },
   {
     word: "demur",
@@ -179,7 +164,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["object", "protest", "take exception", "balk", "hesitate"],
     partOfSpeech: "verb",
-    etymology: "Old French demorer, from Latin demorari -- de (completely) + morari (to delay).",
   },
   {
     word: "desultory",
@@ -190,7 +174,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["aimless", "haphazard", "random", "unfocused", "erratic"],
     partOfSpeech: "adjective",
-    etymology: "Latin desultorius, from desultor -- a circus rider who leaps from horse to horse.",
   },
   {
     word: "diffident",
@@ -201,7 +184,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["shy", "timid", "bashful", "self-effacing", "unassuming"],
     partOfSpeech: "adjective",
-    etymology: "Latin diffidere (to mistrust), from dis (away) + fidere (to trust).",
   },
   {
     word: "dilettante",
@@ -212,7 +194,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["amateur", "dabbler", "nonprofessional", "trifler"],
     partOfSpeech: "noun",
-    etymology: "Italian dilettante (lover of the arts), from dilettare (to delight).",
   },
   {
     word: "disabuse",
@@ -223,7 +204,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["correct", "enlighten", "undeceive", "set straight"],
     partOfSpeech: "verb",
-    etymology: "French desabuser -- des (away, from) + abuser (to deceive, abuse).",
   },
   {
     word: "duplicity",
@@ -234,7 +214,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["deceit", "deception", "dishonesty", "treachery", "double-dealing"],
     partOfSpeech: "noun",
-    etymology: "Latin duplex (twofold), from duo (two) + plicare (to fold).",
   },
   {
     word: "effete",
@@ -245,7 +224,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["decadent", "overrefined", "effeminate", "weak", "enervated"],
     partOfSpeech: "adjective",
-    etymology: "Latin effetus -- ex (out) + fetus (breeding).",
   },
   {
     word: "egregious",
@@ -256,18 +234,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["flagrant", "glaring", "gross", "outrageous", "shocking"],
     partOfSpeech: "adjective",
-    etymology: "Latin egregius (outstanding), from ex (out of) + grex (flock). Originally a compliment.",
-  },
-  {
-    word: "emollient",
-    definition: "Having a softening or soothing effect, especially on skin or on feelings.",
-    keyConcepts: [
-      { keyword: "softening", matchTerms: ["soften", "smooth", "moistur", "supple", "gentle"], label: "Softening effect", hint: "The definition describes making something less rough or harsh." },
-      { keyword: "soothing", matchTerms: ["sooth", "calm", "ease", "comfort", "reliev", "pacif"], label: "Soothing quality", hint: "Brings comfort or relief, whether physical or emotional." },
-    ],
-    synonyms: ["soothing", "softening", "mollifying", "calming"],
-    partOfSpeech: "adjective",
-    etymology: "Latin emollire -- e (out) + mollire (to soften), from mollis (soft).",
   },
   {
     word: "equanimity",
@@ -278,7 +244,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["composure", "calmness", "serenity", "poise", "self-possession"],
     partOfSpeech: "noun",
-    etymology: "Latin aequanimitas -- aequus (equal, even) + animus (mind, spirit).",
   },
   {
     word: "equivocate",
@@ -289,18 +254,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["prevaricate", "hedge", "evade", "dodge", "waffle"],
     partOfSpeech: "verb",
-    etymology: "Latin aequivocus -- aequus (equal) + vox (voice) -- speaking in two ways.",
-  },
-  {
-    word: "ersatz",
-    definition: "An inferior substitute or imitation.",
-    keyConcepts: [
-      { keyword: "inferior", matchTerms: ["inferior", "poor", "cheap", "lesser", "low-quality"], label: "Inferior quality", hint: "The definition emphasizes that it's worse than the original." },
-      { keyword: "substitute", matchTerms: ["substitut", "imitat", "replac", "fake", "artificial", "counterfeit"], label: "Substitute or imitation", hint: "It's meant to stand in for something genuine." },
-    ],
-    synonyms: ["artificial", "imitation", "fake", "substitute", "synthetic"],
-    partOfSpeech: "adjective",
-    etymology: "German Ersatz, from ersetzen (to replace).",
   },
   {
     word: "esoteric",
@@ -311,7 +264,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["arcane", "obscure", "abstruse", "recondite", "cryptic"],
     partOfSpeech: "adjective",
-    etymology: "Greek esoterikos (inner), from esotero (more within).",
   },
   {
     word: "excoriate",
@@ -322,7 +274,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["denounce", "condemn", "lambaste", "censure", "castigate"],
     partOfSpeech: "verb",
-    etymology: "Latin excoriare -- ex (off) + corium (skin, hide).",
   },
   {
     word: "exigent",
@@ -333,7 +284,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["urgent", "pressing", "demanding", "critical", "imperative"],
     partOfSpeech: "adjective",
-    etymology: "Latin exigere -- ex (out) + agere (to drive).",
   },
   {
     word: "facetious",
@@ -344,7 +294,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["flippant", "glib", "frivolous", "tongue-in-cheek", "playful"],
     partOfSpeech: "adjective",
-    etymology: "Latin facetus (witty, elegant).",
   },
   {
     word: "fallacious",
@@ -355,7 +304,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["false", "erroneous", "invalid", "unfounded", "specious"],
     partOfSpeech: "adjective",
-    etymology: "Latin fallacia (deception), from fallax (deceitful).",
   },
   {
     word: "fatuous",
@@ -366,7 +314,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["foolish", "silly", "inane", "vacuous", "asinine"],
     partOfSpeech: "adjective",
-    etymology: "Latin fatuus (foolish, insipid).",
   },
   {
     word: "feckless",
@@ -377,7 +324,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["ineffective", "irresponsible", "worthless", "incompetent", "useless"],
     partOfSpeech: "adjective",
-    etymology: "Scottish feck (effect, value) + -less -- literally 'without effect.'",
   },
   {
     word: "furtive",
@@ -388,7 +334,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["secretive", "stealthy", "sneaky", "surreptitious", "covert"],
     partOfSpeech: "adjective",
-    etymology: "Latin furtivus (stolen, hidden), from fur (thief).",
   },
   {
     word: "garrulous",
@@ -399,7 +344,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["talkative", "loquacious", "verbose", "chatty", "voluble"],
     partOfSpeech: "adjective",
-    etymology: "Latin garrulus (talkative), from garrire (to chatter).",
   },
   {
     word: "gratuitous",
@@ -410,7 +354,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["unnecessary", "unwarranted", "unjustified", "needless", "superfluous"],
     partOfSpeech: "adjective",
-    etymology: "Latin gratuitus (free, spontaneous), from gratia (favor).",
   },
   {
     word: "hackneyed",
@@ -421,7 +364,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["cliched", "trite", "banal", "stale", "overused"],
     partOfSpeech: "adjective",
-    etymology: "From Hackney, a London borough where horses were hired out -- overworked horses.",
   },
   {
     word: "hubris",
@@ -432,7 +374,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["arrogance", "conceit", "pride", "haughtiness", "self-importance"],
     partOfSpeech: "noun",
-    etymology: "Greek hybris (insolence, outrage against the gods).",
   },
   {
     word: "iconoclastic",
@@ -443,7 +384,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["nonconformist", "radical", "rebellious", "subversive", "unorthodox"],
     partOfSpeech: "adjective",
-    etymology: "Greek eikonoklastes -- eikon (image, likeness) + klastes (breaker).",
   },
   {
     word: "ignominious",
@@ -454,7 +394,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["shameful", "humiliating", "disgraceful", "dishonorable", "degrading"],
     partOfSpeech: "adjective",
-    etymology: "Latin ignobilis -- in (not) + gnobilis, older form of nobilis (noble).",
   },
   {
     word: "implacable",
@@ -465,7 +404,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["unforgiving", "relentless", "inexorable", "merciless", "unappeasable"],
     partOfSpeech: "adjective",
-    etymology: "Latin implacabilis, from im (not) + placare (to calm, soothe, please).",
   },
   {
     word: "impunity",
@@ -476,7 +414,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["immunity", "exemption", "freedom", "liberty", "license"],
     partOfSpeech: "noun",
-    etymology: "Latin impunitas, from im (not) + poena (penalty).",
   },
   {
     word: "ineffable",
@@ -487,7 +424,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["indescribable", "inexpressible", "unspeakable", "unutterable"],
     partOfSpeech: "adjective",
-    etymology: "Latin ineffabilis, from in (not) + effari (to utter).",
   },
   {
     word: "inexorable",
@@ -498,7 +434,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["relentless", "unstoppable", "inevitable", "unyielding", "implacable"],
     partOfSpeech: "adjective",
-    etymology: "Latin inexorabilis, from in (not) + exorare (to prevail upon).",
   },
   {
     word: "inimical",
@@ -509,7 +444,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["hostile", "harmful", "adverse", "detrimental", "antagonistic"],
     partOfSpeech: "adjective",
-    etymology: "Latin inimicalis, from inimicus -- in (not) + amicus (friend).",
   },
   {
     word: "insatiable",
@@ -520,7 +454,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["unquenchable", "voracious", "greedy", "ravenous", "insatiate"],
     partOfSpeech: "adjective",
-    etymology: "Latin insatiabilis, from in (not) + satiare (to satisfy).",
   },
   {
     word: "insidious",
@@ -531,18 +464,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["treacherous", "crafty", "subtle", "sly", "cunning"],
     partOfSpeech: "adjective",
-    etymology: "Latin insidiosus (cunning), from insidiae (ambush).",
-  },
-  {
-    word: "insouciant",
-    definition: "Showing a casual lack of concern; carefree.",
-    keyConcepts: [
-      { keyword: "casual", matchTerms: ["casual", "nonchalant", "relaxed", "unconcerned", "indifferent"], label: "Casual manner", hint: "The definition describes an easy, unbothered attitude." },
-      { keyword: "carefree", matchTerms: ["carefree", "lightheart", "blithe", "unworried", "breezy"], label: "Carefree attitude", hint: "Concerns that would trouble others don't register." },
-    ],
-    synonyms: ["nonchalant", "carefree", "unconcerned", "blithe", "indifferent"],
-    partOfSpeech: "adjective",
-    etymology: "French insouciant, from in (not) + soucier (to care).",
   },
   {
     word: "inveigle",
@@ -553,7 +474,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["coax", "cajole", "wheedle", "beguile", "entice"],
     partOfSpeech: "verb",
-    etymology: "Anglo-French enveogler (to blind, delude).",
   },
   {
     word: "irascible",
@@ -564,18 +484,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["irritable", "quick-tempered", "hot-tempered", "testy", "touchy"],
     partOfSpeech: "adjective",
-    etymology: "Latin irascibilis, from irasci, from ira (anger).",
-  },
-  {
-    word: "jejune",
-    definition: "Naive, simplistic, and superficial; lacking substance.",
-    keyConcepts: [
-      { keyword: "naive", matchTerms: ["naive", "childish", "immature", "unsophistic", "innocent"], label: "Naive quality", hint: "The definition describes a lack of worldly understanding." },
-      { keyword: "superficial", matchTerms: ["superficial", "shallow", "empty", "thin", "lacking"], label: "Lacking substance", hint: "There's no depth or richness." },
-    ],
-    synonyms: ["naive", "simplistic", "unsophisticated", "puerile", "vapid"],
-    partOfSpeech: "adjective",
-    etymology: "Latin jejunus -- the jejunum (part of the small intestine) is named from the same root.",
   },
   {
     word: "laconic",
@@ -586,7 +494,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["terse", "concise", "brief", "succinct", "pithy"],
     partOfSpeech: "adjective",
-    etymology: "From Laconia (Sparta), whose people were famous for brief speech.",
   },
   {
     word: "ludicrous",
@@ -597,18 +504,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["absurd", "ridiculous", "preposterous", "laughable", "farcical"],
     partOfSpeech: "adjective",
-    etymology: "Latin ludicrus (sportive), from ludus (play, game).",
-  },
-  {
-    word: "lugubrious",
-    definition: "Looking or sounding sad and dismal; mournful.",
-    keyConcepts: [
-      { keyword: "sad", matchTerms: ["sad", "sorrow", "grief", "melanchol", "gloomy", "morose"], label: "Sad appearance", hint: "The definition describes an outward show of sadness." },
-      { keyword: "dismal", matchTerms: ["dismal", "dreary", "bleak", "somber", "funereal", "doleful"], label: "Dismal quality", hint: "There's a heaviness and darkness to it." },
-    ],
-    synonyms: ["mournful", "doleful", "melancholy", "sorrowful", "woeful"],
-    partOfSpeech: "adjective",
-    etymology: "Latin lugubris, from lugere (to mourn).",
   },
   {
     word: "maelstrom",
@@ -619,29 +514,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["whirlpool", "turmoil", "chaos", "tumult", "pandemonium"],
     partOfSpeech: "noun",
-    etymology: "Dutch maelstrom -- malen (to grind) + stroom (stream).",
-  },
-  {
-    word: "magniloquent",
-    definition: "Using high-flown or bombastic language; grandly eloquent.",
-    keyConcepts: [
-      { keyword: "high-flown", matchTerms: ["high-flown", "lofty", "grandiose", "elevated", "pompous"], label: "High-flown language", hint: "The definition describes speech that aims high." },
-      { keyword: "bombastic", matchTerms: ["bombast", "inflated", "pretentious", "overwrought", "flowery"], label: "Bombastic style", hint: "The grandeur may exceed the substance." },
-    ],
-    synonyms: ["grandiloquent", "pompous", "bombastic", "pretentious", "rhetorical"],
-    partOfSpeech: "adjective",
-    etymology: "Latin grandiloquus -- grandis (grand, great) + loqui (to speak).",
-  },
-  {
-    word: "mellifluous",
-    definition: "Sweet or musical; pleasant to hear.",
-    keyConcepts: [
-      { keyword: "sweet", matchTerms: ["sweet", "honeyed", "rich", "smooth", "mellow"], label: "Sweet sound", hint: "The definition describes something pleasing to the ear." },
-      { keyword: "pleasant", matchTerms: ["pleasant", "agreeable", "soothing", "melodious", "harmonious"], label: "Pleasant to hear", hint: "The sound brings pleasure rather than grating." },
-    ],
-    synonyms: ["sweet-sounding", "melodious", "dulcet", "honeyed", "euphonious"],
-    partOfSpeech: "adjective",
-    etymology: "Latin mellifluus -- mel (honey) + fluere (to flow).",
   },
   {
     word: "mordant",
@@ -652,7 +524,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["caustic", "acerbic", "biting", "scathing", "trenchant"],
     partOfSpeech: "adjective",
-    etymology: "French mordant, from mordre, from Latin mordere (to bite).",
   },
   {
     word: "myopic",
@@ -663,7 +534,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["shortsighted", "narrow-minded", "unimaginative", "provincial"],
     partOfSpeech: "adjective",
-    etymology: "Greek myopia (nearsightedness), from myein (to close) + ops (eye).",
   },
   {
     word: "nihilistic",
@@ -674,7 +544,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["pessimistic", "cynical", "negative", "anarchic", "hopeless"],
     partOfSpeech: "adjective",
-    etymology: "Latin nihil (nothing) + -ism -- the doctrine of nothing.",
   },
   {
     word: "nonchalant",
@@ -685,7 +554,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["casual", "unconcerned", "indifferent", "blasé", "insouciant"],
     partOfSpeech: "adjective",
-    etymology: "French nonchalant, from non (not) + chaloir (to concern).",
   },
   {
     word: "obdurate",
@@ -696,7 +564,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["stubborn", "unyielding", "inflexible", "intransigent", "adamant"],
     partOfSpeech: "adjective",
-    etymology: "Latin obdurare, from ob (against) + durare (to harden), from durus (hard).",
   },
   {
     word: "officious",
@@ -707,29 +574,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["meddlesome", "interfering", "intrusive", "bossy", "overbearing"],
     partOfSpeech: "adjective",
-    etymology: "Latin officiosus, from officium (duty, service).",
-  },
-  {
-    word: "ossify",
-    definition: "To turn into bone; to become rigid and set in one's ways.",
-    keyConcepts: [
-      { keyword: "bone", matchTerms: ["bone", "harden", "calcif", "solidif", "petrif"], label: "Turn into bone", hint: "The definition describes a hardening process." },
-      { keyword: "rigid", matchTerms: ["rigid", "inflexib", "fixed", "unchang", "stuck", "set"], label: "Become rigid", hint: "Flexibility is lost; things become fixed." },
-    ],
-    synonyms: ["harden", "solidify", "petrify", "fossilize", "calcify"],
-    partOfSpeech: "verb",
-    etymology: "Latin os (bone) + -ify (to make).",
-  },
-  {
-    word: "palpable",
-    definition: "So intense as to be almost felt physically; easily perceived.",
-    keyConcepts: [
-      { keyword: "intense", matchTerms: ["intense", "strong", "powerful", "overwhelming", "tangible"], label: "Intense quality", hint: "The definition describes something very strong." },
-      { keyword: "perceived", matchTerms: ["perceiv", "felt", "sens", "detect", "notic", "obvious"], label: "Easily perceived", hint: "It's unmistakably present." },
-    ],
-    synonyms: ["tangible", "perceptible", "noticeable", "obvious", "unmistakable"],
-    partOfSpeech: "adjective",
-    etymology: "Latin palpare (to touch gently, stroke).",
   },
   {
     word: "pecuniary",
@@ -740,7 +584,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["financial", "monetary", "fiscal", "economic"],
     partOfSpeech: "adjective",
-    etymology: "Latin impecuniosus -- in (not) + pecuniosus, from pecunia (money), from pecu (cattle).",
   },
   {
     word: "pedantic",
@@ -751,7 +594,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["fussy", "fastidious", "punctilious", "nitpicking", "academic"],
     partOfSpeech: "adjective",
-    etymology: "Italian pedante (teacher), perhaps from Greek paideuein (to teach).",
   },
   {
     word: "peremptory",
@@ -762,7 +604,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["imperious", "dictatorial", "authoritative", "commanding", "bossy"],
     partOfSpeech: "adjective",
-    etymology: "Latin peremptorius (destructive, decisive), from perimere (to destroy).",
   },
   {
     word: "perfunctory",
@@ -773,7 +614,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["cursory", "superficial", "mechanical", "routine", "halfhearted"],
     partOfSpeech: "adjective",
-    etymology: "Latin perfunctorius (careless), from perfungi (to get through with).",
   },
   {
     word: "philistine",
@@ -784,7 +624,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["uncultured", "lowbrow", "ignoramus", "barbarian", "boor"],
     partOfSpeech: "noun",
-    etymology: "From the Philistines, ancient enemies of the Israelites, used by German students for 'townspeople.'",
   },
   {
     word: "platitude",
@@ -795,7 +634,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["cliche", "truism", "banality", "bromide", "commonplace"],
     partOfSpeech: "noun",
-    etymology: "French platitude (flatness, dullness), from plat (flat).",
   },
   {
     word: "poignant",
@@ -806,7 +644,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["moving", "touching", "affecting", "plaintive", "bittersweet"],
     partOfSpeech: "adjective",
-    etymology: "Old French poignant (pricking, stinging), from Latin pungere (to prick).",
   },
   {
     word: "polemic",
@@ -817,7 +654,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["diatribe", "tirade", "invective", "denunciation", "attack"],
     partOfSpeech: "noun",
-    etymology: "Greek polemikos, from polemos (war).",
   },
   {
     word: "probity",
@@ -828,7 +664,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["integrity", "honesty", "uprightness", "rectitude", "virtue"],
     partOfSpeech: "noun",
-    etymology: "Latin probitas, from probus (good, honest).",
   },
   {
     word: "profligate",
@@ -839,7 +674,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["extravagant", "wasteful", "dissolute", "debauched", "decadent"],
     partOfSpeech: "adjective",
-    etymology: "Latin profligatus, from profligare -- pro (forward) + fligere (to strike).",
   },
   {
     word: "pugnacious",
@@ -850,7 +684,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["combative", "aggressive", "belligerent", "quarrelsome", "contentious"],
     partOfSpeech: "adjective",
-    etymology: "Latin pugnax, from pugnare (to fight), from pugnus (fist).",
   },
   {
     word: "quagmire",
@@ -861,7 +694,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["swamp", "bog", "morass", "predicament", "mire"],
     partOfSpeech: "noun",
-    etymology: "Quag (marshy ground) + mire (swampy ground).",
   },
   {
     word: "quiescent",
@@ -872,7 +704,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["inactive", "dormant", "still", "latent", "passive"],
     partOfSpeech: "adjective",
-    etymology: "Latin quiescere, from quies (rest, quiet).",
   },
   {
     word: "quixotic",
@@ -883,7 +714,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["idealistic", "romantic", "visionary", "impractical", "unrealistic"],
     partOfSpeech: "adjective",
-    etymology: "From Don Quixote, the idealistic knight in Cervantes' novel.",
   },
   {
     word: "rancorous",
@@ -894,7 +724,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["bitter", "resentful", "malicious", "spiteful", "acrimonious"],
     partOfSpeech: "adjective",
-    etymology: "Old French rancor, from Latin rancorem, from rancere (to stink).",
   },
   {
     word: "salient",
@@ -905,7 +734,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["prominent", "notable", "conspicuous", "striking", "important"],
     partOfSpeech: "adjective",
-    etymology: "Latin saliens (leaping), from salire (to leap) -- originally 'leaping out.'",
   },
   {
     word: "sardonic",
@@ -916,7 +744,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["cynical", "mocking", "derisive", "scornful", "sneering"],
     partOfSpeech: "adjective",
-    etymology: "Greek sardonios, possibly from a Sardinian plant (herba sardonia).",
   },
   {
     word: "sedulous",
@@ -927,18 +754,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["diligent", "assiduous", "industrious", "conscientious", "persevering"],
     partOfSpeech: "adjective",
-    etymology: "Latin sedulus, from sedulo, from se (without) + dolus (trickery).",
-  },
-  {
-    word: "sentimental",
-    definition: "Having or arousing feelings of tenderness, sadness, or nostalgia.",
-    keyConcepts: [
-      { keyword: "tenderness", matchTerms: ["tender", "gentle", "soft", "warm", "affection"], label: "Feelings of tenderness", hint: "The definition describes gentle, caring emotions." },
-      { keyword: "nostalgia", matchTerms: ["nostalg", "yearn", "wistful", "longing", "reminiscent"], label: "Sadness or nostalgia", hint: "Often involves looking back with emotion." },
-    ],
-    synonyms: ["emotional", "nostalgic", "romantic", "tender", "mawkish"],
-    partOfSpeech: "adjective",
-    etymology: "Latin sentire (to feel).",
   },
   {
     word: "serendipity",
@@ -949,7 +764,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["luck", "fortune", "chance", "providence", "happenstance"],
     partOfSpeech: "noun",
-    etymology: "Coined by Horace Walpole from the fairy tale 'The Three Princes of Serendip.'",
   },
   {
     word: "solicitous",
@@ -960,7 +774,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["concerned", "attentive", "caring", "considerate", "anxious"],
     partOfSpeech: "adjective",
-    etymology: "Latin sollicitus (anxious), from sollus (entire) + ciere (to set in motion).",
   },
   {
     word: "spurious",
@@ -971,18 +784,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["false", "fake", "bogus", "counterfeit", "fraudulent"],
     partOfSpeech: "adjective",
-    etymology: "Latin spurius (illegitimate, false).",
-  },
-  {
-    word: "stoic",
-    definition: "Enduring pain or hardship without showing feelings or complaining.",
-    keyConcepts: [
-      { keyword: "enduring", matchTerms: ["endur", "bear", "withstand", "tolerat", "suffer"], label: "Enduring hardship", hint: "The definition describes bearing difficulty." },
-      { keyword: "without", matchTerms: ["without", "suppress", "hide", "conceal", "uncomplain"], label: "Without showing feelings", hint: "Emotions are kept internal rather than expressed." },
-    ],
-    synonyms: ["impassive", "unemotional", "uncomplaining", "resigned", "long-suffering"],
-    partOfSpeech: "adjective",
-    etymology: "Greek stoikos, from Stoa Poikile (Painted Porch) where Stoic philosophers taught.",
   },
   {
     word: "subversive",
@@ -993,7 +794,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["seditious", "revolutionary", "treasonous", "dissident", "insurgent"],
     partOfSpeech: "adjective",
-    etymology: "Latin subvertere -- sub (from below) + vertere (to turn).",
   },
   {
     word: "supplicate",
@@ -1004,7 +804,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["beg", "plead", "entreat", "implore", "beseech"],
     partOfSpeech: "verb",
-    etymology: "Latin supplicare, from sub (under, from below) + plicare (to fold).",
   },
   {
     word: "surreptitious",
@@ -1015,29 +814,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["secret", "stealthy", "clandestine", "covert", "furtive"],
     partOfSpeech: "adjective",
-    etymology: "Latin surreptitius, from surripere (to snatch secretly).",
-  },
-  {
-    word: "sybaritic",
-    definition: "Fond of sensuous luxury or pleasure; self-indulgent.",
-    keyConcepts: [
-      { keyword: "luxury", matchTerms: ["luxur", "comfort", "opulen", "lavish", "extravagan"], label: "Fond of luxury", hint: "The definition describes love of fine things." },
-      { keyword: "pleasure", matchTerms: ["pleasure", "indulg", "hedon", "sensual", "gratif"], label: "Self-indulgent pleasure", hint: "Physical and sensual enjoyment is prioritized." },
-    ],
-    synonyms: ["hedonistic", "luxurious", "self-indulgent", "decadent", "voluptuous"],
-    partOfSpeech: "adjective",
-    etymology: "From Sybaris, a Greek colony in southern Italy.",
-  },
-  {
-    word: "sycophantic",
-    definition: "Behaving in an obsequious way to gain advantage; excessively flattering.",
-    keyConcepts: [
-      { keyword: "obsequious", matchTerms: ["obsequi", "servile", "fawning", "grovel", "toady"], label: "Obsequious behavior", hint: "The definition describes excessive deference." },
-      { keyword: "flattering", matchTerms: ["flatter", "prais", "compliment", "ingratiat", "butter"], label: "Excessive flattery", hint: "The praise is calculated rather than sincere." },
-    ],
-    synonyms: ["obsequious", "fawning", "servile", "toadying", "ingratiating"],
-    partOfSpeech: "adjective",
-    etymology: "Greek sykophantes -- sykon (fig) + phainein (to show).",
   },
   {
     word: "taciturn",
@@ -1048,18 +824,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["reticent", "uncommunicative", "quiet", "reserved", "silent"],
     partOfSpeech: "adjective",
-    etymology: "Latin tacitus (silent), from tacere (to be silent).",
-  },
-  {
-    word: "torpid",
-    definition: "Mentally or physically inactive; lethargic and sluggish.",
-    keyConcepts: [
-      { keyword: "inactive", matchTerms: ["inactiv", "idle", "dormant", "still", "motionless"], label: "Mentally or physically inactive", hint: "The definition describes absence of activity." },
-      { keyword: "sluggish", matchTerms: ["sluggish", "letharg", "slow", "languid", "listless"], label: "Lethargic and sluggish", hint: "Movement and thought are slowed." },
-    ],
-    synonyms: ["lethargic", "sluggish", "inactive", "listless", "languid"],
-    partOfSpeech: "adjective",
-    etymology: "Latin torpidus, from torpere (to be numb or sluggish).",
   },
   {
     word: "truculent",
@@ -1070,18 +834,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["aggressive", "belligerent", "pugnacious", "combative", "hostile"],
     partOfSpeech: "adjective",
-    etymology: "Latin truculentus (fierce, savage), from trux (fierce).",
-  },
-  {
-    word: "turgid",
-    definition: "Swollen and distended; pompous or bombastic in language.",
-    keyConcepts: [
-      { keyword: "swollen", matchTerms: ["swollen", "bloat", "distend", "puff", "inflat"], label: "Swollen and distended", hint: "The definition describes excessive fullness." },
-      { keyword: "pompous", matchTerms: ["pompous", "bombast", "grandios", "pretentious", "overblown"], label: "Pompous language", hint: "Language is puffed up beyond its substance." },
-    ],
-    synonyms: ["swollen", "bloated", "pompous", "bombastic", "pretentious"],
-    partOfSpeech: "adjective",
-    etymology: "Latin turgidus, from turgere (to swell).",
   },
   {
     word: "vapid",
@@ -1092,7 +844,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["dull", "insipid", "bland", "flat", "lifeless"],
     partOfSpeech: "adjective",
-    etymology: "Latin vapidus (flat-tasting, insipid).",
   },
   {
     word: "vindictive",
@@ -1103,7 +854,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["vengeful", "spiteful", "resentful", "malicious", "revengeful"],
     partOfSpeech: "adjective",
-    etymology: "Latin vindicare (to claim, avenge).",
   },
   {
     word: "vitriol",
@@ -1114,7 +864,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["venom", "spite", "malice", "bitterness", "acrimony"],
     partOfSpeech: "noun",
-    etymology: "Latin vitreolus (glassy), later meaning sulfuric acid -- something that burns.",
   },
   {
     word: "vociferous",
@@ -1125,7 +874,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["loud", "clamorous", "outspoken", "strident", "vehement"],
     partOfSpeech: "adjective",
-    etymology: "Latin vociferari -- vox (voice) + ferre (to carry).",
   },
   {
     word: "winnow",
@@ -1136,18 +884,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["sift", "separate", "filter", "sort", "cull"],
     partOfSpeech: "verb",
-    etymology: "Old English windwian, from wind.",
-  },
-  {
-    word: "zealous",
-    definition: "Having great energy or enthusiasm for a cause or objective.",
-    keyConcepts: [
-      { keyword: "energy", matchTerms: ["energy", "vigor", "passion", "fervor", "ardor"], label: "Great energy", hint: "The definition describes intense drive." },
-      { keyword: "enthusiasm", matchTerms: ["enthusi", "eager", "devot", "dedicat", "commit"], label: "Enthusiasm for a cause", hint: "The energy is directed at something specific." },
-    ],
-    synonyms: ["passionate", "fervent", "enthusiastic", "ardent", "devoted"],
-    partOfSpeech: "adjective",
-    etymology: "Greek zelos (zeal, ardor).",
   },
   {
     word: "zeitgeist",
@@ -1158,32 +894,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["spirit of the age", "ethos", "mood", "atmosphere", "trend"],
     partOfSpeech: "noun",
-    etymology: "German Zeitgeist -- Zeit (time) + Geist (spirit, ghost).",
-  },
-
-  // ===== NEW ENTRIES (to be created) =====
-  
-  {
-    word: "acknowledge",
-    definition: "To accept or admit the existence or truth of something.",
-    keyConcepts: [
-      { keyword: "accept", matchTerms: ["accept", "admit", "recogniz", "concede", "grant"], label: "Accept or admit", hint: "The definition involves accepting something as true." },
-      { keyword: "existence", matchTerms: ["exist", "truth", "reality", "fact", "presence"], label: "Existence or truth", hint: "What's being acknowledged is real or valid." },
-    ],
-    synonyms: ["admit", "recognize", "accept", "concede", "confess"],
-    partOfSpeech: "verb",
-    etymology: "Old English oncnawan, from on + cnawan (to know). Related to 'know.'",
-  },
-  {
-    word: "accurate",
-    definition: "Correct in all details; free from errors.",
-    keyConcepts: [
-      { keyword: "correct", matchTerms: ["correct", "right", "true", "exact", "precise"], label: "Correct in details", hint: "The definition emphasizes being right." },
-      { keyword: "errors", matchTerms: ["error", "mistake", "fault", "flaw", "inaccura"], label: "Free from errors", hint: "Nothing is wrong or mistaken." },
-    ],
-    synonyms: ["precise", "exact", "correct", "true", "faithful"],
-    partOfSpeech: "adjective",
-    etymology: "Latin accuratus (prepared with care), from ad (to) + cura (care).",
   },
   {
     word: "anecdotal",
@@ -1194,18 +904,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["informal", "unreliable", "unscientific", "hearsay", "unverified"],
     partOfSpeech: "adjective",
-    etymology: "Greek anekdota (things unpublished), from an (not) + ekdotos (published).",
-  },
-  {
-    word: "anticipate",
-    definition: "To expect or predict something; to act in advance of.",
-    keyConcepts: [
-      { keyword: "expect", matchTerms: ["expect", "predict", "foresee", "forecast", "envision"], label: "Expect or predict", hint: "The definition involves looking ahead." },
-      { keyword: "advance", matchTerms: ["advance", "ahead", "before", "prior", "prepar"], label: "Act in advance", hint: "Action is taken before something happens." },
-    ],
-    synonyms: ["expect", "foresee", "predict", "await", "prepare for"],
-    partOfSpeech: "verb",
-    etymology: "Latin anticipare -- ante (before) + capere (to take).",
   },
   {
     word: "assertive",
@@ -1216,18 +914,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["confident", "self-assured", "bold", "forceful", "decisive"],
     partOfSpeech: "adjective",
-    etymology: "Latin asserere (to claim), from ad (to) + serere (to join).",
-  },
-  {
-    word: "attentive",
-    definition: "Paying close attention; alert and observant.",
-    keyConcepts: [
-      { keyword: "attention", matchTerms: ["attention", "focus", "concentrat", "mindful", "heed"], label: "Paying close attention", hint: "The definition emphasizes careful focus." },
-      { keyword: "observant", matchTerms: ["observant", "alert", "watchful", "aware", "vigilant"], label: "Alert and observant", hint: "Nothing escapes notice." },
-    ],
-    synonyms: ["alert", "observant", "watchful", "mindful", "vigilant"],
-    partOfSpeech: "adjective",
-    etymology: "Latin attendere -- ad (to) + tendere (to stretch).",
   },
   {
     word: "awkward",
@@ -1238,7 +924,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["clumsy", "uncomfortable", "embarrassing", "ungainly", "difficult"],
     partOfSpeech: "adjective",
-    etymology: "Middle English awke (turned the wrong way) + -ward. From Old Norse ofugr (turned backward).",
   },
   {
     word: "biased",
@@ -1249,29 +934,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["prejudiced", "partial", "one-sided", "partisan", "slanted"],
     partOfSpeech: "adjective",
-    etymology: "French biais (oblique, slant), of uncertain origin.",
-  },
-  {
-    word: "brief",
-    definition: "Of short duration; using few words.",
-    keyConcepts: [
-      { keyword: "short", matchTerms: ["short", "quick", "fleeting", "momentary", "transient"], label: "Short duration", hint: "The definition emphasizes brevity in time." },
-      { keyword: "few", matchTerms: ["few", "concise", "succinct", "terse", "compact"], label: "Using few words", hint: "Communication is economical." },
-    ],
-    synonyms: ["short", "concise", "succinct", "quick", "fleeting"],
-    partOfSpeech: "adjective",
-    etymology: "Latin brevis (short). Related to 'abbreviate.'",
-  },
-  {
-    word: "busy",
-    definition: "Having a great deal to do; occupied with activity.",
-    keyConcepts: [
-      { keyword: "great", matchTerms: ["great", "much", "lot", "full", "packed"], label: "Great deal to do", hint: "The definition describes having many tasks." },
-      { keyword: "occupied", matchTerms: ["occupi", "engag", "active", "working", "involv"], label: "Occupied with activity", hint: "Time and attention are filled." },
-    ],
-    synonyms: ["occupied", "engaged", "active", "hectic", "industrious"],
-    partOfSpeech: "adjective",
-    etymology: "Old English bisig (anxious, careful). Of Germanic origin.",
   },
   {
     word: "cabal",
@@ -1282,7 +944,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["conspiracy", "faction", "clique", "junta", "coterie"],
     partOfSpeech: "noun",
-    etymology: "Hebrew qabbalah (received tradition), from qabal (to receive).",
   },
   {
     word: "charisma",
@@ -1293,7 +954,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["charm", "appeal", "magnetism", "allure", "presence"],
     partOfSpeech: "noun",
-    etymology: "Greek kharisma (divine gift), from kharis (grace, favor).",
   },
   {
     word: "condescending",
@@ -1304,7 +964,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["patronizing", "supercilious", "disdainful", "superior", "snobbish"],
     partOfSpeech: "adjective",
-    etymology: "Latin condescendere -- con (together) + descendere (to descend).",
   },
   {
     word: "constraint",
@@ -1315,7 +974,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["restriction", "limitation", "restraint", "curb", "check"],
     partOfSpeech: "noun",
-    etymology: "Latin constringere -- con (together) + stringere (to draw tight).",
   },
   {
     word: "corrosive",
@@ -1326,18 +984,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["destructive", "erosive", "damaging", "harmful", "caustic"],
     partOfSpeech: "adjective",
-    etymology: "Latin corrodere -- cor (intensive) + rodere (to gnaw).",
-  },
-  {
-    word: "credible",
-    definition: "Able to be believed; convincing.",
-    keyConcepts: [
-      { keyword: "believed", matchTerms: ["believ", "trust", "accept", "credit", "plausible"], label: "Able to be believed", hint: "The definition involves trustworthiness." },
-      { keyword: "convincing", matchTerms: ["convinc", "persuasive", "compel", "reliable", "sound"], label: "Convincing", hint: "It successfully persuades." },
-    ],
-    synonyms: ["believable", "plausible", "convincing", "trustworthy", "reliable"],
-    partOfSpeech: "adjective",
-    etymology: "Latin credibilis, from credere (to believe).",
   },
   {
     word: "deliberate",
@@ -1348,7 +994,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["intentional", "planned", "calculated", "conscious", "purposeful"],
     partOfSpeech: "adjective",
-    etymology: "Latin deliberatus, from deliberare -- de + librare (to weigh), from libra (scales).",
   },
   {
     word: "delusional",
@@ -1359,18 +1004,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["deluded", "mistaken", "irrational", "unrealistic", "self-deceiving"],
     partOfSpeech: "adjective",
-    etymology: "Latin deludere (to mock, deceive) -- de + ludere (to play).",
-  },
-  {
-    word: "dependent",
-    definition: "Relying on someone or something for support or existence.",
-    keyConcepts: [
-      { keyword: "relying", matchTerms: ["rely", "depend", "need", "require", "lean"], label: "Relying on", hint: "The definition describes needing external support." },
-      { keyword: "support", matchTerms: ["support", "help", "assistance", "sustenance", "maintenance"], label: "For support", hint: "Something external is needed to continue." },
-    ],
-    synonyms: ["reliant", "contingent", "subordinate", "conditional", "subject to"],
-    partOfSpeech: "adjective",
-    etymology: "Latin dependere -- de (down) + pendere (to hang).",
   },
   {
     word: "derivative",
@@ -1381,29 +1014,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["unoriginal", "imitative", "copied", "secondary", "borrowed"],
     partOfSpeech: "adjective",
-    etymology: "Latin derivare -- de (away) + rivus (stream).",
-  },
-  {
-    word: "direct",
-    definition: "Going straight to the point; frank and clear.",
-    keyConcepts: [
-      { keyword: "straight", matchTerms: ["straight", "immediate", "shortest", "linear", "undeviat"], label: "Straight to the point", hint: "The definition describes not taking detours." },
-      { keyword: "frank", matchTerms: ["frank", "honest", "open", "candid", "forthright"], label: "Frank and clear", hint: "Communication is honest and transparent." },
-    ],
-    synonyms: ["straightforward", "frank", "candid", "plain", "explicit"],
-    partOfSpeech: "adjective",
-    etymology: "Latin directus, from dirigere -- di (apart) + regere (to guide).",
-  },
-  {
-    word: "discrete",
-    definition: "Individually separate and distinct.",
-    keyConcepts: [
-      { keyword: "separate", matchTerms: ["separat", "apart", "individual", "independent", "detached"], label: "Individually separate", hint: "The definition describes things that don't overlap." },
-      { keyword: "distinct", matchTerms: ["distinct", "different", "unique", "particular", "specific"], label: "Distinct", hint: "Each item is clearly its own." },
-    ],
-    synonyms: ["separate", "distinct", "individual", "detached", "unconnected"],
-    partOfSpeech: "adjective",
-    etymology: "Latin discretus (separated), from discernere -- dis (apart) + cernere (to separate).",
   },
   {
     word: "disillusioned",
@@ -1414,7 +1024,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["disenchanted", "disappointed", "disillusioned", "cynical", "let down"],
     partOfSpeech: "adjective",
-    etymology: "Dis- (removal) + illusion, from Latin illudere (to mock).",
   },
   {
     word: "dissolve",
@@ -1425,18 +1034,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["melt", "disintegrate", "disperse", "end", "terminate"],
     partOfSpeech: "verb",
-    etymology: "Latin dissolvere -- dis (apart) + solvere (to loosen).",
-  },
-  {
-    word: "earnest",
-    definition: "Showing sincere and intense conviction; serious in intention.",
-    keyConcepts: [
-      { keyword: "sincere", matchTerms: ["sincer", "genuine", "honest", "heartfelt", "authentic"], label: "Sincere conviction", hint: "The definition describes genuine feeling." },
-      { keyword: "serious", matchTerms: ["serious", "solemn", "grave", "intense", "determined"], label: "Serious intention", hint: "The approach is not casual or frivolous." },
-    ],
-    synonyms: ["sincere", "serious", "solemn", "heartfelt", "fervent"],
-    partOfSpeech: "adjective",
-    etymology: "Old English eornost (seriousness, battle). Of Germanic origin.",
   },
   {
     word: "empathetic",
@@ -1447,7 +1044,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["understanding", "compassionate", "sympathetic", "sensitive", "perceptive"],
     partOfSpeech: "adjective",
-    etymology: "Greek empatheia -- en (in) + pathos (feeling).",
   },
   {
     word: "erroneous",
@@ -1458,7 +1054,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["incorrect", "wrong", "false", "inaccurate", "mistaken"],
     partOfSpeech: "adjective",
-    etymology: "Latin errare (to wander, stray).",
   },
   {
     word: "exaggerate",
@@ -1469,7 +1064,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["overstate", "embellish", "amplify", "magnify", "inflate"],
     partOfSpeech: "verb",
-    etymology: "Latin exaggerare -- ex (thoroughly) + aggerare (to heap up).",
   },
   {
     word: "existential",
@@ -1480,7 +1074,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["philosophical", "fundamental", "metaphysical", "ontological"],
     partOfSpeech: "adjective",
-    etymology: "Latin existere -- ex (out) + sistere (to cause to stand).",
   },
   {
     word: "explicit",
@@ -1491,18 +1084,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["clear", "unambiguous", "definite", "precise", "express"],
     partOfSpeech: "adjective",
-    etymology: "Latin explicitus (unfolded), from explicare -- ex + plicare (to fold).",
-  },
-  {
-    word: "flexible",
-    definition: "Capable of bending easily; willing to change or compromise.",
-    keyConcepts: [
-      { keyword: "bending", matchTerms: ["bend", "pliable", "supple", "malleable", "elastic"], label: "Capable of bending", hint: "The definition describes physical or metaphorical adaptability." },
-      { keyword: "change", matchTerms: ["change", "adapt", "adjust", "compromis", "accommodat"], label: "Willing to change", hint: "There's openness to different approaches." },
-    ],
-    synonyms: ["adaptable", "versatile", "pliable", "adjustable", "accommodating"],
-    partOfSpeech: "adjective",
-    etymology: "Latin flexibilis, from flectere (to bend).",
   },
   {
     word: "gaslighting",
@@ -1513,18 +1094,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["manipulating", "deceiving", "psychologically abusing", "brainwashing"],
     partOfSpeech: "noun",
-    etymology: "From the 1944 film 'Gaslight,' where a husband manipulates his wife into doubting her sanity.",
-  },
-  {
-    word: "harmless",
-    definition: "Not able or likely to cause harm; inoffensive.",
-    keyConcepts: [
-      { keyword: "harm", matchTerms: ["harm", "hurt", "injur", "damag", "danger"], label: "Not causing harm", hint: "The definition negates harmful potential." },
-      { keyword: "inoffensive", matchTerms: ["inoffensive", "innocent", "benign", "safe", "gentle"], label: "Inoffensive", hint: "No threat is posed." },
-    ],
-    synonyms: ["innocuous", "safe", "benign", "inoffensive", "gentle"],
-    partOfSpeech: "adjective",
-    etymology: "Old English hearm (harm) + -less. Of Germanic origin.",
   },
   {
     word: "implicit",
@@ -1535,73 +1104,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["implied", "tacit", "understood", "unspoken", "inferred"],
     partOfSpeech: "adjective",
-    etymology: "Latin implicitus (entangled), from implicare -- in + plicare (to fold).",
-  },
-  {
-    word: "incognito",
-    definition: "Having one's true identity concealed; in disguise.",
-    keyConcepts: [
-      { keyword: "identity", matchTerms: ["identity", "name", "self", "person", "who"], label: "True identity concealed", hint: "The definition involves hiding who one is." },
-      { keyword: "disguise", matchTerms: ["disguis", "hidden", "anonymous", "unrecogniz", "secret"], label: "In disguise", hint: "Appearance or identity is altered." },
-    ],
-    synonyms: ["anonymous", "disguised", "unrecognized", "undercover", "in disguise"],
-    partOfSpeech: "adverb",
-    etymology: "Latin incognitus -- in (not) + cognitus (known), from cognoscere (to know).",
-  },
-  {
-    word: "influence",
-    definition: "The capacity to have an effect on someone's character, development, or behavior.",
-    keyConcepts: [
-      { keyword: "capacity", matchTerms: ["capacit", "power", "abil", "potential", "force"], label: "Capacity to affect", hint: "The definition describes the power to change things." },
-      { keyword: "effect", matchTerms: ["effect", "impact", "change", "alter", "shape"], label: "Have an effect", hint: "There's a resulting change." },
-    ],
-    synonyms: ["power", "sway", "impact", "effect", "authority"],
-    partOfSpeech: "noun",
-    etymology: "Latin influere (to flow in) -- in + fluere (to flow). Originally an astrological term.",
-  },
-  {
-    word: "intention",
-    definition: "A thing intended; an aim or plan.",
-    keyConcepts: [
-      { keyword: "intended", matchTerms: ["intend", "mean", "plan", "purpose", "goal"], label: "Thing intended", hint: "The definition describes what one means to do." },
-      { keyword: "aim", matchTerms: ["aim", "plan", "objective", "target", "design"], label: "Aim or plan", hint: "There's a specific objective in mind." },
-    ],
-    synonyms: ["aim", "purpose", "plan", "goal", "objective"],
-    partOfSpeech: "noun",
-    etymology: "Latin intentio (a stretching out), from intendere -- in + tendere (to stretch).",
-  },
-  {
-    word: "intuition",
-    definition: "The ability to understand something immediately, without conscious reasoning.",
-    keyConcepts: [
-      { keyword: "understand", matchTerms: ["understand", "know", "sense", "perceiv", "grasp"], label: "Understand immediately", hint: "The definition describes instant comprehension." },
-      { keyword: "without", matchTerms: ["without", "beyond", "absent", "instinct", "gut"], label: "Without conscious reasoning", hint: "Logic isn't the path to this understanding." },
-    ],
-    synonyms: ["instinct", "insight", "hunch", "gut feeling", "sixth sense"],
-    partOfSpeech: "noun",
-    etymology: "Latin intueri (to look at, consider) -- in + tueri (to watch, guard).",
-  },
-  {
-    word: "irony",
-    definition: "The expression of meaning through language that signifies the opposite.",
-    keyConcepts: [
-      { keyword: "expression", matchTerms: ["express", "statement", "language", "words", "speech"], label: "Expression of meaning", hint: "The definition involves communication." },
-      { keyword: "opposite", matchTerms: ["opposit", "contrary", "revers", "contradict", "incongruous"], label: "Signifies the opposite", hint: "What's said differs from what's meant." },
-    ],
-    synonyms: ["sarcasm", "satire", "mockery", "paradox", "incongruity"],
-    partOfSpeech: "noun",
-    etymology: "Greek eironeia (dissimulation, feigned ignorance), from eiron (dissembler).",
-  },
-  {
-    word: "justify",
-    definition: "To show or prove to be right or reasonable.",
-    keyConcepts: [
-      { keyword: "show", matchTerms: ["show", "demonstrat", "prove", "establish", "confirm"], label: "Show or prove", hint: "The definition involves making a case." },
-      { keyword: "reasonable", matchTerms: ["reasonabl", "right", "valid", "legitim", "warrant"], label: "Right or reasonable", hint: "The goal is to establish validity." },
-    ],
-    synonyms: ["defend", "vindicate", "warrant", "validate", "rationalize"],
-    partOfSpeech: "verb",
-    etymology: "Latin justificare -- justus (just) + facere (to make).",
   },
   {
     word: "manipulative",
@@ -1612,95 +1114,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["scheming", "calculating", "devious", "cunning", "crafty"],
     partOfSpeech: "adjective",
-    etymology: "Latin manipulus (handful), from manus (hand) + plere (to fill).",
-  },
-  {
-    word: "methodical",
-    definition: "Done in a systematic and orderly way.",
-    keyConcepts: [
-      { keyword: "systematic", matchTerms: ["systematic", "organiz", "structur", "logical", "planned"], label: "Systematic approach", hint: "The definition describes following a system." },
-      { keyword: "orderly", matchTerms: ["orderly", "neat", "tidy", "disciplin", "careful"], label: "Orderly way", hint: "Things are done in proper sequence." },
-    ],
-    synonyms: ["systematic", "orderly", "organized", "disciplined", "meticulous"],
-    partOfSpeech: "adjective",
-    etymology: "Greek methodikos, from methodos -- meta (after) + hodos (way, journey).",
-  },
-  {
-    word: "minimal",
-    definition: "Of a minimum amount, quantity, or degree; negligibly small.",
-    keyConcepts: [
-      { keyword: "minimum", matchTerms: ["minimum", "least", "smallest", "lowest", "basic"], label: "Minimum amount", hint: "The definition describes the smallest possible." },
-      { keyword: "small", matchTerms: ["small", "tiny", "negligible", "slight", "bare"], label: "Negligibly small", hint: "The quantity is very limited." },
-    ],
-    synonyms: ["minimum", "least", "smallest", "nominal", "negligible"],
-    partOfSpeech: "adjective",
-    etymology: "Latin minimus (smallest), superlative of minor (smaller).",
-  },
-  {
-    word: "moderate",
-    definition: "Average in amount, intensity, or degree; not extreme.",
-    keyConcepts: [
-      { keyword: "average", matchTerms: ["average", "medium", "middle", "reasonable", "fair"], label: "Average amount", hint: "The definition describes the middle ground." },
-      { keyword: "extreme", matchTerms: ["extreme", "excessive", "radical", "intense", "drastic"], label: "Not extreme", hint: "Extremes are avoided." },
-    ],
-    synonyms: ["reasonable", "temperate", "measured", "modest", "middle-of-the-road"],
-    partOfSpeech: "adjective",
-    etymology: "Latin moderatus, from moderari (to regulate), from modus (measure).",
-  },
-  {
-    word: "motivation",
-    definition: "The reason or reasons for acting or behaving in a particular way.",
-    keyConcepts: [
-      { keyword: "reason", matchTerms: ["reason", "cause", "purpose", "rationale", "grounds"], label: "Reason for acting", hint: "The definition describes what drives behavior." },
-      { keyword: "acting", matchTerms: ["act", "behav", "do", "perform", "conduct"], label: "Acting in a way", hint: "Behavior is the result." },
-    ],
-    synonyms: ["incentive", "drive", "impetus", "stimulus", "reason"],
-    partOfSpeech: "noun",
-    etymology: "Latin motivus (moving), from movere (to move).",
-  },
-  {
-    word: "neutral",
-    definition: "Not supporting either side in a conflict or dispute; impartial.",
-    keyConcepts: [
-      { keyword: "supporting", matchTerms: ["support", "favor", "side with", "align", "back"], label: "Not supporting either side", hint: "The definition describes non-alignment." },
-      { keyword: "impartial", matchTerms: ["impartial", "unbiased", "objective", "fair", "detached"], label: "Impartial stance", hint: "No preference is shown." },
-    ],
-    synonyms: ["impartial", "unbiased", "objective", "uncommitted", "nonpartisan"],
-    partOfSpeech: "adjective",
-    etymology: "Latin neutralis, from neuter -- ne (not) + uter (either).",
-  },
-  {
-    word: "objective",
-    definition: "Not influenced by personal feelings; based on facts.",
-    keyConcepts: [
-      { keyword: "personal", matchTerms: ["personal", "feeling", "emotion", "bias", "prejudic"], label: "Not influenced by feelings", hint: "The definition excludes subjective factors." },
-      { keyword: "facts", matchTerms: ["fact", "evidence", "reality", "truth", "data"], label: "Based on facts", hint: "The foundation is verifiable information." },
-    ],
-    synonyms: ["impartial", "unbiased", "factual", "neutral", "dispassionate"],
-    partOfSpeech: "adjective",
-    etymology: "Latin objectivus, from objectum (thing presented to the mind), from obicere (to throw before).",
-  },
-  {
-    word: "outcome",
-    definition: "The way a thing turns out; a result or consequence.",
-    keyConcepts: [
-      { keyword: "turns", matchTerms: ["turn", "end", "result", "conclude", "finish"], label: "Way something turns out", hint: "The definition describes the end state." },
-      { keyword: "result", matchTerms: ["result", "consequence", "effect", "product", "upshot"], label: "A result", hint: "It's what follows from prior events." },
-    ],
-    synonyms: ["result", "consequence", "effect", "conclusion", "end"],
-    partOfSpeech: "noun",
-    etymology: "Out- + come. A straightforward English compound.",
-  },
-  {
-    word: "overlook",
-    definition: "To fail to notice or consider something; to disregard.",
-    keyConcepts: [
-      { keyword: "fail", matchTerms: ["fail", "miss", "neglect", "omit", "skip"], label: "Fail to notice", hint: "The definition describes missing something." },
-      { keyword: "disregard", matchTerms: ["disregard", "ignore", "dismiss", "excuse", "forgive"], label: "Disregard", hint: "Something isn't given proper attention." },
-    ],
-    synonyms: ["miss", "ignore", "neglect", "disregard", "pass over"],
-    partOfSpeech: "verb",
-    etymology: "Over- + look. Originally 'to look over from above,' later 'to fail to notice.'",
   },
   {
     word: "patronizing",
@@ -1711,29 +1124,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["condescending", "superior", "disdainful", "supercilious", "snobbish"],
     partOfSpeech: "adjective",
-    etymology: "Latin patronus (protector), from pater (father). A patron 'looks down' as a father might.",
-  },
-  {
-    word: "persistent",
-    definition: "Continuing firmly despite difficulty or opposition.",
-    keyConcepts: [
-      { keyword: "continuing", matchTerms: ["continu", "persist", "keep", "maintain", "endur"], label: "Continuing firmly", hint: "The definition describes not giving up." },
-      { keyword: "difficulty", matchTerms: ["difficult", "opposition", "obstacle", "challenge", "hardship"], label: "Despite difficulty", hint: "Obstacles don't stop the effort." },
-    ],
-    synonyms: ["persevering", "tenacious", "determined", "resolute", "dogged"],
-    partOfSpeech: "adjective",
-    etymology: "Latin persistere -- per (through) + sistere (to stand).",
-  },
-  {
-    word: "perspective",
-    definition: "A particular attitude toward or way of regarding something.",
-    keyConcepts: [
-      { keyword: "attitude", matchTerms: ["attitude", "viewpoint", "outlook", "stance", "position"], label: "Particular attitude", hint: "The definition describes a mental stance." },
-      { keyword: "regarding", matchTerms: ["regard", "view", "see", "consider", "perceiv"], label: "Way of regarding", hint: "It's how something is seen." },
-    ],
-    synonyms: ["viewpoint", "standpoint", "outlook", "angle", "approach"],
-    partOfSpeech: "noun",
-    etymology: "Latin perspicere (to look through) -- per + specere (to look).",
   },
   {
     word: "pretentious",
@@ -1744,7 +1134,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["affected", "ostentatious", "pompous", "showy", "grandiose"],
     partOfSpeech: "adjective",
-    etymology: "Latin praetendere (to stretch forth, claim) -- prae (before) + tendere (to stretch).",
   },
   {
     word: "proportionate",
@@ -1755,7 +1144,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["commensurate", "corresponding", "relative", "balanced", "appropriate"],
     partOfSpeech: "adjective",
-    etymology: "Latin proportio -- pro (for) + portio (part, share).",
   },
   {
     word: "provocative",
@@ -1766,7 +1154,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["inflammatory", "incendiary", "controversial", "stimulating", "challenging"],
     partOfSpeech: "adjective",
-    etymology: "Latin provocare (to call forth, challenge) -- pro + vocare (to call).",
   },
   {
     word: "reductive",
@@ -1777,7 +1164,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["simplistic", "oversimplified", "narrow", "limiting", "diminishing"],
     partOfSpeech: "adjective",
-    etymology: "Latin reducere (to lead back) -- re (back) + ducere (to lead).",
   },
   {
     word: "resentment",
@@ -1788,51 +1174,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["bitterness", "indignation", "animosity", "grudge", "displeasure"],
     partOfSpeech: "noun",
-    etymology: "French ressentir (to feel strongly) -- re (intensive) + sentir (to feel).",
-  },
-  {
-    word: "resilient",
-    definition: "Able to recover quickly from difficulties; tough and adaptable.",
-    keyConcepts: [
-      { keyword: "recover", matchTerms: ["recover", "bounce back", "rebound", "overcome", "withstand"], label: "Recover quickly", hint: "The definition describes bouncing back." },
-      { keyword: "tough", matchTerms: ["tough", "strong", "hardy", "robust", "durable"], label: "Tough and adaptable", hint: "There's underlying strength." },
-    ],
-    synonyms: ["tough", "hardy", "adaptable", "flexible", "strong"],
-    partOfSpeech: "adjective",
-    etymology: "Latin resilire (to spring back) -- re (back) + salire (to jump).",
-  },
-  {
-    word: "restrained",
-    definition: "Characterized by reserve or moderation; unemotional.",
-    keyConcepts: [
-      { keyword: "reserve", matchTerms: ["reserv", "self-control", "disciplin", "contain", "hold back"], label: "Characterized by reserve", hint: "The definition describes holding back." },
-      { keyword: "moderation", matchTerms: ["moderat", "temper", "subdued", "muted", "understated"], label: "Moderation", hint: "Expression is kept in check." },
-    ],
-    synonyms: ["controlled", "moderate", "subdued", "muted", "understated"],
-    partOfSpeech: "adjective",
-    etymology: "Latin restringere -- re (back) + stringere (to draw tight).",
-  },
-  {
-    word: "risk",
-    definition: "The possibility of loss, harm, or failure.",
-    keyConcepts: [
-      { keyword: "possibility", matchTerms: ["possibil", "chance", "likelihood", "potential", "prospect"], label: "Possibility", hint: "The definition describes something that might happen." },
-      { keyword: "harm", matchTerms: ["harm", "loss", "damage", "danger", "failure"], label: "Of loss or harm", hint: "The potential outcome is negative." },
-    ],
-    synonyms: ["danger", "hazard", "peril", "threat", "gamble"],
-    partOfSpeech: "noun",
-    etymology: "Italian risco or rischio, possibly from Arabic rizq (fortune, luck).",
-  },
-  {
-    word: "sarcasm",
-    definition: "The use of irony to mock or convey contempt.",
-    keyConcepts: [
-      { keyword: "irony", matchTerms: ["irony", "mock", "ridicul", "deris", "satir"], label: "Use of irony", hint: "The definition involves saying the opposite of what's meant." },
-      { keyword: "contempt", matchTerms: ["contempt", "scorn", "disdain", "disrespect", "hostil"], label: "Convey contempt", hint: "The purpose is to show disdain." },
-    ],
-    synonyms: ["irony", "mockery", "ridicule", "derision", "scorn"],
-    partOfSpeech: "noun",
-    etymology: "Greek sarkasmos (a sneer), from sarkazein (to tear flesh) -- sarx (flesh).",
   },
   {
     word: "scapegoat",
@@ -1843,106 +1184,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["whipping boy", "fall guy", "victim", "target", "patsy"],
     partOfSpeech: "noun",
-    etymology: "Hebrew azazel (the goat sent into the wilderness in Leviticus, bearing the sins of the people).",
-  },
-  {
-    word: "speculate",
-    definition: "To form a theory without firm evidence; to conjecture.",
-    keyConcepts: [
-      { keyword: "theory", matchTerms: ["theor", "hypothes", "guess", "suppos", "assume"], label: "Form a theory", hint: "The definition involves proposing ideas." },
-      { keyword: "evidence", matchTerms: ["evidence", "proof", "firm", "certain", "solid"], label: "Without firm evidence", hint: "The theory lacks solid backing." },
-    ],
-    synonyms: ["conjecture", "theorize", "hypothesize", "guess", "surmise"],
-    partOfSpeech: "verb",
-    etymology: "Latin speculari (to observe), from specula (watchtower), from specere (to look).",
-  },
-  {
-    word: "steady",
-    definition: "Firmly fixed, supported, or balanced; regular and even.",
-    keyConcepts: [
-      { keyword: "firmly", matchTerms: ["firm", "stable", "secure", "solid", "fixed"], label: "Firmly fixed", hint: "The definition describes solidity." },
-      { keyword: "regular", matchTerms: ["regular", "even", "consistent", "uniform", "constant"], label: "Regular and even", hint: "There's consistency over time." },
-    ],
-    synonyms: ["stable", "firm", "constant", "consistent", "unwavering"],
-    partOfSpeech: "adjective",
-    etymology: "Old English stede (place, position). Related to 'stead' and 'instead.'",
-  },
-  {
-    word: "tentative",
-    definition: "Not certain or fixed; provisional or hesitant.",
-    keyConcepts: [
-      { keyword: "certain", matchTerms: ["certain", "definite", "fixed", "firm", "settled"], label: "Not certain", hint: "The definition describes uncertainty." },
-      { keyword: "hesitant", matchTerms: ["hesitant", "uncertain", "provisional", "cautious", "tentativ"], label: "Hesitant", hint: "There's reluctance to commit." },
-    ],
-    synonyms: ["uncertain", "provisional", "hesitant", "preliminary", "unsure"],
-    partOfSpeech: "adjective",
-    etymology: "Latin tentare (to try, test), from tendere (to stretch).",
-  },
-  {
-    word: "tolerant",
-    definition: "Showing willingness to allow the existence of opinions or behavior that differ from one's own.",
-    keyConcepts: [
-      { keyword: "willingness", matchTerms: ["willing", "open", "accept", "allow", "permit"], label: "Showing willingness", hint: "The definition describes openness." },
-      { keyword: "differ", matchTerms: ["differ", "disagree", "other", "diverse", "alternative"], label: "Opinions that differ", hint: "The views accepted are not one's own." },
-    ],
-    synonyms: ["accepting", "open-minded", "liberal", "forbearing", "permissive"],
-    partOfSpeech: "adjective",
-    etymology: "Latin tolerare (to bear, endure).",
-  },
-  {
-    word: "transparent",
-    definition: "Easy to perceive or detect; open and honest.",
-    keyConcepts: [
-      { keyword: "perceive", matchTerms: ["perceiv", "see", "detect", "recogniz", "discern"], label: "Easy to perceive", hint: "The definition describes visibility." },
-      { keyword: "honest", matchTerms: ["honest", "open", "frank", "candid", "forthright"], label: "Open and honest", hint: "Nothing is hidden." },
-    ],
-    synonyms: ["clear", "obvious", "open", "honest", "candid"],
-    partOfSpeech: "adjective",
-    etymology: "Latin transparere -- trans (through) + parere (to appear).",
-  },
-  {
-    word: "utility",
-    definition: "The state of being useful, profitable, or beneficial.",
-    keyConcepts: [
-      { keyword: "useful", matchTerms: ["useful", "practical", "functional", "serviceable", "helpful"], label: "Being useful", hint: "The definition describes serving a purpose." },
-      { keyword: "beneficial", matchTerms: ["benefic", "advantag", "valuable", "worthwhile", "productive"], label: "Profitable or beneficial", hint: "There's positive value." },
-    ],
-    synonyms: ["usefulness", "practicality", "functionality", "benefit", "value"],
-    partOfSpeech: "noun",
-    etymology: "Latin utilitas, from utilis (useful), from uti (to use).",
-  },
-  {
-    word: "validate",
-    definition: "To confirm the truth or value of something.",
-    keyConcepts: [
-      { keyword: "confirm", matchTerms: ["confirm", "verify", "prove", "substantiat", "corroborat"], label: "Confirm", hint: "The definition involves establishing truth." },
-      { keyword: "value", matchTerms: ["value", "worth", "legitim", "valid", "authentic"], label: "Truth or value", hint: "What's confirmed is significance or correctness." },
-    ],
-    synonyms: ["confirm", "verify", "substantiate", "authenticate", "ratify"],
-    partOfSpeech: "verb",
-    etymology: "Latin validus (strong), from valere (to be strong).",
-  },
-  {
-    word: "voluntary",
-    definition: "Done, given, or acting of one's own free will.",
-    keyConcepts: [
-      { keyword: "free", matchTerms: ["free", "willing", "choice", "optional", "unprompted"], label: "Of one's own free will", hint: "The definition emphasizes choice." },
-      { keyword: "acting", matchTerms: ["act", "do", "give", "perform", "participate"], label: "Done or given", hint: "Action is taken without compulsion." },
-    ],
-    synonyms: ["willing", "optional", "unforced", "spontaneous", "discretionary"],
-    partOfSpeech: "adjective",
-    etymology: "Latin voluntarius, from voluntas (will), from velle (to wish).",
-  },
-  {
-    word: "willingness",
-    definition: "The quality of being ready or eager to do something.",
-    keyConcepts: [
-      { keyword: "ready", matchTerms: ["ready", "prepar", "willing", "disposed", "inclin"], label: "Being ready", hint: "The definition describes preparedness." },
-      { keyword: "eager", matchTerms: ["eager", "keen", "enthusiast", "happy", "glad"], label: "Eager to do", hint: "There's positive inclination." },
-    ],
-    synonyms: ["readiness", "eagerness", "inclination", "disposition", "openness"],
-    partOfSpeech: "noun",
-    etymology: "Old English willan (to wish, will) + -ness. Of Germanic origin.",
   },
   {
     word: "discerning",
@@ -1953,7 +1194,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["perceptive", "astute", "shrewd", "judicious", "discriminating"],
     partOfSpeech: "adjective",
-    etymology: "Latin discernere -- dis (apart) + cernere (to separate, sift).",
   },
   {
     word: "discombobulated",
@@ -1964,7 +1204,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["confused", "flustered", "bewildered", "disoriented", "rattled"],
     partOfSpeech: "adjective",
-    etymology: "American English, fanciful alteration of discompose or discomfort. Origin uncertain, possibly humorous coinage.",
   },
   {
     word: "vexed",
@@ -1975,18 +1214,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["annoyed", "irritated", "frustrated", "troubled", "agitated"],
     partOfSpeech: "adjective",
-    etymology: "Latin vexare (to shake, agitate, annoy).",
-  },
-  {
-    word: "tessellate",
-    definition: "To cover a surface with repeated geometric shapes that fit together without gaps or overlaps.",
-    keyConcepts: [
-      { keyword: "repeated shapes", matchTerms: ["repeat", "pattern", "tile", "mosaic", "geometr", "shape"], label: "Repeated shapes", hint: "The definition describes a pattern of shapes." },
-      { keyword: "no gaps", matchTerms: ["gap", "overlap", "fit", "cover", "seamless", "interlock", "together"], label: "Fitting without gaps", hint: "The shapes must fit perfectly together." },
-    ],
-    synonyms: ["tile", "mosaic", "pattern", "interlock", "pave"],
-    partOfSpeech: "verb",
-    etymology: "Latin tessella (small square stone), diminutive of tessera (a square tablet or die used in mosaics).",
   },
   {
     word: "sycophant",
@@ -1997,18 +1224,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["flatterer", "toady", "yes-man", "bootlicker", "brown-noser"],
     partOfSpeech: "noun",
-    etymology: "Greek sykophantes (informer, slanderer) -- sykon (fig) + phainein (to show).",
-  },
-  {
-    word: "perfunctory",
-    definition: "Carried out with minimal effort or interest; done as a routine duty.",
-    keyConcepts: [
-      { keyword: "minimal effort", matchTerms: ["minimal", "little", "half-heart", "careless", "superfic", "cursory"], label: "Minimal effort", hint: "The definition describes lack of care." },
-      { keyword: "routine duty", matchTerms: ["routine", "duty", "obligat", "automat", "mechan", "going through"], label: "Done routinely", hint: "It's done out of obligation, not interest." },
-    ],
-    synonyms: ["cursory", "superficial", "half-hearted", "mechanical", "indifferent"],
-    partOfSpeech: "adjective",
-    etymology: "Latin perfunctorius -- perfungi (to get through with) -- per (through) + fungi (perform).",
   },
   {
     word: "cacophony",
@@ -2019,7 +1234,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["din", "racket", "discord", "dissonance", "clamor"],
     partOfSpeech: "noun",
-    etymology: "Greek kakophonia -- kakos (bad) + phone (sound).",
   },
   {
     word: "superfluous",
@@ -2030,7 +1244,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["unnecessary", "redundant", "excess", "surplus", "needless"],
     partOfSpeech: "adjective",
-    etymology: "Latin superfluus -- super (over) + fluere (to flow). Literally 'overflowing'.",
   },
   {
     word: "vicarious",
@@ -2041,162 +1254,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["indirect", "secondhand", "surrogate", "empathetic", "substituted"],
     partOfSpeech: "adjective",
-    etymology: "Latin vicarius (substituted) -- vicis (change, turn, place).",
-  },
-  {
-    word: "capricious",
-    definition: "Given to sudden and unaccountable changes of mood or behavior.",
-    keyConcepts: [
-      { keyword: "sudden changes", matchTerms: ["sudden", "quick", "unpredict", "erratic", "whims", "impuls"], label: "Sudden changes", hint: "Changes happen unexpectedly." },
-      { keyword: "mood or behavior", matchTerms: ["mood", "behav", "temperament", "fickle", "inconsist", "mercur"], label: "In mood or behavior", hint: "It relates to how someone acts or feels." },
-    ],
-    synonyms: ["fickle", "unpredictable", "changeable", "mercurial", "erratic"],
-    partOfSpeech: "adjective",
-    etymology: "Italian capriccioso -- capriccio (sudden start) possibly from capro (goat), suggesting the leaping of a goat.",
-  },
-  {
-    word: "nonchalant",
-    definition: "Appearing casually calm and relaxed; not displaying anxiety or interest.",
-    keyConcepts: [
-      { keyword: "casually calm", matchTerms: ["calm", "cool", "relax", "casual", "laid-back", "composed"], label: "Casually calm", hint: "The definition describes easy composure." },
-      { keyword: "not anxious", matchTerms: ["unworri", "unbother", "indifferen", "unconcern", "carefree", "blase"], label: "Not showing concern", hint: "There's an absence of worry." },
-    ],
-    synonyms: ["casual", "indifferent", "unconcerned", "cool", "blasé"],
-    partOfSpeech: "adjective",
-    etymology: "French nonchalant -- non (not) + chaloir (to concern) from Latin calere (to be warm).",
-  },
-  {
-    word: "surreptitious",
-    definition: "Kept secret because it would not be approved of; done stealthily.",
-    keyConcepts: [
-      { keyword: "secret", matchTerms: ["secret", "hidden", "covert", "clandes", "conceal", "furtive"], label: "Kept secret", hint: "The action is hidden from others." },
-      { keyword: "stealthy", matchTerms: ["stealth", "sneak", "sly", "underhand", "quiet", "subvers"], label: "Done stealthily", hint: "It's done to avoid detection." },
-    ],
-    synonyms: ["secret", "covert", "stealthy", "clandestine", "furtive"],
-    partOfSpeech: "adjective",
-    etymology: "Latin surrepticius -- surripere (to steal secretly) -- sub (under) + rapere (to seize).",
-  },
-  {
-  word: "vindictive",
-  definition: "Having or showing a strong desire for revenge.",
-  keyConcepts: [
-  { keyword: "revenge", matchTerms: ["revenge", "vengean", "retali", "payback", "punish", "aveng"], label: "Desire for revenge", hint: "The definition describes wanting to get back at someone." },
-  { keyword: "strong desire", matchTerms: ["spite", "malice", "bitter", "resentful", "hostile", "grudge"], label: "Strong negative feeling", hint: "There's intense ill will." },
-  ],
-  synonyms: ["vengeful", "spiteful", "resentful", "malicious", "unforgiving"],
-  partOfSpeech: "adjective",
-  etymology: "Latin vindicta (vengeance) -- vindicare (to claim, avenge).",
-  },
-  // Word-class pairs: same word, different part of speech, different meaning
-  {
-    word: "deliberate",
-    definition: "Done consciously and intentionally; not accidental.",
-    keyConcepts: [
-      { keyword: "intentional", matchTerms: ["intention", "purpose", "conscious", "meant", "planned", "willful"], label: "Intentional", hint: "The action was done on purpose." },
-      { keyword: "not accidental", matchTerms: ["accident", "careful", "consider", "thought", "calculat"], label: "Not accidental", hint: "It wasn't by chance or mistake." },
-    ],
-    synonyms: ["intentional", "purposeful", "calculated", "premeditated", "conscious"],
-    partOfSpeech: "adjective",
-    etymology: "Latin deliberare -- de (down) + librare (to weigh).",
-  },
-  {
-    word: "deliberate",
-    definition: "To engage in long and careful consideration; to discuss formally.",
-    keyConcepts: [
-      { keyword: "careful consideration", matchTerms: ["consider", "think", "ponder", "weigh", "reflect", "contempl"], label: "Careful consideration", hint: "It involves thinking deeply." },
-      { keyword: "discuss formally", matchTerms: ["discuss", "debate", "confer", "consult", "meet", "talk"], label: "Formal discussion", hint: "Often done in groups or committees." },
-    ],
-    synonyms: ["consider", "ponder", "debate", "discuss", "contemplate"],
-    partOfSpeech: "verb",
-    etymology: "Latin deliberare -- de (down) + librare (to weigh).",
-  },
-  {
-    word: "moderate",
-    definition: "Average in amount, intensity, or degree; not extreme.",
-    keyConcepts: [
-      { keyword: "average", matchTerms: ["average", "medium", "middle", "reasonable", "modest", "temperat"], label: "Average amount", hint: "Neither too much nor too little." },
-      { keyword: "not extreme", matchTerms: ["extreme", "mild", "gentle", "balanced", "restrain", "measured"], label: "Not extreme", hint: "Avoiding excess in either direction." },
-    ],
-    synonyms: ["average", "medium", "reasonable", "temperate", "mild"],
-    partOfSpeech: "adjective",
-    etymology: "Latin moderatus -- moderare (to regulate, control).",
-  },
-  {
-    word: "moderate",
-    definition: "To make or become less extreme, intense, or violent; to preside over a discussion.",
-    keyConcepts: [
-      { keyword: "less extreme", matchTerms: ["reduce", "lessen", "ease", "soften", "temper", "tone down"], label: "Reduce intensity", hint: "To make something less severe." },
-      { keyword: "preside over", matchTerms: ["preside", "chair", "lead", "mediat", "facilitat", "oversee"], label: "Preside over", hint: "To guide or control a discussion." },
-    ],
-    synonyms: ["regulate", "temper", "mediate", "chair", "preside"],
-    partOfSpeech: "verb",
-    etymology: "Latin moderare (to regulate, control).",
-  },
-  {
-    word: "intimate",
-    definition: "Closely acquainted; very personal or private.",
-    keyConcepts: [
-      { keyword: "closely acquainted", matchTerms: ["close", "familiar", "personal", "dear", "friend", "warm"], label: "Closely acquainted", hint: "A close relationship." },
-      { keyword: "private", matchTerms: ["private", "personal", "secret", "confiden", "inner", "deep"], label: "Very private", hint: "Not shared widely." },
-    ],
-    synonyms: ["close", "personal", "familiar", "private", "confidential"],
-    partOfSpeech: "adjective",
-    etymology: "Latin intimare (to make known) -- intimus (innermost).",
-  },
-  {
-    word: "intimate",
-    definition: "To suggest or hint at something indirectly.",
-    keyConcepts: [
-      { keyword: "suggest", matchTerms: ["suggest", "imply", "hint", "indicat", "insinuat", "allude"], label: "Suggest indirectly", hint: "Not stated directly." },
-      { keyword: "indirectly", matchTerms: ["indirect", "subtle", "implied", "unspoken", "covert"], label: "Done indirectly", hint: "The meaning is implied rather than explicit." },
-    ],
-    synonyms: ["suggest", "imply", "hint", "insinuate", "indicate"],
-    partOfSpeech: "verb",
-    etymology: "Latin intimare (to make known) -- intimus (innermost).",
-  },
-  {
-    word: "articulate",
-    definition: "Having or showing the ability to speak fluently and coherently.",
-    keyConcepts: [
-      { keyword: "speak fluently", matchTerms: ["fluent", "eloqu", "express", "well-spoken", "clear", "coherent"], label: "Speaks fluently", hint: "Good at expressing themselves." },
-      { keyword: "coherently", matchTerms: ["coherent", "lucid", "understand", "intelligib", "logical"], label: "Coherent speech", hint: "Easy to follow and understand." },
-    ],
-    synonyms: ["eloquent", "fluent", "expressive", "well-spoken", "coherent"],
-    partOfSpeech: "adjective",
-    etymology: "Latin articulare (to divide into joints, utter distinctly).",
-  },
-  {
-    word: "articulate",
-    definition: "To express an idea or feeling fluently and clearly.",
-    keyConcepts: [
-      { keyword: "express clearly", matchTerms: ["express", "convey", "communicat", "state", "voice", "verbalis"], label: "Express clearly", hint: "To put into words." },
-      { keyword: "fluently", matchTerms: ["fluent", "clear", "well", "effective", "precise", "distinct"], label: "Done fluently", hint: "With skill and clarity." },
-    ],
-    synonyms: ["express", "convey", "communicate", "voice", "enunciate"],
-    partOfSpeech: "verb",
-    etymology: "Latin articulare (to divide into joints, utter distinctly).",
-  },
-  {
-    word: "appropriate",
-    definition: "Suitable or proper in the circumstances.",
-    keyConcepts: [
-      { keyword: "suitable", matchTerms: ["suitab", "fit", "proper", "right", "correct", "apt"], label: "Suitable", hint: "It fits the situation." },
-      { keyword: "circumstances", matchTerms: ["circumstan", "context", "situation", "occasion", "setting"], label: "For the circumstances", hint: "Depends on the context." },
-    ],
-    synonyms: ["suitable", "proper", "fitting", "apt", "correct"],
-    partOfSpeech: "adjective",
-    etymology: "Latin appropriare -- ad (to) + proprius (own, proper).",
-  },
-  {
-    word: "appropriate",
-    definition: "To take something for one's own use, often without permission.",
-    keyConcepts: [
-      { keyword: "take for oneself", matchTerms: ["take", "seize", "claim", "acquire", "commandeer", "expropri"], label: "Take for oneself", hint: "To make something your own." },
-      { keyword: "without permission", matchTerms: ["without", "unauthor", "steal", "misappropri", "usurp"], label: "Often unauthorized", hint: "May involve taking improperly." },
-    ],
-    synonyms: ["take", "seize", "commandeer", "expropriate", "claim"],
-    partOfSpeech: "verb",
-    etymology: "Latin appropriare -- ad (to) + proprius (own, proper).",
   },
   {
     word: "consummate",
@@ -2207,18 +1264,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["perfect", "complete", "accomplished", "supreme", "masterful"],
     partOfSpeech: "adjective",
-    etymology: "Latin consummare -- con (together) + summa (sum, total).",
-  },
-  {
-    word: "consummate",
-    definition: "To make complete or perfect; to finalize, especially a marriage or deal.",
-    keyConcepts: [
-      { keyword: "make complete", matchTerms: ["complet", "finish", "conclude", "finaliz", "accomplish", "fulfill"], label: "Make complete", hint: "To bring to completion." },
-      { keyword: "finalize", matchTerms: ["final", "seal", "close", "conclude", "execute", "ratify"], label: "Finalize formally", hint: "Often used for marriages or agreements." },
-    ],
-    synonyms: ["complete", "finalize", "conclude", "fulfill", "accomplish"],
-    partOfSpeech: "verb",
-    etymology: "Latin consummare -- con (together) + summa (sum, total).",
   },
   {
     word: "compound",
@@ -2229,18 +1274,6 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["mixture", "combination", "blend", "composite", "amalgam"],
     partOfSpeech: "noun",
-    etymology: "Latin componere -- com (together) + ponere (to put).",
-  },
-  {
-    word: "compound",
-    definition: "To make something bad worse; to intensify or add to.",
-    keyConcepts: [
-      { keyword: "make worse", matchTerms: ["worse", "worsen", "exacerbat", "aggravat", "intensif", "heighten"], label: "Make worse", hint: "To add to a problem." },
-      { keyword: "add to", matchTerms: ["add", "increas", "multipl", "magnif", "amplif"], label: "Add to or intensify", hint: "Building on what exists." },
-    ],
-    synonyms: ["worsen", "exacerbate", "intensify", "aggravate", "magnify"],
-    partOfSpeech: "verb",
-    etymology: "Latin componere -- com (together) + ponere (to put).",
   },
   {
     word: "duplicate",
@@ -2251,42 +1284,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["copy", "replica", "clone", "double", "reproduction"],
     partOfSpeech: "noun",
-    etymology: "Latin duplicare -- duplex (twofold) -- duo (two) + plicare (to fold).",
   },
-  {
-    word: "duplicate",
-    definition: "To make an exact copy of something; to repeat or replicate.",
-    keyConcepts: [
-      { keyword: "make a copy", matchTerms: ["copy", "replic", "reproduc", "clone", "recreat"], label: "Make a copy", hint: "To create an identical version." },
-      { keyword: "repeat", matchTerms: ["repeat", "redo", "double", "mirror", "match"], label: "Repeat or replicate", hint: "To do again identically." },
-    ],
-    synonyms: ["copy", "replicate", "reproduce", "clone", "repeat"],
-    partOfSpeech: "verb",
-    etymology: "Latin duplicare -- duplex (twofold) -- duo (two) + plicare (to fold).",
-  },
-  {
-    word: "approximate",
-    definition: "Close to the actual but not completely accurate; roughly estimated.",
-    keyConcepts: [
-      { keyword: "close to actual", matchTerms: ["close", "near", "rough", "about", "around", "almost"], label: "Close to actual", hint: "Not exact but nearby." },
-      { keyword: "not accurate", matchTerms: ["estimat", "imprecis", "inexact", "ballpark", "loose"], label: "Not completely accurate", hint: "An estimation rather than exact." },
-    ],
-    synonyms: ["rough", "estimated", "near", "close", "inexact"],
-    partOfSpeech: "adjective",
-    etymology: "Latin approximare -- ad (to) + proximus (nearest).",
-  },
-  {
-    word: "approximate",
-    definition: "To come close to or estimate something; to resemble.",
-    keyConcepts: [
-      { keyword: "come close to", matchTerms: ["close", "approach", "near", "border", "verge"], label: "Come close to", hint: "To get near to something." },
-      { keyword: "estimate", matchTerms: ["estimat", "guess", "reckon", "gauge", "judge"], label: "To estimate", hint: "To calculate roughly." },
-    ],
-    synonyms: ["approach", "estimate", "near", "resemble", "border on"],
-    partOfSpeech: "verb",
-    etymology: "Latin approximare -- ad (to) + proximus (nearest).",
-  },
-  // ── compendium ──
   {
     word: "compendium",
     definition: "A collection of concise but detailed information about a particular subject.",
@@ -2296,9 +1294,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["collection", "compilation", "anthology", "digest", "handbook"],
     partOfSpeech: "noun",
-    etymology: "Latin compendium (saving, shortcut) -- compendere (to weigh together).",
   },
-  // ── apoplectic ──
   {
     word: "apoplectic",
     definition: "Overcome with extreme anger; furious to the point of being unable to speak coherently.",
@@ -2308,9 +1304,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["furious", "enraged", "livid", "incensed", "wrathful"],
     partOfSpeech: "adjective",
-    etymology: "Greek apoplektikos -- apoplexia (stroke).",
   },
-  // ── consensual ──
   {
     word: "consensual",
     definition: "Relating to or involving consent, especially mutual consent by all parties involved.",
@@ -2320,9 +1314,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["agreed", "mutual", "voluntary", "willing"],
     partOfSpeech: "adjective",
-    etymology: "Latin consentire (to agree) -- con (together) + sentire (to feel).",
   },
-  // ── opportunistic ──
   {
     word: "opportunistic",
     definition: "Exploiting chances or circumstances for personal gain, often without regard for principles.",
@@ -2332,9 +1324,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["exploitative", "calculating", "self-serving", "pragmatic", "expedient"],
     partOfSpeech: "adjective",
-    etymology: "Latin opportunus (favorable) -- ob (toward) + portus (harbor).",
   },
-  // ── suffrage ──
   {
     word: "suffrage",
     definition: "The right to vote in political elections.",
@@ -2344,9 +1334,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["franchise", "voting rights", "ballot"],
     partOfSpeech: "noun",
-    etymology: "Latin suffragium (voting tablet, vote).",
   },
-  // ── addendum ──
   {
     word: "addendum",
     definition: "An item of additional material added at the end of a book or document.",
@@ -2356,9 +1344,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["supplement", "appendix", "addition", "postscript", "attachment"],
     partOfSpeech: "noun",
-    etymology: "Latin addendum (thing to be added) -- addere (to add).",
   },
-  // ── omnipotent ──
   {
     word: "omnipotent",
     definition: "Having unlimited or universal power; able to do anything.",
@@ -2368,9 +1354,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["all-powerful", "almighty", "supreme", "invincible"],
     partOfSpeech: "adjective",
-    etymology: "Latin omnipotens -- omnis (all) + potens (powerful).",
   },
-  // ── agnostic ──
   {
     word: "agnostic",
     definition: "A person who believes that the existence of God is unknown or unknowable; holding no strong opinion.",
@@ -2380,9 +1364,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["doubter", "skeptic", "nonbeliever", "freethinker"],
     partOfSpeech: "noun",
-    etymology: "Greek agnostos (unknown) -- a (not) + gnostos (known).",
   },
-  // ── capitulate ──
   {
     word: "capitulate",
     definition: "To cease to resist an opponent or demand; to surrender.",
@@ -2392,21 +1374,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["surrender", "yield", "submit", "concede", "give in"],
     partOfSpeech: "verb",
-    etymology: "Latin capitulare (to draw up under headings) -- caput (head).",
   },
-  // ── onomatopoeia ──
-  {
-    word: "onomatopoeia",
-    definition: "The formation of a word from a sound associated with what it represents, such as 'buzz' or 'sizzle'.",
-    keyConcepts: [
-      { keyword: "word from sound", matchTerms: ["word", "sound", "noise", "represent", "imitat", "mimic", "echo", "resembl"], label: "Word formed from sound", hint: "The definition says 'formation of a word from a sound' -- the word sounds like the thing." },
-      { keyword: "associated with", matchTerms: ["associat", "connect", "link", "relat", "buzz", "sizzle", "bang", "crash", "meow", "splash", "pop", "hiss"], label: "Sound it represents", hint: "The definition says 'associated with what it represents' -- like 'buzz' or 'sizzle'." },
-    ],
-    synonyms: ["sound word", "echoism", "imitative word"],
-    partOfSpeech: "noun",
-    etymology: "Greek onomatopoiia -- onoma (name) + poiein (to make).",
-  },
-  // ── derelict ──
   {
     word: "derelict",
     definition: "In a very poor condition as a result of disuse and neglect; a person without a home or job.",
@@ -2416,9 +1384,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["abandoned", "dilapidated", "neglected", "vagrant", "homeless"],
     partOfSpeech: "adjective/noun",
-    etymology: "Latin derelictus (abandoned) -- derelinquere (to forsake).",
   },
-  // ── dereliction ──
   {
     word: "dereliction",
     definition: "The shameful failure to fulfill one's obligations; the state of being abandoned and neglected.",
@@ -2428,9 +1394,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["neglect", "negligence", "abandonment", "failure"],
     partOfSpeech: "noun",
-    etymology: "Latin derelictio -- derelinquere (to forsake).",
   },
-  // ── amnesty ──
   {
     word: "amnesty",
     definition: "An official pardon for people who have committed political offenses; forgiveness granted by authority.",
@@ -2440,9 +1404,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["pardon", "forgiveness", "clemency", "reprieve", "absolution"],
     partOfSpeech: "noun",
-    etymology: "Greek amnestia (forgetfulness) -- a (not) + mnestis (remembrance).",
   },
-  // ── bespoke ──
   {
     word: "bespoke",
     definition: "Made to order according to the buyer's specifications; custom-made.",
@@ -2452,9 +1414,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["custom-made", "tailored", "made-to-order", "personalized"],
     partOfSpeech: "adjective",
-    etymology: "Past participle of bespeak (to speak for, order).",
   },
-  // ── correlate ──
   {
     word: "correlate",
     definition: "To have a mutual relationship or connection; to establish a relationship between two things.",
@@ -2464,21 +1424,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["connect", "associate", "link", "relate", "correspond"],
     partOfSpeech: "verb",
-    etymology: "Latin correlatus -- com (together) + relatus (related).",
   },
-  // ── cudgel ──
-  {
-    word: "cudgel",
-    definition: "A short thick stick used as a weapon; to beat with a cudgel.",
-    keyConcepts: [
-      { keyword: "thick stick", matchTerms: ["stick", "club", "bat", "baton", "rod", "staff", "thick", "heavy", "blunt"], label: "A thick stick", hint: "The definition says 'a short thick stick' -- a blunt weapon." },
-      { keyword: "weapon or beat", matchTerms: ["weapon", "beat", "hit", "strike", "bludgeon", "attack", "assault", "pummel"], label: "Used as weapon", hint: "The definition says 'used as a weapon' or 'to beat with' -- for striking." },
-    ],
-    synonyms: ["club", "bludgeon", "truncheon", "baton"],
-    partOfSpeech: "noun/verb",
-    etymology: "Old English cycgel.",
-  },
-  // ── contract (verb) ──
   {
     word: "contract",
     definition: "To decrease in size, number, or range; to catch or develop a disease.",
@@ -2488,21 +1434,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["shrink", "reduce", "catch", "acquire"],
     partOfSpeech: "verb",
-    etymology: "Latin contrahere -- con (together) + trahere (to draw).",
   },
-  // ── contract (adjective - contracted) ──
-  {
-    word: "contracted",
-    definition: "Having become smaller or shorter; bound by the terms of an agreement.",
-    keyConcepts: [
-      { keyword: "become smaller", matchTerms: ["smaller", "shorter", "shrunk", "reduced", "tightened", "constricted", "compressed"], label: "Become smaller", hint: "The definition says 'having become smaller or shorter' -- reduced in size." },
-      { keyword: "bound by agreement", matchTerms: ["bound", "agreement", "contract", "obligat", "commit", "hired", "engaged", "agreed"], label: "Bound by agreement", hint: "The definition also says 'bound by the terms of an agreement' -- legally committed." },
-    ],
-    synonyms: ["shrunk", "reduced", "bound", "obligated"],
-    partOfSpeech: "adjective",
-    etymology: "Latin contrahere -- con (together) + trahere (to draw).",
-  },
-  // ── defunct ──
   {
     word: "defunct",
     definition: "No longer existing or functioning; dead or extinct.",
@@ -2512,9 +1444,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["extinct", "dead", "obsolete", "inactive", "inoperative"],
     partOfSpeech: "adjective",
-    etymology: "Latin defunctus (dead) -- defungi (to finish).",
   },
-  // ── episodic ──
   {
     word: "episodic",
     definition: "Occurring occasionally and at irregular intervals; consisting of separate episodes.",
@@ -2524,9 +1454,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["sporadic", "intermittent", "occasional", "irregular"],
     partOfSpeech: "adjective",
-    etymology: "Greek epeisodion (addition) -- epi (upon) + eisodos (entrance).",
   },
-  // ── affluent ──
   {
     word: "affluent",
     definition: "Having a great deal of money; wealthy and prosperous.",
@@ -2536,21 +1464,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["wealthy", "rich", "prosperous", "well-off", "opulent"],
     partOfSpeech: "adjective",
-    etymology: "Latin affluere (to flow toward) -- ad (to) + fluere (to flow).",
   },
-  // ── effluence ──
-  {
-    word: "effluence",
-    definition: "Something that flows out or emanates from a source; an outflow or emanation.",
-    keyConcepts: [
-      { keyword: "flows out", matchTerms: ["flow", "out", "emanat", "discharge", "stream", "pour", "issue", "emerge", "escape"], label: "Flows out", hint: "The definition says 'something that flows out' -- moving outward from a source." },
-      { keyword: "emanation", matchTerms: ["emanat", "emission", "outflow", "output", "release", "exud", "radiat", "source"], label: "Emanation from source", hint: "The definition says 'emanates from a source' -- originating from somewhere." },
-    ],
-    synonyms: ["outflow", "emanation", "discharge", "emission"],
-    partOfSpeech: "noun",
-    etymology: "Latin effluere (to flow out) -- ex (out) + fluere (to flow).",
-  },
-  // ── perturb ──
   {
     word: "perturb",
     definition: "To make someone anxious or unsettled; to disturb the normal state of something.",
@@ -2560,9 +1474,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["disturb", "unsettle", "agitate", "worry", "disquiet"],
     partOfSpeech: "verb",
-    etymology: "Latin perturbare -- per (through) + turbare (to disturb).",
   },
-  // ── excruciating ──
   {
     word: "excruciating",
     definition: "Intensely painful; causing great physical or mental suffering.",
@@ -2572,21 +1484,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["agonizing", "painful", "unbearable", "torturous", "harrowing"],
     partOfSpeech: "adjective",
-    etymology: "Latin excruciare (to torture) -- ex (out) + cruciare (to crucify).",
   },
-  // ── hermetic ──
-  {
-    word: "hermetic",
-    definition: "Completely airtight; relating to an ancient occult tradition; isolated from outside influences.",
-    keyConcepts: [
-      { keyword: "airtight", matchTerms: ["airtight", "sealed", "tight", "impermeable", "watertight", "closed", "secure", "vacuum"], label: "Airtight", hint: "The definition says 'completely airtight' -- nothing can get in or out." },
-      { keyword: "isolated", matchTerms: ["isolat", "secluded", "insulated", "cut off", "separate", "protected", "removed", "occult", "esoteric", "mysterious"], label: "Isolated from outside", hint: "The definition says 'isolated from outside influences' -- protected from external contact." },
-    ],
-    synonyms: ["airtight", "sealed", "isolated", "secluded"],
-    partOfSpeech: "adjective",
-    etymology: "Greek Hermes Trismegistus (legendary alchemist).",
-  },
-  // ── stupendous ──
   {
     word: "stupendous",
     definition: "Extremely impressive; amazingly large, excellent, or great.",
@@ -2596,9 +1494,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["amazing", "tremendous", "remarkable", "extraordinary", "phenomenal"],
     partOfSpeech: "adjective",
-    etymology: "Latin stupendus (to be wondered at) -- stupere (to be stunned).",
   },
-  // ── fissure ──
   {
     word: "fissure",
     definition: "A long, narrow opening or crack, especially in rock or the earth's surface.",
@@ -2608,9 +1504,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["crack", "crevice", "split", "rift", "fracture"],
     partOfSpeech: "noun",
-    etymology: "Latin fissura -- findere (to split).",
   },
-  // ── despot ──
   {
     word: "despot",
     definition: "A ruler or other person who holds absolute power, typically exercising it cruelly.",
@@ -2620,33 +1514,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["tyrant", "dictator", "autocrat", "oppressor"],
     partOfSpeech: "noun",
-    etymology: "Greek despotes (master, lord).",
   },
-  // ── dapper ──
-  {
-    word: "dapper",
-    definition: "Neat and trim in dress and appearance; stylishly dressed.",
-    keyConcepts: [
-      { keyword: "neat and trim", matchTerms: ["neat", "trim", "tidy", "smart", "spruce", "well-groomed", "clean", "crisp", "polished"], label: "Neat and trim", hint: "The definition says 'neat and trim in dress and appearance' -- well put together." },
-      { keyword: "stylish", matchTerms: ["stylish", "fashion", "elegant", "sharp", "chic", "dashing", "debonair", "suave", "sophisticated"], label: "Stylishly dressed", hint: "The definition says 'stylishly dressed' -- looking good with effort." },
-    ],
-    synonyms: ["smart", "stylish", "spruce", "debonair", "elegant"],
-    partOfSpeech: "adjective",
-    etymology: "Middle Dutch dapper (brave, strong).",
-  },
-  // ── blasé ──
-  {
-    word: "blasé",
-    definition: "Unimpressed or indifferent due to overexposure; bored from excessive worldly pleasures.",
-    keyConcepts: [
-      { keyword: "unimpressed", matchTerms: ["unimpress", "indifferen", "unconcern", "nonchalant", "unmoved", "apathetic", "casual", "cool"], label: "Unimpressed", hint: "The definition says 'unimpressed or indifferent' -- not easily excited." },
-      { keyword: "due to overexposure", matchTerms: ["overexpos", "excessive", "too much", "jaded", "world-weary", "satiat", "bored", "tired", "seen it all"], label: "Due to overexposure", hint: "The definition says 'due to overexposure' -- having seen too much to care." },
-    ],
-    synonyms: ["indifferent", "jaded", "nonchalant", "unimpressed", "world-weary"],
-    partOfSpeech: "adjective",
-    etymology: "French blasé (exhausted by pleasure).",
-  },
-  // ── collude ──
   {
     word: "collude",
     definition: "To cooperate in a secret or unlawful way to deceive or cheat others.",
@@ -2656,9 +1524,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["conspire", "connive", "scheme", "plot"],
     partOfSpeech: "verb",
-    etymology: "Latin colludere -- com (together) + ludere (to play).",
   },
-  // ── egotistic ──
   {
     word: "egotistic",
     definition: "Excessively conceited or self-centered; having an inflated sense of self-importance.",
@@ -2668,9 +1534,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["conceited", "narcissistic", "self-centered", "vain", "arrogant"],
     partOfSpeech: "adjective",
-    etymology: "Latin ego (I) + -istic.",
   },
-  // ── affront ──
   {
     word: "affront",
     definition: "An action or remark that causes outrage or offense; to insult or offend someone openly.",
@@ -2680,9 +1544,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["insult", "offense", "slight", "indignity"],
     partOfSpeech: "noun/verb",
-    etymology: "Old French afronter (to confront) -- Latin ad (to) + frons (forehead).",
   },
-  // ── conglomerate ──
   {
     word: "conglomerate",
     definition: "A large corporation formed by merging different businesses; a mass of various materials gathered together.",
@@ -2692,21 +1554,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["corporation", "conglomeration", "combination", "aggregate"],
     partOfSpeech: "noun",
-    etymology: "Latin conglomerare -- con (together) + glomerare (to wind into a ball).",
   },
-  // ── foist ──
-  {
-    word: "foist",
-    definition: "To impose an unwelcome or unnecessary thing on someone; to force upon.",
-    keyConcepts: [
-      { keyword: "impose unwelcome", matchTerms: ["impose", "unwelcome", "unwanted", "force", "thrust", "push", "inflict", "burden", "saddle"], label: "Impose unwelcome thing", hint: "The definition says 'impose an unwelcome or unnecessary thing' -- forcing something undesired." },
-      { keyword: "force upon", matchTerms: ["force", "upon", "on", "onto", "palm off", "pass off", "unload", "dump", "fob off"], label: "Force upon someone", hint: "The definition says 'force upon' -- making someone accept something." },
-    ],
-    synonyms: ["impose", "force", "thrust", "palm off", "inflict"],
-    partOfSpeech: "verb",
-    etymology: "Dutch vuisten (to take in hand).",
-  },
-  // ── harangue ──
   {
     word: "harangue",
     definition: "A lengthy and aggressive speech; to lecture someone at length in an aggressive manner.",
@@ -2716,9 +1564,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["tirade", "diatribe", "rant", "lecture"],
     partOfSpeech: "noun/verb",
-    etymology: "Old French harangue (public address).",
   },
-  // ── beguile ──
   {
     word: "beguile",
     definition: "To charm or enchant someone, often in a deceptive way; to trick into doing something.",
@@ -2728,9 +1574,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["charm", "enchant", "deceive", "captivate", "seduce"],
     partOfSpeech: "verb",
-    etymology: "be- (thoroughly) + guile (deceit).",
   },
-  // ── tumultuous ──
   {
     word: "tumultuous",
     definition: "Making a loud, confused noise; excited, confused, or disorderly.",
@@ -2740,21 +1584,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["chaotic", "turbulent", "stormy", "riotous", "boisterous"],
     partOfSpeech: "adjective",
-    etymology: "Latin tumultus (commotion).",
   },
-  // ── tautological ──
-  {
-    word: "tautological",
-    definition: "Using different words to say the same thing; needlessly repetitive in meaning.",
-    keyConcepts: [
-      { keyword: "same thing", matchTerms: ["same", "repeat", "redundant", "identical", "duplicate", "restat", "echo"], label: "Saying the same thing", hint: "The definition says 'using different words to say the same thing' -- repetition of meaning." },
-      { keyword: "needlessly repetitive", matchTerms: ["needless", "unnecessary", "superfluous", "redundant", "repetit", "circular", "pleonastic"], label: "Needlessly repetitive", hint: "The definition says 'needlessly repetitive in meaning' -- adds nothing new." },
-    ],
-    synonyms: ["redundant", "repetitive", "pleonastic", "circular"],
-    partOfSpeech: "adjective",
-    etymology: "Greek tautologia -- tauto (the same) + logos (word).",
-  },
-  // ── flagrant ──
   {
     word: "flagrant",
     definition: "Conspicuously or obviously offensive; shockingly noticeable.",
@@ -2764,9 +1594,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["blatant", "glaring", "brazen", "egregious", "gross"],
     partOfSpeech: "adjective",
-    etymology: "Latin flagrans (burning) -- flagrare (to burn).",
   },
-  // ── aloof ──
   {
     word: "aloof",
     definition: "Not friendly or forthcoming; cool and distant in manner.",
@@ -2776,9 +1604,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["distant", "detached", "reserved", "standoffish", "remote"],
     partOfSpeech: "adjective",
-    etymology: "Dutch loef (windward) -- nautical term for keeping distance.",
   },
-  // ── astute ──
   {
     word: "astute",
     definition: "Having an ability to accurately assess situations and turn them to one's advantage; shrewd.",
@@ -2788,9 +1614,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["shrewd", "sharp", "clever", "perceptive", "canny"],
     partOfSpeech: "adjective",
-    etymology: "Latin astutus (crafty) -- astus (craft, cunning).",
   },
-  // ── shrewd ──
   {
     word: "shrewd",
     definition: "Having sharp powers of judgment; clever in practical matters.",
@@ -2800,9 +1624,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["astute", "sharp", "clever", "canny", "perceptive"],
     partOfSpeech: "adjective",
-    etymology: "Middle English shrewed (wicked) -- from shrew.",
   },
-  // ── incorrigible ──
   {
     word: "incorrigible",
     definition: "Not able to be corrected, improved, or reformed; beyond redemption.",
@@ -2812,9 +1634,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["irredeemable", "hopeless", "inveterate", "hardened", "unreformable"],
     partOfSpeech: "adjective",
-    etymology: "Latin incorrigibilis -- in (not) + corrigere (to correct).",
   },
-  // ── boorish ──
   {
     word: "boorish",
     definition: "Rough and bad-mannered; coarse and unrefined.",
@@ -2824,9 +1644,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["crude", "uncouth", "vulgar", "rude", "loutish"],
     partOfSpeech: "adjective",
-    etymology: "Dutch boer (farmer) -- implying rustic manners.",
   },
-  // ── caustic ──
   {
     word: "caustic",
     definition: "Able to burn or corrode organic tissue; sarcastic in a scathing way.",
@@ -2836,9 +1654,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["corrosive", "acidic", "biting", "acerbic", "scathing"],
     partOfSpeech: "adjective",
-    etymology: "Greek kaustikos (capable of burning) -- kaiein (to burn).",
   },
-  // ── judicious ──
   {
     word: "judicious",
     definition: "Having or showing good judgment; sensible and wise.",
@@ -2848,9 +1664,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["wise", "prudent", "sensible", "discerning", "shrewd"],
     partOfSpeech: "adjective",
-    etymology: "Latin judicium (judgment) -- judex (judge).",
   },
-  // ── litigious ──
   {
     word: "litigious",
     definition: "Inclined to go to law to settle disputes; relating to lawsuits.",
@@ -2860,10 +1674,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["contentious", "quarrelsome", "disputatious", "argumentative"],
     partOfSpeech: "adjective",
-    etymology: "Latin litigiosus -- litigare (to go to law).",
   },
-  // ── turbulent ──
-  // ── regime ──
   {
     word: "regime",
     definition: "A government or system of rule, especially an authoritarian one; a systematic way of doing things.",
@@ -2874,9 +1685,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["government", "administration", "rule", "system", "regimen"],
     partOfSpeech: "noun",
-    etymology: "French régime -- Latin regimen (rule, guidance).",
   },
-  // ── aberrant ──
   {
     word: "aberrant",
     definition: "Departing from an accepted standard; deviating from the normal type.",
@@ -2886,9 +1695,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["abnormal", "deviant", "anomalous", "atypical", "irregular"],
     partOfSpeech: "adjective",
-    etymology: "Latin aberrans -- aberrare (to wander away).",
   },
-  // ── abrasive ──
   {
     word: "abrasive",
     definition: "Harsh or rough in manner; tending to annoy or cause ill will.",
@@ -2898,21 +1705,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["harsh", "caustic", "brusque", "cutting", "grating"],
     partOfSpeech: "adjective",
-    etymology: "Latin abradere (to scrape off).",
   },
-  // ── accountable ──
-  {
-    word: "accountable",
-    definition: "Required or expected to justify actions or decisions; responsible.",
-    keyConcepts: [
-      { keyword: "required to justify", matchTerms: ["required", "justify", "explain", "answer for", "answerable", "liable"], label: "Required to justify", hint: "The definition says 'required to justify actions' -- must explain yourself." },
-      { keyword: "responsible", matchTerms: ["responsible", "liable", "obligated", "duty", "beholden", "chargeable"], label: "Responsible", hint: "The definition says 'responsible' -- held to account." },
-    ],
-    synonyms: ["responsible", "answerable", "liable", "obligated", "beholden"],
-    partOfSpeech: "adjective",
-    etymology: "Old French aconter (to count, reckon).",
-  },
-  // ── acrimonious ──
   {
     word: "acrimonious",
     definition: "Angry and bitter in tone or manner; harsh and sharp in language.",
@@ -2922,21 +1715,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["bitter", "caustic", "rancorous", "vitriolic", "hostile"],
     partOfSpeech: "adjective",
-    etymology: "Latin acrimonia (sharpness, pungency).",
   },
-  // ── adaptable ──
-  {
-    word: "adaptable",
-    definition: "Able to adjust to new conditions or circumstances; flexible.",
-    keyConcepts: [
-      { keyword: "able to adjust", matchTerms: ["able", "adjust", "change", "modify", "accommodate", "conform"], label: "Able to adjust", hint: "The definition says 'able to adjust to new conditions' -- can change as needed." },
-      { keyword: "flexible", matchTerms: ["flexible", "versatile", "malleable", "pliant", "resilient", "responsive"], label: "Flexible", hint: "The definition says 'flexible' -- bends without breaking." },
-    ],
-    synonyms: ["flexible", "versatile", "adjustable", "malleable", "resilient"],
-    partOfSpeech: "adjective",
-    etymology: "Latin adaptare (to fit).",
-  },
-  // ── adversarial ──
   {
     word: "adversarial",
     definition: "Involving conflict or opposition; characteristic of an opponent or enemy.",
@@ -2946,9 +1725,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["hostile", "antagonistic", "combative", "confrontational", "opposing"],
     partOfSpeech: "adjective",
-    etymology: "Latin adversarius (opponent).",
   },
-  // ── advantageous ──
   {
     word: "advantageous",
     definition: "Involving or creating favorable circumstances; beneficial or profitable.",
@@ -2958,9 +1735,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["beneficial", "profitable", "favorable", "useful", "helpful"],
     partOfSpeech: "adjective",
-    etymology: "Old French avantage (advantage).",
   },
-  // ── amplify ──
   {
     word: "amplify",
     definition: "To increase the strength or amount of something; to make larger or more powerful.",
@@ -2970,9 +1745,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["increase", "magnify", "intensify", "boost", "enhance"],
     partOfSpeech: "verb",
-    etymology: "Latin amplificare (to enlarge).",
   },
-  // ── anachronistic ──
   {
     word: "anachronistic",
     definition: "Belonging to a period other than that being portrayed; out of date.",
@@ -2982,9 +1755,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["outdated", "obsolete", "archaic", "antiquated", "old-fashioned"],
     partOfSpeech: "adjective",
-    etymology: "Greek anachronismos (wrong time reference).",
   },
-  // ── antagonistic ──
   {
     word: "antagonistic",
     definition: "Showing or feeling active opposition or hostility toward someone.",
@@ -2994,9 +1765,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["hostile", "opposing", "unfriendly", "adversarial", "combative"],
     partOfSpeech: "adjective",
-    etymology: "Greek antagonistes (opponent, competitor).",
   },
-  // ── arrogant ──
   {
     word: "arrogant",
     definition: "Having an exaggerated sense of one's own importance or abilities; overbearingly proud.",
@@ -3006,9 +1775,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["conceited", "haughty", "pompous", "presumptuous", "supercilious"],
     partOfSpeech: "adjective",
-    etymology: "Latin arrogare (to claim for oneself).",
   },
-  // ── authoritative ──
   {
     word: "authoritative",
     definition: "Commanding and self-confident; recognized as being reliable or accurate.",
@@ -3018,9 +1785,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["commanding", "definitive", "reliable", "official", "expert"],
     partOfSpeech: "adjective",
-    etymology: "Latin auctoritas (authority, influence).",
   },
-  // ── autonomous ──
   {
     word: "autonomous",
     definition: "Having the freedom to govern itself or control its own affairs; self-governing.",
@@ -3030,9 +1795,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["independent", "self-governing", "sovereign", "self-sufficient", "free"],
     partOfSpeech: "adjective",
-    etymology: "Greek autonomos (having its own laws).",
   },
-  // ── bellwether ──
   {
     word: "bellwether",
     definition: "An indicator or predictor of something; a leader or trendsetter.",
@@ -3042,9 +1805,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["indicator", "harbinger", "leader", "trendsetter", "barometer"],
     partOfSpeech: "noun",
-    etymology: "Middle English -- bell + wether (castrated ram leading a flock).",
   },
-  // ── blatant ──
   {
     word: "blatant",
     definition: "Done openly and unashamedly; completely lacking in subtlety.",
@@ -3054,9 +1815,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["obvious", "flagrant", "glaring", "brazen", "shameless"],
     partOfSpeech: "adjective",
-    etymology: "Coined by Edmund Spenser, possibly from Latin blatire (to babble).",
   },
-  // ── brazen ──
   {
     word: "brazen",
     definition: "Bold and shameless; showing no embarrassment about one's behavior.",
@@ -3066,21 +1825,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["bold", "shameless", "audacious", "impudent", "unabashed"],
     partOfSpeech: "adjective",
-    etymology: "Old English bræsen (made of brass).",
   },
-  // ── calculated ──
-  {
-    word: "calculated",
-    definition: "Done with full awareness of the likely consequences; deliberately planned.",
-    keyConcepts: [
-      { keyword: "full awareness", matchTerms: ["aware", "consequenc", "deliberat", "intentional", "conscious", "knowing"], label: "Full awareness", hint: "The definition says 'done with full awareness of consequences' -- knowing what will happen." },
-      { keyword: "deliberately planned", matchTerms: ["deliberat", "planned", "premeditat", "purposeful", "strategic", "considered"], label: "Deliberately planned", hint: "The definition says 'deliberately planned' -- thought out in advance." },
-    ],
-    synonyms: ["deliberate", "intentional", "premeditated", "strategic", "planned"],
-    partOfSpeech: "adjective",
-    etymology: "Latin calculare (to reckon, compute).",
-  },
-  // ── censorious ──
   {
     word: "censorious",
     definition: "Severely critical of others; quick to find fault.",
@@ -3090,9 +1835,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["critical", "judgmental", "fault-finding", "carping", "hypercritical"],
     partOfSpeech: "adjective",
-    etymology: "Latin censorius (relating to a censor).",
   },
-  // ── circumspect ──
   {
     word: "circumspect",
     definition: "Wary and unwilling to take risks; careful to consider all circumstances.",
@@ -3102,9 +1845,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["cautious", "careful", "prudent", "guarded", "wary"],
     partOfSpeech: "adjective",
-    etymology: "Latin circumspicere (to look around).",
   },
-  // ── coercive ──
   {
     word: "coercive",
     definition: "Using force or threats to persuade someone; compelling through pressure.",
@@ -3114,21 +1855,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["forceful", "compelling", "oppressive", "intimidating", "pressuring"],
     partOfSpeech: "adjective",
-    etymology: "Latin coercere (to restrain, control).",
   },
-  // ── collaborative ──
-  {
-    word: "collaborative",
-    definition: "Involving two or more parties working together; produced by cooperation.",
-    keyConcepts: [
-      { keyword: "working together", matchTerms: ["work together", "joint", "combined", "collective", "cooperative", "team"], label: "Working together", hint: "The definition says 'two or more parties working together' -- joint effort." },
-      { keyword: "produced by cooperation", matchTerms: ["cooperat", "partner", "mutual", "shared", "united", "coordinated"], label: "Produced by cooperation", hint: "The definition says 'produced by cooperation' -- working as a team." },
-    ],
-    synonyms: ["cooperative", "joint", "collective", "combined", "shared"],
-    partOfSpeech: "adjective",
-    etymology: "Latin collaborare (to labor together).",
-  },
-  // ── combative ──
   {
     word: "combative",
     definition: "Ready or eager to fight or argue; aggressively competitive.",
@@ -3138,9 +1865,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["aggressive", "belligerent", "pugnacious", "hostile", "confrontational"],
     partOfSpeech: "adjective",
-    etymology: "Latin combattere (to fight with).",
   },
-  // ── complicit ──
   {
     word: "complicit",
     definition: "Involved with others in an illegal activity or wrongdoing; being an accomplice.",
@@ -3150,9 +1875,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["involved", "implicated", "guilty", "colluding", "conspiring"],
     partOfSpeech: "adjective",
-    etymology: "Latin complicare (to fold together).",
   },
-  // ── conscientious ──
   {
     word: "conscientious",
     definition: "Wishing to do what is right; thorough and careful in one's work.",
@@ -3162,9 +1885,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["diligent", "careful", "thorough", "meticulous", "scrupulous"],
     partOfSpeech: "adjective",
-    etymology: "Latin conscientia (conscience, knowledge within oneself).",
   },
-  // ── consequential ──
   {
     word: "consequential",
     definition: "Following as a result or effect; important in significance or outcome.",
@@ -3174,9 +1895,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["significant", "important", "momentous", "substantial", "weighty"],
     partOfSpeech: "adjective",
-    etymology: "Latin consequi (to follow closely).",
   },
-  // ── conservative ──
   {
     word: "conservative",
     definition: "Favoring traditional views and values; cautious about change or innovation.",
@@ -3186,21 +1905,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["traditional", "cautious", "conventional", "moderate", "restrained"],
     partOfSpeech: "adjective",
-    etymology: "Latin conservare (to preserve).",
   },
-  // ── constructive ──
-  {
-    word: "constructive",
-    definition: "Serving a useful purpose; intended to be helpful or improve something.",
-    keyConcepts: [
-      { keyword: "serving useful purpose", matchTerms: ["useful", "purpose", "productive", "beneficial", "positive", "valuable"], label: "Serving useful purpose", hint: "The definition says 'serving a useful purpose' -- actually helps." },
-      { keyword: "intended to improve", matchTerms: ["intended", "helpful", "improve", "build", "develop", "advance", "contribute"], label: "Intended to improve", hint: "The definition says 'intended to be helpful or improve something' -- making things better." },
-    ],
-    synonyms: ["helpful", "productive", "positive", "beneficial", "useful"],
-    partOfSpeech: "adjective",
-    etymology: "Latin construere (to build together).",
-  },
-  // ── contentious ──
   {
     word: "contentious",
     definition: "Causing or likely to cause an argument; involving heated disagreement.",
@@ -3210,21 +1915,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["controversial", "disputed", "divisive", "argumentative", "combative"],
     partOfSpeech: "adjective",
-    etymology: "Latin contentiosus (quarrelsome).",
   },
-  // ── conventional ──
-  {
-    word: "conventional",
-    definition: "Based on or in accordance with what is generally done or believed; traditional.",
-    keyConcepts: [
-      { keyword: "generally done", matchTerms: ["general", "done", "believed", "accepted", "standard", "typical", "usual"], label: "Generally done", hint: "The definition says 'in accordance with what is generally done' -- following the norm." },
-      { keyword: "traditional", matchTerms: ["traditional", "customary", "established", "orthodox", "mainstream", "normal"], label: "Traditional", hint: "The definition says 'traditional' -- the usual way." },
-    ],
-    synonyms: ["traditional", "standard", "typical", "orthodox", "customary"],
-    partOfSpeech: "adjective",
-    etymology: "Latin conventio (assembly, agreement).",
-  },
-  // ── corroborative ──
   {
     word: "corroborative",
     definition: "Serving to confirm or support a statement, theory, or finding.",
@@ -3234,9 +1925,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["confirming", "supporting", "substantiating", "validating", "verifying"],
     partOfSpeech: "adjective",
-    etymology: "Latin corroborare (to strengthen).",
   },
-  // ── counterproductive ──
   {
     word: "counterproductive",
     definition: "Having the opposite of the desired effect; hindering the achievement of a goal.",
@@ -3246,9 +1935,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["harmful", "detrimental", "self-defeating", "unhelpful", "obstructive"],
     partOfSpeech: "adjective",
-    etymology: "Counter- + productive.",
   },
-  // ── debilitating ──
   {
     word: "debilitating",
     definition: "Causing weakness or loss of strength; severely impairing function.",
@@ -3258,21 +1945,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["weakening", "crippling", "incapacitating", "disabling", "exhausting"],
     partOfSpeech: "adjective",
-    etymology: "Latin debilitare (to weaken).",
   },
-  // ── decisive ──
-  {
-    word: "decisive",
-    definition: "Settling an issue or producing a definite result; able to make decisions quickly.",
-    keyConcepts: [
-      { keyword: "settling an issue", matchTerms: ["settl", "issue", "definite", "result", "conclusive", "determining", "final"], label: "Settling an issue", hint: "The definition says 'settling an issue or producing a definite result' -- ends the question." },
-      { keyword: "make decisions quickly", matchTerms: ["decision", "quickly", "resolute", "determined", "firm", "unhesitating"], label: "Make decisions quickly", hint: "The definition says 'able to make decisions quickly' -- doesn't hesitate." },
-    ],
-    synonyms: ["conclusive", "definitive", "determined", "resolute", "firm"],
-    partOfSpeech: "adjective",
-    etymology: "Latin decidere (to cut off, determine).",
-  },
-  // ── definitive ──
   {
     word: "definitive",
     definition: "Done or reached decisively and with authority; serving as a standard or reference.",
@@ -3282,9 +1955,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["conclusive", "authoritative", "final", "ultimate", "decisive"],
     partOfSpeech: "adjective",
-    etymology: "Latin definitivus (defining, limiting).",
   },
-  // ── dehumanizing ──
   {
     word: "dehumanizing",
     definition: "Depriving someone of human qualities or dignity; degrading.",
@@ -3294,9 +1965,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["degrading", "demeaning", "humiliating", "debasing", "objectifying"],
     partOfSpeech: "adjective",
-    etymology: "De- + humanize.",
   },
-  // ── demoralizing ──
   {
     word: "demoralizing",
     definition: "Causing someone to lose confidence or hope; disheartening.",
@@ -3306,9 +1975,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["discouraging", "disheartening", "dispiriting", "deflating", "crushing"],
     partOfSpeech: "adjective",
-    etymology: "French démoraliser (to corrupt morals).",
   },
-  // ── destructive ──
   {
     word: "destructive",
     definition: "Causing great damage or harm; tending to destroy or undermine.",
@@ -3318,9 +1985,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["damaging", "harmful", "devastating", "ruinous", "detrimental"],
     partOfSpeech: "adjective",
-    etymology: "Latin destruere (to pull down).",
   },
-  // ── detached ──
   {
     word: "detached",
     definition: "Separate or disconnected; not emotionally involved or objective.",
@@ -3330,9 +1995,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["disconnected", "aloof", "objective", "impartial", "dispassionate"],
     partOfSpeech: "adjective",
-    etymology: "French détacher (to unfasten).",
   },
-  // ── discernible ──
   {
     word: "discernible",
     definition: "Able to be perceived or recognized; distinguishable.",
@@ -3342,9 +2005,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["perceptible", "noticeable", "detectable", "visible", "apparent"],
     partOfSpeech: "adjective",
-    etymology: "Latin discernere (to separate, distinguish).",
   },
-  // ── discretionary ──
   {
     word: "discretionary",
     definition: "Available for use at one's own judgment; not required or fixed.",
@@ -3354,9 +2015,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["optional", "elective", "voluntary", "flexible", "arbitrary"],
     partOfSpeech: "adjective",
-    etymology: "Medieval Latin discretionarius (of discretion).",
   },
-  // ── dismissive ──
   {
     word: "dismissive",
     definition: "Showing that something is unworthy of consideration; rejecting or disregarding.",
@@ -3366,9 +2025,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["contemptuous", "disdainful", "scornful", "disparaging", "condescending"],
     partOfSpeech: "adjective",
-    etymology: "Latin dimittere (to send away).",
   },
-  // ── disproportionate ──
   {
     word: "disproportionate",
     definition: "Too large or too small in relation to something else; out of proportion.",
@@ -3378,9 +2035,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["excessive", "unequal", "unbalanced", "incommensurate", "lopsided"],
     partOfSpeech: "adjective",
-    etymology: "Dis- + proportionate.",
   },
-  // ── disruptive ──
   {
     word: "disruptive",
     definition: "Causing or tending to cause disruption; innovative in a way that upsets the status quo.",
@@ -3390,9 +2045,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["disturbing", "unsettling", "troublesome", "revolutionary", "transformative"],
     partOfSpeech: "adjective",
-    etymology: "Latin disrumpere (to break apart).",
   },
-  // ── divisive ──
   {
     word: "divisive",
     definition: "Tending to cause disagreement or hostility between people; creating division.",
@@ -3402,9 +2055,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["polarizing", "contentious", "controversial", "alienating", "splitting"],
     partOfSpeech: "adjective",
-    etymology: "Latin dividere (to divide).",
   },
-  // ── elusive ──
   {
     word: "elusive",
     definition: "Difficult to find, catch, or achieve; skillfully evading capture.",
@@ -3414,9 +2065,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["evasive", "slippery", "fleeting", "intangible", "hard to catch"],
     partOfSpeech: "adjective",
-    etymology: "Latin eludere (to escape from).",
   },
-  // ── embittered ──
   {
     word: "embittered",
     definition: "Made bitter or resentful by unfair treatment; feeling angry and disappointed.",
@@ -3426,9 +2075,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["resentful", "bitter", "cynical", "disillusioned", "aggrieved"],
     partOfSpeech: "adjective",
-    etymology: "En- + bitter.",
   },
-  // ── empirical ──
   {
     word: "empirical",
     definition: "Based on observation or experience rather than theory; verifiable by observation.",
@@ -3438,9 +2085,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["observational", "experiential", "practical", "factual", "experimental"],
     partOfSpeech: "adjective",
-    etymology: "Greek empeirikos (experienced).",
   },
-  // ── enduring ──
   {
     word: "enduring",
     definition: "Lasting over a long period of time; able to withstand hardship.",
@@ -3450,9 +2095,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["lasting", "durable", "permanent", "persistent", "resilient"],
     partOfSpeech: "adjective",
-    etymology: "Latin indurare (to make hard).",
   },
-  // ── enlightened ──
   {
     word: "enlightened",
     definition: "Having or showing a rational and well-informed outlook; spiritually aware.",
@@ -3462,9 +2105,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["informed", "educated", "wise", "progressive", "aware"],
     partOfSpeech: "adjective",
-    etymology: "En- + lighten.",
   },
-  // ── entrenched ──
   {
     word: "entrenched",
     definition: "Firmly established and difficult to change; deeply rooted.",
@@ -3474,9 +2115,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["established", "ingrained", "deep-rooted", "embedded", "fixed"],
     partOfSpeech: "adjective",
-    etymology: "En- + trench.",
   },
-  // ── estranged ──
   {
     word: "estranged",
     definition: "No longer close or affectionate to someone; alienated.",
@@ -3486,9 +2125,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["alienated", "separated", "distant", "divided", "isolated"],
     partOfSpeech: "adjective",
-    etymology: "Latin extraneare (to treat as a stranger).",
   },
-  // ── exclusionary ──
   {
     word: "exclusionary",
     definition: "Tending to exclude people from a group or activity; restrictive.",
@@ -3498,9 +2135,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["restrictive", "discriminatory", "selective", "limiting", "closed"],
     partOfSpeech: "adjective",
-    etymology: "Latin excludere (to shut out).",
   },
-  // ── exploitative ──
   {
     word: "exploitative",
     definition: "Taking unfair advantage of someone for one's own benefit; using selfishly.",
@@ -3510,9 +2145,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["abusive", "manipulative", "predatory", "opportunistic", "selfish"],
     partOfSpeech: "adjective",
-    etymology: "Latin exploitare (to accomplish).",
   },
-  // ── formative ──
   {
     word: "formative",
     definition: "Having a lasting influence on character or development; shaping.",
@@ -3522,9 +2155,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["influential", "shaping", "developmental", "defining", "foundational"],
     partOfSpeech: "adjective",
-    etymology: "Latin formare (to form).",
   },
-  // ── fortuitous ──
   {
     word: "fortuitous",
     definition: "Happening by chance rather than intention; lucky or fortunate.",
@@ -3534,33 +2165,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["accidental", "lucky", "serendipitous", "chance", "providential"],
     partOfSpeech: "adjective",
-    etymology: "Latin fortuitus (happening by chance).",
   },
-  // ── grounded ──
-  {
-    word: "grounded",
-    definition: "Well-balanced and sensible; based on a solid foundation.",
-    keyConcepts: [
-      { keyword: "well-balanced", matchTerms: ["well-balanced", "sensible", "stable", "level-headed", "practical", "down-to-earth"], label: "Well-balanced", hint: "The definition says 'well-balanced and sensible' -- has their feet on the ground." },
-      { keyword: "solid foundation", matchTerms: ["solid", "foundation", "based", "rooted", "founded", "established"], label: "Solid foundation", hint: "The definition says 'based on a solid foundation' -- built on something real." },
-    ],
-    synonyms: ["sensible", "stable", "level-headed", "practical", "down-to-earth"],
-    partOfSpeech: "adjective",
-    etymology: "From ground.",
-  },
-  // ── habitual ──
-  {
-    word: "habitual",
-    definition: "Done constantly or as a habit; regular or usual.",
-    keyConcepts: [
-      { keyword: "done constantly", matchTerms: ["constant", "habit", "repeat", "routine", "regular", "frequent"], label: "Done constantly", hint: "The definition says 'done constantly or as a habit' -- keeps doing it." },
-      { keyword: "regular or usual", matchTerms: ["regular", "usual", "customary", "typical", "normal", "accustomed"], label: "Regular or usual", hint: "The definition says 'regular or usual' -- happens all the time." },
-    ],
-    synonyms: ["regular", "customary", "routine", "frequent", "chronic"],
-    partOfSpeech: "adjective",
-    etymology: "Latin habitus (condition, habit).",
-  },
-  // ── hierarchical ──
   {
     word: "hierarchical",
     definition: "Arranged in a graded order or ranking; having levels of authority.",
@@ -3570,9 +2175,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["ranked", "tiered", "stratified", "graded", "structured"],
     partOfSpeech: "adjective",
-    etymology: "Greek hierarchia (rule of a high priest).",
   },
-  // ── hypocritical ──
   {
     word: "hypocritical",
     definition: "Behaving in a way that contradicts one's stated beliefs or feelings; insincere.",
@@ -3582,9 +2185,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["insincere", "two-faced", "phony", "deceitful", "duplicitous"],
     partOfSpeech: "adjective",
-    etymology: "Greek hypokrites (actor, pretender).",
   },
-  // ── idealistic ──
   {
     word: "idealistic",
     definition: "Characterized by high ideals that may be unrealistic; visionary.",
@@ -3594,9 +2195,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["visionary", "utopian", "romantic", "optimistic", "quixotic"],
     partOfSpeech: "adjective",
-    etymology: "Greek idea (form, pattern).",
   },
-  // ── illusory ──
   {
     word: "illusory",
     definition: "Based on illusion; not real or true despite appearances.",
@@ -3606,21 +2205,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["false", "deceptive", "imaginary", "unreal", "misleading"],
     partOfSpeech: "adjective",
-    etymology: "Latin illusio (a mocking).",
   },
-  // ── imperative ──
-  {
-    word: "imperative",
-    definition: "Of vital importance; absolutely necessary or urgent.",
-    keyConcepts: [
-      { keyword: "vital importance", matchTerms: ["vital", "importance", "essential", "critical", "crucial", "paramount"], label: "Vital importance", hint: "The definition says 'of vital importance' -- really matters." },
-      { keyword: "absolutely necessary", matchTerms: ["absolut", "necessary", "urgent", "pressing", "compulsory", "mandatory"], label: "Absolutely necessary", hint: "The definition says 'absolutely necessary or urgent' -- must be done." },
-    ],
-    synonyms: ["essential", "crucial", "vital", "urgent", "necessary"],
-    partOfSpeech: "adjective",
-    etymology: "Latin imperare (to command).",
-  },
-  // ── implausible ──
   {
     word: "implausible",
     definition: "Not seeming reasonable or probable; difficult to believe.",
@@ -3630,9 +2215,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["unlikely", "unbelievable", "unconvincing", "far-fetched", "dubious"],
     partOfSpeech: "adjective",
-    etymology: "Latin in- + plausibilis (worthy of applause).",
   },
-  // ── inadvertent ──
   {
     word: "inadvertent",
     definition: "Not resulting from or achieved through deliberate planning; unintentional.",
@@ -3642,10 +2225,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["unintentional", "accidental", "unplanned", "unwitting", "careless"],
     partOfSpeech: "adjective",
-    etymology: "Latin inadvertens (not paying attention).",
   },
-  // ── incongruous ──
-  // ── indiscriminate ──
   {
     word: "indiscriminate",
     definition: "Done at random or without careful judgment; not making distinctions.",
@@ -3655,9 +2235,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["random", "arbitrary", "haphazard", "wholesale", "undiscriminating"],
     partOfSpeech: "adjective",
-    etymology: "Latin in- + discriminare (to distinguish).",
   },
-  // ── inequitable ──
   {
     word: "inequitable",
     definition: "Unfair or unjust; not treating people equally.",
@@ -3667,9 +2245,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["unfair", "unjust", "unequal", "biased", "partial"],
     partOfSpeech: "adjective",
-    etymology: "Latin in- + aequitas (fairness).",
   },
-  // ── inflexible ──
   {
     word: "inflexible",
     definition: "Unwilling to change or compromise; rigid and unbending.",
@@ -3679,21 +2255,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["rigid", "stubborn", "unyielding", "unbending", "obstinate"],
     partOfSpeech: "adjective",
-    etymology: "Latin inflexibilis (that cannot be bent).",
   },
-  // ── influential ──
-  {
-    word: "influential",
-    definition: "Having great influence on someone or something; powerful in shaping opinions.",
-    keyConcepts: [
-      { keyword: "great influence", matchTerms: ["great", "influence", "impact", "effect", "sway", "weight", "power"], label: "Great influence", hint: "The definition says 'having great influence' -- makes a difference." },
-      { keyword: "shaping opinions", matchTerms: ["shaping", "opinions", "persuasive", "authoritative", "leading", "prominent"], label: "Shaping opinions", hint: "The definition says 'powerful in shaping opinions' -- changes minds." },
-    ],
-    synonyms: ["powerful", "authoritative", "prominent", "leading", "significant"],
-    partOfSpeech: "adjective",
-    etymology: "Latin influere (to flow in).",
-  },
-  // ── inhibited ──
   {
     word: "inhibited",
     definition: "Unable to act in a relaxed and natural way; restrained or held back.",
@@ -3703,9 +2265,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["reserved", "restrained", "self-conscious", "repressed", "shy"],
     partOfSpeech: "adjective",
-    etymology: "Latin inhibere (to hold in, restrain).",
   },
-  // ── insular ──
   {
     word: "insular",
     definition: "Ignorant of or uninterested in ideas beyond one's own experience; narrow-minded.",
@@ -3715,9 +2275,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["narrow-minded", "provincial", "parochial", "isolated", "limited"],
     partOfSpeech: "adjective",
-    etymology: "Latin insula (island).",
   },
-  // ── intangible ──
   {
     word: "intangible",
     definition: "Unable to be touched or grasped; not having physical presence.",
@@ -3727,9 +2285,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["abstract", "immaterial", "incorporeal", "impalpable", "ethereal"],
     partOfSpeech: "adjective",
-    etymology: "Latin in- + tangere (to touch).",
   },
-  // ── intermittent ──
   {
     word: "intermittent",
     definition: "Occurring at irregular intervals; not continuous or steady.",
@@ -3739,9 +2295,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["sporadic", "occasional", "irregular", "periodic", "fitful"],
     partOfSpeech: "adjective",
-    etymology: "Latin intermittere (to discontinue).",
   },
-  // ── intrusive ──
   {
     word: "intrusive",
     definition: "Causing disruption or annoyance through being unwelcome; invasive.",
@@ -3751,21 +2305,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["invasive", "obtrusive", "interfering", "meddlesome", "pushy"],
     partOfSpeech: "adjective",
-    etymology: "Latin intrudere (to thrust in).",
   },
-  // ── liberating ──
-  {
-    word: "liberating",
-    definition: "Providing a feeling of freedom from restrictions; setting free.",
-    keyConcepts: [
-      { keyword: "feeling of freedom", matchTerms: ["feeling", "freedom", "free", "release", "emancipat", "relief"], label: "Feeling of freedom", hint: "The definition says 'providing a feeling of freedom' -- feels free." },
-      { keyword: "from restrictions", matchTerms: ["restriction", "constraint", "limit", "bound", "unfetter", "unshackle"], label: "From restrictions", hint: "The definition says 'freedom from restrictions' -- breaking loose." },
-    ],
-    synonyms: ["freeing", "emancipating", "releasing", "unbinding", "empowering"],
-    partOfSpeech: "adjective",
-    etymology: "Latin liberare (to set free).",
-  },
-  // ── marginalized ──
   {
     word: "marginalized",
     definition: "Treated as insignificant or peripheral; pushed to the edge of society.",
@@ -3775,22 +2315,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["excluded", "sidelined", "disenfranchised", "neglected", "overlooked"],
     partOfSpeech: "adjective",
-    etymology: "Latin margo (edge, border).",
   },
-  // ── misguided ──
-  {
-    word: "misguided",
-    definition: "Having or showing faulty judgment or reasoning; wrongly directed.",
-    keyConcepts: [
-      { keyword: "faulty judgment", matchTerms: ["faulty", "judgment", "reasoning", "wrong", "mistaken", "erroneous", "flawed"], label: "Faulty judgment", hint: "The definition says 'having faulty judgment or reasoning' -- thinking wrong." },
-      { keyword: "wrongly directed", matchTerms: ["wrongly", "directed", "ill-advised", "unwise", "foolish", "misled"], label: "Wrongly directed", hint: "The definition says 'wrongly directed' -- going the wrong way." },
-    ],
-    synonyms: ["mistaken", "erroneous", "ill-advised", "foolish", "unwise"],
-    partOfSpeech: "adjective",
-    etymology: "Mis- + guided.",
-  },
-  // ── misleading ──
-  // ── myriad ──
   {
     word: "myriad",
     definition: "A countless or extremely great number; innumerable.",
@@ -3800,9 +2325,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["countless", "innumerable", "numerous", "multitudinous", "endless"],
     partOfSpeech: "adjective",
-    etymology: "Greek myrias (ten thousand).",
   },
-  // ── nuanced ──
   {
     word: "nuanced",
     definition: "Characterized by subtle distinctions or variations; showing delicate complexity.",
@@ -3812,9 +2335,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["subtle", "refined", "sophisticated", "complex", "intricate"],
     partOfSpeech: "adjective",
-    etymology: "French nuance (shade, subtlety).",
   },
-  // ── objectionable ──
   {
     word: "objectionable",
     definition: "Arousing distaste or opposition; offensive or unacceptable.",
@@ -3824,9 +2345,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["offensive", "unacceptable", "disagreeable", "repugnant", "deplorable"],
     partOfSpeech: "adjective",
-    etymology: "Latin obiectare (to throw against).",
   },
-  // ── obstructive ──
   {
     word: "obstructive",
     definition: "Causing a blockage or obstacle; deliberately creating difficulties.",
@@ -3836,9 +2355,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["hindering", "blocking", "unhelpful", "impeding", "uncooperative"],
     partOfSpeech: "adjective",
-    etymology: "Latin obstruere (to block up).",
   },
-  // ── overbearing ──
   {
     word: "overbearing",
     definition: "Unpleasantly dominating; attempting to control others in an oppressive way.",
@@ -3848,9 +2365,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["domineering", "bossy", "dictatorial", "imperious", "autocratic"],
     partOfSpeech: "adjective",
-    etymology: "Over- + bearing.",
   },
-  // ── overstated ──
   {
     word: "overstated",
     definition: "Expressed too strongly; exaggerated beyond what is accurate.",
@@ -3860,9 +2375,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["exaggerated", "overblown", "inflated", "embellished", "overemphasized"],
     partOfSpeech: "adjective",
-    etymology: "Over- + stated.",
   },
-  // ── paradoxical ──
   {
     word: "paradoxical",
     definition: "Seemingly absurd or self-contradictory; having contradictory qualities.",
@@ -3872,9 +2385,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["contradictory", "inconsistent", "ironic", "puzzling", "anomalous"],
     partOfSpeech: "adjective",
-    etymology: "Greek paradoxos (contrary to expectation).",
   },
-  // ── pervasive ──
   {
     word: "pervasive",
     definition: "Spreading widely throughout an area or group of people; prevalent.",
@@ -3884,9 +2395,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["widespread", "prevalent", "ubiquitous", "omnipresent", "extensive"],
     partOfSpeech: "adjective",
-    etymology: "Latin pervadere (to go through).",
   },
-  // ── polarizing ──
   {
     word: "polarizing",
     definition: "Causing division into two opposing groups; creating strong contrasting positions.",
@@ -3896,9 +2405,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["divisive", "controversial", "contentious", "splitting", "alienating"],
     partOfSpeech: "adjective",
-    etymology: "From pole (opposite ends).",
   },
-  // ── presumptive ──
   {
     word: "presumptive",
     definition: "Based on presumption rather than proof; giving grounds for a belief.",
@@ -3908,22 +2415,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["assumed", "supposed", "probable", "likely", "expected"],
     partOfSpeech: "adjective",
-    etymology: "Latin praesumptivus (taking beforehand).",
   },
-  // ── problematic ──
-  {
-    word: "problematic",
-    definition: "Constituting or presenting a problem; difficult to deal with.",
-    keyConcepts: [
-      { keyword: "presenting a problem", matchTerms: ["present", "problem", "issue", "concern", "trouble", "complicat"], label: "Presenting a problem", hint: "The definition says 'constituting or presenting a problem' -- causes issues." },
-      { keyword: "difficult to deal with", matchTerms: ["difficult", "deal", "troublesome", "awkward", "challenging", "thorny"], label: "Difficult to deal with", hint: "The definition says 'difficult to deal with' -- hard to handle." },
-    ],
-    synonyms: ["troublesome", "difficult", "challenging", "complicated", "thorny"],
-    partOfSpeech: "adjective",
-    etymology: "Greek problema (something thrown forward).",
-  },
-  // ── productive ──
-  // ── prohibitive ──
   {
     word: "prohibitive",
     definition: "Serving to forbid or restrict; so high as to prevent purchase or use.",
@@ -3933,9 +2425,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["forbidding", "restrictive", "excessive", "exorbitant", "steep"],
     partOfSpeech: "adjective",
-    etymology: "Latin prohibere (to hold back).",
   },
-  // ── provisional ──
   {
     word: "provisional",
     definition: "Arranged or existing for the present but likely to change; temporary.",
@@ -3945,9 +2435,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["temporary", "interim", "tentative", "conditional", "stopgap"],
     partOfSpeech: "adjective",
-    etymology: "Latin provisio (a providing).",
   },
-  // ── reactionary ──
   {
     word: "reactionary",
     definition: "Opposing political or social progress or reform; extremely conservative.",
@@ -3957,9 +2445,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["conservative", "traditional", "regressive", "right-wing", "ultraconservative"],
     partOfSpeech: "adjective",
-    etymology: "French réactionnaire.",
   },
-  // ── reconciliatory ──
   {
     word: "reconciliatory",
     definition: "Intended to restore friendly relations; aimed at making peace.",
@@ -3969,9 +2455,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["conciliatory", "peacemaking", "pacifying", "appeasing", "harmonizing"],
     partOfSpeech: "adjective",
-    etymology: "Latin reconciliare (to bring together again).",
   },
-  // ── regressive ──
   {
     word: "regressive",
     definition: "Returning to a less developed or earlier state; moving backward.",
@@ -3981,9 +2465,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["backward", "retrograde", "declining", "deteriorating", "reverting"],
     partOfSpeech: "adjective",
-    etymology: "Latin regredi (to go back).",
   },
-  // ── resentful ──
   {
     word: "resentful",
     definition: "Feeling or expressing bitterness or indignation at being treated unfairly.",
@@ -3993,21 +2475,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["bitter", "aggrieved", "indignant", "grudging", "embittered"],
     partOfSpeech: "adjective",
-    etymology: "French ressentir (to feel strongly).",
   },
-  // ── resistant ──
-  {
-    word: "resistant",
-    definition: "Offering resistance to something; not affected by something.",
-    keyConcepts: [
-      { keyword: "offering resistance", matchTerms: ["offer", "resistance", "oppose", "withstand", "defy", "repel"], label: "Offering resistance", hint: "The definition says 'offering resistance to something' -- pushes back." },
-      { keyword: "not affected", matchTerms: ["not affected", "immune", "impervious", "unsusceptible", "unaffected", "proof"], label: "Not affected", hint: "The definition says 'not affected by something' -- doesn't respond to it." },
-    ],
-    synonyms: ["opposing", "impervious", "immune", "defiant", "unyielding"],
-    partOfSpeech: "adjective",
-    etymology: "Latin resistere (to stand against).",
-  },
-  // ── retaliatory ──
   {
     word: "retaliatory",
     definition: "Characterized by a desire to hurt someone in return for harm done; vengeful.",
@@ -4017,9 +2485,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["vengeful", "vindictive", "punitive", "revengeful", "counter"],
     partOfSpeech: "adjective",
-    etymology: "Latin retaliare (to repay in kind).",
   },
-  // ── sanctioned ──
   {
     word: "sanctioned",
     definition: "Given official permission or approval; authorized or endorsed.",
@@ -4029,45 +2495,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["authorized", "approved", "endorsed", "permitted", "ratified"],
     partOfSpeech: "adjective",
-    etymology: "Latin sanctio (decree, ordinance).",
   },
-  // ── self-serving ──
-  {
-    word: "self-serving",
-    definition: "Having concern for one's own welfare above others; serving one's own interests.",
-    keyConcepts: [
-      { keyword: "concern for own welfare", matchTerms: ["concern", "own", "welfare", "interest", "benefit", "advantage"], label: "Concern for own welfare", hint: "The definition says 'having concern for one's own welfare above others' -- puts self first." },
-      { keyword: "serving own interests", matchTerms: ["serv", "interest", "selfish", "egotistical", "self-centered", "opportunistic"], label: "Serving own interests", hint: "The definition says 'serving one's own interests' -- looking out for number one." },
-    ],
-    synonyms: ["selfish", "egotistical", "self-centered", "opportunistic", "self-interested"],
-    partOfSpeech: "adjective",
-    etymology: "Self- + serving.",
-  },
-  // ── situational ──
-  {
-    word: "situational",
-    definition: "Relating to or dependent on a set of circumstances; context-specific.",
-    keyConcepts: [
-      { keyword: "dependent on circumstances", matchTerms: ["depend", "circumstanc", "condition", "context", "case", "scenario"], label: "Dependent on circumstances", hint: "The definition says 'dependent on a set of circumstances' -- varies by situation." },
-      { keyword: "context-specific", matchTerms: ["context", "specific", "particular", "variable", "conditional", "relative"], label: "Context-specific", hint: "The definition says 'context-specific' -- depends on the situation." },
-    ],
-    synonyms: ["contextual", "circumstantial", "conditional", "contingent", "case-specific"],
-    partOfSpeech: "adjective",
-    etymology: "Latin situare (to place).",
-  },
-  // ── subordinate ──
-  {
-    word: "subordinate",
-    definition: "Lower in rank or position; placed in or occupying a less important position.",
-    keyConcepts: [
-      { keyword: "lower in rank", matchTerms: ["lower", "rank", "position", "junior", "inferior", "lesser"], label: "Lower in rank", hint: "The definition says 'lower in rank or position' -- not as high up." },
-      { keyword: "less important", matchTerms: ["less important", "secondary", "subsidiary", "auxiliary", "ancillary", "dependent"], label: "Less important", hint: "The definition says 'occupying a less important position' -- secondary role." },
-    ],
-    synonyms: ["junior", "inferior", "secondary", "lesser", "subsidiary"],
-    partOfSpeech: "adjective",
-    etymology: "Latin subordinare (to place in a lower order).",
-  },
-  // ── substantive ──
   {
     word: "substantive",
     definition: "Having a firm basis in reality; important, meaningful, or considerable.",
@@ -4077,9 +2505,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["significant", "substantial", "meaningful", "considerable", "important"],
     partOfSpeech: "adjective",
-    etymology: "Latin substantivus (self-existent).",
   },
-  // ── systemic ──
   {
     word: "systemic",
     definition: "Relating to a system as a whole; affecting an entire system or organization.",
@@ -4089,9 +2515,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["systematic", "structural", "organizational", "institutional", "pervasive"],
     partOfSpeech: "adjective",
-    etymology: "Greek systema (organized whole).",
   },
-  // ── transactional ──
   {
     word: "transactional",
     definition: "Relating to the conducting of business; based on exchange of goods or services.",
@@ -4101,9 +2525,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["commercial", "business", "exchange-based", "reciprocal", "mercantile"],
     partOfSpeech: "adjective",
-    etymology: "Latin transactio (a settlement).",
   },
-  // ── transformative ──
   {
     word: "transformative",
     definition: "Causing a major change in form, nature, or character; revolutionary.",
@@ -4113,9 +2535,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["revolutionary", "radical", "groundbreaking", "life-changing", "profound"],
     partOfSpeech: "adjective",
-    etymology: "Latin transformare (to change shape).",
   },
-  // ── understated ──
   {
     word: "understated",
     definition: "Presented or expressed with restraint; subtle rather than obvious.",
@@ -4125,9 +2545,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["subtle", "restrained", "modest", "muted", "low-key"],
     partOfSpeech: "adjective",
-    etymology: "Under- + stated.",
   },
-  // ── unfounded ──
   {
     word: "unfounded",
     definition: "Having no foundation or basis in fact; groundless.",
@@ -4137,9 +2555,7 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["baseless", "groundless", "unsubstantiated", "unsupported", "unwarranted"],
     partOfSpeech: "adjective",
-    etymology: "Un- + founded.",
   },
-  // ── unsustainable ──
   {
     word: "unsustainable",
     definition: "Not able to be maintained at the current rate or level; not environmentally sound.",
@@ -4149,6 +2565,2139 @@ export const hardWords: DailyWord[] = [
     ],
     synonyms: ["untenable", "unviable", "unworkable", "impractical", "harmful"],
     partOfSpeech: "adjective",
-    etymology: "Un- + sustainable.",
   },
-]
+
+
+  // ===== PDF-SOURCED ENTRIES (183 words) =====
+
+  // [PDF]
+  {
+    word: "abase",
+    definition: "To lower in rank, status, or dignity; to degrade or humble someone.",
+    keyConcepts: [
+      { keyword: "lower", matchTerms: ["lower", "degrade", "humble", "demean", "diminish", "reduce", "debase", "strip", "dishonor", "belittle", "shame", "disgrace"], label: "To lower in rank", hint: "The definition says 'lower in rank, status, or dignity' — bringing someone down." },
+    ],
+    synonyms: ["degrade", "humble", "demean", "belittle", "dishonor"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "abdicate",
+    definition: "To formally give up a position of power or responsibility, especially a throne.",
+    keyConcepts: [
+      { keyword: "give up", matchTerms: ["give up", "relinquish", "renounce", "surrender", "abandon", "resign", "step down", "vacate", "yield", "forsake", "forgo", "release"], label: "Give up power", hint: "The definition says 'give up a position of power' — voluntarily stepping away." },
+      { keyword: "responsibility", matchTerms: ["responsibility", "duty", "power", "throne", "office", "position", "role", "authority", "obligation", "rule"], label: "Position of responsibility", hint: "The definition says 'power or responsibility' — a formal role being surrendered." },
+    ],
+    synonyms: ["relinquish", "renounce", "resign", "step down", "yield"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "abeyance",
+    definition: "A state of temporary suspension or inactivity; something held in pause.",
+    keyConcepts: [
+      { keyword: "temporary", matchTerms: ["temporary", "suspension", "pause", "halt", "delay", "inactivity", "dormant", "pending", "interim", "standstill", "waiting", "hold"], label: "Temporary suspension", hint: "The definition says 'temporary suspension or inactivity' — things on hold, not ended." },
+    ],
+    synonyms: ["suspension", "dormancy", "pause", "hiatus", "standstill"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "abhor",
+    definition: "To regard with intense disgust or hatred; to detest completely.",
+    keyConcepts: [
+      { keyword: "intense disgust", matchTerms: ["disgust", "hatred", "detest", "loathe", "despise", "hate", "abominate", "execrate", "revile", "scorn", "repulse", "repel"], label: "Intense disgust", hint: "The definition says 'intense disgust or hatred' — a visceral, powerful aversion." },
+    ],
+    synonyms: ["detest", "loathe", "despise", "execrate", "hate"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "abjure",
+    definition: "To formally renounce or repudiate a belief, claim, or practice, often under oath.",
+    keyConcepts: [
+      { keyword: "renounce", matchTerms: ["renounce", "repudiate", "recant", "retract", "abandon", "disavow", "forswear", "reject", "deny", "relinquish", "give up", "withdraw"], label: "Formally renounce", hint: "The definition says 'formally renounce' — publicly and solemnly giving something up." },
+      { keyword: "oath", matchTerms: ["oath", "sworn", "formal", "official", "legal", "solemn", "vow", "pledge", "binding", "ceremony"], label: "Under oath", hint: "The definition says 'often under oath' — this is a serious, official act." },
+    ],
+    synonyms: ["renounce", "recant", "retract", "forswear", "repudiate"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "abridge",
+    definition: "To shorten a text or work by omitting parts while retaining the main ideas.",
+    keyConcepts: [
+      { keyword: "shorten", matchTerms: ["shorten", "condense", "reduce", "cut", "trim", "compress", "abbreviate", "truncate", "summarize", "edit", "pare", "prune"], label: "To shorten", hint: "The definition says 'shorten by omitting parts' — making something smaller." },
+      { keyword: "main ideas", matchTerms: ["main", "idea", "essence", "core", "substance", "meaning", "content", "gist", "point", "spirit", "key", "central"], label: "Retaining main ideas", hint: "The definition says 'retaining the main ideas' — not just cutting but preserving meaning." },
+    ],
+    synonyms: ["condense", "shorten", "truncate", "abbreviate", "compress"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "abyss",
+    definition: "A deep or bottomless chasm; anything profound, immeasurable, or infinite.",
+    keyConcepts: [
+      { keyword: "bottomless", matchTerms: ["bottomless", "deep", "chasm", "void", "gulf", "depth", "infinite", "immeasurable", "fathomless", "unfathomable", "vast", "profound"], label: "Bottomless depth", hint: "The definition says 'bottomless chasm' — a depth that seems to have no end." },
+    ],
+    synonyms: ["chasm", "void", "gulf", "depth", "pit"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "activism",
+    definition: "The use of vigorous action and campaigns to achieve political or social change.",
+    keyConcepts: [
+      { keyword: "vigorous action", matchTerms: ["action", "campaign", "advocacy", "protest", "movement", "activism", "agitation", "effort", "push", "drive", "fight", "cause"], label: "Vigorous action", hint: "The definition says 'vigorous action and campaigns' — active, energetic effort." },
+      { keyword: "change", matchTerms: ["change", "reform", "progress", "social", "political", "transformation", "justice", "rights", "movement", "cause", "goal"], label: "To achieve change", hint: "The definition says 'achieve political or social change' — the purpose of the action." },
+    ],
+    synonyms: ["advocacy", "campaigning", "agitation", "protest", "reform"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "acumen",
+    definition: "The ability to make quick, accurate judgments; keen insight and good sense.",
+    keyConcepts: [
+      { keyword: "keen insight", matchTerms: ["insight", "judgment", "acuity", "shrewdness", "perception", "discernment", "intelligence", "wisdom", "astuteness", "perspicacity", "sharpness", "wit"], label: "Keen insight", hint: "The definition says 'keen insight and good sense' — sharp mental perception." },
+      { keyword: "quick", matchTerms: ["quick", "sharp", "rapid", "fast", "immediate", "instant", "prompt", "ready", "alert", "nimble", "astute", "clever"], label: "Quick judgment", hint: "The definition says 'quick, accurate judgments' — speed combined with accuracy." },
+    ],
+    synonyms: ["shrewdness", "astuteness", "discernment", "perspicacity", "sharpness"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "adhere",
+    definition: "To stick firmly to a surface, belief, or plan; to follow closely without deviation.",
+    keyConcepts: [
+      { keyword: "stick", matchTerms: ["stick", "cling", "attach", "hold", "bond", "bind", "follow", "comply", "observe", "keep", "maintain", "uphold"], label: "To stick or cling", hint: "The definition says 'stick firmly' — remaining fixed whether physically or in principle." },
+    ],
+    synonyms: ["stick", "cling", "comply", "follow", "observe"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "admonish",
+    definition: "To warn or reprimand someone firmly but not harshly; to caution or advise.",
+    keyConcepts: [
+      { keyword: "warn", matchTerms: ["warn", "reprimand", "caution", "advise", "rebuke", "scold", "counsel", "urge", "remind", "chide", "correct", "reproach"], label: "To warn or reprimand", hint: "The definition says 'warn or reprimand' — a correction delivered with care." },
+      { keyword: "firmly", matchTerms: ["firmly", "firmly but", "not harshly", "gentle", "mild", "earnest", "serious", "direct", "sincere", "measured"], label: "Done firmly", hint: "The definition says 'firmly but not harshly' — the tone is serious but not cruel." },
+    ],
+    synonyms: ["reprimand", "caution", "rebuke", "counsel", "warn"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "affable",
+    definition: "Friendly, good-natured, and easy to talk to; pleasant in manner.",
+    keyConcepts: [
+      { keyword: "friendly", matchTerms: ["friendly", "pleasant", "warm", "approachable", "genial", "amiable", "congenial", "sociable", "agreeable", "good-natured", "personable", "welcoming"], label: "Friendly and warm", hint: "The definition says 'friendly, good-natured' — radiating warmth and openness." },
+    ],
+    synonyms: ["amiable", "genial", "congenial", "approachable", "personable"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "affectation",
+    definition: "Behavior or speech adopted to impress others that is artificial or insincere.",
+    keyConcepts: [
+      { keyword: "artificial", matchTerms: ["artificial", "insincere", "fake", "pretentious", "contrived", "affected", "mannered", "unnatural", "put-on", "performed", "forced", "phony"], label: "Artificial behavior", hint: "The definition says 'artificial or insincere' — it's a pose, not genuine." },
+      { keyword: "impress", matchTerms: ["impress", "appearance", "effect", "image", "show", "display", "performance", "pretense", "posture", "seem", "appear", "project"], label: "To impress others", hint: "The definition says 'adopted to impress others' — the behavior is for an audience." },
+    ],
+    synonyms: ["pretension", "pose", "artificiality", "mannerism", "insincerity"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "aggrandize",
+    definition: "To make something appear greater or more important than it actually is; to exaggerate.",
+    keyConcepts: [
+      { keyword: "greater", matchTerms: ["greater", "larger", "bigger", "important", "exaggerate", "inflate", "magnify", "enhance", "boost", "elevate", "overstate", "glorify"], label: "Make appear greater", hint: "The definition says 'appear greater or more important' — inflating beyond reality." },
+    ],
+    synonyms: ["exaggerate", "inflate", "magnify", "overstate", "glorify"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "alacrity",
+    definition: "Brisk and cheerful readiness; eager willingness to act without hesitation.",
+    keyConcepts: [
+      { keyword: "cheerful readiness", matchTerms: ["readiness", "eagerness", "willingness", "enthusiasm", "promptness", "speed", "zeal", "keenness", "briskness", "quickness", "alacrity", "sprightliness"], label: "Cheerful readiness", hint: "The definition says 'brisk and cheerful readiness' — enthusiastic and quick." },
+    ],
+    synonyms: ["eagerness", "readiness", "enthusiasm", "promptness", "willingness"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "alienate",
+    definition: "To cause someone to feel isolated, hostile, or estranged from a person or group.",
+    keyConcepts: [
+      { keyword: "isolated", matchTerms: ["isolat", "estrang", "distant", "hostile", "unfriendly", "detach", "separate", "cut off", "push away", "withdraw", "excluded", "marginalized"], label: "Cause isolation", hint: "The definition says 'feel isolated or estranged' — creating distance and disconnection." },
+    ],
+    synonyms: ["estrange", "isolate", "distance", "detach", "ostracize"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "amalgamate",
+    definition: "To combine or unite separate elements into a single unified whole.",
+    keyConcepts: [
+      { keyword: "combine", matchTerms: ["combine", "unite", "merge", "blend", "fuse", "integrate", "consolidate", "join", "incorporate", "unify", "pool", "mix"], label: "To combine", hint: "The definition says 'combine or unite' — bringing separate things together." },
+      { keyword: "unified whole", matchTerms: ["unified", "whole", "single", "one", "together", "complete", "cohesive", "integrated", "collective", "combined", "total"], label: "Into a unified whole", hint: "The definition says 'single unified whole' — the result is one integrated thing." },
+    ],
+    synonyms: ["merge", "unite", "combine", "fuse", "integrate"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "ameliorate",
+    definition: "To make a bad or unsatisfactory situation better or more bearable.",
+    keyConcepts: [
+      { keyword: "better", matchTerms: ["better", "improve", "relieve", "ease", "alleviate", "mitigate", "enhance", "upgrade", "amend", "reform", "remedy", "help"], label: "Make better", hint: "The definition says 'make better or more bearable' — improving without necessarily fixing." },
+    ],
+    synonyms: ["improve", "alleviate", "mitigate", "relieve", "better"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "anachronism",
+    definition: "Something that belongs to a different time period and is out of place in the present.",
+    keyConcepts: [
+      { keyword: "different time", matchTerms: ["time", "period", "era", "age", "epoch", "historical", "outdated", "out of place", "wrong era", "past", "misplaced", "belongs"], label: "Wrong time period", hint: "The definition says 'belongs to a different time period' — displaced in history." },
+      { keyword: "out of place", matchTerms: ["out of place", "incongruous", "misplaced", "inappropriate", "inconsistent", "anachronistic", "jarring", "odd", "strange", "unsuitable"], label: "Out of place", hint: "The definition says 'out of place in the present' — it doesn't fit its current context." },
+    ],
+    synonyms: ["archaism", "relic", "throwback", "incongruity", "misplacement"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "analogous",
+    definition: "Comparable in function or structure to something else; serving as a useful analogy.",
+    keyConcepts: [
+      { keyword: "comparable", matchTerms: ["comparable", "similar", "parallel", "equivalent", "corresponding", "like", "akin", "related", "resembling", "analogous", "alike", "matching"], label: "Comparable", hint: "The definition says 'comparable in function or structure' — having meaningful similarity." },
+    ],
+    synonyms: ["comparable", "similar", "parallel", "equivalent", "corresponding"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "precursor",
+    definition: "A thing that comes before and signals or leads to something that follows.",
+    keyConcepts: [
+      { keyword: "comes before", matchTerms: ["before", "precede", "prior", "earlier", "ahead", "leading", "preliminary", "forerunner", "predecessor", "antecedent", "advance", "herald"], label: "Comes before", hint: "The definition says 'comes before' — it arrives ahead of what it announces." },
+      { keyword: "signals", matchTerms: ["signals", "indicates", "announces", "heralds", "foreshadows", "suggests", "portends", "warns", "hints", "presages", "leads to", "points toward"], label: "Signals what follows", hint: "The definition says 'signals or leads to something that follows' — it's not just a chronological predecessor but a meaningful one." },
+    ],
+    synonyms: ["forerunner", "harbinger", "herald", "antecedent", "predecessor"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "prescient",
+    definition: "Having or showing knowledge of events before they take place; far-sighted.",
+    keyConcepts: [
+      { keyword: "knowledge of events before", matchTerms: ["knowledge", "events", "before", "foresight", "predict", "prophetic", "clairvoyant", "visionary", "anticipate", "foresee", "ahead", "future"], label: "Knowledge before events", hint: "The definition says 'knowledge of events before they take place' — knowing what hasn't happened yet." },
+    ],
+    synonyms: ["prophetic", "far-sighted", "visionary", "clairvoyant", "farsighted"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "presumptuous",
+    definition: "Failing to observe proper boundaries; behaving too boldly and overstepping one's place.",
+    keyConcepts: [
+      { keyword: "overstepping", matchTerms: ["overstepping", "transgressing", "exceeding", "crossing lines", "bold", "forward", "impertinent", "audacious", "arrogant", "brash", "improper", "insolent"], label: "Overstepping", hint: "The definition says 'overstepping one's place' — going beyond what is appropriate." },
+      { keyword: "proper boundaries", matchTerms: ["boundaries", "limits", "place", "role", "propriety", "decorum", "etiquette", "convention", "permission", "authority", "scope", "appropriate"], label: "Proper boundaries", hint: "The definition says 'failing to observe proper boundaries' — there are recognized limits being ignored." },
+    ],
+    synonyms: ["arrogant", "bold", "impertinent", "audacious", "forward"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "prevaricate",
+    definition: "To speak or act in an evasive way so as to avoid telling the full truth.",
+    keyConcepts: [
+      { keyword: "evasive", matchTerms: ["evasive", "equivocate", "dodge", "avoid", "hedge", "evade", "sidestep", "mislead", "distort", "obscure", "obfuscate", "weasel"], label: "Evasive", hint: "The definition says 'in an evasive way' — not direct, not forthcoming." },
+      { keyword: "avoid telling the truth", matchTerms: ["avoid truth", "deceive", "mislead", "equivocate", "lie", "fudge", "twist", "conceal", "withhold", "distort", "shade", "spin"], label: "Avoid telling truth", hint: "The definition says 'avoid telling the full truth' — there is something being withheld or distorted." },
+    ],
+    synonyms: ["equivocate", "hedge", "evade", "dissemble", "obfuscate"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "principled",
+    definition: "Acting according to moral rules and strong personal values; guided by principle.",
+    keyConcepts: [
+      { keyword: "moral rules", matchTerms: ["moral", "ethics", "values", "principles", "standards", "beliefs", "integrity", "conscience", "virtue", "honor", "righteousness", "code"], label: "Moral rules", hint: "The definition says 'moral rules and strong personal values' — behavior guided by an internal ethical code." },
+      { keyword: "guided by principle", matchTerms: ["guided", "principle", "conviction", "consistent", "firm", "steadfast", "unwavering", "incorruptible", "honest", "upright", "strict", "reliable"], label: "Guided by principle", hint: "The definition says 'guided by principle' — the values direct behavior, not convenience or self-interest." },
+    ],
+    synonyms: ["ethical", "moral", "honorable", "upright", "virtuous"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "proclivity",
+    definition: "A natural tendency or inclination toward a particular behavior or interest.",
+    keyConcepts: [
+      { keyword: "natural tendency", matchTerms: ["tendency", "inclination", "predisposition", "leaning", "penchant", "propensity", "bent", "predilection", "disposition", "liking", "preference", "impulse"], label: "Natural tendency", hint: "The definition says 'natural tendency' — something one gravitates toward without necessarily choosing to." },
+    ],
+    synonyms: ["tendency", "inclination", "predisposition", "propensity", "penchant"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "prodigious",
+    definition: "Remarkably large or impressive in amount, extent, or degree; extraordinary.",
+    keyConcepts: [
+      { keyword: "remarkably large", matchTerms: ["remarkably large", "impressive", "enormous", "exceptional", "extraordinary", "stupendous", "immense", "vast", "tremendous", "considerable", "monumental", "staggering"], label: "Remarkably large", hint: "The definition says 'remarkably large or impressive' — it exceeds what is expected." },
+    ],
+    synonyms: ["extraordinary", "exceptional", "enormous", "impressive", "remarkable"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "profound",
+    definition: "Having deep insight or understanding; intellectually demanding and significant.",
+    keyConcepts: [
+      { keyword: "deep insight", matchTerms: ["deep", "insight", "understanding", "knowledge", "wisdom", "penetrating", "perceptive", "thoughtful", "weighty", "serious", "substantive", "meaningful"], label: "Deep insight", hint: "The definition says 'deep insight or understanding' — going far below the surface." },
+    ],
+    synonyms: ["deep", "insightful", "weighty", "meaningful", "penetrating"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "proliferate",
+    definition: "To increase rapidly in number or extent; to multiply and spread quickly.",
+    keyConcepts: [
+      { keyword: "increase rapidly", matchTerms: ["increase rapidly", "multiply", "spread", "expand", "grow", "explode", "surge", "balloon", "escalate", "propagate", "reproduce", "burgeon"], label: "Increase rapidly", hint: "The definition says 'increase rapidly in number' — fast growth, not slow accumulation." },
+    ],
+    synonyms: ["multiply", "spread", "expand", "burgeon", "propagate"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "propensity",
+    definition: "An inclination or tendency to behave in a particular way; a natural disposition.",
+    keyConcepts: [
+      { keyword: "inclination", matchTerms: ["inclination", "tendency", "disposition", "predisposition", "bent", "leaning", "penchant", "proclivity", "habit", "impulse", "readiness", "appetite"], label: "Inclination", hint: "The definition says 'inclination or tendency to behave' — a pull toward certain actions." },
+    ],
+    synonyms: ["tendency", "inclination", "predisposition", "proclivity", "disposition"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "prosaic",
+    definition: "Having the style of ordinary, factual writing; commonplace and unromantic.",
+    keyConcepts: [
+      { keyword: "commonplace", matchTerms: ["commonplace", "ordinary", "dull", "mundane", "unimaginative", "pedestrian", "plain", "flat", "routine", "uninspiring", "humdrum", "banal"], label: "Commonplace and dull", hint: "The definition says 'commonplace and unromantic' — nothing elevated or interesting." },
+    ],
+    synonyms: ["mundane", "ordinary", "pedestrian", "dull", "unremarkable"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "prudent",
+    definition: "Acting with care and wise judgment about the future; practical and cautious.",
+    keyConcepts: [
+      { keyword: "wise judgment", matchTerms: ["wise", "judgment", "careful", "thoughtful", "sensible", "judicious", "discerning", "deliberate", "foresighted", "cautious", "calculating", "measured"], label: "Wise judgment", hint: "The definition says 'wise judgment about the future' — thinking ahead and weighing consequences." },
+    ],
+    synonyms: ["wise", "cautious", "judicious", "sensible", "circumspect"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "puerile",
+    definition: "Childishly silly and immature; not deserving serious consideration.",
+    keyConcepts: [
+      { keyword: "childishly", matchTerms: ["childish", "immature", "juvenile", "infantile", "silly", "naive", "unsophisticated", "simple-minded", "petty", "trivial", "foolish", "irresponsible"], label: "Childishly immature", hint: "The definition says 'childishly silly and immature' — the behavior is beneath adulthood." },
+    ],
+    synonyms: ["childish", "immature", "juvenile", "infantile", "silly"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "quandary",
+    definition: "A state of uncertainty or confusion about what to do in a difficult situation.",
+    keyConcepts: [
+      { keyword: "uncertainty", matchTerms: ["uncertainty", "confusion", "indecision", "dilemma", "perplexity", "doubt", "puzzlement", "hesitation", "difficulty", "predicament", "stalemate", "limbo"], label: "Uncertainty", hint: "The definition says 'uncertainty or confusion' — not knowing which way to go." },
+      { keyword: "difficult situation", matchTerms: ["difficult", "situation", "problem", "predicament", "bind", "fix", "spot", "challenge", "impasse", "crossroads", "crisis", "trouble"], label: "Difficult situation", hint: "The definition says 'in a difficult situation' — the quandary arises from something genuinely hard." },
+    ],
+    synonyms: ["dilemma", "predicament", "uncertainty", "perplexity", "impasse"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "recalcitrant",
+    definition: "Having an obstinately uncooperative attitude toward authority or discipline.",
+    keyConcepts: [
+      { keyword: "uncooperative", matchTerms: ["uncooperative", "resistant", "defiant", "disobedient", "rebellious", "obstinate", "stubborn", "refractory", "intractable", "recalcitrant", "headstrong", "contrary"], label: "Uncooperative", hint: "The definition says 'obstinately uncooperative' — actively refusing to go along." },
+      { keyword: "authority", matchTerms: ["authority", "discipline", "control", "rules", "supervision", "management", "order", "hierarchy", "institution", "power", "establishment", "structure"], label: "Toward authority", hint: "The definition says 'toward authority or discipline' — the resistance is directed at those in charge." },
+    ],
+    synonyms: ["defiant", "uncooperative", "rebellious", "obstinate", "refractory"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "recant",
+    definition: "To withdraw or disavow a previously held statement or belief, often publicly.",
+    keyConcepts: [
+      { keyword: "withdraw", matchTerms: ["withdraw", "disavow", "retract", "renounce", "take back", "repudiate", "reverse", "rescind", "abandon", "abjure", "forswear", "revoke"], label: "Withdraw", hint: "The definition says 'withdraw or disavow' — taking back what was said or believed." },
+      { keyword: "previously held", matchTerms: ["previously held", "earlier", "former", "past", "prior", "once-stated", "original", "old", "established", "stated", "expressed", "declared"], label: "Previously held belief", hint: "The definition says 'previously held statement or belief' — there is a reversal from a prior position." },
+    ],
+    synonyms: ["retract", "withdraw", "renounce", "disavow", "repudiate"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "rhetoric",
+    definition: "The art of persuasive speaking or writing; language designed to have a persuasive effect.",
+    keyConcepts: [
+      { keyword: "persuasive", matchTerms: ["persuasive", "convincing", "compelling", "eloquent", "effective", "influential", "impactful", "forceful", "moving", "stirring", "appealing", "affecting"], label: "Persuasive", hint: "The definition says 'persuasive speaking or writing' — the goal is to influence the audience." },
+      { keyword: "language", matchTerms: ["language", "speech", "writing", "discourse", "words", "expression", "style", "diction", "prose", "oration", "text", "argument"], label: "Use of language", hint: "The definition says 'language designed to have a persuasive effect' — it's about how language is crafted and deployed." },
+    ],
+    synonyms: ["oratory", "eloquence", "persuasion", "discourse", "speechcraft"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "sanguine",
+    definition: "Optimistic and positive, especially in a difficult or worrying situation.",
+    keyConcepts: [
+      { keyword: "optimistic", matchTerms: ["optimistic", "hopeful", "positive", "confident", "cheerful", "upbeat", "buoyant", "encouraged", "expectant", "assured", "bright", "bullish"], label: "Optimistic", hint: "The definition says 'optimistic and positive' — looking on the bright side." },
+      { keyword: "difficult situation", matchTerms: ["difficult", "worrying", "challenging", "adverse", "trying", "hard", "uncertain", "troubled", "crisis", "hardship", "despite circumstances", "against odds"], label: "In a difficult situation", hint: "The definition says 'especially in a difficult or worrying situation' — the optimism persists even when things are bad." },
+    ],
+    synonyms: ["optimistic", "hopeful", "positive", "confident", "upbeat"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "saturate",
+    definition: "To fill something completely so that no more can be absorbed; to soak thoroughly.",
+    keyConcepts: [
+      { keyword: "fill completely", matchTerms: ["fill completely", "soak", "drench", "flood", "permeate", "suffuse", "imbue", "steep", "inundate", "overwhelm", "overload", "pervade"], label: "Fill completely", hint: "The definition says 'fill something completely' — beyond full, to the point of overflow." },
+    ],
+    synonyms: ["soak", "drench", "permeate", "flood", "suffuse"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "scintilla",
+    definition: "A tiny trace or spark of something; an extremely small amount.",
+    keyConcepts: [
+      { keyword: "tiny trace", matchTerms: ["tiny", "trace", "spark", "bit", "iota", "jot", "hint", "shred", "particle", "grain", "atom", "flicker"], label: "Tiny trace", hint: "The definition says 'tiny trace or spark' — the smallest possible presence of something." },
+    ],
+    synonyms: ["trace", "iota", "particle", "hint", "shred"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "sporadic",
+    definition: "Occurring at irregular intervals and not in a regular pattern; scattered and occasional.",
+    keyConcepts: [
+      { keyword: "irregular intervals", matchTerms: ["irregular", "occasional", "intermittent", "scattered", "infrequent", "random", "unpredictable", "patchy", "on and off", "inconsistent", "erratic", "fitful"], label: "Irregular intervals", hint: "The definition says 'irregular intervals' — it happens sometimes but not on any dependable schedule." },
+    ],
+    synonyms: ["intermittent", "occasional", "irregular", "scattered", "fitful"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "stymie",
+    definition: "To block or hinder the progress of someone or something; to prevent advancement.",
+    keyConcepts: [
+      { keyword: "block", matchTerms: ["block", "hinder", "obstruct", "thwart", "impede", "prevent", "stop", "frustrate", "hamper", "foil", "check", "derail"], label: "To block", hint: "The definition says 'block or hinder the progress' — putting an obstacle in the way." },
+    ],
+    synonyms: ["hinder", "obstruct", "thwart", "impede", "frustrate"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "sublime",
+    definition: "Of such excellence and beauty as to inspire awe; elevated and majestic in quality.",
+    keyConcepts: [
+      { keyword: "inspire awe", matchTerms: ["inspire awe", "awe-inspiring", "breathtaking", "transcendent", "majestic", "magnificent", "elevated", "exalted", "overwhelming", "stunning", "reverential", "overpowering"], label: "Inspire awe", hint: "The definition says 'inspire awe' — it elevates the observer beyond the ordinary." },
+      { keyword: "excellence and beauty", matchTerms: ["excellence", "beauty", "perfection", "nobility", "grandeur", "greatness", "magnificence", "splendor", "glory", "ideal", "supreme", "ultimate"], label: "Excellence and beauty", hint: "The definition says 'excellence and beauty' — the quality is both morally and aesthetically elevated." },
+    ],
+    synonyms: ["transcendent", "majestic", "exalted", "magnificent", "awe-inspiring"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "substantiate",
+    definition: "To provide evidence to support or prove the truth of something.",
+    keyConcepts: [
+      { keyword: "provide evidence", matchTerms: ["provide evidence", "prove", "support", "verify", "confirm", "corroborate", "validate", "demonstrate", "establish", "back up", "justify", "document"], label: "Provide evidence", hint: "The definition says 'provide evidence to support' — making claims credible through proof." },
+      { keyword: "truth", matchTerms: ["truth", "validity", "accuracy", "claim", "assertion", "argument", "statement", "hypothesis", "contention", "allegation", "position", "belief"], label: "Support the truth", hint: "The definition says 'support or prove the truth' — the goal is establishing that something is real or correct." },
+    ],
+    synonyms: ["prove", "verify", "corroborate", "confirm", "support"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "supplant",
+    definition: "To take the place of someone or something, especially by force or cunning.",
+    keyConcepts: [
+      { keyword: "take the place of", matchTerms: ["take the place of", "replace", "displace", "oust", "supersede", "succeed", "substitute", "unseat", "overthrow", "remove", "usurp", "dislodge"], label: "Take the place of", hint: "The definition says 'take the place of' — what was there before is now gone." },
+      { keyword: "force or cunning", matchTerms: ["force", "cunning", "scheming", "deception", "manipulation", "treachery", "plotting", "strategy", "underhanded", "sneaky", "calculated", "deliberate"], label: "By force or cunning", hint: "The definition says 'especially by force or cunning' — the replacement is not straightforward or fair." },
+    ],
+    synonyms: ["replace", "oust", "displace", "supersede", "usurp"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "tacit",
+    definition: "Understood or implied without being directly stated; silently assumed.",
+    keyConcepts: [
+      { keyword: "implied", matchTerms: ["implied", "unstated", "unspoken", "understood", "assumed", "inferred", "indirect", "covert", "silent", "unvoiced", "unexpressed", "read between the lines"], label: "Implied without stating", hint: "The definition says 'implied without being directly stated' — meaning exists but no words convey it explicitly." },
+    ],
+    synonyms: ["implied", "unspoken", "understood", "implicit", "unstated"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "ubiquitous",
+    definition: "Present, appearing, or found everywhere at the same time.",
+    keyConcepts: [
+      { keyword: "everywhere", matchTerms: ["everywhere", "omnipresent", "pervasive", "universal", "all-pervasive", "rampant", "widespread", "prevalent", "constant", "inescapable", "unavoidable", "saturating"], label: "Found everywhere", hint: "The definition says 'found everywhere' — there is no escaping its presence." },
+    ],
+    synonyms: ["omnipresent", "pervasive", "universal", "widespread", "inescapable"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "unprecedented",
+    definition: "Never done or known before; having no prior example or parallel in history.",
+    keyConcepts: [
+      { keyword: "never done before", matchTerms: ["never done before", "first", "new", "novel", "original", "unique", "singular", "historic", "groundbreaking", "uncharted", "path-breaking", "first-ever"], label: "Never done before", hint: "The definition says 'never done or known before' — there is no comparable case." },
+      { keyword: "no prior example", matchTerms: ["no prior example", "unparalleled", "unmatched", "without precedent", "new ground", "first time", "no comparison", "history", "record", "benchmark", "baseline", "reference"], label: "No prior example", hint: "The definition says 'no prior example or parallel' — there is nothing to compare it to." },
+    ],
+    synonyms: ["unparalleled", "unheard-of", "novel", "historic", "first"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "anarchy",
+    definition: "A state of disorder due to the absence of authority or government control.",
+    keyConcepts: [
+      { keyword: "disorder", matchTerms: ["disorder", "chaos", "lawlessness", "turmoil", "upheaval", "confusion", "mayhem", "anarchy", "unrest", "instability", "pandemonium", "bedlam"], label: "State of disorder", hint: "The definition says 'state of disorder' — breakdown of structure and control." },
+      { keyword: "absence", matchTerms: ["absence", "lack", "without", "no", "removal", "void", "breakdown", "collapse", "failure", "overthrow", "abolition"], label: "Absence of authority", hint: "The definition says 'absence of authority' — disorder arises because nothing is in charge." },
+    ],
+    synonyms: ["chaos", "lawlessness", "disorder", "mayhem", "bedlam"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "annul",
+    definition: "To declare invalid or legally void; to cancel or abolish an official agreement.",
+    keyConcepts: [
+      { keyword: "invalid", matchTerms: ["invalid", "void", "null", "cancel", "abolish", "nullify", "repeal", "revoke", "rescind", "terminate", "dissolve", "invalidate"], label: "Declare invalid", hint: "The definition says 'declare invalid or legally void' — erasing its legal effect." },
+    ],
+    synonyms: ["nullify", "void", "cancel", "revoke", "rescind"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "antagonize",
+    definition: "To cause someone to become hostile or unfriendly; to provoke or irritate.",
+    keyConcepts: [
+      { keyword: "hostile", matchTerms: ["hostile", "unfriendly", "provoke", "irritate", "aggravate", "alienate", "anger", "offend", "incite", "inflame", "upset", "arouse"], label: "Cause hostility", hint: "The definition says 'become hostile or unfriendly' — creating opposition or enmity." },
+    ],
+    synonyms: ["provoke", "alienate", "irritate", "aggravate", "incense"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "antithetical",
+    definition: "Directly opposed or contrasted; being the exact opposite of something.",
+    keyConcepts: [
+      { keyword: "directly opposed", matchTerms: ["opposed", "opposite", "contrary", "contradictory", "conflicting", "antithetical", "incompatible", "at odds", "counter", "inverse", "reverse", "contrasted"], label: "Directly opposed", hint: "The definition says 'directly opposed or contrasted' — not just different but fundamentally contrary." },
+    ],
+    synonyms: ["contrary", "opposed", "contradictory", "incompatible", "opposite"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "arbiter",
+    definition: "A person empowered to judge or settle a dispute; one whose authority is final.",
+    keyConcepts: [
+      { keyword: "judge", matchTerms: ["judge", "arbitrate", "settle", "decide", "umpire", "referee", "mediator", "authority", "adjudicate", "rule", "determine", "resolve"], label: "One who judges", hint: "The definition says 'judge or settle a dispute' — an authoritative decision-maker." },
+      { keyword: "final", matchTerms: ["final", "ultimate", "authoritative", "supreme", "definitive", "conclusive", "decisive", "binding", "absolute", "unquestioned", "unchallenged"], label: "Final authority", hint: "The definition says 'authority is final' — there is no appeal beyond this person." },
+    ],
+    synonyms: ["judge", "mediator", "adjudicator", "umpire", "referee"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "arcane",
+    definition: "Known or understood by only a few; mysterious, secret, or esoteric.",
+    keyConcepts: [
+      { keyword: "few", matchTerms: ["few", "select", "limited", "exclusive", "obscure", "specialist", "insider", "privileged", "initiated", "rare", "hidden", "secret"], label: "Known by few", hint: "The definition says 'known by only a few' — not common or widely accessible knowledge." },
+      { keyword: "mysterious", matchTerms: ["mysterious", "secret", "esoteric", "cryptic", "occult", "obscure", "hidden", "enigmatic", "abstruse", "recondite", "inscrutable", "unknowable"], label: "Mysterious quality", hint: "The definition says 'mysterious or secret' — there's an air of the unknowable." },
+    ],
+    synonyms: ["esoteric", "mysterious", "obscure", "cryptic", "recondite"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "archaic",
+    definition: "Belonging to an earlier period; no longer in common use or outdated.",
+    keyConcepts: [
+      { keyword: "earlier period", matchTerms: ["earlier", "old", "ancient", "past", "historical", "bygone", "former", "antique", "dated", "vintage", "traditional", "obsolete"], label: "Earlier period", hint: "The definition says 'belonging to an earlier period' — it comes from a different age." },
+      { keyword: "outdated", matchTerms: ["outdated", "obsolete", "old-fashioned", "antiquated", "superseded", "disused", "extinct", "defunct", "outmoded", "archaic", "no longer used", "stale"], label: "No longer used", hint: "The definition says 'no longer in common use' — it has been left behind." },
+    ],
+    synonyms: ["antiquated", "obsolete", "ancient", "outdated", "outmoded"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "arduous",
+    definition: "Requiring great effort or exertion; extremely difficult and tiring.",
+    keyConcepts: [
+      { keyword: "great effort", matchTerms: ["effort", "exertion", "labor", "struggle", "toil", "work", "energy", "difficulty", "taxing", "demanding", "challenging", "strenuous"], label: "Requiring great effort", hint: "The definition says 'requiring great effort or exertion' — it takes a lot out of you." },
+    ],
+    synonyms: ["strenuous", "grueling", "laborious", "exhausting", "demanding"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "articulate",
+    definition: "Able to express ideas clearly and fluently; skilled at using language effectively.",
+    keyConcepts: [
+      { keyword: "express", matchTerms: ["express", "communicate", "speak", "convey", "explain", "describe", "voice", "articulate", "state", "present", "phrase", "put into words"], label: "Able to express", hint: "The definition says 'express ideas clearly' — translating thought into effective language." },
+      { keyword: "clearly", matchTerms: ["clearly", "fluently", "effectively", "well", "precisely", "coherently", "distinctly", "eloquently", "skillfully", "lucidly", "logically", "persuasively"], label: "Clearly and fluently", hint: "The definition says 'clearly and fluently' — not just expressing but doing so with ease and precision." },
+    ],
+    synonyms: ["eloquent", "fluent", "expressive", "lucid", "coherent"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "artifact",
+    definition: "An object made by humans, especially one of historical or cultural significance.",
+    keyConcepts: [
+      { keyword: "made by humans", matchTerms: ["made", "crafted", "created", "produced", "manufactured", "constructed", "fashioned", "handmade", "man-made", "human", "cultural", "historical"], label: "Made by humans", hint: "The definition says 'made by humans' — distinguishing it from natural objects." },
+      { keyword: "historical", matchTerms: ["historical", "cultural", "significance", "ancient", "archaeological", "relic", "remnant", "heritage", "past", "tradition", "old", "excavated"], label: "Historical significance", hint: "The definition says 'historical or cultural significance' — valued for its connection to the past." },
+    ],
+    synonyms: ["relic", "remnant", "object", "item", "creation"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "artless",
+    definition: "Without cunning or deception; natural and sincere; free from artifice.",
+    keyConcepts: [
+      { keyword: "without deception", matchTerms: ["without deception", "sincere", "natural", "genuine", "innocent", "naive", "open", "honest", "unaffected", "candid", "transparent", "unpretentious"], label: "Without deception", hint: "The definition says 'without cunning or deception' — nothing hidden or calculated." },
+    ],
+    synonyms: ["genuine", "sincere", "naive", "ingenuous", "unpretentious"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "ascertain",
+    definition: "To find out something with certainty; to discover a fact definitively.",
+    keyConcepts: [
+      { keyword: "certainty", matchTerms: ["certainty", "certain", "definitive", "confirm", "verify", "establish", "determine", "discover", "learn", "find out", "ascertain", "prove"], label: "Find out with certainty", hint: "The definition says 'with certainty' — not guessing but confirming beyond doubt." },
+    ],
+    synonyms: ["determine", "confirm", "verify", "establish", "discover"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "ascetic",
+    definition: "Characterized by severe self-discipline and abstention from physical pleasures.",
+    keyConcepts: [
+      { keyword: "self-discipline", matchTerms: ["self-discipline", "abstinence", "austere", "spartan", "strict", "denial", "restraint", "frugal", "simple", "rigorous", "puritanical", "severe"], label: "Severe self-discipline", hint: "The definition says 'severe self-discipline' — an unusually strict approach to life." },
+      { keyword: "pleasures", matchTerms: ["pleasure", "comfort", "luxury", "indulgence", "physical", "sensual", "material", "enjoyment", "gratification", "desire", "appetite", "want"], label: "Abstention from pleasures", hint: "The definition says 'abstention from physical pleasures' — deliberately avoiding comforts." },
+    ],
+    synonyms: ["austere", "spartan", "abstemious", "self-denying", "puritanical"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "assiduous",
+    definition: "Showing great care, attention, and persistent effort in one's work.",
+    keyConcepts: [
+      { keyword: "persistent", matchTerms: ["persistent", "diligent", "tireless", "industrious", "dedicated", "hard-working", "thorough", "careful", "attentive", "meticulous", "conscientious", "steadfast"], label: "Persistent effort", hint: "The definition says 'persistent effort' — keeping at it without giving up." },
+      { keyword: "care", matchTerms: ["care", "attention", "detail", "thoroughness", "precision", "exactness", "caution", "watchfulness", "application", "devotion", "focus", "commitment"], label: "Great care", hint: "The definition says 'great care and attention' — not just working hard but working carefully." },
+    ],
+    synonyms: ["diligent", "industrious", "persistent", "meticulous", "tireless"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "audacious",
+    definition: "Showing a willingness to take bold risks; daring and fearlessly original.",
+    keyConcepts: [
+      { keyword: "bold", matchTerms: ["bold", "daring", "fearless", "brave", "courageous", "reckless", "adventurous", "audacious", "gutsy", "intrepid", "nervy", "presumptuous"], label: "Bold and daring", hint: "The definition says 'bold risks' — doing what others wouldn't dare." },
+    ],
+    synonyms: ["daring", "bold", "fearless", "brazen", "intrepid"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "august",
+    definition: "Inspiring reverence and admiration; having impressive dignity or grandeur.",
+    keyConcepts: [
+      { keyword: "reverence", matchTerms: ["reverence", "admiration", "dignity", "grandeur", "respect", "awe", "majesty", "imposing", "noble", "stately", "venerable", "commanding"], label: "Inspiring reverence", hint: "The definition says 'inspiring reverence and admiration' — commanding profound respect." },
+    ],
+    synonyms: ["venerable", "majestic", "dignified", "imposing", "stately"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "avarice",
+    definition: "Extreme greed for wealth or material gain; an insatiable desire to accumulate.",
+    keyConcepts: [
+      { keyword: "extreme greed", matchTerms: ["greed", "covetousness", "acquisitiveness", "cupidity", "miserliness", "avarice", "rapacity", "materialism", "desire for wealth", "money-hungry", "avaricious"], label: "Extreme greed", hint: "The definition says 'extreme greed' — not just wanting more but an obsessive craving." },
+      { keyword: "insatiable", matchTerms: ["insatiable", "unquenchable", "never satisfied", "endless", "unrelenting", "constant", "relentless", "boundless", "inexhaustible", "voracious", "limitless", "unceasing"], label: "Insatiable desire", hint: "The definition says 'insatiable desire' — it can never be satisfied." },
+    ],
+    synonyms: ["greed", "covetousness", "cupidity", "rapacity", "acquisitiveness"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "canonical",
+    definition: "Conforming to established rules or standards; recognized as authoritative or orthodox.",
+    keyConcepts: [
+      { keyword: "established", matchTerms: ["established", "standard", "orthodox", "authoritative", "accepted", "recognized", "official", "approved", "traditional", "classic", "definitive", "sanctioned"], label: "Established standard", hint: "The definition says 'established rules or standards' — the recognized benchmark." },
+    ],
+    synonyms: ["authoritative", "orthodox", "standard", "accepted", "definitive"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "censure",
+    definition: "Strong official disapproval or condemnation of an action or person.",
+    keyConcepts: [
+      { keyword: "official disapproval", matchTerms: ["disapproval", "condemnation", "reprimand", "rebuke", "criticism", "censure", "denunciation", "blame", "reproach", "admonishment", "formal", "official"], label: "Official disapproval", hint: "The definition says 'official disapproval or condemnation' — a formal judgment." },
+    ],
+    synonyms: ["condemnation", "reprimand", "rebuke", "criticism", "reproach"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "chauvinism",
+    definition: "Excessive belief in the superiority of one's own group, nation, or sex.",
+    keyConcepts: [
+      { keyword: "excessive belief", matchTerms: ["excessive", "belief", "superiority", "fanatical", "blind", "bigoted", "prejudiced", "bias", "conviction", "devotion", "zealous", "extreme"], label: "Excessive belief", hint: "The definition says 'excessive belief in superiority' — beyond normal pride into bias." },
+      { keyword: "superiority", matchTerms: ["superiority", "better", "dominant", "supreme", "above", "superior", "higher", "greater", "privilege", "patriotism", "nationalism", "sexism"], label: "Own group's superiority", hint: "The definition says 'superiority of one's own group' — an us-vs-them mentality taken too far." },
+    ],
+    synonyms: ["jingoism", "nationalism", "bigotry", "prejudice", "bias"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "chicanery",
+    definition: "The use of clever but deceptive arguments or trickery to achieve a goal.",
+    keyConcepts: [
+      { keyword: "deceptive", matchTerms: ["deceptive", "trickery", "cunning", "devious", "dishonest", "manipulative", "scheming", "underhanded", "sly", "crafty", "fraudulent", "misleading"], label: "Deceptive tactics", hint: "The definition says 'deceptive arguments or trickery' — dishonest cleverness." },
+      { keyword: "clever", matchTerms: ["clever", "cunning", "artful", "shrewd", "ingenious", "sophisticated", "skillful", "crafty", "calculated", "strategic", "tricky", "wily"], label: "Clever manipulation", hint: "The definition says 'clever but deceptive' — it takes skill but is used dishonestly." },
+    ],
+    synonyms: ["trickery", "deception", "duplicity", "guile", "subterfuge"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "chronological",
+    definition: "Arranged in the order in which events occurred in time; time-sequenced.",
+    keyConcepts: [
+      { keyword: "order", matchTerms: ["order", "sequence", "arranged", "sequential", "organized", "systematic", "structured", "ranked", "sorted", "listed", "categorized", "classified"], label: "Arranged in order", hint: "The definition says 'arranged in order' — items are placed deliberately." },
+      { keyword: "time", matchTerms: ["time", "temporal", "historical", "date", "era", "period", "sequence", "timeline", "when", "occurrence", "event", "chronology"], label: "By time", hint: "The definition says 'occurred in time' — it's specifically ordered by when things happened." },
+    ],
+    synonyms: ["sequential", "time-ordered", "dated", "temporal", "successive"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "circumscribe",
+    definition: "To restrict or limit the range or scope of something strictly.",
+    keyConcepts: [
+      { keyword: "restrict", matchTerms: ["restrict", "limit", "confine", "constrain", "bound", "contain", "curb", "narrow", "define", "delineate", "control", "regulate"], label: "To restrict", hint: "The definition says 'restrict or limit' — putting boundaries around something." },
+    ],
+    synonyms: ["restrict", "limit", "confine", "constrain", "bound"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "complementary",
+    definition: "Combining in a way that enhances each other's qualities; mutually completing.",
+    keyConcepts: [
+      { keyword: "combining", matchTerms: ["combining", "together", "pair", "complement", "mutual", "reciprocal", "joint", "cooperative", "linked", "connected", "interrelated", "partnered"], label: "Combining together", hint: "The definition says 'combining in a way' — it only works when both parts are present." },
+      { keyword: "enhances", matchTerms: ["enhance", "improve", "complete", "strengthen", "enrich", "fulfill", "supplement", "support", "balance", "offset", "supply", "fill"], label: "Enhances qualities", hint: "The definition says 'enhances each other's qualities' — each makes the other better." },
+    ],
+    synonyms: ["supplementary", "matching", "paired", "compatible", "harmonious"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "conciliatory",
+    definition: "Intended to make peace or reduce conflict; willing to make concessions.",
+    keyConcepts: [
+      { keyword: "peace", matchTerms: ["peace", "reconcile", "appease", "soothe", "calm", "placate", "mollify", "harmony", "agreement", "compromise", "goodwill", "mediation"], label: "Making peace", hint: "The definition says 'make peace or reduce conflict' — reaching toward resolution." },
+      { keyword: "concessions", matchTerms: ["concessions", "compromise", "yield", "give", "accommodate", "flexible", "willing", "humble", "lenient", "forgiving", "open", "understanding"], label: "Willing to concede", hint: "The definition says 'willing to make concessions' — not holding firm but giving ground." },
+    ],
+    synonyms: ["appeasing", "placating", "mollifying", "reconciliatory", "accommodating"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "confer",
+    definition: "To have a discussion in order to reach a decision; to grant or bestow something.",
+    keyConcepts: [
+      { keyword: "discussion", matchTerms: ["discussion", "consult", "deliberate", "talk", "meet", "exchange", "debate", "advise", "negotiate", "discuss", "converse", "dialogue"], label: "To have a discussion", hint: "The definition says 'discussion in order to reach a decision' — a purposeful exchange." },
+    ],
+    synonyms: ["consult", "deliberate", "discuss", "bestow", "grant"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "connoisseur",
+    definition: "A person with expert knowledge and refined taste, especially in art or food.",
+    keyConcepts: [
+      { keyword: "expert", matchTerms: ["expert", "authority", "specialist", "judge", "critic", "knowledgeable", "learned", "skilled", "experienced", "sophisticated", "accomplished", "proficient"], label: "Expert knowledge", hint: "The definition says 'expert knowledge' — this person genuinely knows their subject deeply." },
+      { keyword: "refined taste", matchTerms: ["refined", "taste", "discerning", "discriminating", "cultivated", "appreciation", "aesthetic", "palate", "judgment", "sophisticated", "fastidious", "selective"], label: "Refined taste", hint: "The definition says 'refined taste' — the ability to distinguish quality from mediocrity." },
+    ],
+    synonyms: ["expert", "authority", "critic", "aficionado", "maven"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "connote",
+    definition: "To suggest or imply a meaning beyond the literal definition of a word.",
+    keyConcepts: [
+      { keyword: "suggest", matchTerms: ["suggest", "imply", "hint", "indicate", "evoke", "convey", "insinuate", "signal", "intimate", "mean", "represent", "symbolize"], label: "To suggest or imply", hint: "The definition says 'suggest or imply' — communicating beyond what is literally stated." },
+      { keyword: "beyond", matchTerms: ["beyond", "additional", "associated", "secondary", "indirect", "unstated", "underlying", "implicit", "figurative", "emotional", "cultural", "contextual"], label: "Beyond literal meaning", hint: "The definition says 'beyond the literal definition' — the word carries extra associations." },
+    ],
+    synonyms: ["imply", "suggest", "indicate", "evoke", "signify"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "conversant",
+    definition: "Familiar with or knowledgeable about a subject through practice or study.",
+    keyConcepts: [
+      { keyword: "knowledgeable", matchTerms: ["knowledgeable", "familiar", "informed", "versed", "experienced", "acquainted", "aware", "proficient", "practiced", "schooled", "well-read", "trained"], label: "Knowledgeable about", hint: "The definition says 'knowledgeable about a subject' — having genuine understanding." },
+    ],
+    synonyms: ["familiar", "knowledgeable", "acquainted", "versed", "informed"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "cosmopolitan",
+    definition: "Familiar with and at ease in many different countries and cultures; worldly.",
+    keyConcepts: [
+      { keyword: "many cultures", matchTerms: ["cultures", "countries", "nations", "international", "global", "diverse", "multicultural", "worldly", "broad", "universal", "inclusive", "varied"], label: "Many cultures", hint: "The definition says 'many different countries and cultures' — breadth of exposure." },
+      { keyword: "at ease", matchTerms: ["ease", "comfortable", "familiar", "worldly", "sophisticated", "cultured", "polished", "urbane", "broad-minded", "tolerant", "open", "versatile"], label: "At ease in the world", hint: "The definition says 'at ease' — not just exposed but genuinely comfortable across differences." },
+    ],
+    synonyms: ["worldly", "sophisticated", "urbane", "international", "cultured"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "covert",
+    definition: "Not openly acknowledged or displayed; secret and hidden from view.",
+    keyConcepts: [
+      { keyword: "secret", matchTerms: ["secret", "hidden", "clandestine", "concealed", "undercover", "covert", "disguised", "veiled", "surreptitious", "stealthy", "furtive", "incognito"], label: "Secret and hidden", hint: "The definition says 'secret and hidden' — kept deliberately out of sight." },
+    ],
+    synonyms: ["secret", "clandestine", "concealed", "undercover", "surreptitious"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "credulous",
+    definition: "Too willing to believe things without sufficient evidence; easily deceived.",
+    keyConcepts: [
+      { keyword: "willing to believe", matchTerms: ["believe", "trust", "accept", "gullible", "naive", "unsuspecting", "credulous", "deceived", "manipulated", "fooled", "taken in", "swallow"], label: "Willing to believe", hint: "The definition says 'willing to believe' — the disposition to accept without questioning." },
+      { keyword: "without evidence", matchTerms: ["without evidence", "insufficient", "uncritical", "unquestioning", "blindly", "readily", "easily", "hasty", "careless", "indiscriminate", "thoughtless"], label: "Without sufficient evidence", hint: "The definition says 'without sufficient evidence' — belief isn't grounded in proof." },
+    ],
+    synonyms: ["gullible", "naive", "unsuspecting", "trusting", "impressionable"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "culminate",
+    definition: "To reach the highest or final point; to come to a climax after a long development.",
+    keyConcepts: [
+      { keyword: "highest point", matchTerms: ["highest", "peak", "pinnacle", "apex", "climax", "zenith", "summit", "culmination", "top", "final", "ultimate", "acme"], label: "Highest point", hint: "The definition says 'highest or final point' — the moment everything has been building toward." },
+    ],
+    synonyms: ["peak", "climax", "conclude", "cap", "crest"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "debase",
+    definition: "To lower the quality, value, or moral character of something or someone.",
+    keyConcepts: [
+      { keyword: "lower", matchTerms: ["lower", "reduce", "diminish", "degrade", "corrupt", "depreciate", "deteriorate", "cheapen", "tarnish", "taint", "pollute", "contaminate"], label: "To lower quality", hint: "The definition says 'lower the quality or value' — making something worth less." },
+    ],
+    synonyms: ["degrade", "corrupt", "cheapen", "tarnish", "diminish"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "debunk",
+    definition: "To expose the falseness or exaggeration of a claim or belief.",
+    keyConcepts: [
+      { keyword: "expose", matchTerms: ["expose", "reveal", "uncover", "disprove", "discredit", "contradict", "refute", "challenge", "invalidate", "demolish", "puncture", "unmask"], label: "To expose", hint: "The definition says 'expose the falseness' — bringing hidden untruth into the open." },
+      { keyword: "falseness", matchTerms: ["false", "fake", "myth", "claim", "belief", "misconception", "exaggeration", "fallacy", "fraud", "error", "deception", "misinformation"], label: "Falseness of a claim", hint: "The definition says 'falseness or exaggeration of a claim' — the target is something widely believed but wrong." },
+    ],
+    synonyms: ["disprove", "expose", "refute", "discredit", "contradict"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "deference",
+    definition: "Respectful submission to the opinion or authority of another person.",
+    keyConcepts: [
+      { keyword: "respectful submission", matchTerms: ["submission", "respect", "yield", "defer", "comply", "obey", "honor", "bow", "reverence", "regard", "acknowledge", "concede"], label: "Respectful submission", hint: "The definition says 'respectful submission' — it is both yielding AND honoring." },
+      { keyword: "authority", matchTerms: ["authority", "opinion", "judgment", "expertise", "status", "seniority", "knowledge", "experience", "rank", "position", "power", "leadership"], label: "To another's authority", hint: "The definition says 'opinion or authority' — deferring to someone's superior position or knowledge." },
+    ],
+    synonyms: ["submission", "respect", "deference", "compliance", "regard"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "deleterious",
+    definition: "Causing harm or damage, especially in a gradual or subtle way.",
+    keyConcepts: [
+      { keyword: "harm", matchTerms: ["harm", "damage", "injure", "hurt", "impair", "adverse", "detrimental", "destructive", "negative", "unhealthy", "toxic", "poisonous"], label: "Causing harm", hint: "The definition says 'causing harm or damage' — something with a negative effect." },
+      { keyword: "gradual", matchTerms: ["gradual", "subtle", "slow", "insidious", "creeping", "cumulative", "incremental", "imperceptible", "progressive", "over time", "hidden", "unnoticed"], label: "Gradual or subtle", hint: "The definition says 'gradual or subtle' — the harm may not be obvious at first." },
+    ],
+    synonyms: ["harmful", "damaging", "injurious", "detrimental", "adverse"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "denigrate",
+    definition: "To unfairly criticize or attack the reputation of a person or thing.",
+    keyConcepts: [
+      { keyword: "unfairly criticize", matchTerms: ["criticize", "belittle", "disparage", "attack", "defame", "slander", "malign", "vilify", "demean", "discredit", "undermine", "besmirch"], label: "Unfairly criticize", hint: "The definition says 'unfairly criticize' — the criticism goes beyond what is deserved." },
+      { keyword: "reputation", matchTerms: ["reputation", "character", "name", "standing", "image", "honor", "integrity", "credibility", "dignity", "esteem", "status", "worth"], label: "Attack reputation", hint: "The definition says 'attack the reputation' — the target is how someone is perceived." },
+    ],
+    synonyms: ["disparage", "belittle", "malign", "defame", "discredit"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "denote",
+    definition: "To be a name or symbol for something; to indicate or represent directly.",
+    keyConcepts: [
+      { keyword: "indicate", matchTerms: ["indicate", "represent", "mean", "signify", "stand for", "refer to", "name", "label", "identify", "designate", "mark", "specify"], label: "To indicate directly", hint: "The definition says 'indicate or represent directly' — the literal, explicit meaning." },
+    ],
+    synonyms: ["indicate", "signify", "represent", "mean", "stand for"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "deride",
+    definition: "To mock or laugh at with contempt; to treat as ridiculous or unworthy.",
+    keyConcepts: [
+      { keyword: "mock", matchTerms: ["mock", "ridicule", "scorn", "jeer", "sneer", "taunt", "belittle", "scoff", "deride", "dismiss", "disdain", "laugh at"], label: "To mock", hint: "The definition says 'mock or laugh at' — treating with open contempt." },
+      { keyword: "contempt", matchTerms: ["contempt", "disdain", "scorn", "disrespect", "condescension", "dismissiveness", "disregard", "belittlement", "derision", "ridicule", "low regard"], label: "With contempt", hint: "The definition says 'with contempt' — the attitude behind the mockery is deep disrespect." },
+    ],
+    synonyms: ["mock", "ridicule", "scorn", "jeer", "taunt"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "dichotomy",
+    definition: "A division into two sharply contrasting groups or sets of ideas.",
+    keyConcepts: [
+      { keyword: "division", matchTerms: ["division", "split", "separation", "distinction", "contrast", "opposition", "difference", "divergence", "fork", "duality", "binary", "polarity"], label: "A division", hint: "The definition says 'division into two' — a splitting into parts." },
+      { keyword: "contrasting", matchTerms: ["contrasting", "opposing", "conflicting", "contradictory", "incompatible", "polarized", "sharply different", "antithetical", "mutually exclusive", "divergent"], label: "Sharply contrasting", hint: "The definition says 'sharply contrasting' — the two sides are very different, not just slightly so." },
+    ],
+    synonyms: ["division", "split", "contrast", "duality", "polarity"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "dictum",
+    definition: "A formal or authoritative statement of principle; a widely quoted saying.",
+    keyConcepts: [
+      { keyword: "authoritative", matchTerms: ["authoritative", "formal", "official", "binding", "ruling", "pronouncement", "decree", "declaration", "mandate", "edict", "command", "law"], label: "Authoritative statement", hint: "The definition says 'formal or authoritative statement' — it carries weight and recognition." },
+      { keyword: "principle", matchTerms: ["principle", "rule", "maxim", "truth", "saying", "proverb", "axiom", "tenet", "doctrine", "belief", "guideline", "motto"], label: "Statement of principle", hint: "The definition says 'statement of principle' — it encapsulates a guiding truth or rule." },
+    ],
+    synonyms: ["maxim", "saying", "ruling", "decree", "pronouncement"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "didactic",
+    definition: "Intended to teach or instruct, often in a moral or overly preachy way.",
+    keyConcepts: [
+      { keyword: "teach", matchTerms: ["teach", "instruct", "educate", "inform", "guide", "lesson", "preach", "moralize", "lecture", "enlighten", "explain", "illustrate"], label: "Intended to teach", hint: "The definition says 'intended to teach or instruct' — the primary purpose is instruction." },
+      { keyword: "moral", matchTerms: ["moral", "ethics", "virtue", "values", "lesson", "principle", "preachy", "righteous", "improving", "edifying", "moralizing", "sanctimonious"], label: "Moral lesson", hint: "The definition says 'moral or overly preachy' — it teaches with a pointed ethical agenda." },
+    ],
+    synonyms: ["instructive", "educational", "preachy", "moralistic", "pedagogic"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "diffuse",
+    definition: "Spread out over a wide area; not concentrated or focused in one place.",
+    keyConcepts: [
+      { keyword: "spread out", matchTerms: ["spread", "dispersed", "scattered", "distributed", "wide", "broad", "extensive", "pervasive", "diluted", "disseminated", "unfocused", "diffuse"], label: "Spread out", hint: "The definition says 'spread out over a wide area' — not concentrated." },
+      { keyword: "not focused", matchTerms: ["not focused", "unfocused", "lacking concentration", "diluted", "vague", "rambling", "wordy", "verbose", "digressive", "scattered", "diffuse", "meandering"], label: "Not concentrated", hint: "The definition says 'not concentrated' — energy or meaning is spread too thin." },
+    ],
+    synonyms: ["scattered", "dispersed", "spread", "unfocused", "diluted"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "digress",
+    definition: "To deviate from the main topic in speech or writing; to go off on a tangent.",
+    keyConcepts: [
+      { keyword: "deviate", matchTerms: ["deviate", "stray", "wander", "diverge", "depart", "drift", "sidetrack", "turn aside", "veer", "ramble", "tangent", "meander"], label: "To deviate", hint: "The definition says 'deviate from the main topic' — moving away from the central subject." },
+      { keyword: "main topic", matchTerms: ["topic", "subject", "point", "focus", "main idea", "thread", "argument", "discourse", "narrative", "theme", "purpose", "direction"], label: "From the main topic", hint: "The definition says 'main topic' — there is a proper course being abandoned." },
+    ],
+    synonyms: ["deviate", "stray", "wander", "ramble", "sidetrack"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "dilatory",
+    definition: "Slow to act or respond; tending to cause delay or procrastinate.",
+    keyConcepts: [
+      { keyword: "slow", matchTerms: ["slow", "delay", "procrastinate", "tardy", "late", "unhurried", "leisurely", "lagging", "dawdling", "postponing", "stalling", "dragging"], label: "Slow to act", hint: "The definition says 'slow to act or respond' — failing to move with appropriate speed." },
+      { keyword: "delay", matchTerms: ["delay", "postpone", "defer", "stall", "drag out", "put off", "hold back", "obstruct", "hinder", "impede", "stretch out", "prolong"], label: "Causing delay", hint: "The definition says 'tending to cause delay' — the slowness has a consequence." },
+    ],
+    synonyms: ["slow", "tardy", "procrastinating", "delaying", "dawdling"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "discomfiting",
+    definition: "Causing a feeling of unease, embarrassment, or confusion; unsettling.",
+    keyConcepts: [
+      { keyword: "unease", matchTerms: ["unease", "embarrassment", "discomfort", "awkward", "unsettling", "confusing", "disconcerting", "disturbing", "upsetting", "perplexing", "troubling", "destabilizing"], label: "Causing unease", hint: "The definition says 'feeling of unease, embarrassment, or confusion' — a destabilizing effect." },
+    ],
+    synonyms: ["unsettling", "disconcerting", "embarrassing", "awkward", "perplexing"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "discrete",
+    definition: "Individually separate and distinct; existing as individual, unconnected parts.",
+    keyConcepts: [
+      { keyword: "separate", matchTerms: ["separate", "distinct", "individual", "independent", "isolated", "unconnected", "different", "unique", "detached", "divided", "apart", "discontinuous"], label: "Individually separate", hint: "The definition says 'individually separate and distinct' — each part stands alone." },
+    ],
+    synonyms: ["separate", "distinct", "individual", "detached", "unconnected"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "disingenuous",
+    definition: "Not candid or sincere; pretending to be unaware or innocent while having hidden motives.",
+    keyConcepts: [
+      { keyword: "not sincere", matchTerms: ["not sincere", "insincere", "dishonest", "deceptive", "misleading", "false", "fake", "pretending", "hypocritical", "two-faced", "calculated", "manipulative"], label: "Not sincere", hint: "The definition says 'not candid or sincere' — there's a hidden reality beneath the surface." },
+      { keyword: "hidden motives", matchTerms: ["hidden", "motives", "agenda", "intentions", "purpose", "ulterior", "concealed", "disguised", "undisclosed", "secret", "real reason", "underlying"], label: "Hidden motives", hint: "The definition says 'hidden motives' — the person knows more or wants more than they let on." },
+    ],
+    synonyms: ["insincere", "dishonest", "calculating", "hypocritical", "two-faced"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "disseminate",
+    definition: "To spread information, ideas, or knowledge widely among many people.",
+    keyConcepts: [
+      { keyword: "spread", matchTerms: ["spread", "distribute", "broadcast", "circulate", "share", "propagate", "disperse", "disseminate", "publish", "release", "convey", "transmit"], label: "To spread widely", hint: "The definition says 'spread widely' — reaching as many people as possible." },
+      { keyword: "information", matchTerms: ["information", "ideas", "knowledge", "news", "message", "content", "data", "material", "findings", "beliefs", "teachings", "views"], label: "Spread information", hint: "The definition says 'information, ideas, or knowledge' — something intellectual being distributed." },
+    ],
+    synonyms: ["distribute", "broadcast", "circulate", "spread", "propagate"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "dissent",
+    definition: "The holding or expression of an opinion contrary to an official or mainstream view.",
+    keyConcepts: [
+      { keyword: "contrary opinion", matchTerms: ["contrary", "opposing", "different", "disagreement", "objection", "protest", "dissent", "deviation", "non-conformity", "rejection", "challenge", "alternative"], label: "Contrary opinion", hint: "The definition says 'opinion contrary to' — it goes against what is established." },
+      { keyword: "official view", matchTerms: ["official", "mainstream", "established", "authority", "institution", "consensus", "accepted", "orthodox", "majority", "dominant", "government", "body"], label: "Against official view", hint: "The definition says 'official or mainstream view' — the opposition is to something with recognized status." },
+    ],
+    synonyms: ["disagreement", "objection", "protest", "opposition", "nonconformity"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "ebullient",
+    definition: "Overflowing with enthusiasm, energy, and excitement; cheerful and vivacious.",
+    keyConcepts: [
+      { keyword: "overflowing", matchTerms: ["overflowing", "exuberant", "bubbling", "effusive", "irrepressible", "abundant", "brimming", "bursting", "gushing", "vivacious", "animated", "spirited"], label: "Overflowing energy", hint: "The definition says 'overflowing with enthusiasm' — the energy can't be contained." },
+      { keyword: "enthusiasm", matchTerms: ["enthusiasm", "energy", "excitement", "joy", "zest", "vitality", "liveliness", "vigor", "spirit", "passion", "delight", "cheerfulness"], label: "With enthusiasm", hint: "The definition says 'enthusiasm, energy, and excitement' — all positive energy." },
+    ],
+    synonyms: ["exuberant", "effervescent", "vivacious", "enthusiastic", "buoyant"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "eccentric",
+    definition: "Departing from conventional or accepted behavior in an unconventional way; odd.",
+    keyConcepts: [
+      { keyword: "unconventional", matchTerms: ["unconventional", "unusual", "odd", "peculiar", "quirky", "idiosyncratic", "nonconformist", "irregular", "weird", "strange", "offbeat", "individual"], label: "Unconventional", hint: "The definition says 'unconventional way' — different from the norm in a distinctive manner." },
+      { keyword: "behavior", matchTerms: ["behavior", "manner", "conduct", "character", "personality", "habit", "style", "practice", "attitude", "way", "approach", "disposition"], label: "Departing from behavior norms", hint: "The definition says 'departing from conventional behavior' — it's seen in how someone acts." },
+    ],
+    synonyms: ["unconventional", "quirky", "odd", "peculiar", "idiosyncratic"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "eclectic",
+    definition: "Deriving ideas from a broad and diverse range of sources or styles.",
+    keyConcepts: [
+      { keyword: "diverse", matchTerms: ["diverse", "varied", "mixed", "broad", "wide-ranging", "multifaceted", "heterogeneous", "assorted", "different", "various", "multiple", "wide"], label: "Diverse range", hint: "The definition says 'broad and diverse range' — it comes from many different places." },
+      { keyword: "sources", matchTerms: ["sources", "styles", "influences", "traditions", "schools", "disciplines", "areas", "fields", "backgrounds", "origins", "approaches", "methods"], label: "Range of sources", hint: "The definition says 'range of sources or styles' — selecting from many distinct traditions." },
+    ],
+    synonyms: ["diverse", "varied", "wide-ranging", "multifaceted", "catholic"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "efficacy",
+    definition: "The ability to produce the intended result; effectiveness in achieving a goal.",
+    keyConcepts: [
+      { keyword: "intended result", matchTerms: ["intended", "result", "effect", "outcome", "goal", "purpose", "aim", "objective", "success", "achievement", "impact", "output"], label: "Intended result", hint: "The definition says 'intended result' — it's about producing exactly what was sought." },
+      { keyword: "ability", matchTerms: ["ability", "power", "capacity", "capability", "strength", "potency", "effectiveness", "efficiency", "performance", "productivity", "reliability", "force"], label: "Ability to produce", hint: "The definition says 'ability to produce' — the capacity to actually make something happen." },
+    ],
+    synonyms: ["effectiveness", "potency", "efficiency", "capability", "power"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "egalitarian",
+    definition: "Believing in or based on the principle that all people are equal and deserve equal rights.",
+    keyConcepts: [
+      { keyword: "equal", matchTerms: ["equal", "equality", "fair", "just", "democratic", "impartial", "balanced", "equitable", "uniform", "same", "unbiased", "neutral"], label: "All people equal", hint: "The definition says 'all people are equal' — no hierarchies, no special treatment." },
+      { keyword: "rights", matchTerms: ["rights", "treatment", "opportunity", "access", "privilege", "status", "respect", "dignity", "entitlement", "freedom", "consideration", "standing"], label: "Equal rights", hint: "The definition says 'deserve equal rights' — the equality is in what people are owed." },
+    ],
+    synonyms: ["equalitarian", "democratic", "fair", "impartial", "just"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "elicit",
+    definition: "To draw out or provoke a response, reaction, or information from someone.",
+    keyConcepts: [
+      { keyword: "draw out", matchTerms: ["draw out", "provoke", "evoke", "call forth", "bring out", "extract", "prompt", "induce", "generate", "produce", "cause", "stimulate"], label: "To draw out", hint: "The definition says 'draw out or provoke' — pulling something out that wasn't freely given." },
+      { keyword: "response", matchTerms: ["response", "reaction", "information", "answer", "reply", "emotion", "feeling", "behavior", "action", "data", "opinion", "comment"], label: "A response or reaction", hint: "The definition says 'response, reaction, or information' — the result of the elicitation." },
+    ],
+    synonyms: ["evoke", "provoke", "extract", "draw out", "prompt"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "eloquent",
+    definition: "Fluent and persuasive in speech or writing; able to express ideas with clarity and force.",
+    keyConcepts: [
+      { keyword: "fluent", matchTerms: ["fluent", "articulate", "expressive", "persuasive", "compelling", "forceful", "clear", "moving", "effective", "polished", "coherent", "powerful"], label: "Fluent and persuasive", hint: "The definition says 'fluent and persuasive' — not just clear but also convincing." },
+    ],
+    synonyms: ["articulate", "fluent", "expressive", "persuasive", "forceful"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "eminent",
+    definition: "Famous and respected within a particular field; standing out for achievements or status.",
+    keyConcepts: [
+      { keyword: "famous", matchTerms: ["famous", "renowned", "distinguished", "celebrated", "prominent", "notable", "illustrious", "respected", "acclaimed", "preeminent", "outstanding", "recognized"], label: "Famous and respected", hint: "The definition says 'famous and respected' — this person is known AND admired." },
+      { keyword: "particular field", matchTerms: ["field", "area", "profession", "domain", "discipline", "sphere", "subject", "industry", "career", "specialty", "realm", "category"], label: "In a particular field", hint: "The definition says 'within a particular field' — the eminence is specific, not general." },
+    ],
+    synonyms: ["distinguished", "renowned", "prominent", "notable", "celebrated"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "emulate",
+    definition: "To try to equal or surpass another person or thing by copying their example.",
+    keyConcepts: [
+      { keyword: "equal or surpass", matchTerms: ["equal", "surpass", "match", "rival", "exceed", "outdo", "beat", "better", "compete", "challenge", "meet", "overtake"], label: "Equal or surpass", hint: "The definition says 'equal or surpass' — the goal is to be as good as or better." },
+      { keyword: "copying", matchTerms: ["copy", "imitate", "model", "follow", "mirror", "replicate", "reproduce", "take after", "learn from", "adopt", "simulate", "mimic"], label: "By copying", hint: "The definition says 'by copying their example' — imitation is the means to competition." },
+    ],
+    synonyms: ["imitate", "copy", "rival", "match", "mirror"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "endemic",
+    definition: "Native to and regularly found in a particular place or population; locally common.",
+    keyConcepts: [
+      { keyword: "native", matchTerms: ["native", "local", "indigenous", "specific", "natural", "inherent", "characteristic", "belonging", "originating", "confined", "exclusive", "particular"], label: "Native to a place", hint: "The definition says 'native to a particular place' — it originated there and belongs there." },
+      { keyword: "regularly found", matchTerms: ["regularly", "commonly", "frequently", "consistently", "always", "prevalent", "widespread", "typical", "usual", "normal", "recurrent", "persistent"], label: "Regularly found", hint: "The definition says 'regularly found' — it's not a surprise or anomaly but an expected presence." },
+    ],
+    synonyms: ["native", "indigenous", "local", "prevalent", "widespread"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "enervate",
+    definition: "To weaken or drain of energy, vitality, or strength; to make someone feel exhausted.",
+    keyConcepts: [
+      { keyword: "weaken", matchTerms: ["weaken", "drain", "exhaust", "tire", "deplete", "sap", "debilitate", "enfeeble", "devitalize", "impair", "reduce", "diminish"], label: "To weaken", hint: "The definition says 'weaken or drain' — removing what gives something life or force." },
+      { keyword: "energy", matchTerms: ["energy", "vitality", "strength", "vigor", "force", "power", "stamina", "drive", "spirit", "life", "motivation", "capacity"], label: "Drain of energy", hint: "The definition says 'energy, vitality, or strength' — what is being taken away." },
+    ],
+    synonyms: ["weaken", "exhaust", "debilitate", "sap", "drain"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "engender",
+    definition: "To cause or give rise to a feeling, situation, or condition; to bring into being.",
+    keyConcepts: [
+      { keyword: "cause", matchTerms: ["cause", "produce", "generate", "create", "bring about", "give rise", "foster", "cultivate", "spark", "trigger", "inspire", "develop"], label: "To cause", hint: "The definition says 'cause or give rise to' — being the origin of something." },
+      { keyword: "feeling", matchTerms: ["feeling", "situation", "condition", "emotion", "attitude", "response", "outcome", "result", "effect", "state", "quality", "characteristic"], label: "A feeling or situation", hint: "The definition says 'a feeling, situation, or condition' — the things that are engendered." },
+    ],
+    synonyms: ["cause", "produce", "generate", "create", "foster"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "enigma",
+    definition: "A person or thing that is mysterious, puzzling, or difficult to understand.",
+    keyConcepts: [
+      { keyword: "mysterious", matchTerms: ["mysterious", "puzzling", "baffling", "inexplicable", "inscrutable", "incomprehensible", "obscure", "ambiguous", "complex", "cryptic", "perplexing", "confounding"], label: "Mysterious", hint: "The definition says 'mysterious, puzzling' — resisting easy understanding." },
+      { keyword: "difficult to understand", matchTerms: ["difficult to understand", "hard to read", "impenetrable", "elusive", "unknowable", "opaque", "unclear", "obscure", "hidden", "complex", "deep", "challenging"], label: "Difficult to understand", hint: "The definition says 'difficult to understand' — it is genuinely resistant to being figured out." },
+    ],
+    synonyms: ["mystery", "puzzle", "riddle", "paradox", "conundrum"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "entitlement",
+    definition: "The belief that one deserves special privileges or treatment, often without justification.",
+    keyConcepts: [
+      { keyword: "belief", matchTerms: ["belief", "assumption", "expectation", "conviction", "attitude", "sense", "feeling", "perception", "idea", "notion", "claim", "view"], label: "Belief one deserves", hint: "The definition says 'belief that one deserves' — it is a mental stance, not a fact." },
+      { keyword: "privileges", matchTerms: ["privileges", "special treatment", "rights", "benefits", "advantages", "concessions", "favors", "accommodations", "exemptions", "deference", "consideration", "access"], label: "Special privileges", hint: "The definition says 'special privileges or treatment' — expecting more than others receive." },
+    ],
+    synonyms: ["presumption", "privilege", "right", "claim", "expectation"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "ephemeral",
+    definition: "Lasting for only a very short time; passing quickly and not enduring.",
+    keyConcepts: [
+      { keyword: "very short time", matchTerms: ["short time", "brief", "fleeting", "transient", "temporary", "momentary", "passing", "transitory", "impermanent", "short-lived", "quick", "instantaneous"], label: "Very short time", hint: "The definition says 'only a very short time' — it barely lasts before it's gone." },
+    ],
+    synonyms: ["transient", "fleeting", "momentary", "short-lived", "impermanent"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "equitable",
+    definition: "Fair and impartial; treating all parties with justice and without favoritism.",
+    keyConcepts: [
+      { keyword: "fair", matchTerms: ["fair", "just", "impartial", "balanced", "unbiased", "equal", "neutral", "objective", "disinterested", "evenhanded", "reasonable", "proportionate"], label: "Fair and impartial", hint: "The definition says 'fair and impartial' — neither side gets special advantage." },
+    ],
+    synonyms: ["fair", "just", "impartial", "balanced", "unbiased"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "erratic",
+    definition: "Not even or regular; unpredictable and inconsistent in behavior or movement.",
+    keyConcepts: [
+      { keyword: "unpredictable", matchTerms: ["unpredictable", "inconsistent", "irregular", "variable", "volatile", "changeable", "unstable", "capricious", "random", "unsteady", "fluctuating", "sporadic"], label: "Unpredictable", hint: "The definition says 'unpredictable and inconsistent' — you can't rely on it to behave in any set way." },
+    ],
+    synonyms: ["unpredictable", "inconsistent", "irregular", "volatile", "capricious"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "erudite",
+    definition: "Having or showing deep, often scholarly knowledge; highly educated and learned.",
+    keyConcepts: [
+      { keyword: "deep knowledge", matchTerms: ["knowledge", "learning", "scholarship", "wisdom", "education", "expertise", "literacy", "culture", "intellect", "understanding", "insight", "academic"], label: "Deep knowledge", hint: "The definition says 'deep, often scholarly knowledge' — not casual familiarity but serious study." },
+    ],
+    synonyms: ["learned", "scholarly", "knowledgeable", "erudite", "educated"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "eschew",
+    definition: "To deliberately avoid or abstain from something; to shun as undesirable.",
+    keyConcepts: [
+      { keyword: "avoid", matchTerms: ["avoid", "abstain", "shun", "forgo", "forswear", "refrain", "reject", "steer clear", "keep away", "bypass", "evade", "sidestep"], label: "Deliberately avoid", hint: "The definition says 'deliberately avoid or abstain' — a conscious, purposeful choice." },
+    ],
+    synonyms: ["avoid", "shun", "abstain", "forgo", "forswear"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "ethos",
+    definition: "The characteristic spirit or fundamental values of a culture, community, or group.",
+    keyConcepts: [
+      { keyword: "characteristic spirit", matchTerms: ["spirit", "character", "values", "culture", "identity", "nature", "essence", "attitude", "philosophy", "outlook", "temperament", "disposition"], label: "Characteristic spirit", hint: "The definition says 'characteristic spirit' — the underlying tone that defines a group." },
+      { keyword: "culture", matchTerms: ["culture", "community", "group", "society", "organization", "nation", "movement", "institution", "tradition", "people", "collective", "body"], label: "Of a culture or group", hint: "The definition says 'culture, community, or group' — an ethos belongs to a collective, not an individual." },
+    ],
+    synonyms: ["character", "spirit", "values", "philosophy", "culture"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "eulogy",
+    definition: "A speech or piece of writing praising a person, especially one who has recently died.",
+    keyConcepts: [
+      { keyword: "praising", matchTerms: ["praising", "tribute", "honor", "celebrate", "commend", "extol", "laud", "glorify", "appreciate", "commemorate", "remember", "acclaim"], label: "Praising a person", hint: "The definition says 'praising a person' — the purpose is to honor and celebrate." },
+      { keyword: "died", matchTerms: ["died", "death", "funeral", "deceased", "passed", "memorial", "mourning", "loss", "obituary", "late", "gone", "farewell"], label: "Who has died", hint: "The definition says 'recently died' — a eulogy is most commonly associated with loss and mourning." },
+    ],
+    synonyms: ["tribute", "encomium", "panegyric", "oration", "testimonial"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "exacerbate",
+    definition: "To make an already bad situation worse or more severe.",
+    keyConcepts: [
+      { keyword: "worse", matchTerms: ["worse", "aggravate", "intensify", "inflame", "heighten", "increase", "compound", "deepen", "amplify", "escalate", "deteriorate", "magnify"], label: "Make worse", hint: "The definition says 'make worse or more severe' — things were already bad and now they are more so." },
+      { keyword: "already bad", matchTerms: ["already bad", "existing problem", "situation", "condition", "difficulty", "tension", "conflict", "suffering", "pain", "issue", "trouble", "complication"], label: "Already bad situation", hint: "The definition says 'already bad situation' — exacerbation requires a pre-existing problem." },
+    ],
+    synonyms: ["aggravate", "worsen", "intensify", "inflame", "compound"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "exacting",
+    definition: "Making great demands; requiring very precise and careful attention to standards.",
+    keyConcepts: [
+      { keyword: "great demands", matchTerms: ["demands", "requirements", "standards", "expectations", "criteria", "conditions", "rigor", "strictness", "precision", "exactness", "accuracy", "thoroughness"], label: "Making great demands", hint: "The definition says 'making great demands' — a high bar is set and enforced." },
+      { keyword: "precise", matchTerms: ["precise", "careful", "meticulous", "exact", "rigorous", "accurate", "fastidious", "thorough", "strict", "demanding", "uncompromising", "detailed"], label: "Precise attention", hint: "The definition says 'precise and careful' — not just demanding but demanding exactness specifically." },
+    ],
+    synonyms: ["demanding", "rigorous", "strict", "meticulous", "fastidious"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "exhaustive",
+    definition: "Covering every aspect of a topic thoroughly; leaving nothing out.",
+    keyConcepts: [
+      { keyword: "every aspect", matchTerms: ["every aspect", "complete", "comprehensive", "thorough", "all-encompassing", "inclusive", "total", "entire", "full", "whole", "broad", "detailed"], label: "Every aspect", hint: "The definition says 'every aspect' — nothing is overlooked or skipped." },
+      { keyword: "leaving nothing out", matchTerms: ["leaving nothing", "complete", "thorough", "full", "exhaustive", "comprehensive", "all-inclusive", "systematic", "rigorous", "meticulous", "painstaking", "definitive"], label: "Leaving nothing out", hint: "The definition says 'leaving nothing out' — the completeness is the defining quality." },
+    ],
+    synonyms: ["comprehensive", "thorough", "complete", "all-inclusive", "definitive"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "expedient",
+    definition: "Convenient and practical, often at the expense of moral considerations.",
+    keyConcepts: [
+      { keyword: "convenient", matchTerms: ["convenient", "practical", "useful", "effective", "advantageous", "suitable", "serviceable", "efficient", "pragmatic", "opportunistic", "sensible", "tactical"], label: "Convenient and practical", hint: "The definition says 'convenient and practical' — it works, and that's what matters." },
+      { keyword: "moral considerations", matchTerms: ["moral", "ethics", "principles", "values", "conscience", "integrity", "fairness", "honor", "right", "wrong", "scruples", "ideals"], label: "At expense of morals", hint: "The definition says 'at the expense of moral considerations' — expediency trades ethics for results." },
+    ],
+    synonyms: ["practical", "convenient", "pragmatic", "useful", "politic"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "fanatical",
+    definition: "Filled with excessive and uncritical devotion to a cause, belief, or activity.",
+    keyConcepts: [
+      { keyword: "excessive devotion", matchTerms: ["excessive", "devotion", "obsessive", "extreme", "zealous", "fervent", "intense", "passionate", "radical", "dogmatic", "blind", "unreasoning"], label: "Excessive devotion", hint: "The definition says 'excessive devotion' — going far beyond normal commitment." },
+      { keyword: "uncritical", matchTerms: ["uncritical", "blind", "unquestioning", "unreasoning", "rigid", "inflexible", "dogmatic", "close-minded", "absolute", "unwavering", "unthinking", "irrational"], label: "Uncritical belief", hint: "The definition says 'uncritical devotion' — reason and doubt have been switched off." },
+    ],
+    synonyms: ["zealous", "obsessive", "fervent", "extreme", "radical"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "fastidious",
+    definition: "Very attentive to accuracy and detail; hard to please due to high standards.",
+    keyConcepts: [
+      { keyword: "attentive to detail", matchTerms: ["attentive", "detail", "precise", "meticulous", "careful", "thorough", "exacting", "particular", "fussy", "scrupulous", "demanding", "perfectionist"], label: "Attentive to detail", hint: "The definition says 'attentive to accuracy and detail' — nothing escapes notice." },
+      { keyword: "high standards", matchTerms: ["high standards", "hard to please", "discerning", "selective", "demanding", "exacting", "fussy", "critical", "discriminating", "picky", "difficult", "choosy"], label: "Hard to please", hint: "The definition says 'hard to please due to high standards' — ordinary quality won't satisfy." },
+    ],
+    synonyms: ["meticulous", "precise", "exacting", "fussy", "discriminating"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "feasible",
+    definition: "Possible to achieve or accomplish; likely to work in practice.",
+    keyConcepts: [
+      { keyword: "possible", matchTerms: ["possible", "achievable", "workable", "viable", "realistic", "practicable", "manageable", "attainable", "doable", "plausible", "reasonable", "sensible"], label: "Possible to achieve", hint: "The definition says 'possible to achieve or accomplish' — not just theoretical but actually doable." },
+    ],
+    synonyms: ["possible", "viable", "workable", "practicable", "achievable"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "felicitous",
+    definition: "Well-suited to the occasion; pleasing and aptly chosen.",
+    keyConcepts: [
+      { keyword: "well-suited", matchTerms: ["well-suited", "apt", "appropriate", "fitting", "perfect", "ideal", "suitable", "timely", "pertinent", "relevant", "happy", "fortunate"], label: "Well-suited", hint: "The definition says 'well-suited to the occasion' — it fits exactly right." },
+      { keyword: "pleasing", matchTerms: ["pleasing", "delightful", "charming", "agreeable", "satisfying", "elegant", "graceful", "apt", "inspired", "excellent", "successful", "effective"], label: "Pleasing and apt", hint: "The definition says 'pleasing and aptly chosen' — not just correct but enjoyable in its correctness." },
+    ],
+    synonyms: ["apt", "fitting", "appropriate", "inspired", "well-chosen"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "finesse",
+    definition: "Skill and delicacy in handling a difficult situation; subtle and refined technique.",
+    keyConcepts: [
+      { keyword: "skill", matchTerms: ["skill", "delicacy", "subtlety", "refinement", "technique", "artistry", "tact", "dexterity", "mastery", "craft", "elegance", "grace"], label: "Skill and delicacy", hint: "The definition says 'skill and delicacy' — not brute force but careful, precise handling." },
+      { keyword: "difficult situation", matchTerms: ["difficult situation", "challenge", "problem", "obstacle", "complexity", "sensitivity", "nuance", "complication", "predicament", "negotiation", "conflict", "task"], label: "In a difficult situation", hint: "The definition says 'handling a difficult situation' — finesse matters most under pressure." },
+    ],
+    synonyms: ["skill", "delicacy", "tact", "subtlety", "artistry"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "florid",
+    definition: "Elaborately ornate in style or color; excessively showy or flowery in language.",
+    keyConcepts: [
+      { keyword: "ornate", matchTerms: ["ornate", "elaborate", "decorative", "showy", "flowery", "baroque", "overwrought", "embellished", "fancy", "busy", "extravagant", "flamboyant"], label: "Elaborately ornate", hint: "The definition says 'elaborately ornate' — decorated to an excessive degree." },
+      { keyword: "excessively showy", matchTerms: ["excessively showy", "overdone", "flamboyant", "ostentatious", "gaudy", "pompous", "pretentious", "affected", "overwrought", "verbose", "bombastic", "grandiose"], label: "Excessively showy", hint: "The definition says 'excessively showy or flowery' — it has gone too far." },
+    ],
+    synonyms: ["ornate", "flowery", "baroque", "elaborate", "flamboyant"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "foreshadow",
+    definition: "To be a warning or indication of something that will happen in the future.",
+    keyConcepts: [
+      { keyword: "warning", matchTerms: ["warning", "indication", "sign", "signal", "portent", "omen", "hint", "presage", "foretell", "anticipate", "predict", "suggest"], label: "A warning or indication", hint: "The definition says 'warning or indication' — it points forward to what's coming." },
+      { keyword: "future", matchTerms: ["future", "upcoming", "later", "subsequent", "coming", "eventual", "ahead", "forthcoming", "impending", "approaching", "pending", "next"], label: "Of the future", hint: "The definition says 'will happen in the future' — the foreshadowing precedes the event." },
+    ],
+    synonyms: ["presage", "portend", "prefigure", "herald", "suggest"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "frenetic",
+    definition: "Fast, energetic, and frantic; characterized by wild activity or excitement.",
+    keyConcepts: [
+      { keyword: "frantic", matchTerms: ["frantic", "frenzied", "wild", "hectic", "chaotic", "manic", "intense", "furious", "fierce", "turbulent", "breathless", "disordered"], label: "Frantic and wild", hint: "The definition says 'frantic' — energy with an edge of disorder or urgency." },
+      { keyword: "fast", matchTerms: ["fast", "energetic", "rapid", "vigorous", "intense", "active", "busy", "rushing", "speeding", "urgent", "restless", "driven"], label: "Fast and energetic", hint: "The definition says 'fast, energetic' — movement and activity at high speed." },
+    ],
+    synonyms: ["frenzied", "hectic", "frantic", "manic", "wild"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "frugal",
+    definition: "Sparing in the use of resources; careful not to waste money or food.",
+    keyConcepts: [
+      { keyword: "sparing", matchTerms: ["sparing", "economical", "thrifty", "careful", "conservative", "restrained", "moderate", "prudent", "saving", "measured", "judicious", "minimal"], label: "Sparing with resources", hint: "The definition says 'sparing in the use of resources' — using only what is needed." },
+      { keyword: "waste", matchTerms: ["waste", "squander", "excessive", "extravagant", "lavish", "spend", "use up", "exhaust", "deplete", "dissipate", "indulge", "overconsume"], label: "Careful not to waste", hint: "The definition says 'careful not to waste' — the defining concern is avoiding excess." },
+    ],
+    synonyms: ["thrifty", "economical", "sparing", "abstemious", "parsimonious"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "futile",
+    definition: "Incapable of producing any useful result; pointless and without effect.",
+    keyConcepts: [
+      { keyword: "no useful result", matchTerms: ["no result", "pointless", "ineffective", "useless", "unproductive", "vain", "fruitless", "wasted", "hopeless", "unsuccessful", "empty", "in vain"], label: "No useful result", hint: "The definition says 'incapable of producing any useful result' — effort with no payoff." },
+    ],
+    synonyms: ["pointless", "fruitless", "useless", "vain", "ineffectual"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "gauche",
+    definition: "Lacking social grace or tact; awkward in a way that causes embarrassment.",
+    keyConcepts: [
+      { keyword: "lacking social grace", matchTerms: ["lacking social grace", "tactless", "awkward", "clumsy", "inept", "insensitive", "crude", "blundering", "unsophisticated", "embarrassing", "unpolished", "ungainly"], label: "Lacking social grace", hint: "The definition says 'lacking social grace or tact' — not knowing how to behave." },
+      { keyword: "embarrassment", matchTerms: ["embarrassment", "awkward", "uncomfortable", "cringe", "inappropriate", "offensive", "out of place", "clumsy", "unfortunate", "regrettable", "tactless", "indiscreet"], label: "Causing embarrassment", hint: "The definition says 'causes embarrassment' — the awkwardness has a social cost." },
+    ],
+    synonyms: ["tactless", "awkward", "clumsy", "inept", "unsophisticated"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "germane",
+    definition: "Relevant and appropriate to the matter being discussed; pertinent.",
+    keyConcepts: [
+      { keyword: "relevant", matchTerms: ["relevant", "pertinent", "applicable", "appropriate", "related", "connected", "fitting", "apt", "on point", "material", "on topic", "useful"], label: "Relevant", hint: "The definition says 'relevant and appropriate' — it fits the discussion at hand." },
+    ],
+    synonyms: ["relevant", "pertinent", "applicable", "fitting", "apt"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "glib",
+    definition: "Speaking fluently but without sincerity or depth; superficially plausible.",
+    keyConcepts: [
+      { keyword: "without sincerity", matchTerms: ["without sincerity", "superficial", "shallow", "insincere", "hollow", "facile", "empty", "pat", "smooth", "slick", "flippant", "offhand"], label: "Without sincerity", hint: "The definition says 'without sincerity or depth' — the words flow easily but mean little." },
+      { keyword: "fluently", matchTerms: ["fluently", "smooth", "easy", "ready", "quick", "facile", "effortless", "confident", "articulate", "ready-made", "well-rehearsed", "polished"], label: "Speaking fluently", hint: "The definition says 'speaking fluently' — the delivery is easy, which is part of the deception." },
+    ],
+    synonyms: ["facile", "superficial", "slick", "shallow", "insincere"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "gregarious",
+    definition: "Fond of company and social interaction; enjoying the company of others.",
+    keyConcepts: [
+      { keyword: "fond of company", matchTerms: ["fond of company", "sociable", "outgoing", "social", "extroverted", "friendly", "convivial", "affable", "approachable", "warm", "engaging", "people-oriented"], label: "Fond of company", hint: "The definition says 'fond of company and social interaction' — genuinely enjoying being with others." },
+    ],
+    synonyms: ["sociable", "outgoing", "extroverted", "convivial", "social"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "hegemony",
+    definition: "Leadership or dominance of one group over others, especially in political or cultural terms.",
+    keyConcepts: [
+      { keyword: "dominance", matchTerms: ["dominance", "leadership", "control", "authority", "supremacy", "influence", "power", "ascendancy", "sway", "mastery", "rule", "command"], label: "Dominance", hint: "The definition says 'leadership or dominance' — one party is clearly on top." },
+      { keyword: "one group over others", matchTerms: ["group", "nation", "state", "class", "power", "bloc", "culture", "institution", "over others", "superiority", "hierarchy", "domination"], label: "One group over others", hint: "The definition says 'one group over others' — the relationship is unequal." },
+    ],
+    synonyms: ["dominance", "supremacy", "leadership", "authority", "ascendancy"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "heterogeneous",
+    definition: "Made up of different kinds of elements; diverse and varied in composition.",
+    keyConcepts: [
+      { keyword: "different kinds", matchTerms: ["different kinds", "diverse", "varied", "mixed", "assorted", "disparate", "unlike", "dissimilar", "miscellaneous", "multifarious", "eclectic", "various"], label: "Different kinds", hint: "The definition says 'different kinds of elements' — diversity is the defining quality." },
+    ],
+    synonyms: ["diverse", "varied", "mixed", "disparate", "assorted"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "homogeneous",
+    definition: "Made up of the same kind of elements; uniform and consistent throughout.",
+    keyConcepts: [
+      { keyword: "same kind", matchTerms: ["same kind", "uniform", "consistent", "identical", "alike", "similar", "undifferentiated", "standardized", "regular", "unvaried", "equal", "matching"], label: "Same kind", hint: "The definition says 'same kind of elements' — uniformity is the defining quality." },
+      { keyword: "throughout", matchTerms: ["throughout", "entirely", "wholly", "across", "all through", "completely", "totally", "uniformly", "consistently", "everywhere", "without variation"], label: "Uniform throughout", hint: "The definition says 'uniform and consistent throughout' — no variation from any angle." },
+    ],
+    synonyms: ["uniform", "consistent", "identical", "standardized", "undifferentiated"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "iconoclast",
+    definition: "A person who attacks or challenges established beliefs, traditions, or institutions.",
+    keyConcepts: [
+      { keyword: "attacks", matchTerms: ["attacks", "challenges", "opposes", "questions", "rejects", "undermines", "criticizes", "defies", "subverts", "disrupts", "rebels against", "confronts"], label: "Attacks or challenges", hint: "The definition says 'attacks or challenges' — active opposition, not just skepticism." },
+      { keyword: "established beliefs", matchTerms: ["established beliefs", "traditions", "institutions", "orthodoxy", "convention", "norms", "dogma", "status quo", "accepted wisdom", "sacred cows", "authority", "customs"], label: "Established beliefs", hint: "The definition says 'established beliefs, traditions, or institutions' — the targets are things others revere." },
+    ],
+    synonyms: ["rebel", "dissenter", "nonconformist", "heretic", "radical"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "idiosyncrasy",
+    definition: "A distinctive characteristic or habit that is peculiar to an individual.",
+    keyConcepts: [
+      { keyword: "distinctive", matchTerms: ["distinctive", "peculiar", "characteristic", "unique", "individual", "personal", "specific", "particular", "singular", "unusual", "uncommon", "trademark"], label: "Distinctive characteristic", hint: "The definition says 'distinctive characteristic' — it stands out as unique to that person." },
+      { keyword: "individual", matchTerms: ["individual", "person", "particular", "one's own", "personal", "private", "unique", "specific", "someone", "unique to", "characteristic of", "belonging to"], label: "Peculiar to an individual", hint: "The definition says 'peculiar to an individual' — it identifies that one person." },
+    ],
+    synonyms: ["quirk", "mannerism", "eccentricity", "peculiarity", "trait"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "incongruous",
+    definition: "Not fitting or in harmony with the surrounding environment; out of place.",
+    keyConcepts: [
+      { keyword: "not fitting", matchTerms: ["not fitting", "out of place", "inappropriate", "inconsistent", "incompatible", "mismatched", "jarring", "discordant", "unsuitable", "inharmonious", "clashing", "alien"], label: "Not fitting", hint: "The definition says 'not fitting' — there is a mismatch between thing and context." },
+      { keyword: "surrounding environment", matchTerms: ["environment", "context", "setting", "surroundings", "situation", "background", "place", "location", "atmosphere", "circumstances", "conditions", "backdrop"], label: "With surroundings", hint: "The definition says 'surrounding environment' — what matters is how it relates to its context." },
+    ],
+    synonyms: ["inappropriate", "inconsistent", "out of place", "incompatible", "mismatched"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "inconsequential",
+    definition: "Not important or significant; too small or trivial to matter.",
+    keyConcepts: [
+      { keyword: "not important", matchTerms: ["not important", "insignificant", "trivial", "minor", "negligible", "trifling", "immaterial", "irrelevant", "meaningless", "petty", "unimportant", "small"], label: "Not important", hint: "The definition says 'not important or significant' — it registers no real weight." },
+    ],
+    synonyms: ["insignificant", "trivial", "minor", "negligible", "trifling"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "indolent",
+    definition: "Disinclined to work or exert effort; habitually lazy.",
+    keyConcepts: [
+      { keyword: "disinclined to work", matchTerms: ["disinclined", "lazy", "idle", "slothful", "lethargic", "inactive", "sluggish", "inert", "apathetic", "unmotivated", "listless", "passive"], label: "Disinclined to work", hint: "The definition says 'disinclined to work' — an aversion to effort." },
+    ],
+    synonyms: ["lazy", "idle", "slothful", "sluggish", "inert"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "infallible",
+    definition: "Incapable of making errors; never wrong or failing.",
+    keyConcepts: [
+      { keyword: "incapable of errors", matchTerms: ["incapable of errors", "never wrong", "perfect", "flawless", "unerring", "reliable", "certain", "dependable", "accurate", "faultless", "trustworthy", "unfailing"], label: "Incapable of errors", hint: "The definition says 'incapable of making errors' — no mistakes are possible." },
+    ],
+    synonyms: ["perfect", "unerring", "flawless", "certain", "reliable"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "ingenuous",
+    definition: "Innocent and unsuspecting; sincere and candid without hidden motives.",
+    keyConcepts: [
+      { keyword: "innocent", matchTerms: ["innocent", "sincere", "candid", "guileless", "naive", "artless", "honest", "open", "genuine", "straightforward", "unpretentious", "direct"], label: "Innocent and sincere", hint: "The definition says 'innocent and unsuspecting' — pure in motive and perception." },
+      { keyword: "without hidden motives", matchTerms: ["without hidden motives", "transparent", "honest", "genuine", "candid", "open", "frank", "truthful", "above board", "straightforward", "uncalculating", "artless"], label: "Without hidden motives", hint: "The definition says 'without hidden motives' — what you see is genuinely what is there." },
+    ],
+    synonyms: ["naive", "sincere", "artless", "candid", "guileless"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "ingrained",
+    definition: "Firmly established as a habit or belief; deeply rooted in someone's character.",
+    keyConcepts: [
+      { keyword: "firmly established", matchTerms: ["firmly established", "deeply rooted", "entrenched", "fixed", "embedded", "set", "habitual", "deep-seated", "persistent", "lasting", "abiding", "permanent"], label: "Firmly established", hint: "The definition says 'firmly established' — it has taken hold and won't easily shift." },
+      { keyword: "habit or belief", matchTerms: ["habit", "belief", "attitude", "value", "pattern", "behavior", "character", "nature", "instinct", "disposition", "tendency", "conviction"], label: "As habit or belief", hint: "The definition says 'as a habit or belief' — something behavioral or mental, not physical." },
+    ],
+    synonyms: ["entrenched", "deep-seated", "rooted", "habitual", "fixed"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "inherent",
+    definition: "Existing as a permanent and essential feature of something; built-in by nature.",
+    keyConcepts: [
+      { keyword: "permanent", matchTerms: ["permanent", "essential", "intrinsic", "natural", "innate", "built-in", "fundamental", "basic", "core", "native", "inseparable", "constitutive"], label: "Permanent feature", hint: "The definition says 'permanent and essential feature' — it cannot be removed without changing the thing itself." },
+    ],
+    synonyms: ["intrinsic", "innate", "essential", "fundamental", "native"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "iniquity",
+    definition: "Grossly unfair or immoral behavior; great wickedness or injustice.",
+    keyConcepts: [
+      { keyword: "immoral behavior", matchTerms: ["immoral", "wickedness", "evil", "sin", "wrongdoing", "depravity", "corruption", "vice", "transgression", "injustice", "misconduct", "villainy"], label: "Immoral behavior", hint: "The definition says 'immoral behavior' — deliberate wrongdoing." },
+      { keyword: "grossly unfair", matchTerms: ["grossly unfair", "unjust", "inequitable", "wrong", "egregious", "outrageous", "offensive", "abominable", "heinous", "flagrant", "extreme", "severe"], label: "Grossly unfair", hint: "The definition says 'grossly unfair' — not merely unfair but deeply, obviously so." },
+    ],
+    synonyms: ["wickedness", "injustice", "evil", "sin", "wrongdoing"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "insinuate",
+    definition: "To suggest or hint at something unpleasant indirectly; to imply without stating directly.",
+    keyConcepts: [
+      { keyword: "suggest indirectly", matchTerms: ["suggest", "hint", "imply", "infer", "intimate", "indicate", "allude", "signal", "convey", "whisper", "plant", "insinuate"], label: "Suggest indirectly", hint: "The definition says 'suggest or hint indirectly' — the message is sent without being stated." },
+      { keyword: "unpleasant", matchTerms: ["unpleasant", "negative", "critical", "damaging", "accusatory", "offensive", "disparaging", "derogatory", "undermining", "suspicious", "malicious", "sinister"], label: "Something unpleasant", hint: "The definition says 'something unpleasant' — what is being insinuated is usually negative." },
+    ],
+    synonyms: ["hint", "imply", "intimate", "suggest", "allude"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "intransigent",
+    definition: "Refusing to agree or compromise; uncompromisingly rigid in one's position.",
+    keyConcepts: [
+      { keyword: "refusing to compromise", matchTerms: ["refusing to compromise", "unyielding", "inflexible", "rigid", "stubborn", "obstinate", "uncompromising", "hardline", "immovable", "steadfast", "firm", "entrenched"], label: "Refusing to compromise", hint: "The definition says 'refusing to agree or compromise' — no middle ground will be found." },
+    ],
+    synonyms: ["unyielding", "inflexible", "rigid", "stubborn", "uncompromising"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "intrinsic",
+    definition: "Belonging naturally and essentially to something; inherent to its very nature.",
+    keyConcepts: [
+      { keyword: "naturally", matchTerms: ["naturally", "essentially", "inherently", "fundamentally", "innately", "built-in", "constitutionally", "by nature", "inseparably", "organically", "internally", "necessarily"], label: "Naturally belonging", hint: "The definition says 'belonging naturally' — no external force put it there." },
+      { keyword: "very nature", matchTerms: ["nature", "essence", "core", "substance", "identity", "character", "being", "makeup", "foundation", "heart", "base", "self"], label: "Inherent to its nature", hint: "The definition says 'inherent to its very nature' — you cannot separate it from what the thing is." },
+    ],
+    synonyms: ["inherent", "essential", "innate", "fundamental", "natural"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "inundate",
+    definition: "To overwhelm with a large number or amount; to flood with more than can be handled.",
+    keyConcepts: [
+      { keyword: "overwhelm", matchTerms: ["overwhelm", "flood", "swamp", "bury", "submerge", "deluge", "drown", "overload", "engulf", "saturate", "overcome", "bury"], label: "To overwhelm", hint: "The definition says 'overwhelm with a large number' — more arrives than can be dealt with." },
+      { keyword: "more than can be handled", matchTerms: ["more than can be handled", "excessive", "unmanageable", "too much", "overflowing", "surplus", "beyond capacity", "unbearable", "oppressive", "crushing", "relentless"], label: "More than can be handled", hint: "The definition says 'more than can be handled' — the quantity defeats the recipient's capacity." },
+    ],
+    synonyms: ["overwhelm", "flood", "swamp", "deluge", "engulf"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "lavish",
+    definition: "Sumptuously rich, elaborate, or luxurious; giving or using more than is necessary.",
+    keyConcepts: [
+      { keyword: "luxurious", matchTerms: ["luxurious", "opulent", "sumptuous", "extravagant", "elaborate", "rich", "generous", "abundant", "plentiful", "profuse", "liberal", "unstinting"], label: "Luxurious and rich", hint: "The definition says 'sumptuously rich, elaborate, or luxurious' — exceeding ordinary measure." },
+      { keyword: "more than necessary", matchTerms: ["more than necessary", "excessive", "overabundant", "profuse", "unstinting", "liberal", "overgenerous", "immoderate", "unrestrained", "indulgent", "wasteful", "beyond measure"], label: "More than necessary", hint: "The definition says 'more than is necessary' — the excess is part of what defines it." },
+    ],
+    synonyms: ["opulent", "extravagant", "sumptuous", "generous", "abundant"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "lethargic",
+    definition: "Affected by lethargy; sluggish, drowsy, and lacking energy or enthusiasm.",
+    keyConcepts: [
+      { keyword: "sluggish", matchTerms: ["sluggish", "drowsy", "tired", "exhausted", "listless", "slow", "torpid", "languid", "inert", "apathetic", "dull", "heavy"], label: "Sluggish", hint: "The definition says 'sluggish, drowsy' — moving through life at a reduced pace." },
+      { keyword: "lacking energy", matchTerms: ["lacking energy", "without enthusiasm", "unmotivated", "lifeless", "passive", "indolent", "lethargic", "weak", "feeble", "spiritless", "flat", "inert"], label: "Lacking energy", hint: "The definition says 'lacking energy or enthusiasm' — the inner drive has gone quiet." },
+    ],
+    synonyms: ["sluggish", "drowsy", "listless", "torpid", "languid"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "livid",
+    definition: "Furiously angry; also discolored as if bruised, typically pale or bluish.",
+    keyConcepts: [
+      { keyword: "furiously angry", matchTerms: ["furiously angry", "enraged", "incensed", "infuriated", "seething", "irate", "outraged", "fuming", "apoplectic", "wrathful", "beside oneself", "extremely angry"], label: "Furiously angry", hint: "The definition says 'furiously angry' — beyond irritation, at the extreme end of anger." },
+    ],
+    synonyms: ["furious", "enraged", "incensed", "irate", "infuriated"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "lugubrious",
+    definition: "Looking or sounding mournful and dismal, often to an exaggerated degree.",
+    keyConcepts: [
+      { keyword: "mournful", matchTerms: ["mournful", "dismal", "gloomy", "melancholy", "doleful", "woeful", "sorrowful", "despondent", "funereal", "somber", "plaintive", "dejected"], label: "Mournful and dismal", hint: "The definition says 'mournful and dismal' — expressing deep gloom." },
+      { keyword: "exaggerated", matchTerms: ["exaggerated", "overdone", "theatrical", "excessive", "dramatic", "affected", "overwrought", "performed", "deliberately", "too much", "extreme", "over-the-top"], label: "Often exaggerated", hint: "The definition says 'often to an exaggerated degree' — the sadness may be performed or overdone." },
+    ],
+    synonyms: ["mournful", "gloomy", "doleful", "dismal", "melancholy"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "magnanimous",
+    definition: "Generously forgiving or tolerant, especially toward a defeated rival or enemy.",
+    keyConcepts: [
+      { keyword: "generously forgiving", matchTerms: ["forgiving", "generous", "tolerant", "gracious", "noble", "charitable", "big-hearted", "benevolent", "kind", "lenient", "understanding", "merciful"], label: "Generously forgiving", hint: "The definition says 'generously forgiving or tolerant' — giving more grace than required." },
+      { keyword: "defeated rival", matchTerms: ["defeated rival", "enemy", "opponent", "adversary", "loser", "vanquished", "challenger", "competitor", "foe", "someone weaker", "those who wronged", "former enemy"], label: "Toward a defeated rival", hint: "The definition says 'especially toward a defeated rival or enemy' — magnanimity most counts in victory." },
+    ],
+    synonyms: ["generous", "gracious", "forgiving", "noble", "charitable"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "malleable",
+    definition: "Able to be shaped or influenced; easily changed or adapted.",
+    keyConcepts: [
+      { keyword: "shaped", matchTerms: ["shaped", "molded", "formed", "bent", "altered", "changed", "adapted", "modified", "transformed", "influenced", "manipulated", "guided"], label: "Able to be shaped", hint: "The definition says 'able to be shaped' — it yields to external force." },
+      { keyword: "influenced", matchTerms: ["influenced", "persuaded", "directed", "swayed", "guided", "steered", "moved", "convinced", "changed", "receptive", "responsive", "open"], label: "Easily influenced", hint: "The definition says 'easily changed or adapted' — it doesn't resist modification." },
+    ],
+    synonyms: ["pliable", "flexible", "adaptable", "pliant", "yielding"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "maudlin",
+    definition: "Weakly sentimental in a self-pitying or tearful way; excessively emotional.",
+    keyConcepts: [
+      { keyword: "sentimental", matchTerms: ["sentimental", "emotional", "tearful", "weepy", "gushing", "soppy", "mushy", "saccharine", "bathetic", "overwrought", "saccharine", "cloying"], label: "Weakly sentimental", hint: "The definition says 'weakly sentimental' — the emotion is excessive but lacking real depth." },
+      { keyword: "self-pitying", matchTerms: ["self-pitying", "self-indulgent", "pathetic", "whiny", "plaintive", "pitiful", "sorry for oneself", "indulgent", "moaning", "lamenting", "wallowing", "dramatic"], label: "Self-pitying", hint: "The definition says 'self-pitying or tearful way' — the emotion is turned inward, wallowing." },
+    ],
+    synonyms: ["sentimental", "tearful", "weepy", "soppy", "lachrymose"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "metaphysical",
+    definition: "Relating to abstract ideas about the nature of existence, reality, and being.",
+    keyConcepts: [
+      { keyword: "abstract ideas", matchTerms: ["abstract", "philosophical", "theoretical", "speculative", "conceptual", "intangible", "immaterial", "transcendent", "beyond physical", "intellectual", "non-empirical", "hypothetical"], label: "Abstract ideas", hint: "The definition says 'abstract ideas' — not grounded in material reality." },
+      { keyword: "existence", matchTerms: ["existence", "reality", "being", "nature", "essence", "consciousness", "universe", "fundamental", "substance", "truth", "ultimate", "first principles"], label: "About existence", hint: "The definition says 'nature of existence, reality, and being' — the deepest possible questions." },
+    ],
+    synonyms: ["philosophical", "abstract", "transcendent", "theoretical", "spiritual"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "meticulous",
+    definition: "Showing great attention to detail; extremely careful and precise.",
+    keyConcepts: [
+      { keyword: "great attention to detail", matchTerms: ["attention to detail", "careful", "precise", "thorough", "exact", "painstaking", "scrupulous", "fastidious", "methodical", "rigorous", "accurate", "conscientious"], label: "Great attention to detail", hint: "The definition says 'great attention to detail' — nothing small is overlooked." },
+    ],
+    synonyms: ["precise", "careful", "thorough", "painstaking", "scrupulous"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "modicum",
+    definition: "A small quantity of something, especially something desirable or necessary.",
+    keyConcepts: [
+      { keyword: "small quantity", matchTerms: ["small quantity", "little", "bit", "trace", "touch", "grain", "ounce", "shred", "hint", "amount", "measure", "degree"], label: "Small quantity", hint: "The definition says 'a small quantity' — not much, just enough to mention." },
+      { keyword: "desirable or necessary", matchTerms: ["desirable", "necessary", "needed", "wanted", "valuable", "important", "useful", "scarce", "worthwhile", "precious", "limited", "rare"], label: "Of something desirable", hint: "The definition says 'especially something desirable or necessary' — the smallness matters more when the thing is valued." },
+    ],
+    synonyms: ["bit", "trace", "touch", "amount", "measure"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "morose",
+    definition: "Sullen, ill-tempered, and gloomy; silently bad-humored.",
+    keyConcepts: [
+      { keyword: "sullen", matchTerms: ["sullen", "gloomy", "glum", "dour", "surly", "brooding", "somber", "melancholy", "despondent", "somber", "dark", "withdrawn"], label: "Sullen and gloomy", hint: "The definition says 'sullen, ill-tempered, and gloomy' — a combination of bad mood and quiet withdrawal." },
+    ],
+    synonyms: ["sullen", "gloomy", "glum", "dour", "brooding"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "nascent",
+    definition: "Just coming into existence and beginning to develop; emerging in its early stages.",
+    keyConcepts: [
+      { keyword: "coming into existence", matchTerms: ["coming into existence", "emerging", "developing", "forming", "growing", "evolving", "arising", "beginning", "incipient", "budding", "fledgling", "new"], label: "Coming into existence", hint: "The definition says 'just coming into existence' — it has barely appeared." },
+      { keyword: "early stages", matchTerms: ["early stages", "beginning", "infancy", "dawn", "start", "birth", "initial", "formative", "embryonic", "rudimentary", "primitive", "foundational"], label: "In early stages", hint: "The definition says 'beginning to develop' — it is young and not yet fully formed." },
+    ],
+    synonyms: ["emerging", "developing", "incipient", "budding", "embryonic"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "notoriety",
+    definition: "The state of being famous for a negative reason; infamy.",
+    keyConcepts: [
+      { keyword: "famous", matchTerms: ["famous", "known", "recognized", "notorious", "prominent", "public", "visible", "celebrated", "talked about", "renowned", "well-known", "infamous"], label: "Famous", hint: "The definition says 'state of being famous' — widely known." },
+      { keyword: "negative reason", matchTerms: ["negative", "bad", "disgraceful", "shameful", "scandalous", "criminal", "disreputable", "unflattering", "embarrassing", "problematic", "unsavory", "notorious"], label: "For a negative reason", hint: "The definition says 'negative reason' — the fame is unwanted and unflattering." },
+    ],
+    synonyms: ["infamy", "disrepute", "ignominy", "ill-fame", "scandal"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "nuance",
+    definition: "A subtle difference in meaning, tone, or expression; a delicate distinction.",
+    keyConcepts: [
+      { keyword: "subtle difference", matchTerms: ["subtle", "difference", "distinction", "variation", "shade", "degree", "gradation", "refinement", "complexity", "depth", "delicacy", "precision"], label: "Subtle difference", hint: "The definition says 'subtle difference' — small but meaningful." },
+      { keyword: "meaning or tone", matchTerms: ["meaning", "tone", "expression", "interpretation", "connotation", "implication", "color", "mood", "character", "quality", "feeling", "sense"], label: "In meaning or tone", hint: "The definition says 'in meaning, tone, or expression' — nuance lives in the way things are communicated." },
+    ],
+    synonyms: ["subtlety", "distinction", "gradation", "shade", "refinement"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "obsequious",
+    definition: "Excessively eager to serve or please; obedient and flattering to an excessive degree.",
+    keyConcepts: [
+      { keyword: "excessively eager", matchTerms: ["excessively eager", "servile", "groveling", "fawning", "sycophantic", "flattering", "ingratiating", "toadying", "kowtowing", "submissive", "compliant", "unctuous"], label: "Excessively eager", hint: "The definition says 'excessively eager to serve' — the eagerness goes too far." },
+      { keyword: "please", matchTerms: ["please", "serve", "flatter", "appease", "satisfy", "accommodate", "defer to", "comply with", "indulge", "court", "win favor", "ingratiate"], label: "To serve or please", hint: "The definition says 'serve or please' — the focus is always on the other person's satisfaction." },
+    ],
+    synonyms: ["servile", "fawning", "sycophantic", "subservient", "unctuous"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "obsolete",
+    definition: "No longer in use or production; outdated and replaced by something newer.",
+    keyConcepts: [
+      { keyword: "no longer in use", matchTerms: ["no longer in use", "outdated", "disused", "discontinued", "superseded", "retired", "abandoned", "extinct", "phased out", "archaic", "antiquated", "past"], label: "No longer in use", hint: "The definition says 'no longer in use' — it has been set aside." },
+      { keyword: "replaced", matchTerms: ["replaced", "superseded", "updated", "improved upon", "succeeded", "surpassed", "overridden", "new version", "modern alternative", "upgraded", "substituted"], label: "Replaced by newer", hint: "The definition says 'replaced by something newer' — it was set aside for something better." },
+    ],
+    synonyms: ["outdated", "antiquated", "archaic", "superseded", "outmoded"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "onerous",
+    definition: "Involving a great deal of effort and difficulty; burdensome and oppressive.",
+    keyConcepts: [
+      { keyword: "burdensome", matchTerms: ["burdensome", "oppressive", "heavy", "demanding", "taxing", "exhausting", "difficult", "hard", "trying", "weighty", "crushing", "onerous"], label: "Burdensome", hint: "The definition says 'burdensome and oppressive' — it weighs on those who bear it." },
+      { keyword: "great effort", matchTerms: ["great effort", "difficulty", "exertion", "toil", "labor", "work", "struggle", "strain", "challenge", "hardship", "trouble", "obligation"], label: "Involving great effort", hint: "The definition says 'involving a great deal of effort and difficulty' — it takes a lot." },
+    ],
+    synonyms: ["burdensome", "oppressive", "taxing", "demanding", "arduous"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "opaque",
+    definition: "Not transparent; difficult to understand or interpret clearly.",
+    keyConcepts: [
+      { keyword: "not transparent", matchTerms: ["not transparent", "unclear", "impenetrable", "murky", "obscure", "muddy", "cloudy", "dark", "dense", "cryptic", "inscrutable", "incomprehensible"], label: "Not transparent", hint: "The definition says 'not transparent' — you cannot see through it." },
+      { keyword: "difficult to understand", matchTerms: ["difficult to understand", "hard to interpret", "confusing", "ambiguous", "obscure", "complex", "baffling", "unintelligible", "vague", "puzzling", "perplexing", "abstruse"], label: "Difficult to understand", hint: "The definition says 'difficult to understand or interpret' — it resists being made sense of." },
+    ],
+    synonyms: ["unclear", "impenetrable", "murky", "obscure", "incomprehensible"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "opprobrium",
+    definition: "Harsh criticism or public disgrace resulting from shameful conduct.",
+    keyConcepts: [
+      { keyword: "harsh criticism", matchTerms: ["harsh criticism", "scorn", "censure", "condemnation", "reproach", "rebuke", "denunciation", "disapproval", "contempt", "vilification", "censure", "derision"], label: "Harsh criticism", hint: "The definition says 'harsh criticism' — strong negative judgment, publicly expressed." },
+      { keyword: "public disgrace", matchTerms: ["public disgrace", "shame", "dishonor", "infamy", "ignominy", "humiliation", "scandal", "disrepute", "stigma", "loss of reputation", "embarrassment", "obloquy"], label: "Public disgrace", hint: "The definition says 'public disgrace' — the shame is visible to the world." },
+    ],
+    synonyms: ["disgrace", "censure", "condemnation", "infamy", "ignominy"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "pariah",
+    definition: "A person who is rejected or avoided by society; an outcast.",
+    keyConcepts: [
+      { keyword: "rejected", matchTerms: ["rejected", "excluded", "avoided", "shunned", "ostracized", "cast out", "marginalized", "isolated", "unwanted", "despised", "untouchable", "expelled"], label: "Rejected by society", hint: "The definition says 'rejected or avoided by society' — actively pushed out." },
+      { keyword: "outcast", matchTerms: ["outcast", "exile", "leper", "outsider", "untouchable", "misfit", "reject", "unwanted person", "social exile", "persona non grata", "expelled", "marginalized"], label: "An outcast", hint: "The definition says 'an outcast' — someone placed firmly outside the social group." },
+    ],
+    synonyms: ["outcast", "exile", "untouchable", "reject", "social outcast"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "partisan",
+    definition: "Strongly supporting a particular cause or party in a biased way; one-sided.",
+    keyConcepts: [
+      { keyword: "strongly supporting", matchTerms: ["strongly supporting", "loyal", "devoted", "committed", "dedicated", "fervent", "zealous", "fanatical", "one-sided", "partial", "prejudiced", "biased"], label: "Strongly supporting", hint: "The definition says 'strongly supporting' — committed beyond neutrality." },
+      { keyword: "biased", matchTerms: ["biased", "one-sided", "partial", "prejudiced", "slanted", "unfair", "factional", "sectarian", "tendentious", "interested", "non-objective", "tendentious"], label: "In a biased way", hint: "The definition says 'in a biased way' — the support is not impartial." },
+    ],
+    synonyms: ["biased", "one-sided", "factional", "sectarian", "partial"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "paucity",
+    definition: "The presence of something in only small or insufficient quantities; scarcity.",
+    keyConcepts: [
+      { keyword: "small quantities", matchTerms: ["small quantities", "scarcity", "lack", "shortage", "insufficiency", "dearth", "deficiency", "meagerness", "sparseness", "inadequacy", "fewness", "rarity"], label: "Small quantities", hint: "The definition says 'only small or insufficient quantities' — not enough." },
+    ],
+    synonyms: ["scarcity", "shortage", "dearth", "lack", "deficiency"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "permeate",
+    definition: "To spread throughout something; to penetrate every part of a substance or space.",
+    keyConcepts: [
+      { keyword: "spread throughout", matchTerms: ["spread throughout", "penetrate", "infuse", "pervade", "saturate", "fill", "suffuse", "flow through", "imbue", "seep into", "diffuse", "percolate"], label: "Spread throughout", hint: "The definition says 'spread throughout' — reaching every corner." },
+      { keyword: "every part", matchTerms: ["every part", "all through", "entirely", "completely", "wholly", "throughout", "everywhere", "pervasively", "fully", "totally", "all aspects", "all areas"], label: "Every part", hint: "The definition says 'penetrate every part' — nothing is untouched." },
+    ],
+    synonyms: ["pervade", "saturate", "infuse", "penetrate", "suffuse"],
+    partOfSpeech: "verb",
+  },
+
+  // [PDF]
+  {
+    word: "pernicious",
+    definition: "Having a harmful effect in a subtle or gradual way; insidiously destructive.",
+    keyConcepts: [
+      { keyword: "harmful", matchTerms: ["harmful", "destructive", "damaging", "dangerous", "injurious", "deadly", "fatal", "lethal", "ruinous", "toxic", "corrosive", "corrupting"], label: "Harmful effect", hint: "The definition says 'harmful effect' — the outcome is negative." },
+      { keyword: "subtle or gradual", matchTerms: ["subtle", "gradual", "insidious", "creeping", "slow", "hidden", "imperceptible", "quiet", "stealthy", "inconspicuous", "unnoticed", "cumulative"], label: "Subtle or gradual", hint: "The definition says 'subtle or gradual way' — the harm builds slowly and isn't immediately obvious." },
+    ],
+    synonyms: ["harmful", "insidious", "destructive", "damaging", "corrosive"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "plausible",
+    definition: "Seeming reasonable or probable; appearing to be valid or true on the surface.",
+    keyConcepts: [
+      { keyword: "seeming reasonable", matchTerms: ["seeming reasonable", "believable", "credible", "convincing", "probable", "likely", "tenable", "defensible", "viable", "logical", "plausible", "persuasive"], label: "Seeming reasonable", hint: "The definition says 'seeming reasonable or probable' — it passes a basic test of credibility." },
+      { keyword: "on the surface", matchTerms: ["on the surface", "appearance", "face value", "apparently", "ostensibly", "seemingly", "at first glance", "superficially", "without deep examination", "apparent", "prima facie"], label: "On the surface", hint: "The definition says 'on the surface' — plausibility doesn't guarantee truth, just the appearance of it." },
+    ],
+    synonyms: ["believable", "credible", "convincing", "probable", "tenable"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "plethora",
+    definition: "A large or excessive amount of something; an overabundance.",
+    keyConcepts: [
+      { keyword: "excessive amount", matchTerms: ["excessive", "overabundance", "surplus", "glut", "surfeit", "excess", "superabundance", "profusion", "wealth", "flood", "oversupply", "too much"], label: "Excessive amount", hint: "The definition says 'large or excessive amount' — more than is needed or wanted." },
+    ],
+    synonyms: ["abundance", "excess", "surplus", "glut", "overabundance"],
+    partOfSpeech: "noun",
+  },
+
+  // [PDF]
+  {
+    word: "pragmatic",
+    definition: "Dealing with problems in a practical and realistic way rather than theoretically.",
+    keyConcepts: [
+      { keyword: "practical", matchTerms: ["practical", "realistic", "sensible", "rational", "reasonable", "workable", "functional", "useful", "applied", "results-oriented", "hands-on", "down-to-earth"], label: "Practical", hint: "The definition says 'practical and realistic' — concerned with what actually works." },
+      { keyword: "rather than theoretically", matchTerms: ["rather than theoretical", "not ideological", "not abstract", "not idealistic", "not dogmatic", "not principle-based", "not hypothetical", "not rigid", "empirical", "flexible", "adaptive", "contextual"], label: "Not theoretical", hint: "The definition says 'rather than theoretically' — pragmatism bypasses ideology for results." },
+    ],
+    synonyms: ["practical", "realistic", "sensible", "down-to-earth", "functional"],
+    partOfSpeech: "adjective",
+  },
+
+  // [PDF]
+  {
+    word: "precarious",
+    definition: "Not securely held or in position; likely to fall or fail; dangerously uncertain.",
+    keyConcepts: [
+      { keyword: "not secure", matchTerms: ["not secure", "unstable", "unsafe", "unreliable", "fragile", "vulnerable", "shaky", "unsteady", "tenuous", "uncertain", "perilous", "risky"], label: "Not secure", hint: "The definition says 'not securely held' — there is no firm foundation." },
+      { keyword: "likely to fail", matchTerms: ["likely to fail", "dangerous", "uncertain", "hazardous", "doubtful", "at risk", "threatened", "in jeopardy", "critical", "volatile", "unpredictable", "exposed"], label: "Likely to fail", hint: "The definition says 'likely to fall or fail' — instability makes a bad outcome probable." },
+    ],
+    synonyms: ["unstable", "uncertain", "risky", "tenuous", "vulnerable"],
+    partOfSpeech: "adjective",
+  },
+
+];
