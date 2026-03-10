@@ -9907,5 +9907,5 @@ export const easyWords: DailyWord[] = [
       { keyword: "evaporating", matchTerms: ["evaporating", "vaporous", "unstable", "fleeting", "transient", "gaseous", "explosive"], label: "Evaporating quickly", hint: "The definition says 'evaporating quickly' -- the chemical meaning." },
     ],
     synonyms: ["unstable", "unpredictable", "erratic"],
-  }
+  },
 ];
