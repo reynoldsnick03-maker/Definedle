@@ -9,7 +9,6 @@ import type { ShareData } from "@/components/shared-result"
 import { SettingsPanel } from "@/components/settings-panel"
 import { EasyListModal } from "@/components/easy-list-modal"
 import { HardListModal } from "@/components/hard-list-modal"
-import { HardListModal } from "@/components/hard-list-modal"
 
 interface PageClientProps {
   dailyWord: DailyWord
