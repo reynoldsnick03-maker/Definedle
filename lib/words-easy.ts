@@ -255,14 +255,7 @@ export const easyWords: DailyWord[] = [
       { keyword: "moral principles", matchTerms: ["moral", "principle", "ethic", "virtue", "value", "standard", "character", "conscience", "righteous", "just", "fair", "noble", "honor", "decent", "good", "scrupul"], label: "Strong moral principles", hint: "The definition says 'strong moral principles' -- a firm ethical foundation." },
     ],
     synonyms: ["honesty", "virtue", "rectitude"],
-    altDefinitions: [
-      {
-        definition: "The state of being whole and undivided; structural soundness.",
-        keyConcepts: [
-          { keyword: "whole", matchTerms: ["whole", "complete", "undivid", "intact", "unbroken", "unified", "together", "cohesive", "sound", "solid"], label: "Whole and undivided", hint: "Integrity can also mean being whole and undivided -- nothing broken or missing." },
-          { keyword: "structural soundness", matchTerms: ["structur", "sound", "strong", "stable", "reliable", "durable", "condition", "quality", "robust", "uncompromis"], label: "Structural soundness", hint: "Integrity also refers to the soundness of a structure or system." },
-        ],
-      },
+  },
   {
     word: "nostalgia",
     partOfSpeech: "noun",
