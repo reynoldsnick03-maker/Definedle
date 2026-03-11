@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { X, Flame, Trophy, Hash, Zap, Star } from "lucide-react"
-import type { GameHistory } from "@/lib/history"
+import { getHistory, computeStats, migrateFromCookie, type GameHistory } from "@/lib/history"
 import { getPlayerId } from "@/lib/player-id"
 
 interface StatsPanelProps {
@@ -32,10 +32,11 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
   const [avgWordsPerSession, setAvgWordsPerSession] = useState(0)
   const [expandedSession, setExpandedSession] = useState<string | null>(null)
 
-  const fetchStats = useCallback(async () => {
+  const fetchStats = useCallback(() => {
     try {
-      const res = await fetch("/api/history")
-      if (res.ok) setStats(await res.json())
+      migrateFromCookie()
+      const entries = getHistory()
+      setStats(computeStats(entries))
     } catch {}
   }, [])
 

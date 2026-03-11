@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react"
 import type { DailyWord, GameMode } from "@/lib/game-data"
 import type { ScoreResult, ConceptResult, ScoreBreakdown } from "@/lib/scoring"
 import { scoreDefinition } from "@/lib/scoring"
-import { formatDateKey, type HistoryEntry } from "@/lib/history"
+import { formatDateKey, saveEntryToHistory, getHistory, type HistoryEntry } from "@/lib/history"
 import { WordDisplay } from "./word-display"
 import { loadSettings } from "./settings-panel"
 import { DefinitionInput } from "./definition-input"
@@ -78,18 +78,16 @@ export function Game({
       const raw = localStorage.getItem("definedle-settings")
       const settings = raw ? JSON.parse(raw) : {}
       if (!settings.nemesisWords) { setNemesisPrev(null); return }
-      const histRes = fetch("/api/history").then(r => r.json()).then((data) => {
-        const entries: HistoryEntry[] = data.entries ?? []
-        const thresh = settings.nemesisThreshold || "awful"
-        const matches = entries.filter(e => e.w === dailyWord.word && e.m === difficulty)
-        if (matches.length === 0) { setNemesisPrev(null); return }
-        const last = matches[matches.length - 1]
-        const isPoor = last.s < 60
-        const isAwful = last.s < 30
-        const qualifies = thresh === "poor" ? isPoor : isAwful
-        if (!qualifies || last.s >= 95) { setNemesisPrev(null); return }
-        setNemesisPrev({ score: last.s, definition: last.p ?? "" })
-      }).catch(() => setNemesisPrev(null))
+      const entries: HistoryEntry[] = getHistory()
+      const thresh = settings.nemesisThreshold || "awful"
+      const matches = entries.filter(e => e.w === dailyWord.word && e.m === difficulty)
+      if (matches.length === 0) { setNemesisPrev(null); return }
+      const last = matches[matches.length - 1]
+      const isPoor = last.s < 60
+      const isAwful = last.s < 30
+      const qualifies = thresh === "poor" ? isPoor : isAwful
+      if (!qualifies || last.s >= 95) { setNemesisPrev(null); return }
+      setNemesisPrev({ score: last.s, definition: last.p ?? "" })
     } catch { setNemesisPrev(null) }
   }, [dailyWord.word, isPractice, difficulty])
   const [result, setResult] = useState<ScoreResult | null>(null)
@@ -180,7 +178,7 @@ export function Game({
   }, [])
 
   const saveToHistory = useCallback(
-    async (scoreResult: ScoreResult, word: DailyWord) => {
+    (scoreResult: ScoreResult, word: DailyWord) => {
       const matchedCount = scoreResult.concepts.filter((c) => c.matched).length
       const entry: HistoryEntry = {
         d: getDateKey(),
@@ -188,16 +186,12 @@ export function Game({
         c: `${matchedCount}/${scoreResult.concepts.length}`,
         w: word.word,
         m: difficulty,
-        p: definition.slice(0, 200), // store first 200 chars for nemesis display
+        p: definition.slice(0, 200),
       }
       try {
-        await fetch("/api/history", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(entry),
-        })
+        saveEntryToHistory(entry)
       } catch {
-        // Ignore network errors
+        // Ignore storage errors
       }
     },
     [difficulty]

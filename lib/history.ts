@@ -1,5 +1,4 @@
-// Cookie-based game history. Stores a compact array of daily results.
-// Cookies are capped at ~4KB so we keep a rolling 60-day window.
+// localStorage-based game history. Stores a compact array of daily results.
 
 export interface HistoryEntry {
   /** Date key, e.g. "2026-02-21" */
@@ -26,58 +25,103 @@ export interface GameHistory {
   played: number
 }
 
-const COOKIE_NAME = "definedle-history"
-const MAX_ENTRIES = 60
+const LS_KEY = "definedle-history-v2"
+const LEGACY_COOKIE_NAME = "definedle-history"
+const MAX_ENTRIES = 365
 
-export function parseHistoryCookie(cookieValue: string | undefined): HistoryEntry[] {
-  if (!cookieValue) return []
+// ── localStorage read/write ───────────────────────────────────────────────────
+
+export function getHistory(): HistoryEntry[] {
+  if (typeof window === "undefined") return []
   try {
-    const parsed = JSON.parse(cookieValue)
-    if (Array.isArray(parsed)) return parsed
-    return []
-  } catch {
-    return []
-  }
+    const raw = localStorage.getItem(LS_KEY)
+    if (raw) {
+      const parsed = JSON.parse(raw)
+      if (Array.isArray(parsed)) return parsed
+    }
+  } catch {}
+  return []
 }
 
-export function serializeHistory(entries: HistoryEntry[]): string {
-  // Keep only the latest MAX_ENTRIES
-  const trimmed = entries.slice(-MAX_ENTRIES)
-  return JSON.stringify(trimmed)
+export function saveHistory(entries: HistoryEntry[]): void {
+  if (typeof window === "undefined") return
+  try {
+    const trimmed = entries.slice(-MAX_ENTRIES)
+    localStorage.setItem(LS_KEY, JSON.stringify(trimmed))
+  } catch {}
 }
 
 export function addEntryToHistory(
   entries: HistoryEntry[],
   entry: HistoryEntry
 ): HistoryEntry[] {
-  // Don't duplicate if same date + mode already exists
   const mode = entry.m || "easy"
   const filtered = entries.filter((e) => !(e.d === entry.d && (e.m || "easy") === mode))
   filtered.push(entry)
-  // Sort by date ascending
   filtered.sort((a, b) => a.d.localeCompare(b.d))
   return filtered.slice(-MAX_ENTRIES)
 }
+
+/** Save a single entry to localStorage history (reads, merges, writes). */
+export function saveEntryToHistory(entry: HistoryEntry): HistoryEntry[] {
+  const entries = getHistory()
+  const updated = addEntryToHistory(entries, entry)
+  saveHistory(updated)
+  return updated
+}
+
+/** One-time migration: read old server cookie value and merge into localStorage. */
+export function migrateFromCookie(): void {
+  if (typeof window === "undefined") return
+  // Only migrate once
+  if (localStorage.getItem("definedle-history-migrated")) return
+  try {
+    const match = document.cookie
+      .split("; ")
+      .find((c) => c.startsWith(LEGACY_COOKIE_NAME + "="))
+    if (match) {
+      const raw = decodeURIComponent(match.split("=").slice(1).join("="))
+      const parsed = JSON.parse(raw)
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        const existing = getHistory()
+        let merged = [...existing]
+        for (const entry of parsed) {
+          merged = addEntryToHistory(merged, entry)
+        }
+        saveHistory(merged)
+      }
+    }
+  } catch {}
+  localStorage.setItem("definedle-history-migrated", "1")
+}
+
+// ── Stats computation ─────────────────────────────────────────────────────────
 
 export function computeStats(entries: HistoryEntry[]): GameHistory {
   const played = entries.length
   const best = entries.reduce((max, e) => Math.max(max, e.s), 0)
 
-  // Calculate streak: count consecutive days backward from today (UTC)
-  // Deduplicate by date first (a player may have both easy + hard on the same day)
   let streak = 0
   if (entries.length > 0) {
     const now = new Date()
     const todayMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
+    const yesterdayMs = todayMs - 86400000
     const uniqueDays = [...new Set(entries.map((e) => e.d))].sort((a, b) => b.localeCompare(a))
 
-    for (let i = 0; i < uniqueDays.length; i++) {
-      const expectedMs = todayMs - i * 86400000
-      const expectedDate = new Date(expectedMs)
-      const expectedKey = formatDateKey(expectedDate)
+    // Allow streak to start from today OR yesterday (grace period for opening
+    // stats before completing today's game, or just after midnight)
+    const mostRecentMs = new Date(uniqueDays[0] + "T00:00:00Z").getTime()
+    if (mostRecentMs !== todayMs && mostRecentMs !== yesterdayMs) {
+      return { entries, streak: 0, best, played }
+    }
 
-      if (uniqueDays[i] === expectedKey) {
+    // Walk backwards, counting consecutive days
+    let expectedMs = mostRecentMs
+    for (const day of uniqueDays) {
+      const dayMs = new Date(day + "T00:00:00Z").getTime()
+      if (dayMs === expectedMs) {
         streak++
+        expectedMs -= 86400000
       } else {
         break
       }
@@ -91,8 +135,14 @@ export function formatDateKey(date: Date): string {
   return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}-${String(date.getUTCDate()).padStart(2, "0")}`
 }
 
-export function getCookieName(): string {
-  return COOKIE_NAME
+// Kept for backwards compatibility with any code that still references it
+export function getCookieName(): string { return LEGACY_COOKIE_NAME }
+export function parseHistoryCookie(v: string | undefined): HistoryEntry[] {
+  if (!v) return []
+  try { const p = JSON.parse(v); return Array.isArray(p) ? p : [] } catch { return [] }
+}
+export function serializeHistory(entries: HistoryEntry[]): string {
+  return JSON.stringify(entries.slice(-MAX_ENTRIES))
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
