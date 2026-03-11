@@ -12,6 +12,7 @@ import { ModeToggle, type TabMode } from "@/components/mode-toggle"
 import { StreakBadge } from "@/components/streak-badge"
 import type { DailyWord, GameMode } from "@/lib/game-data"
 import { getRandomPracticeWord, getWordByName } from "@/lib/game-data"
+import { formatDateKey, getHistory, computeStats, migrateFromCookie } from "@/lib/history"
 
 interface PageClientProps {
   dailyWord: DailyWord
@@ -69,16 +70,13 @@ export function PageClient({ dailyWord, hardWord, shareData, shareWordData }: Pa
 
   // Fetch streak on mount
   useEffect(() => {
-    const fetchStreak = async () => {
+    const fetchStreak = () => {
       try {
-        const res = await fetch("/api/history")
-        if (res.ok) {
-          const data = await res.json()
-          setStreak(data.streak || 0)
-        }
-      } catch {
-        // Ignore
-      }
+        migrateFromCookie()
+        const entries = getHistory()
+        const stats = computeStats(entries)
+        setStreak(stats.streak || 0)
+      } catch {}
     }
     fetchStreak()
   }, [])
@@ -160,16 +158,12 @@ if (newTab === "practice") {
   }
 
   // Callback to refresh streak after game completion
-  const refreshStreak = useCallback(async () => {
+  const refreshStreak = useCallback(() => {
     try {
-      const res = await fetch("/api/history")
-      if (res.ok) {
-        const data = await res.json()
-        setStreak(data.streak || 0)
-      }
-    } catch {
-      // Ignore
-    }
+      const entries = getHistory()
+      const stats = computeStats(entries)
+      setStreak(stats.streak || 0)
+    } catch {}
   }, [])
 
   return (
