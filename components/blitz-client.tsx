@@ -600,13 +600,6 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
               wordsPlayed: sess.wordsPlayed + 1,
               sessionWordHistory: [...sess.sessionWordHistory, entry],
             })
-              word: entry.word,
-              points: entry.points,
-              guesses: entry.guesses,
-              hintsUsed: entry.hintsUsed,
-              tier: wasAwful ? "awful" : entry.guesses === 0 ? "failed" : "other",
-              bestGuess: entry.bestGuess,
-            })
           }}
           onSessionUpdate={handleSessionUpdate}
           onSessionEnd={handleSessionEnd}
