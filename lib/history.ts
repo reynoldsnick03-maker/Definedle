@@ -11,7 +11,7 @@ export interface HistoryEntry {
   w: string
   /** Game mode: "easy" | "hard" (defaults to "easy" for legacy entries) */
   m?: "easy" | "hard"
-  /** Player's definition (stored for nemesis display) */
+  /** Player's definition */
   p?: string
 }
 

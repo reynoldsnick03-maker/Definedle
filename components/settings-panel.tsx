@@ -24,9 +24,6 @@ export interface Settings {
   darkMode: boolean
   reduceMotion: boolean
   fontSize: "small" | "medium" | "large"
-  // Nemesis (kept from before)
-  nemesisWords: boolean
-  nemesisThreshold: "poor" | "awful"
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -41,8 +38,6 @@ export const DEFAULT_SETTINGS: Settings = {
   darkMode: false,
   reduceMotion: false,
   fontSize: "medium",
-  nemesisWords: false,
-  nemesisThreshold: "awful",
 }
 
 export function loadSettings(): Settings {
@@ -108,7 +103,7 @@ export function SettingsPanel({ open, onClose, isBlitz = false }: SettingsPanelP
 
           <SettingRow
             label="Strict mode"
-            description="Disables the etymology hint button. It will still be visible but greyed out."
+            description="Disables the synonym hint button. It will still be visible but greyed out."
             checked={settings.strictMode}
             onChange={v => update({ strictMode: v })}
           />
@@ -207,43 +202,6 @@ export function SettingsPanel({ open, onClose, isBlitz = false }: SettingsPanelP
           </div>
 
           <div className="h-px bg-border" />
-
-          {/* ── Nemesis Words ─────────────────────────────────────── */}
-          <SectionHeader label="Nemesis Words" />
-
-          <SettingRow
-            label="Enable Nemesis Words"
-            description={isBlitz
-              ? "When you replay a word you previously struggled with, see your past guess and score."
-              : "When you replay a word you previously struggled with, see your past definition and score."}
-            checked={settings.nemesisWords}
-            onChange={v => update({ nemesisWords: v })}
-          />
-
-          {settings.nemesisWords && (
-            <div className="flex flex-col gap-2 pl-1">
-              <p className="text-xs text-muted-foreground">Show nemesis when previous result was:</p>
-              <div className="inline-flex items-center rounded-lg border border-border bg-muted/50 p-0.5 self-start">
-                {(["awful", "poor"] as const).map(threshold => (
-                  <button
-                    key={threshold}
-                    type="button"
-                    onClick={() => update({ nemesisThreshold: threshold })}
-                    className={`rounded-md px-4 py-1.5 text-xs font-medium transition-all duration-200 min-h-[28px] ${
-                      settings.nemesisThreshold === threshold
-                        ? "bg-card text-foreground shadow-sm"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {threshold === "awful" ? "Awful only" : "Poor or worse"}
-                  </button>
-                ))}
-              </div>
-              <p className="text-[10px] text-muted-foreground/70">
-                A flawless previous result will never trigger Nemesis.
-              </p>
-            </div>
-          )}
 
         </div>
       </div>

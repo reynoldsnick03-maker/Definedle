@@ -12,43 +12,7 @@ import { getMirrorStreak, updateMirrorStreak, type MirrorStreak } from "@/lib/hi
 import { getPlayerId } from "@/lib/player-id"
 import { BlitzWordHistoryPanel } from "@/components/blitz-word-history-panel"
 
-// Nemesis Words — look up previous result for a word from stored session history
-function getNemesisEntry(
-  wordName: string,
-  threshold: "poor" | "awful"
-): { points: number; guesses: number; hintsUsed: number } | null {
-  try {
-    const raw = localStorage.getItem("definedle-settings")
-    const settings = raw ? JSON.parse(raw) : {}
-    if (!settings.nemesisWords) return null
-    const thresh = settings.nemesisThreshold || "awful"
-
-    // Load all saved word history from mirror sessions stored locally
-    const histRaw = localStorage.getItem("definedle-blitz-word-history")
-    if (!histRaw) return null
-    const history: Array<{ word: string; points: number; guesses: number; hintsUsed: number; tier: string; bestGuess?: string }> = JSON.parse(histRaw)
-
-    const match = history.filter(e => e.word === wordName)
-    if (match.length === 0) return null
-
-    // Most recent match
-    const last = match[match.length - 1]
-
-    // Only surface if below threshold
-    const isPoor = last.tier === "poor" || last.tier === "awful" || last.guesses === 0
-    const isAwful = last.tier === "awful" || last.guesses === 0
-    const qualifies = thresh === "poor" ? isPoor : isAwful
-    // Never show if previously flawless
-    const wasFlawless = last.guesses === 1 && last.hintsUsed === 0
-    if (wasFlawless || !qualifies) return null
-
-    return { points: last.points, guesses: last.guesses, hintsUsed: last.hintsUsed, bestGuess: last.bestGuess }
-  } catch {
-    return null
-  }
-}
-
-// Save word to local blitz history for nemesis lookup
+// Save word to local blitz history
 function saveWordToBlitzHistory(entry: {
   word: string; points: number; guesses: number; hintsUsed: number; tier: string; bestGuess?: string
 }) {
@@ -167,7 +131,6 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const [difficulty, setDifficulty] = useState<GameMode>("easy")
   const [mirrorStreak, setMirrorStreak] = useState<MirrorStreak>({ easyStreak: 0, easyBest: 0, hardStreak: 0, hardBest: 0 })
   const [blitzTab, setBlitzTab] = useState<"practice" | "daily">("daily")
-  const [nemesisEntry, setNemesisEntry] = useState<{ points: number; guesses: number; hintsUsed: number; bestGuess?: string } | null>(null)
   const [dailyDone, setDailyDone] = useState<{ easy: boolean; hard: boolean }>({ easy: false, hard: false })
   const [dailyFailed, setDailyFailed] = useState<{ easy: boolean; hard: boolean }>({ easy: false, hard: false })
   const [dailyStoredSummary, setDailyStoredSummary] = useState<Record<string, {score: number; wordsSolved: number; bestMultiplier: number; wordHistory?: WordHistoryEntry[]} | null>>({} as Record<string, {score: number; wordsSolved: number; bestMultiplier: number; wordHistory?: WordHistoryEntry[]} | null>)
@@ -211,8 +174,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   // Load daily completion status — refresh after each session ends
   useEffect(() => {
     try {
-      const today = new Date()
-      const dateKey = `${today.getUTCFullYear()}-${String(today.getUTCMonth()+1).padStart(2,"0")}-${String(today.getUTCDate()).padStart(2,"0")}`
+      const dateKey = getLocalDateKey()
       const raw = localStorage.getItem("definedle-blitz-daily") || "{}"
       const rec = JSON.parse(raw)
       const todayRec = rec[dateKey] || {}
@@ -234,16 +196,33 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const dailySequence = difficulty === "easy" ? dailySequenceEasy : dailySequenceHard
   const currentWord = blitzTab === "daily" ? dailySequence[dailyWordIndex] ?? null : practiceWord
 
-  // Update nemesis entry when word changes
+  // Track current LOCAL date to detect day rollover (local midnight, not UTC)
+  const getLocalDateKey = () => {
+    const d = new Date()
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`
+  }
+  const [currentDateKey, setCurrentDateKey] = useState(getLocalDateKey)
+
+  // Refresh sequence and reset state when the UTC date changes (midnight rollover)
   useEffect(() => {
-    if (currentWord) setNemesisEntry(getNemesisEntry(currentWord.word, "awful"))
-    else setNemesisEntry(null)
-  }, [currentWord?.word])
+    const interval = setInterval(() => {
+      const key = getLocalDateKey()
+      if (key !== currentDateKey) {
+        setCurrentDateKey(key)
+        setDailySequenceEasy(getDailyBlitzSequence("easy"))
+        setDailySequenceHard(getDailyBlitzSequence("hard"))
+        setDailyWordIndex(0)
+        setDailyDone({ easy: false, hard: false })
+        setDailyFailed({ easy: false, hard: false })
+      }
+    }, 60000) // check every minute
+    return () => clearInterval(interval)
+  }, [currentDateKey])
 
   useEffect(() => {
     try { setMirrorStreak(getMirrorStreak()) } catch {}
-    setDailySequenceEasy(getDailyBlitzSequence("easy"))
-    setDailySequenceHard(getDailyBlitzSequence("hard"))
+    setDailySequenceEasy(getDailyBlitzSequence("easy", getLocalDateKey()))
+    setDailySequenceHard(getDailyBlitzSequence("hard", getLocalDateKey()))
 
     // Restore in-progress session if page was refreshed
     const savedTab = localStorage.getItem("definedle-blitz-last-tab") as "daily" | "practice" | null
@@ -252,6 +231,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       const progress = loadBlitzProgress(savedDiff, savedTab)
       if (progress) {
         setBlitzTab(savedTab)
+        if (savedTab === "daily") setDailyWordIndex(progress.wordIndex ?? 0)
         setSessions(prev => ({
           ...prev,
           [`${savedDiff}-${savedTab}`]: {
@@ -341,8 +321,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       // Mark daily as completed if applicable
       if (blitzTab === "daily") {
         try {
-          const today = new Date()
-          const dateKey = `${today.getUTCFullYear()}-${String(today.getUTCMonth()+1).padStart(2,"0")}-${String(today.getUTCDate()).padStart(2,"0")}`
+          const dateKey = getLocalDateKey()
           const raw = localStorage.getItem("definedle-blitz-daily") || "{}"
           const dailyRecord = JSON.parse(raw)
           if (!dailyRecord[dateKey]) dailyRecord[dateKey] = {}
@@ -391,6 +370,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
     const key = `${target}-${blitzTab}`
     setSessions((prev: Record<string, SessionState>) => ({ ...prev, [key]: emptySession() }))
     clearBlitzProgress(target, blitzTab)
+    if (blitzTab === "daily") setDailyWordIndex(0)
   }, [difficulty, blitzTab])
 
   const handleNextWord = useCallback(() => {
@@ -620,8 +600,6 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
               wordsPlayed: sess.wordsPlayed + 1,
               sessionWordHistory: [...sess.sessionWordHistory, entry],
             })
-            // Save for nemesis lookup
-            saveWordToBlitzHistory({
               word: entry.word,
               points: entry.points,
               guesses: entry.guesses,
@@ -633,7 +611,6 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           onSessionUpdate={handleSessionUpdate}
           onSessionEnd={handleSessionEnd}
           isDark={isDark}
-          nemesisEntry={nemesisEntry}
           showWordLength={showWordLength}
           showSimilarity={showSimilarity}
           skipPenaltyOff={skipPenaltyOff}

@@ -657,8 +657,6 @@ function scoreAgainstDefinition(
   definitionText: string,
 ): { concepts: ConceptResult[]; matchedCount: number; conceptScore: number; precisionScore: number; precisionRatio: number; relevantWords: number; irrelevantWords: string[]; lengthScore: number; synonymWarning: boolean } {
   const conceptCount = keyConcepts.length
-  // Use floor to avoid exceeding 75 total (e.g., 3 concepts at 25 each = 75, not 26*3=78)
-  const pointsPerConcept = Math.floor(75 / conceptCount)
 
   // Extract meaningful words from the official definition for overlap checking
   const officialDefWords = meaningfulWords(definitionText.toLowerCase())
@@ -720,7 +718,8 @@ function scoreAgainstDefinition(
   })
 
   const matchedCount = concepts.filter((c) => c.matched).length
-  const conceptScore = matchedCount * pointsPerConcept
+  // Round based on ratio so full credit always = exactly 75 regardless of concept count
+  const conceptScore = conceptCount > 0 ? Math.round((matchedCount / conceptCount) * 75) : 0
 
   // Synonym-only penalty - use token-based matching, not substring
   let synonymWarning = false

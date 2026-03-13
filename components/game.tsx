@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react"
 import type { DailyWord, GameMode } from "@/lib/game-data"
 import type { ScoreResult, ConceptResult, ScoreBreakdown } from "@/lib/scoring"
 import { scoreDefinition } from "@/lib/scoring"
-import { formatDateKey, saveEntryToHistory, getHistory, type HistoryEntry } from "@/lib/history"
+import { formatDateKey, saveEntryToHistory, type HistoryEntry } from "@/lib/history"
 import { WordDisplay } from "./word-display"
 import { loadSettings } from "./settings-panel"
 import { DefinitionInput } from "./definition-input"
@@ -71,31 +71,12 @@ export function Game({
 }: GameProps) {
   const DAILY_RESULT_COOKIE = difficulty === "hard" ? "definedle-today-hard" : "definedle-today"
 
-  // Load nemesis entry for practice mode
-  useEffect(() => {
-    if (!isPractice) { setNemesisPrev(null); return }
-    try {
-      const raw = localStorage.getItem("definedle-settings")
-      const settings = raw ? JSON.parse(raw) : {}
-      if (!settings.nemesisWords) { setNemesisPrev(null); return }
-      const entries: HistoryEntry[] = getHistory()
-      const thresh = settings.nemesisThreshold || "awful"
-      const matches = entries.filter(e => e.w === dailyWord.word && e.m === difficulty)
-      if (matches.length === 0) { setNemesisPrev(null); return }
-      const last = matches[matches.length - 1]
-      const isPoor = last.s < 60
-      const isAwful = last.s < 30
-      const qualifies = thresh === "poor" ? isPoor : isAwful
-      if (!qualifies || last.s >= 95) { setNemesisPrev(null); return }
-      setNemesisPrev({ score: last.s, definition: last.p ?? "" })
-    } catch { setNemesisPrev(null) }
-  }, [dailyWord.word, isPractice, difficulty])
+
   const [result, setResult] = useState<ScoreResult | null>(null)
   const [submitted, setSubmitted] = useState(false)
   const [playerDefinition, setPlayerDefinition] = useState("")
   const [usedHint, setUsedHint] = useState(false)
   const [showHint, setShowHint] = useState(false)
-  const [nemesisPrev, setNemesisPrev] = useState<{ score: number; definition: string } | null>(null)
   const [showBlitzPrompt, setShowBlitzPrompt] = useState(false)
   const [strictMode, setStrictMode] = useState(false)
   const [showScore, setShowScore] = useState(true)
@@ -178,7 +159,7 @@ export function Game({
   }, [])
 
   const saveToHistory = useCallback(
-    (scoreResult: ScoreResult, word: DailyWord) => {
+    (scoreResult: ScoreResult, word: DailyWord, playerDef: string) => {
       const matchedCount = scoreResult.concepts.filter((c) => c.matched).length
       const entry: HistoryEntry = {
         d: getDateKey(),
@@ -186,7 +167,7 @@ export function Game({
         c: `${matchedCount}/${scoreResult.concepts.length}`,
         w: word.word,
         m: difficulty,
-        p: definition.slice(0, 200),
+        p: playerDef.slice(0, 200),
       }
       try {
         saveEntryToHistory(entry)
@@ -248,7 +229,7 @@ export function Game({
         } catch {
           // Ignore
         }
-        saveToHistory(scoreResult, dailyWord)
+        saveToHistory(scoreResult, dailyWord, definition)
         // Notify parent that game is complete (for streak refresh)
         onComplete?.()
       }
@@ -276,17 +257,6 @@ export function Game({
 
         <div className="my-6 h-px bg-border" aria-hidden="true" />
 
-        {/* Nemesis banner — practice mode, if previously struggled */}
-        {nemesisPrev && !submitted && (
-          <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2.5 text-xs dark:border-red-900/40 dark:bg-red-950/20">
-            <p className="font-medium text-red-600 dark:text-red-400 mb-1">⚔️ Nemesis — you scored {nemesisPrev.score} here before</p>
-            {nemesisPrev.definition ? (
-              <p className="text-muted-foreground italic">&ldquo;{nemesisPrev.definition}&rdquo;</p>
-            ) : (
-              <p className="text-muted-foreground">No definition saved from last time.</p>
-            )}
-          </div>
-        )}
 
         {/* Synonym hint — hard mode only, greyed out in strict mode */}
         {!submitted && dailyWord.synonyms && dailyWord.synonyms.length > 0 && (
