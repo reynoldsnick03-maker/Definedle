@@ -104,22 +104,26 @@ export function computeStats(entries: HistoryEntry[]): GameHistory {
   let streak = 0
   if (entries.length > 0) {
     const now = new Date()
+    // UTC date — all resets happen at UTC midnight globally
     const todayMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
     const yesterdayMs = todayMs - 86400000
+    const utcToday = `${now.getUTCFullYear()}-${String(now.getUTCMonth()+1).padStart(2,"0")}-${String(now.getUTCDate()).padStart(2,"0")}`
+    const y = new Date(yesterdayMs)
+    const utcYesterday = `${y.getUTCFullYear()}-${String(y.getUTCMonth()+1).padStart(2,"0")}-${String(y.getUTCDate()).padStart(2,"0")}`
     const uniqueDays = [...new Set(entries.map((e) => e.d))].sort((a, b) => b.localeCompare(a))
 
-    // Allow streak to start from today OR yesterday (grace period for opening
-    // stats before completing today's game, or just after midnight)
-    const mostRecentMs = new Date(uniqueDays[0] + "T00:00:00Z").getTime()
-    if (mostRecentMs !== todayMs && mostRecentMs !== yesterdayMs) {
+    // Allow streak to start from today OR yesterday (grace period before completing today)
+    const mostRecent = uniqueDays[0]
+    if (mostRecent !== utcToday && mostRecent !== utcYesterday) {
       return { entries, streak: 0, best, played }
     }
 
-    // Walk backwards, counting consecutive days
-    let expectedMs = mostRecentMs
+    // Walk backwards counting consecutive UTC days
+    let expectedMs = mostRecent === utcToday ? todayMs : yesterdayMs
     for (const day of uniqueDays) {
-      const dayMs = new Date(day + "T00:00:00Z").getTime()
-      if (dayMs === expectedMs) {
+      const parts = day.split("-").map(Number)
+      const dayUtcMs = Date.UTC(parts[0], parts[1] - 1, parts[2])
+      if (dayUtcMs === expectedMs) {
         streak++
         expectedMs -= 86400000
       } else {

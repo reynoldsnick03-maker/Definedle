@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { X, Flame, Trophy, Hash, Zap, Star } from "lucide-react"
-import { getHistory, computeStats, migrateFromCookie, type GameHistory } from "@/lib/history"
+import { getHistory, computeStats, migrateFromCookie, getMirrorStreak, type GameHistory } from "@/lib/history"
 import { getPlayerId } from "@/lib/player-id"
 
 interface StatsPanelProps {
@@ -28,7 +28,7 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
   const [blitzHard, setBlitzHard] = useState<BlitzSession[]>([])
   const [blitzError, setBlitzError] = useState<string | null>(null)
   const [blitzLoading, setBlitzLoading] = useState(false)
-  const [flawlessWordCount, setFlawlessWordCount] = useState(0)
+  const [bestFlawlessStreak, setBestFlawlessStreak] = useState<{ easy: number; hard: number }>({ easy: 0, hard: 0 })
   const [avgWordsPerSession, setAvgWordsPerSession] = useState(0)
   const [expandedSession, setExpandedSession] = useState<string | null>(null)
 
@@ -80,11 +80,8 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
   useEffect(() => {
     if (!open) return
     try {
-      const raw = localStorage.getItem("definedle-blitz-word-history")
-      if (!raw) return
-      const history = JSON.parse(raw) as { word: string; guesses: number; hintsUsed: number; tier: string }[]
-      const flawless = history.filter(e => e.guesses === 1 && e.hintsUsed === 0).length
-      setFlawlessWordCount(flawless)
+      const streak = getMirrorStreak()
+      setBestFlawlessStreak({ easy: streak.easyBest, hard: streak.hardBest })
     } catch {}
   }, [open])
 
@@ -202,7 +199,7 @@ export function StatsPanel({ open, onClose, blitzMode = false, isDark = false }:
                           { icon: <Hash className="h-3.5 w-3.5" />, label: "Sessions", value: blitzTotalSessions },
                           { icon: <Trophy className="h-3.5 w-3.5" />, label: "Best", value: Math.round(blitzBestScore) },
                           { icon: <Zap className="h-3.5 w-3.5" />, label: "Avg", value: Math.round((blitzAvgEasy + blitzAvgHard) / (blitzEasy.length > 0 && blitzHard.length > 0 ? 2 : 1)) },
-                          { icon: <Star className="h-3.5 w-3.5" />, label: "Flawless", value: flawlessWordCount },
+                          { icon: <Star className="h-3.5 w-3.5" />, label: "Best Run", value: Math.max(bestFlawlessStreak.easy, bestFlawlessStreak.hard) },
                         ].map(({ icon, label, value }) => (
                           <div key={label} className={`flex flex-col items-center gap-1`}>
                             <div className={`flex items-center gap-1.5 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>{icon}<span className="text-[10px] uppercase tracking-widest font-medium">{label}</span></div>

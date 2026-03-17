@@ -196,10 +196,10 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const dailySequence = difficulty === "easy" ? dailySequenceEasy : dailySequenceHard
   const currentWord = blitzTab === "daily" ? dailySequence[dailyWordIndex] ?? null : practiceWord
 
-  // Track current LOCAL date to detect day rollover (local midnight, not UTC)
+  // Use UTC date so blitz daily resets at the same time as the Definedle daily word
   const getLocalDateKey = () => {
     const d = new Date()
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`
+    return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")}`
   }
   const [currentDateKey, setCurrentDateKey] = useState(getLocalDateKey)
 
@@ -302,7 +302,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         bestMultiplier: Math.max(s.bestMultiplier, newMult),
       }}
     })
-  }, [difficulty])
+  }, [difficulty, blitzTab])
 
   const handleSessionEnd = useCallback(async (
     finalScore: number,
@@ -584,21 +584,23 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             setSessions((prev: Record<string, SessionState>) => {
               const key = `${difficulty}-${blitzTab}`
               const s = prev[key] ?? emptySession()
+              const newConsecutiveAwful = wasAwful ? s.consecutiveAwful + 1 : 0
+              const newHistory = [...s.sessionWordHistory, entry]
+              // Persist inside updater so we use fresh state, not stale closure
+              saveBlitzProgress(difficulty, blitzTab, {
+                wordIndex: s.wordsPlayed + 1,
+                score: s.sessionScore + (entry.points * s.multiplier),
+                multiplier: s.multiplier,
+                bestMultiplier: s.bestMultiplier,
+                streak: newConsecutiveAwful,
+                wordsPlayed: s.wordsPlayed + 1,
+                sessionWordHistory: newHistory,
+              })
               return { ...prev, [key]: {
                 ...s,
-                consecutiveAwful: wasAwful ? s.consecutiveAwful + 1 : 0,
-                sessionWordHistory: [...s.sessionWordHistory, entry],
+                consecutiveAwful: newConsecutiveAwful,
+                sessionWordHistory: newHistory,
               }}
-            })
-            // Persist session progress for page refresh recovery
-            saveBlitzProgress(difficulty, blitzTab, {
-              wordIndex: sess.wordsPlayed + 1,
-              score: sess.sessionScore + (entry.points * sess.multiplier),
-              multiplier: sess.multiplier,
-              bestMultiplier: sess.bestMultiplier,
-              streak: sess.consecutiveAwful,
-              wordsPlayed: sess.wordsPlayed + 1,
-              sessionWordHistory: [...sess.sessionWordHistory, entry],
             })
           }}
           onSessionUpdate={handleSessionUpdate}
