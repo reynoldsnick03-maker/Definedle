@@ -61,41 +61,20 @@ function applyMultiplierEffect(current: number, effect: "flawless" | "good" | "d
   return MULTIPLIER_STEPS[Math.max(idx - 1, 0)] // poor = −1 step
 }
 
-// Easy mode: hints 0 matter for tier; Hard mode: hints 1–2 free, hint 3 loses flawless, hints 4+ degrade further
+// Unified cost formula:
+//   Easy: cost = guesses + hints * 0.5
+//   Hard: cost = guesses + hints * (1/3)
+// cost ≤ 1 → flawless, ≤ 2 → good, ≤ 3 → decent, ≤ 4 → poor, > 4 → awful
+// No live multiplier drain — tier is the sole penalty channel.
 function classifyPlay(guesses: number, hintsUsed: number, difficulty: "easy" | "hard" = "easy"): "flawless" | "good" | "decent" | "poor" | "awful" | "fail" {
   if (guesses === 0) return "fail"
-
-  if (difficulty === "hard") {
-    // Base tier from guesses: 1g 0–2h = flawless, 1g 3h+ starts at good; 2g = good; 3g = decent
-    let base: "flawless" | "good" | "decent" | "poor" | "awful"
-    if (guesses === 1)      base = hintsUsed <= 2 ? "flawless" : "good"
-    else if (guesses === 2) base = "good"
-    else                    base = "decent"
-    // Each hint beyond 3 degrades one tier
-    const extra = Math.max(0, hintsUsed - 3)
-    const tiers: Array<"flawless" | "good" | "decent" | "poor" | "awful"> = ["flawless", "good", "decent", "poor", "awful"]
-    const idx = tiers.indexOf(base)
-    return tiers[Math.min(idx + extra, tiers.length - 1)]
-  }
-
-  // Easy mode (unchanged logic)
-  if (guesses === 1 && hintsUsed === 0) return "flawless"
-  if (
-    (guesses === 1 && hintsUsed === 1) ||
-    (guesses === 2 && hintsUsed === 0) ||
-    (guesses === 2 && hintsUsed === 1)
-  ) return "good"
-  if (
-    (guesses === 1 && hintsUsed <= 3) ||
-    (guesses === 2 && hintsUsed <= 3) ||
-    (guesses === 3 && hintsUsed <= 3)
-  ) return "decent"
-  if (
-    (guesses === 1 && hintsUsed >= 6) ||
-    (guesses === 2 && hintsUsed >= 5) ||
-    (guesses === 3 && hintsUsed >= 5)
-  ) return "awful"
-  return "poor"
+  const hintWeight = difficulty === "hard" ? 1/3 : 0.5
+  const cost = Math.round((guesses + hintsUsed * hintWeight) * 10000) / 10000
+  if (cost <= 1) return "flawless"
+  if (cost <= 2) return "good"
+  if (cost <= 3) return "decent"
+  if (cost <= 4) return "poor"
+  return "awful"
 }
 
 function calcBasePoints(guesses: number, hintsUsed: number, difficulty: "easy" | "hard" = "easy"): number {
@@ -257,9 +236,10 @@ export function MirrorGame({
   const [isSkipped, setIsSkipped] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const maxGuesses = 3
-  const maxHints = 3
   const remainingGuesses = maxGuesses - guesses.length
-  const revealedIndices = getRevealedLetters(word.word, hintsUsed)
+  // Easy mode: first letter is always revealed for free (doesn't count toward hintsUsed)
+  const freeReveal = difficulty === "easy" ? 1 : 0
+  const revealedIndices = getRevealedLetters(word.word, hintsUsed + freeReveal)
 
   useEffect(() => {
     setGuesses([])
@@ -292,15 +272,7 @@ export function MirrorGame({
   const handleRevealLetter = () => {
     if (isComplete) return
     if (hintsUsed >= word.word.length - 1) return
-    if (hintsUsed >= maxHints && multiplier <= 1 && sessionScore <= 0) return
     setHintsUsed(h => h + 1)
-    if (hintsUsed >= maxHints) {
-      if (multiplier <= 1) {
-        onSessionUpdate({ points: -1, correct: false, multiplierEffect: "decent" })
-      } else {
-        onSessionUpdate({ points: 0, correct: false, multiplierEffect: "poor" })
-      }
-    }
   }
 
   const handleSkip = useCallback(() => {
@@ -470,7 +442,7 @@ export function MirrorGame({
                 </span>
               )}
             </div>
-            <div className={`relative flex items-center gap-1 px-2 py-0.5 rounded-md border transition-all duration-200 ${isDark ? "bg-[#111110] border-[#2a2926]" : "bg-muted/40 border-border/50"} ${hintHover && hintsUsed >= maxHints ? "scale-110 " + (isDark ? "border-amber-500/50" : "border-foreground/30") : ""}`}>
+            <div className={`relative flex items-center gap-1 px-2 py-0.5 rounded-md border transition-all duration-200 ${isDark ? "bg-[#111110] border-[#2a2926]" : "bg-muted/40 border-border/50"} ${hintHover && ""}`}>
               <Zap className={`h-3 w-3 ${multiplierColor}`} />
               <span className={`text-xs font-bold tabular-nums ${multiplierColor}`}>×{multiplier}</span>
               {floatingMult && floatingMult.value !== 0 && (
@@ -533,11 +505,7 @@ export function MirrorGame({
                   onMouseEnter={() => setHintHover(true)}
                   onMouseLeave={() => setHintHover(false)}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-200 text-xs border ${
-                    hintsUsed >= maxHints
-                      ? isDark
-                        ? `bg-[#111110] border-red-500/30 text-red-400 hover:border-red-500/60 ${hintHover ? "border-red-500/60" : ""}`
-                        : "bg-muted/40 hover:bg-muted/60 text-red-500 border-red-300/50"
-                      : isDark
+                    isDark
                         ? `bg-[#111110] text-[#6b6560] border-[#2a2926] hover:text-[#9b9589] hover:border-amber-500/40 ${hintHover ? "border-amber-500/40" : ""}`
                         : "bg-muted/40 hover:bg-muted/60 text-muted-foreground hover:text-foreground border-border/50"
                   }`}
@@ -545,17 +513,15 @@ export function MirrorGame({
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
                   </svg>
-                  {hintsUsed < maxHints ? "Reveal a letter" : multiplier <= 1 ? "Reveal a letter (−1 pt)" : "Reveal a letter (−0.5×)"}
+                  {difficulty === "easy" && hintsUsed === 0 ? "Reveal another letter" : "Reveal a letter"}
                 </button>
                 <div className="flex items-center gap-1.5 mt-1">
-                  {Array.from({ length: Math.max(maxHints, hintsUsed) }).map((_, i) => (
+                  {Array.from({ length: Math.max(3, hintsUsed) }).map((_, i) => (
                     <span
                       key={i}
                       className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
                         i < hintsUsed
-                          ? i < maxHints
-                            ? isDark ? "bg-amber-500" : "bg-foreground"
-                            : "bg-red-500"
+                          ? isDark ? "bg-amber-500" : "bg-foreground"
                           : isDark ? "bg-[#3a3936]" : "bg-muted-foreground/25"
                       }`}
                     />

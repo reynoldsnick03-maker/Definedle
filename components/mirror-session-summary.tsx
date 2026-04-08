@@ -1,6 +1,6 @@
 "use client"
 
-import { Star, Flame, Zap, RotateCcw, ChevronDown, ChevronUp } from "lucide-react"
+import { Star, Flame, Zap, RotateCcw, ChevronDown, ChevronUp, Users } from "lucide-react"
 import { useState, useMemo } from "react"
 import type { WordHistoryEntry } from "@/components/mirror-game"
 
@@ -16,9 +16,10 @@ interface MirrorSessionSummaryProps {
   isDark?: boolean
   difficulty?: "easy" | "hard"
   oppositeCompleted?: boolean
+  averageData?: { average: number; count: number } | null
 }
 
-export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordHistory, reason, onPlayAgain, onFlipBack, isDark = false, isDaily = false, difficulty = "easy", oppositeCompleted = false }: MirrorSessionSummaryProps) {
+export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordHistory, reason, onPlayAgain, onFlipBack, isDark = false, isDaily = false, difficulty = "easy", oppositeCompleted = false, averageData = null }: MirrorSessionSummaryProps) {
   const [showHistory, setShowHistory] = useState(false)
 
   const { rounded, rating } = useMemo(() => {
@@ -85,6 +86,12 @@ export function MirrorSessionSummary({ score, wordsSolved, bestMultiplier, wordH
           </div>
           <p className={`text-xs mb-3 ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>points</p>
           <p className={`text-sm font-medium ${isDark ? "text-amber-500" : "text-foreground/70"}`}>{rating}</p>
+          {isDaily && averageData && averageData.count > 1 && (
+            <div className={`flex items-center justify-center gap-1.5 mt-2 text-xs ${isDark ? "text-[#6b6560]" : "text-muted-foreground"}`}>
+              <Users className="h-3.5 w-3.5" />
+              <span>Average: <span className={`font-medium ${isDark ? "text-[#9b9589]" : "text-foreground/70"}`}>{averageData.average}</span> · {averageData.count} {averageData.count === 1 ? "player" : "players"}</span>
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-2 gap-4 mb-6">

@@ -74,10 +74,10 @@ export function HowToPlayBlitz({ open, onClose }: HowToPlayBlitzProps) {
               Hints
             </h3>
             <p>
-              Stuck? Reveal a letter. On <span className="text-[#d4cfc8]">Easy</span>, every hint costs multiplier steps — use them wisely.
+              Stuck? Reveal a letter. Hints lower your tier — the more you use, the fewer points that word is worth.
             </p>
             <p>
-              On <span className="text-amber-500">Hard</span>, your first two hints are free — they reveal the first and last letter at no cost. A third hint loses you the Flawless tier. A fourth hint and beyond start affecting your multiplier.
+              On <span className="text-[#d4cfc8]">Easy</span>, the first letter is always shown for free. On <span className="text-amber-500">Hard</span>, hints are cheaper — you can take more before your tier drops.
             </p>
           </div>
 
@@ -90,11 +90,12 @@ export function HowToPlayBlitz({ open, onClose }: HowToPlayBlitzProps) {
             <p>Every correct word earns points based on how cleanly you solved it:</p>
             <div className="flex flex-col gap-2 rounded-lg border border-[#2a2926] bg-[#111110] px-4 py-3">
               {[
-                { tier: "Flawless", desc: "1 guess · ≤2 hints on Hard", pts: "5 pts", color: "text-emerald-500" },
-                { tier: "Good", desc: "1–2 guesses · few hints", pts: "4 pts", color: "text-amber-500" },
-                { tier: "Decent", desc: "2–3 guesses", pts: "3 pts", color: "text-[#9b9589]" },
-                { tier: "Bad / Awful", desc: "Many hints used", pts: "2–1 pts", color: "text-red-400" },
-                { tier: "Failed", desc: "3 wrong guesses", pts: "0 pts", color: "text-[#6b6560]" },
+                { tier: "Flawless", desc: "1 guess · no hints", pts: "5 pts", color: "text-emerald-500" },
+                { tier: "Good", desc: "1 guess · 1–2 hints, or 2 guesses · 0–1 hints", pts: "4 pts", color: "text-amber-500" },
+                { tier: "Decent", desc: "up to 3 guesses · moderate hints", pts: "3 pts", color: "text-[#9b9589]" },
+                { tier: "Poor", desc: "many hints or 3 guesses with hints", pts: "2 pts", color: "text-orange-400" },
+                { tier: "Awful", desc: "heavy hints across multiple guesses", pts: "1 pt", color: "text-red-400" },
+                { tier: "Failed", desc: "3 wrong guesses or skipped", pts: "0 pts", color: "text-[#6b6560]" },
               ].map(({ tier, desc, pts, color }) => (
                 <div key={tier} className="flex items-start justify-between gap-3 text-xs">
                   <div>
@@ -106,7 +107,7 @@ export function HowToPlayBlitz({ open, onClose }: HowToPlayBlitzProps) {
               ))}
             </div>
             <p className="text-xs text-[#6b6560]">
-              All points are multiplied by your current multiplier. A failed word earns nothing and drops your multiplier.
+              All points are multiplied by your current multiplier. Hard mode is more hint-tolerant — hints count for less when calculating your tier.
             </p>
           </div>
 

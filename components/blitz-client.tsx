@@ -51,9 +51,11 @@ function saveBlitzProgress(difficulty: string, tab: string, data: {
   sessionWordHistory: WordHistoryEntry[]
 }) {
   try {
+    const d = new Date()
+    const dateKey = `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")}`
     localStorage.setItem(
       `definedle-blitz-progress-${difficulty}-${tab}`,
-      JSON.stringify({ ...data, savedAt: Date.now() })
+      JSON.stringify({ ...data, savedAt: Date.now(), dateKey })
     )
   } catch {}
 }
@@ -67,7 +69,14 @@ function loadBlitzProgress(difficulty: string, tab: string): {
     const raw = localStorage.getItem(`definedle-blitz-progress-${difficulty}-${tab}`)
     if (!raw) return null
     const data = JSON.parse(raw)
-    // Expire after 24h
+    // Reject if from a previous day
+    const d = new Date()
+    const todayKey = `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")}`
+    if (data.dateKey && data.dateKey !== todayKey) {
+      localStorage.removeItem(`definedle-blitz-progress-${difficulty}-${tab}`)
+      return null
+    }
+    // Also expire after 24h as a fallback
     if (Date.now() - data.savedAt > 86400000) {
       localStorage.removeItem(`definedle-blitz-progress-${difficulty}-${tab}`)
       return null
@@ -134,6 +143,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const [dailyDone, setDailyDone] = useState<{ easy: boolean; hard: boolean }>({ easy: false, hard: false })
   const [dailyFailed, setDailyFailed] = useState<{ easy: boolean; hard: boolean }>({ easy: false, hard: false })
   const [dailyStoredSummary, setDailyStoredSummary] = useState<Record<string, {score: number; wordsSolved: number; bestMultiplier: number; wordHistory?: WordHistoryEntry[]} | null>>({} as Record<string, {score: number; wordsSolved: number; bestMultiplier: number; wordHistory?: WordHistoryEntry[]} | null>)
+  const [dailyAverageData, setDailyAverageData] = useState<Record<string, { average: number; count: number } | null>>({ easy: null, hard: null })
   const [dailySequenceEasy, setDailySequenceEasy] = useState<DailyWord[]>([])
   const [dailySequenceHard, setDailySequenceHard] = useState<DailyWord[]>([])
   const [dailyWordIndex, setDailyWordIndex] = useState(0)
@@ -214,6 +224,14 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
         setDailyWordIndex(0)
         setDailyDone({ easy: false, hard: false })
         setDailyFailed({ easy: false, hard: false })
+        // Reset daily sessions and clear stale progress so old multiplier/score don't carry over
+        setSessions((prev: Record<string, SessionState>) => ({
+          ...prev,
+          "easy-daily": emptySession(),
+          "hard-daily": emptySession(),
+        }))
+        clearBlitzProgress("easy", "daily")
+        clearBlitzProgress("hard", "daily")
       }
     }, 60000) // check every minute
     return () => clearInterval(interval)
@@ -242,6 +260,13 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             wordsPlayed: progress.wordsPlayed,
             sessionWordHistory: progress.sessionWordHistory,
           }
+        }))
+      } else if (savedTab === "daily") {
+        // No valid progress for today — ensure daily session is clean
+        setDailyWordIndex(0)
+        setSessions(prev => ({
+          ...prev,
+          [`${savedDiff}-daily`]: emptySession(),
         }))
       }
     }
@@ -339,6 +364,18 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             ...prev,
             [difficulty]: { score: finalScore, wordsSolved, bestMultiplier: peakMult, wordHistory }
           }))
+          // Fetch today's average for this difficulty
+          try {
+            const d = new Date()
+            const dateKey = `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")}`
+            const avgRes = await fetch(`/api/blitz-daily-average?date=${dateKey}&difficulty=${difficulty}`)
+            if (avgRes.ok) {
+              const avgData = await avgRes.json()
+              if (avgData.count > 0) {
+                setDailyAverageData(prev => ({ ...prev, [difficulty]: { average: avgData.average, count: avgData.count } }))
+              }
+            }
+          } catch {}
         } catch {}
       }
       try {
@@ -546,6 +583,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
             wordHistory={dailyStoredSummary[difficulty]!.wordHistory ?? []}
             reason="complete"
             isDaily={true}
+            averageData={dailyAverageData[difficulty]}
             isDark={isDark}
             difficulty={difficulty}
             oppositeCompleted={difficulty === "easy" ? dailyDone.hard : dailyDone.easy}
@@ -627,6 +665,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           wordHistory={summaryData.wordHistory}
           reason={summaryData.reason}
           isDaily={blitzTab === "daily"}
+          averageData={blitzTab === "daily" ? dailyAverageData[difficulty] : null}
           isDark={isDark}
           difficulty={difficulty}
           oppositeCompleted={difficulty === "easy" ? dailyDone.hard : dailyDone.easy}
