@@ -49,6 +49,7 @@ function saveBlitzProgress(difficulty: string, tab: string, data: {
   wordIndex: number; score: number; multiplier: number
   bestMultiplier: number; streak: number; wordsPlayed: number
   sessionWordHistory: WordHistoryEntry[]
+  midWordGuesses?: number; midWordHints?: number
 }) {
   try {
     const d = new Date()
@@ -64,6 +65,7 @@ function loadBlitzProgress(difficulty: string, tab: string): {
   wordIndex: number; score: number; multiplier: number
   bestMultiplier: number; streak: number; wordsPlayed: number
   sessionWordHistory: WordHistoryEntry[]
+  midWordGuesses?: number; midWordHints?: number
 } | null {
   try {
     const raw = localStorage.getItem(`definedle-blitz-progress-${difficulty}-${tab}`)
@@ -618,6 +620,21 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           wordsPlayed={wordsPlayed}
           consecutiveAwful={consecutiveAwful}
           wordHistory={sessionWordHistory}
+          onProgressUpdate={(guesses: number, hintsUsed: number) => {
+            // Save mid-word progress so page refresh restores current word state
+            const s = sessions[`${difficulty}-${blitzTab}`] ?? emptySession()
+            saveBlitzProgress(difficulty, blitzTab, {
+              wordIndex: s.wordsPlayed,
+              score: s.sessionScore,
+              multiplier: s.multiplier,
+              bestMultiplier: s.bestMultiplier,
+              streak: s.consecutiveAwful,
+              wordsPlayed: s.wordsPlayed,
+              sessionWordHistory: s.sessionWordHistory,
+              midWordGuesses: guesses,
+              midWordHints: hintsUsed,
+            })
+          }}
           onWordPlayed={(wasAwful: boolean, entry: WordHistoryEntry) => {
             setSessions((prev: Record<string, SessionState>) => {
               const key = `${difficulty}-${blitzTab}`
@@ -627,7 +644,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
               // Persist inside updater so we use fresh state, not stale closure
               saveBlitzProgress(difficulty, blitzTab, {
                 wordIndex: s.wordsPlayed + 1,
-                score: s.sessionScore + (entry.points * s.multiplier),
+                score: s.sessionScore + entry.points,
                 multiplier: s.multiplier,
                 bestMultiplier: s.bestMultiplier,
                 streak: newConsecutiveAwful,

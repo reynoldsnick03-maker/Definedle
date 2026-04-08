@@ -36,6 +36,7 @@ interface MirrorGameProps {
   skipPenaltyOff?: boolean
   autoAdvance?: boolean
   difficulty?: "easy" | "hard"
+  onProgressUpdate?: (guesses: number, hintsUsed: number) => void
 }
 
 interface Guess {
@@ -218,6 +219,7 @@ export function MirrorGame({
   skipPenaltyOff = false,
   autoAdvance = false,
   difficulty = "easy",
+  onProgressUpdate,
 }: MirrorGameProps) {
   const [guesses, setGuesses] = useState<Guess[]>([])
   const [currentGuess, setCurrentGuess] = useState("")
@@ -272,7 +274,9 @@ export function MirrorGame({
   const handleRevealLetter = () => {
     if (isComplete) return
     if (hintsUsed >= word.word.length - 1) return
-    setHintsUsed(h => h + 1)
+    const newHints = hintsUsed + 1
+    setHintsUsed(newHints)
+    onProgressUpdate?.(guesses.length, newHints)
   }
 
   const handleSkip = useCallback(() => {
@@ -345,6 +349,7 @@ export function MirrorGame({
     const newGuesses = [...guesses, { word: trimmedGuess, similarity, nearMiss }]
     setGuesses(newGuesses)
     setCurrentGuess("")
+    onProgressUpdate?.(newGuesses.length, hintsUsed)
 
     if (isActuallyCorrect) {
       const quality = classifyPlay(newGuesses.length, hintsUsed, difficulty)
