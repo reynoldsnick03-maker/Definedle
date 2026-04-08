@@ -256,7 +256,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           ...prev,
           [`${savedDiff}-${savedTab}`]: {
             ...(prev[`${savedDiff}-${savedTab}`] ?? emptySession()),
-            score: progress.score,
+            sessionScore: progress.score,
             multiplier: progress.multiplier,
             bestMultiplier: progress.bestMultiplier,
             wordsPlayed: progress.wordsPlayed,
@@ -310,13 +310,24 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
       const newScore = Math.max(0, s.sessionScore + points)
       const newMult = applyMultiplierStep(s.multiplier, multiplierEffect)
       if (!correct) {
-        // Skip/fail — apply multiplier penalty but don't increment streak/words solved
-        return { ...prev, [key]: {
+        // Skip/fail or hint deduction — apply changes and persist score
+        const updated = {
           ...s,
           sessionScore: newScore,
           multiplier: newMult,
           bestMultiplier: Math.max(s.bestMultiplier, newMult),
-        }}
+        }
+        // Persist immediately so score is saved after hint deductions
+        saveBlitzProgress(difficulty, blitzTab, {
+          wordIndex: s.wordsPlayed,
+          score: newScore,
+          multiplier: newMult,
+          bestMultiplier: Math.max(s.bestMultiplier, newMult),
+          streak: s.consecutiveAwful,
+          wordsPlayed: s.wordsPlayed,
+          sessionWordHistory: s.sessionWordHistory,
+        })
+        return { ...prev, [key]: updated }
       }
       const newStreak = s.sessionStreak + 1
       return { ...prev, [key]: {
@@ -621,18 +632,22 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
           consecutiveAwful={consecutiveAwful}
           wordHistory={sessionWordHistory}
           onProgressUpdate={(guesses: number, hintsUsed: number) => {
-            // Save mid-word progress so page refresh restores current word state
-            const s = sessions[`${difficulty}-${blitzTab}`] ?? emptySession()
-            saveBlitzProgress(difficulty, blitzTab, {
-              wordIndex: s.wordsPlayed,
-              score: s.sessionScore,
-              multiplier: s.multiplier,
-              bestMultiplier: s.bestMultiplier,
-              streak: s.consecutiveAwful,
-              wordsPlayed: s.wordsPlayed,
-              sessionWordHistory: s.sessionWordHistory,
-              midWordGuesses: guesses,
-              midWordHints: hintsUsed,
+            // Save mid-word progress using setSessions to read fresh state
+            setSessions((prev: Record<string, SessionState>) => {
+              const key = `${difficulty}-${blitzTab}`
+              const s = prev[key] ?? emptySession()
+              saveBlitzProgress(difficulty, blitzTab, {
+                wordIndex: s.wordsPlayed,
+                score: s.sessionScore,
+                multiplier: s.multiplier,
+                bestMultiplier: s.bestMultiplier,
+                streak: s.consecutiveAwful,
+                wordsPlayed: s.wordsPlayed,
+                sessionWordHistory: s.sessionWordHistory,
+                midWordGuesses: guesses,
+                midWordHints: hintsUsed,
+              })
+              return prev // no state change, just reading fresh state
             })
           }}
           onWordPlayed={(wasAwful: boolean, entry: WordHistoryEntry) => {
