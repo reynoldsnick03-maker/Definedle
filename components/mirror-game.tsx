@@ -63,14 +63,16 @@ function applyMultiplierEffect(current: number, effect: "flawless" | "good" | "d
 }
 
 // Unified cost formula:
-//   Easy: cost = guesses + hints * 0.5
-//   Hard: cost = guesses + hints * (1/3)
+//   Easy: cost = guesses + hints * 0.5 (no free hints)
+//   Hard: cost = guesses + max(0, hints-1) * (1/3) (first hint free)
 // cost ≤ 1 → flawless, ≤ 2 → good, ≤ 3 → decent, ≤ 4 → poor, > 4 → awful
 // No live multiplier drain — tier is the sole penalty channel.
+// Extra hints (easy: 4+, hard: 4+) also deduct 1pt directly from session score.
 function classifyPlay(guesses: number, hintsUsed: number, difficulty: "easy" | "hard" = "easy"): "flawless" | "good" | "decent" | "poor" | "awful" | "fail" {
   if (guesses === 0) return "fail"
+  const effectiveHints = difficulty === "hard" ? Math.max(0, hintsUsed - 1) : hintsUsed
   const hintWeight = difficulty === "hard" ? 1/3 : 0.5
-  const cost = Math.round((guesses + hintsUsed * hintWeight) * 10000) / 10000
+  const cost = Math.round((guesses + effectiveHints * hintWeight) * 10000) / 10000
   if (cost <= 1) return "flawless"
   if (cost <= 2) return "good"
   if (cost <= 3) return "decent"
@@ -193,7 +195,7 @@ function getRevealedLetters(word: string, count: number): number[] {
     ? [0]
     : len === 2
     ? [0, 1]
-    : [0, len - 1, ...remaining]
+    : [0, ...remaining, len - 1]
   return ordered.slice(0, count).sort((a, b) => a - b)
 }
 
@@ -239,9 +241,9 @@ export function MirrorGame({
   const inputRef = useRef<HTMLInputElement>(null)
   const maxGuesses = 3
   const remainingGuesses = maxGuesses - guesses.length
-  // Easy mode: first letter is always revealed for free (doesn't count toward hintsUsed)
-  const freeReveal = difficulty === "easy" ? 1 : 0
-  const revealedIndices = getRevealedLetters(word.word, hintsUsed + freeReveal)
+  // No auto-reveal on either mode — player must press hint
+  // Hard mode: first hint is free in cost formula but not auto-shown
+  const revealedIndices = getRevealedLetters(word.word, hintsUsed)
 
   useEffect(() => {
     setGuesses([])
@@ -271,11 +273,16 @@ export function MirrorGame({
     return () => vv.removeEventListener("resize", onResize)
   }, [])
 
+  const EXTRA_HINT_THRESHOLD = 3 // hints 4+ cost -1pt directly (both modes)
   const handleRevealLetter = () => {
     if (isComplete) return
     if (hintsUsed >= word.word.length - 1) return
     const newHints = hintsUsed + 1
     setHintsUsed(newHints)
+    // Extra hints (4th and beyond) deduct 1pt from score directly, multiplier unaffected
+    if (newHints > EXTRA_HINT_THRESHOLD) {
+      onSessionUpdate({ points: -1, correct: false, multiplierEffect: "decent" })
+    }
     onProgressUpdate?.(guesses.length, newHints)
   }
 
@@ -518,7 +525,7 @@ export function MirrorGame({
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
                   </svg>
-                  {difficulty === "easy" && hintsUsed === 0 ? "Reveal another letter" : "Reveal a letter"}
+                  {hintsUsed >= 3 ? "Reveal a letter (−1 pt)" : "Reveal a letter"}
                 </button>
                 <div className="flex items-center gap-1.5 mt-1">
                   {Array.from({ length: Math.max(3, hintsUsed) }).map((_, i) => (
