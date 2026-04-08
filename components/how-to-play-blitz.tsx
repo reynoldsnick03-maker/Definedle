@@ -74,10 +74,10 @@ export function HowToPlayBlitz({ open, onClose }: HowToPlayBlitzProps) {
               Hints
             </h3>
             <p>
-              Press <span className={`font-medium ${isDark ? "text-[#d4cfc8]" : "text-foreground"}`}>Reveal a letter</span> to uncover a letter. Every hint lowers your tier for that word, earning you fewer points.
+              Press <span className="font-medium text-[#d4cfc8]">Reveal a letter</span> to uncover a letter. Every hint lowers your tier for that word, earning you fewer points.
             </p>
             <p>
-              On <span className="text-amber-500">Hard</span>, your first hint is free — press it to reveal the first letter with no tier penalty. From the second hint onward, your tier drops. On <span className={`font-medium ${isDark ? "text-[#d4cfc8]" : "text-foreground"}`}>Easy</span>, every hint counts from the first.
+              On <span className="text-amber-500">Hard</span>, your first hint is free — press it to reveal the first letter with no tier penalty. From the second hint onward, your tier drops. On <span className="font-medium text-[#d4cfc8]">Easy</span>, every hint counts from the first.
             </p>
             <p>
               Take 4 or more hints on either mode and each extra hint deducts 1 point directly from your score.
