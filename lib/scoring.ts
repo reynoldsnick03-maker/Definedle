@@ -104,6 +104,7 @@ const SYNONYM_CLUSTERS: string[][] = [
   ["fix", "repair", "mend", "restor", "correct", "remedy", "rectif"],
   ["give", "provid", "supply", "offer", "grant", "bestow", "confer", "donat", "present", "furnish", "deliver"],
   ["take", "seiz", "grab", "acquir", "obtain", "captur", "claim", "confiscat", "appropriat"],
+  ["buy", "purchas", "procur", "acquir", "pay for", "invest in", "transact"],
   ["keep", "retain", "maintain", "preserv", "conserv", "sustain", "uphold", "hold"],
   ["lose", "forfeit", "sacrific", "surrender", "relinquish", "abandon", "give up"],
   ["want", "desir", "wish", "crave", "covet", "yearn", "long for", "aspir"],
@@ -163,6 +164,7 @@ const SYNONYM_CLUSTERS: string[][] = [
   ["deny", "refut", "contradict", "disput", "challeng", "contest", "rebut"],
   // ── Movement & direction ──
   ["move", "travel", "proceed", "advanc", "progress", "journey", "migrat", "relocat"],
+  ["occur", "happen", "take place", "arise", "manifest", "transpir", "emerg", "befall"],
   ["return", "revert", "restor", "recover", "bounc", "rebound", "go back", "come back"],
   ["gather", "collect", "assembl", "accumulat", "amass", "compil", "hoard", "stockpil"],
   ["scatter", "dispers", "spread", "distribut", "disseminat", "diffus"],
@@ -182,6 +184,7 @@ const SYNONYM_CLUSTERS: string[][] = [
   ["small", "tiny", "minor", "slight", "minute", "subtle", "fine", "delicate", "modest", "meager"],
   ["large", "huge", "enormous", "vast", "immense", "massive", "great", "substantial", "considerable", "sizeable", "tremendous"],
   ["harmful", "terrible", "awful", "dreadful", "horrible", "negative", "adverse", "detrimental", "damaging", "noxious", "toxic", "pernicious"],
+  ["ineffective", "ineffectual", "futile", "useless", "pointless", "fruitless", "vain", "worthless", "unproductive", "impotent", "powerless"],
   ["beneficial", "excellent", "positive", "favorab", "favourab", "advantageous", "wholesome", "constructiv"],
   ["fast", "quick", "rapid", "swift", "speedy", "prompt", "hasty", "abrupt", "sudden", "brisk"],
   ["slow", "gradual", "sluggish", "leisurely", "unhurried", "plodding"],
@@ -240,6 +243,7 @@ const SYNONYM_CLUSTERS: string[][] = [
   ["public", "open", "overt", "transparent", "unconcealed"],
   ["common", "ordinary", "usual", "typical", "normal", "standard", "conventional", "mundane", "everyday"],
   ["rare", "uncommon", "unusual", "exceptional", "extraordinar", "scarce", "infrequent", "singular", "unique"],
+  ["occasional", "sporadic", "intermittent", "periodic", "irregular", "infrequent", "scattered", "episodic", "spasmodic"],
   ["strange", "weird", "odd", "bizarre", "peculiar", "unusual", "quirky", "eccentric", "anomalous"],
   ["familiar", "known", "recognizable", "accustomed", "customary"],
   ["empty", "vacant", "hollow", "void", "barren", "desolat"],
@@ -550,7 +554,7 @@ function meaningfulWordsWithNegation(text: string): { words: string[]; negatedWo
   
   for (const word of allWords) {
     // Check if this word is a negation marker
-    if (NEGATION_WORDS.has(word) || (word.startsWith("un") && word.length > 3) || (word.startsWith("in") && word.length > 4)) {
+    if (NEGATION_WORDS.has(word) || (word.startsWith("un") && word.length > 3)) {
       negationActive = true
       negationDistance = 0
       continue
