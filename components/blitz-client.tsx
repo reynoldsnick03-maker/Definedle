@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback, useEffect, useRef } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { MirrorGame, type WordHistoryEntry } from "@/components/mirror-game"
 import { MirrorSessionSummary } from "@/components/mirror-session-summary"
 import { HowToPlayBlitz } from "@/components/how-to-play-blitz"
@@ -58,6 +58,9 @@ function saveBlitzProgress(difficulty: string, tab: string, data: {
       `definedle-blitz-progress-${difficulty}-${tab}`,
       JSON.stringify({ ...data, savedAt: Date.now(), dateKey })
     )
+    // Always keep last-tab and last-diff in sync with what was just saved
+    localStorage.setItem("definedle-blitz-last-tab", tab)
+    localStorage.setItem("definedle-blitz-last-diff", difficulty)
   } catch {}
 }
 
@@ -287,13 +290,7 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   }, [difficulty]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Track current tab and difficulty for restore on refresh
-  // Use a ref to skip writing on initial mount (would overwrite saved state before restore reads it)
-  const hasInitialised = useRef(false)
   useEffect(() => {
-    if (!hasInitialised.current) {
-      hasInitialised.current = true
-      return
-    }
     try {
       localStorage.setItem("definedle-blitz-last-tab", blitzTab)
       localStorage.setItem("definedle-blitz-last-diff", difficulty)
