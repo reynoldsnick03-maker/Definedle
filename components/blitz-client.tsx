@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback, useEffect } from "react"
+import { useState, useCallback, useEffect, useRef } from "react"
 import { MirrorGame, type WordHistoryEntry } from "@/components/mirror-game"
 import { MirrorSessionSummary } from "@/components/mirror-session-summary"
 import { HowToPlayBlitz } from "@/components/how-to-play-blitz"
@@ -146,8 +146,8 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   const [dailyFailed, setDailyFailed] = useState<{ easy: boolean; hard: boolean }>({ easy: false, hard: false })
   const [dailyStoredSummary, setDailyStoredSummary] = useState<Record<string, {score: number; wordsSolved: number; bestMultiplier: number; wordHistory?: WordHistoryEntry[]} | null>>({} as Record<string, {score: number; wordsSolved: number; bestMultiplier: number; wordHistory?: WordHistoryEntry[]} | null>)
   const [dailyAverageData, setDailyAverageData] = useState<Record<string, { average: number; count: number } | null>>({ easy: null, hard: null })
-  const [dailySequenceEasy, setDailySequenceEasy] = useState<DailyWord[]>([])
-  const [dailySequenceHard, setDailySequenceHard] = useState<DailyWord[]>([])
+  const [dailySequenceEasy, setDailySequenceEasy] = useState<DailyWord[]>(() => getDailyBlitzSequence("easy", (() => { const d = new Date(); return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")}` })()))
+  const [dailySequenceHard, setDailySequenceHard] = useState<DailyWord[]>(() => getDailyBlitzSequence("hard", (() => { const d = new Date(); return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")}` })()))
   const [dailyWordIndex, setDailyWordIndex] = useState(0)
 
   const [sessions, setSessions] = useState<Record<string, SessionState>>({
@@ -287,7 +287,13 @@ export function BlitzClient({ onSettingsOpen }: BlitzClientProps) {
   }, [difficulty]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Track current tab and difficulty for restore on refresh
+  // Use a ref to skip writing on initial mount (would overwrite saved state before restore reads it)
+  const hasInitialised = useRef(false)
   useEffect(() => {
+    if (!hasInitialised.current) {
+      hasInitialised.current = true
+      return
+    }
     try {
       localStorage.setItem("definedle-blitz-last-tab", blitzTab)
       localStorage.setItem("definedle-blitz-last-diff", difficulty)
