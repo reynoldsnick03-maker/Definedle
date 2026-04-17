@@ -52,15 +52,11 @@ export function HowToPlay({ open, onClose }: HowToPlayProps) {
             <div className="flex flex-col gap-2.5">
               <div className="flex gap-3 items-start">
                 <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-score-high/15 text-[10px] font-bold text-score-high">75</span>
-                <p><span className="text-foreground font-medium">Key concepts</span> &mdash; Every word has 2&ndash;3 core ideas in its meaning. Capturing them is the bulk of your score.</p>
+                <p><span className="text-foreground font-medium">Key concepts</span> &mdash; Every word has core ideas that define its meaning. Capturing them is the bulk of your score.</p>
               </div>
               <div className="flex gap-3 items-start">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-score-high/15 text-[10px] font-bold text-score-high">10</span>
-                <p><span className="text-foreground font-medium">Precision</span> &mdash; A bonus for using tight, specific vocabulary rather than vague or off-topic phrasing.</p>
-              </div>
-              <div className="flex gap-3 items-start">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-score-high/15 text-[10px] font-bold text-score-high">15</span>
-                <p><span className="text-foreground font-medium">Detail</span> &mdash; Definitions that read like a real dictionary entry earn more. A few well-chosen words can still score well.</p>
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-score-high/15 text-[10px] font-bold text-score-high">25</span>
+                <p><span className="text-foreground font-medium">Clarity</span> &mdash; How cleanly you expressed the meaning. Irrelevant or off-topic words cost points — but short precise answers score just as well as long ones.</p>
               </div>
             </div>
           </div>
@@ -80,7 +76,7 @@ export function HowToPlay({ open, onClose }: HowToPlayProps) {
               </li>
               <li className="flex gap-2 items-start">
                 <span className="text-muted-foreground mt-px" aria-hidden="true">&bull;</span>
-                <span>Be specific. &ldquo;Very bad&rdquo; scores less than &ldquo;harmful&rdquo; or &ldquo;destructive&rdquo;.</span>
+                <span>Be specific. &ldquo;Harmful&rdquo; or &ldquo;destructive&rdquo; scores better than &ldquo;not good&rdquo; or &ldquo;bad thing&rdquo;.</span>
               </li>
             </ul>
           </div>

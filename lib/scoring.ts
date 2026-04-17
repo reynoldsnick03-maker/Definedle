@@ -12,6 +12,8 @@ export interface ConceptResult {
 
 export interface ScoreBreakdown {
   concepts: { earned: number; max: number }
+  clarity: { earned: number; max: number; relevantWords: string[]; ignoredWords: string[]; irrelevantWords: string[] }
+  // Legacy fields kept for backwards compatibility
   precision: { earned: number; max: number; ratio: number; relevantCount: number; totalMeaningful: number; irrelevantWords: string[] }
   detail: { earned: number; max: number; wordCount: number }
   hintPenalty: number
@@ -651,6 +653,264 @@ function fuzzyConceptMatch(inputWords: string[], negatedWords: Set<string>, conc
 
 // Score a user definition against a single set of keyConcepts + definition text.
 // Returns an intermediate result used to compare primary vs alternate definitions.
+
+// ── Global Concept Dictionary ─────────────────────────────────────────────────
+// Each key is a concept name. Values are word stems/synonyms that express that concept.
+// Words reference these keys via the optional `clarityConceptKeys` field.
+// This is the central semantic layer — tune here, fix everywhere.
+
+export const GLOBAL_CONCEPTS: Record<string, string[]> = {
+  // ── Emotions ──
+  ANGER:        ["anger", "annoyance", "displeasure", "irritation", "resentment", "fury", "wrath", "indignation", "outrage", "aggravation", "vexation", "ire", "rage", "angry", "furious", "irate", "incensed", "aggrieved"],
+  SADNESS:      ["sadness", "sorrow", "grief", "misery", "unhappiness", "melancholy", "despair", "dejection", "distress", "heartache", "woe", "sad", "sorrowful", "mournful", "despondent"],
+  FEAR:         ["fear", "anxiety", "dread", "terror", "fright", "apprehension", "trepidation", "alarm", "panic", "scared", "fearful", "afraid", "frightened", "terrified"],
+  JOY:          ["joy", "happiness", "delight", "pleasure", "elation", "gladness", "contentment", "bliss", "euphoria", "cheerfulness", "happy", "joyful", "elated", "pleased", "delighted"],
+  SHAME:        ["shame", "embarrassment", "humiliation", "disgrace", "mortification", "remorse", "guilt", "ashamed", "humiliated", "disgraced"],
+  PRIDE:        ["pride", "arrogance", "conceit", "vanity", "haughtiness", "self-importance", "pomposity", "proud", "arrogant", "conceited", "vain"],
+  CONTEMPT:     ["contempt", "disdain", "scorn", "derision", "disrespect", "condescension", "sneering", "dismissive"],
+  LOVE:         ["love", "affection", "fondness", "adoration", "devotion", "tenderness", "care", "attachment", "loving", "affectionate", "devoted"],
+  HATE:         ["hate", "hatred", "loathing", "abhorrence", "disgust", "aversion", "hostility", "animosity", "detest", "despise", "abhor"],
+  ENVY:         ["envy", "jealousy", "covetousness", "resentment", "enviousness", "jealous", "envious", "covetous"],
+
+  // ── Expression / Communication ──
+  EXPRESSION:   ["expressing", "showing", "displaying", "manifesting", "exhibiting", "conveying", "demonstrating", "revealing", "indicating", "reflecting", "signalling", "communicating"],
+  SPEAKING:     ["speaking", "saying", "stating", "declaring", "asserting", "uttering", "voicing", "proclaiming", "announcing", "telling", "talking"],
+  WRITING:      ["writing", "recording", "documenting", "composing", "drafting", "inscribing", "noting"],
+
+  // ── Actions ──
+  GIVING:       ["giving", "providing", "supplying", "offering", "granting", "bestowing", "donating", "presenting", "furnishing", "delivering"],
+  TAKING:       ["taking", "seizing", "grabbing", "acquiring", "obtaining", "capturing", "claiming", "removing", "extracting"],
+  HELPING:      ["helping", "assisting", "supporting", "aiding", "facilitating", "enabling", "benefiting"],
+  HARMING:      ["harming", "hurting", "damaging", "injuring", "wounding", "destroying", "ruining"],
+  STOPPING:     ["stopping", "preventing", "blocking", "halting", "ceasing", "hindering", "impeding", "inhibiting", "restraining"],
+  STARTING:     ["starting", "beginning", "initiating", "commencing", "launching", "triggering"],
+  MOVING:       ["moving", "travelling", "proceeding", "advancing", "progressing", "migrating"],
+  CHANGING:     ["changing", "altering", "modifying", "transforming", "shifting", "converting", "adjusting"],
+  MAKING:       ["making", "creating", "producing", "building", "constructing", "forming", "generating", "crafting"],
+  HIDING:       ["hiding", "concealing", "obscuring", "masking", "disguising", "covering", "suppressing"],
+  SHOWING_ACTION: ["showing", "revealing", "displaying", "exposing", "demonstrating", "exhibiting"],
+
+  // ── Qualities ──
+  UNFAIRNESS:   ["unfair", "unjust", "inequitable", "wrongful", "unreasonable", "biased", "partial", "one-sided", "discriminatory"],
+  FAIRNESS:     ["fair", "just", "equitable", "reasonable", "impartial", "unbiased"],
+  BADNESS:      ["bad", "poor", "terrible", "awful", "dreadful", "horrible", "negative", "adverse", "harmful", "detrimental", "damaging", "noxious"],
+  GOODNESS:     ["good", "excellent", "positive", "beneficial", "favorable", "advantageous", "wholesome"],
+  IMPORTANCE:   ["important", "significant", "crucial", "vital", "essential", "critical", "major", "paramount"],
+  SMALLNESS:    ["small", "tiny", "minor", "slight", "minute", "subtle", "little", "minimal"],
+  LARGENESS:    ["large", "huge", "enormous", "vast", "immense", "massive", "great", "substantial"],
+  STRENGTH:     ["strong", "powerful", "intense", "forceful", "potent", "vigorous", "great", "extreme", "severe", "deep", "profound"],
+  WEAKNESS:     ["weak", "feeble", "frail", "fragile", "faint", "powerless", "ineffective"],
+  SPEED:        ["fast", "quick", "rapid", "swift", "speedy", "prompt", "hasty"],
+  SLOWNESS:     ["slow", "gradual", "sluggish", "leisurely", "unhurried"],
+  CLARITY_Q:    ["clear", "obvious", "evident", "apparent", "plain", "distinct", "explicit", "transparent"],
+  VAGUENESS:    ["vague", "ambiguous", "obscure", "unclear", "murky", "nebulous"],
+  HONESTY:      ["honest", "truthful", "candid", "frank", "sincere", "genuine", "authentic"],
+  DECEPTION:    ["dishonest", "deceitful", "lying", "fraudulent", "deceptive", "false", "fake"],
+  KINDNESS:     ["kind", "compassionate", "gentle", "caring", "sympathetic", "benevolent", "generous"],
+  CRUELTY:      ["cruel", "ruthless", "merciless", "brutal", "harsh", "severe", "callous"],
+  INTELLIGENCE: ["intelligent", "smart", "clever", "wise", "astute", "shrewd", "perceptive", "insightful"],
+  FOOLISHNESS:  ["foolish", "stupid", "reckless", "unwise", "absurd", "senseless"],
+
+  // ── States ──
+  FREQUENCY:    ["frequent", "regular", "recurring", "repeated", "constant", "persistent", "continual"],
+  INFREQUENCY:  ["infrequent", "occasional", "rare", "sporadic", "intermittent", "irregular", "scattered", "uncommon", "seldom", "sometimes"],
+  PERMANENCE:   ["permanent", "lasting", "enduring", "perpetual", "eternal", "indefinite", "abiding"],
+  TEMPORARINESS:["temporary", "fleeting", "transient", "brief", "short-lived", "momentary", "passing"],
+  CERTAINTY:    ["certain", "sure", "definite", "confident", "positive", "assured", "inevitable"],
+  UNCERTAINTY:  ["uncertain", "doubtful", "unsure", "dubious", "hesitant", "questionable"],
+  PRESENCE:     ["present", "existing", "occurring", "happening", "taking place", "in existence"],
+  ABSENCE:      ["absent", "missing", "lacking", "without", "devoid", "empty"],
+  BEGINNING:    ["beginning", "start", "onset", "commencement", "origin", "inception", "arising"],
+  ENDING:       ["ending", "conclusion", "finish", "termination", "cessation", "completion"],
+  PROXIMITY:    ["near", "close", "imminent", "approaching", "forthcoming", "about to", "impending"],
+
+  // ── Perception / Thought ──
+  UNDERSTANDING:["understanding", "comprehending", "grasping", "knowing", "recognising", "realising", "perceiving"],
+  BELIEVING:    ["believing", "thinking", "considering", "supposing", "assuming", "presuming"],
+  PERCEIVING:   ["perceiving", "noticing", "observing", "seeing", "detecting", "discerning"],
+  JUDGING:      ["judging", "evaluating", "assessing", "appraising", "rating", "criticising"],
+
+  // ── People / Social ──
+  PERSON:       ["person", "individual", "human", "someone", "people", "one"],
+  GROUP:        ["group", "collection", "body", "assembly", "organisation", "institution"],
+  AUTHORITY:    ["authority", "power", "control", "dominion", "influence", "command", "leadership"],
+  TREATMENT:    ["treatment", "handling", "dealing with", "behaviour toward", "conduct toward"],
+
+  // ── Cause / Effect ──
+  CAUSE:        ["cause", "reason", "source", "origin", "root", "basis", "motive", "catalyst"],
+  RESULT:       ["result", "effect", "outcome", "consequence", "impact", "product"],
+
+  // ── Degree/Intensity modifiers (neutral — don't penalise) ──
+  INTENSIFIER:  ["very", "extremely", "highly", "greatly", "deeply", "strongly", "particularly", "especially", "notably", "remarkably", "exceptionally", "utterly", "completely", "thoroughly"],
+}
+
+// Build lookup: word/stem → set of concept keys
+const CONCEPT_LOOKUP = new Map<string, Set<string>>()
+for (const [key, terms] of Object.entries(GLOBAL_CONCEPTS)) {
+  for (const term of terms) {
+    const t = term.toLowerCase()
+    if (!CONCEPT_LOOKUP.has(t)) CONCEPT_LOOKUP.set(t, new Set())
+    CONCEPT_LOOKUP.get(t)!.add(key)
+  }
+}
+
+// Check if a word maps to any concept key
+function wordToConceptKeys(word: string): Set<string> {
+  const w = word.toLowerCase()
+  const result = new Set<string>()
+  for (const [term, keys] of CONCEPT_LOOKUP) {
+    if (w === term || (w.length >= 4 && term.length >= 4 && (w.startsWith(term.slice(0,5)) || term.startsWith(w.slice(0,5))))) {
+      for (const k of keys) result.add(k)
+    }
+  }
+  return result
+}
+
+// Classify a player word as relevant, neutral (intensifier), or irrelevant
+// relative to a set of expected concept keys
+function classifyWord(word: string, expectedConceptKeys: Set<string>): "relevant" | "neutral" | "irrelevant" {
+  const keys = wordToConceptKeys(word)
+  if (keys.size === 0) return "irrelevant"
+  // Check if it's purely an intensifier
+  if (keys.has("INTENSIFIER") && keys.size === 1) return "neutral"
+  // Check if any of its concept keys overlap with expected
+  for (const k of keys) {
+    if (expectedConceptKeys.has(k)) return "relevant"
+  }
+  // Has concepts but none match expected — still not fully irrelevant
+  // Check synonym clusters as fallback
+  return "irrelevant"
+}
+
+// ── Clarity Scoring ───────────────────────────────────────────────────────────
+// Replaces precision (0-10) + detail (0-15) with a single Clarity (0-25) score.
+// Penalty-based: starts at 25, deducts for irrelevant words and contradictions.
+// No brevity penalty when all concepts are matched.
+
+interface ClarityResult {
+  clarity: number
+  relevantWords: string[]
+  ignoredWords: string[]
+  irrelevantWords: string[]
+  debug: {
+    conceptsHit: string[]
+    conceptsMissed: string[]
+    rawPenalty: number
+  }
+}
+
+function computeClarity(
+  inputMeaningful: string[],
+  negatedWords: Set<string>,
+  keyConcepts: DailyWord["keyConcepts"],
+  synonyms: string[],
+  definitionText: string,
+  matchedConceptCount: number,
+  totalConceptCount: number,
+): ClarityResult {
+  // Build the full set of expected concept keys from keyConcepts matchTerms + official def
+  const expectedKeys = new Set<string>()
+  const conceptsHit: string[] = []
+  const conceptsMissed: string[] = []
+
+  // Add concept keys from keyConcept match terms and labels
+  for (const kc of keyConcepts) {
+    const allTerms = [...kc.matchTerms, kc.keyword, kc.label, kc.hint]
+    for (const term of allTerms) {
+      for (const w of term.toLowerCase().split(/\s+/)) {
+        const keys = wordToConceptKeys(w)
+        for (const k of keys) expectedKeys.add(k)
+      }
+    }
+  }
+
+  // Add concept keys from official definition words
+  for (const w of meaningfulWords(definitionText)) {
+    const keys = wordToConceptKeys(w)
+    for (const k of keys) expectedKeys.add(k)
+  }
+
+  // Add concept keys from synonyms
+  for (const syn of synonyms) {
+    const keys = wordToConceptKeys(syn.toLowerCase())
+    for (const k of keys) expectedKeys.add(k)
+  }
+
+  // Classify each player word
+  const relevantWords: string[] = []
+  const ignoredWords: string[] = []
+  const irrelevantWords: string[] = []
+
+  for (const w of inputMeaningful) {
+    if (negatedWords.has(w)) {
+      ignoredWords.push(w)
+      continue
+    }
+    const classification = classifyWord(w, expectedKeys)
+    if (classification === "relevant") {
+      relevantWords.push(w)
+    } else if (classification === "neutral") {
+      ignoredWords.push(w)
+    } else {
+      // One more check: synonym clusters (existing areSynonyms function)
+      const isRelatedViaSynonym = [...expectedKeys].some(key => {
+        const keyTerms = GLOBAL_CONCEPTS[key] || []
+        return keyTerms.some(t => areSynonyms(w, t))
+      })
+      if (isRelatedViaSynonym) {
+        relevantWords.push(w)
+      } else {
+        // Also check against official def words via stemMatch
+        const defWords = meaningfulWords(definitionText)
+        const matchesOfficialDef = defWords.some(dw => stemMatch(w, dw))
+        if (matchesOfficialDef) {
+          relevantWords.push(w)
+        } else {
+          irrelevantWords.push(w)
+        }
+      }
+    }
+  }
+
+  // Compute clarity score — penalty-based
+  let clarity = 25
+  const allConceptsHit = matchedConceptCount === totalConceptCount
+
+  // Penalty per irrelevant word — but only count meaningful irrelevant words
+  // Small penalty (1pt) per irrelevant word, max deduction 5pts from irrelevance
+  const irrelevancePenalty = Math.min(irrelevantWords.length * 1.5, 5)
+  clarity -= irrelevancePenalty
+
+  // If concepts are NOT fully matched, cap clarity at 22
+  // (can't get perfect clarity if you missed the meaning)
+  if (!allConceptsHit) {
+    const conceptRatio = totalConceptCount > 0 ? matchedConceptCount / totalConceptCount : 0
+    const maxClarity = 22 - Math.round((1 - conceptRatio) * 5)
+    clarity = Math.min(clarity, maxClarity)
+  }
+
+  // No brevity penalty when all concepts hit
+  // If concepts missed and answer is very short (< 2 meaningful words), add small penalty
+  if (!allConceptsHit && inputMeaningful.length < 2) {
+    clarity -= 3
+  }
+
+  clarity = Math.max(0, Math.round(clarity))
+
+  return {
+    clarity,
+    relevantWords,
+    ignoredWords,
+    irrelevantWords,
+    debug: {
+      conceptsHit,
+      conceptsMissed,
+      rawPenalty: 25 - clarity,
+    }
+  }
+}
+
+
 function scoreAgainstDefinition(
   input: string,
   inputMeaningful: string[],
@@ -659,7 +919,7 @@ function scoreAgainstDefinition(
   keyConcepts: DailyWord["keyConcepts"],
   synonyms: string[],
   definitionText: string,
-): { concepts: ConceptResult[]; matchedCount: number; conceptScore: number; precisionScore: number; precisionRatio: number; relevantWords: number; irrelevantWords: string[]; lengthScore: number; synonymWarning: boolean } {
+): { concepts: ConceptResult[]; matchedCount: number; conceptScore: number; precisionScore: number; precisionRatio: number; relevantWords: number; irrelevantWords: string[]; lengthScore: number; synonymWarning: boolean; clarityResult: ClarityResult } {
   const conceptCount = keyConcepts.length
 
   // Extract meaningful words from the official definition for overlap checking
@@ -828,7 +1088,12 @@ function scoreAgainstDefinition(
   const detailRatio = Math.min(wc / targetWc, 1)
   const lengthScore = Math.round(Math.pow(detailRatio, 0.6) * 15)
 
-  return { concepts, matchedCount, conceptScore, precisionScore, precisionRatio, relevantWords, irrelevantWords, lengthScore, synonymWarning }
+  // Compute clarity score (new system)
+  const clarityResult = computeClarity(
+    inputMeaningful, negatedWords, keyConcepts, synonyms, definitionText, matchedCount, conceptCount
+  )
+
+  return { concepts, matchedCount, conceptScore, precisionScore, precisionRatio, relevantWords, irrelevantWords, lengthScore, synonymWarning, clarityResult }
 }
 
 // Normalize text for comparison: lowercase, strip punctuation, collapse spaces
@@ -913,13 +1178,14 @@ export function scoreDefinition(
     }))
     
     return {
-      score: usedHint ? 93 : 98,
+      score: usedHint ? 95 : 100,
       feedback: "You matched the official definition almost exactly. Well done!",
       concepts,
       synonymWarning: false,
       missedSummary: null,
       breakdown: {
         concepts: { earned: 75, max: 75 },
+        clarity: { earned: usedHint ? 20 : 25, max: 25, relevantWords: words, ignoredWords: [], irrelevantWords: [] },
         precision: { earned: 10, max: 10, ratio: 1, relevantCount: words.length, totalMeaningful: words.length, irrelevantWords: [] },
         detail: { earned: usedHint ? 8 : 13, max: 15, wordCount: words.length },
         hintPenalty: usedHint ? 5 : 0,
@@ -960,13 +1226,21 @@ export function scoreDefinition(
     }
   }
 
-  const { concepts, matchedCount, conceptScore, precisionScore, precisionRatio, relevantWords, irrelevantWords, lengthScore, synonymWarning } = best
+  const { concepts, matchedCount, conceptScore, precisionScore, precisionRatio, relevantWords, irrelevantWords, lengthScore, synonymWarning, clarityResult } = best
   const conceptCount = best.concepts.length
   const missedConcepts = concepts.filter((c) => !c.matched)
   const wc = words.length
 
-  // --- Total ---
-  let score = conceptScore + precisionScore + lengthScore
+  // --- Total (new: concepts + clarity) ---
+  const clarityScore = clarityResult.clarity
+  let score = conceptScore + clarityScore
+
+  // Override: all concepts + high clarity + minimum length = 100
+  // Requires at least 4 words total to prevent single-word synonym answers
+  // ("About to happen" style exact matches are handled by isOfficialDefinitionMatch above)
+  if (conceptScore === 75 && clarityScore >= 23 && wc >= 4) {
+    score = 100
+  }
 
   // Apply synonym penalty (-20 instead of hard cap to 35)
   if (synonymWarning) {
@@ -979,6 +1253,7 @@ export function scoreDefinition(
   
   // Clamp
   score = Math.max(0, Math.min(100, score))
+  score = Math.round(score)
 
   // --- Feedback ---
   const pick = (options: string[]) => options[(score + words.length) % options.length]
@@ -1046,7 +1321,9 @@ export function scoreDefinition(
     altDefinitionUsed,
     breakdown: {
       concepts: { earned: conceptScore, max: 75 },
-      precision: { earned: precisionScore, max: 10, ratio: precisionRatio, relevantCount: relevantWords, totalMeaningful: inputMeaningful.length, irrelevantWords },
+      clarity: { earned: clarityScore, max: 25, relevantWords: clarityResult.relevantWords, ignoredWords: clarityResult.ignoredWords, irrelevantWords: clarityResult.irrelevantWords },
+      // Legacy fields for backwards compat with results-panel
+      precision: { earned: precisionScore, max: 10, ratio: precisionRatio, relevantCount: relevantWords, totalMeaningful: inputMeaningful.length, irrelevantWords: clarityResult.irrelevantWords },
       detail: { earned: lengthScore, max: 15, wordCount: wc },
       hintPenalty,
     },

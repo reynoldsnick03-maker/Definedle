@@ -281,10 +281,33 @@ definedle.com`
                   return `${wc} word${wc === 1 ? "" : "s"} isn't enough to capture a definition. Try writing a fuller sentence.`
                 })()
 
-  const factors: { label: string; earned: number; max: number; pct: number; explanation: string; isPenalty?: boolean }[] = [
-  { label: "Key concepts", earned: breakdown.concepts.earned, max: breakdown.concepts.max, pct: conceptPct, explanation: conceptExplanation },
-  { label: "Precision", earned: breakdown.precision.earned, max: breakdown.precision.max, pct: precisionPct, explanation: precisionExplanation },
-  { label: "Detail", earned: breakdown.detail.earned, max: breakdown.detail.max, pct: detailPct, explanation: detailExplanation },
+  // Use clarity if available (new scoring), otherwise fall back to precision+detail
+  const hasClarity = !!breakdown.clarity
+
+  const clarityExplanation = (() => {
+    if (!breakdown.clarity) return ""
+    const { irrelevantWords, relevantWords } = breakdown.clarity
+    const earned = breakdown.clarity.earned
+    if (earned >= 23) return "Clean, precise definition. Strong word choice throughout."
+    if (earned >= 20) {
+      const sample = irrelevantWords.slice(0, 2)
+      return sample.length > 0
+        ? `Good overall. ${sample.map(w => `"${w}"`).join(", ")} didn't connect strongly to the definition.`
+        : "Good overall, with minor room to tighten the phrasing."
+    }
+    const sample = irrelevantWords.slice(0, 3)
+    return sample.length > 0
+      ? `Some words like ${sample.map(w => `"${w}"`).join(", ")} weren't directly relevant. Focus on the core meaning.`
+      : "The definition could be more focused on the core meaning."
+  })()
+
+  const factors: { label: string; earned: number; max: number; pct: number; explanation: string; isPenalty?: boolean }[] = hasClarity ? [
+    { label: "Key concepts", earned: breakdown.concepts.earned, max: breakdown.concepts.max, pct: conceptPct, explanation: conceptExplanation },
+    { label: "Clarity", earned: breakdown.clarity!.earned, max: 25, pct: Math.round((breakdown.clarity!.earned / 25) * 100), explanation: clarityExplanation },
+  ] : [
+    { label: "Key concepts", earned: breakdown.concepts.earned, max: breakdown.concepts.max, pct: conceptPct, explanation: conceptExplanation },
+    { label: "Precision", earned: breakdown.precision.earned, max: breakdown.precision.max, pct: precisionPct, explanation: precisionExplanation },
+    { label: "Detail", earned: breakdown.detail.earned, max: breakdown.detail.max, pct: detailPct, explanation: detailExplanation },
   ]
   if (breakdown.hintPenalty > 0) {
     factors.push({ label: "Hint used", earned: -breakdown.hintPenalty, max: 0, pct: 0, explanation: "Etymology hint was revealed before answering.", isPenalty: true })
