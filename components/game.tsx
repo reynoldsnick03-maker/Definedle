@@ -73,6 +73,7 @@ export function Game({
 
 
   const [result, setResult] = useState<ScoreResult | null>(null)
+  const [isScoring, setIsScoring] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [playerDefinition, setPlayerDefinition] = useState("")
   const [usedHint, setUsedHint] = useState(false)
@@ -179,11 +180,14 @@ export function Game({
   )
 
   const handleSubmit = useCallback(
-    (definition: string) => {
-      const scoreResult = scoreDefinition(definition, dailyWord, usedHint)
-      setResult(scoreResult)
+    async (definition: string) => {
+      // 1. Get local score immediately so UI responds fast
+      const localResult = scoreDefinition(definition, dailyWord, usedHint)
+      setResult(localResult)
       setPlayerDefinition(definition)
       setSubmitted(true)
+      setIsScoring(true)
+
       // Show Blitz prompt on first ever completed game
       try {
         const visited = localStorage.getItem("definedle-blitz-visited")
@@ -191,24 +195,73 @@ export function Game({
         localStorage.setItem("definedle-games-played", String(played + 1))
         if (!visited && played === 0) {
           setShowBlitzPrompt(true)
-          // Signal page-client to highlight Blitz tab
           try { window.dispatchEvent(new CustomEvent("definedle-highlight-blitz")) } catch {}
         }
       } catch {}
 
-      // Always save to localStorage word history (daily + practice)
+      // 2. Call API for semantic clarity scoring
+      let finalResult = localResult
+      try {
+        const matchedCount = localResult.concepts.filter(c => c.matched).length
+        const res = await fetch("/api/score-clarity", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            word: dailyWord.word,
+            partOfSpeech: dailyWord.partOfSpeech,
+            officialDefinition: dailyWord.definition,
+            playerDefinition: definition,
+            conceptsMatched: matchedCount,
+            totalConcepts: localResult.concepts.length,
+          }),
+        })
+        if (res.ok) {
+          const data = await res.json()
+          if (typeof data.clarity === "number") {
+            // Rebuild score with API clarity
+            const wc = definition.trim().split(/\s+/).length
+            const conceptScore = localResult.breakdown.concepts.earned
+            let newScore = conceptScore + data.clarity
+            if (wc < 4) newScore = Math.min(newScore, 96)
+            if (conceptScore === 75 && data.clarity >= 23 && wc >= 4) newScore = 100
+            if (localResult.synonymWarning) newScore = Math.max(0, newScore - 20)
+            if (usedHint) newScore -= 5
+            newScore = Math.max(0, Math.min(100, Math.round(newScore)))
+            finalResult = {
+              ...localResult,
+              score: newScore,
+              breakdown: {
+                ...localResult.breakdown,
+                clarity: {
+                  earned: data.clarity,
+                  max: 25,
+                  relevantWords: localResult.breakdown.clarity?.relevantWords ?? [],
+                  ignoredWords: localResult.breakdown.clarity?.ignoredWords ?? [],
+                  irrelevantWords: localResult.breakdown.clarity?.irrelevantWords ?? [],
+                },
+              },
+            }
+            setResult(finalResult)
+          }
+        }
+      } catch (e) {
+        // API failed — keep local result, no disruption to player
+        console.error("Clarity API error:", e)
+      }
+      setIsScoring(false)
+
+      // 3. Save to history (using final score)
       saveWordToDefinedleHistory({
         word: dailyWord.word,
-        score: scoreResult.score,
+        score: finalResult.score,
         date: getDateKey(),
         difficulty,
         isPractice,
       })
 
-      // Save daily result to cookie and history (daily mode only)
       if (!isPractice) {
         try {
-          const slimConcepts = scoreResult.concepts.map((c) => ({
+          const slimConcepts = finalResult.concepts.map((c) => ({
             keyword: c.keyword,
             label: c.label,
             hint: "",
@@ -216,21 +269,18 @@ export function Game({
           }))
           const cached: CachedResult = {
             date: getDateKey(),
-            score: scoreResult.score,
-            feedback: scoreResult.feedback,
+            score: finalResult.score,
+            feedback: finalResult.feedback,
             concepts: slimConcepts,
-            synonymWarning: scoreResult.synonymWarning,
+            synonymWarning: finalResult.synonymWarning,
             missedSummary: null,
             definition: definition.slice(0, 200),
-            breakdown: scoreResult.breakdown,
-            altDefinitionUsed: scoreResult.altDefinitionUsed,
+            breakdown: finalResult.breakdown,
+            altDefinitionUsed: finalResult.altDefinitionUsed,
           }
           setCookie(DAILY_RESULT_COOKIE, JSON.stringify(cached), 1)
-        } catch {
-          // Ignore
-        }
-        saveToHistory(scoreResult, dailyWord, definition)
-        // Notify parent that game is complete (for streak refresh)
+        } catch {}
+        saveToHistory(finalResult, dailyWord, definition)
         onComplete?.()
       }
     },
@@ -298,24 +348,29 @@ export function Game({
         )}
 
         {submitted && result ? (
-          <ResultsPanel
-            score={result.score}
-            feedback={result.feedback}
-            concepts={result.concepts}
-            synonymWarning={result.synonymWarning}
-            missedSummary={result.missedSummary}
-            breakdown={result.breakdown}
-            playerDefinition={playerDefinition}
-            officialDefinition={dailyWord.definition}
-            altDefinitionUsed={result.altDefinitionUsed}
-            word={dailyWord.word}
-            showScore={showScore}
-            showConceptBreakdown={showConceptBreakdown}
-            isPractice={isPractice}
-            difficulty={difficulty}
-            onPractice={!isPractice ? onStartPractice : undefined}
-            onNextWord={isPractice ? onNextWord : undefined}
-          />
+          <>
+            {isScoring && (
+              <p className="text-center text-xs text-muted-foreground animate-pulse mb-2">Scoring…</p>
+            )}
+            <ResultsPanel
+              score={result.score}
+              feedback={result.feedback}
+              concepts={result.concepts}
+              synonymWarning={result.synonymWarning}
+              missedSummary={result.missedSummary}
+              breakdown={result.breakdown}
+              playerDefinition={playerDefinition}
+              officialDefinition={dailyWord.definition}
+              altDefinitionUsed={result.altDefinitionUsed}
+              word={dailyWord.word}
+              showScore={showScore}
+              showConceptBreakdown={showConceptBreakdown}
+              isPractice={isPractice}
+              difficulty={difficulty}
+              onPractice={!isPractice ? onStartPractice : undefined}
+              onNextWord={isPractice ? onNextWord : undefined}
+            />
+          </>
         ) : (
           <DefinitionInput key={dailyWord.word} onSubmit={handleSubmit} />
         )}
