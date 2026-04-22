@@ -1235,9 +1235,13 @@ export function scoreDefinition(
   const clarityScore = clarityResult.clarity
   let score = conceptScore + clarityScore
 
+  // Cap at 96 for very short answers (< 4 words) — a 2-word answer isn't a definition
+  // "About to happen" style exact matches are handled by isOfficialDefinitionMatch above
+  if (wc < 4) {
+    score = Math.min(score, 96)
+  }
+
   // Override: all concepts + high clarity + minimum length = 100
-  // Requires at least 4 words total to prevent single-word synonym answers
-  // ("About to happen" style exact matches are handled by isOfficialDefinitionMatch above)
   if (conceptScore === 75 && clarityScore >= 23 && wc >= 4) {
     score = 100
   }
